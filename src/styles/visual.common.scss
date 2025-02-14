@@ -1,0 +1,122 @@
+// :root {
+//   // --top-window-height: 60px !important;
+//   // --window-left: 320px !important;
+//   // --window-right: 320px !important;
+// }
+
+page {
+  height: 100%;
+  background-color: var(--el-bg-color-page);
+}
+
+#app {
+  color: var(--el-text-color-primary);
+}
+
+.dark {
+  .visual-transparent-bg {
+    background: url('@/static/transparent-dark.svg');
+  }
+}
+
+.visual-transparent-bg {
+  background: url('@/static/transparent.svg');
+}
+
+.visual-group {
+  .visual-carousel {
+    pointer-events: none;
+  }
+
+  &.is-drag {
+    .visual-flex {
+      .is-empty[data-component-key='VisualFlex'] {
+        &::before {
+          background-color: var(--el-color-primary-light-9);
+        }
+      }
+    }
+
+    .is-empty[data-disabled='true'] {
+      &::before {
+        background-color: var(--el-disabled-bg-color);
+        opacity: 0.4;
+      }
+    }
+  }
+
+  &.is-drag[data-source-type='VisualObject'] {
+    .visual-object {
+      .is-empty[data-component-key='VisualObject'] {
+        &::before {
+          background-color: var(--el-color-warning-light-9);
+        }
+      }
+    }
+  }
+
+  &.is-drag[data-source-type='VisualObjectArray'] {
+    .visual-object-array {
+      .is-empty[data-component-key='VisualObjectArray'] {
+        &::before {
+          background-color: var(--el-color-warning-light-9);
+        }
+      }
+    }
+  }
+
+  &[data-component-key='VisualFlex'] {
+    display: flex;
+  }
+
+  .visual-block {
+    overflow: hidden;
+
+    & > view {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+    }
+  }
+
+  .visual-flex {
+    & > .visual-group {
+      width: 100%;
+    }
+  }
+}
+
+.visual-image-input {
+  .el-input__wrapper {
+    padding-left: 0;
+
+    .el-color-picker {
+      margin-right: 4px;
+      margin-left: 4px;
+      width: 30px;
+      .el-color-picker__trigger {
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+.visual-normal-select {
+  .el-select__wrapper {
+    border-radius: 0 !important;
+  }
+}
+
+.el-button,
+.el-dialog,
+.el-select .el-select__wrapper,
+.el-input .el-input__wrapper,
+.el-input .el-input-group__append,
+.el-input .el-input-group__prepend,
+.el-radio-group .el-radio-button__inner {
+  border-radius: 0 !important;
+}
+
+.el-divider.el-divider--horizontal {
+  margin: 12px 0;
+}

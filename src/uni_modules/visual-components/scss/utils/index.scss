@@ -1,0 +1,155 @@
+@use 'sass:map';
+
+@mixin ellipsis($line: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+$spacing-sizes: (
+  xs: 8rpx,
+  sm: 16rpx,
+  md: 24rpx,
+  base: 32rpx,
+  lg: 64rpx,
+);
+
+$radius-sizes: (
+  xs: 8rpx,
+  sm: 16rpx,
+  md: 24rpx,
+  base: 32rpx,
+  lg: 64rpx,
+  full: 9999rpx,
+);
+
+$font-sizes: (
+  xs: 20rpx,
+  sm: 24rpx,
+  md: 28rpx,
+  base: 32rpx,
+  lg: 48rpx,
+);
+
+// 生成字体css变量
+@mixin generate-font-size-values() {
+  @each $size, $value in $font-sizes {
+    --v-text-#{$size}: #{$value};
+  }
+}
+
+// 生成字体大小类
+@mixin generate-text-size-classes() {
+  @each $size, $value in $font-sizes {
+    .v-text-#{$size} {
+      font-size: var(--v-text-#{$size});
+    }
+  }
+}
+
+// 生成间距css变量
+@mixin generate-spacing-values() {
+  @each $size, $value in $spacing-sizes {
+    --v-spacing-#{$size}: #{$value};
+  }
+}
+
+// 生成圆角css变量
+@mixin generate-radius-values() {
+  @each $size, $value in $radius-sizes {
+    --v-radius-#{$size}: #{$value};
+  }
+}
+
+// 生成圆角大小类
+@mixin generate-round-size-classes() {
+  @each $size, $value in $radius-sizes {
+    .v-round-#{$size} {
+      border-radius: var(--v-radius-#{$size});
+    }
+  }
+}
+
+$slide-alias: (
+  margin: m,
+  padding: p,
+  width: w,
+  height: h,
+  top: top,
+  right: right,
+  bottom: bottom,
+  left: left,
+);
+$sides-positions: (
+  top: t,
+  right: r,
+  bottom: b,
+  left: l,
+);
+
+@mixin generate-slide-classes($property, $sizes, $step) {
+  @for $i from 0 through $sizes {
+    .v-#{map.get($slide-alias, $property)}-#{$i * $step} {
+      #{$property}: #{$i * $step * 1rpx};
+    }
+    @each $position, $alias in $sides-positions {
+      .v-#{map.get($slide-alias, $property)}#{$alias}-#{$i * $step} {
+        #{$property}-#{$position}: #{$i * $step * 1rpx};
+      }
+    }
+  }
+}
+
+@mixin generate-bound-rect-classes($property, $sizes, $step) {
+  .v-#{map.get($slide-alias, $property)}-full {
+    #{$property}: 100%;
+  }
+  @for $i from 0 through $sizes {
+    .v-#{map.get($slide-alias, $property)}-#{$i * $step} {
+      #{$property}: #{$i * $step * 1rpx};
+    }
+  }
+}
+
+@mixin generate-grid-classes($columns) {
+  .v-grid {
+    display: grid;
+  }
+
+  @for $i from 1 through $columns {
+    .v-grid-cols-#{$i} {
+      grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+    }
+    .v-col-span-#{$i} {
+      grid-column: #{'span ' + $i + ' / span ' + $i};
+    }
+    .v-col-start-#{$i} {
+      grid-column-start: #{$i};
+    }
+    .v-col-end-#{$i} {
+      grid-column-end: #{$i};
+    }
+    .v-grid-rows-#{$i} {
+      grid-template-rows: repeat(#{$i}, minmax(0, 1fr));
+    }
+    .v-row-span-#{$i} {
+      grid-row: #{'span ' + $i + ' / span ' + $i};
+    }
+    .v-row-start-#{$i} {
+      grid-row-start: #{$i};
+    }
+    .v-row-end-#{$i} {
+      grid-row-end: #{$i};
+    }
+  }
+}
+
+@mixin generate-gap-classes($sizes, $step) {
+  @for $i from 0 through $sizes {
+    .v-gap-#{$i * $step} {
+      gap: #{$i * $step * 1rpx};
+    }
+  }
+}

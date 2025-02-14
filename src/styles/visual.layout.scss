@@ -1,0 +1,215 @@
+html {
+  font-size: 16px !important;
+}
+
+body {
+  min-width: 1040px;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 1040px) {
+  page {
+    padding-bottom: 16px;
+  }
+}
+
+.uni-top-window,
+.uni-top-window--placeholder {
+  height: var(--top-window-height) !important;
+}
+
+.uni-top-window {
+  border-bottom: 1px solid var(--el-border-color);
+}
+
+.uni-left-window,
+.uni-right-window {
+  height: 100%;
+}
+
+.uni-left-window,
+.uni-right-window,
+.uni-top-window,
+.uni-top-window--placeholder {
+  background-color: var(--el-bg-color);
+}
+
+.uni-left-window {
+  border-right: 1px solid var(--el-border-color);
+}
+
+.uni-right-window {
+  border-left: 1px solid var(--el-border-color);
+}
+
+.visual-materiel-container {
+  .visual-tabs {
+    --el-tabs-header-height: 60px;
+    height: 100%;
+
+    .el-tabs__header {
+      margin-right: 0;
+
+      .el-tabs__nav-wrap {
+        &::after {
+          width: 1px;
+        }
+
+        .el-tabs__item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 0 12px;
+          color: var(--el-text-color-regular);
+
+          &.is-active {
+            color: var(--el-color-primary);
+          }
+        }
+      }
+    }
+    .el-tabs__content {
+      height: 100%;
+      .el-tab-pane {
+        height: 100%;
+      }
+    }
+  }
+
+  .visual-components {
+    .el-scrollbar__view {
+      margin-left: 1px;
+    }
+
+    .el-collapse {
+      --el-collapse-header-height: 40px;
+      --el-collapse-header-bg-color: var(--el-color-info-light-9);
+      --el-collapse-border-color: var(--el-border-color);
+
+      .el-collapse-item__header {
+        padding: 0 12px;
+      }
+
+      .el-collapse-item__content {
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+.visual-options-container,
+.visual-form-config-editor__dialog {
+  .visual-options {
+    .el-collapse {
+      --el-collapse-header-height: 30px;
+      --el-collapse-header-bg-color: var(--el-color-info-light-9);
+      --el-collapse-border-color: var(--el-border-color);
+
+      .el-collapse-item__header {
+        padding: 0 12px;
+      }
+
+      .el-collapse-item__content {
+        padding-bottom: 0;
+        padding-right: 8px;
+      }
+    }
+  }
+}
+
+.visual-form-config-editor__dialog {
+  .el-drawer__header {
+    padding: 12px;
+    margin-bottom: 0;
+  }
+  .el-drawer__body {
+    padding: 0;
+  }
+  .el-drawer {
+    box-shadow: none;
+    border-left: 1rpx solid var(--el-border-color);
+    height: calc(100vh - var(--top-window-height));
+    top: var(--top-window-height);
+  }
+
+  .visual-props-options {
+    & > view {
+      border-bottom: 1px solid var(--el-border-color);
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+.visual-form-config-editor__dialog.el-overlay {
+  background-color: transparent;
+}
+
+.visual-stage-container {
+  &.visual-disabled {
+    .visual-group {
+      .visual-block {
+        outline-width: 0 !important;
+        padding: 0 !important;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .el-scrollbar__view {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sortable-drag {
+    opacity: 0 !important;
+  }
+
+  .visual-group-item {
+    position: relative;
+    min-height: 20px !important;
+    &::after {
+      position: absolute;
+      inset: 0;
+      content: attr(data-name);
+      background-color: var(--el-color-primary);
+      color: #fff;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.visual-stage-bar {
+  svg {
+    transform: scale(1.3);
+    opacity: 0.8;
+  }
+
+  .el-radio-group {
+    .el-radio-button__inner {
+      border-radius: 0 !important;
+    }
+  }
+
+  .el-button-group {
+    .el-button {
+      border-radius: 0 !important;
+    }
+  }
+}
+
+.visual-list-data-options {
+  .visual-control-item {
+    padding: 0;
+    min-height: auto;
+  }
+}

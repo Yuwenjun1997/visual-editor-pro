@@ -1,0 +1,46 @@
+<template>
+  <view class="visual-px-input" @click.stop>
+    <el-input
+      class="visual-px-input__input"
+      v-model="textValue"
+      :placeholder="props.placeholder"
+    />
+  </view>
+</template>
+
+<script setup lang="ts">
+import { useVModel } from '@vueuse/core'
+
+interface Props {
+  modelValue?: string
+  placeholder?: string
+}
+
+defineOptions({
+  name: 'VisualTextInput',
+})
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: '',
+  placeholder: 'input',
+})
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void
+}>()
+
+const textValue = useVModel(props, 'modelValue', emit)
+</script>
+
+<style scoped lang="scss">
+.visual-px-input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  .visual-px-input__input {
+    --el-input-border-radius: 0 !important;
+  }
+}
+</style>
