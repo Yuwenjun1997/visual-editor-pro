@@ -17,7 +17,7 @@
         class="visual-group-item text-xs more-components"
         :class="'span-' + element.span"
       >
-        <image
+        <img
           class="visual-group-item-preview"
           src="/image/coding.svg"
         />
@@ -29,7 +29,7 @@
         @mousedown="onMouseDown(element)"
         @mouseup="onMouseUp"
       >
-        <image class="visual-group-item-preview" :src="element.previewImage" />
+        <img class="visual-group-item-preview" :src="element.previewImage" />
         <div class="visual-group-item-label">{{ element.label }}</div>
       </div>
     </template>
@@ -108,7 +108,8 @@ const blocks = computed(() => {
       flex-direction: row;
       color: var(--el-text-color-placeholder);
       gap: 8px;
-      image {
+
+      img {
         width: 30px;
         height: 30px;
       }
