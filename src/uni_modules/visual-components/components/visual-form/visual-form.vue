@@ -58,7 +58,7 @@
               />
             </template>
             <template v-if="item.option.type === 'visual-checkbox-group'">
-              <visual-checkbox-group>
+              <visual-checkbox-group v-model="item.option.value">
                 <visual-checkbox
                   v-for="option in item.option.columns"
                   :key="option.value"
@@ -68,7 +68,7 @@
               </visual-checkbox-group>
             </template>
             <template v-if="item.option.type === 'visual-radio-group'">
-              <visual-radio-group>
+              <visual-radio-group v-model="item.option.value">
                 <visual-radio
                   v-for="option in item.option.columns"
                   :key="option.value"

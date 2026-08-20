@@ -1,15 +1,17 @@
 <template>
-  <div class="visual-switch" :class="_bindClassList">
-    <switch
+  <div class="visual-switch" :class="_bindClassList" :style="_bindStyles">
+    <ui-switch
       class="visual-switch__inner"
-      :checked="_modelValue"
-      :color="_props.activeColor"
-      @change="_handleChange"
+      :checked="_checked"
+      @update:checked="_handleCheckedChange"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+import Switch from '../../../ui/switch/Switch.vue'
+import { computed } from 'vue'
+
 interface Props {
   modelValue?: boolean | string | number
   trueValue?: boolean | string | number
@@ -22,26 +24,26 @@ const _props = withDefaults(defineProps<Props>(), {
   size: 'medium',
   trueValue: true,
   falseValue: false,
+  activeColor: 'var(--v-primary-1)',
 })
 
 const _emit = defineEmits<{
   (e: 'update:modelValue', value: boolean | string | number | undefined): void
 }>()
 
-const _modelValue = computed({
-  set: (value) => {
-    _emit('update:modelValue', value ? _props.trueValue : _props.falseValue)
-  },
-  get: () => _props.modelValue === _props.trueValue,
-})
+const _checked = computed(() => _props.modelValue === _props.trueValue)
+
+const _handleCheckedChange = (on: boolean | 'indeterminate') => {
+  _emit('update:modelValue', on ? _props.trueValue : _props.falseValue)
+}
 
 const _bindClassList = computed(() => ({
   [`visual-switch--${_props.size}`]: true,
 }))
 
-const _handleChange = (e: any) => {
-  _modelValue.value = e.detail.value
-}
+const _bindStyles = computed(() => ({
+  '--v-active-color': _props.activeColor,
+}))
 </script>
 
 <style scoped lang="scss">
@@ -54,7 +56,11 @@ const _handleChange = (e: any) => {
 
   .visual-switch__inner {
     transform-origin: 0 center;
-    transform: scale(0.53);
+    transform: scale(0.9);
+  }
+
+  :deep([role='switch'][data-state='checked']) {
+    background-color: var(--v-active-color) !important;
   }
 }
 </style>

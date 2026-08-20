@@ -1,15 +1,23 @@
 <template>
   <div class="visual-checkbox" :class="_bindClassList" :style="_bindStyles">
-    <div class="visual-checkbox__inner" @click="_handleClick">
-      <visual-icon class="visual-checkbox__icon" :icon="_bindIcon" />
-      <div class="visual-checkbox__label" v-if="_props.label">
+    <label class="visual-checkbox__inner">
+      <ui-checkbox
+        class="visual-checkbox__box"
+        :checked="_isChecked"
+        @update:checked="_handleChange"
+      />
+      <span class="visual-checkbox__label" v-if="_props.label">
         {{ _props.label }}
-      </div>
-    </div>
+      </span>
+    </label>
   </div>
 </template>
 
 <script setup lang="ts">
+import Checkbox from '../../../ui/checkbox/Checkbox.vue'
+import type { CheckboxGroupRef } from '../visual-checkbox-group/visual-checkbox-group.vue'
+import { computed, inject } from 'vue'
+
 interface Props {
   modelValue?: boolean | string | number
   label?: string
@@ -19,12 +27,7 @@ interface Props {
   activeColor?: string
 }
 
-interface CheckboxGroupRef {
-  trigger: (value: string | number, checked: boolean) => void
-  checkedList: Array<string | number>
-}
-
-const _checkboxGroupRef = inject<CheckboxGroupRef>('_checkboxGroupRef')
+const _checkboxGroupRef = inject<CheckboxGroupRef>('_visualCheckboxGroupRef')
 
 const _props = withDefaults(defineProps<Props>(), {
   trueValue: true,
@@ -36,36 +39,30 @@ const _emit = defineEmits<{
   (e: 'update:modelValue', value: boolean | string | number | undefined): void
 }>()
 
-const _modelValue = computed({
-  set: (value) => {
-    _emit('update:modelValue', value ? _props.trueValue : _props.falseValue)
-  },
-  get: () => _props.modelValue === _props.trueValue,
-})
-
 const _isChecked = computed(() => {
-  if (!_checkboxGroupRef) return _props.modelValue === _props.trueValue
-  if (typeof _props.value === 'undefined') return false
-  return _checkboxGroupRef.checkedList.includes(_props.value)
+  if (_checkboxGroupRef) {
+    if (typeof _props.value === 'undefined') return false
+    return _checkboxGroupRef.isChecked(_props.value)
+  }
+  return _props.modelValue === _props.trueValue
 })
 
-const _bindIcon = computed(() => {
-  return _isChecked.value ? 'bi:check-square-fill' : 'bi:square'
-})
+const _handleChange = (checked: boolean | 'indeterminate') => {
+  const on = checked === true
+  _emit('update:modelValue', on ? _props.trueValue : _props.falseValue)
+  if (typeof _props.value === 'undefined') return
+  _checkboxGroupRef?.trigger(_props.value, on)
+}
 
 const _bindStyles = computed(() => ({
-  '--v-active-color': _isChecked.value ? _props.activeColor : 'var(--v-text-5)',
+  '--v-active-color': _isChecked.value
+    ? _props.activeColor
+    : 'var(--v-text-5)',
 }))
 
 const _bindClassList = computed(() => ({
   'is-checked': _isChecked.value,
 }))
-
-const _handleClick = () => {
-  _modelValue.value = !_modelValue.value
-  if (typeof _props.value === 'undefined') return
-  _checkboxGroupRef?.trigger(_props.value, _modelValue.value)
-}
 </script>
 
 <style scoped lang="scss">
@@ -80,15 +77,20 @@ const _handleClick = () => {
     display: flex;
     align-items: center;
     gap: var(--v-spacing-xs);
-
-    .visual-checkbox__icon {
-      color: var(--v-active-color);
-      font-size: var(--v-text-base);
-    }
+    cursor: pointer;
 
     .visual-checkbox__label {
       font-size: var(--v-text-md);
     }
+  }
+
+  :deep(.visual-checkbox__box[data-state='checked']) {
+    border-color: var(--v-active-color);
+    background-color: var(--v-active-color);
+  }
+
+  :deep(.visual-checkbox__box[data-state='unchecked']) {
+    border-color: var(--v-active-color);
   }
 
   &.is-checked {

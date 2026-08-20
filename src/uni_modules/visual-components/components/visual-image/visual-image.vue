@@ -33,7 +33,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
 }))
 
 const _bindImageStyles = computed<CSSProperties>(() => {
-  const modeMap: Record<string, string> = {
+  const modeMap: Record<string, CSSProperties['objectFit']> = {
     aspectFill: 'cover',
     aspectFit: 'contain',
     scaleToFill: 'fill',

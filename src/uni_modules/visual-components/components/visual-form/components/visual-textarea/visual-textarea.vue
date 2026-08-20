@@ -1,12 +1,16 @@
 <template>
-  <div class="visual-textarea" :style="_bindStyles">
-    <spanarea
+  <div
+    class="visual-textarea"
+    :class="{ 'is-auto-height': _props.autoHeight }"
+    :style="_bindStyles"
+  >
+    <ui-textarea
       class="visual-textarea__inner"
-      v-model="_modelValue"
+      :model-value="_modelValue"
       :placeholder="_props.placeholder"
       :maxlength="_maxlength"
-      :password="_props.password"
-      :autoHeight="_props.autoHeight"
+      :rows="_props.rows"
+      @update:model-value="_handleInput"
     />
     <div class="visual-textarea__count" v-if="_props.showWordLimit">
       {{ _wordLimitText }}
@@ -17,12 +21,13 @@
 <script setup lang="ts">
 import { formatNumber } from '../../../../utils/tools'
 import { isNumber } from '../../../../utils/validate'
+import Textarea from '../../../ui/textarea/Textarea.vue'
 import { computed } from 'vue'
 
 interface Props {
   name?: string
   placeholder?: string
-  modelValue?: string
+  modelValue?: string | number
   maxlength?: string | number
   password?: boolean
   showWordLimit?: boolean
@@ -32,6 +37,8 @@ interface Props {
 
 const _props = withDefaults(defineProps<Props>(), {
   rows: 3,
+  showWordLimit: false,
+  autoHeight: false,
 })
 
 const _emit = defineEmits<{
@@ -48,9 +55,13 @@ const _maxlength = computed(() => formatNumber(_props.maxlength, -1))
 const _wordLimitText = computed(() => {
   if (!isNumber(_props.maxlength)) return
   let wordCount = 0
-  wordCount = _props.modelValue?.length || 0
+  wordCount = String(_props.modelValue ?? '').length
   return `${wordCount}/${_props.maxlength}`
 })
+
+const _handleInput = (value: string | number) => {
+  _modelValue.value = value
+}
 
 const _bindStyles = computed(() => ({
   '--v-textarea-height': `${_props.rows * 36}px`,
@@ -63,7 +74,6 @@ const _bindStyles = computed(() => ({
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   padding: var(--v-spacing-sm) var(--v-spacing-md);
 
   .visual-textarea__inner {
@@ -72,7 +82,16 @@ const _bindStyles = computed(() => ({
     z-index: 20;
     flex: 1;
     width: auto;
-    height: var(--v-textarea-height);
+    min-height: var(--v-textarea-height);
+    height: auto;
+    resize: vertical;
+  }
+
+  &.is-auto-height {
+    .visual-textarea__inner {
+      resize: none;
+      overflow: hidden;
+    }
   }
 
   .visual-textarea__count {
