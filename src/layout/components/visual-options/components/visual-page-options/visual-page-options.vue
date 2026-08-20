@@ -26,7 +26,7 @@ const { activeKey } = useReload()
 
 <style scoped lang="scss">
 .visual-page-options {
-  & > view {
+  & > div {
     border-bottom: 1px solid var(--el-border-color);
 
     &:last-child {

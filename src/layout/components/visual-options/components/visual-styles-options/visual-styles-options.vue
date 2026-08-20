@@ -43,7 +43,7 @@ const opacity = computed<number>({
 
 <style scoped lang="scss">
 .visual-styles-options {
-  & > view {
+  & > div {
     border-bottom: 1px solid var(--el-border-color);
 
     &:last-child {

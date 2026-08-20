@@ -119,7 +119,7 @@ const handleRemove = (index: number) => {
 
 <style scoped lang="scss">
 .visual-list-data-options {
-  & > view {
+  & > div {
     border-bottom: 1px solid var(--el-border-color);
 
     &:last-child {
