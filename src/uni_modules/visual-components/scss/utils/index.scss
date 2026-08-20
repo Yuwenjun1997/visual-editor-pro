@@ -9,28 +9,28 @@
 }
 
 $spacing-sizes: (
-  xs: 8rpx,
-  sm: 16rpx,
-  md: 24rpx,
-  base: 32rpx,
-  lg: 64rpx,
+  xs: 8px,
+  sm: 16px,
+  md: 24px,
+  base: 32px,
+  lg: 64px,
 );
 
 $radius-sizes: (
-  xs: 8rpx,
-  sm: 16rpx,
-  md: 24rpx,
-  base: 32rpx,
-  lg: 64rpx,
-  full: 9999rpx,
+  xs: 8px,
+  sm: 16px,
+  md: 24px,
+  base: 32px,
+  lg: 64px,
+  full: 9999px,
 );
 
 $font-sizes: (
-  xs: 20rpx,
-  sm: 24rpx,
-  md: 28rpx,
-  base: 32rpx,
-  lg: 48rpx,
+  xs: 20px,
+  sm: 24px,
+  md: 28px,
+  base: 32px,
+  lg: 48px,
 );
 
 // 生成字体css变量
@@ -92,11 +92,11 @@ $sides-positions: (
 @mixin generate-slide-classes($property, $sizes, $step) {
   @for $i from 0 through $sizes {
     .v-#{map.get($slide-alias, $property)}-#{$i * $step} {
-      #{$property}: #{$i * $step * 1rpx};
+      #{$property}: #{$i * $step * 1px};
     }
     @each $position, $alias in $sides-positions {
       .v-#{map.get($slide-alias, $property)}#{$alias}-#{$i * $step} {
-        #{$property}-#{$position}: #{$i * $step * 1rpx};
+        #{$property}-#{$position}: #{$i * $step * 1px};
       }
     }
   }
@@ -108,7 +108,7 @@ $sides-positions: (
   }
   @for $i from 0 through $sizes {
     .v-#{map.get($slide-alias, $property)}-#{$i * $step} {
-      #{$property}: #{$i * $step * 1rpx};
+      #{$property}: #{$i * $step * 1px};
     }
   }
 }
@@ -149,7 +149,7 @@ $sides-positions: (
 @mixin generate-gap-classes($sizes, $step) {
   @for $i from 0 through $sizes {
     .v-gap-#{$i * $step} {
-      gap: #{$i * $step * 1rpx};
+      gap: #{$i * $step * 1px};
     }
   }
 }

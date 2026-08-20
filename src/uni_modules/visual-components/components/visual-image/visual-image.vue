@@ -1,12 +1,12 @@
 <template>
   <visual-box class="visual-image" :styles="_props.styles">
-    <view class="visual-image__inner" :style="_bindInnerStyles">
-      <image
+    <div class="visual-image__inner" :style="_bindInnerStyles">
+      <img
         class="visual-image__img"
         :src="_bindProps.src"
-        :mode="_bindProps.mode"
+        :style="_bindImageStyles"
       />
-    </view>
+    </div>
   </visual-box>
 </template>
 
@@ -31,6 +31,16 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
   '--v-image-radius': cssRadiusVar(_bindProps.value.round),
   '--v-image-align': _bindProps.value.align,
 }))
+
+const _bindImageStyles = computed<CSSProperties>(() => {
+  const modeMap: Record<string, string> = {
+    aspectFill: 'cover',
+    aspectFit: 'contain',
+    scaleToFill: 'fill',
+  }
+  const objectFit = modeMap[_bindProps.value.mode || ''] || 'cover'
+  return { objectFit }
+})
 </script>
 
 <style scoped lang="scss">
@@ -41,7 +51,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
     .visual-image__img {
       display: block;
       width: var(--v-image-width, 100%);
-      height: var(--v-image-height, 360rpx);
+      height: var(--v-image-height, 360px);
       border-radius: var(--v-image-radius);
       overflow: hidden;
     }

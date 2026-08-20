@@ -1,11 +1,11 @@
 <template>
-  <view class="visual-tool-button" :class="{ 'is-disabled': props.disabled }">
+  <div class="visual-tool-button" :class="{ 'is-disabled': props.disabled }">
     <el-tooltip :content="props.toolTip" effect="dark" placement="left">
       <div class="visual-tools__control" @click="handleClick">
         <Icon :icon="props.iconName" />
       </div>
     </el-tooltip>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

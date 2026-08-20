@@ -1,8 +1,8 @@
 <template>
-  <view class="h-full flex items-center justify-between">
+  <div class="h-full flex items-center justify-between">
     <visual-logo />
     <visual-top-bar />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -4,32 +4,32 @@
       <visual-color-input v-model="shadowColor" />
     </template>
     <template #default>
-      <view class="grid grid-cols-2 p-2 gap-2 visual-input-group">
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+      <div class="grid grid-cols-2 p-2 gap-2 visual-input-group">
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="bi:box-arrow-right" />
-          </view>
+          </div>
           <visual-px-input v-model="offsetX" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="bi:box-arrow-down" />
-          </view>
+          </div>
           <visual-px-input v-model="offsetY" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="bi:droplet-half" />
-          </view>
+          </div>
           <visual-px-input v-model="blurRadius" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="bi:back" />
-          </view>
+          </div>
           <visual-px-input v-model="spreadRadius" />
-        </view>
-      </view>
+        </div>
+      </div>
     </template>
   </visual-collapse>
 </template>

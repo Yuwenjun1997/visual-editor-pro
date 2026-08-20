@@ -1,6 +1,6 @@
 <template>
   <visual-box class="visual-text" :styles="_props.styles">
-    <view :class="bindClass" :style="bindStyle">{{ _props.props.text }}</view>
+    <div :class="bindClass" :style="bindStyle">{{ _props.props.text }}</div>
   </visual-box>
 </template>
 
@@ -39,23 +39,23 @@ const bindStyle = computed(() => ({
 
 <style scoped lang="scss">
 .v-text-xs {
-  font-size: var(--v-text-xs, 20rpx);
+  font-size: var(--v-text-xs, 20px);
 }
 
 .v-text-sm {
-  font-size: var(--v-text-sm, 24rpx);
+  font-size: var(--v-text-sm, 24px);
 }
 
 .v-text-md {
-  font-size: var(--v-text-md, 28rpx);
+  font-size: var(--v-text-md, 28px);
 }
 
 .v-text-base {
-  font-size: var(--v-text-base, 32rpx);
+  font-size: var(--v-text-base, 32px);
 }
 
 .v-text-lg {
-  font-size: var(--v-text-xl, 48rpx);
+  font-size: var(--v-text-xl, 48px);
 }
 
 .v-text-left {

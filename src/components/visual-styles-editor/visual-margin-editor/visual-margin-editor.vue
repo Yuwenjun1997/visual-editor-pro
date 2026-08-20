@@ -4,32 +4,32 @@
       <visual-px-input v-model="margin" @change="onRootmarginChange" />
     </template>
     <template #default>
-      <view class="grid grid-cols-2 p-2 gap-2 visual-input-group">
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+      <div class="grid grid-cols-2 p-2 gap-2 visual-input-group">
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:arrow-align-top" />
-          </view>
+          </div>
           <visual-px-input v-model="marginTop" @change="onMarginChange" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:arrow-align-right" />
-          </view>
+          </div>
           <visual-px-input v-model="marginRight" @change="onMarginChange" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:arrow-align-bottom" />
-          </view>
+          </div>
           <visual-px-input v-model="marginBottom" @change="onMarginChange" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:arrow-align-left" />
-          </view>
+          </div>
           <visual-px-input v-model="marginLeft" @change="onMarginChange" />
-        </view>
-      </view>
+        </div>
+      </div>
     </template>
   </visual-collapse>
 </template>

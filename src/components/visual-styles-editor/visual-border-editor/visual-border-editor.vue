@@ -1,59 +1,59 @@
 <template>
   <visual-collapse class="visual-margin-editor" title="边框">
     <template #default>
-      <view class="gap-2 visual-input-group">
-        <view class="grid grid-cols-3 border-btn-group">
-          <view class="col-span-3">
-            <view
+      <div class="gap-2 visual-input-group">
+        <div class="grid grid-cols-3 border-btn-group">
+          <div class="col-span-3">
+            <div
               class="border-btn"
               :class="{ 'border-btn-active': active === 'borderTop' }"
               @click="active = 'borderTop'"
             >
-              <text>┳</text>
-            </view>
-          </view>
-          <view class="col-span-1">
-            <view
+              <span>┳</span>
+            </div>
+          </div>
+          <div class="col-span-1">
+            <div
               class="border-btn"
               :class="{ 'border-btn-active': active === 'borderLeft' }"
               @click="active = 'borderLeft'"
             >
-              <text>┣</text>
-            </view>
-          </view>
-          <view class="col-span-1">
-            <view
+              <span>┣</span>
+            </div>
+          </div>
+          <div class="col-span-1">
+            <div
               class="border-btn"
               :class="{ 'border-btn-active': active === 'border' }"
               @click="active = 'border'"
             >
-              <text>╋</text>
-            </view>
-          </view>
-          <view class="col-span-1">
-            <view
+              <span>╋</span>
+            </div>
+          </div>
+          <div class="col-span-1">
+            <div
               class="border-btn"
               :class="{
                 'border-btn-active': active === 'borderRight',
               }"
               @click="active = 'borderRight'"
             >
-              <text>┫</text>
-            </view>
-          </view>
-          <view class="col-span-3">
-            <view
+              <span>┫</span>
+            </div>
+          </div>
+          <div class="col-span-3">
+            <div
               class="border-btn"
               :class="{
                 'border-btn-active': active === 'borderBottom',
               }"
               @click="active = 'borderBottom'"
             >
-              <text>┻</text>
-            </view>
-          </view>
-        </view>
-        <view class="flex flex-col gap-2">
+              <span>┻</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
           <visual-normal-select
             class="w-full"
             :options="borderStyles"
@@ -61,8 +61,8 @@
           />
           <visual-px-input v-model="borderWidth" />
           <visual-color-input v-model="borderColor" />
-        </view>
-      </view>
+        </div>
+      </div>
     </template>
   </visual-collapse>
 </template>

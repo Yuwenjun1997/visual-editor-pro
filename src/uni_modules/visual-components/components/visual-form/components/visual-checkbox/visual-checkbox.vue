@@ -1,12 +1,12 @@
 <template>
-  <view class="visual-checkbox" :class="_bindClassList" :style="_bindStyles">
-    <view class="visual-checkbox__inner" @click="_handleClick">
+  <div class="visual-checkbox" :class="_bindClassList" :style="_bindStyles">
+    <div class="visual-checkbox__inner" @click="_handleClick">
       <visual-icon class="visual-checkbox__icon" :icon="_bindIcon" />
-      <view class="visual-checkbox__label" v-if="_props.label">
+      <div class="visual-checkbox__label" v-if="_props.label">
         {{ _props.label }}
-      </view>
-    </view>
-  </view>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

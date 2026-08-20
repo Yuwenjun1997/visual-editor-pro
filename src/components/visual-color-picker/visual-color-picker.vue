@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-color-picker">
+  <div class="visual-color-picker">
     <el-popover
       trigger="click"
       popper-class="visual-color-picker__popover"
@@ -8,22 +8,22 @@
     >
       <template #reference>
         <el-button size="small">
-          <view class="color-btn" :style="bindStyles">
+          <div class="color-btn" :style="bindStyles">
             <Icon icon="bi:x-lg" v-if="!modelValue" />
-          </view>
+          </div>
         </el-button>
       </template>
-      <view class="color-list" v-for="color in colorList" :key="color.value">
-        <text
+      <div class="color-list" v-for="color in colorList" :key="color.value">
+        <span
           class="color-item"
           v-for="(item, index) in getColors(color.value)"
           :key="index"
           :style="{ backgroundColor: item }"
           @click="handleClick(item)"
         />
-      </view>
+      </div>
     </el-popover>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,6 +1,6 @@
 <template>
   <visual-box class="visual-video" :styles="_props.styles">
-    <view class="visual-video__inner" :style="_bindInnerStyles">
+    <div class="visual-video__inner" :style="_bindInnerStyles">
       <video
         class="visual-video__video"
         :src="_bindProps.src"
@@ -14,7 +14,7 @@
         :object-fit="_bindProps.objectFit"
         :title="_bindProps.title"
       />
-    </view>
+    </div>
   </visual-box>
 </template>
 
@@ -49,7 +49,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
     .visual-video__video {
       display: block;
       width: var(--v-video-width, 100%);
-      height: var(--v-video-height, 360rpx);
+      height: var(--v-video-height, 360px);
       border-radius: var(--v-video-radius);
       overflow: hidden;
     }

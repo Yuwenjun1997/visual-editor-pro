@@ -1,7 +1,7 @@
 <template>
   <visual-box class="visual-object-array" :styles="_props.styles">
     <visual-message v-if="_errorMsg" message-type="request-error">
-      <text>发现错误：{{ _errorMsg || '未知错误' }}</text>
+      <span>发现错误：{{ _errorMsg || '未知错误' }}</span>
     </visual-message>
     <slot v-else />
   </visual-box>
@@ -69,12 +69,12 @@ watchEffect(() => {
     padding: var(--v-spacing-md);
     gap: var(--v-spacing-xs);
 
-    image {
-      width: 80rpx;
-      height: 80rpx;
+    img {
+      width: 80px;
+      height: 80px;
     }
 
-    text {
+    span {
       font-size: var(--v-text-xs);
       color: var(--v-text-3);
     }

@@ -4,35 +4,35 @@
       <visual-px-input v-model="round" @change="onRootRoundChange" />
     </template>
     <template #default>
-      <view class="grid grid-cols-2 p-2 gap-2 visual-input-group">
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+      <div class="grid grid-cols-2 p-2 gap-2 visual-input-group">
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:arrow-align-top" />
-          </view>
+          </div>
           <visual-px-input v-model="topLeftRadius" @change="onRoundChange" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:arrow-align-right" />
-          </view>
+          </div>
           <visual-px-input v-model="topRightRadius" @change="onRoundChange" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:arrow-align-bottom" />
-          </view>
+          </div>
           <visual-px-input v-model="bottomLeftRadius" @change="onRoundChange" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:arrow-align-left" />
-          </view>
+          </div>
           <visual-px-input
             v-model="bottomRightRadius"
             @change="onRoundChange"
           />
-        </view>
-      </view>
+        </div>
+      </div>
     </template>
   </visual-collapse>
 </template>

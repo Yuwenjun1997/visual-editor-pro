@@ -4,26 +4,25 @@
     :styles="_props.styles"
     :show-empty="_noListData"
   >
-    <swiper
+    <el-carousel
       :autoplay="_bindProps.autoplay"
       :interval="_bindProps.interval"
       :duration="_bindProps.duration"
-      :circular="_bindProps.circular"
-      :vertical="_bindProps.vertical"
-      :style="_bindSwiperStyles"
-      :current="_currentIndex"
+      :loop="_bindProps.circular"
+      :direction="_bindProps.vertical ? 'vertical' : 'horizontal'"
+      :height="_bindProps.height || '200px'"
       @change="_onChange"
     >
-      <swiper-item v-for="(item, index) in _props.listData" :key="index">
-        <view :style="_bindSwiperItemStyles" class="visual-carousel-item">
-          <image
+      <el-carousel-item v-for="(item, index) in _props.listData" :key="index">
+        <div :style="_bindSwiperItemStyles" class="visual-carousel-item">
+          <img
             :src="item.image"
             :style="_bindImageStyles"
-            mode="cover"
+            style="object-fit: cover"
           />
-        </view>
-      </swiper-item>
-    </swiper>
+        </div>
+      </el-carousel-item>
+    </el-carousel>
     <template v-if="_bindProps.indicatorDots">
       <visual-indicator
         v-model:current="_currentIndex"
@@ -58,21 +57,20 @@ const _bindProps = computed<VisualCarouselProps>(() => ({
   ..._props.props,
 }))
 
-const _bindSwiperStyles = computed<CSSProperties>(() => ({
-  height: _props.props.height,
-}))
-
 const _bindSwiperItemStyles = computed<CSSProperties>(() => ({
   padding: `0 ${_props.props.gap}`,
+  height: '100%',
 }))
 
 const _bindImageStyles = computed<CSSProperties>(() => ({
   borderRadius: _props.props.radius,
+  width: '100%',
+  height: '100%',
 }))
 
 const _currentIndex = ref(0)
-const _onChange = (e: any) => {
-  _currentIndex.value = e.detail.current
+const _onChange = (index: number) => {
+  _currentIndex.value = index
 }
 </script>
 
@@ -85,10 +83,11 @@ const _onChange = (e: any) => {
     height: 100%;
     overflow: hidden;
 
-    image {
+    img {
       display: block;
       width: 100%;
-      flex: 1;
+      height: 100%;
+      object-fit: cover;
     }
   }
 }

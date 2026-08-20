@@ -1,8 +1,8 @@
 <template>
   <visual-box class="visual-flex" :styles="_props.styles">
-    <view :class="_bindClass" :style="_bindStyles">
+    <div :class="_bindClass" :style="_bindStyles">
       <slot></slot>
-    </view>
+    </div>
   </visual-box>
 </template>
 
@@ -39,18 +39,18 @@ const _bindStyles = computed<CSSProperties>(() => ({
 }
 
 .v-gap-xs {
-  gap: var(--v-spacing-xs, 8rpx);
+  gap: var(--v-spacing-xs, 8px);
 }
 
 .v-gap-sm {
-  gap: var(--v-spacing-sm, 16rpx);
+  gap: var(--v-spacing-sm, 16px);
 }
 
 .v-gap-md {
-  gap: var(--v-spacing-md, 24rpx);
+  gap: var(--v-spacing-md, 24px);
 }
 
 .v-gap-lg {
-  gap: var(--v-spacing-lg, 48rpx);
+  gap: var(--v-spacing-lg, 48px);
 }
 </style>

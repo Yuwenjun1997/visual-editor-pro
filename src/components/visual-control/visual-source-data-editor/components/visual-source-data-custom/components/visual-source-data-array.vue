@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-source-data-array">
+  <div class="visual-source-data-array">
     <el-table :data="tableData" size="small" border max-height="400">
       <template v-for="column in schemaList" :key="column.propName">
         <el-table-column
@@ -23,7 +23,7 @@
     <el-button class="w-full mt-2" size="small" @click="handleAdd">
       +添加一项
     </el-button>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

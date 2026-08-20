@@ -8,14 +8,14 @@ import {
   createTextInputControl,
 } from '@/utils/visual.control'
 
-const defaultVideoUrl = '/static/media/flower.mp4'
+const defaultVideoUrl = '/media/flower.mp4'
 
 const VisualVideo: VisualEditorComponent<VisualVideoProps> = {
   key: 'VisualVideo',
   moduleName: 'basicWidgets',
   componentName: 'VisualVideo',
   label: '视频播放',
-  previewImage: '/static/image/block.svg',
+  previewImage: '/image/block.svg',
   props: {
     title: createTextInputControl({ label: '标题', defaultValue: '' }),
     src: createImageInputControl({

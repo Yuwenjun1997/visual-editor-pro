@@ -1,12 +1,12 @@
 <template>
-  <view class="visual-box" :style="bindBoxStyles">
+  <div class="visual-box" :style="bindBoxStyles">
     <visual-message v-if="showEmpty" />
     <template v-else>
-      <view class="visual-box__inner" :style="bindBoxInnerStyles">
+      <div class="visual-box__inner" :style="bindBoxInnerStyles">
         <slot />
-      </view>
+      </div>
     </template>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -48,7 +48,7 @@ const bindBoxInnerStyles = computed<CSSProperties>(() =>
 <style scoped lang="scss">
 .visual-box {
   position: relative;
-  max-width: 750rpx;
+  max-width: 750px;
   .visual-box__inner {
     overflow: hidden;
     width: 100%;

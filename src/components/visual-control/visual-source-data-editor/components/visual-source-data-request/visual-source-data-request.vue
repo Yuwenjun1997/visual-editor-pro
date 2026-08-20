@@ -1,6 +1,6 @@
 <template>
-  <view class="visual-source-data-request">
-    <view class="flex items-center gap-1">
+  <div class="visual-source-data-request">
+    <div class="flex items-center gap-1">
       <el-select
         class="w-40"
         v-model="modelValue.httpMethod"
@@ -13,7 +13,7 @@
       <el-button type="primary" class="w-40" @click="sendResuest">
         测试请求
       </el-button>
-    </view>
+    </div>
     <el-radio-group size="small" v-model="optionType">
       <el-radio-button label="请求参数" value="requestParams" />
       <el-radio-button label="请求头信息" value="requestHeaders" />
@@ -28,7 +28,7 @@
     <template v-if="optionType === 'responseTransform'">
       <visual-request-format v-model="modelValue" />
     </template>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

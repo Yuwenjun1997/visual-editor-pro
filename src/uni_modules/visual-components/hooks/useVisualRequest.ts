@@ -7,7 +7,6 @@ interface VisualResuestCustomOptions {
 }
 
 export const useVisualRequest = (options: VisualSourceOptions) => {
-  // 将字段数组转换为对象
   const transformFieldsToObject = (fileds: VisualHttpField[] = []) => {
     return fileds.reduce(
       (prev, current) => ({ ...prev, [current.key]: current.value }),
@@ -34,23 +33,31 @@ export const useVisualRequest = (options: VisualSourceOptions) => {
   }
 
   const request = (customOption?: VisualResuestCustomOptions) => {
-    return new Promise((resolve, reject) => {
-      if (!options.httpRequest) return
-      uni.request({
-        url: options.httpRequest,
-        method: options.httpMethod,
-        dataType: 'json',
-        data: {
-          ...transformFieldsToObject(options.httpRequestParams),
-          ...customOption,
-        },
-        header: {
-          ...transformFieldsToObject(options.httpRequestHeaders),
-        },
-        success: (result) => resolve(transformResult(result.data)),
-        fail: reject,
-      })
-    })
+    if (!options.httpRequest) return Promise.reject(new Error('No HTTP request URL'))
+
+    const url = options.httpRequest
+    const method = (options.httpMethod || 'GET').toUpperCase()
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...transformFieldsToObject(options.httpRequestHeaders),
+    }
+    const body = {
+      ...transformFieldsToObject(options.httpRequestParams),
+      ...customOption,
+    }
+
+    const fetchOptions: RequestInit = {
+      method,
+      headers,
+    }
+
+    if (method !== 'GET' && method !== 'HEAD') {
+      fetchOptions.body = JSON.stringify(body)
+    }
+
+    return fetch(url, fetchOptions)
+      .then((response) => response.json())
+      .then((data) => transformResult(data))
   }
 
   return {

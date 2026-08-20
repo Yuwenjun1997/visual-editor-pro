@@ -1,6 +1,6 @@
 <template>
   <el-config-provider :locale="zhCn">
-    <view class="visual-stage-container" :class="bindClassList">
+    <div class="visual-stage-container" :class="bindClassList">
       <visual-stage-bar />
       <template v-if="activePanel === 'viewJson'">
         <visual-monaco-editor :options="viewJsonOptions" v-model="viewJson" />
@@ -11,7 +11,7 @@
       <template v-else>
         <visual-stage-panel />
       </template>
-    </view>
+    </div>
   </el-config-provider>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-source-data-column"></view>
+  <div class="visual-source-data-column"></div>
 </template>
 
 <script setup lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-stage-bar">
+  <div class="visual-stage-bar">
     <el-button-group size="small">
       <el-tooltip content="撤销">
         <el-button @click="undo" :disabled="!canUndo">
@@ -51,7 +51,7 @@
         </el-radio-button>
       </el-tooltip>
     </el-radio-group>
-    <view class="flex-1" />
+    <div class="flex-1" />
     <el-button-group size="small">
       <el-tooltip content="运行">
         <el-button>
@@ -64,7 +64,7 @@
         </el-button>
       </el-tooltip>
     </el-button-group>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

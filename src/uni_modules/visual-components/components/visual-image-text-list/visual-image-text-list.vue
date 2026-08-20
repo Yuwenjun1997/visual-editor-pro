@@ -1,7 +1,7 @@
 <template>
   <visual-box class="visual-image-text" :styles="_props.styles">
-    <scroll-view scroll-x>
-      <view class="visual-image-text__inner" :style="_bindInnerStyles">
+    <div class="scroll-view-x">
+      <div class="visual-image-text__inner" :style="_bindInnerStyles">
         <visual-image-text-one
           class="visual-image-text-item"
           v-for="(item, index) in _props.listData"
@@ -11,8 +11,8 @@
           :showTime="_bindProps.showTime"
           :corver-in-right="_bindProps.coverInRight"
         ></visual-image-text-one>
-      </view>
-    </scroll-view>
+      </div>
+    </div>
   </visual-box>
 </template>
 
@@ -47,7 +47,7 @@ const _innerWidth = computed(() => {
 })
 
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-inner-width': `${_innerWidth.value}rpx`,
+  '--v-inner-width': `${_innerWidth.value}px`,
   '--v-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
   '--v-item-round': cssRadiusVar(_bindProps.value.round),
 }))

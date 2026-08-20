@@ -1,11 +1,11 @@
 <template>
-  <view class="visual-indicator" :class="bindClassList">
-    <text v-if="type === 'title'">{{ showTitle }}</text>
-    <text v-else-if="type === 'fixed-right'">
+  <div class="visual-indicator" :class="bindClassList">
+    <span v-if="type === 'title'">{{ showTitle }}</span>
+    <span v-else-if="type === 'fixed-right'">
       {{ current + 1 }}/{{ props.list.length }}
-    </text>
+    </span>
     <template v-else>
-      <view
+      <div
         class="visual-indicator-item"
         :class="{ 'is-active': index === current }"
         v-for="(item, index) in props.list"
@@ -13,7 +13,7 @@
         :data-index="index + 1"
       />
     </template>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -53,16 +53,16 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
   &.visual-indicator__dot,
   &.visual-indicator__line,
   &.visual-indicator__number {
-    bottom: 12rpx;
-    gap: 12rpx;
+    bottom: 12px;
+    gap: 12px;
     left: 50%;
     transform: translateX(-50%);
   }
 
   &.visual-indicator__dot {
     .visual-indicator-item {
-      width: 12rpx;
-      height: 12rpx;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background-color: var(--v-primary-6);
       transition: all 0.4s;
@@ -74,34 +74,34 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
 
   &.visual-indicator__line {
     .visual-indicator-item {
-      width: 12rpx;
-      height: 4rpx;
-      border-radius: 2rpx;
+      width: 12px;
+      height: 4px;
+      border-radius: 2px;
       background-color: var(--v-primary-6);
       transition: all 0.4s;
       &.is-active {
-        width: 24rpx;
+        width: 24px;
         background-color: var(--v-primary-1);
       }
     }
   }
 
   &.visual-indicator__number {
-    gap: 12rpx;
-    bottom: 8rpx;
+    gap: 12px;
+    bottom: 8px;
     .visual-indicator-item {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 30rpx;
-      height: 30rpx;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       background-color: rgba(0, 0, 0, 0.2);
       transition: all 0.4s;
 
       &::after {
         content: attr(data-index);
-        font-size: 20rpx;
+        font-size: 20px;
         color: #fff;
       }
 
@@ -114,7 +114,7 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
   &.visual-indicator__title {
     bottom: 0;
     width: 100%;
-    line-height: 48rpx;
+    line-height: 48px;
     background-color: var(--v-black-opacity-1);
     color: #fff;
     font-size:  var(--v-text-sm);
@@ -128,13 +128,13 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
 
   &.visual-indicator__fixed-right {
     right: 0;
-    bottom: 12rpx;
+    bottom: 12px;
     background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
     font-size: var(--v-text-sm);
-    line-height: 40rpx;
-    border-radius: 20rpx 0 0 20rpx;
-    padding-left: 12rpx;
+    line-height: 40px;
+    border-radius: 20px 0 0 20px;
+    padding-left: 12px;
   }
 }
 </style>

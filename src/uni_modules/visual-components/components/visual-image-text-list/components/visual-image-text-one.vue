@@ -1,22 +1,22 @@
 <template>
-  <view class="visual-image-text-one" :class="_bindClassList">
-    <view class="visual-image-text__cover">
-      <image :src="_props.data.cover"></image>
-    </view>
-    <view class="visual-image-text__content">
-      <view class="visual-image-text__body">
+  <div class="visual-image-text-one" :class="_bindClassList">
+    <div class="visual-image-text__cover">
+      <img :src="_props.data.cover"></img>
+    </div>
+    <div class="visual-image-text__content">
+      <div class="visual-image-text__body">
         {{ _props.data.title }}
-      </view>
-      <view class="visual-image-text__footer">
+      </div>
+      <div class="visual-image-text__footer">
         <visual-author
           v-if="_props.showAuthor"
           :author-avatar="_props.data.authorAvatar"
           :author-name="_props.data.authorName"
         />
         <visual-time v-if="_props.showTime" :time="_props.data.publishTime" />
-      </view>
-    </view>
-  </view>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -39,12 +39,12 @@ const _bindClassList = computed(() => ({
 </script>
 
 <style scoped lang="scss">
-@import '../../../scss/utils/index.scss';
+@use '../../../scss/utils/index.scss' as *;
 
 .visual-image-text-one {
   display: flex;
   align-items: center;
-  height: 184rpx;
+  height: 184px;
   background-color: #fff;
   font-size: var(--v-text-md);
 
@@ -53,11 +53,11 @@ const _bindClassList = computed(() => ({
   }
 
   .visual-image-text__cover {
-    width: 184rpx;
-    height: 184rpx;
+    width: 184px;
+    height: 184px;
     flex-shrink: 0;
 
-    image {
+    img {
       display: block;
       width: 100%;
       height: 100%;
@@ -73,7 +73,7 @@ const _bindClassList = computed(() => ({
   }
 
   .visual-image-text__body {
-    height: 84rpx;
+    height: 84px;
     @include ellipsis(2);
   }
 

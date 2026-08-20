@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-styles-options">
+  <div class="visual-styles-options">
     <visual-background-editor v-model="cssOptions" />
     <visual-shadow-editor v-model="cssOptions" />
     <visual-margin-editor v-model="cssOptions" />
@@ -9,7 +9,7 @@
     <visual-control-item title="透明度">
       <el-slider v-model="opacity" :min="0" :max="1" :step="0.01" />
     </visual-control-item>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

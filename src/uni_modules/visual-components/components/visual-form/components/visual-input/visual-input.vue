@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-input">
+  <div class="visual-input">
     <input
       class="visual-input__inner"
       v-model="_modelValue"
@@ -7,17 +7,17 @@
       :maxlength="_maxlength"
       :password="_props.password"
     />
-    <view
+    <div
       class="visual-input__clear"
       v-if="_showClearBtn"
       @click="_handleClear"
     >
       <visual-icon icon="bi:backspace-fill" />
-    </view>
-    <view class="visual-input__count" v-if="_props.showWordLimit">
+    </div>
+    <div class="visual-input__count" v-if="_props.showWordLimit">
       {{ _wordLimitText }}
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -73,23 +73,23 @@ const _handleClear = () => {
   justify-content: center;
   position: relative;
   padding: var(--v-spacing-sm) var(--v-spacing-md);
-  height: 72rpx;
+  height: 72px;
 
   .visual-input__inner {
     position: relative;
-    line-height: 36rpx;
+    line-height: 36px;
     z-index: 20;
     flex: 1;
   }
 
   .visual-input__count {
-    margin-left: 12rpx;
+    margin-left: 12px;
     font-size: var(--v-text-sm);
     color: var(--v-text-4);
   }
 
   .visual-input__clear {
-    margin-left: 12rpx;
+    margin-left: 12px;
     color: var(--v-text-4);
   }
 }

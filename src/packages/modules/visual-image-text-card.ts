@@ -14,7 +14,7 @@ import {
   createTextInputControl,
 } from '@/utils/visual.control'
 
-const defaultCover = '/static/image/cover.svg'
+const defaultCover = '/image/cover.svg'
 
 const createData = (): Record<
   keyof VisualImageTextCardItem,
@@ -47,7 +47,7 @@ const VisualImageTextCard: VisualEditorComponent<VisualImageTextCardProps> = {
   moduleName: 'imageTextWidgets',
   componentName: 'VisualImageTextCard',
   label: '图文卡片',
-  previewImage: '/static/image/block.svg',
+  previewImage: '/image/block.svg',
   souceDataType: 'VisualObjectArray',
   styles: {
     backgroundColor: '#f9f9f9',

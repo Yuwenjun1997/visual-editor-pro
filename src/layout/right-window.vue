@@ -1,8 +1,8 @@
 <template>
-  <view class="visual-options-container flex h-full">
+  <div class="visual-options-container flex h-full">
     <visual-tools-bar />
     <visual-options />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

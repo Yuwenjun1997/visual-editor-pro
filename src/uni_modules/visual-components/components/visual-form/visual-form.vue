@@ -5,17 +5,17 @@
       :class="_bindInnerClassList"
       :style="_bindInnerStyles"
     >
-      <view
+      <div
         class="visual-form-item"
         :class="_bindFormItemClassList(item)"
         v-for="(item, index) in _props.listData"
         :key="index"
       >
-        <view class="visual-form-item__inner">
-          <view class="visual-form-item__label" v-if="_bindProps.showLabel">
-            <text>{{ item.label }}</text>
-          </view>
-          <view class="visual-form-item__content">
+        <div class="visual-form-item__inner">
+          <div class="visual-form-item__label" v-if="_bindProps.showLabel">
+            <span>{{ item.label }}</span>
+          </div>
+          <div class="visual-form-item__content">
             <template v-if="item.option.type === 'visual-input'">
               <visual-input
                 v-model="item.option.value"
@@ -81,9 +81,9 @@
             <template v-if="item.option.type === 'visual-picker'">
               <visual-picker :range="item.option.columns" range-key="label" />
             </template>
-          </view>
-        </view>
-      </view>
+          </div>
+        </div>
+      </div>
     </form>
   </visual-box>
 </template>
@@ -163,7 +163,7 @@ const _bindInnerStyles = computed(() => ({
       .visual-form-item__inner {
         display: flex;
         align-items: center;
-        height: 80rpx;
+        height: 80px;
         border-bottom: 1px solid var(--v-gray-6);
 
         .visual-form-item__label {
@@ -173,7 +173,7 @@ const _bindInnerStyles = computed(() => ({
           align-items: center;
           width: var(--v-form-label-width);
           color: var(--v-form-label-color);
-          padding-left: 24rpx;
+          padding-left: 24px;
         }
 
         .visual-form-item__content {

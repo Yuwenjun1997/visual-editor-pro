@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-radio-group">visual-radio-group</view>
+  <div class="visual-radio-group">visual-radio-group</div>
 </template>
 
 <script setup lang="ts"></script>

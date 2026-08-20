@@ -1,6 +1,6 @@
 <template>
-  <view class="visual-textarea" :style="_bindStyles">
-    <textarea
+  <div class="visual-textarea" :style="_bindStyles">
+    <spanarea
       class="visual-textarea__inner"
       v-model="_modelValue"
       :placeholder="_props.placeholder"
@@ -8,10 +8,10 @@
       :password="_props.password"
       :autoHeight="_props.autoHeight"
     />
-    <view class="visual-textarea__count" v-if="_props.showWordLimit">
+    <div class="visual-textarea__count" v-if="_props.showWordLimit">
       {{ _wordLimitText }}
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -53,7 +53,7 @@ const _wordLimitText = computed(() => {
 })
 
 const _bindStyles = computed(() => ({
-  '--v-textarea-height': `${_props.rows * 36}rpx`,
+  '--v-textarea-height': `${_props.rows * 36}px`,
 }))
 </script>
 
@@ -68,7 +68,7 @@ const _bindStyles = computed(() => ({
 
   .visual-textarea__inner {
     position: relative;
-    line-height: 36rpx;
+    line-height: 36px;
     z-index: 20;
     flex: 1;
     width: auto;
@@ -77,7 +77,7 @@ const _bindStyles = computed(() => ({
 
   .visual-textarea__count {
     position: absolute;
-    margin-left: 12rpx;
+    margin-left: 12px;
     font-size: var(--v-text-sm);
     color: var(--v-text-4);
     right: var(--v-spacing-md);

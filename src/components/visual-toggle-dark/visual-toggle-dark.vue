@@ -1,9 +1,9 @@
 <template>
-  <view class="visual-toggle-dark">
+  <div class="visual-toggle-dark">
     <el-tooltip :content="_darkThemeLabel">
       <Icon class="btn" :icon="_darkThemeIcon" @click="handleToggleDark" />
     </el-tooltip>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts" name="VadToggleDark">

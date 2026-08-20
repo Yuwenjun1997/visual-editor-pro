@@ -9,7 +9,7 @@ body {
 }
 
 @media screen and (max-width: 1040px) {
-  page {
+  body {
     padding-bottom: 16px;
   }
 }
@@ -129,13 +129,13 @@ body {
   }
   .el-drawer {
     box-shadow: none;
-    border-left: 1rpx solid var(--el-border-color);
+    border-left: 1px solid var(--el-border-color);
     height: calc(100vh - var(--top-window-height));
     top: var(--top-window-height);
   }
 
   .visual-props-options {
-    & > view {
+    & > div {
       border-bottom: 1px solid var(--el-border-color);
 
       &:last-child {

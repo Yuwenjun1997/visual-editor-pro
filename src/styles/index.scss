@@ -1,2 +1,2 @@
-@import './visual.layout.scss';
-@import './visual.common.scss';
+@use './visual.layout.scss' as *;
+@use  './visual.common.scss' as *;

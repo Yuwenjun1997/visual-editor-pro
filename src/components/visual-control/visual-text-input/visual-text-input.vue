@@ -1,11 +1,11 @@
 <template>
-  <view class="visual-px-input" @click.stop>
+  <div class="visual-px-input" @click.stop>
     <el-input
       class="visual-px-input__input"
       v-model="textValue"
       :placeholder="props.placeholder"
     />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

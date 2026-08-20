@@ -13,7 +13,7 @@ import {
   createTextInputControl,
 } from '@/utils/visual.control'
 
-const defaultCover = '/static/image/cover.svg'
+const defaultCover = '/image/cover.svg'
 
 const createData = (): Record<
   keyof VisualImageTextListItem,
@@ -46,7 +46,7 @@ const VisualImageTextList: VisualEditorComponent<VisualImageTextListProps> = {
   moduleName: 'imageTextWidgets',
   componentName: 'VisualImageTextList',
   label: '图文列表',
-  previewImage: '/static/image/block.svg',
+  previewImage: '/image/block.svg',
   souceDataType: 'VisualObjectArray',
   styles: {
     backgroundColor: '#f9f9f9',

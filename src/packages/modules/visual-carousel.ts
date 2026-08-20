@@ -14,7 +14,7 @@ import {
   createTextInputControl,
 } from '@/utils/visual.control'
 
-const defaultCover = '/static/image/cover.svg'
+const defaultCover = '/image/cover.svg'
 
 const createListData = (): Record<
   keyof VisualCarouselItem,
@@ -38,7 +38,7 @@ const visualCarousel: VisualEditorComponent<
   moduleName: 'basicWidgets',
   componentName: 'VisualCarousel',
   label: '轮播图',
-  previewImage: '/static/image/visual-carousel.svg',
+  previewImage: '/image/visual-carousel.svg',
   souceDataType: 'VisualObjectArray',
   props: {
     autoplay: createSwitchControl({ label: '自动切换', defaultValue: true }),

@@ -1,12 +1,12 @@
 <template>
-  <view class="visual-number-input" @click.stop>
+  <div class="visual-number-input" @click.stop>
     <el-input
       class="visual-number-input__input"
       v-model.number="modelValue"
       type="number"
       :placeholder="props.placeholder"
     />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

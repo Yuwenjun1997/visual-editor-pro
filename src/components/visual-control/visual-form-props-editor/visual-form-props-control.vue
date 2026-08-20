@@ -1,10 +1,10 @@
 <template>
-  <view class="visual-form-config-control" @click.stop>
+  <div class="visual-form-config-control" @click.stop>
     <el-button @click="handleClick">
       <Icon icon="bi:airplane" />
       <span class="ml-2">更多属性</span>
     </el-button>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

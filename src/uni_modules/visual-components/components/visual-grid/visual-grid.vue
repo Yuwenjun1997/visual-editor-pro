@@ -4,7 +4,7 @@
     :styles="_props.styles"
     :show-empty="_noListData"
   >
-    <view
+    <div
       class="visual-grid__inner"
       :class="_bindClassList"
       :style="_bindInnerStyles"
@@ -21,7 +21,7 @@
         :direction="_bindProps.direction"
         :show-border="_bindProps.showBorder"
       />
-    </view>
+    </div>
   </visual-box>
 </template>
 

@@ -1,9 +1,9 @@
 <template>
-  <view class="visual-top-bar px-4">
+  <div class="visual-top-bar px-4">
     <visual-fullscreen />
     <visual-toggle-dark />
     <visual-avatar />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

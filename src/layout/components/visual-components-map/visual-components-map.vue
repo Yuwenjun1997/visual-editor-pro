@@ -1,6 +1,6 @@
 <template>
-  <view class="visual-components-map h-full">
-    <view class="title p-2">组件大纲</view>
+  <div class="visual-components-map h-full">
+    <div class="title p-2">组件大纲</div>
     <el-scrollbar height="100%" class="flex-1">
       <el-tree
         ref="treeRef"
@@ -14,7 +14,7 @@
         @current-change="onCurrentChange"
       >
         <template #default="{ data }">
-          <view class="flex items-center gap-1">
+          <div class="flex items-center gap-1">
             <template v-if="data.moduleName === 'basicWidgets'">
               <Icon icon="ion:color-palette-outline" />
             </template>
@@ -27,15 +27,15 @@
             <template v-if="data.moduleName === 'imageTextWidgets'">
               <Icon icon="bi:card-list" />
             </template>
-            <view>{{ data.label }}</view>
-          </view>
+            <div>{{ data.label }}</div>
+          </div>
         </template>
         <template #empty>
           <el-empty description="暂无数据" :image-size="60" />
         </template>
       </el-tree>
     </el-scrollbar>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

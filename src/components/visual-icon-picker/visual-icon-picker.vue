@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-icon-picker">
+  <div class="visual-icon-picker">
     <el-popover
       trigger="click"
       popper-class="visual-icon-picker__popover"
@@ -8,35 +8,35 @@
     >
       <template #reference>
         <el-button size="small">
-          <view class="icon-btn" :class="{ 'is-empty': isEmpty }">
+          <div class="icon-btn" :class="{ 'is-empty': isEmpty }">
             <Icon :icon="showIcon" />
-          </view>
+          </div>
         </el-button>
       </template>
 
-      <view v-if="visible">
-        <view class="flex items-center gap-1">
+      <div v-if="visible">
+        <div class="flex items-center gap-1">
           <el-input v-model="keyword" size="small" placeholder="图标名称搜索" />
           <el-button type="primary" @click="onSearch()" size="small">
             <template #icon>
               <Icon icon="line-md:search-twotone" />
             </template>
-            <text class="text-xs whitespace-nowrap">搜索</text>
+            <span class="text-xs whitespace-nowrap">搜索</span>
           </el-button>
-        </view>
+        </div>
 
-        <view class="icon-list my-2">
-          <view
+        <div class="icon-list my-2">
+          <div
             v-for="(item, index) in icons"
             :key="index"
             class="icon-item"
             @click="handleClick(item)"
           >
             <Icon :icon="item" />
-          </view>
-        </view>
+          </div>
+        </div>
 
-        <view class="flex items-start justify-center">
+        <div class="flex items-start justify-center">
           <el-pagination
             layout="prev, pager, next"
             :page-size="pageSize"
@@ -44,10 +44,10 @@
             small
             @current-change="onCurrentChange"
           />
-        </view>
-      </view>
+        </div>
+      </div>
     </el-popover>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -125,7 +125,7 @@ const handleClick = (icon: string) => {
       height: 36px;
       outline-offset: -2px;
       cursor: pointer;
-      font-size: 40rpx;
+      font-size: 40px;
       background-color: var(--el-bg-color);
 
       &:hover {

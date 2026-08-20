@@ -4,7 +4,7 @@
 //   // --window-right: 320px !important;
 // }
 
-page {
+html, body {
   height: 100%;
   background-color: var(--el-bg-color-page);
 }
@@ -15,12 +15,12 @@ page {
 
 .dark {
   .visual-transparent-bg {
-    background: url('@/static/transparent-dark.svg');
+    background: url('@/assets/transparent-dark.svg');
   }
 }
 
 .visual-transparent-bg {
-  background: url('@/static/transparent.svg');
+  background: url('@/assets/transparent.svg');
 }
 
 .visual-group {
@@ -72,7 +72,7 @@ page {
   .visual-block {
     overflow: hidden;
 
-    & > view {
+    & > div {
       -webkit-box-flex: 1;
       -ms-flex: 1;
       flex: 1;

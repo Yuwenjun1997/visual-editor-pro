@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-props-options">
+  <div class="visual-props-options">
     <template v-for="item in visualOptions">
       <visual-control-item :title="item.label">
         <template v-if="item.type === VisualEditorType.pxInput">
@@ -38,7 +38,7 @@
         </template>
       </visual-control-item>
     </template>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

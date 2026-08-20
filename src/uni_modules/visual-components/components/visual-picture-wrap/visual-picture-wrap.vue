@@ -1,23 +1,23 @@
 <template>
   <visual-box class="visual-picture-wrap" :styles="_props.styles">
-    <scroll-view scroll-x>
-      <view
+    <div class="scroll-view-x">
+      <div
         class="visual-picture-wrap__inner"
         :class="_bindProps.layout"
         :style="_bindInnerStyles"
       >
-        <view
+        <div
           class="visual-picture"
           v-for="(item, index) in _props.listData"
           :key="index"
         >
-          <image class="visual-picture__image" :src="item.url" />
-          <text class="visual-picture__label" v-if="_bindProps.showLabel">
+          <img class="visual-picture__image" :src="item.url" />
+          <span class="visual-picture__label" v-if="_bindProps.showLabel">
             {{ item.label }}
-          </text>
-        </view>
-      </view>
-    </scroll-view>
+          </span>
+        </div>
+      </div>
+    </div>
   </visual-box>
 </template>
 
@@ -48,7 +48,7 @@ const _innerWidth = computed(() => {
 })
 
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-inner-width': `${_innerWidth.value}rpx`,
+  '--v-inner-width': `${_innerWidth.value}px`,
   '--v-picture-radius': cssSpacingVar(_bindProps.value.radius),
   '--v-picture-height': _bindProps.value.height,
   '--v-picture-gutter': cssSpacingVar(_bindProps.value.gutter),
@@ -57,7 +57,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/utils/index.scss';
+@use '../../scss/utils/index.scss' as *;
 
 .visual-picture-wrap {
   .visual-picture-wrap__inner {
@@ -67,7 +67,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
       position: relative;
       overflow: hidden;
       border-radius: var(--v-picture-radius);
-      height: var(--v-picture-height, 240rpx);
+      height: var(--v-picture-height, 240px);
       background-color: var(--v-picture-bg-color);
 
       .visual-picture__image {
@@ -83,7 +83,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
         padding: 0 var(--v-spacing-sm);
         background-color: var(--v-black-opacity-6);
         color: var(--v-white);
-        line-height: 48rpx;
+        line-height: 48px;
         font-size: var(--v-text-md);
         @include ellipsis(1);
       }
@@ -142,7 +142,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
     .visual-picture {
       &:nth-child(1) {
         grid-area: 1 / 1 / 2 / 3;
-        height: calc(var(--v-picture-height, 240rpx) / 3 * 2);
+        height: calc(var(--v-picture-height, 240px) / 3 * 2);
       }
 
       &:nth-child(2) {
@@ -165,7 +165,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
     width: var(--v-inner-width);
 
     .visual-picture {
-      width: 380rpx;
+      width: 380px;
       display: inline-block;
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <view
+  <div
     class="visual-grid-item"
     :class="_bindClassList"
     hover-class="visual-block-hover"
@@ -14,8 +14,8 @@
       :size="_props.iconSize"
       :color="_props.iconColor"
     />
-    <text v-if="_props.text">{{ _props.text }}</text>
-  </view>
+    <span v-if="_props.text">{{ _props.text }}</span>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -55,14 +55,14 @@ const _bindClassList = computed(() => ({ 'has-border': _props.showBorder }))
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12rpx;
-  gap: 8rpx;
+  padding: 12px;
+  gap: 8px;
 
-  image {
+  img {
     display: block;
   }
 
-  text {
+  span {
     line-height: 1;
     color: var(--v-item-text-color);
     font-size: var(--v-item-text-size);

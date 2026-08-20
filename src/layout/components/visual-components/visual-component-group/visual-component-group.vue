@@ -12,17 +12,17 @@
     @end="onEnd"
   >
     <template #item="{ element }">
-      <view
+      <div
         v-if="element.span"
         class="visual-group-item text-xs more-components"
         :class="'span-' + element.span"
       >
         <image
           class="visual-group-item-preview"
-          src="/static/image/coding.svg"
+          src="/image/coding.svg"
         />
-      </view>
-      <view
+      </div>
+      <div
         v-else
         class="visual-group-item visual-drag-item"
         :data-name="element.label"
@@ -30,8 +30,8 @@
         @mouseup="onMouseUp"
       >
         <image class="visual-group-item-preview" :src="element.previewImage" />
-        <view class="visual-group-item-label">{{ element.label }}</view>
-      </view>
+        <div class="visual-group-item-label">{{ element.label }}</div>
+      </div>
     </template>
   </draggable>
 </template>

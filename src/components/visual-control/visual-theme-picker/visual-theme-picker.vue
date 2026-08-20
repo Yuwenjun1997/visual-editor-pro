@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-theme-picker">
+  <div class="visual-theme-picker">
     <el-popover
       trigger="click"
       popper-class="visual-theme-picker__popover"
@@ -8,22 +8,22 @@
     >
       <template #reference>
         <el-button size="small">
-          <view class="theme-btn" :style="bindStyles">
+          <div class="theme-btn" :style="bindStyles">
             <Icon icon="bi:x-lg" v-if="!modelValue" />
-          </view>
+          </div>
         </el-button>
       </template>
-      <view class="theme-list">
-        <text
+      <div class="theme-list">
+        <span
           class="theme-item"
           v-for="(color, theme) in themeMap"
           :key="theme"
           :style="{ backgroundColor: color }"
           @click="handleClick(theme)"
         />
-      </view>
+      </div>
     </el-popover>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

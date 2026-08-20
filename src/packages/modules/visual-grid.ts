@@ -15,7 +15,7 @@ import {
   createTextInputControl,
 } from '@/utils/visual.control'
 
-const defaultCover = '/static/image/cover.svg'
+const defaultCover = '/image/cover.svg'
 
 const createListData = (): Record<
   keyof VisualGridItemProps,
@@ -33,7 +33,7 @@ const visualGrid: VisualEditorComponent<VisualGridProps> = {
   moduleName: 'basicWidgets',
   componentName: 'VisualGrid',
   label: '宫格',
-  previewImage: '/static/image/block.svg',
+  previewImage: '/image/block.svg',
   souceDataType: 'VisualObjectArray',
   slots: {
     default: {

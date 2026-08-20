@@ -1,12 +1,12 @@
 <template>
-  <view class="visual-switch" :class="_bindClassList">
+  <div class="visual-switch" :class="_bindClassList">
     <switch
       class="visual-switch__inner"
       :checked="_modelValue"
       :color="_props.activeColor"
       @change="_handleChange"
     />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

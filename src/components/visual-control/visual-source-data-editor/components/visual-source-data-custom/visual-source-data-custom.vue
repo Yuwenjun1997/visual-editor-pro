@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-source-data-custom">
+  <div class="visual-source-data-custom">
     <template v-if="!emptySchema">
       <template v-if="modelValue.customDataType === 'VisualObject'">
         <visual-source-data-object v-model="modelValue" />
@@ -11,7 +11,7 @@
     <template v-else>
       <el-empty description="暂无数据" />
     </template>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

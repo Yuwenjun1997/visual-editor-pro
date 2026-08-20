@@ -1,9 +1,9 @@
 <template>
   <div class="visual-logo">
-    <view class="flex items-center justify-center w-12 h-12">
-      <image src="/static/vite.svg" class="w-10 h-10" />
-    </view>
-    <text class="text-xl">可视化设计</text>
+    <div class="flex items-center justify-center w-12 h-12">
+      <image src="/vite.svg" class="w-10 h-10" />
+    </div>
+    <span class="text-xl">可视化设计</span>
   </div>
 </template>
 

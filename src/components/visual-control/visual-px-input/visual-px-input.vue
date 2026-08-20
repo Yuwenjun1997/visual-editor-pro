@@ -1,15 +1,15 @@
 <template>
-  <view class="visual-px-input" @click.stop>
+  <div class="visual-px-input" @click.stop>
     <el-input
       class="visual-px-input__input"
       v-model.number="inputValue"
       :placeholder="props.placeholder"
       @blur="onInputBlur"
     />
-    <view class="visual-px-input__unit" @click="onUnitClick">
+    <div class="visual-px-input__unit" @click="onUnitClick">
       {{ unitValue }}
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

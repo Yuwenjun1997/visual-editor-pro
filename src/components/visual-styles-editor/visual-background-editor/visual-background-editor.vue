@@ -4,36 +4,36 @@
       <visual-color-input v-model="bgColor" />
     </template>
     <template #default>
-      <view class="visual-input-group grid grid-cols-2 p-2 gap-2">
-        <view class="flex items-center col-span-2">
-          <view class="w-6 flex-shrink-0">
+      <div class="visual-input-group grid grid-cols-2 p-2 gap-2">
+        <div class="flex items-center col-span-2">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:image" />
-          </view>
+          </div>
           <visual-image-input v-model="bgImage" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
-            <text class="iconfont icon-rule"></text>
-          </view>
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
+            <span class="iconfont icon-rule"></span>
+          </div>
           <visual-px-input placeholder="size" v-model="bgSize" />
-        </view>
-        <view class="flex items-center">
-          <view class="w-6 flex-shrink-0">
-            <text class="iconfont icon-repeat"></text>
-          </view>
+        </div>
+        <div class="flex items-center">
+          <div class="w-6 flex-shrink-0">
+            <span class="iconfont icon-repeat"></span>
+          </div>
           <visual-normal-select
             class="w-full"
             v-model="bgRepeat"
             :options="repeatOptions"
           />
-        </view>
-        <view class="flex items-center col-span-2">
-          <view class="w-6 flex-shrink-0">
+        </div>
+        <div class="flex items-center col-span-2">
+          <div class="w-6 flex-shrink-0">
             <Icon icon="line-md:map-marker" />
-          </view>
+          </div>
           <visual-text-input placeholder="center center" v-model="bgPosition" />
-        </view>
-      </view>
+        </div>
+      </div>
     </template>
   </visual-collapse>
 </template>

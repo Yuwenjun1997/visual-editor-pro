@@ -16,7 +16,7 @@ import {
   createTextInputControl,
 } from '@/utils/visual.control'
 
-const defaultIconPath = '/static/image/location.svg'
+const defaultIconPath = '/image/location.svg'
 
 const createData = (): Record<keyof VisualMapMarker, VisualEditorProps> => ({
   iconPath: createImageInputControl({
@@ -33,7 +33,7 @@ const VisualMap: VisualEditorComponent<VisualMapProps> = {
   moduleName: 'basicWidgets',
   componentName: 'VisualMap',
   label: '地图',
-  previewImage: '/static/image/block.svg',
+  previewImage: '/image/block.svg',
   props: {
     autoLocation: createSwitchControl({
       label: '自动定位',

@@ -6,34 +6,34 @@
   >
     <!-- 普通列表 -->
     <template v-if="!_isScroll">
-      <view class="visual-picture-wrap__inner" :style="_bindInnerStyles">
-        <view
+      <div class="visual-picture-wrap__inner" :style="_bindInnerStyles">
+        <div
           class="visual-picture"
           v-for="(item, index) in _props.listData"
           :key="index"
         >
-          <image class="visual-picture__image" :src="item.url" />
-          <text class="visual-picture__label" v-if="_bindProps.showLabel">
+          <img class="visual-picture__image" :src="item.url" />
+          <span class="visual-picture__label" v-if="_bindProps.showLabel">
             {{ item.label }}
-          </text>
-        </view>
-      </view>
+          </span>
+        </div>
+      </div>
     </template>
     <!-- 滚动列表 -->
-    <scroll-view scroll-x="true" v-else>
-      <view class="visual-picture-wrap__inner" :style="_bindInnerStyles">
-        <view
+    <div class="scroll-view-x" v-else>
+      <div class="visual-picture-wrap__inner" :style="_bindInnerStyles">
+        <div
           class="visual-picture"
           v-for="(item, index) in _props.listData"
           :key="index"
         >
-          <image class="visual-picture__image" :src="item.url" />
-          <text class="visual-picture__label" v-if="_bindProps.showLabel">
+          <img class="visual-picture__image" :src="item.url" />
+          <span class="visual-picture__label" v-if="_bindProps.showLabel">
             {{ item.label }}
-          </text>
-        </view>
-      </view>
-    </scroll-view>
+          </span>
+        </div>
+      </div>
+    </div>
   </visual-box>
 </template>
 
@@ -82,7 +82,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
       position: relative;
       overflow: hidden;
       border-radius: var(--v-picture-radius);
-      height: var(--v-picture-height, 240rpx);
+      height: var(--v-picture-height, 240px);
       background-color: var(--v-picture-bg-color);
 
       .visual-picture__image {
@@ -157,7 +157,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
       .visual-picture {
         &:nth-child(1) {
           grid-area: 1 / 1 / 2 / 3;
-          height: calc(var(--v-picture-height, 240rpx) / 3 * 2);
+          height: calc(var(--v-picture-height, 240px) / 3 * 2);
         }
 
         &:nth-child(2) {
@@ -183,8 +183,8 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
       overflow: unset;
 
       .visual-picture {
-        width: calc(var(--v-picture-height, 180rpx) * 1.75);
-        height: var(--v-picture-height, 180rpx);
+        width: calc(var(--v-picture-height, 180px) * 1.75);
+        height: var(--v-picture-height, 180px);
         flex-shrink: 0;
       }
     }

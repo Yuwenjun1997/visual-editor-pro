@@ -10,7 +10,7 @@ const visualFlex: VisualEditorComponent<VisualFlexProps> = {
   moduleName: 'basicWidgets',
   componentName: 'VisualFlex',
   label: '弹性布局',
-  previewImage: '/static/image/block.svg',
+  previewImage: '/image/block.svg',
   props: {
     flexDirection: createNormalSelectControl({
       label: '排列方向',

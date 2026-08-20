@@ -1,27 +1,26 @@
 <template>
   <visual-box class="visual-map" :styles="_props.styles">
-    <view class="visual-map__inner" :style="_bindInnerStyles">
-      <map
-        class="visual-map__map"
-        :longitude="_longitude"
-        :latitude="_latitude"
-        :scale="_bindProps.scale"
-        :markers="_markers"
-      />
-    </view>
+    <div class="visual-map__inner" :style="_bindInnerStyles">
+      <div class="visual-map__map" :style="_bindMapStyles">
+        <div class="visual-map__placeholder">
+          <div>Lat: {{ _latitude }}, Lng: {{ _longitude }}</div>
+          <div v-if="_bindProps.title" class="visual-map__title">{{ _bindProps.title }}</div>
+        </div>
+      </div>
+    </div>
   </visual-box>
 </template>
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
-import type { VisualMapMarker, VisualMapProps } from './interface'
+import type { VisualMapProps } from './interface'
 import { cssRadiusVar } from '../../utils/styles.utils'
 
 interface Props {
   styles?: CSSProperties
   props: VisualMapProps
-  listData: VisualMapMarker[]
+  listData: any[]
 }
 
 const _props = withDefaults(defineProps<Props>(), {
@@ -37,55 +36,27 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
   '--v-map-align': _bindProps.value.align,
 }))
 
-const _locationInfo = ref<UniApp.GetLocationSuccess>()
+const _bindMapStyles = computed<CSSProperties>(() => ({
+  width: _bindProps.value.width,
+  height: _bindProps.value.height,
+  borderRadius: cssRadiusVar(_bindProps.value.round),
+}))
 
-const _longitude = computed(() => {
-  return _locationInfo.value?.longitude || _bindProps.value.longitude
-})
-const _latitude = computed(() => {
-  return _locationInfo.value?.latitude || _bindProps.value.latitude
-})
-
-const _createMarker = (options: VisualMapMarker) => ({
-  latitude: options.latitude,
-  longitude: options.longitude,
-  title: options.title,
-  iconPath: options.iconPath,
-  callout: {
-    content: options.title,
-    display: 'ALWAYS',
-    color: _bindProps.value.titleColor,
-    fontSize: _bindProps.value.titleFontSize,
-  },
-})
-
-const _markers = computed(() => {
-  return [
-    _createMarker({
-      latitude: _latitude.value,
-      longitude: _longitude.value,
-      title: _bindProps.value.title,
-      iconPath: '/static/image/location.svg',
-    }),
-    ..._props.listData
-      .filter((item) => item.latitude && item.longitude)
-      .map(_createMarker),
-  ]
-})
+const _longitude = ref(_bindProps.value.longitude || 0)
+const _latitude = ref(_bindProps.value.latitude || 0)
 
 onMounted(() => {
-  if (_bindProps.value.autoLocation) {
+  if (_bindProps.value.autoLocation && navigator.geolocation) {
     console.log('正在获取定位信息...')
-    uni.getLocation({
-      success(result) {
-        _locationInfo.value = result
-        console.log(result)
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        _longitude.value = position.coords.longitude
+        _latitude.value = position.coords.latitude
       },
-      fail(error) {
-        _locationInfo.value = undefined
+      (error) => {
         console.log(error)
-      },
-    })
+      }
+    )
   }
 })
 </script>
@@ -95,12 +66,29 @@ onMounted(() => {
   .visual-map__inner {
     display: flex;
     justify-content: var(--v-map-align, flex-start);
+
     .visual-map__map {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: var(--v-map-width, 100%);
-      height: var(--v-map-height, 360rpx);
+      height: var(--v-map-height, 360px);
       border-radius: var(--v-map-radius);
       overflow: hidden;
+      background-color: var(--el-fill-color-light);
+      border: 1px solid var(--el-border-color);
+    }
+
+    .visual-map__placeholder {
+      text-align: center;
+      font-size: 12px;
+      color: var(--el-text-color-secondary);
+    }
+
+    .visual-map__title {
+      margin-top: 4px;
+      font-weight: 500;
+      color: var(--el-text-color-primary);
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-news-time">{{ props.time }}</view>
+  <div class="visual-news-time">{{ props.time }}</div>
 </template>
 
 <script setup lang="ts">

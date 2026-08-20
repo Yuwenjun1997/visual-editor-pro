@@ -1,6 +1,6 @@
 <template>
-  <view class="visual-options flex-1">
-    <view class="title p-2">属性配置</view>
+  <div class="visual-options flex-1">
+    <div class="title p-2">属性配置</div>
     <el-scrollbar height="100%" class="flex-1">
       <el-collapse v-model="activeNames" accordion>
         <el-collapse-item title="页面属性" name="pageInfo">
@@ -29,7 +29,7 @@
 
     <!-- 可视化表单项配置信息 -->
     <visual-form-props-editor />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

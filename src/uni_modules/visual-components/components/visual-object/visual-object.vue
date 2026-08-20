@@ -1,7 +1,7 @@
 <template>
   <visual-box class="visual-object" :styles="_props.styles">
     <visual-message v-if="_errorMsg" message-type="request-error">
-      <text>发现错误：{{ _errorMsg || '未知错误' }}</text>
+      <span>发现错误：{{ _errorMsg || '未知错误' }}</span>
     </visual-message>
     <slot v-else />
   </visual-box>

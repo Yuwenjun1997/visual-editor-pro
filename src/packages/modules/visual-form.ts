@@ -37,7 +37,7 @@ const VisualForm: VisualEditorComponent<VisualFormProps> = {
   moduleName: 'basicWidgets',
   componentName: 'VisualForm',
   label: '个性表单',
-  previewImage: '/static/image/block.svg',
+  previewImage: '/image/block.svg',
   props: {
     labelWidth: createPxInputControl({ label: '标签宽度' }),
     labelColor: createColorInputControl({ label: '标签颜色' }),

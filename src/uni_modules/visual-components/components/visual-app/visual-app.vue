@@ -1,7 +1,7 @@
 <template>
-  <view class="visual-app" :class="_bindClassList" :style="_bindStyles">
+  <div class="visual-app" :class="_bindClassList" :style="_bindStyles">
     <slot />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

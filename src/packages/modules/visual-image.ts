@@ -6,14 +6,14 @@ import {
   createPxInputControl,
 } from '@/utils/visual.control'
 
-const defaultCover = '/static/image/cover.svg'
+const defaultCover = '/image/cover.svg'
 
 const VisualImage: VisualEditorComponent<VisualImageProps> = {
   key: 'VisualImage',
   moduleName: 'basicWidgets',
   componentName: 'VisualImage',
   label: '图片',
-  previewImage: '/static/image/block.svg',
+  previewImage: '/image/block.svg',
   props: {
     src: createImageInputControl({
       label: '图片地址',

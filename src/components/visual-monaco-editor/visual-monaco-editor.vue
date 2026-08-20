@@ -1,7 +1,7 @@
 <template>
-  <view class="p-1 flex-1 w-full">
+  <div class="p-1 flex-1 w-full">
     <div ref="editorEl" class="w-full h-full"></div>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

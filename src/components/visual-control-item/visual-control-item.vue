@@ -1,10 +1,10 @@
 <template>
-  <view class="visual-control-item">
-    <text class="text-sm">{{ props.title }}</text>
-    <view class="control-content">
+  <div class="visual-control-item">
+    <span class="text-sm">{{ props.title }}</span>
+    <div class="control-content">
       <slot />
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

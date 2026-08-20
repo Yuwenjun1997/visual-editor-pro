@@ -1,10 +1,10 @@
 <template>
-  <view class="visual-empty">
-    <image :src="_imageList[_props.messageType]" />
+  <div class="visual-empty">
+    <img :src="_imageList[_props.messageType]" />
     <slot>
-      <text>{{ _props.message }}</text>
+      <span>{{ _props.message }}</span>
     </slot>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -41,9 +41,9 @@ const _props = withDefaults(defineProps<Props>(), {
   font-size: var(--v-text-xs);
   color: var(--v-text-4);
 
-  image {
-    width: 80rpx;
-    height: 80rpx;
+  img {
+    width: 80px;
+    height: 80px;
   }
 }
 </style>

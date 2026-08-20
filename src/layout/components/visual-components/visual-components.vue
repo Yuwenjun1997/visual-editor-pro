@@ -1,6 +1,6 @@
 <template>
-  <view class="visual-components h-full">
-    <view class="title p-2">全部组件</view>
+  <div class="visual-components h-full">
+    <div class="title p-2">全部组件</div>
     <el-scrollbar height="100%" class="flex-1">
       <el-collapse v-model="activeNames" @change="handleChange">
         <el-collapse-item title="基础组件" name="basic">
@@ -17,7 +17,7 @@
         </el-collapse-item>
       </el-collapse>
     </el-scrollbar>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

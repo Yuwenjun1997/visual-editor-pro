@@ -1,7 +1,7 @@
 <template>
-  <view class="visual-checkbox-group">
+  <div class="visual-checkbox-group">
     <slot></slot>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,10 +1,10 @@
 <template>
-  <view class="visual-source-data-editor" @click.stop>
+  <div class="visual-source-data-editor" @click.stop>
     <el-button @click="handleClick">
       <Icon icon="bi:airplane" />
       <span class="ml-2">配置数据</span>
     </el-button>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

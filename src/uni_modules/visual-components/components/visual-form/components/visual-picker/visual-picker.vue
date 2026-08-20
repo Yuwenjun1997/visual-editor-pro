@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-picker">visual-picker</view>
+  <div class="visual-picker">visual-picker</div>
 </template>
 
 <script setup lang="ts"></script>

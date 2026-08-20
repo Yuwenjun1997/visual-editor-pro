@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-slider">
+  <div class="visual-slider">
     <slider
       class="visual-slider__inner"
       :max="_max"
@@ -12,7 +12,7 @@
       :blockColor="_props.blockColor"
       @change="_handleChange"
     />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

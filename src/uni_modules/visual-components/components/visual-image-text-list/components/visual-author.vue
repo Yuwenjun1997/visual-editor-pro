@@ -1,8 +1,8 @@
 <template>
-  <view class="visual-news-author">
-    <image :src="props.authorAvatar" mode="aspectFill" />
-    <text class="author-name">{{ props.authorName }}</text>
-  </view>
+  <div class="visual-news-author">
+    <img :src="props.authorAvatar" style="object-fit: cover" />
+    <span class="author-name">{{ props.authorName }}</span>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
   align-items: center;
   gap: var(--v-spacing-xs);
 
-  image {
+  img {
     display: block;
     width: var(--v-text-md);
     height: var(--v-text-md);

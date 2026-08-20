@@ -1,17 +1,17 @@
 <template>
-  <view class="visual-list-data-options">
+  <div class="visual-list-data-options">
     <template v-for="(option, index) in visualOptions">
       <visual-collapse :title="`第${index + 1}项`">
         <template #right>
-          <view
+          <div
             @click.stop="handleRemove(index)"
             class="visual-del-btn"
             v-if="delAble"
           >
             <Icon icon="bi:trash" />
-          </view>
+          </div>
         </template>
-        <view class="visual-list-item-options">
+        <div class="visual-list-item-options">
           <visual-control-item
             v-for="(item, propName) in option"
             :key="propName"
@@ -52,15 +52,15 @@
               />
             </template>
           </visual-control-item>
-        </view>
+        </div>
       </visual-collapse>
     </template>
-    <view class="p-1" v-if="addAble">
+    <div class="p-1" v-if="addAble">
       <el-button size="small" class="w-full" @click="handleAdd">
         +添加项目
       </el-button>
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

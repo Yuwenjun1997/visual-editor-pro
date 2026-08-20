@@ -1,19 +1,19 @@
 <template>
-  <view class="visual-collapse">
-    <view
+  <div class="visual-collapse">
+    <div
       class="visual-collapse-btn cursor-pointer"
       @click="isCollapse = !isCollapse"
     >
-      <view class="flex items-center flex-1">
+      <div class="flex items-center flex-1">
         <Icon :icon="icon" class="text-xs" />
-        <text class="text-sm ml-1">{{ props.title }}</text>
-      </view>
+        <span class="text-sm ml-1">{{ props.title }}</span>
+      </div>
       <slot name="right" />
-    </view>
-    <view class="visual-collapse-content" v-show="isCollapse">
+    </div>
+    <div class="visual-collapse-content" v-show="isCollapse">
       <slot />
-    </view>
-  </view>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

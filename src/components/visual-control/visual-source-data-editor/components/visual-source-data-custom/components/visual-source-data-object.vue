@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-source-data-object">
+  <div class="visual-source-data-object">
     <el-table :data="tableData" size="small" border max-height="400">
       <el-table-column prop="label" label="属性名" width="120" />
       <el-table-column prop="propName" label="Key" width="120" />
@@ -9,7 +9,7 @@
         </template>
       </el-table-column>
     </el-table>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

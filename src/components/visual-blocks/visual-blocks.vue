@@ -15,7 +15,7 @@
     @end="onEnd"
   >
     <template #item="{ element, index }">
-      <view
+      <div
         class="visual-block"
         :class="{
           'has-children': !isEmptySlots(element),
@@ -37,7 +37,7 @@
             />
           </template>
         </use-component>
-      </view>
+      </div>
     </template>
   </draggable>
 </template>
@@ -140,8 +140,8 @@ const bindStyle = computed(() => ({
 .visual-group {
   &.is-empty {
     position: relative;
-    min-height: 160rpx;
-    min-width: 200rpx;
+    min-height: 160px;
+    min-width: 200px;
     &::before {
       content: attr(data-slot);
       position: absolute;
@@ -150,7 +150,7 @@ const bindStyle = computed(() => ({
       align-items: center;
       justify-content: center;
       height: 100%;
-      font-size: 24rpx;
+      font-size: 24px;
       color: var(--el-text-color-secondary);
       background-color: var(--el-color-info-light-9);
       white-space: nowrap;

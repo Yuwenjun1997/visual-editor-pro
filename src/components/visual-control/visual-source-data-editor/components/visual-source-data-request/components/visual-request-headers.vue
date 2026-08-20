@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-request-panel">
+  <div class="visual-request-panel">
     <el-table
       size="small"
       border
@@ -27,7 +27,7 @@
     <el-button class="w-full" size="small" @click="handleAdd">
       +添加字段
     </el-button>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

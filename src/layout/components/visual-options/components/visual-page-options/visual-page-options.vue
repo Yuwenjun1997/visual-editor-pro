@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-page-options" :key="activeKey">
+  <div class="visual-page-options" :key="activeKey">
     <visual-control-item title="页面标题">
       <visual-text-input v-model="pageConfig.title" />
     </visual-control-item>
@@ -8,7 +8,7 @@
     </visual-control-item> -->
     <visual-background-editor v-model="pageConfig.globalStyle" />
     <visual-padding-editor v-model="pageConfig.globalStyle" />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

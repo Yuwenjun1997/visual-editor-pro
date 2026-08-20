@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-form-config-editor">
+  <div class="visual-form-config-editor">
     <el-drawer
       size="280px"
       v-model="visible"
@@ -9,10 +9,10 @@
       destroy-on-close
       modal-class="visual-form-config-editor__dialog"
     >
-      <view class="visual-options">
+      <div class="visual-options">
         <el-collapse v-model="activeNames" accordion>
           <el-collapse-item title="组件属性" name="componentProps">
-            <view class="visual-props-options">
+            <div class="visual-props-options">
               <visual-control-item title="类型">
                 <el-select v-model="modelValue.type">
                   <el-option
@@ -30,14 +30,14 @@
                 :field-props="propFileds[propName]"
                 v-model="modelValue[propName]"
               />
-            </view>
+            </div>
           </el-collapse-item>
           <el-collapse-item
             title="验证规则"
             name="componentRules"
             v-if="_renderRuleFields.length"
           >
-            <view class="visual-props-options">
+            <div class="visual-props-options">
               <visual-form-control
                 v-for="propName in _renderRuleFields"
                 :key="propName"
@@ -45,12 +45,12 @@
                 :field-props="ruleFileds[propName]"
                 v-model="modelValue[propName]"
               />
-            </view>
+            </div>
           </el-collapse-item>
         </el-collapse>
-      </view>
+      </div>
     </el-drawer>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

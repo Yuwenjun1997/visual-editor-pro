@@ -1,24 +1,24 @@
 <template>
   <visual-box class="visual-section" :styles="_props.styles">
-    <view class="visual-section__inner" :style="_bindInnerStyles">
-      <view class="visual-section__title">
+    <div class="visual-section__inner" :style="_bindInnerStyles">
+      <div class="visual-section__title">
         <template v-if="_bindProps.showLine">
-          <view class="visual-section__line"></view>
+          <div class="visual-section__line"></div>
         </template>
-        <view class="visual-section__title_text">
+        <div class="visual-section__title_text">
           {{ _bindProps.title }}
-        </view>
+        </div>
         <visual-icon
           v-if="_bindProps.icon"
           :icon="_bindProps.icon"
           :size="_bindProps.titleSize"
           :color="_bindProps.iconColor"
         />
-      </view>
-      <view class="visual-section__desc" v-if="_bindProps.description">
+      </div>
+      <div class="visual-section__desc" v-if="_bindProps.description">
         {{ _bindProps.description }}
-      </view>
-    </view>
+      </div>
+    </div>
   </visual-box>
 </template>
 
@@ -72,10 +72,10 @@ const _bindInnerStyles = computed(() => ({
       }
 
       .visual-section__line {
-        width: var(--v-section-line-width, 4rpx);
+        width: var(--v-section-line-width, 4px);
         // margin-right: var(--v-spacing-sm);
         background-color: var(--v-section-line-color, var(--v-primary-1));
-        border-radius: var(--v-section-line-width, 4rpx);
+        border-radius: var(--v-section-line-width, 4px);
       }
     }
 

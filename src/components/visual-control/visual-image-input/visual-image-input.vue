@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-image-input">
+  <div class="visual-image-input">
     <el-input
       class="visual-image-input__input"
       v-model.trim="imageValue"
@@ -7,12 +7,12 @@
       clearable
     >
       <template #prefix>
-        <view class="w-8 visual-upload__btn" @click.stop>
+        <div class="w-8 visual-upload__btn" @click.stop>
           <Icon icon="line-md:cloud-up" class="text-base" />
-        </view>
+        </div>
       </template>
     </el-input>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

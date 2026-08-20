@@ -1,17 +1,17 @@
 <template>
-  <view class="visual-image-input" @click.stop>
+  <div class="visual-image-input" @click.stop>
     <el-input
       class="visual-image-input__input"
       :placeholder="props.placeholder"
       v-model="colorValue"
     >
       <template #prefix>
-        <view @click.stop style="margin-left: 4px">
+        <div @click.stop style="margin-left: 4px">
           <visual-color-picker v-model="colorValue" />
-        </view>
+        </div>
       </template>
     </el-input>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

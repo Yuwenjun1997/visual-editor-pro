@@ -1,9 +1,9 @@
 <template>
-  <view class="visual-fullscreen">
+  <div class="visual-fullscreen">
     <el-tooltip :content="fullscreenLabel">
       <Icon class="btn" :icon="fullscreenIcon" @click="toggle()" />
     </el-tooltip>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts" name="VadFullscreen">

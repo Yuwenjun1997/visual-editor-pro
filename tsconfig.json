@@ -8,7 +8,7 @@
       "@/*": ["./src/*"]
     },
     "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types", "element-plus/global"]
+    "types": ["element-plus/global"]
   },
   "include": [
     "src/**/*.ts",

@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-radio">visual-radio</view>
+  <div class="visual-radio">visual-radio</div>
 </template>
 
 <script setup lang="ts"></script>

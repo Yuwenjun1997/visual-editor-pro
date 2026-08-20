@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-icon" :class="_bindClassList" :style="_bindStyles" />
+  <div class="visual-icon" :class="_bindClassList" :style="_bindStyles" />
 </template>
 
 <script setup lang="ts">

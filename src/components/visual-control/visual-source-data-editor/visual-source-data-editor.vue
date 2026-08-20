@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-source-data-editor">
+  <div class="visual-source-data-editor">
     <el-dialog
       v-model="visible"
       title="数据来源配置"
@@ -27,7 +27,7 @@
         </span>
       </template>
     </el-dialog>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,28 +1,28 @@
 <template>
-  <view class="visual-materiel-container h-full">
+  <div class="visual-materiel-container h-full">
     <el-tabs class="visual-tabs" tab-position="left">
       <el-tab-pane label="大纲">
         <template #label>
           <Icon class="text-xl" icon="bi:bounding-box" />
-          <text class="text-xs mt-1">大纲</text>
+          <span class="text-xs mt-1">大纲</span>
         </template>
         <visual-components-map />
       </el-tab-pane>
       <el-tab-pane label="组件">
         <template #label>
           <Icon class="text-xl" icon="bi:box" />
-          <text class="text-xs mt-1">组件</text>
+          <span class="text-xs mt-1">组件</span>
         </template>
         <visual-components />
       </el-tab-pane>
       <el-tab-pane label="模板">
         <template #label>
           <Icon class="text-xl" icon="bi:stickies" />
-          <text class="text-xs mt-1">模板</text>
+          <span class="text-xs mt-1">模板</span>
         </template>
       </el-tab-pane>
     </el-tabs>
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">

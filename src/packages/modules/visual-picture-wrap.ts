@@ -15,7 +15,7 @@ import {
   createTextInputControl,
 } from '@/utils/visual.control'
 
-const defaultCover = '/static/image/cover.svg'
+const defaultCover = '/image/cover.svg'
 
 const createData = (): Record<keyof VisualPicture, VisualEditorProps> => ({
   label: createTextInputControl({
@@ -33,7 +33,7 @@ const visualPictureWrap: VisualEditorComponent<VisualPictureWrapProps> = {
   moduleName: 'imageTextWidgets',
   componentName: 'VisualPictureWrap',
   label: '照片墙',
-  previewImage: '/static/image/block.svg',
+  previewImage: '/image/block.svg',
   styles: {
     backgroundColor: '#f9f9f9',
   },

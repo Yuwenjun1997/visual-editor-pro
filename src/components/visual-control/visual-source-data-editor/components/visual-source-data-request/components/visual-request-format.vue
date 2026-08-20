@@ -1,5 +1,5 @@
 <template>
-  <view class="visual-request-format">
+  <div class="visual-request-format">
     <template v-if="!emptySchema">
       <el-table size="small" border max-height="400" :data="tableData">
         <el-table-column label="字段名" prop="label">
@@ -39,7 +39,7 @@
       <el-button size="small" @click="handleAdd">+添加字段</el-button>
     </template>
     <el-empty v-else description="暂无需要映射的属性" />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">
