@@ -21,7 +21,7 @@ const visualObjectArray: VisualEditorComponent<VisualObjectArrayProps> = {
       defaultValue: {
         dataSource: 'custom',
         httpMethod: 'GET',
-        customJsonDataType: 'VisualObjectArray',
+        customDataType: 'VisualObjectArray',
       },
     }),
   },

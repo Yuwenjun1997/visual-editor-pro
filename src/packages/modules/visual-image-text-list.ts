@@ -84,7 +84,7 @@ const VisualImageTextList: VisualEditorComponent<VisualImageTextListProps> = {
         { label: '较大', value: 'lg' },
       ],
     }),
-  },
+    },
   listData: {
     label: '图文列表',
     data: [createData(), createData()],

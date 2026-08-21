@@ -1,0 +1,10 @@
+<svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="120" y="330" width="784" height="364" rx="40" fill="#ff6b5e"/>
+  <circle cx="374" cy="446" r="34" fill="#ff9c94"/>
+  <circle cx="374" cy="578" r="34" fill="#ff9c94"/>
+  <text x="260" y="536" font-size="120" font-family="Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="central">¥</text>
+  <text x="502" y="452" font-size="44" font-family="Arial, sans-serif" fill="#ffffff" text-anchor="middle">新人立减券</text>
+  <text x="502" y="530" font-size="34" font-family="Arial, sans-serif" opacity="0.85" fill="#ffffff" text-anchor="middle">满100元可用</text>
+  <rect x="444" y="586" width="200" height="64" rx="32" fill="#ffffff"/>
+  <text x="544" y="622" font-size="34" font-family="Arial, sans-serif" font-weight="bold" fill="#ff6b5e" text-anchor="middle" dominant-baseline="central">立即领取</text>
+</svg>

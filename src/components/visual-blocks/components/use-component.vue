@@ -6,7 +6,9 @@
     :styles="componentStyles"
     :ref="(node: any) => registerRef(node, vid)"
   >
-    <slot name="default" />
+    <template v-for="(_, key) in $slots" #[key] :key="key">
+      <slot :name="key" />
+    </template>
   </component>
 </template>
 

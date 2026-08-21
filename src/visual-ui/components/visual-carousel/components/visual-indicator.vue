@@ -53,16 +53,16 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
   &.visual-indicator__dot,
   &.visual-indicator__line,
   &.visual-indicator__number {
-    bottom: 12px;
-    gap: 12px;
+    bottom: 6px;
+    gap: 6px;
     left: 50%;
     transform: translateX(-50%);
   }
 
   &.visual-indicator__dot {
     .visual-indicator-item {
-      width: 12px;
-      height: 12px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background-color: var(--v-primary-6);
       transition: all 0.4s;
@@ -87,21 +87,19 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
   }
 
   &.visual-indicator__number {
-    gap: 12px;
-    bottom: 8px;
     .visual-indicator-item {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 30px;
-      height: 30px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background-color: rgba(0, 0, 0, 0.2);
       transition: all 0.4s;
 
       &::after {
         content: attr(data-index);
-        font-size: 20px;
+        font-size: var(--v-text-sm);
         color: #fff;
       }
 
@@ -114,7 +112,7 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
   &.visual-indicator__title {
     bottom: 0;
     width: 100%;
-    line-height: 48px;
+    line-height: 32px;
     background-color: var(--v-black-opacity-1);
     color: #fff;
     font-size:  var(--v-text-sm);
@@ -128,11 +126,11 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
 
   &.visual-indicator__fixed-right {
     right: 0;
-    bottom: 12px;
+    bottom: 6px;
     background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
     font-size: var(--v-text-sm);
-    line-height: 40px;
+    line-height: 24px;
     border-radius: 20px 0 0 20px;
     padding-left: 12px;
   }

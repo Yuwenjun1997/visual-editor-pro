@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-image-text" :styles="_props.styles">
+  <visual-box class="visual-image-text" :styles="_props.styles" :show-empty="_noListData">
     <div class="scroll-view-x">
       <div
         class="visual-image-text__inner"
@@ -40,6 +40,8 @@ interface Props {
 const _props = withDefaults(defineProps<Props>(), {
   listData: () => [],
 })
+
+const _noListData = computed(() => _props.listData.length <= 0)
 
 const _bindProps = computed<VisualImageTextCardProps>(() => ({
   layout: 'col-1',

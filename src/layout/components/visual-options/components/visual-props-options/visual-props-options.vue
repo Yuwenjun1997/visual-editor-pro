@@ -29,6 +29,16 @@
         <template v-else-if="item.type === VisualEditorType.switch">
           <el-switch v-model="item.defaultValue" />
         </template>
+        <template v-else-if="item.type === VisualEditorType.datePicker">
+          <el-date-picker
+            v-model="item.defaultValue"
+            type="datetime"
+            value-format="YYYY-MM-DD HH:mm:ss"
+            placeholder="选择结束时间"
+            :clearable="true"
+            style="width: 100%"
+          />
+        </template>
         <template v-else-if="item.type === VisualEditorType.sourceData">
           <visual-source-data-control
             v-if="visualKey"

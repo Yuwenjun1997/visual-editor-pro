@@ -1,0 +1,5 @@
+<svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="292" y="382" width="440" height="260" rx="40" fill="#07c160"/>
+  <path d="M512 472v60M482 520h60" stroke="#ffffff" stroke-width="36" stroke-linecap="round" fill="none"/>
+  <text x="512" y="700" font-size="52" font-family="Arial, sans-serif" font-weight="bold" fill="#07c160" text-anchor="middle">咨询</text>
+</svg>

@@ -67,3 +67,9 @@ export const createListDataControl: VisualPropsEditorControl<{
   defaultValue?: any
   tips?: string
 }> = (options) => ({ type: VisualEditorType.listData, ...options })
+
+export const createDatePickerControl: VisualPropsEditorControl<{
+  label: string
+  defaultValue?: string
+  tips?: string
+}> = (options) => ({ type: VisualEditorType.datePicker, ...options })

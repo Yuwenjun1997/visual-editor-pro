@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-picture-wrap" :styles="_props.styles">
+  <visual-box class="visual-picture-wrap" :styles="_props.styles" :show-empty="_noListData">
     <div class="scroll-view-x">
       <div
         class="visual-picture-wrap__inner"
@@ -40,6 +40,8 @@ defineOptions({
 const _props = withDefaults(defineProps<Props>(), {
   listData: () => [],
 })
+
+const _noListData = computed(() => _props.listData.length <= 0)
 
 const _bindProps = computed(() => ({ ..._props.props }))
 

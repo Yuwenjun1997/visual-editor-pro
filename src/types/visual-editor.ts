@@ -42,6 +42,7 @@ export enum VisualEditorType {
   sourceData = 'sourceData',
   listData = 'listData',
   numberInput = 'numberInput',
+  datePicker = 'datePicker',
 }
 
 export interface VisualSelectOption {

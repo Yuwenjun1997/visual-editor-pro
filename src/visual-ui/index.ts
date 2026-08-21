@@ -15,6 +15,12 @@ import VisualPictureWrap from './components/visual-picture-wrap'
 import VisualVideo from './components/visual-video'
 import VisualMap from './components/visual-map'
 import VisualSection from './components/visual-section'
+import VisualButton from './components/visual-button'
+import VisualCountDown from './components/visual-count-down'
+import VisualCustomerService from './components/visual-customer-service'
+import VisualCoupon from './components/visual-coupon'
+import VisualQRCode from './components/visual-qrcode'
+import VisualTabs from './components/visual-tabs'
 
 import type { App } from 'vue'
 import type { CustomThemeConfig } from './types/theme'
@@ -37,5 +43,11 @@ export default {
     app.component('VisualVideo', VisualVideo)
     app.component('VisualMap', VisualMap)
     app.component('VisualSection', VisualSection)
+    app.component('VisualButton', VisualButton)
+    app.component('VisualCountDown', VisualCountDown)
+    app.component('VisualCustomerService', VisualCustomerService)
+    app.component('VisualCoupon', VisualCoupon)
+    app.component('VisualQRCode', VisualQRCode)
+    app.component('VisualTabs', VisualTabs)
   },
 }

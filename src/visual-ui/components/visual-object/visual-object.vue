@@ -35,6 +35,8 @@ const _errorMsg = ref<string>()
 const _loadData = async () => {
   try {
     if (!_props.props.options) return
+    _errorMsg.value = undefined
+    if (!_props.props.options.httpRequest) return
     _isLoading.value = true
     const { request } = useVisualRequest(_props.props.options)
     const response = await request()
@@ -55,6 +57,7 @@ defineExpose({
 watchEffect(() => {
   const { options } = _props.props
   if (options?.dataSource === 'custom') {
+    _errorMsg.value = undefined
     _slotData.value = transformCustomSlotObject(options)
   }
 })
