@@ -1,4 +1,4 @@
-import type { VisualSourceOptions } from '@/uni_modules/visual-components/types'
+import type { VisualSourceOptions } from '#visual-ui/types'
 
 const visible = ref<boolean>(false)
 

@@ -18,7 +18,7 @@
 import VisualSourceDataArray from './components/visual-source-data-array.vue'
 import VisualSourceDataObject from './components/visual-source-data-object.vue'
 import { useSchema } from '@/hooks/useSchema'
-import type { VisualSourceOptions } from '@/uni_modules/visual-components/types'
+import type { VisualSourceOptions } from '#visual-ui/types'
 import { useVModel } from '@vueuse/core'
 
 interface Props {

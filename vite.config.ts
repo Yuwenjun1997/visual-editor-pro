@@ -11,6 +11,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@/': `${pathSrc}/`,
+      '#visual-ui/': `${pathSrc}/visual-ui/`,
     },
   },
   plugins: [

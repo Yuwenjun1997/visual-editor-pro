@@ -5,7 +5,7 @@ import type {
 import type {
   VisualImageTextListItem,
   VisualImageTextListProps,
-} from '@/uni_modules/visual-components/components/visual-image-text-list/interface'
+} from '#visual-ui/components/visual-image-text-list/interface'
 import {
   createImageInputControl,
   createNormalSelectControl,

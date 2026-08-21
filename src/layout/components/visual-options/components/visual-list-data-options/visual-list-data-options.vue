@@ -44,13 +44,6 @@
             <template v-else-if="item.type === VisualEditorType.switch">
               <el-switch v-model="item.defaultValue" />
             </template>
-            <template v-else-if="item.type === VisualEditorType.formItem">
-              <visual-form-props-control
-                v-if="visualKey"
-                v-model="item.defaultValue"
-                :visualKey="visualKey"
-              />
-            </template>
           </visual-control-item>
         </div>
       </visual-collapse>
@@ -74,7 +67,6 @@ import VisualImageInput from '@/components/visual-control/visual-image-input/vis
 import VisualColorInput from '@/components/visual-control/visual-color-input/visual-color-input.vue'
 import VisualIconInput from '@/components/visual-control/visual-icon-input/visual-icon-input.vue'
 import VisualTextInput from '@/components/visual-control/visual-text-input/visual-text-input.vue'
-import VisualFormPropsControl from '@/components/visual-control/visual-form-props-editor/visual-form-props-control.vue'
 import {
   VisualEditorType,
   type VisualEditorListData,
@@ -85,8 +77,6 @@ const visualStore = useViusalStore()
 const visualOptions = computed(
   () => visualStore.visualEditorComponent?.listData?.data
 )
-
-const visualKey = computed(() => visualStore.currentBlock?.key)
 
 const canAdd = (listData?: VisualEditorListData<any>) => {
   if (!listData) return false

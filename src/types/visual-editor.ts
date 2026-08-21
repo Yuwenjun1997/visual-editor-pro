@@ -42,7 +42,6 @@ export enum VisualEditorType {
   sourceData = 'sourceData',
   listData = 'listData',
   numberInput = 'numberInput',
-  formItem = 'formItem',
 }
 
 export interface VisualSelectOption {

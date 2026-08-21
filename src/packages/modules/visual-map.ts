@@ -5,7 +5,7 @@ import type {
 import type {
   VisualMapMarker,
   VisualMapProps,
-} from '@/uni_modules/visual-components/components/visual-map/interface'
+} from '#visual-ui/components/visual-map/interface'
 import {
   createColorInputControl,
   createImageInputControl,

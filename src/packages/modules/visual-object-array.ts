@@ -1,5 +1,5 @@
 import type { VisualEditorComponent } from '@/types/visual-editor'
-import type { VisualObjectArrayProps } from '@/uni_modules/visual-components/components/visual-object-array/interface'
+import type { VisualObjectArrayProps } from '#visual-ui/components/visual-object-array/interface'
 import { createSourceDataControl } from '@/utils/visual.control'
 
 const visualObjectArray: VisualEditorComponent<VisualObjectArrayProps> = {

@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import { useSchema } from '@/hooks/useSchema'
-import type { VisualSourceOptions } from '@/uni_modules/visual-components/types'
+import type { VisualSourceOptions } from '#visual-ui/types'
 import { useVModel } from '@vueuse/core'
 
 interface Props {

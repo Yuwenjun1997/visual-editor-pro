@@ -28,8 +28,8 @@
 
 <script setup lang="ts">
 import { useSchema } from '@/hooks/useSchema'
-import type { VisualSourceOptions } from '@/uni_modules/visual-components/types'
-import { formatJsonToObjectArray } from '@/uni_modules/visual-components/utils'
+import type { VisualSourceOptions } from '#visual-ui/types'
+import { formatJsonToObjectArray } from '#visual-ui/utils'
 import { useVModel } from '@vueuse/core'
 
 interface Props {

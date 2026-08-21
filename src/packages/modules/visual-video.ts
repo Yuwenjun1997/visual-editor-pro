@@ -1,5 +1,5 @@
 import type { VisualEditorComponent } from '@/types/visual-editor'
-import type { VisualVideoProps } from '@/uni_modules/visual-components/components/visual-video/interface'
+import type { VisualVideoProps } from '#visual-ui/components/visual-video/interface'
 import {
   createImageInputControl,
   createNormalSelectControl,

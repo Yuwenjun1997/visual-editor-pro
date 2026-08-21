@@ -26,9 +26,6 @@
 
     <!-- 可视化数据编辑器 -->
     <visual-source-data-editor />
-
-    <!-- 可视化表单项配置信息 -->
-    <visual-form-props-editor />
   </div>
 </template>
 
@@ -39,7 +36,6 @@ import VisualStylesOptions from './components/visual-styles-options/visual-style
 import VisualPageOptions from './components/visual-page-options/visual-page-options.vue'
 import VisualListDataOptions from './components/visual-list-data-options/visual-list-data-options.vue'
 import VisualSourceDataEditor from '@/components/visual-control/visual-source-data-editor/visual-source-data-editor.vue'
-import VisualFormPropsEditor from '@/components/visual-control/visual-form-props-editor/visual-form-props-editor.vue'
 import { debounce } from 'lodash'
 
 const activeNames = ref([])

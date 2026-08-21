@@ -181,17 +181,6 @@ const bindStyle = computed(() => ({
 
     &:hover {
       outline-color: var(--el-color-primary);
-      // &::after {
-      //   content: attr(data-block-name);
-      //   position: absolute;
-      //   right: 0;
-      //   top: 0;
-      //   transform: translateX(100%);
-      //   background-color: var(--el-color-primary);
-      //   font-size: 12px;
-      //   color: #fff;
-      //   padding: 2px 8px;
-      // }
     }
 
     &.is-active {

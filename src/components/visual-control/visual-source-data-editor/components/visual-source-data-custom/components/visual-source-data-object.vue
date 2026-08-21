@@ -15,13 +15,13 @@
 <script setup lang="ts">
 import { useSchema } from '@/hooks/useSchema'
 import { useVModel } from '@vueuse/core'
-import { formatJsonToObject } from '@/uni_modules/visual-components/utils'
+import { formatJsonToObject } from '#visual-ui/utils'
 import type { CustomTableData } from '@/utils/visual.transform'
 import {
   transformCustomJsonDataToTalbeData,
   transformTableDataToCustomJsonData,
 } from '@/utils/visual.transform'
-import type { VisualSourceOptions } from '@/uni_modules/visual-components/types'
+import type { VisualSourceOptions } from '#visual-ui/types'
 
 interface Props {
   modelValue: VisualSourceOptions

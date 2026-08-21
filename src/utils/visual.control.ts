@@ -67,9 +67,3 @@ export const createListDataControl: VisualPropsEditorControl<{
   defaultValue?: any
   tips?: string
 }> = (options) => ({ type: VisualEditorType.listData, ...options })
-
-export const createFormItemControl: VisualPropsEditorControl<{
-  label: string
-  defaultValue?: any
-  tips?: string
-}> = (options) => ({ type: VisualEditorType.formItem, ...options })

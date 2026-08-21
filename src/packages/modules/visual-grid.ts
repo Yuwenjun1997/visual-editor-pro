@@ -5,7 +5,7 @@ import type {
 import type {
   VisualGridItemProps,
   VisualGridProps,
-} from '@/uni_modules/visual-components/components/visual-grid/interface'
+} from '#visual-ui/components/visual-grid/interface'
 import {
   createColorInputControl,
   createIconInputControl,

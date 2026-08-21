@@ -36,9 +36,9 @@ import VisualRequestParams from './components/visual-request-params.vue'
 import VisualRequestHeaders from './components/visual-request-headers.vue'
 import VisualRequestFormat from './components/visual-request-format.vue'
 import { useVModel } from '@vueuse/core'
-import { useVisualRequest } from '@/uni_modules/visual-components/hooks/useVisualRequest'
+import { useVisualRequest } from '#visual-ui/hooks/useVisualRequest'
 import { ElNotification } from 'element-plus'
-import type { VisualSourceOptions } from '@/uni_modules/visual-components/types'
+import type { VisualSourceOptions } from '#visual-ui/types'
 
 interface Props {
   modelValue: VisualSourceOptions

@@ -1,5 +1,5 @@
 import type { VisualEditorComponent } from '@/types/visual-editor'
-import type { VisualFlexProps } from '@/uni_modules/visual-components/components/visual-flex/interface'
+import type { VisualFlexProps } from '#visual-ui/components/visual-flex/interface'
 import {
   createNormalSelectControl,
   createPxInputControl,

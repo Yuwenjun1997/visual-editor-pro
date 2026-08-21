@@ -5,7 +5,7 @@ import type {
 import type {
   VisualImageTextCardItem,
   VisualImageTextCardProps,
-} from '@/uni_modules/visual-components/components/visual-image-text-card/interface'
+} from '#visual-ui/components/visual-image-text-card/interface'
 import {
   createImageInputControl,
   createNormalSelectControl,

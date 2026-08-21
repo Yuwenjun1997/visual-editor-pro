@@ -30,7 +30,7 @@
 import { Icon } from '@iconify/vue'
 import { useVModel } from '@vueuse/core'
 import type { CSSProperties } from 'vue'
-import { useTheme } from '@/uni_modules/visual-components/hooks/useTheme'
+import { useTheme } from '#visual-ui/hooks/useTheme'
 import { colorList } from './configs/colorMap'
 
 interface Props {

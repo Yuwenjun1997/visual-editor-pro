@@ -99,8 +99,7 @@ body {
   }
 }
 
-.visual-options-container,
-.visual-form-config-editor__dialog {
+.visual-options-container {
   .visual-options {
     .el-collapse {
       --el-collapse-header-height: 30px;
@@ -117,36 +116,6 @@ body {
       }
     }
   }
-}
-
-.visual-form-config-editor__dialog {
-  .el-drawer__header {
-    padding: 12px;
-    margin-bottom: 0;
-  }
-  .el-drawer__body {
-    padding: 0;
-  }
-  .el-drawer {
-    box-shadow: none;
-    border-left: 1px solid var(--el-border-color);
-    height: calc(100vh - var(--top-window-height));
-    top: var(--top-window-height);
-  }
-
-  .visual-props-options {
-    & > div {
-      border-bottom: 1px solid var(--el-border-color);
-
-      &:last-child {
-        border-bottom: 0;
-      }
-    }
-  }
-}
-
-.visual-form-config-editor__dialog.el-overlay {
-  background-color: transparent;
 }
 
 .visual-stage-container {

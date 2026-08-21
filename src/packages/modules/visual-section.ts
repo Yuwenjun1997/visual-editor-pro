@@ -1,5 +1,5 @@
 import type { VisualEditorComponent } from '@/types/visual-editor'
-import type { VisualSectionProps } from '@/uni_modules/visual-components/components/visual-section/interface'
+import type { VisualSectionProps } from '#visual-ui/components/visual-section/interface'
 import {
   createColorInputControl,
   createIconInputControl,

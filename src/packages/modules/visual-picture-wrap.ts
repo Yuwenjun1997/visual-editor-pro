@@ -5,7 +5,7 @@ import type {
 import type {
   VisualPicture,
   VisualPictureWrapProps,
-} from '@/uni_modules/visual-components/components/visual-picture-wrap/interface'
+} from '#visual-ui/components/visual-picture-wrap/interface'
 import {
   createColorInputControl,
   createImageInputControl,

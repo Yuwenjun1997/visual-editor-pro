@@ -1,5 +1,5 @@
 import type { VisualEditorComponent } from '@/types/visual-editor'
-import type { VisualTextProps } from '@/uni_modules/visual-components/components/visual-text/interface'
+import type { VisualTextProps } from '#visual-ui/components/visual-text/interface'
 import {
   createColorInputControl,
   createNormalSelectControl,

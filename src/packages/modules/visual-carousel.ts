@@ -5,7 +5,7 @@ import type {
 import type {
   VisualCarouselItem,
   VisualCarouselProps,
-} from '@/uni_modules/visual-components/components/visual-carousel/interface'
+} from '#visual-ui/components/visual-carousel/interface'
 import {
   createImageInputControl,
   createNormalSelectControl,
