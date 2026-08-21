@@ -140,8 +140,9 @@ const bindStyle = computed(() => ({
 .visual-group {
   &.is-empty {
     position: relative;
-    min-height: 160px;
-    min-width: 200px;
+    min-height: 80px;
+    min-width: 100px;
+
     &::before {
       content: attr(data-slot);
       position: absolute;
@@ -150,7 +151,7 @@ const bindStyle = computed(() => ({
       align-items: center;
       justify-content: center;
       height: 100%;
-      font-size: 24px;
+      font-size: 12px;
       color: var(--el-text-color-secondary);
       background-color: var(--el-color-info-light-9);
       white-space: nowrap;
