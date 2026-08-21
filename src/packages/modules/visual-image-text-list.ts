@@ -46,7 +46,7 @@ const VisualImageTextList: VisualEditorComponent<VisualImageTextListProps> = {
   moduleName: 'imageTextWidgets',
   componentName: 'VisualImageTextList',
   label: '图文列表',
-  previewImage: '/image/block.svg',
+  previewImage: '/componets/visual-image-text-list.svg',
   souceDataType: 'VisualObjectArray',
   styles: {
     backgroundColor: '#f9f9f9',

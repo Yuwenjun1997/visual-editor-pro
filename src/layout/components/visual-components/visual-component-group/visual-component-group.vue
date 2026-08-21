@@ -17,10 +17,7 @@
         class="visual-group-item text-xs more-components"
         :class="'span-' + element.span"
       >
-        <img
-          class="visual-group-item-preview"
-          src="/image/coding.svg"
-        />
+        <img class="visual-group-item-preview" src="/image/coding.svg" />
       </div>
       <div
         v-else
@@ -91,6 +88,7 @@ const blocks = computed(() => {
   grid-template-columns: repeat(3, 1fr);
   background-color: var(--el-border-color);
   gap: 1px;
+  border-top: 1px solid var(--el-border-color);
 
   .visual-group-item {
     position: relative;
@@ -99,7 +97,6 @@ const blocks = computed(() => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 80px;
     padding: 6px;
     background-color: var(--el-bg-color);
     transition: var(--el-transition-all);
@@ -107,18 +104,16 @@ const blocks = computed(() => {
     &.more-components {
       flex-direction: row;
       color: var(--el-text-color-placeholder);
-      gap: 8px;
 
       img {
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
       }
     }
 
     .visual-group-item-preview {
       display: block;
-      width: 100%;
-      height: 100%;
+      height: 48px;
     }
 
     .visual-group-item-label {

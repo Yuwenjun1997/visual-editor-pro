@@ -33,7 +33,7 @@ const visualPictureWrap: VisualEditorComponent<VisualPictureWrapProps> = {
   moduleName: 'imageTextWidgets',
   componentName: 'VisualPictureWrap',
   label: '照片墙',
-  previewImage: '/image/block.svg',
+  previewImage: '/componets/visual-picture-wrap.svg',
   styles: {
     backgroundColor: '#f9f9f9',
   },

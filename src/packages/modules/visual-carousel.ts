@@ -38,7 +38,7 @@ const visualCarousel: VisualEditorComponent<
   moduleName: 'basicWidgets',
   componentName: 'VisualCarousel',
   label: '轮播图',
-  previewImage: '/image/visual-carousel.svg',
+  previewImage: '/componets/visual-carousel.svg',
   souceDataType: 'VisualObjectArray',
   props: {
     autoplay: createSwitchControl({ label: '自动切换', defaultValue: true }),

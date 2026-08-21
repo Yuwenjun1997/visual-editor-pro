@@ -1,48 +1,3 @@
-html {
-  font-size: 16px !important;
-}
-
-body {
-  min-width: 1040px;
-  overflow-y: hidden;
-  overflow-x: auto;
-}
-
-@media screen and (max-width: 1040px) {
-  body {
-    padding-bottom: 16px;
-  }
-}
-
-.uni-top-window,
-.uni-top-window--placeholder {
-  height: var(--top-window-height) !important;
-}
-
-.uni-top-window {
-  border-bottom: 1px solid var(--el-border-color);
-}
-
-.uni-left-window,
-.uni-right-window {
-  height: 100%;
-}
-
-.uni-left-window,
-.uni-right-window,
-.uni-top-window,
-.uni-top-window--placeholder {
-  background-color: var(--el-bg-color);
-}
-
-.uni-left-window {
-  border-right: 1px solid var(--el-border-color);
-}
-
-.uni-right-window {
-  border-left: 1px solid var(--el-border-color);
-}
-
 .visual-materiel-container {
   .visual-tabs {
     --el-tabs-header-height: 60px;
@@ -52,29 +7,19 @@ body {
       margin-right: 0;
 
       .el-tabs__nav-wrap {
-        &::after {
-          width: 1px;
-        }
-
         .el-tabs__item {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           padding: 0 12px;
-          color: var(--el-text-color-regular);
-
-          &.is-active {
-            color: var(--el-color-primary);
-          }
         }
       }
     }
-    .el-tabs__content {
+
+    .el-tabs__content,
+    .el-tab-pane {
       height: 100%;
-      .el-tab-pane {
-        height: 100%;
-      }
     }
   }
 
@@ -82,38 +27,20 @@ body {
     .el-scrollbar__view {
       margin-left: 1px;
     }
-
-    .el-collapse {
-      --el-collapse-header-height: 40px;
-      --el-collapse-header-bg-color: var(--el-color-info-light-9);
-      --el-collapse-border-color: var(--el-border-color);
-
-      .el-collapse-item__header {
-        padding: 0 12px;
-      }
-
-      .el-collapse-item__content {
-        padding-bottom: 0;
-      }
-    }
   }
 }
 
-.visual-options-container {
-  .visual-options {
-    .el-collapse {
-      --el-collapse-header-height: 30px;
-      --el-collapse-header-bg-color: var(--el-color-info-light-9);
-      --el-collapse-border-color: var(--el-border-color);
+.visual-options-container,
+.visual-materiel-container {
+  .el-collapse {
+    --el-collapse-header-height: 36px;
 
-      .el-collapse-item__header {
-        padding: 0 12px;
-      }
+    .el-collapse-item__header {
+      padding: 0 8px;
+    }
 
-      .el-collapse-item__content {
-        padding-bottom: 0;
-        padding-right: 8px;
-      }
+    .el-collapse-item__content {
+      padding-bottom: 0;
     }
   }
 }
@@ -142,7 +69,9 @@ body {
 
   .visual-group-item {
     position: relative;
-    min-height: 20px !important;
+    height: 32px !important;
+    overflow: hidden;
+
     &::after {
       position: absolute;
       inset: 0;

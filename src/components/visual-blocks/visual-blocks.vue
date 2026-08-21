@@ -140,7 +140,7 @@ const bindStyle = computed(() => ({
 .visual-group {
   &.is-empty {
     position: relative;
-    min-height: 80px;
+    min-height: 60px;
     min-width: 100px;
 
     &::before {

@@ -27,8 +27,8 @@
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import VisualComponentsMap from './components/visual-components-map/visual-components-map.vue'
-import VisualComponents from './components/visual-components/visual-components.vue'
+import VisualComponentsMap from './visual-components-map/visual-components-map.vue'
+import VisualComponents from './visual-components/visual-components.vue'
 </script>
 
 <style lang="scss"></style>

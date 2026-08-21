@@ -16,7 +16,7 @@ defineOptions({
 
 const _props = withDefaults(defineProps<VisualAppProps>(), {
   safeAreaBottom: true,
-  bgColor: 'white',
+  bgColor: 'transparent',
 })
 
 const { themeConfig, themeName, colorVar, colorVal } = useTheme()

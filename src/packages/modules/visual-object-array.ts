@@ -7,7 +7,7 @@ const visualObjectArray: VisualEditorComponent<VisualObjectArrayProps> = {
   moduleName: 'dataWidgets',
   componentName: 'VisualObjectArray',
   label: '对象数组',
-  previewImage: '/image/block.svg',
+  previewImage: '/componets/visual-object-array.svg',
   slots: {
     default: {
       name: '组件',

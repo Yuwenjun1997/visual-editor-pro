@@ -47,7 +47,7 @@ const VisualImageTextCard: VisualEditorComponent<VisualImageTextCardProps> = {
   moduleName: 'imageTextWidgets',
   componentName: 'VisualImageTextCard',
   label: '图文卡片',
-  previewImage: '/image/block.svg',
+  previewImage: '/componets/visual-image-text-card.svg',
   souceDataType: 'VisualObjectArray',
   styles: {
     backgroundColor: '#f9f9f9',

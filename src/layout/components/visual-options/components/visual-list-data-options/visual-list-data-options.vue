@@ -75,7 +75,7 @@ import { useViusalStore } from '@/store/useVisual'
 
 const visualStore = useViusalStore()
 const visualOptions = computed(
-  () => visualStore.visualEditorComponent?.listData?.data
+  () => visualStore.visualEditorComponent?.listData?.data,
 )
 
 const canAdd = (listData?: VisualEditorListData<any>) => {
@@ -114,6 +114,10 @@ const handleRemove = (index: number) => {
 
     &:last-child {
       border-bottom: 0;
+    }
+
+    &:nth-child(1) {
+      border-top: 1px solid var(--el-border-color);
     }
   }
 

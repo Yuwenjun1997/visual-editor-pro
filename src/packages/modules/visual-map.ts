@@ -33,7 +33,7 @@ const VisualMap: VisualEditorComponent<VisualMapProps> = {
   moduleName: 'basicWidgets',
   componentName: 'VisualMap',
   label: '地图',
-  previewImage: '/image/block.svg',
+  previewImage: '/componets/visual-map.svg',
   props: {
     autoLocation: createSwitchControl({
       label: '自动定位',

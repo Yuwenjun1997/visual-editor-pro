@@ -31,8 +31,7 @@ defineOptions({
   name: 'VadAvatar',
 })
 
-const avatarUrl =
-  'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+const avatarUrl = '/image/avatar.svg'
 
 const handleCommand = (event: string) => {
   console.log(event)

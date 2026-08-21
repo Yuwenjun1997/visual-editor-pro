@@ -12,7 +12,7 @@ const visualText: VisualEditorComponent<VisualTextProps> = {
   moduleName: 'basicWidgets',
   componentName: 'VisualText',
   label: '文本',
-  previewImage: '/image/block.svg',
+  previewImage: '/componets/visual-text.svg',
   souceDataType: 'VisualObject',
   props: {
     text: createTextInputControl({ label: '文本', defaultValue: '文本内容' }),

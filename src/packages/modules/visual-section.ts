@@ -14,7 +14,7 @@ const VisualSection: VisualEditorComponent<VisualSectionProps> = {
   moduleName: 'basicWidgets',
   componentName: 'VisualSection',
   label: '标题栏',
-  previewImage: '/image/block.svg',
+  previewImage: '/componets/visual-section.svg',
   props: {
     title: createTextInputControl({ label: '标题', defaultValue: '标题栏' }),
     titleColor: createColorInputControl({ label: '标题颜色' }),

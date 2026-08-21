@@ -2,15 +2,17 @@
   <el-config-provider :locale="zhCn">
     <div class="visual-stage-container" :class="bindClassList">
       <visual-stage-bar />
-      <template v-if="activePanel === 'viewJson'">
-        <visual-monaco-editor :options="viewJsonOptions" v-model="viewJson" />
-      </template>
-      <template v-else-if="activePanel === 'viewCode'">
-        <visual-monaco-editor />
-      </template>
-      <template v-else>
-        <visual-stage-panel />
-      </template>
+      <div class="relative flex-1 flex flex-col">
+        <template v-if="activePanel === 'viewJson'">
+          <visual-monaco-editor :options="viewJsonOptions" v-model="viewJson" />
+        </template>
+        <template v-else-if="activePanel === 'viewCode'">
+          <visual-monaco-editor />
+        </template>
+        <div class="absolute inset-0" v-else>
+          <visual-stage-panel />
+        </div>
+      </div>
     </div>
   </el-config-provider>
 </template>

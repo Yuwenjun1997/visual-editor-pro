@@ -3,22 +3,24 @@
     height="100%"
     class="visual-stage-panel flex-1 visual-transparent-bg"
   >
-    <visual-app
-      class="visual-stage-app"
-      :bg-color="pageConfig.globalStyle.backgroundColor"
-    >
-      <VisualBlocks
-        v-model="blockList"
-        v-model:isDrag="visualStore.isDrag"
-        class="visual-stage-wrap"
-        :data-move-vid="visualStore.moveBlock?._vid"
-        :data-source-type="visualStore.moveBlock?.souceDataType"
-        :class="[visualStore.device, { 'is-drag': visualStore.isDrag }]"
-        :disabled="disabled"
-        :style="pageConfig.globalStyle"
-        :move-block="visualStore.moveBlock"
-      />
-    </visual-app>
+    <div class="visual-state-inner">
+      <visual-app
+        :bg-color="pageConfig.globalStyle.backgroundColor"
+        class="visual-stage-app"
+      >
+        <VisualBlocks
+          v-model="blockList"
+          v-model:isDrag="visualStore.isDrag"
+          class="visual-stage-wrap"
+          :data-move-vid="visualStore.moveBlock?._vid"
+          :data-source-type="visualStore.moveBlock?.souceDataType"
+          :class="[visualStore.device, { 'is-drag': visualStore.isDrag }]"
+          :disabled="disabled"
+          :style="pageConfig.globalStyle"
+          :move-block="visualStore.moveBlock"
+        />
+      </visual-app>
+    </div>
   </el-scrollbar>
 </template>
 
@@ -47,6 +49,13 @@ const { pageConfig } = usePageConfig()
   height: 100%;
   padding: 8px;
   box-shadow: inset 0 0 6px 2px var(--el-color-info-light-7);
+
+  .visual-state-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--el-bg-color);
+  }
 
   .visual-stage-app {
     flex: 1;

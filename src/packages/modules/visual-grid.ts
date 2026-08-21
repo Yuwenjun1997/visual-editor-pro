@@ -33,7 +33,7 @@ const visualGrid: VisualEditorComponent<VisualGridProps> = {
   moduleName: 'basicWidgets',
   componentName: 'VisualGrid',
   label: '宫格',
-  previewImage: '/image/block.svg',
+  previewImage: '/componets/visual-grid.svg',
   souceDataType: 'VisualObjectArray',
   slots: {
     default: {

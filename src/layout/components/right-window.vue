@@ -6,6 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import VisualToolsBar from './components/visual-tools-bar/visual-tools-bar.vue'
-import visualOptions from './components/visual-options/visual-options.vue'
+import VisualToolsBar from './visual-tools-bar/visual-tools-bar.vue'
+import visualOptions from './visual-options/visual-options.vue'
 </script>

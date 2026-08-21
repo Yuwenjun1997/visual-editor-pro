@@ -7,7 +7,7 @@ const visualObject: VisualEditorComponent<VisualObjectProps> = {
   moduleName: 'dataWidgets',
   componentName: 'VisualObject',
   label: '对象',
-  previewImage: '/image/block.svg',
+  previewImage: '/componets/visual-object.svg',
   slots: {
     default: {
       name: '组件',

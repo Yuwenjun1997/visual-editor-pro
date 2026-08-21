@@ -68,6 +68,10 @@ const visualKey = computed(() => visualStore.currentBlock?.key)
     &:last-child {
       border-bottom: 0;
     }
+
+    &:nth-child(1) {
+      border-top: 1px solid var(--el-border-color);
+    }
   }
 }
 </style>

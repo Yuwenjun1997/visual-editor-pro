@@ -4,13 +4,22 @@
 //   // --window-right: 320px !important;
 // }
 
-html, body {
+html,
+body {
   height: 100%;
-  background-color: var(--el-bg-color-page);
 }
 
-#app {
-  color: var(--el-text-color-primary);
+body {
+  font-size: 16px !important;
+  min-width: 1040px;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 1040px) {
+  body {
+    padding-bottom: 16px;
+  }
 }
 
 .dark {

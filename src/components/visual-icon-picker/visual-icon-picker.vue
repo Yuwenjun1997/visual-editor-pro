@@ -32,7 +32,7 @@
             class="icon-item"
             @click="handleClick(item)"
           >
-            <Icon :icon="item" />
+            <Icon :icon="item" style="font-size: 24px" />
           </div>
         </div>
 
