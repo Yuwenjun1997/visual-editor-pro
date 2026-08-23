@@ -1,0 +1,11 @@
+<svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <!-- 容器外框（虚线） -->
+  <rect x="176" y="176" width="672" height="576" rx="48" fill="none" stroke="#409eff" stroke-width="24" stroke-dasharray="48 24"/>
+  <!-- 内容区域 -->
+  <rect x="240" y="280" width="544" height="320" rx="24" fill="#ecf5ff"/>
+  <!-- 光标手型 -->
+  <path d="M480 420c0-20 16-36 36-36s36 16 36 36v100h80V380c0-20 16-36 36-36s36 16 36 36v160h80V420c0-20 16-36 36-36s36 16 36 36v200c0 80-64 144-144 144H500c-80 0-144-64-144-144V420z" fill="#409eff" opacity="0.85"/>
+  <!-- 点击波纹 -->
+  <circle cx="516" cy="360" r="16" fill="#409eff"/>
+  <circle cx="516" cy="360" r="32" fill="none" stroke="#409eff" stroke-width="12" opacity="0.4"/>
+</svg>

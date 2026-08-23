@@ -5,6 +5,11 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: '/preview',
+      name: 'preview',
+      component: () => import('@/views/preview/index.vue'),
+    },
+    {
       path: '/',
       component: DefaultLayout,
       children: [

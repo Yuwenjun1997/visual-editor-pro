@@ -21,6 +21,7 @@ import VisualCustomerService from './components/visual-customer-service'
 import VisualCoupon from './components/visual-coupon'
 import VisualQRCode from './components/visual-qrcode'
 import VisualTabs from './components/visual-tabs'
+import VisualEventContainer from './components/visual-event-container'
 
 import type { App } from 'vue'
 import type { CustomThemeConfig } from './types/theme'
@@ -49,5 +50,6 @@ export default {
     app.component('VisualCoupon', VisualCoupon)
     app.component('VisualQRCode', VisualQRCode)
     app.component('VisualTabs', VisualTabs)
+    app.component('VisualEventContainer', VisualEventContainer)
   },
 }

@@ -1,5 +1,6 @@
 import type {
   VisualBlockData,
+  VisualBlockSlots,
   VisualEditorComponent,
 } from '@/types/visual-editor'
 import {
@@ -50,6 +51,22 @@ export const useViusalStore = defineStore('visual', {
       if (isSameBlock(this.currentBlock, newBlock)) return
       this.currentBlock.listData = newBlock.listData
       this.currentBlock.props = newBlock.props
+
+      // 同步动态 slots（仅 visual-tabs）
+      if (this.currentBlock.key === 'VisualTabs') {
+        const listData = newBlock.listData
+        if (listData && listData.length > 0) {
+          const newSlots: VisualBlockSlots = {}
+          listData.forEach((_: any, index: number) => {
+            const key = `tab-${index}`
+            newSlots[key] = this.currentBlock?.slots?.[key] || {
+              name: `页签${index + 1}`,
+              blocks: [],
+            }
+          })
+          this.currentBlock.slots = newSlots
+        }
+      }
     },
     clearCurrent() {
       this.vid = ''

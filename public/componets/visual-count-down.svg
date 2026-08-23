@@ -1,13 +1,30 @@
 <svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-  <rect x="140" y="300" width="744" height="424" rx="64" fill="#409eff"/>
-  <rect x="196" y="352" width="140" height="320" rx="32" fill="#1f2d3d"/>
-  <rect x="400" y="352" width="140" height="320" rx="32" fill="#1f2d3d"/>
-  <rect x="604" y="352" width="140" height="320" rx="32" fill="#1f2d3d"/>
-  <rect x="216" y="380" width="100" height="12" rx="6" fill="#ffffff" opacity="0.22"/>
-  <rect x="420" y="380" width="100" height="12" rx="6" fill="#ffffff" opacity="0.22"/>
-  <rect x="624" y="380" width="100" height="12" rx="6" fill="#ffffff" opacity="0.22"/>
-  <circle cx="368" cy="460" r="22" fill="#ffffff"/>
-  <circle cx="368" cy="568" r="22" fill="#ffffff"/>
-  <circle cx="572" cy="460" r="22" fill="#ffffff"/>
-  <circle cx="572" cy="568" r="22" fill="#ffffff"/>
+  <!-- 钟面外圈 -->
+  <circle cx="512" cy="512" r="380" fill="#409eff"/>
+  <circle cx="512" cy="512" r="330" fill="#ffffff"/>
+  <circle cx="512" cy="512" r="330" fill="none" stroke="#409eff" stroke-width="8" opacity="0.25"/>
+  <!-- 12点刻度三角 -->
+  <polygon points="512,160 500,190 524,190" fill="#409eff"/>
+  <!-- 四个主要刻度线 -->
+  <rect x="504" y="180" width="16" height="36" rx="8" fill="#409eff"/>
+  <rect x="504" y="808" width="16" height="36" rx="8" fill="#409eff"/>
+  <rect x="180" y="504" width="36" height="16" rx="8" fill="#409eff"/>
+  <rect x="808" y="504" width="36" height="16" rx="8" fill="#409eff"/>
+  <!-- 八个小刻度 -->
+  <rect x="506" y="256" width="12" height="20" rx="6" fill="#a0cfff"/>
+  <rect x="506" y="748" width="12" height="20" rx="6" fill="#a0cfff"/>
+  <rect x="256" y="506" width="20" height="12" rx="6" fill="#a0cfff"/>
+  <rect x="748" y="506" width="20" height="12" rx="6" fill="#a0cfff"/>
+  <rect x="336" y="296" width="12" height="20" rx="6" fill="#a0cfff" transform="rotate(30,342,306)"/>
+  <rect x="676" y="296" width="12" height="20" rx="6" fill="#a0cfff" transform="rotate(-30,682,306)"/>
+  <rect x="336" y="708" width="12" height="20" rx="6" fill="#a0cfff" transform="rotate(-30,342,718)"/>
+  <rect x="676" y="708" width="12" height="20" rx="6" fill="#a0cfff" transform="rotate(30,682,718)"/>
+  <!-- 时针（短，指向约10点方向） -->
+  <line x1="512" y1="512" x2="420" y2="340" stroke="#1f2d3d" stroke-width="28" stroke-linecap="round"/>
+  <!-- 分针（长，指向约2点方向） -->
+  <line x1="512" y1="512" x2="660" y2="310" stroke="#1f2d3d" stroke-width="18" stroke-linecap="round"/>
+  <!-- 中心圆点 -->
+  <circle cx="512" cy="512" r="22" fill="#409eff"/>
+  <!-- 右下倒计时弧线（红色进度指示） -->
+  <path d="M 730 730 A 310 310 0 0 1 512 822" fill="none" stroke="#f56c6c" stroke-width="20" stroke-linecap="round"/>
 </svg>

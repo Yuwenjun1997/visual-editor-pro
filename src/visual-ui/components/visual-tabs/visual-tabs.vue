@@ -32,11 +32,12 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
-import type { VisualTabsProps } from './interface'
+import type { VisualTabItem, VisualTabsProps } from './interface'
 
 interface Props {
   styles?: Partial<CSSProperties>
   props: VisualTabsProps
+  listData?: VisualTabItem[]
 }
 
 defineOptions({
@@ -45,28 +46,19 @@ defineOptions({
 
 const _props = defineProps<Props>()
 
-const activeKey = ref(_props.props.activeKey || 'pane1')
+const activeKey = ref('')
 
 const headerStyle = computed<CSSProperties>(() => ({
   '--v-tabs-active': _props.props.activeColor || '#409eff',
 }))
 
-watch(
-  () => _props.props.activeKey,
-  (v) => {
-    if (v) activeKey.value = v
-  }
-)
-
 const panes = computed(() => {
-  const labels: Record<string, string | undefined> = {
-    pane1: _props.props.label1,
-    pane2: _props.props.label2,
-    pane3: _props.props.label3,
-  }
-  return (['pane1', 'pane2', 'pane3'] as const)
-    .filter((key) => labels[key])
-    .map((key) => ({ key, label: labels[key] as string }))
+  return (_props.listData || [])
+    .map((item, index) => ({
+      key: `tab-${index}`,
+      label: item.label || `页签${index + 1}`,
+    }))
+    .filter((pane) => pane.label)
 })
 
 watch(

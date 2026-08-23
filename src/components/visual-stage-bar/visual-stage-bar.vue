@@ -54,7 +54,7 @@
     <div class="flex-1" />
     <el-button-group size="small">
       <el-tooltip content="运行">
-        <el-button>
+        <el-button @click="handleRun">
           <Icon icon="ion:play-outline" />
         </el-button>
       </el-tooltip>
@@ -69,6 +69,8 @@
 
 <script setup lang="ts">
 import { useHistory } from '@/hooks/useHistory'
+import { useBlocks } from '@/hooks/useBlocks'
+import { usePageConfig } from '@/hooks/usePageConfig'
 import { useViusalStore } from '@/store/useVisual'
 import { Icon } from '@iconify/vue'
 
@@ -77,8 +79,18 @@ defineOptions({
 })
 
 const visualStore = useViusalStore()
+const router = useRouter()
 
 const { redo, undo, canRedo, canUndo } = useHistory()
+const { blockList } = useBlocks()
+const { pageConfig } = usePageConfig()
+
+const handleRun = () => {
+  const data = { ...unref(pageConfig), blocks: unref(blockList) }
+  sessionStorage.setItem('preview-data', JSON.stringify(data))
+  const { href } = router.resolve({ name: 'preview' })
+  window.open(href, '_blank')
+}
 </script>
 
 <style scoped lang="scss">

@@ -57,3 +57,12 @@ Holds the page tree of blocks and the current selection. The `src/hooks/*` compo
 - Editor component names/IPs are prefixed `Visual` (component) and `visual-` (files/dirs, kebab-case).
 - UI strings (labels) are Chinese.
 - Prettier: no semicolons, single quotes (`.prettierrc`).
+
+### visual 组件库规范
+
+> **重要**：visual 组件库（`src/uni_modules/visual-components/`）是可独立发布的组件包，必须与项目解耦。遵循以下规范以确保独立性：
+
+1. **禁止 Element UI**：visual 组件库中绝对不能出现任何 Element UI 相关的组件、导入或引用
+2. **仅用 shadcn-vue**：扩展组件时仅使用 shadcn-vue（reka-ui）组件库
+3. **禁止 Tailwind CSS**：visual 组件库中不允许使用 Tailwind CSS 样式，仅使用 `@src/visual-ui/` 中定义的样式
+4. **原因**：visual 组件库会脱离当前项目使用，必须保持零依赖以确保可移植性
