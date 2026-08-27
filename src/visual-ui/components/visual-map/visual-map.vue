@@ -75,20 +75,20 @@ onMounted(() => {
       height: var(--v-map-height, 180px);
       border-radius: var(--v-map-radius);
       overflow: hidden;
-      background-color: var(--el-fill-color-light);
-      border: 1px solid var(--el-border-color);
+      background-color: var(--v-gray-6, #f5f7fa);
+      border: 1px solid var(--v-gray-4, #dcdfe6);
     }
 
     .visual-map__placeholder {
       text-align: center;
       font-size: 12px;
-      color: var(--el-text-color-secondary);
+      color: var(--v-text-4, #909399);
     }
 
     .visual-map__title {
       margin-top: 4px;
       font-weight: 500;
-      color: var(--el-text-color-primary);
+      color: var(--v-text-1, #303133);
     }
   }
 }

@@ -60,9 +60,9 @@ Holds the page tree of blocks and the current selection. The `src/hooks/*` compo
 
 ### visual 组件库规范
 
-> **重要**：visual 组件库（`src/uni_modules/visual-components/`）是可独立发布的组件包，必须与项目解耦。遵循以下规范以确保独立性：
+> **重要**：visual 组件库（`src/visual-ui/`）是可独立发布的组件包，必须与项目解耦。遵循以下规范以确保独立性：
 
-1. **禁止 Element UI**：visual 组件库中绝对不能出现任何 Element UI 相关的组件、导入或引用
-2. **仅用 shadcn-vue**：扩展组件时仅使用 shadcn-vue（reka-ui）组件库
-3. **禁止 Tailwind CSS**：visual 组件库中不允许使用 Tailwind CSS 样式，仅使用 `@src/visual-ui/` 中定义的样式
-4. **原因**：visual 组件库会脱离当前项目使用，必须保持零依赖以确保可移植性
+1. **禁止 Element UI**：visual 组件库中绝对不能出现任何 Element UI 相关的组件、导入或引用（含 `ElMessage` 等服务调用与 `--el-*` 全局 CSS 变量）
+2. **仅用 shadcn-vue**：扩展组件时仅基于 shadcn-vue（reka-ui / vue-sonner）组件库开发，组件统一落在 `src/visual-ui/components/ui/`
+3. **样式**：shadcn-vue 组件依赖 Tailwind 工具类（Tailwind 为项目既有依赖）；其余自定义样式仅使用 `@src/visual-ui/` 中定义的样式
+4. **原因**：visual 组件库会脱离当前项目使用，须保持可移植性，除 shadcn-vue 依赖体系外不再引入其他 UI 库或全局样式

@@ -1,6 +1,7 @@
 <template>
   <div class="visual-app" :class="_bindClassList" :style="_bindStyles">
     <slot />
+    <Sonner />
   </div>
 </template>
 
@@ -8,6 +9,7 @@
 import { computed, type CSSProperties } from 'vue'
 import { useTheme } from '../../hooks/useTheme'
 import { useSafeArea } from '../../hooks/useSafeArea'
+import Sonner from '../../components/ui/sonner.vue'
 import type { VisualAppProps } from './interface'
 
 defineOptions({

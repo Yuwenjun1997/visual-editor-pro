@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage } from 'element-plus'
 import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
+import { toast } from '../../utils/toast'
 import type { VisualEventContainerProps } from './interface'
 
 interface Props {
@@ -47,7 +47,7 @@ function executeAction() {
     window.location.href = url
   }
   if (actionType === 'toast' && actionText) {
-    ElMessage(actionText)
+    toast(actionText)
   }
   if (actionType === 'jscode' && actionCode) {
     try {
