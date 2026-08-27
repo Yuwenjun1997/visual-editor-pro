@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@visual/editor": ["../../packages/visual-editor/src/index.ts"],
+      "@visual/editor/*": ["../../packages/visual-editor/src/*"],
+      "@visual/ui": ["../../packages/visual-ui/src/index.ts"],
+      "@visual/ui/*": ["../../packages/visual-ui/src/*"]
+    },
+    "types": ["vite/client", "element-plus/global"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "vite.config.ts",
+    "../../packages/visual-editor/src",
+    "../../packages/visual-ui/src"
+  ]
+}
