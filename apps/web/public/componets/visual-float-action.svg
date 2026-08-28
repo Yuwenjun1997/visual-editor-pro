@@ -1,0 +1,6 @@
+<svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <path d="M600 340l60 60-60 60M660 400h-80a120 120 0 0 0-120 120v20" stroke="#4f6ef7" stroke-width="44" fill="none" stroke-linecap="round"/>
+  <rect x="560" y="700" width="220" height="220" rx="110" fill="#4f6ef7"/>
+  <path d="M640 790l40 40 80-80" stroke="#ffffff" stroke-width="36" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="512" y="1000" font-size="52" font-family="Arial, sans-serif" font-weight="bold" fill="#4f6ef7" text-anchor="middle">悬浮</text>
+</svg>

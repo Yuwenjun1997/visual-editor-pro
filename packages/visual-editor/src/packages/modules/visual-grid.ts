@@ -11,7 +11,6 @@ import {
   createIconInputControl,
   createNormalSelectControl,
   createPxInputControl,
-  createSwitchControl,
   createTextInputControl,
 } from '../../utils/visual.control'
 
@@ -30,7 +29,7 @@ const createListData = (): Record<
 
 const visualGrid: VisualEditorComponent<VisualGridProps> = {
   key: 'VisualGrid',
-  moduleName: 'basicWidgets',
+  moduleName: 'layoutWidgets',
   componentName: 'VisualGrid',
   label: '宫格',
   previewImage: '/componets/visual-grid.svg',
@@ -44,7 +43,6 @@ const visualGrid: VisualEditorComponent<VisualGridProps> = {
   },
   props: {
     columnNum: createTextInputControl({ label: '列数', defaultValue: '4' }),
-    showBorder: createSwitchControl({ label: '显示边框', defaultValue: true }),
     fontSize: createPxInputControl({ label: '文字大小', defaultValue: '14px' }),
     iconSize: createPxInputControl({ label: '图标大小', defaultValue: '20px' }),
     fontColor: createColorInputControl({ label: '文字颜色' }),

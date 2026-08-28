@@ -4,16 +4,19 @@
       class="visual-px-input__input"
       v-model="textValue"
       :placeholder="props.placeholder"
+      :type="type"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core'
+import type { InputType } from 'element-plus'
 
 interface Props {
   modelValue?: string
   placeholder?: string
+  type?: InputType
 }
 
 defineOptions({
@@ -23,6 +26,7 @@ defineOptions({
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   placeholder: 'input',
+  type: 'text',
 })
 
 const emit = defineEmits<{

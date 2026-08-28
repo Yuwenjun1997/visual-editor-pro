@@ -4,7 +4,9 @@
     height: 100%;
 
     .el-tabs__header {
-      margin-right: 0;
+      &.is-left {
+        margin-right: 0;
+      }
 
       .el-tabs__nav-wrap {
         .el-tabs__item {

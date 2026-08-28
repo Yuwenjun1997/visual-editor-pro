@@ -21,7 +21,7 @@ const eventOptions = [
 
 const visualEventContainer: VisualEditorComponent<VisualEventContainerProps> = {
   key: 'VisualEventContainer',
-  moduleName: 'basicWidgets',
+  moduleName: 'layoutWidgets',
   componentName: 'VisualEventContainer',
   label: '事件容器',
   previewImage: '/componets/visual-event-container.svg',

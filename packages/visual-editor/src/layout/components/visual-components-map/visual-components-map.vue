@@ -1,7 +1,7 @@
 <template>
   <div class="visual-components-map ve-h-full">
     <div class="title ve-p-2">组件大纲</div>
-    <el-scrollbar height="100%" class="ve-flex-1">
+    <el-scrollbar height="100%" class="ve-flex-1 ve-min-h-0">
       <el-tree
         ref="treeRef"
         class="ve-w-full"
@@ -18,14 +18,26 @@
             <template v-if="data.moduleName === 'basicWidgets'">
               <Icon icon="ion:color-palette-outline" />
             </template>
-            <template v-if="data.moduleName === 'serviceWidgets'">
+            <template v-else-if="data.moduleName === 'layoutWidgets'">
+              <Icon icon="bi:grid-3x3-gap" />
+            </template>
+            <template v-else-if="data.moduleName === 'imageTextWidgets'">
+              <Icon icon="bi:card-list" />
+            </template>
+            <template v-else-if="data.moduleName === 'mediaWidgets'">
+              <Icon icon="bi:play-circle" />
+            </template>
+            <template v-else-if="data.moduleName === 'commerceWidgets'">
+              <Icon icon="bi:cart" />
+            </template>
+            <template v-else-if="data.moduleName === 'serviceWidgets'">
               <Icon icon="bi:layout-text-window-reverse" />
             </template>
-            <template v-if="data.moduleName === 'dataWidgets'">
+            <template v-else-if="data.moduleName === 'dataWidgets'">
               <Icon icon="bi:database" />
             </template>
-            <template v-if="data.moduleName === 'imageTextWidgets'">
-              <Icon icon="bi:card-list" />
+            <template v-else>
+              <Icon icon="bi:box" />
             </template>
             <div>{{ data.label }}</div>
           </div>

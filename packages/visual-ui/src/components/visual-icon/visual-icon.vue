@@ -1,5 +1,5 @@
 <template>
-  <div class="visual-icon" :class="_bindClassList" :style="_bindStyles" />
+  <div class="visual-icon" :class="[_bindClassList, _props.class]" :style="_bindStyles" />
 </template>
 
 <script setup lang="ts">
@@ -10,6 +10,7 @@ interface Props {
   icon: string
   color?: string
   size?: string
+  class?: string
 }
 
 defineOptions({

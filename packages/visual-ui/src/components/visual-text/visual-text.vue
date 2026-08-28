@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-text" :styles="_props.styles">
+  <visual-box class="visual-text" :styles="_props.styles" :class="_props.class">
     <div :class="bindClass" :style="bindStyle">{{ _props.props.text }}</div>
   </visual-box>
 </template>
@@ -12,6 +12,7 @@ import type { VisualTextProps } from './interface'
 interface Props {
   styles?: Partial<CSSProperties>
   props: VisualTextProps
+  class?: string
 }
 
 defineOptions({

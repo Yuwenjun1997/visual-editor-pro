@@ -45,7 +45,8 @@ const _bindClassList = computed(() => ({
   display: flex;
   align-items: center;
   height: 92px;
-  background-color: #fff;
+  background-color: var(--v-surface-1);
+  border-radius: var(--v-item-round);
   font-size: var(--v-text-md);
 
   &.cover-in-right {

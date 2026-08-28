@@ -15,12 +15,12 @@ const visualButton: VisualEditorComponent<VisualButtonProps> = {
   previewImage: '/componets/visual-button.svg',
   props: {
     text: createTextInputControl({ label: '按钮文案', defaultValue: '立即领取' }),
-    type: createNormalSelectControl({
+    variant: createNormalSelectControl({
       label: '按钮类型',
       defaultValue: 'primary',
       options: [
         { label: '主色', value: 'primary' },
-        { label: '危险', value: 'danger' },
+        { label: '危险', value: 'destructive' },
         { label: '警示', value: 'warning' },
         { label: '描边', value: 'outline' },
       ],
@@ -29,9 +29,9 @@ const visualButton: VisualEditorComponent<VisualButtonProps> = {
       label: '按钮尺寸',
       defaultValue: 'default',
       options: [
-        { label: '大号', value: 'large' },
+        { label: '大号', value: 'lg' },
         { label: '中号', value: 'default' },
-        { label: '小号', value: 'small' },
+        { label: '小号', value: 'sm' },
       ],
     }),
     bgColor: createColorInputControl({ label: '背景颜色' }),

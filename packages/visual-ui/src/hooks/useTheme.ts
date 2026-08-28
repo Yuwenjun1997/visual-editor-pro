@@ -10,16 +10,16 @@ import { isColorCode } from '../utils/validate'
 const constantColorMap = {
   white: '#ffffff',
   black: '#101010',
-  gray: '#bdc3c7',
-  text: '#303133',
+  gray: '#E5E7EB',
+  text: '#1F2937',
 }
 
 const normalColorMap = {
-  primary: '#3498db',
-  warning: '#f39c12',
-  success: '#09be4f',
-  error: '#ff2b2b',
-  info: '#34495e',
+  primary: '#2563EB',
+  warning: '#D97706',
+  success: '#0F9D6E',
+  error: '#E5484D',
+  info: '#0284C7',
 }
 
 const createTheme = (v: ThemeColors, d = false) => {

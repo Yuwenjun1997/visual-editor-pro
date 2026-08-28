@@ -61,26 +61,29 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
 
   &.visual-indicator__dot {
     .visual-indicator-item {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background-color: var(--v-primary-6);
+      background-color: var(--v-gray-2);
+      box-shadow: 0 2px 6px rgba(16, 16, 16, 0.18);
       transition: all 0.4s;
       &.is-active {
         background-color: var(--v-primary-1);
+        animation: vu-breathe 2.4s var(--v-ease-soft) infinite alternate;
       }
     }
   }
 
   &.visual-indicator__line {
     .visual-indicator-item {
-      width: 12px;
+      width: 14px;
       height: 4px;
       border-radius: 2px;
-      background-color: var(--v-primary-6);
+      background-color: var(--v-gray-2);
+      box-shadow: 0 2px 6px rgba(16, 16, 16, 0.18);
       transition: all 0.4s;
       &.is-active {
-        width: 24px;
+        width: 26px;
         background-color: var(--v-primary-1);
       }
     }
@@ -91,20 +94,23 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background-color: rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 6px rgba(16, 16, 16, 0.18);
       transition: all 0.4s;
 
       &::after {
         content: attr(data-index);
-        font-size: var(--v-text-sm);
-        color: #fff;
+        font-family: var(--v-font-display);
+        font-size: 12px;
+        color: var(--v-white);
       }
 
       &.is-active {
         background-color: var(--v-primary-1);
+        animation: vu-breathe 2.4s var(--v-ease-soft) infinite alternate;
       }
     }
   }
@@ -113,9 +119,10 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
     bottom: 0;
     width: 100%;
     line-height: 32px;
-    background-color: var(--v-black-opacity-1);
-    color: #fff;
-    font-size:  var(--v-text-sm);
+    background-color: var(--v-black-opacity-2);
+    color: var(--v-white);
+    font-family: var(--v-font-body);
+    font-size: var(--v-text-sm);
     padding: 0 var(--v-spacing-xs);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -128,8 +135,9 @@ const bindClassList = computed(() => ['visual-indicator__' + props.type])
     right: 0;
     bottom: 6px;
     background-color: rgba(0, 0, 0, 0.2);
-    color: #fff;
-    font-size: var(--v-text-sm);
+    color: var(--v-white);
+    font-family: var(--v-font-display);
+    font-size: 13px;
     line-height: 24px;
     border-radius: 20px 0 0 20px;
     padding-left: 12px;

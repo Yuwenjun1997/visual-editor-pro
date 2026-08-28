@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-event-container" :styles="_props.styles">
+  <visual-box class="visual-event-container" :styles="_props.styles" :class="_props.class">
     <div
       class="visual-event-container__inner"
       @click="handleClick"
@@ -25,6 +25,7 @@ import type { VisualEventContainerProps } from './interface'
 interface Props {
   styles?: Partial<CSSProperties>
   props: VisualEventContainerProps
+  class?: string
 }
 
 defineOptions({
@@ -118,6 +119,7 @@ function handleMouseMove() {
 <style scoped lang="scss">
 .visual-event-container {
   width: 100%;
+  cursor: pointer;
 
   .visual-event-container__inner {
     width: 100%;

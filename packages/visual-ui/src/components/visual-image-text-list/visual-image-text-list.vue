@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-image-text" :styles="_props.styles" :show-empty="_noListData">
+  <visual-box class="visual-image-text" :styles="_props.styles" :show-empty="_noListData" :class="_props.class">
     <div class="scroll-view-x">
       <div class="visual-image-text__inner" :style="_bindInnerStyles">
         <visual-image-text-one
@@ -30,6 +30,7 @@ interface Props {
   props: VisualImageTextListProps
   styles?: CSSProperties
   listData?: VisualImageTextListItem[]
+  class?: string
 }
 
 const _props = withDefaults(defineProps<Props>(), {

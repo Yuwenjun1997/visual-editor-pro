@@ -3,4 +3,5 @@ export interface VisualAppProps {
   bgColor?: string
   customClass?: string | string[]
   customStyle?: string | object
+  class?: string
 }

@@ -6,9 +6,12 @@ import type {
 export function createVisualBlockConfig() {
   const componentModules: ComponentModules = {
     basicWidgets: [],
+    layoutWidgets: [],
+    imageTextWidgets: [],
+    mediaWidgets: [],
+    commerceWidgets: [],
     serviceWidgets: [],
     dataWidgets: [],
-    imageTextWidgets: [],
   }
   const componentMap: Record<string, VisualEditorComponent> = {}
   return {
@@ -16,9 +19,12 @@ export function createVisualBlockConfig() {
     componentMap,
     clear(): void {
       componentModules.basicWidgets.length = 0
+      componentModules.layoutWidgets.length = 0
+      componentModules.imageTextWidgets.length = 0
+      componentModules.mediaWidgets.length = 0
+      componentModules.commerceWidgets.length = 0
       componentModules.serviceWidgets.length = 0
       componentModules.dataWidgets.length = 0
-      componentModules.imageTextWidgets.length = 0
     },
     registry: (
       moduleName: keyof ComponentModules,

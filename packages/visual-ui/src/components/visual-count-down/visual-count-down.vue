@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-count-down" :styles="_props.styles">
+  <visual-box class="visual-count-down" :styles="_props.styles" :class="_props.class">
     <div class="visual-count-down__inner" :style="innerStyle">
       <span v-if="_props.props.title" class="visual-count-down__title">
         {{ _props.props.title }}
@@ -25,6 +25,7 @@ import type { VisualCountDownProps } from './interface'
 interface Props {
   styles?: Partial<CSSProperties>
   props: VisualCountDownProps
+  class?: string
 }
 
 defineOptions({
@@ -111,17 +112,18 @@ onBeforeUnmount(() => {
     min-width: 24px;
     height: 24px;
     padding: 0 4px;
-    border-radius: 4px;
-    font-family: monospace;
+    border-radius: var(--v-radius-moody-sm);
+    font-family: var(--v-font-body);
     font-size: 16px;
-    font-weight: 600;
-    background-color: var(--v-count-num-bg, #000);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    background: var(--v-count-num-bg, var(--v-gradient-primary));
     color: var(--v-count-num-color, #fff);
   }
 
   .visual-count-down__colon {
     font-weight: 600;
-    color: var(--v-count-colon-color, #000);
+    color: var(--v-count-colon-color, var(--v-text-1));
   }
 }
 </style>

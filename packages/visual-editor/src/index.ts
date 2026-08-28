@@ -13,7 +13,6 @@ export { useViusalStore } from './store/useVisual'
 
 export { useBlocks } from './hooks/useBlocks'
 export { useHistory } from './hooks/useHistory'
-export { loadIcons, useIconList } from './hooks/useIconList'
 export { useLayout } from './hooks/useLayout'
 export { usePageConfig, type PageConfig } from './hooks/usePageConfig'
 export { useReload } from './hooks/useReload'

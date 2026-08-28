@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-map" :styles="_props.styles">
+  <visual-box class="visual-map" :styles="_props.styles" :class="_props.class">
     <div class="visual-map__inner" :style="_bindInnerStyles">
       <div class="visual-map__map" :style="_bindMapStyles">
         <div class="visual-map__placeholder">
@@ -21,6 +21,7 @@ interface Props {
   styles?: CSSProperties
   props: VisualMapProps
   listData: any[]
+  class?: string
 }
 
 const _props = withDefaults(defineProps<Props>(), {

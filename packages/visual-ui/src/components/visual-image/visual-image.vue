@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-image" :styles="_props.styles">
+  <visual-box class="visual-image" :styles="_props.styles" :class="_props.class">
     <div class="visual-image__inner" :style="_bindInnerStyles">
       <img
         class="visual-image__img"
@@ -19,6 +19,7 @@ import { cssRadiusVar } from '../../utils/styles.utils'
 interface Props {
   props: VisualImageProps
   styles: CSSProperties
+  class?: string
 }
 
 const _props = defineProps<Props>()

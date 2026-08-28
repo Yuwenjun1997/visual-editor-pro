@@ -9,7 +9,7 @@ import {
 
 const visualCountDown: VisualEditorComponent<VisualCountDownProps> = {
   key: 'VisualCountDown',
-  moduleName: 'basicWidgets',
+  moduleName: 'commerceWidgets',
   componentName: 'VisualCountDown',
   label: '倒计时',
   previewImage: '/componets/visual-count-down.svg',
@@ -19,9 +19,9 @@ const visualCountDown: VisualEditorComponent<VisualCountDownProps> = {
       label: '结束时间',
       defaultValue: '2099-12-31 23:59:59',
     }),
-    bgColor: createColorInputControl({ label: '数字背景色', defaultValue: '#000000' }),
+    bgColor: createColorInputControl({ label: '数字背景色' }),
     numColor: createColorInputControl({ label: '数字颜色', defaultValue: '#ffffff' }),
-    colonColor: createColorInputControl({ label: '分隔符颜色', defaultValue: '#999999' }),
+    colonColor: createColorInputControl({ label: '分隔符颜色', defaultValue: '#9CA3AF' }),
     showDays: createSwitchControl({ label: '显示天数', defaultValue: false }),
   },
 }

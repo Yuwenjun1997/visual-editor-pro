@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-video" :styles="_props.styles">
+  <visual-box class="visual-video" :styles="_props.styles" :class="_props.class">
     <div class="visual-video__inner" :style="_bindInnerStyles">
       <video
         class="visual-video__video"
@@ -27,6 +27,7 @@ import { cssRadiusVar } from '../../utils/styles.utils'
 interface Props {
   styles?: CSSProperties
   props: VisualVideoProps
+  class?: string
 }
 
 const _props = defineProps<Props>()

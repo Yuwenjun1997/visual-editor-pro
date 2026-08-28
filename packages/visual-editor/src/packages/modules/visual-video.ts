@@ -12,7 +12,7 @@ const defaultVideoUrl = '/media/flower.mp4'
 
 const VisualVideo: VisualEditorComponent<VisualVideoProps> = {
   key: 'VisualVideo',
-  moduleName: 'basicWidgets',
+  moduleName: 'mediaWidgets',
   componentName: 'VisualVideo',
   label: '视频播放',
   previewImage: '/componets/visual-video.svg',

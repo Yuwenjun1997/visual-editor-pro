@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-qrcode" :styles="_props.styles">
+  <visual-box class="visual-qrcode" :styles="_props.styles" :class="_props.class">
     <div class="visual-qrcode__inner">
       <img
         v-if="qrUrl"
@@ -22,6 +22,7 @@ import type { VisualQRCodeProps } from './interface'
 interface Props {
   styles?: Partial<CSSProperties>
   props: VisualQRCodeProps
+  class?: string
 }
 
 defineOptions({
@@ -92,9 +93,9 @@ watch(
     justify-content: center;
     padding: 0 24px;
     font-size: 13px;
-    color: #999;
-    border: 1px dashed #ddd;
-    border-radius: 6px;
+    color: var(--v-text-4);
+    border: 1px dashed var(--v-gray-2);
+    border-radius: var(--v-radius-moody-sm);
     box-sizing: border-box;
   }
 }

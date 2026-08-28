@@ -40,7 +40,7 @@ const _props = defineProps<Props>()
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: var(--v-surface-1);
   font-size: var(--v-text-md);
 
   .visual-image-text__cover {

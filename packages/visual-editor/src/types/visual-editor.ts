@@ -26,8 +26,11 @@ export interface VisualBlockData<Props = Record<string, any>> {
 // 组件模块
 export type ComponentModules = {
   basicWidgets: VisualEditorComponent[] // 基础组件
-  imageTextWidgets: VisualEditorComponent[] // 图文组件
-  serviceWidgets: VisualEditorComponent[] // 业务组件
+  layoutWidgets: VisualEditorComponent[] // 布局容器
+  imageTextWidgets: VisualEditorComponent[] // 图文内容
+  mediaWidgets: VisualEditorComponent[] // 媒体组件
+  commerceWidgets: VisualEditorComponent[] // 电商营销
+  serviceWidgets: VisualEditorComponent[] // 互动服务
   dataWidgets: VisualEditorComponent[] // 数据组件
 }
 
@@ -60,7 +63,7 @@ export interface VisualEditorProps {
 }
 
 export interface VisualEditorListData<
-  T extends Record<string, any> = Record<string, any>
+  T extends Record<string, any> = Record<string, any>,
 > {
   label: string
   data: Record<keyof T, VisualEditorProps>[]
@@ -72,7 +75,7 @@ export interface VisualEditorListData<
 
 export interface VisualEditorComponent<
   P extends Record<string, any> = Record<string, any>,
-  T extends Record<string, any> = Record<string, any>
+  T extends Record<string, any> = Record<string, any>,
 > {
   key: string
   moduleName: keyof ComponentModules

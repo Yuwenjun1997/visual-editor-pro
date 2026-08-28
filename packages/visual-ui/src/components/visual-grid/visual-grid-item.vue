@@ -1,7 +1,6 @@
 <template>
   <div
     class="visual-grid-item"
-    :class="_bindClassList"
     hover-class="visual-block-hover"
     hover-stop-propagation
     :hover-start-time="0"
@@ -31,7 +30,6 @@ interface Props {
   fontColor?: string
   iconColor?: string
   image?: string
-  showBorder?: boolean
 }
 
 defineOptions({
@@ -42,11 +40,9 @@ const _props = defineProps<Props>()
 
 const _bindStyles = computed<CSSProperties>(() => ({
   flexDirection: _props.direction as any,
-  '--v-item-text-color': _props.iconColor,
+  '--v-item-text-color': _props.fontColor,
   '--v-item-text-size': _props.fontSize,
 }))
-
-const _bindClassList = computed(() => ({ 'has-border': _props.showBorder }))
 </script>
 
 <style scoped lang="scss">
@@ -66,16 +62,6 @@ const _bindClassList = computed(() => ({ 'has-border': _props.showBorder }))
     line-height: 1;
     color: var(--v-item-text-color);
     font-size: var(--v-item-text-size);
-  }
-
-  &.has-border {
-    &::after {
-      content: '';
-      position: absolute;
-      inset: -50%;
-      border: 1px solid var(--v-gray-6);
-      transform: scale(0.5);
-    }
   }
 }
 </style>

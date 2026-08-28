@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-flex" :styles="_props.styles">
+  <visual-box class="visual-flex" :styles="_props.styles" :class="_props.class">
     <div :class="_bindClass" :style="_bindStyles">
       <slot></slot>
     </div>
@@ -14,6 +14,7 @@ import type { VisualFlexProps } from './interface'
 interface Props {
   styles?: Partial<CSSProperties>
   props: VisualFlexProps
+  class?: string
 }
 
 defineOptions({

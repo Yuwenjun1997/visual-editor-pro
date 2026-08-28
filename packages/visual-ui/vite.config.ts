@@ -18,7 +18,18 @@ export default defineConfig({
       cssFileName: 'ui',
     },
     rollupOptions: {
-      external: ['vue', 'clsx', 'lodash', 'qrcode', 'swiper', 'tailwind-merge', 'vue-sonner'],
+      external: [
+        'vue',
+        'clsx',
+        'class-variance-authority',
+        'embla-carousel',
+        'embla-carousel-autoplay',
+        'lodash',
+        'qrcode',
+        'reka-ui',
+        'tailwind-merge',
+        'vue-sonner',
+      ],
     },
   },
 })

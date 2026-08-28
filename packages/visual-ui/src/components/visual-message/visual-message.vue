@@ -1,5 +1,5 @@
 <template>
-  <div class="visual-empty">
+  <div class="visual-empty" :class="_props.class">
     <img :src="_imageList[_props.messageType]" />
     <slot>
       <span>{{ _props.message }}</span>
@@ -14,6 +14,7 @@ import requestFaildImage from '../../assets/request-faild.svg'
 interface Props {
   message?: string
   messageType?: 'request-error' | 'empty'
+  class?: string
 }
 
 defineOptions({

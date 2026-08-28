@@ -1,0 +1,17 @@
+<svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="180" y="240" width="664" height="664" rx="64" fill="url(#p)"/>
+  <defs>
+    <linearGradient id="p" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#35407d"/>
+      <stop offset="1" stop-color="#7b8cff"/>
+    </linearGradient>
+  </defs>
+  <rect x="310" y="330" width="404" height="36" rx="18" fill="#ffffff"/>
+  <rect x="350" y="400" width="324" height="24" rx="12" fill="rgba(255,255,255,0.7)"/>
+  <rect x="420" y="470" width="184" height="184" rx="16" fill="#ffffff"/>
+  <rect x="440" y="490" width="144" height="144" rx="8" fill="#2b2f3a"/>
+  <rect x="360" y="694" width="220" height="56" rx="28" fill="#ffffff"/>
+  <text x="470" y="730" font-size="32" font-family="Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">去领取</text>
+  <circle cx="788" cy="288" r="40" fill="rgba(255,255,255,0.92)"/>
+  <path d="M772 288h32M788 272v32" stroke="#4f6ef7" stroke-width="10" stroke-linecap="round"/>
+</svg>

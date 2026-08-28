@@ -19,7 +19,7 @@ export interface VisualTabItem {
 }
 
 export interface VisualTabsProps {
-  type?: 'line' | 'pill'
+  variant?: 'line' | 'pill'
   activeColor?: string
   textColor?: string
 }

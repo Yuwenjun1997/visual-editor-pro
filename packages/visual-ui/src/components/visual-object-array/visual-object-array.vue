@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-object-array" :styles="_props.styles">
+  <visual-box class="visual-object-array" :styles="_props.styles" :class="_props.class">
     <visual-message v-if="_errorMsg" message-type="request-error">
       <span>发现错误：{{ _errorMsg || '未知错误' }}</span>
     </visual-message>
@@ -13,12 +13,13 @@ import VisualBox from '../visual-box/visual-box.vue'
 import type { CSSProperties } from 'vue'
 import { getErrorMsg, type JsonObjectArray } from '../../utils'
 import { useVisualRequest } from '../../hooks/useVisualRequest'
-import { transformCustomSlotObject } from './utils'
+import { transformCustomSlotObjectArray } from './utils'
 import type { VisualObjectArrayProps } from './interface'
 
 interface Props {
   styles?: CSSProperties
   props: VisualObjectArrayProps
+  class?: string
 }
 
 defineOptions({
@@ -58,7 +59,7 @@ watchEffect(() => {
   const { options } = _props.props
   if (options?.dataSource === 'custom') {
     _errorMsg.value = undefined
-    _slotData.value = transformCustomSlotObject(options)
+    _slotData.value = transformCustomSlotObjectArray(options)
   }
 })
 </script>

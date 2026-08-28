@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-object" :styles="_props.styles">
+  <visual-box class="visual-object" :styles="_props.styles" :class="_props.class">
     <visual-message v-if="_errorMsg" message-type="request-error">
       <span>发现错误：{{ _errorMsg || '未知错误' }}</span>
     </visual-message>
@@ -19,6 +19,7 @@ import type { VisualObjectProps } from './interface'
 interface Props {
   styles?: CSSProperties
   props: VisualObjectProps
+  class?: string
 }
 
 defineOptions({

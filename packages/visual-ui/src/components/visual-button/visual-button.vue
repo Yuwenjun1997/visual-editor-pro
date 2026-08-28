@@ -1,8 +1,12 @@
 <template>
-  <visual-box class="visual-button" :styles="_props.styles">
+  <visual-box
+    class="visual-button"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
     <a
       class="visual-button__btn"
-      :class="bindClass"
+      :class="[bindVariantClass, bindSizeClass]"
       :style="bindStyle"
       :href="bindHref"
       @click="handleClick"
@@ -20,6 +24,7 @@ import type { VisualButtonProps } from './interface'
 interface Props {
   styles?: Partial<CSSProperties>
   props: VisualButtonProps
+  class?: string
 }
 
 defineOptions({
@@ -28,11 +33,15 @@ defineOptions({
 
 const _props = defineProps<Props>()
 
-const bindClass = computed(() => {
-  return [
-    _props.props.type && `v-btn-${_props.props.type}`,
-    _props.props.size && `v-btn-${_props.props.size}`,
-  ]
+const bindVariantClass = computed(() => {
+  const variant = _props.props.variant || 'primary'
+  const key = variant === 'primary' ? 'default' : variant
+  return `visual-button__btn--${key}`
+})
+
+const bindSizeClass = computed(() => {
+  const size = _props.props.size || 'default'
+  return size === 'default' ? '' : `visual-button__btn--${size}`
 })
 
 const bindStyle = computed<CSSProperties>(() => {
@@ -56,63 +65,95 @@ const handleClick = (event: MouseEvent) => {
 <style scoped lang="scss">
 .visual-button {
   .visual-button__btn {
-    display: inline-block;
     box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    height: 36px;
+    padding: 0 16px;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
     user-select: none;
-    transition: opacity 0.2s;
+    border: none;
+    border-radius: var(--v-radius-moody-sm);
+    font-family: var(--v-font-display);
+    font-size: 14px;
+    font-weight: 600;
+    transition:
+      transform var(--v-motion-fast) var(--v-ease-soft),
+      box-shadow var(--v-motion-fast) var(--v-ease-soft),
+      background-color var(--v-motion-fast) var(--v-ease-soft),
+      color var(--v-motion-fast) var(--v-ease-soft),
+      opacity var(--v-motion-fast) var(--v-ease-soft);
 
     &:active {
       opacity: 0.85;
+      box-shadow: none;
     }
-  }
 
-  .v-btn-primary {
-    background-color: var(--v-btn-primary-bg, #409eff);
-    color: var(--v-btn-primary-color, #fff);
-    border: none;
-  }
+    &--default {
+      background-color: var(--v-primary-1);
+      color: var(--v-white);
+      box-shadow: var(--v-shadow-soft);
 
-  .v-btn-danger {
-    background-color: var(--v-btn-danger-bg, #f56c6c);
-    color: var(--v-btn-danger-color, #fff);
-    border: none;
-  }
+      &:hover {
+        box-shadow: var(--v-shadow-soft-lg);
+      }
+    }
 
-  .v-btn-warning {
-    background-color: var(--v-btn-warning-bg, #e6a23c);
-    color: var(--v-btn-warning-color, #fff);
-    border: none;
-  }
+    &--warning {
+      background-color: var(--v-warning-1);
+      color: var(--v-white);
+      box-shadow: var(--v-shadow-soft);
 
-  .v-btn-outline {
-    background-color: transparent;
-    border: 1px solid var(--v-btn-outline-border, #409eff);
-    color: var(--v-btn-outline-color, #409eff);
-  }
+      &:hover {
+        box-shadow: var(--v-shadow-soft-lg);
+      }
+    }
 
-  .v-btn-large {
-    height: 48px;
-    line-height: 48px;
-    font-size: 18px;
-    border-radius: 8px;
-  }
+    &--destructive {
+      background-color: var(--v-error-1);
+      color: var(--v-white);
+      box-shadow: var(--v-shadow-soft);
 
-  .v-btn-default {
-    height: 40px;
-    line-height: 40px;
-    font-size: 16px;
-    border-radius: 6px;
-  }
+      &:hover {
+        box-shadow: var(--v-shadow-soft-lg);
+      }
+    }
 
-  .v-btn-small {
-    height: 32px;
-    line-height: 32px;
-    font-size: 14px;
-    border-radius: 4px;
+    &--outline {
+      background-color: transparent;
+      border: 1px solid var(--v-gray-2);
+      color: var(--v-text-1);
+
+      &:hover {
+        background-color: var(--v-surface-2);
+      }
+    }
+
+    &--ghost {
+      background-color: transparent;
+      color: var(--v-text-4);
+      font-family: var(--v-font-body);
+
+      &:hover {
+        background-color: var(--v-gray-1);
+      }
+    }
+
+    &--sm {
+      height: 32px;
+      padding: 0 12px;
+      font-size: 12px;
+    }
+
+    &--lg {
+      height: 40px;
+      padding: 0 28px;
+      font-size: 16px;
+    }
   }
 }
 </style>

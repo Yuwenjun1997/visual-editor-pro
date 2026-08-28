@@ -7,7 +7,7 @@ import {
 
 const visualFlex: VisualEditorComponent<VisualFlexProps> = {
   key: 'VisualFlex',
-  moduleName: 'basicWidgets',
+  moduleName: 'layoutWidgets',
   componentName: 'VisualFlex',
   label: '弹性布局',
   previewImage: '/componets/visual-flex.svg',

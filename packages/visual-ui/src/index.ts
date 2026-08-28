@@ -22,6 +22,21 @@ import VisualCoupon from './components/visual-coupon'
 import VisualQRCode from './components/visual-qrcode'
 import VisualTabs from './components/visual-tabs'
 import VisualEventContainer from './components/visual-event-container'
+import VisualStatCard from './components/visual-stat-card'
+import VisualNoticeBar from './components/visual-notice-bar'
+import VisualRating from './components/visual-rating'
+import VisualSearch from './components/visual-search'
+import VisualProductCard from './components/visual-product-card'
+import VisualProductList from './components/visual-product-list'
+import VisualFlashSale from './components/visual-flash-sale'
+import VisualTimeline from './components/visual-timeline'
+import VisualComment from './components/visual-comment'
+import VisualRichText from './components/visual-rich-text'
+import VisualFloatAction from './components/visual-float-action'
+import VisualAudio from './components/visual-audio'
+import VisualPoster from './components/visual-poster'
+import VisualForm from './components/visual-form'
+import VisualPopup from './components/visual-popup'
 
 import type { App } from 'vue'
 import type { CustomThemeConfig } from './types/theme'
@@ -51,5 +66,20 @@ export default {
     app.component('VisualQRCode', VisualQRCode)
     app.component('VisualTabs', VisualTabs)
     app.component('VisualEventContainer', VisualEventContainer)
+    app.component('VisualStatCard', VisualStatCard)
+    app.component('VisualNoticeBar', VisualNoticeBar)
+    app.component('VisualRating', VisualRating)
+    app.component('VisualSearch', VisualSearch)
+    app.component('VisualProductCard', VisualProductCard)
+    app.component('VisualProductList', VisualProductList)
+    app.component('VisualFlashSale', VisualFlashSale)
+    app.component('VisualTimeline', VisualTimeline)
+    app.component('VisualComment', VisualComment)
+    app.component('VisualRichText', VisualRichText)
+    app.component('VisualFloatAction', VisualFloatAction)
+    app.component('VisualAudio', VisualAudio)
+    app.component('VisualPoster', VisualPoster)
+    app.component('VisualForm', VisualForm)
+    app.component('VisualPopup', VisualPopup)
   },
 }

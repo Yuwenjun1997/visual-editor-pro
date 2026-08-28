@@ -17,12 +17,12 @@ const createListDataItem = (
 
 const visualTabs: VisualEditorComponent<VisualTabsProps> = {
   key: 'VisualTabs',
-  moduleName: 'basicWidgets',
+  moduleName: 'layoutWidgets',
   componentName: 'VisualTabs',
   label: '页签切换',
   previewImage: '/componets/visual-tabs.svg',
   props: {
-    type: createNormalSelectControl({
+    variant: createNormalSelectControl({
       label: '页签样式',
       defaultValue: 'line',
       options: [
@@ -30,8 +30,8 @@ const visualTabs: VisualEditorComponent<VisualTabsProps> = {
         { label: '胶囊', value: 'pill' },
       ],
     }),
-    activeColor: createColorInputControl({ label: '激活色', defaultValue: '#409eff' }),
-    textColor: createColorInputControl({ label: '文字颜色', defaultValue: '#666666' }),
+    activeColor: createColorInputControl({ label: '激活色', defaultValue: '#2563EB' }),
+    textColor: createColorInputControl({ label: '文字颜色', defaultValue: '#4B5563' }),
   },
   listData: {
     label: '页签数据',

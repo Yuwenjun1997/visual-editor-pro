@@ -1,0 +1,11 @@
+<svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="140" y="280" width="360" height="360" rx="40" fill="#ffffff" stroke="#dbe3ff" stroke-width="12"/>
+  <rect x="140" y="280" width="360" height="280" fill="#e2e9ff"/>
+  <rect x="172" y="580" width="240" height="26" rx="13" fill="#2b2f3a"/>
+  <text x="176" y="650" font-size="40" font-family="Arial, sans-serif" font-weight="bold" fill="#ff5c7a">¥59.9</text>
+  <rect x="524" y="280" width="360" height="360" rx="40" fill="#ffffff" stroke="#dbe3ff" stroke-width="12"/>
+  <rect x="524" y="280" width="360" height="280" fill="#e2e9ff"/>
+  <rect x="556" y="580" width="240" height="26" rx="13" fill="#2b2f3a"/>
+  <text x="560" y="650" font-size="40" font-family="Arial, sans-serif" font-weight="bold" fill="#ff5c7a">¥39.9</text>
+  <text x="512" y="740" font-size="52" font-family="Arial, sans-serif" font-weight="bold" fill="#4f6ef7" text-anchor="middle">商品列表</text>
+</svg>

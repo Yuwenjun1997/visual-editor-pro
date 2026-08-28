@@ -1,0 +1,9 @@
+<svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="120" y="420" width="784" height="200" rx="44" fill="#4f6ef7"/>
+  <circle cx="230" cy="520" r="56" fill="#ffffff"/>
+  <circle cx="212" cy="506" r="14" fill="#4f6ef7"/>
+  <circle cx="212" cy="534" r="14" fill="#4f6ef7"/>
+  <rect x="330" y="488" width="380" height="26" rx="13" fill="rgba(255,255,255,0.8)"/>
+  <rect x="330" y="532" width="300" height="26" rx="13" fill="rgba(255,255,255,0.45)"/>
+  <text x="512" y="720" font-size="52" font-family="Arial, sans-serif" font-weight="bold" fill="#4f6ef7" text-anchor="middle">公告</text>
+</svg>

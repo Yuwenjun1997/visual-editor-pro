@@ -1,0 +1,24 @@
+// 科技渐变 · Gib 设计令牌（作用域 .visual-app，供交互层取用）
+// 全局 --v-radius-{xs..lg} 刻度保留不动（块组件在用），这里另起一套圆角系
+.visual-app {
+  --v-font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --v-font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+
+  --v-gradient-primary: linear-gradient(135deg, #2563eb 0%, #6d28d9 100%);
+
+  --v-radius-moody: 12px;
+  --v-radius-moody-sm: 8px;
+  --v-radius-moody-lg: 16px;
+
+  --v-shadow-soft: 0 8px 24px -12px rgba(37, 99, 235, 0.15);
+  --v-shadow-soft-lg: 0 16px 40px -16px rgba(37, 99, 235, 0.24);
+
+  --v-surface-1: #ffffff;
+  --v-surface-2: #f4f6fa;
+
+  --v-motion-fast: 180ms;
+  --v-motion-base: 320ms;
+  --v-ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}

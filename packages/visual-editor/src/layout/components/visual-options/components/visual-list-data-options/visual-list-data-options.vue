@@ -124,8 +124,6 @@ const handleRemove = (index: number) => {
   .visual-list-item-options {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 8px;
     background-color: var(--el-color-info-light-9);
   }
 

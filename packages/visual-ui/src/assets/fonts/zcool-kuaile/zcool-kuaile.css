@@ -1,0 +1,8 @@
+/* ZCOOL KuaiLe (站酷快乐体) — 展示字体，SIL OFL 1.1，见 OFL.txt */
+@font-face {
+  font-family: 'ZCOOL KuaiLe';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./zcool-kuaile.woff2') format('woff2');
+}

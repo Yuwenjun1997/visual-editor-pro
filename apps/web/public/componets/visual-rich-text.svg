@@ -1,0 +1,9 @@
+<svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="200" y="300" width="624" height="400" rx="24" fill="#ffffff" stroke="#e5e9ff" stroke-width="14"/>
+  <text x="512" y="450" font-size="120" font-family="Arial, sans-serif" font-weight="bold" fill="#4f6ef7" text-anchor="middle">Aa</text>
+  <rect x="248" y="500" width="360" height="28" rx="14" fill="#c3cbdd"/>
+  <rect x="248" y="560" width="520" height="20" rx="10" fill="#dde3f7"/>
+  <rect x="248" y="596" width="520" height="20" rx="10" fill="#dde3f7"/>
+  <rect x="248" y="632" width="300" height="20" rx="10" fill="#dde3f7"/>
+  <text x="512" y="780" font-size="52" font-family="Arial, sans-serif" font-weight="bold" fill="#4f6ef7" text-anchor="middle">富文本</text>
+</svg>

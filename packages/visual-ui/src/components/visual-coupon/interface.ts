@@ -9,4 +9,10 @@ export interface VisualCouponProps {
   textColor?: string
   btnColor?: string
   showBtn?: boolean
+  layout?: 'row' | 'column'
+  edge?: 'plain' | 'notch'
+  theme?: 'default' | 'pink' | 'gold' | 'cool'
+  showBadge?: boolean
+  badgeText?: string
+  badgeColor?: string
 }

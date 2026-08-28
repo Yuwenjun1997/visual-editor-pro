@@ -1,0 +1,13 @@
+<svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="240" cy="360" r="70" fill="#dde5ff"/>
+  <text x="240" y="386" font-size="60" font-family="Arial, sans-serif" fill="#5b6fb8" text-anchor="middle">人</text>
+  <rect x="360" y="316" width="320" height="34" rx="17" fill="#2b2f3a"/>
+  <text x="700" y="345" font-size="24" font-family="Arial, sans-serif" fill="#f6b73c">★★★★★</text>
+  <rect x="360" y="380" width="480" height="26" rx="13" fill="#c3cbdd"/>
+  <rect x="240" y="440" width="70" height="70" rx="70" fill="#dde5ff"/>
+  <text x="240" y="484" font-size="60" font-family="Arial, sans-serif" fill="#5b6fb8" text-anchor="middle">人</text>
+  <rect x="360" y="444" width="280" height="34" rx="17" fill="#2b2f3a"/>
+  <text x="660" y="473" font-size="24" font-family="Arial, sans-serif" fill="#f6b73c">★★★★★</text>
+  <rect x="360" y="508" width="440" height="26" rx="13" fill="#c3cbdd"/>
+  <text x="512" y="640" font-size="52" font-family="Arial, sans-serif" font-weight="bold" fill="#4f6ef7" text-anchor="middle">评论</text>
+</svg>

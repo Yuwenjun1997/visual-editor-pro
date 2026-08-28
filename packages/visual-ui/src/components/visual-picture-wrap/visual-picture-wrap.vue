@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-picture-wrap" :styles="_props.styles" :show-empty="_noListData">
+  <visual-box class="visual-picture-wrap" :styles="_props.styles" :show-empty="_noListData" :class="_props.class">
     <div class="scroll-view-x">
       <div
         class="visual-picture-wrap__inner"
@@ -31,6 +31,7 @@ interface Props {
   props: VisualPictureWrapProps
   styles?: CSSProperties
   listData?: VisualPicture[]
+  class?: string
 }
 
 defineOptions({

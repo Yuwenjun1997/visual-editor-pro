@@ -1,7 +1,9 @@
 <template>
-  <div class="visual-options ve-flex-1">
-    <div class="title ve-p-2">属性配置</div>
-    <el-scrollbar height="100%" class="ve-flex-1">
+  <flex-full-layout class="visual-options ve-flex-1">
+    <template #header>
+      <div class="title ve-p-2">属性配置</div>
+    </template>
+    <el-scrollbar height="100%" class="ve-h-full ve-min-h-0">
       <el-collapse v-model="activeNames" accordion>
         <el-collapse-item title="页面属性" name="pageInfo">
           <visual-page-options />
@@ -26,11 +28,12 @@
 
     <!-- 可视化数据编辑器 -->
     <visual-source-data-editor />
-  </div>
+  </flex-full-layout>
 </template>
 
 <script setup lang="ts">
 import { useViusalStore } from '../../../store/useVisual'
+import FlexFullLayout from '../../../components/flex-full-layout/index.vue'
 import VisualPropsOptions from './components/visual-props-options/visual-props-options.vue'
 import VisualStylesOptions from './components/visual-styles-options/visual-styles-options.vue'
 import VisualPageOptions from './components/visual-page-options/visual-page-options.vue'
@@ -61,21 +64,19 @@ const listDataLabel = computed(() => {
 const showStyles = computed(() => !!visualStore.currentBlock)
 
 const editorJson = computed(() =>
-  JSON.stringify(visualStore.visualEditorComponent || {})
+  JSON.stringify(visualStore.visualEditorComponent || {}),
 )
 
 watch(
   () => editorJson.value,
   debounce(() => {
     visualStore.updateCurrentBlock()
-  })
+  }),
 )
 </script>
 
 <style scoped lang="scss">
 .visual-options {
-  display: flex;
-  flex-direction: column;
   .title {
     color: var(--el-text-color-regular);
   }

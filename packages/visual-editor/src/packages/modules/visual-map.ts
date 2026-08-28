@@ -30,7 +30,7 @@ const createData = (): Record<keyof VisualMapMarker, VisualEditorProps> => ({
 
 const VisualMap: VisualEditorComponent<VisualMapProps> = {
   key: 'VisualMap',
-  moduleName: 'basicWidgets',
+  moduleName: 'mediaWidgets',
   componentName: 'VisualMap',
   label: '地图',
   previewImage: '/componets/visual-map.svg',

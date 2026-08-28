@@ -1,6 +1,5 @@
 export interface VisualGridProps {
   columnNum: number
-  showBorder?: boolean
   direction?: 'column' | 'row'
   fontSize?: string
   iconSize?: string

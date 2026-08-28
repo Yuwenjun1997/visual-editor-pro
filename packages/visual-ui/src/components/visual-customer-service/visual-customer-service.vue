@@ -1,5 +1,9 @@
 <template>
-  <visual-box class="visual-customer-service" :styles="_props.styles">
+  <visual-box
+    class="visual-customer-service"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
     <a
       class="visual-customer-service__entry"
       :style="entryStyle"
@@ -23,6 +27,7 @@ import type { VisualCustomerServiceProps } from './interface'
 interface Props {
   styles?: Partial<CSSProperties>
   props: VisualCustomerServiceProps
+  class?: string
 }
 
 defineOptions({
@@ -33,7 +38,7 @@ const _props = defineProps<Props>()
 
 const entryStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {}
-  if (_props.props.bgColor) style.backgroundColor = _props.props.bgColor
+  if (_props.props.bgColor) style['--v-cs-bg'] = _props.props.bgColor
   if (_props.props.textColor) style.color = _props.props.textColor
   if (_props.props.radius) style.borderRadius = _props.props.radius
   return style
@@ -65,13 +70,13 @@ const handleClick = (event: MouseEvent) => {
     justify-content: center;
     gap: 6px;
     padding: 8px 16px;
-    background-color: var(--v-cs-bg, #07c160);
+    background: var(--v-cs-bg, var(--v-gradient-primary));
     color: var(--v-cs-color, #fff);
-    border-radius: 8px;
+    border-radius: var(--v-radius-moody-sm);
     text-decoration: none;
     cursor: pointer;
     user-select: none;
-    transition: opacity 0.2s;
+    transition: opacity var(--v-motion-fast) var(--v-ease-soft);
 
     &:active {
       opacity: 0.85;

@@ -3,10 +3,10 @@
     class="visual-grid"
     :styles="_props.styles"
     :show-empty="_noListData"
+    :class="_props.class"
   >
     <div
       class="visual-grid__inner"
-      :class="_bindClassList"
       :style="_bindInnerStyles"
     >
       <visual-grid-item
@@ -19,7 +19,6 @@
         :icon-color="_bindProps.iconColor"
         :font-color="_bindProps.fontColor"
         :direction="_bindProps.direction"
-        :show-border="_bindProps.showBorder"
       />
     </div>
   </visual-box>
@@ -35,6 +34,7 @@ interface Props {
   styles?: CSSProperties
   props: VisualGridProps
   listData: VisualGridItemProps[]
+  class?: string
 }
 
 defineOptions({
@@ -52,10 +52,6 @@ const _bindProps = computed<VisualGridProps>(() => ({
 const _bindInnerStyles = computed<CSSProperties>(() => ({
   gridTemplateColumns: `repeat(${_bindProps.value.columnNum}, 1fr)`,
 }))
-
-const _bindClassList = computed(() => ({
-  'has-border': _bindProps.value.showBorder,
-}))
 </script>
 
 <style scoped lang="scss">
@@ -64,16 +60,7 @@ const _bindClassList = computed(() => ({
 
   .visual-grid__inner {
     display: grid;
-    position: relative;
-
-    &.has-border {
-      &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border: 1px solid var(--v-gray-6);
-      }
-    }
+    gap: var(--v-spacing-sm);
   }
 }
 </style>

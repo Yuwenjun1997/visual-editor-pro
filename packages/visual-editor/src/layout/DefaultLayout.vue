@@ -1,5 +1,5 @@
 <template>
-  <el-container class="ve-h-screen">
+  <el-container class="ve-h-screen visual-editor-app">
     <el-header class="visual-top-window">
       <TopWindow />
     </el-header>

@@ -1,5 +1,5 @@
 <template>
-  <visual-box class="visual-section" :styles="_props.styles">
+  <visual-box class="visual-section" :styles="_props.styles" :class="_props.class">
     <div class="visual-section__inner" :style="_bindInnerStyles">
       <div class="visual-section__title">
         <template v-if="_bindProps.showLine">
@@ -32,6 +32,7 @@ import { cssTextSizeVar } from '../../utils/styles.utils'
 interface Props {
   props: VisualSectionProps
   styles?: Partial<CSSProperties>
+  class?: string
 }
 
 defineOptions({

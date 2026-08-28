@@ -1,8 +1,8 @@
 export { default as VisualButton } from './visual-button.vue'
 export interface VisualButtonProps {
   text?: string
-  type?: 'primary' | 'danger' | 'warning' | 'outline'
-  size?: 'large' | 'default' | 'small'
+  variant?: 'primary' | 'destructive' | 'warning' | 'outline'
+  size?: 'lg' | 'default' | 'sm'
   bgColor?: string
   textColor?: string
   radius?: string

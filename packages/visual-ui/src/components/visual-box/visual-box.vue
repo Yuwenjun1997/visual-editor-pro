@@ -1,5 +1,5 @@
 <template>
-  <div class="visual-box" :style="bindBoxStyles">
+  <div :class="cn('visual-box', _props.class)" :style="bindBoxStyles">
     <visual-message v-if="showEmpty" />
     <template v-else>
       <div class="visual-box__inner" :style="bindBoxInnerStyles">
@@ -12,12 +12,14 @@
 <script setup lang="ts">
 import VisualMessage from '../visual-message/visual-message.vue'
 import type { CSSProperties } from 'vue'
+import { cn } from '../../utils/cn'
 import { getBoxStyles, getBoxInnerStyles } from '../../utils/styles.utils'
 import { useTheme } from '../../hooks/useTheme'
 
 interface Props {
   styles?: CSSProperties
   showEmpty?: boolean
+  class?: string
 }
 
 defineOptions({
