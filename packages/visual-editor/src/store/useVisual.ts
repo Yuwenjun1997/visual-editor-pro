@@ -13,7 +13,7 @@ import { defineStore } from 'pinia'
 interface VisualState {
   activePanel: string
   isDrag: boolean
-  device: 'h5' | 'pad'
+  device: 'h5' | 'pad' | 'pc'
   vid: string
   currentBlock: VisualBlockData | null
   visualEditorComponent: VisualEditorComponent | null
@@ -41,7 +41,7 @@ export const useViusalStore = defineStore('visual', {
       this.currentBlock = block
       this.visualEditorComponent = createVisualEditorComponent(block)
     },
-    setDevice(device: 'h5' | 'pad') {
+    setDevice(device: 'h5' | 'pad' | 'pc') {
       this.device = device
     },
     updateCurrentBlock() {

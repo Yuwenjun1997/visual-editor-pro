@@ -1,10 +1,22 @@
 <template>
   <visual-box class="visual-picture-wrap" :styles="_props.styles" :show-empty="_noListData" :class="_props.class">
-    <div class="scroll-view-x">
+    <div class="visual-picture-wrap__content" :style="_bindInnerStyles">
+      <visual-scroll-x v-if="_bindProps.layout === 'layout-card-type-scroll-x'">
+        <div
+          class="visual-picture visual-picture--slide"
+          v-for="(item, index) in _props.listData"
+          :key="index"
+        >
+          <img class="visual-picture__image" :src="item.url" />
+          <span class="visual-picture__label" v-if="_bindProps.showLabel">
+            {{ item.label }}
+          </span>
+        </div>
+      </visual-scroll-x>
       <div
+        v-else
         class="visual-picture-wrap__inner"
         :class="_bindProps.layout"
-        :style="_bindInnerStyles"
       >
         <div
           class="visual-picture"
@@ -23,6 +35,7 @@
 
 <script setup lang="ts">
 import VisualBox from '../visual-box/visual-box.vue'
+import VisualScrollX from '../visual-scroll-x/visual-scroll-x.vue'
 import type { CSSProperties } from 'vue'
 import type { VisualPicture, VisualPictureWrapProps } from './interface'
 import { cssSpacingVar } from '../../utils/styles.utils'
@@ -46,51 +59,47 @@ const _noListData = computed(() => _props.listData.length <= 0)
 
 const _bindProps = computed(() => ({ ..._props.props }))
 
-const _innerWidth = computed(() => {
-  return _props.listData.length * 320 + (_props.listData.length + 1) * 24
-})
-
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-inner-width': `${_innerWidth.value}px`,
   '--v-picture-radius': cssSpacingVar(_bindProps.value.radius),
   '--v-picture-height': _bindProps.value.height,
   '--v-picture-gutter': cssSpacingVar(_bindProps.value.gutter),
   '--v-picture-bg-color': _bindProps.value.bgColor,
+  '--v-slide-width': _bindProps.value.cardWidth,
 }))
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 @use '../../assets/scss/utils/index.scss' as *;
 
 .visual-picture-wrap {
+  .visual-picture {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--v-picture-radius);
+    height: var(--v-picture-height, 120px);
+    background-color: var(--v-picture-bg-color);
+
+    .visual-picture__image {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .visual-picture__label {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      padding: 0 var(--v-spacing-sm);
+      background-color: var(--v-black-opacity-6);
+      color: var(--v-white);
+      line-height: 24px;
+      font-size: var(--v-text-md);
+      @include ellipsis(1);
+    }
+  }
+
   .visual-picture-wrap__inner {
     gap: var(--v-picture-gutter);
-
-    .visual-picture {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--v-picture-radius);
-      height: var(--v-picture-height, 120px);
-      background-color: var(--v-picture-bg-color);
-
-      .visual-picture__image {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-
-      .visual-picture__label {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        padding: 0 var(--v-spacing-sm);
-        background-color: var(--v-black-opacity-6);
-        color: var(--v-white);
-        line-height: 24px;
-        font-size: var(--v-text-md);
-        @include ellipsis(1);
-      }
-    }
   }
 
   .layout-card-type-one {
@@ -163,14 +172,11 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
     }
   }
 
-  .layout-card-type-scroll-x {
-    display: flex;
-    width: var(--v-inner-width);
-
-    .visual-picture {
-      width: 180px;
-      display: inline-block;
-    }
+  .visual-picture--slide {
+    flex: 0 0 var(--v-slide-width, 200px);
+    width: var(--v-slide-width, 200px);
+    min-width: 0;
+    margin-right: var(--v-picture-gutter);
   }
 }
 </style>

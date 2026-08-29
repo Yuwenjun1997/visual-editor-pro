@@ -20,6 +20,7 @@
           <Icon class="ve-text-xl" icon="bi:stickies" />
           <span class="ve-text-xs ve-mt-1">模板</span>
         </template>
+        <visual-templates />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -29,6 +30,7 @@
 import { Icon } from '@iconify/vue'
 import VisualComponentsMap from './visual-components-map/visual-components-map.vue'
 import VisualComponents from './visual-components/visual-components.vue'
+import VisualTemplates from './visual-templates/visual-templates.vue'
 </script>
 
 <style lang="scss"></style>

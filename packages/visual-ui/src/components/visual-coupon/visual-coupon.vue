@@ -85,7 +85,6 @@ const badgeStyle = computed<CSSProperties>(() => ({
     display: flex;
     align-items: stretch;
     overflow: hidden;
-    border-radius: var(--v-radius-moody);
     background: var(--v-coupon-bg, var(--v-gradient-primary));
     color: var(--v-coupon-color, #fff);
     box-shadow: var(--v-shadow-soft);
@@ -125,6 +124,10 @@ const badgeStyle = computed<CSSProperties>(() => ({
     // （border-box 下 min-width 128 即外宽），分隔条 margin-left -2 且宽 10，
     // 中心 x = 128 - 2 + 5 = 131px，勿随意改动该结构
     &--notch {
+      // 两层描边式 mask 默认相加（add/source-over）会把彼此的不透明区并回缺口里，
+      // 必须 intersect/source-in：最终只见「两层都不透明」的区域，缺口才保留
+      -webkit-mask-composite: source-in;
+      mask-composite: intersect;
       -webkit-mask-image:
         radial-gradient(circle 13px at 131px 0, transparent 13px, #000 13.5px),
         radial-gradient(circle 13px at 131px 100%, transparent 13px, #000 13.5px);

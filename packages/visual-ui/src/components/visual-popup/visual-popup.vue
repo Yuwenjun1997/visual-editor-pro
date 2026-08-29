@@ -1,7 +1,12 @@
 <template>
-  <teleport to="body">
+  <teleport-box :is-design="isDesign">
     <transition name="visual-popup">
-      <div v-if="show" class="visual-popup" @click.self="close">
+      <div
+        v-if="show"
+        class="visual-popup"
+        :class="{ 'visual-popup--design': isDesign }"
+        @click.self="isDesign ? undefined : close"
+      >
         <div class="visual-popup__card">
           <img
             v-if="_props.props.bgImage"
@@ -12,7 +17,9 @@
           <div v-else class="visual-popup__bg visual-popup__bg--gradient" />
           <div class="visual-popup__content">
             <div class="visual-popup__title">{{ title || '活动公告' }}</div>
-            <div v-if="description" class="visual-popup__desc">{{ description }}</div>
+            <div v-if="description" class="visual-popup__desc">
+              {{ description }}
+            </div>
             <a
               v-if="buttonLink"
               class="visual-popup__button"
@@ -36,22 +43,26 @@
         </div>
       </div>
     </transition>
-  </teleport>
+  </teleport-box>
 </template>
 
 <script setup lang="ts">
+import TeleportBox from '../../deps/teleport-box/index.vue'
 import { getCurrentInstance } from 'vue'
 import type { VisualPopupProps } from './interface'
 
 interface Props {
   props: VisualPopupProps
+  isDesign?: boolean
 }
 
 defineOptions({
   name: 'VisualPopup',
 })
 
-const _props = defineProps<Props>()
+const _props = withDefaults(defineProps<Props>(), { isDesign: false })
+
+const isDesign = computed(() => _props.isDesign)
 
 const title = computed(() => _props.props.title || '')
 const description = computed(() => _props.props.description || '')
@@ -60,10 +71,13 @@ const buttonText = computed(() => _props.props.buttonText || '')
 
 const btnHref = computed(() => {
   if (!buttonLink.value) return undefined
-  return buttonLink.value.startsWith('http') ? buttonLink.value : `//${buttonLink.value}`
+  return buttonLink.value.startsWith('http')
+    ? buttonLink.value
+    : `//${buttonLink.value}`
 })
 
-const show = ref(false)
+const showRef = ref(false)
+const show = computed(() => showRef.value)
 
 // 实例级命名空间，避免同一页面多个弹窗的触发标记互相串扰
 const KEY_PREFIX = 'visualPopup'
@@ -80,13 +94,13 @@ const shouldShow = () => {
 }
 
 const doOpen = () => {
-  show.value = true
+  showRef.value = true
   document.body.style.overflow = 'hidden'
   document.addEventListener('keydown', onKeydown)
 }
 
 const close = () => {
-  show.value = false
+  showRef.value = false
   document.body.style.overflow = ''
   document.removeEventListener('keydown', onKeydown)
 }
@@ -100,7 +114,7 @@ let timer: ReturnType<typeof setTimeout> | null = null
 onMounted(() => {
   const mode = _props.props.mode || 'delay'
   if (mode === 'manual') {
-    show.value = true
+    showRef.value = true
     return
   }
   const openPopup = () => {
@@ -133,6 +147,15 @@ onBeforeUnmount(() => {
   padding: 32px;
   background: rgba(15, 18, 40, 0.6);
   backdrop-filter: blur(2px);
+}
+
+// 设计态：锚定舞台页容器（浮层块 .visual-block.is-overlay 为 static），蒙层可穿透不拦截下层编辑
+.visual-popup--design {
+  pointer-events: none;
+
+  .visual-popup__card {
+    pointer-events: auto; // 点卡片冒泡到外层 .visual-block 选中该组件
+  }
 }
 
 .visual-popup__card {

@@ -112,8 +112,6 @@ watch(
   .visual-poster__card {
     position: relative;
     overflow: hidden;
-    // aspect-ratio: 3 / 4;
-    border-radius: var(--v-radius-moody);
     background: var(--v-gradient-primary);
   }
 

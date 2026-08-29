@@ -11,7 +11,10 @@
         :src="cover"
         :alt="title"
       />
-      <span v-else class="visual-product-item__cover visual-product-item__cover--empty">
+      <span
+        v-else
+        class="visual-product-item__cover visual-product-item__cover--empty"
+      >
         <i class="bi bi-image" />
       </span>
       <span v-if="showTag !== false && tag" class="visual-product-item__tag">
@@ -61,7 +64,7 @@ const title = computed(() => _props.data?.title || '')
 const tag = computed(() => _props.data?.tag || '')
 
 const priceText = computed(() =>
-  formatPrice(_props.data?.price, { currency: _props.currency })
+  formatPrice(_props.data?.price, { currency: _props.currency }),
 )
 
 const originPriceText = computed(() => {
@@ -91,7 +94,7 @@ const itemStyle = computed<CSSProperties>(() => ({
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: var(--v-product-radius, var(--v-radius-moody-sm));
+  border-radius: var(--v-product-radius);
   background: #fff;
 
   &--horizontal {

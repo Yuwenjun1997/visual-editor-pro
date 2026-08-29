@@ -34,9 +34,6 @@ const visualPictureWrap: VisualEditorComponent<VisualPictureWrapProps> = {
   componentName: 'VisualPictureWrap',
   label: '照片墙',
   previewImage: '/componets/visual-picture-wrap.svg',
-  styles: {
-    backgroundColor: '#f9f9f9',
-  },
   props: {
     layout: createNormalSelectControl({
       label: '列表类型',
@@ -49,6 +46,17 @@ const visualPictureWrap: VisualEditorComponent<VisualPictureWrapProps> = {
       ],
       defaultValue: 'layout-card-type-one',
     }),
+    cardWidth: createNormalSelectControl({
+      label: '卡片宽度',
+      options: [
+        { label: '200px', value: '200px' },
+        { label: '240px', value: '240px' },
+        { label: '280px', value: '280px' },
+        { label: '320px', value: '320px' },
+        { label: '360px', value: '360px' },
+      ],
+      defaultValue: '200px',
+    }),
     showLabel: createSwitchControl({ label: '显示标签', defaultValue: false }),
     bgColor: createColorInputControl({ label: '背景色' }),
     gutter: createNormalSelectControl({
@@ -60,7 +68,7 @@ const visualPictureWrap: VisualEditorComponent<VisualPictureWrapProps> = {
         { label: '默认', value: 'base' },
         { label: '较大', value: 'lg' },
       ],
-      defaultValue: 'base',
+      defaultValue: 'md',
     }),
     radius: createNormalSelectControl({
       label: '圆角大小',

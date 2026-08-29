@@ -1,6 +1,12 @@
 <template>
   <visual-box class="visual-count-down" :styles="_props.styles" :class="_props.class">
-    <div class="visual-count-down__inner" :style="innerStyle">
+    <div class="visual-count-down__inner" :style="innerStyle" :class="variantClass">
+      <img
+        v-if="_props.props.image"
+        class="visual-count-down__image"
+        :src="_props.props.image"
+        :style="imageStyle"
+      />
       <span v-if="_props.props.title" class="visual-count-down__title">
         {{ _props.props.title }}
       </span>
@@ -9,10 +15,11 @@
         <span class="visual-count-down__colon" :style="colonStyle">天</span>
       </template>
       <span class="visual-count-down__num">{{ pad(hours) }}</span>
-      <span class="visual-count-down__colon" :style="colonStyle">:</span>
+      <span class="visual-count-down__colon" :style="colonStyle">{{ hSep }}</span>
       <span class="visual-count-down__num">{{ pad(minutes) }}</span>
-      <span class="visual-count-down__colon" :style="colonStyle">:</span>
+      <span class="visual-count-down__colon" :style="colonStyle">{{ mSep }}</span>
       <span class="visual-count-down__num">{{ pad(seconds) }}</span>
+      <span v-if="isPlain" class="visual-count-down__colon" :style="colonStyle">秒</span>
     </div>
   </visual-box>
 </template>
@@ -35,6 +42,18 @@ defineOptions({
 const _props = defineProps<Props>()
 
 const showDays = computed(() => _props.props.showDays)
+
+const variant = computed(() => _props.props.variant || 'default')
+const isPlain = computed(() => variant.value === 'plain')
+const variantClass = computed(() =>
+  variant.value === 'default' ? '' : `visual-count-down__inner--${variant.value}`
+)
+const imageStyle = computed<CSSProperties>(() => ({
+  '--v-count-img-width': _props.props.imageWidth || '32px',
+}))
+// 简约数字模式用 时/分/秒 文字单位替代冒号
+const hSep = computed(() => (isPlain.value ? '时' : ':'))
+const mSep = computed(() => (isPlain.value ? '分' : ':'))
 
 const remain = ref(0)
 
@@ -97,6 +116,50 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: center;
     gap: 4px;
+  }
+
+  .visual-count-down__image {
+    width: var(--v-count-img-width, 32px);
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  // 纯色块：双停同色渐变表现为实色；用户 bgColor inline 覆盖后即为该色实块
+  .visual-count-down__inner--flat {
+    --v-count-num-bg: linear-gradient(135deg, #4f46e5 0%, #4f46e5 100%);
+  }
+
+  // 描边块：透明底 + 彩色描边，数字为同色
+  .visual-count-down__inner--outline {
+    --v-count-colon-color: #4f46e5;
+
+    .visual-count-down__num {
+      background: transparent;
+      border: 1px solid var(--v-count-num-bg, #4f46e5);
+      color: var(--v-count-num-color, #4f46e5);
+    }
+  }
+
+  // 简约数字：无块无描边，大号数字 + 文字单位
+  .visual-count-down__inner--plain {
+    .visual-count-down__num {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      min-width: 0;
+      font-size: 20px;
+      color: var(--v-count-num-color, #111827);
+    }
+
+    .visual-count-down__colon {
+      margin: 0 2px;
+      font-size: 14px;
+      color: var(--v-count-colon-color, var(--v-text-1));
+    }
   }
 
   .visual-count-down__title {

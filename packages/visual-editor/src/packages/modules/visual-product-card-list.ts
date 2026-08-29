@@ -3,9 +3,9 @@ import type {
   VisualEditorProps,
 } from '../../types/visual-editor'
 import type {
-  VisualProductListItem,
-  VisualProductListProps,
-} from '@visual/ui/components/visual-product-list/interface'
+  VisualProductCardListItem,
+  VisualProductCardListProps,
+} from '@visual/ui/components/visual-product-card-list/interface'
 import {
   createImageInputControl,
   createNormalSelectControl,
@@ -17,7 +17,7 @@ import {
 
 const defaultCover = '/image/cover.svg'
 
-const createData = (): Record<keyof VisualProductListItem, VisualEditorProps> => ({
+const createData = (): Record<keyof VisualProductCardListItem, VisualEditorProps> => ({
   cover: createImageInputControl({ label: '商品图', defaultValue: defaultCover }),
   title: createTextInputControl({
     label: '商品标题',
@@ -29,17 +29,36 @@ const createData = (): Record<keyof VisualProductListItem, VisualEditorProps> =>
   buyLink: createTextInputControl({ label: '跳转链接' }),
 })
 
-const visualProductList: VisualEditorComponent<VisualProductListProps> = {
-  key: 'VisualProductList',
+const visualProductCardList: VisualEditorComponent<VisualProductCardListProps> = {
+  key: 'VisualProductCardList',
   moduleName: 'commerceWidgets',
-  componentName: 'VisualProductList',
-  label: '商品列表',
-  previewImage: '/componets/visual-product-list.svg',
+  componentName: 'VisualProductCardList',
+  label: '商品卡片列表',
+  previewImage: '/componets/visual-product-card-list.svg',
   souceDataType: 'VisualObjectArray',
   props: {
-    coverInRight: createSwitchControl({ label: '图片居右' }),
+    layout: createNormalSelectControl({
+      label: '布局方式',
+      options: [
+        { label: '单列', value: 'col-1' },
+        { label: '双列', value: 'col-2' },
+        { label: '左右滑动', value: 'scroll-x' },
+      ],
+      defaultValue: 'col-2',
+    }),
+    cardWidth: createNormalSelectControl({
+      label: '卡片宽度',
+      options: [
+        { label: '200px', value: '200px' },
+        { label: '240px', value: '240px' },
+        { label: '280px', value: '280px' },
+        { label: '320px', value: '320px' },
+        { label: '360px', value: '360px' },
+      ],
+      defaultValue: '240px',
+    }),
     gutter: createNormalSelectControl({
-      label: '间距',
+      label: '商品间隙',
       options: [
         { label: '超小', value: 'xs' },
         { label: '较小', value: 'sm' },
@@ -49,16 +68,16 @@ const visualProductList: VisualEditorComponent<VisualProductListProps> = {
       ],
       defaultValue: 'md',
     }),
-    round: createPxInputControl({ label: '圆角大小' }),
     showTag: createSwitchControl({ label: '显示角标', defaultValue: true }),
     showBuy: createSwitchControl({ label: '显示购买按钮', defaultValue: true }),
     buttonText: createTextInputControl({ label: '按钮文案', defaultValue: '立即购买' }),
+    round: createPxInputControl({ label: '圆角大小' }),
     currency: createTextInputControl({ label: '货币符号', defaultValue: '¥' }),
   },
   listData: {
-    label: '商品列表',
+    label: '商品卡片列表',
     data: [createData(), createData()],
-    minLength: 1,
+    minLength: 2,
     maxLength: 12,
     addData() {
       this.data.push(createData())
@@ -69,4 +88,4 @@ const visualProductList: VisualEditorComponent<VisualProductListProps> = {
   },
 }
 
-export default visualProductList
+export default visualProductCardList

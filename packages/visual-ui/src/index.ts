@@ -28,6 +28,7 @@ import VisualRating from './components/visual-rating'
 import VisualSearch from './components/visual-search'
 import VisualProductCard from './components/visual-product-card'
 import VisualProductList from './components/visual-product-list'
+import VisualProductCardList from './components/visual-product-card-list'
 import VisualFlashSale from './components/visual-flash-sale'
 import VisualTimeline from './components/visual-timeline'
 import VisualComment from './components/visual-comment'
@@ -72,6 +73,7 @@ export default {
     app.component('VisualSearch', VisualSearch)
     app.component('VisualProductCard', VisualProductCard)
     app.component('VisualProductList', VisualProductList)
+    app.component('VisualProductCardList', VisualProductCardList)
     app.component('VisualFlashSale', VisualFlashSale)
     app.component('VisualTimeline', VisualTimeline)
     app.component('VisualComment', VisualComment)

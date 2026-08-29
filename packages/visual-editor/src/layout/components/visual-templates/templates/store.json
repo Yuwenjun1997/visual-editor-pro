@@ -1,0 +1,319 @@
+{
+  "id": "store",
+  "name": "门店到店",
+  "description": "门店展示、位置导航、到店指南、用户评价",
+  "icon": "bi:shop",
+  "accent": "linear-gradient(135deg, #06B6D4 0%, #2563EB 100%)",
+  "theme": {
+    "title": "门店到店模板",
+    "globalStyle": { "backgroundColor": "#f2f3f5" }
+  },
+  "blocks": [
+    {
+      "key": "VisualNoticeBar",
+      "label": "公告栏",
+      "moduleName": "commerceWidgets",
+      "componentName": "VisualNoticeBar",
+      "styles": { "opacity": 1, "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "text": "门店开业钜惠 · 到店送精美周边，会员消费享 88 折！",
+        "speed": "14",
+        "bgColor": "linear-gradient(90deg, #06B6D4 0%, #2563EB 100%)",
+        "textColor": "#FFFFFF",
+        "radius": "999px"
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "门店展示",
+        "description": "实拍环境，先睹为快",
+        "icon": "bi:images",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#0891B2",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualPictureWrap",
+      "label": "照片墙",
+      "moduleName": "imageTextWidgets",
+      "componentName": "VisualPictureWrap",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px",
+        "paddingLeft": "12px"
+      },
+      "props": {
+        "layout": "layout-card-type-one",
+        "showLabel": true,
+        "bgColor": "#E0F2FE",
+        "gutter": "base",
+        "radius": "md",
+        "height": "150px"
+      },
+      "listData": [
+        { "label": "门店门头", "url": "/image/preview.svg" },
+        { "label": "店内陈列", "url": "/image/coding.svg" },
+        { "label": "智能体验区", "url": "/image/cover.svg" },
+        { "label": "休闲吧台", "url": "/image/block.svg" },
+        { "label": "会员接待区", "url": "/image/avatar.svg" }
+      ]
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "门店位置",
+        "description": "一键导航直达",
+        "icon": "bi:geo-alt-fill",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#0891B2",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualMap",
+      "label": "地图",
+      "moduleName": "mediaWidgets",
+      "componentName": "VisualMap",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px",
+        "paddingLeft": "12px"
+      },
+      "props": {
+        "longitude": 120.096,
+        "latitude": 30.124,
+        "title": "云栖小镇旗舰店",
+        "titleFontSize": 14,
+        "scale": 14,
+        "width": "100%",
+        "height": "240px",
+        "round": "md",
+        "align": "center",
+        "autoLocation": false
+      },
+      "listData": [
+        {
+          "longitude": 120.096,
+          "latitude": 30.124,
+          "title": "云栖小镇旗舰店"
+        }
+      ]
+    },
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "8px",
+        "paddingTop": "14px",
+        "paddingRight": "14px",
+        "paddingBottom": "14px",
+        "paddingLeft": "14px"
+      },
+      "props": {
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "alignItems": "flex-start",
+        "gap": "4px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "云栖小镇旗舰店",
+                "color": "#1E293B",
+                "isBold": true
+              }
+            },
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "地址：杭州市西湖区云栖小镇 2026 号",
+                "color": "#64748B",
+                "fontSize": "sm"
+              }
+            },
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "营业时间：周一至周日 10:00 - 22:00",
+                "color": "#64748B",
+                "fontSize": "sm"
+              }
+            },
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "联系电话：0571-8888 2026",
+                "color": "#64748B",
+                "fontSize": "sm"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "到店指南",
+        "description": "三步玩转门店",
+        "icon": "bi:signpost-2",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#0891B2",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualTimeline",
+      "label": "时间轴",
+      "moduleName": "imageTextWidgets",
+      "componentName": "VisualTimeline",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "16px",
+        "paddingRight": "16px",
+        "paddingBottom": "16px",
+        "paddingLeft": "16px"
+      },
+      "props": {
+        "showTime": true
+      },
+      "listData": [
+        { "icon": "bi:calendar2-check", "title": "预约到店", "desc": "线上预约时段，到店免排队", "time": "第 1 步", "status": "done" },
+        { "icon": "bi:hand-index-thumb", "title": "产品体验", "desc": "专人讲解，样品随心试用", "time": "第 2 步", "status": "doing" },
+        { "icon": "bi:bag-check", "title": "下单提货", "desc": "线上下单，门店自提或极速配送", "time": "第 3 步", "status": "todo" }
+      ]
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "用户评价",
+        "description": "真实到店反馈",
+        "icon": "bi:star-fill",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#0891B2",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualComment",
+      "label": "评论列表",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualComment",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "12px",
+        "paddingRight": "16px",
+        "paddingBottom": "12px",
+        "paddingLeft": "16px"
+      },
+      "props": {
+        "showTime": true,
+        "showRating": true
+      },
+      "listData": [
+        {
+          "avatar": "/image/avatar.svg",
+          "nickname": "星野小鹿",
+          "content": "第一次来，智能家居体验区超有意思，店员讲解很耐心，已经办了会员～",
+          "time": "2 天前",
+          "rating": 5
+        },
+        {
+          "avatar": "/image/avatar.svg",
+          "nickname": "码农阿森",
+          "content": "周末带娃来玩，体验区可以尽情试用样品，吧台的饮品也好喝。",
+          "time": "5 天前",
+          "rating": 5
+        },
+        {
+          "avatar": "/image/avatar.svg",
+          "nickname": "用户三土",
+          "content": "停车方便，开在园区里很好找，服务很专业细致。",
+          "time": "1 周前",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "key": "VisualFloatAction",
+      "label": "悬浮按钮",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualFloatAction",
+      "styles": { "opacity": 1 },
+      "props": {
+        "mode": "customerService",
+        "phone": "057188882026",
+        "bgColor": "#0891B2",
+        "textColor": "#FFFFFF",
+        "position": "right",
+        "bottom": "120px"
+      }
+    }
+  ]
+}

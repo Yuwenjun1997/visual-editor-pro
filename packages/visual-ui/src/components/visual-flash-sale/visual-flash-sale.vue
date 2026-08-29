@@ -141,7 +141,6 @@ onBeforeUnmount(() => {
 .visual-flash-sale {
   .visual-flash-sale__inner {
     padding: 14px 16px;
-    border-radius: var(--v-radius-moody);
     background: var(--v-flash-bg, linear-gradient(120deg, #ff4d6a, #ff6f5e));
     color: #fff;
   }

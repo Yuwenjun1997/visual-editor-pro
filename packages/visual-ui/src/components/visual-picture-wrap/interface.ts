@@ -5,6 +5,7 @@ export interface VisualPictureWrapProps {
     | 'layout-card-type-three'
     | 'layout-card-type-four'
     | 'layout-card-type-scroll-x'
+  cardWidth?: '200px' | '240px' | '280px' | '320px' | '360px'
   showLabel?: boolean
   bgColor?: string
   gutter?: 'xs' | 'sm' | 'md' | 'lg' | 'base'

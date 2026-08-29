@@ -9,9 +9,9 @@
         <template v-else-if="activePanel === 'viewCode'">
           <visual-monaco-editor />
         </template>
-        <div class="ve-absolute ve-inset-0" v-else>
+        <template v-else>
           <visual-stage-panel />
-        </div>
+        </template>
       </div>
     </div>
   </el-config-provider>

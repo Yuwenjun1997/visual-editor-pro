@@ -1,10 +1,25 @@
 <template>
   <visual-box class="visual-image-text" :styles="_props.styles" :show-empty="_noListData" :class="_props.class">
-    <div class="scroll-view-x">
+    <div class="visual-image-text__content" :style="_bindInnerStyles">
+      <visual-scroll-x v-if="_bindProps.layout === 'scroll-x'">
+        <div
+          class="visual-image-text__slide"
+          v-for="(item, index) in _props.listData"
+          :key="index"
+        >
+          <component
+            class="visual-image-text-item"
+            :is="_renderComponent"
+            :data="item"
+            :showAuthor="_bindProps.showAuthor"
+            :showTime="_bindProps.showTime"
+          ></component>
+        </div>
+      </visual-scroll-x>
       <div
+        v-else
         class="visual-image-text__inner"
         :class="_bindInnerClassList"
-        :style="_bindInnerStyles"
       >
         <component
           class="visual-image-text-item"
@@ -23,6 +38,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
+import VisualScrollX from '../visual-scroll-x/visual-scroll-x.vue'
 import VisualImageTextOne from './components/visual-image-text-one.vue'
 import VisualImageTextTwo from './components/visual-image-text-two.vue'
 import type {
@@ -55,15 +71,11 @@ const _renderComponent = computed(() => {
   return VisualImageTextOne
 })
 
-const _innerWidth = computed(() => {
-  return _props.listData.length * 320 + (_props.listData.length + 1) * 24
-})
-
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-inner-width': `${_innerWidth.value}px`,
   '--v-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
   '--v-item-round': cssRadiusVar(_bindProps.value.round),
   '--v-cover-height': _bindProps.value.coverHeight,
+  '--v-slide-width': _bindProps.value.cardWidth,
 }))
 
 const _bindInnerClassList = computed(() => ({
@@ -71,8 +83,13 @@ const _bindInnerClassList = computed(() => ({
 }))
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .visual-image-text {
+  .visual-image-text-item {
+    border-radius: var(--v-item-round);
+    overflow: hidden;
+  }
+
   &__inner {
     display: grid;
     gap: var(--v-inner-gutter);
@@ -84,20 +101,12 @@ const _bindInnerClassList = computed(() => ({
     &.layout-item-card-col-2 {
       grid-template-columns: repeat(2, 1fr);
     }
+  }
 
-    .visual-image-text-item {
-      border-radius: var(--v-item-round);
-      overflow: hidden;
-    }
-
-    &.layout-item-card-scroll-x {
-      display: flex;
-      width: var(--v-inner-width);
-
-      .visual-image-text-item {
-        display: inline-block;
-      }
-    }
+  &__slide {
+    flex: 0 0 var(--v-slide-width, 320px);
+    min-width: 0;
+    margin-right: var(--v-inner-gutter);
   }
 }
 </style>

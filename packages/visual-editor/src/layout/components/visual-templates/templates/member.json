@@ -1,0 +1,418 @@
+{
+  "id": "member",
+  "name": "会员中心",
+  "description": "资产统计、订单页签、专属优惠券、会员码、邀请海报",
+  "icon": "bi:person-badge",
+  "accent": "linear-gradient(135deg, #6D28D9 0%, #2563EB 100%)",
+  "theme": {
+    "title": "会员中心模板",
+    "globalStyle": { "backgroundColor": "#f2f3f5" }
+  },
+  "blocks": [
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "paddingTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "我的资产",
+        "description": "尊享会员权益一览",
+        "icon": "bi:vip-fill",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "alignItems": "stretch",
+        "gap": "8px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualStatCard",
+              "label": "数据统计卡",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualStatCard",
+              "styles": { "opacity": 1 },
+              "props": {
+                "title": "今日成长值",
+                "value": "12,680",
+                "delta": "8.5",
+                "icon": "bi:lightning-charge-fill",
+                "iconColor": "#FFFFFF",
+                "bgColor": "#2563EB",
+                "textColor": "#FFFFFF",
+                "deltaColor": "#C7D2FE"
+              }
+            },
+            {
+              "key": "VisualStatCard",
+              "label": "数据统计卡",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualStatCard",
+              "styles": { "opacity": 1 },
+              "props": {
+                "title": "可用积分",
+                "value": "8,320",
+                "delta": "12.0",
+                "icon": "bi:coin",
+                "iconColor": "#FFFFFF",
+                "bgColor": "#6D28D9",
+                "textColor": "#FFFFFF",
+                "deltaColor": "#DDD6FE"
+              }
+            },
+            {
+              "key": "VisualStatCard",
+              "label": "数据统计卡",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualStatCard",
+              "styles": { "opacity": 1 },
+              "props": {
+                "title": "可用优惠券",
+                "value": "6 张",
+                "delta": "2",
+                "icon": "bi:ticket-perforated",
+                "iconColor": "#FFFFFF",
+                "bgColor": "#0EA5E9",
+                "textColor": "#FFFFFF",
+                "deltaColor": "#BAE6FD"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "我的订单",
+        "description": "全部订单状态一目了然",
+        "icon": "bi:inboxes",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualTabs",
+      "label": "页签切换",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualTabs",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "8px",
+        "paddingRight": "12px",
+        "paddingBottom": "8px",
+        "paddingLeft": "12px"
+      },
+      "props": {
+        "variant": "line",
+        "activeColor": "#6D28D9",
+        "textColor": "#64748B"
+      },
+      "listData": [
+        { "label": "全部" },
+        { "label": "待付款" },
+        { "label": "待收货" }
+      ],
+      "slots": {
+        "tab-0": {
+          "name": "全部",
+          "blocks": [
+            {
+              "key": "VisualProductCardList",
+              "label": "商品卡片列表",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualProductCardList",
+              "souceDataType": "VisualObjectArray",
+              "styles": { "opacity": 1 },
+              "props": {
+                "layout": "col-2",
+                "gutter": "base",
+                "showTag": true,
+                "showBuy": true,
+                "buttonText": "再次购买",
+                "currency": "¥",
+                "round": "8px"
+              },
+              "listData": [
+                { "cover": "/image/cover.svg", "title": "无线降噪耳机 主动降噪 40dB", "price": 199, "originPrice": 399, "tag": "已完成" },
+                { "cover": "/image/preview.svg", "title": "智能恒温保温杯 55℃ 恒温", "price": 129, "originPrice": 169, "tag": "待发货" }
+              ]
+            }
+          ]
+        },
+        "tab-1": {
+          "name": "待付款",
+          "blocks": [
+            {
+              "key": "VisualProductCardList",
+              "label": "商品卡片列表",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualProductCardList",
+              "souceDataType": "VisualObjectArray",
+              "styles": { "opacity": 1 },
+              "props": {
+                "layout": "col-2",
+                "gutter": "base",
+                "showTag": true,
+                "showBuy": true,
+                "buttonText": "去支付",
+                "currency": "¥",
+                "round": "8px"
+              },
+              "listData": [
+                { "cover": "/image/coding.svg", "title": "蓝牙机械键盘 三模热插拔", "price": 269, "originPrice": 369, "tag": "待付款" },
+                { "cover": "/image/block.svg", "title": "桌面护眼氛围灯 无极调光", "price": 89, "originPrice": 129, "tag": "待付款" }
+              ]
+            }
+          ]
+        },
+        "tab-2": {
+          "name": "待收货",
+          "blocks": [
+            {
+              "key": "VisualProductCardList",
+              "label": "商品卡片列表",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualProductCardList",
+              "souceDataType": "VisualObjectArray",
+              "styles": { "opacity": 1 },
+              "props": {
+                "layout": "col-2",
+                "gutter": "base",
+                "showTag": true,
+                "showBuy": true,
+                "buttonText": "查看物流",
+                "currency": "¥",
+                "round": "8px"
+              },
+              "listData": [
+                { "cover": "/image/preview.svg", "title": "运动吨吨杯 大容量 2.2L", "price": 49.9, "originPrice": 79, "tag": "运输中" },
+                { "cover": "/image/cover.svg", "title": "立式无线充电器 三合一快充", "price": 79, "originPrice": 109, "tag": "运输中" }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "专属优惠券",
+        "description": "会员每月自动到账",
+        "icon": "bi:ticket-perforated-fill",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "alignItems": "stretch",
+        "gap": "12px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualCoupon",
+              "label": "领券",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualCoupon",
+              "styles": { "opacity": 1 },
+              "props": {
+                "currency": "¥",
+                "amountText": "60",
+                "conditionText": "满 300 元可用",
+                "titleText": "会员满减券",
+                "btnText": "立即使用",
+                "showBtn": true,
+                "layout": "row",
+                "edge": "notch",
+                "theme": "gold",
+                "showBadge": true,
+                "badgeText": "会员"
+              }
+            },
+            {
+              "key": "VisualCoupon",
+              "label": "领券",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualCoupon",
+              "styles": { "opacity": 1 },
+              "props": {
+                "currency": "¥",
+                "amountText": "20",
+                "conditionText": "全场无门槛",
+                "titleText": "生日礼券",
+                "btnText": "立即使用",
+                "showBtn": true,
+                "layout": "row",
+                "edge": "plain",
+                "theme": "default",
+                "showBadge": true,
+                "badgeText": "本月"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "会员码",
+        "description": "结账时向店员出示",
+        "icon": "bi:qr-code-scan",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "16px",
+        "paddingRight": "16px",
+        "paddingBottom": "16px",
+        "paddingLeft": "16px"
+      },
+      "props": {
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "alignItems": "center",
+        "gap": "8px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualQRCode",
+              "label": "二维码",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualQRCode",
+              "styles": { "opacity": 1 },
+              "props": {
+                "content": "https://member.example.com/vip/2026",
+                "size": 140,
+                "margin": 2,
+                "level": "M",
+                "fgColor": "#2563EB",
+                "bgColor": "#FFFFFF"
+              }
+            },
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "会员号 8802 · 迎宾礼遇已到账",
+                "color": "#64748B",
+                "fontSize": "sm",
+                "textAlign": "center"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "邀请有礼",
+        "description": "好友开通会员，双方同享",
+        "icon": "bi:gift-fill",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualPoster",
+      "label": "分享海报",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualPoster",
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px", "paddingBottom": "16px" },
+      "props": {
+        "title": "邀请好友开通会员",
+        "subtitle": "双方各得 20 元无门槛优惠券",
+        "footerText": "长按识别二维码领取",
+        "qrContent": "https://member.example.com/invite/2026",
+        "qrSize": 120,
+        "buttonText": "立即邀请",
+        "shareLink": "https://member.example.com"
+      }
+    },
+    {
+      "key": "VisualFloatAction",
+      "label": "悬浮按钮",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualFloatAction",
+      "styles": { "opacity": 1 },
+      "props": {
+        "mode": "backTop",
+        "bgColor": "#6D28D9",
+        "textColor": "#FFFFFF",
+        "position": "right",
+        "bottom": "120px"
+      }
+    }
+  ]
+}

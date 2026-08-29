@@ -1,17 +1,15 @@
 <template>
   <visual-box class="visual-image-text" :styles="_props.styles" :show-empty="_noListData" :class="_props.class">
-    <div class="scroll-view-x">
-      <div class="visual-image-text__inner" :style="_bindInnerStyles">
-        <visual-image-text-one
-          class="visual-image-text-item"
-          v-for="(item, index) in _props.listData"
-          :key="index"
-          :data="item"
-          :showAuthor="_bindProps.showAuthor"
-          :showTime="_bindProps.showTime"
-          :corver-in-right="_bindProps.coverInRight"
-        ></visual-image-text-one>
-      </div>
+    <div class="visual-image-text__inner" :style="_bindInnerStyles">
+      <visual-image-text-one
+        class="visual-image-text-item"
+        v-for="(item, index) in _props.listData"
+        :key="index"
+        :data="item"
+        :showAuthor="_bindProps.showAuthor"
+        :showTime="_bindProps.showTime"
+        :corver-in-right="_bindProps.coverInRight"
+      ></visual-image-text-one>
     </div>
   </visual-box>
 </template>
@@ -45,18 +43,13 @@ const _bindProps = computed<VisualImageTextListProps>(() => ({
   ..._props.props,
 }))
 
-const _innerWidth = computed(() => {
-  return _props.listData.length * 320 + (_props.listData.length + 1) * 24
-})
-
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-inner-width': `${_innerWidth.value}px`,
   '--v-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
   '--v-item-round': cssRadiusVar(_bindProps.value.round),
 }))
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .visual-image-text {
   &__inner {
     display: grid;

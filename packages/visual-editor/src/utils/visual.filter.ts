@@ -1,5 +1,8 @@
 import type { CSSProperties } from 'vue'
 
+// 悬浮/浮层类组件：设计态仅在舞台内以真实效果 + 名称占位呈现（isDesign），不改其运行时 teleport 行为
+export const VISUAL_OVERLAY_KEYS = ['VisualPopup', 'VisualFloatAction']
+
 const filterPropsMap: Record<string, string[]> = {
   VisualFlex: ['flexDirection', 'justifyContent', 'alignItems', 'gap'],
 }

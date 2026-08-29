@@ -22,10 +22,15 @@
           'is-active': isCurrentBlock(element),
         }"
         :data-block-name="element.label"
+        :data-block-key="element.key"
         @click.stop="handleClick(element, index)"
         @mousedown.stop="onMouseDown(element)"
       >
-        <use-component :block="element" :key="element._vid">
+        <use-component
+          :block="element"
+          :is-design="isOverlayBlock(element)"
+          :key="element._vid"
+        >
           <template v-for="(value, key) in element.slots" #[key] :key="key">
             <visual-blocks
               v-model="value.blocks"
@@ -51,7 +56,11 @@ import type {
 } from '../../types/visual-editor'
 import { useVModel } from '@vueuse/core'
 import { useViusalStore } from '../../store/useVisual'
-import { collectionProps, collectionStyles } from '../../utils/visual.filter'
+import {
+  collectionProps,
+  collectionStyles,
+  VISUAL_OVERLAY_KEYS,
+} from '../../utils/visual.filter'
 import { useBlocks } from '../../hooks/useBlocks'
 import { cloneDeep } from 'lodash'
 
@@ -104,9 +113,15 @@ const onEnd = () => {
   visualStore.clearMoveBlock()
 }
 
+const isFlexDisabled = (block: VisualBlockData) => {
+  if (block.key !== 'VisualFlex') return props.disabled
+  if (!visualStore.moveBlock) return props.disabled
+  return VISUAL_OVERLAY_KEYS.includes(visualStore.moveBlock.key)
+}
+
 const checkedList = ['VisualObject', 'VisualObjectArray']
 const isDisabled = (block: VisualBlockData): boolean => {
-  if (!checkedList.includes(block.key)) return props.disabled
+  if (!checkedList.includes(block.key)) return isFlexDisabled(block)
   if (!visualStore.moveBlock) return props.disabled
   const souceDataType = visualStore.moveBlock.souceDataType
   return props.disabled || souceDataType !== block.key
@@ -129,6 +144,9 @@ const handleClick = (block: VisualBlockData, index: number) => {
 const isCurrentBlock = (block: VisualBlockData) => {
   return block._vid === visualStore.vid
 }
+const isOverlayBlock = (block: VisualBlockData) => {
+  return VISUAL_OVERLAY_KEYS.includes(block.key)
+}
 
 const bindStyle = computed(() => ({
   ...collectionStyles(parentKey.value, parentStyles.value),
@@ -138,6 +156,9 @@ const bindStyle = computed(() => ({
 
 <style scoped lang="scss">
 .visual-group {
+  // 舞台页锚定容器：悬浮/浮层效果（absolute）锚定至此，而非浏览器视口
+  position: relative;
+
   &.is-empty {
     position: relative;
     min-height: 60px;
@@ -150,7 +171,6 @@ const bindStyle = computed(() => ({
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100%;
       font-size: 12px;
       color: var(--el-text-color-secondary);
       background-color: var(--el-color-info-light-9);

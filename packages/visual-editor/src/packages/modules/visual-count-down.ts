@@ -3,6 +3,9 @@ import type { VisualCountDownProps } from '@visual/ui/components/visual-count-do
 import {
   createColorInputControl,
   createDatePickerControl,
+  createImageInputControl,
+  createNormalSelectControl,
+  createPxInputControl,
   createSwitchControl,
   createTextInputControl,
 } from '../../utils/visual.control'
@@ -23,6 +26,18 @@ const visualCountDown: VisualEditorComponent<VisualCountDownProps> = {
     numColor: createColorInputControl({ label: '数字颜色', defaultValue: '#ffffff' }),
     colonColor: createColorInputControl({ label: '分隔符颜色', defaultValue: '#9CA3AF' }),
     showDays: createSwitchControl({ label: '显示天数', defaultValue: false }),
+    image: createImageInputControl({ label: '左侧图片', defaultValue: '' }),
+    imageWidth: createPxInputControl({ label: '图片宽度', defaultValue: '32px' }),
+    variant: createNormalSelectControl({
+      label: '样式变体',
+      defaultValue: 'default',
+      options: [
+        { label: '默认渐变块', value: 'default' },
+        { label: '纯色块', value: 'flat' },
+        { label: '描边块', value: 'outline' },
+        { label: '简约数字', value: 'plain' },
+      ],
+    }),
   },
 }
 

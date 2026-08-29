@@ -1,17 +1,41 @@
 <svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <!-- 海报外框 -->
   <rect x="250" y="250" width="524" height="650" rx="48" fill="none" stroke="#e2e7fb" stroke-width="16"/>
+  <!-- 渐变底 -->
   <rect x="250" y="250" width="524" height="650" rx="48" fill="url(#g)"/>
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#35407d"/>
       <stop offset="1" stop-color="#7b8cff"/>
     </linearGradient>
+    <!-- 底部渐变压暗（上透下暗，与卡片同形避免露出直角） -->
+    <linearGradient id="bs" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.45" stop-color="rgba(15,18,40,0)"/>
+      <stop offset="0.62" stop-color="rgba(15,18,40,0.4)"/>
+      <stop offset="1" stop-color="rgba(15,18,40,0.6)"/>
+    </linearGradient>
   </defs>
-  <rect x="320" y="310" width="384" height="30" rx="15" fill="#ffffff"/>
-  <rect x="360" y="370" width="304" height="22" rx="11" fill="rgba(255,255,255,0.7)"/>
-  <rect x="420" y="440" width="184" height="184" rx="12" fill="#ffffff"/>
-  <rect x="436" y="456" width="152" height="152" rx="8" fill="#2b2f3a"/>
-  <rect x="360" y="660" width="304" height="20" rx="10" fill="rgba(255,255,255,0.7)"/>
-  <rect x="390" y="716" width="244" height="64" rx="32" fill="#ffffff"/>
-  <text x="512" y="757" font-size="36" font-family="Arial, sans-serif" font-weight="bold" fill="#4f6ef7" text-anchor="middle">分享给好友</text>
+  <!-- 压暗遮罩（与卡片同形，文案/二维码绘制在其上） -->
+  <rect x="250" y="250" width="524" height="650" rx="48" fill="url(#bs)"/>
+  <!-- 标题条 -->
+  <rect x="316" y="292" width="392" height="34" rx="17" fill="#ffffff"/>
+  <!-- 副标题条 -->
+  <rect x="376" y="350" width="272" height="22" rx="11" fill="rgba(255,255,255,0.7)"/>
+  <!-- 二维码白底（带内边距） -->
+  <rect x="408" y="400" width="208" height="208" rx="24" fill="#ffffff"/>
+  <!-- 二维码暗部 -->
+  <rect x="426" y="418" width="172" height="172" rx="12" fill="#2b2f3a"/>
+  <!-- 三个定位角 -->
+  <rect x="440" y="432" width="30" height="30" rx="6" fill="#ffffff"/>
+  <rect x="554" y="432" width="30" height="30" rx="6" fill="#ffffff"/>
+  <rect x="440" y="546" width="30" height="30" rx="6" fill="#ffffff"/>
+  <!-- 二维码散点 -->
+  <rect x="508" y="472" width="14" height="14" rx="3" fill="#ffffff"/>
+  <rect x="540" y="508" width="14" height="14" rx="3" fill="#ffffff"/>
+  <rect x="490" y="514" width="10" height="10" rx="2" fill="#ffffff"/>
+  <!-- 底部说明文字 -->
+  <text x="512" y="700" font-size="30" font-family="Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">长按识别二维码</text>
+  <!-- 底部按钮 -->
+  <rect x="390" y="752" width="244" height="68" rx="34" fill="#ffffff"/>
+  <text x="512" y="796" font-size="36" font-family="Arial, sans-serif" font-weight="bold" fill="#4f6ef7" text-anchor="middle">分享给好友</text>
 </svg>

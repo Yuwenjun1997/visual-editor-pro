@@ -1,0 +1,382 @@
+{
+  "id": "home",
+  "name": "首页布局",
+  "description": "搜索、轮播、宫格导航、限时秒杀、商品列表",
+  "icon": "bi:house",
+  "accent": "linear-gradient(135deg, #2563EB 0%, #6D28D9 100%)",
+  "theme": {
+    "title": "首页模板",
+    "globalStyle": { "backgroundColor": "#f2f3f5" }
+  },
+  "blocks": [
+    {
+      "key": "VisualSearch",
+      "label": "搜索框",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSearch",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "paddingTop": "10px",
+        "paddingRight": "10px",
+        "paddingBottom": "10px",
+        "paddingLeft": "10px"
+      },
+      "props": {
+        "placeholder": "搜索商品 / 店铺",
+        "buttonText": "搜索",
+        "buttonColor": "#2563EB",
+        "radius": "999px"
+      }
+    },
+    {
+      "key": "VisualNoticeBar",
+      "label": "公告栏",
+      "moduleName": "commerceWidgets",
+      "componentName": "VisualNoticeBar",
+      "styles": { "opacity": 1, "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "text": "618 年中大促开启 · 全场满 300 减 60，新人首单再减 20！",
+        "speed": "14",
+        "bgColor": "linear-gradient(90deg, #2563EB 0%, #6D28D9 100%)",
+        "textColor": "#FFFFFF",
+        "radius": "999px"
+      }
+    },
+    {
+      "key": "VisualCarousel",
+      "label": "轮播图",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualCarousel",
+      "souceDataType": "VisualObjectArray",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "12px", "paddingRight": "12px" },
+      "props": {
+        "autoplay": true,
+        "circular": true,
+        "indicatorDots": true,
+        "indicatorDotsType": "dot",
+        "height": "168px",
+        "radius": "12px",
+        "gap": "8px"
+      },
+      "listData": [
+        { "image": "/image/preview.svg", "title": "618 狂欢节 · 全场低至 5 折起" },
+        { "image": "/image/coding.svg", "title": "新品首发 · 无线耳机首发立减 50" },
+        { "image": "/image/cover.svg", "title": "会员日 · 全场积分双倍膨胀" }
+      ]
+    },
+    {
+      "key": "VisualGrid",
+      "label": "宫格",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualGrid",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "8px",
+        "paddingTop": "8px",
+        "paddingRight": "8px",
+        "paddingBottom": "8px",
+        "paddingLeft": "8px"
+      },
+      "props": {
+        "columnNum": 4,
+        "direction": "column",
+        "fontSize": "12px",
+        "iconSize": "20px",
+        "iconColor": "#6D28D9",
+        "fontColor": "#64748B"
+      },
+      "listData": [
+        { "icon": "bi:house", "text": "首页" },
+        { "icon": "bi:grid-3x3-gap", "text": "分类" },
+        { "icon": "bi:cart", "text": "购物车" },
+        { "icon": "bi:person", "text": "我的" }
+      ]
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "限时抢购",
+        "description": "手慢无 · 先到先得",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualFlashSale",
+      "label": "限时秒杀",
+      "moduleName": "commerceWidgets",
+      "componentName": "VisualFlashSale",
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "限时秒杀",
+        "endTime": "2099-12-31 23:59:59",
+        "showDays": false,
+        "price": 79,
+        "originPrice": 129,
+        "soldNum": 682,
+        "totalNum": 1000,
+        "buttonText": "立即抢购",
+        "currency": "¥",
+        "bgColor": "#4F46E5"
+      }
+    },
+    {
+      "key": "VisualCountDown",
+      "label": "倒计时",
+      "moduleName": "commerceWidgets",
+      "componentName": "VisualCountDown",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "距结束仅剩",
+        "endTime": "2099-12-31 23:59:59",
+        "showDays": true,
+        "bgColor": "#4F46E5",
+        "numColor": "#FFFFFF",
+        "colonColor": "#B8C4D9"
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "人气好物",
+        "description": "大家都在买 · 每日上新",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualProductCardList",
+      "label": "商品卡片列表",
+      "moduleName": "commerceWidgets",
+      "componentName": "VisualProductCardList",
+      "souceDataType": "VisualObjectArray",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "12px", "paddingRight": "12px", "paddingBottom": "8px" },
+      "props": {
+        "layout": "col-2",
+        "gutter": "base",
+        "showTag": true,
+        "showBuy": true,
+        "buttonText": "立即抢购",
+        "currency": "¥",
+        "round": "8px"
+      },
+      "listData": [
+        { "cover": "/image/cover.svg", "title": "无线蓝牙降噪耳机 超长续航 30 小时", "price": 199, "originPrice": 299, "tag": "热卖" },
+        { "cover": "/image/preview.svg", "title": "智能恒温保温杯 55℃ 恒温 喝水更规律", "price": 129, "originPrice": 169, "tag": "新品" },
+        { "cover": "/image/coding.svg", "title": "便携三脚支架 桌搭摄影两用 铝合金", "price": 59.9, "originPrice": 89, "tag": "爆款" },
+        { "cover": "/image/block.svg", "title": "桌面护眼氛围灯 无频闪 无极调光", "price": 89, "originPrice": 129, "tag": "推荐" }
+      ]
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "为你推荐",
+        "description": "猜你喜欢",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualTabs",
+      "label": "页签切换",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualTabs",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "8px",
+        "paddingRight": "12px",
+        "paddingBottom": "8px",
+        "paddingLeft": "12px"
+      },
+      "props": {
+        "variant": "line",
+        "activeColor": "#2563EB",
+        "textColor": "#64748B"
+      },
+      "listData": [
+        { "label": "热销" },
+        { "label": "新品" },
+        { "label": "满减" }
+      ],
+      "slots": {
+        "tab-0": {
+          "name": "热销",
+          "blocks": [
+            {
+              "key": "VisualProductCardList",
+              "label": "商品卡片列表",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualProductCardList",
+              "souceDataType": "VisualObjectArray",
+              "styles": { "opacity": 1 },
+              "props": {
+                "layout": "col-2",
+                "gutter": "base",
+                "showTag": true,
+                "showBuy": true,
+                "buttonText": "立即抢购",
+                "currency": "¥",
+                "round": "8px"
+              },
+              "listData": [
+                { "cover": "/image/coding.svg", "title": "机械键盘 87 键 热插拔 Gasket", "price": 299, "originPrice": 399, "tag": "热卖" },
+                { "cover": "/image/cover.svg", "title": "运动吨吨杯 大容量 2.2L 刻度", "price": 49.9, "originPrice": 79, "tag": "热卖" }
+              ]
+            }
+          ]
+        },
+        "tab-1": {
+          "name": "新品",
+          "blocks": [
+            {
+              "key": "VisualProductCardList",
+              "label": "商品卡片列表",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualProductCardList",
+              "souceDataType": "VisualObjectArray",
+              "styles": { "opacity": 1 },
+              "props": {
+                "layout": "col-2",
+                "gutter": "base",
+                "showTag": true,
+                "showBuy": true,
+                "buttonText": "立即抢购",
+                "currency": "¥",
+                "round": "8px"
+              },
+              "listData": [
+                { "cover": "/image/preview.svg", "title": "智能手环 血氧监测 14 天续航", "price": 159, "originPrice": 239, "tag": "新品" },
+                { "cover": "/image/block.svg", "title": "磁吸无线充电宝 10000mAh", "price": 99, "originPrice": 149, "tag": "新品" }
+              ]
+            }
+          ]
+        },
+        "tab-2": {
+          "name": "满减",
+          "blocks": [
+            {
+              "key": "VisualProductCardList",
+              "label": "商品卡片列表",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualProductCardList",
+              "souceDataType": "VisualObjectArray",
+              "styles": { "opacity": 1 },
+              "props": {
+                "layout": "col-2",
+                "gutter": "base",
+                "showTag": true,
+                "showBuy": true,
+                "buttonText": "立即抢购",
+                "currency": "¥",
+                "round": "8px"
+              },
+              "listData": [
+                { "cover": "/image/cover.svg", "title": "立式无线充电器 三合一 快充", "price": 79, "originPrice": 109, "tag": "满减" },
+                { "cover": "/image/coding.svg", "title": "编织快充数据线套装 3 条装", "price": 39.9, "originPrice": 59, "tag": "满减" }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "backgroundImage": "linear-gradient(135deg, #2563EB 0%, #6D28D9 100%)",
+        "backgroundSize": "cover",
+        "backgroundPosition": "center",
+        "borderRadius": "14px",
+        "marginTop": "12px",
+        "paddingTop": "14px",
+        "paddingRight": "14px",
+        "paddingBottom": "14px",
+        "paddingLeft": "14px"
+      },
+      "props": {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "alignItems": "center",
+        "gap": "12px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "新人专享礼包 · 下单立减 20",
+                "color": "#FFFFFF",
+                "isBold": true
+              }
+            },
+            {
+              "key": "VisualButton",
+              "label": "按钮",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualButton",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "去逛逛",
+                "variant": "primary",
+                "size": "default",
+                "bgColor": "#FFFFFF",
+                "textColor": "#2563EB",
+                "radius": "999px"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualFloatAction",
+      "label": "悬浮按钮",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualFloatAction",
+      "styles": { "opacity": 1 },
+      "props": {
+        "mode": "backTop",
+        "bgColor": "#2563EB",
+        "textColor": "#FFFFFF",
+        "position": "right",
+        "bottom": "120px"
+      }
+    }
+  ]
+}

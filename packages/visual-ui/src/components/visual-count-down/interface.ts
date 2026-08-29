@@ -6,4 +6,7 @@ export interface VisualCountDownProps {
   numColor?: string
   colonColor?: string
   showDays?: boolean
+  variant?: string
+  image?: string
+  imageWidth?: string
 }

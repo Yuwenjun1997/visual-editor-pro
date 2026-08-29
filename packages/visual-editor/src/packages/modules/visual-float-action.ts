@@ -5,6 +5,7 @@ import {
   createIconInputControl,
   createNormalSelectControl,
   createNumberInputControl,
+  createPxInputControl,
   createTextInputControl,
 } from '../../utils/visual.control'
 
@@ -23,7 +24,7 @@ const visualFloatAction: VisualEditorComponent<VisualFloatActionProps> = {
         { label: '分享', value: 'share' },
         { label: '跳转链接', value: 'link' },
       ],
-      defaultValue: 'backTop',
+      defaultValue: 'customerService',
     }),
     icon: createIconInputControl({ label: '图标', tips: '留空按功能显示默认图标' }),
     bgColor: createColorInputControl({ label: '背景颜色', defaultValue: '#2563EB' }),
@@ -36,8 +37,7 @@ const visualFloatAction: VisualEditorComponent<VisualFloatActionProps> = {
       ],
       defaultValue: 'right',
     }),
-    bottom: createTextInputControl({
-      label: '距底部',
+    bottom: createPxInputControl({label: '距底部',
       tips: '如 96px',
       defaultValue: '96px',
     }),

@@ -1,17 +1,24 @@
 <svg viewBox="0 0 1024 1024" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-  <rect x="180" y="240" width="664" height="664" rx="64" fill="url(#p)"/>
+  <!-- 页面底色 -->
+  <rect x="120" y="120" width="784" height="784" rx="64" fill="#eef2ff"/>
+  <!-- 全屏遮罩 scrim -->
+  <rect x="120" y="120" width="784" height="784" rx="64" fill="rgba(15,18,40,0.45)"/>
+  <!-- 弹窗卡片（居中，渐变） -->
+  <rect x="192" y="280" width="640" height="464" rx="40" fill="url(#p)"/>
   <defs>
     <linearGradient id="p" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#35407d"/>
       <stop offset="1" stop-color="#7b8cff"/>
     </linearGradient>
   </defs>
-  <rect x="310" y="330" width="404" height="36" rx="18" fill="#ffffff"/>
-  <rect x="350" y="400" width="324" height="24" rx="12" fill="rgba(255,255,255,0.7)"/>
-  <rect x="420" y="470" width="184" height="184" rx="16" fill="#ffffff"/>
-  <rect x="440" y="490" width="144" height="144" rx="8" fill="#2b2f3a"/>
-  <rect x="360" y="694" width="220" height="56" rx="28" fill="#ffffff"/>
-  <text x="470" y="730" font-size="32" font-family="Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">去领取</text>
-  <circle cx="788" cy="288" r="40" fill="rgba(255,255,255,0.92)"/>
-  <path d="M772 288h32M788 272v32" stroke="#4f6ef7" stroke-width="10" stroke-linecap="round"/>
+  <!-- 标题条 -->
+  <rect x="336" y="344" width="352" height="40" rx="20" fill="#ffffff"/>
+  <!-- 副标题条 -->
+  <rect x="394" y="412" width="236" height="24" rx="12" fill="rgba(255,255,255,0.7)"/>
+  <!-- 行动按钮（白色胶囊 + 蓝字） -->
+  <rect x="372" y="608" width="280" height="80" rx="40" fill="#ffffff"/>
+  <text x="512" y="661" font-size="40" font-family="Arial, sans-serif" font-weight="bold" fill="#4f6ef7" text-anchor="middle">立即领取</text>
+  <!-- 关闭按钮（卡片右上角，白色圆 + X） -->
+  <circle cx="770" cy="322" r="38" fill="rgba(255,255,255,0.92)"/>
+  <path d="M754 306L786 338M786 306L754 338" stroke="#4f6ef7" stroke-width="14" stroke-linecap="round"/>
 </svg>

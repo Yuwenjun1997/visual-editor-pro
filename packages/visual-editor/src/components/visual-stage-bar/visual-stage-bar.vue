@@ -12,7 +12,7 @@
         </el-button>
       </el-tooltip>
     </el-button-group>
-    <!-- <el-radio-group v-model="visualStore.device" size="small">
+    <el-radio-group v-model="visualStore.device" size="small">
       <el-tooltip content="移动端尺寸">
         <el-radio-button label="H5" value="h5">
           <Icon icon="ion:phone-portrait-sharp" />
@@ -24,11 +24,11 @@
         </el-radio-button>
       </el-tooltip>
       <el-tooltip content="电脑端尺寸">
-        <el-radio-button label="Pad" value="pc">
+        <el-radio-button label="PC" value="pc">
           <Icon icon="ion:tv-outline" />
         </el-radio-button>
       </el-tooltip>
-    </el-radio-group> -->
+    </el-radio-group>
     <el-radio-group v-model="visualStore.activePanel" size="small">
       <el-tooltip content="可视化设计">
         <el-radio-button label="design" value="design">
@@ -88,7 +88,10 @@ const { pageConfig } = usePageConfig()
 const handleRun = () => {
   const data = { ...unref(pageConfig), blocks: unref(blockList) }
   sessionStorage.setItem('preview-data', JSON.stringify(data))
-  const { href } = router.resolve({ name: 'preview' })
+  const { href } = router.resolve({
+    name: 'preview',
+    query: { device: visualStore.device },
+  })
   window.open(href, '_blank')
 }
 </script>

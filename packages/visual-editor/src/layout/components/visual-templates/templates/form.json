@@ -1,0 +1,308 @@
+{
+  "id": "form",
+  "name": "表单收集",
+  "description": "在线留言、到店信息、地图导航、在线客服",
+  "icon": "bi:card-checklist",
+  "accent": "linear-gradient(135deg, #6D28D9 0%, #4F46E5 100%)",
+  "theme": {
+    "title": "表单收集模板",
+    "globalStyle": { "backgroundColor": "#f2f3f5" }
+  },
+  "blocks": [
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "backgroundImage": "linear-gradient(135deg, #2563EB 0%, #6D28D9 100%)",
+        "backgroundSize": "cover",
+        "backgroundPosition": "center",
+        "borderRadius": "16px",
+        "marginTop": "8px",
+        "paddingTop": "24px",
+        "paddingRight": "24px",
+        "paddingBottom": "24px",
+        "paddingLeft": "24px"
+      },
+      "props": {
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "alignItems": "center",
+        "gap": "6px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "联系我们",
+                "color": "#FFFFFF",
+                "isBold": true,
+                "fontSize": "lg",
+                "textAlign": "center"
+              }
+            },
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "留下诉求，我们将在 24 小时内回访",
+                "color": "rgba(255,255,255,0.8)",
+                "fontSize": "sm",
+                "textAlign": "center"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "在线留言",
+        "description": "请如实填写，以便我们快速响应",
+        "icon": "bi:clipboard-check",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualForm",
+      "label": "表单容器",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualForm",
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px", "paddingBottom": "8px" },
+      "props": {
+        "submitText": "提交留言",
+        "submitButtonColor": "#2563EB",
+        "radius": "16px"
+      },
+      "listData": [
+        { "label": "姓名", "fieldType": "text", "placeholder": "请输入您的姓名", "required": true, "maxLength": 20 },
+        { "label": "手机号", "fieldType": "phone", "placeholder": "请输入手机号", "required": true, "maxLength": 11 },
+        { "label": "留言", "fieldType": "textarea", "placeholder": "简单描述您想咨询的内容", "required": false, "maxLength": 200 }
+      ]
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "到店信息",
+        "description": "导航直达，欢迎莅临",
+        "icon": "bi:geo-alt",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#6D28D9",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualMap",
+      "label": "地图",
+      "moduleName": "mediaWidgets",
+      "componentName": "VisualMap",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px",
+        "paddingLeft": "12px"
+      },
+      "props": {
+        "longitude": 120.096,
+        "latitude": 30.124,
+        "title": "云栖小镇园区店",
+        "titleFontSize": 14,
+        "scale": 14,
+        "width": "100%",
+        "height": "240px",
+        "round": "md",
+        "align": "center",
+        "autoLocation": false
+      },
+      "listData": [
+        {
+          "longitude": 120.096,
+          "latitude": 30.124,
+          "title": "云栖小镇园区店"
+        }
+      ]
+    },
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "8px",
+        "paddingTop": "14px",
+        "paddingRight": "14px",
+        "paddingBottom": "14px",
+        "paddingLeft": "14px"
+      },
+      "props": {
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "alignItems": "flex-start",
+        "gap": "4px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "到店信息",
+                "color": "#1E293B",
+                "isBold": true
+              }
+            },
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "地址：杭州市西湖区云栖小镇 2026 号",
+                "color": "#64748B",
+                "fontSize": "sm"
+              }
+            },
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "营业时间：09:00 - 21:00",
+                "color": "#64748B",
+                "fontSize": "sm"
+              }
+            },
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "客服热线：400-888-2026",
+                "color": "#64748B",
+                "fontSize": "sm"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "alignItems": "center",
+        "gap": "12px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "想直接电话沟通？",
+                "color": "#1E293B"
+              }
+            },
+            {
+              "key": "VisualButton",
+              "label": "按钮",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualButton",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "电话咨询",
+                "variant": "outline",
+                "size": "default",
+                "radius": "999px"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualCustomerService",
+      "label": "在线咨询",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualCustomerService",
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px", "paddingBottom": "16px" },
+      "props": {
+        "type": "wechat",
+        "text": "添加微信在线咨询",
+        "iconVisible": true,
+        "bgColor": "#2563EB",
+        "textColor": "#FFFFFF",
+        "radius": "999px"
+      }
+    },
+    {
+      "key": "VisualFloatAction",
+      "label": "悬浮按钮",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualFloatAction",
+      "styles": { "opacity": 1 },
+      "props": {
+        "mode": "customerService",
+        "phone": "4008882026",
+        "bgColor": "#2563EB",
+        "textColor": "#FFFFFF",
+        "position": "right",
+        "bottom": "120px"
+      }
+    }
+  ]
+}

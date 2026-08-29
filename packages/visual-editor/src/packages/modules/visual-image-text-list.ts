@@ -48,9 +48,6 @@ const VisualImageTextList: VisualEditorComponent<VisualImageTextListProps> = {
   label: '图文列表',
   previewImage: '/componets/visual-image-text-list.svg',
   souceDataType: 'VisualObjectArray',
-  styles: {
-    backgroundColor: '#f9f9f9',
-  },
   props: {
     coverInRight: createSwitchControl({
       label: '封面居右',
@@ -72,7 +69,7 @@ const VisualImageTextList: VisualEditorComponent<VisualImageTextListProps> = {
         { label: '默认', value: 'base' },
         { label: '较大', value: 'lg' },
       ],
-      defaultValue: 'base',
+      defaultValue: 'md',
     }),
     round: createNormalSelectControl({
       label: '圆角',
@@ -84,7 +81,7 @@ const VisualImageTextList: VisualEditorComponent<VisualImageTextListProps> = {
         { label: '较大', value: 'lg' },
       ],
     }),
-    },
+  },
   listData: {
     label: '图文列表',
     data: [createData(), createData()],

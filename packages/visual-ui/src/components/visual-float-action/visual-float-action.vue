@@ -1,22 +1,30 @@
 <template>
-  <teleport to="body">
+  <teleport-box :is-design="isDesign">
     <transition name="visual-float">
       <a
         v-if="visible"
         class="visual-float-action"
-        :class="'visual-float-action--' + (position || 'right')"
+        :class="[
+          'visual-float-action--' + (position || 'right'),
+          { 'visual-float-action--design': isDesign },
+        ]"
         :style="actionStyle"
         :href="href"
         :aria-label="mode"
         @click="handleClick"
       >
-        <visual-icon :icon="icon || defaultIcon" :color="textColor" size="22px" />
+        <visual-icon
+          :icon="icon || defaultIcon"
+          :color="textColor"
+          size="22px"
+        />
       </a>
     </transition>
-  </teleport>
+  </teleport-box>
 </template>
 
 <script setup lang="ts">
+import TeleportBox from '../../deps/teleport-box/index.vue'
 import type { CSSProperties } from 'vue'
 import VisualIcon from '../visual-icon/visual-icon.vue'
 import { toast } from '../../utils/toast'
@@ -24,13 +32,16 @@ import type { VisualFloatActionProps } from './interface'
 
 interface Props {
   props: VisualFloatActionProps
+  isDesign?: boolean
 }
 
 defineOptions({
   name: 'VisualFloatAction',
 })
 
-const _props = defineProps<Props>()
+const _props = withDefaults(defineProps<Props>(), { isDesign: false })
+
+const isDesign = computed(() => _props.isDesign)
 
 const mode = computed(() => _props.props.mode || 'backTop')
 const position = computed(() => _props.props.position || 'right')
@@ -47,15 +58,17 @@ const defaultIcon = computed(() => {
   return map[mode.value] || 'bi:arrow-up'
 })
 
-const visible = ref(mode.value !== 'backTop')
+const visibleRef = ref(mode.value !== 'backTop')
+const visible = computed(() => isDesign.value || visibleRef.value)
 
 const syncScrollVisible = () => {
   if (mode.value !== 'backTop') return
   const threshold = Number(_props.props.showBackTopAfter) || 200
-  visible.value = window.scrollY > threshold
+  visibleRef.value = window.scrollY > threshold
 }
 
 onMounted(() => {
+  if (isDesign.value) return
   if (mode.value === 'backTop') {
     window.addEventListener('scroll', syncScrollVisible)
     syncScrollVisible()
@@ -80,13 +93,16 @@ const href = computed(() => {
 })
 
 const handleClick = (event: MouseEvent) => {
+  if (isDesign.value) return
   if (mode.value === 'backTop') {
     event.preventDefault()
     window.scrollTo({ top: 0, behavior: 'smooth' })
   } else if (mode.value === 'share') {
     event.preventDefault()
     if (navigator.share) {
-      navigator.share({ title: document.title, url: window.location.href }).catch(() => {})
+      navigator
+        .share({ title: document.title, url: window.location.href })
+        .catch(() => {})
     } else {
       toast('分享功能暂未开启')
     }
@@ -125,6 +141,11 @@ const actionStyle = computed<CSSProperties>(() => ({
   &--left {
     left: 16px;
   }
+}
+
+// 设计态：锚定舞台页容器（浮层块 .visual-block.is-overlay 为 static），悬浮于舞台相应角落
+.visual-float-action--design {
+  pointer-events: none;
 }
 
 .visual-float-enter-active,

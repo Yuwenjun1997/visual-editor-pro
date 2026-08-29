@@ -49,9 +49,6 @@ const VisualImageTextCard: VisualEditorComponent<VisualImageTextCardProps> = {
   label: '图文卡片',
   previewImage: '/componets/visual-image-text-card.svg',
   souceDataType: 'VisualObjectArray',
-  styles: {
-    backgroundColor: '#f9f9f9',
-  },
   props: {
     layout: createNormalSelectControl({
       label: '布局方式',
@@ -61,6 +58,17 @@ const VisualImageTextCard: VisualEditorComponent<VisualImageTextCardProps> = {
         { label: '左右滑动', value: 'scroll-x' },
       ],
       defaultValue: 'col-1',
+    }),
+    cardWidth: createNormalSelectControl({
+      label: '卡片宽度',
+      options: [
+        { label: '200px', value: '200px' },
+        { label: '240px', value: '240px' },
+        { label: '280px', value: '280px' },
+        { label: '320px', value: '320px' },
+        { label: '360px', value: '360px' },
+      ],
+      defaultValue: '320px',
     }),
     cardStyle: createNormalSelectControl({
       label: '卡片风格',
@@ -80,7 +88,7 @@ const VisualImageTextCard: VisualEditorComponent<VisualImageTextCardProps> = {
         { label: '默认', value: 'base' },
         { label: '较大', value: 'lg' },
       ],
-      defaultValue: 'base',
+      defaultValue: 'md',
     }),
     round: createNormalSelectControl({
       label: '圆角',

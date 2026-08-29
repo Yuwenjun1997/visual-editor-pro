@@ -1,0 +1,365 @@
+{
+  "id": "content",
+  "name": "内容展示",
+  "description": "资讯图文、深度专题、富文本正文、时间轴、读者评价",
+  "icon": "bi:newspaper",
+  "accent": "linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%)",
+  "theme": {
+    "title": "内容展示模板",
+    "globalStyle": { "backgroundColor": "#f2f3f5" }
+  },
+  "blocks": [
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "paddingTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "资讯动态",
+        "description": "最新趋势与深度内容",
+        "icon": "bi:newspaper",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#2563EB",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualImageTextList",
+      "label": "图文列表",
+      "moduleName": "imageTextWidgets",
+      "componentName": "VisualImageTextList",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px",
+        "paddingLeft": "12px"
+      },
+      "props": {
+        "showAuthor": true,
+        "showTime": true,
+        "gutter": "base",
+        "round": "sm"
+      },
+      "listData": [
+        {
+          "cover": "/image/preview.svg",
+          "title": "从 0 到 1 搭建低代码平台的设计思考",
+          "authorName": "前端漫谈",
+          "authorAvatar": "/image/avatar.svg",
+          "publishTime": "08-26"
+        },
+        {
+          "cover": "/image/coding.svg",
+          "title": "可视化搭建的拖拽交互体验优化实践",
+          "authorName": "设计周刊",
+          "authorAvatar": "/image/avatar.svg",
+          "publishTime": "08-18"
+        },
+        {
+          "cover": "/image/cover.svg",
+          "title": "AIGC 时代的内容生产工作流拆解",
+          "authorName": "运营笔记",
+          "authorAvatar": "/image/avatar.svg",
+          "publishTime": "08-12"
+        },
+        {
+          "cover": "/image/block.svg",
+          "title": "移动端布局适配与降级策略详解",
+          "authorName": "架构视野",
+          "authorAvatar": "/image/avatar.svg",
+          "publishTime": "08-02"
+        }
+      ]
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "深度专题",
+        "description": "值得花时间精读",
+        "icon": "bi:journal-bookmark",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#2563EB",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualImageTextCard",
+      "label": "图文卡片",
+      "moduleName": "imageTextWidgets",
+      "componentName": "VisualImageTextCard",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px",
+        "paddingLeft": "12px"
+      },
+      "props": {
+        "layout": "col-2",
+        "cardStyle": "partysu",
+        "coverHeight": "120px",
+        "gutter": "base",
+        "round": "md",
+        "showAuthor": true,
+        "showTime": true
+      },
+      "listData": [
+        {
+          "cover": "/image/block.svg",
+          "title": "AI 时代的产品设计：从辅助到融合",
+          "authorName": "行业观察",
+          "authorAvatar": "/image/avatar.svg",
+          "publishTime": "08-09"
+        },
+        {
+          "cover": "/image/coding.svg",
+          "title": "低代码引擎的渲染器是如何工作的",
+          "authorName": "研发前线",
+          "authorAvatar": "/image/avatar.svg",
+          "publishTime": "08-05"
+        },
+        {
+          "cover": "/image/cover.svg",
+          "title": "内容运营方法论：持续产出好内容",
+          "authorName": "运营笔记",
+          "authorAvatar": "/image/avatar.svg",
+          "publishTime": "07-30"
+        },
+        {
+          "cover": "/image/preview.svg",
+          "title": "移动端滚动性能优化实战手记",
+          "authorName": "性能小组",
+          "authorAvatar": "/image/avatar.svg",
+          "publishTime": "07-25"
+        }
+      ]
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "编辑精选",
+        "description": "本期深度长文",
+        "icon": "bi:file-earmark-richtext",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#2563EB",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualRichText",
+      "label": "富文本",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualRichText",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "16px",
+        "paddingRight": "16px",
+        "paddingBottom": "16px",
+        "paddingLeft": "16px"
+      },
+      "props": {
+        "html": "<h2>为什么可视化搭建正在成为业务标配</h2><p>过去一年，我们观察到越来越多的业务团队开始拥抱<span style='color:#2563EB'>可视化页面搭建</span>。它把「排期 → 提需求 → 等开发 → 联调上线」的漫长链路，压缩成「<b>拖拽 → 配置 → 预览 → 发布</b>」的分钟级闭环。</p><p>低代码不是要替代工程师，而是把高频、同质化的页面需求自动化，让开发聚焦在真正有挑战的领域上。</p><ul><li>投放与运营团队：秒级产出落地页，AB 测试不再卡排期</li><li>产品与设计：把交互原型直接变成可上线页面</li><li>中后台：表单、列表、详情页按模板批量生成</li></ul><p>我们的目标很简单：<b>让每一次活动落地，都像搭积木一样简单。</b></p>"
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "产品里程碑",
+        "description": "一路向前",
+        "icon": "bi:signpost-split",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#2563EB",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualTimeline",
+      "label": "时间轴",
+      "moduleName": "imageTextWidgets",
+      "componentName": "VisualTimeline",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "16px",
+        "paddingRight": "16px",
+        "paddingBottom": "16px",
+        "paddingLeft": "16px"
+      },
+      "props": {
+        "showTime": true
+      },
+      "listData": [
+        { "title": "产品 3.0 全新升级", "desc": "重构视觉体系与交互体验，发布组件市场", "time": "2026-08-20", "status": "done" },
+        { "title": "多端适配上线", "desc": "H5 与小程序同步支持，一套模板多处投放", "time": "2026-08-12", "status": "done" },
+        { "title": "数据看板发布", "desc": "打通多平台数据源，转化效果一屏掌握", "time": "2026-08-03", "status": "doing" },
+        { "title": "订阅号内容改版", "desc": "栏目细分与个性化推荐优化", "time": "2026-07-28", "status": "done" },
+        { "title": "组件生态开放", "desc": "开放自定义组件接入能力，共建开发者社区", "time": "2026-07-15", "status": "todo" }
+      ]
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "读者评价",
+        "description": "来自真实读者的声音",
+        "icon": "bi:chat-square-quote",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#2563EB",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualComment",
+      "label": "评论列表",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualComment",
+      "souceDataType": "VisualObjectArray",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "borderRadius": "12px",
+        "marginTop": "4px",
+        "paddingTop": "12px",
+        "paddingRight": "16px",
+        "paddingBottom": "12px",
+        "paddingLeft": "16px"
+      },
+      "props": {
+        "showTime": true,
+        "showRating": true
+      },
+      "listData": [
+        {
+          "avatar": "/image/avatar.svg",
+          "nickname": "前端小柯",
+          "content": "读完「可视化搭建的拖拽交互优化」获益很大，从性能到手感都讲透了。",
+          "time": "3 天前",
+          "rating": 5
+        },
+        {
+          "avatar": "/image/avatar.svg",
+          "nickname": "产品阿岚",
+          "content": "低代码平台的设计思考那篇，把搭建引擎的取舍讲得清楚，推荐给团队一起看。",
+          "time": "1 周前",
+          "rating": 5
+        },
+        {
+          "avatar": "/image/avatar.svg",
+          "nickname": "运营大麦",
+          "content": "内容杠杆那节很实用，落地页一周从 0 到上线，省了不少排期。",
+          "time": "2 周前",
+          "rating": 4
+        }
+      ]
+    },
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": {
+        "opacity": 1,
+        "backgroundColor": "#ffffff",
+        "backgroundImage": "linear-gradient(135deg, #2563EB 0%, #6D28D9 100%)",
+        "backgroundSize": "cover",
+        "backgroundPosition": "center",
+        "borderRadius": "14px",
+        "marginTop": "12px",
+        "paddingTop": "20px",
+        "paddingRight": "20px",
+        "paddingBottom": "20px",
+        "paddingLeft": "20px"
+      },
+      "props": {
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "alignItems": "center",
+        "gap": "8px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "设计驱动增长，工具创造价值",
+                "color": "#FFFFFF",
+                "isBold": true,
+                "fontSize": "md",
+                "textAlign": "center"
+              }
+            },
+            {
+              "key": "VisualText",
+              "label": "文本",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualText",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "视觉团队 · 2026",
+                "color": "rgba(255,255,255,0.75)",
+                "fontSize": "sm",
+                "textAlign": "center"
+              }
+            },
+            {
+              "key": "VisualButton",
+              "label": "按钮",
+              "moduleName": "basicWidgets",
+              "componentName": "VisualButton",
+              "styles": { "opacity": 1 },
+              "props": {
+                "text": "了解更多",
+                "variant": "primary",
+                "size": "default",
+                "bgColor": "#FFFFFF",
+                "textColor": "#2563EB",
+                "radius": "999px"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

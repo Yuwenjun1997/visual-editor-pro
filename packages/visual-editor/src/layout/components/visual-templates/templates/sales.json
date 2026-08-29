@@ -1,0 +1,227 @@
+{
+  "id": "sales",
+  "name": "电商营销",
+  "description": "公告、秒杀、双券同领、商品瀑布流、分享海报",
+  "icon": "bi:tag",
+  "accent": "linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)",
+  "theme": {
+    "title": "电商营销模板",
+    "globalStyle": { "backgroundColor": "#f2f3f5" }
+  },
+  "blocks": [
+    {
+      "key": "VisualNoticeBar",
+      "label": "公告栏",
+      "moduleName": "commerceWidgets",
+      "componentName": "VisualNoticeBar",
+      "styles": { "opacity": 1, "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "text": "双 11 狂欢盛典 · 跨店满 300 减 60，神券先到先得！",
+        "speed": "14",
+        "bgColor": "linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%)",
+        "textColor": "#FFFFFF",
+        "radius": "999px"
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "今日大促",
+        "description": "热卖爆款直降",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#7C3AED",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualFlashSale",
+      "label": "限时秒杀",
+      "moduleName": "commerceWidgets",
+      "componentName": "VisualFlashSale",
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "限时秒杀",
+        "endTime": "2099-12-31 23:59:59",
+        "showDays": false,
+        "price": 159,
+        "originPrice": 239,
+        "soldNum": 1320,
+        "totalNum": 2000,
+        "buttonText": "立即抢购",
+        "currency": "¥",
+        "bgColor": "#4F46E5"
+      }
+    },
+    {
+      "key": "VisualCountDown",
+      "label": "倒计时",
+      "moduleName": "commerceWidgets",
+      "componentName": "VisualCountDown",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "距结束仅剩",
+        "endTime": "2099-12-31 23:59:59",
+        "showDays": true,
+        "bgColor": "#4F46E5",
+        "numColor": "#FFFFFF",
+        "colonColor": "#B8C4D9"
+      }
+    },
+    {
+      "key": "VisualFlex",
+      "label": "弹性布局",
+      "moduleName": "layoutWidgets",
+      "componentName": "VisualFlex",
+      "styles": {
+        "opacity": 1,
+        "marginTop": "8px",
+        "paddingLeft": "12px",
+        "paddingRight": "12px"
+      },
+      "props": {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "alignItems": "stretch",
+        "gap": "12px"
+      },
+      "slots": {
+        "default": {
+          "name": "内容",
+          "blocks": [
+            {
+              "key": "VisualCoupon",
+              "label": "领券",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualCoupon",
+              "styles": { "opacity": 1 },
+              "props": {
+                "currency": "¥",
+                "amountText": "60",
+                "conditionText": "满 300 元可用",
+                "titleText": "跨店满减券",
+                "btnText": "立即领取",
+                "showBtn": true,
+                "layout": "row",
+                "edge": "notch",
+                "theme": "default",
+                "showBadge": true,
+                "badgeText": "限量"
+              }
+            },
+            {
+              "key": "VisualCoupon",
+              "label": "领券",
+              "moduleName": "commerceWidgets",
+              "componentName": "VisualCoupon",
+              "styles": { "opacity": 1 },
+              "props": {
+                "currency": "¥",
+                "amountText": "30",
+                "conditionText": "满 150 元可用",
+                "titleText": "会员专享券",
+                "btnText": "立即领取",
+                "showBtn": true,
+                "layout": "row",
+                "edge": "plain",
+                "theme": "cool",
+                "showBadge": true,
+                "badgeText": "专享"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "VisualSection",
+      "label": "标题栏",
+      "moduleName": "basicWidgets",
+      "componentName": "VisualSection",
+      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "props": {
+        "title": "为你推荐",
+        "description": "猜你喜欢",
+        "bold": true,
+        "showLine": true,
+        "lineColor": "#7C3AED",
+        "titleSize": "lg"
+      }
+    },
+    {
+      "key": "VisualProductCardList",
+      "label": "商品卡片列表",
+      "moduleName": "commerceWidgets",
+      "componentName": "VisualProductCardList",
+      "souceDataType": "VisualObjectArray",
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "12px", "paddingRight": "12px", "paddingBottom": "8px" },
+      "props": {
+        "layout": "col-2",
+        "gutter": "base",
+        "showTag": true,
+        "showBuy": true,
+        "buttonText": "立即购买",
+        "currency": "¥",
+        "round": "8px"
+      },
+      "listData": [
+        { "cover": "/image/preview.svg", "title": "无线降噪耳机 主动降噪 40dB", "price": 199, "originPrice": 399, "tag": "热卖" },
+        { "cover": "/image/block.svg", "title": "浓香芝士蛋白粉 3kg 桶装", "price": 129, "originPrice": 199, "tag": "爆款" },
+        { "cover": "/image/coding.svg", "title": "蓝牙机械键盘 三模热插拔", "price": 269, "originPrice": 369, "tag": "满减" },
+        { "cover": "/image/cover.svg", "title": "智能恒温杯 55℃ 长效保温", "price": 109, "originPrice": 159, "tag": "热卖" },
+        { "cover": "/image/preview.svg", "title": "声波电动牙刷 5 档清洁", "price": 169, "originPrice": 229, "tag": "新品" },
+        { "cover": "/image/block.svg", "title": "直播补光灯 三色温 可调光", "price": 69, "originPrice": 99, "tag": "特惠" }
+      ]
+    },
+    {
+      "key": "VisualPopup",
+      "label": "弹窗浮层",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualPopup",
+      "styles": { "opacity": 1 },
+      "props": {
+        "mode": "delay",
+        "delaySeconds": 4,
+        "title": "新人礼包",
+        "description": "注册即领 ¥30 通用券 · 先到先得",
+        "buttonText": "立即领取",
+        "showClose": true,
+        "frequency": "session"
+      }
+    },
+    {
+      "key": "VisualPoster",
+      "label": "分享海报",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualPoster",
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "16px", "paddingRight": "16px", "paddingBottom": "16px" },
+      "props": {
+        "title": "邀请好友一起下单",
+        "subtitle": "好友注册再得 ¥30，双向领券",
+        "footerText": "长按识别二维码领取",
+        "qrContent": "https://mall.example.com/invite/2026",
+        "qrSize": 120,
+        "buttonText": "分享给好友",
+        "shareLink": "https://mall.example.com"
+      }
+    },
+    {
+      "key": "VisualFloatAction",
+      "label": "悬浮按钮",
+      "moduleName": "serviceWidgets",
+      "componentName": "VisualFloatAction",
+      "styles": { "opacity": 1 },
+      "props": {
+        "mode": "backTop",
+        "bgColor": "#4F46E5",
+        "textColor": "#FFFFFF",
+        "position": "right",
+        "bottom": "120px"
+      }
+    }
+  ]
+}

@@ -5,10 +5,13 @@
     :show-empty="_noListData"
     :class="_props.class"
   >
-    <div class="visual-product-list__grid" :style="gridStyle">
+    <div class="visual-product-list__inner" :style="innerStyles">
       <visual-product-item
         v-for="(item, index) in _props.listData"
         :key="index"
+        class="visual-product-list__row"
+        :class="_rowClass"
+        :layout="'horizontal'"
         :data="item"
         :show-tag="_props.props.showTag"
         :show-buy="_props.props.showBuy"
@@ -25,7 +28,10 @@ import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import VisualProductItem from '../visual-product-item/visual-product-item.vue'
 import { cssSpacingVar } from '../../utils/styles.utils'
-import type { VisualProductListProps, VisualProductListItem } from './interface'
+import type {
+  VisualProductListItem,
+  VisualProductListProps,
+} from './interface'
 
 interface Props {
   props: VisualProductListProps
@@ -44,23 +50,29 @@ const _props = withDefaults(defineProps<Props>(), {
 
 const _noListData = computed(() => _props.listData.length <= 0)
 
-const columns = computed(() => {
-  const n = Math.round(Number(_props.props.columns) || 2)
-  return Math.min(4, Math.max(1, n))
-})
+const _bindProps = computed<VisualProductListProps>(() => ({
+  ..._props.props,
+}))
 
-const gridStyle = computed<CSSProperties>(() => ({
-  '--v-product-cols': String(columns.value),
-  '--v-product-gutter': cssSpacingVar(_props.props.gutter),
+const _rowClass = computed(() => ({
+  'visual-product-list__row--reverse': _bindProps.value.coverInRight,
+}))
+
+const innerStyles = computed<CSSProperties>(() => ({
+  '--v-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
 }))
 </script>
 
 <style scoped lang="scss">
 .visual-product-list {
-  .visual-product-list__grid {
-    display: grid;
-    grid-template-columns: repeat(var(--v-product-cols, 2), 1fr);
-    gap: var(--v-product-gutter, var(--v-spacing-base, 10px));
+  .visual-product-list__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--v-inner-gutter);
+  }
+
+  .visual-product-list .visual-product-list__row--reverse {
+    flex-direction: row-reverse;
   }
 }
 </style>

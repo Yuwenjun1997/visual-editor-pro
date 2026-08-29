@@ -27,7 +27,7 @@ const VisualSection: VisualEditorComponent<VisualSectionProps> = {
         { label: '默认', value: 'base' },
         { label: '较大', value: 'lg' },
       ],
-      defaultValue: 'base',
+      defaultValue: 'md',
     }),
 
     bold: createSwitchControl({ label: '标题加粗', defaultValue: false }),
