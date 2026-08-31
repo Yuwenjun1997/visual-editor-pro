@@ -44,7 +44,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     UseComponent: typeof import('./components/visual-blocks/components/use-component.vue')['default']
-    VisualAvatar: typeof import('./components/visual-avatar/visual-avatar.vue')['default']
     VisualBackgroundEditor: typeof import('./components/visual-styles-editor/visual-background-editor/visual-background-editor.vue')['default']
     VisualBgTransparent: typeof import('./components/visual-bg-transparent/visual-bg-transparent.vue')['default']
     VisualBlocks: typeof import('./components/visual-blocks/visual-blocks.vue')['default']
@@ -53,11 +52,9 @@ declare module 'vue' {
     VisualColorInput: typeof import('./components/visual-control/visual-color-input/visual-color-input.vue')['default']
     VisualColorPicker: typeof import('./components/visual-color-picker/visual-color-picker.vue')['default']
     VisualControlItem: typeof import('./components/visual-control-item/visual-control-item.vue')['default']
-    VisualFullscreen: typeof import('./components/visual-fullscreen/visual-fullscreen.vue')['default']
     VisualIconInput: typeof import('./components/visual-control/visual-icon-input/visual-icon-input.vue')['default']
     VisualIconPicker: typeof import('./components/visual-icon-picker/visual-icon-picker.vue')['default']
     VisualImageInput: typeof import('./components/visual-control/visual-image-input/visual-image-input.vue')['default']
-    VisualLogo: typeof import('./components/visual-logo/visual-logo.vue')['default']
     VisualMarginEditor: typeof import('./components/visual-styles-editor/visual-margin-editor/visual-margin-editor.vue')['default']
     VisualMonacoEditor: typeof import('./components/visual-monaco-editor/visual-monaco-editor.vue')['default']
     VisualNormalSelect: typeof import('./components/visual-control/visual-normal-select/visual-normal-select.vue')['default']
@@ -80,7 +77,6 @@ declare module 'vue' {
     VisualStagePanel: typeof import('./components/visual-stage-panel/visual-stage-panel.vue')['default']
     VisualTextInput: typeof import('./components/visual-control/visual-text-input/visual-text-input.vue')['default']
     VisualThemePicker: typeof import('./components/visual-control/visual-theme-picker/visual-theme-picker.vue')['default']
-    VisualToggleDark: typeof import('./components/visual-toggle-dark/visual-toggle-dark.vue')['default']
     VisualToolButton: typeof import('./components/visual-tool-button/visual-tool-button.vue')['default']
   }
 }

@@ -1,6 +1,9 @@
 import type {
+  BusinessDataProvider,
   ComponentModules,
   VisualEditorComponent,
+  VisualPageLoader,
+  VisualSaveHandler,
 } from '../types/visual-editor'
 
 export function createVisualBlockConfig() {
@@ -17,6 +20,10 @@ export function createVisualBlockConfig() {
   return {
     componentModules,
     componentMap,
+    // 宿主注入点(web 在 registryComponent 之后设置;clear() 不清除这些字段)
+    onSave: undefined as VisualSaveHandler | undefined,
+    savedPageLoader: undefined as VisualPageLoader | undefined,
+    businessDataProvider: undefined as BusinessDataProvider | undefined,
     clear(): void {
       componentModules.basicWidgets.length = 0
       componentModules.layoutWidgets.length = 0

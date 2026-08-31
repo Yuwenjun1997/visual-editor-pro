@@ -1,8 +1,5 @@
 <template>
-  <el-container class="ve-h-screen visual-editor-app">
-    <el-header class="visual-top-window">
-      <TopWindow />
-    </el-header>
+  <el-container class="ve-h-full ve-min-h-0 visual-editor-app">
     <el-container>
       <el-aside class="visual-left-window">
         <LeftWindow />
@@ -18,22 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import TopWindow from './components/top-window.vue'
 import LeftWindow from './components/left-window.vue'
 import RightWindow from './components/right-window.vue'
 </script>
 
 <style scoped lang="scss">
-.visual-top-window,
-.visual-top-window--placeholder {
-  height: var(--top-window-height) !important;
-}
-
-.visual-top-window {
-  padding: 0;
-  border-bottom: 1px solid var(--el-border-color);
-}
-
 .visual-left-window {
   width: var(--window-left, 320px);
   height: 100%;

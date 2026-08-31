@@ -59,7 +59,7 @@
         </el-button>
       </el-tooltip>
       <el-tooltip content="保存">
-        <el-button>
+        <el-button @click="handleSave">
           <Icon icon="ion:save-outline" />
         </el-button>
       </el-tooltip>
@@ -72,6 +72,8 @@ import { useHistory } from '../../hooks/useHistory'
 import { useBlocks } from '../../hooks/useBlocks'
 import { usePageConfig } from '../../hooks/usePageConfig'
 import { useViusalStore } from '../../store/useVisual'
+import { visualConfig } from '../../utils/visual.registry'
+import { ElMessage } from 'element-plus'
 import { Icon } from '@iconify/vue'
 
 defineOptions({
@@ -93,6 +95,22 @@ const handleRun = () => {
     query: { device: visualStore.device },
   })
   window.open(href, '_blank')
+}
+
+const handleSave = async () => {
+  if (!visualConfig.onSave) {
+    ElMessage.warning('保存功能未配置')
+    return
+  }
+  const data = { ...unref(pageConfig), blocks: unref(blockList) }
+  const result = await visualConfig.onSave(data)
+  if (result?.pageId) {
+    pageConfig.value = { ...pageConfig.value, pageId: result.pageId }
+  }
+  if (result?.blocks) {
+    blockList.value = result.blocks
+  }
+  visualStore.clearCurrent()
 }
 </script>
 

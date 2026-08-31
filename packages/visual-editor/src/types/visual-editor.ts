@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'vue'
+import type { VisualBusinessDataRef } from '@visual/ui/types'
 
 export interface VisualBlockSlotData {
   name: string
@@ -98,4 +99,36 @@ export interface VisualSchema {
   name: string
   visualKey: string
   schemas: VisualSchemaItem[]
+}
+
+// ---- 宿主(web)注入的整页 schema 与回调契约 ----
+
+export interface PageSchema {
+  pageId: string | number
+  title: string
+  themeName: string
+  globalStyle: CSSProperties
+  blocks: VisualBlockData[]
+}
+
+export interface VisualSaveResult {
+  pageId: string | number
+  blocks?: VisualBlockData[]
+}
+
+export type VisualSaveHandler = (
+  data: PageSchema
+) => Promise<VisualSaveResult | void>
+
+export type VisualPageLoader = (
+  pageId: string | number
+) => Promise<PageSchema | null>
+
+export interface BusinessDataProvider {
+  listCategories(
+    type: 'product' | 'article'
+  ): Promise<{ id: string; name: string }[]>
+  resolveRows(
+    ref: VisualBusinessDataRef
+  ): Promise<Record<string, any>[]>
 }
