@@ -1,8 +1,6 @@
 <template>
-  <el-card shadow="never">
-    <template #header>
-      <div class="wa-text-base wa-font-medium" style="color: #303133">用户管理</div>
-    </template>
+  <div class="admin-page">
+    <div class="wa-text-base wa-font-medium wa-mb-4">用户管理</div>
 
     <el-table :data="users" v-loading="loading">
       <el-table-column label="用户" min-width="240">
@@ -12,10 +10,10 @@
               {{ (row.full_name || row.email || 'U').charAt(0).toUpperCase() }}
             </el-avatar>
             <div class="wa-leading-tight">
-              <div style="color: #303133">
+              <div>
                 {{ row.full_name || '未设置昵称' }}
               </div>
-              <div class="wa-text-xs" style="color: #909399">
+              <div class="wa-text-xs user-email">
                 {{ row.email }}
               </div>
             </div>
@@ -46,13 +44,13 @@
               content="不能修改自己的角色"
               placement="top"
             >
-              <Icon icon="ep:warning" style="color: #c0c4cc" />
+              <Icon icon="ep:warning" class="role-warning" />
             </el-tooltip>
           </div>
         </template>
       </el-table-column>
     </el-table>
-  </el-card>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -107,3 +105,13 @@ const changeRole = async (row: UserListItem, role: RoleCode) => {
   }
 }
 </script>
+
+<style scoped>
+.user-email {
+  color: var(--el-text-color-secondary);
+}
+
+.role-warning {
+  color: var(--el-text-color-placeholder);
+}
+</style>

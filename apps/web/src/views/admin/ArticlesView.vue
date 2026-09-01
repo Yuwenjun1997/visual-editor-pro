@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <el-card shadow="never">
+  <div class="admin-page">
       <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
-        <div class="wa-text-base wa-font-medium" style="color: #303133">
-          文章管理
-        </div>
+        <div class="wa-text-base wa-font-medium">文章管理</div>
         <el-button type="primary" @click="openCreate">新增文章</el-button>
       </div>
 
@@ -46,8 +43,6 @@
           </template>
         </el-table-column>
       </el-table>
-    </el-card>
-
     <el-dialog
       v-model="dialogVisible"
       :title="editing ? '编辑文章' : '新增文章'"

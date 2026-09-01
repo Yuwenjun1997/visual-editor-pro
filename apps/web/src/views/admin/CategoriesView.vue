@@ -1,8 +1,6 @@
 <template>
-  <el-card shadow="never">
-    <div class="wa-text-base wa-font-medium wa-mb-4" style="color: #303133">
-      分类管理
-    </div>
+  <div class="admin-page">
+    <div class="wa-text-base wa-font-medium wa-mb-4">分类管理</div>
 
     <div class="wa-flex wa-items-center wa-gap-3 wa-mb-4">
       <el-radio-group v-model="typeFilter">
@@ -53,7 +51,7 @@
         </template>
       </el-table-column>
     </el-table>
-  </el-card>
+  </div>
 </template>
 
 <script setup lang="ts">

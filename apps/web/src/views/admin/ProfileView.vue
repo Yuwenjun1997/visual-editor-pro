@@ -1,9 +1,7 @@
 <template>
   <div class="wa-max-w-3xl wa-mx-auto">
-    <el-card shadow="never">
-      <template #header>
-        <div class="wa-text-base wa-font-medium" style="color: #303133">个人中心</div>
-      </template>
+    <div class="admin-page">
+      <div class="wa-text-base wa-font-medium wa-mb-4">个人中心</div>
 
       <el-form label-position="left" label-width="96px">
         <el-form-item label="头像">
@@ -33,7 +31,7 @@
           <el-tag :type="roleTagType">{{ roleLabel }}</el-tag>
         </el-form-item>
         <el-form-item label="邮箱">
-          <span style="color: #606266">{{ auth.user?.email }}</span>
+          <span>{{ auth.user?.email }}</span>
         </el-form-item>
         <el-form-item label="修改密码">
           <el-button size="small" plain @click="changePassword">修改密码</el-button>
@@ -44,7 +42,7 @@
           </el-button>
         </el-form-item>
       </el-form>
-    </el-card>
+    </div>
   </div>
 </template>
 

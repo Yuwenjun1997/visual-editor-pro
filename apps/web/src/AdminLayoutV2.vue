@@ -31,8 +31,8 @@ const activeMenu = computed(() => route.path)
 .admin-aside { display: flex; flex-direction: column; border-right: 1px solid var(--el-border-color); transition: width 0.2s; }
 .admin-menu { border-right: none; padding: 8px; }
 .admin-menu :deep(.el-menu-item) { height: 42px; line-height: 42px; margin-bottom: 4px; border-radius: 8px; }
-.admin-menu :deep(.el-menu-item.is-active), .admin-menu :deep(.el-menu-item.is-active:hover) { color: #fff; background: var(--el-color-primary); }
-.admin-menu :deep(.el-menu-item.is-active .el-icon) { color: #fff; }
+.admin-menu :deep(.el-menu-item.is-active), .admin-menu :deep(.el-menu-item.is-active:hover) { color: var(--el-color-white); background: var(--el-color-primary); }
+.admin-menu :deep(.el-menu-item.is-active .el-icon) { color: var(--el-color-white); }
 .admin-menu :deep(.el-menu-item:hover) { color: var(--el-color-primary); background: var(--el-color-primary-light-9); }
 .admin-main { padding: 16px; overflow: auto; }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="wa-flex wa-min-h-screen wa-items-center wa-justify-center">
-    <el-icon :size="22" class="wa-is-loading" style="color: #909399">
+    <el-icon :size="22" class="wa-is-loading preview-loading-icon">
       <Icon icon="ep:loading" />
     </el-icon>
-    <span class="wa-ml-3 wa-text-sm" style="color: #909399">
+    <span class="wa-ml-3 wa-text-sm preview-loading-text">
       正在加载页面...
     </span>
   </div>
@@ -40,3 +40,10 @@ onMounted(async () => {
   }
 })
 </script>
+
+<style scoped>
+.preview-loading-icon,
+.preview-loading-text {
+  color: var(--el-text-color-secondary);
+}
+</style>

@@ -183,7 +183,7 @@ const submit = async () => {
   width: 46%;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #2563eb 0%, #6d28d9 100%);
+  background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-dark-2) 100%);
 }
 
 /* 装饰性光斑 */
@@ -195,7 +195,7 @@ const submit = async () => {
   border-radius: 50%;
   right: -80px;
   top: -80px;
-  background: rgba(255, 255, 255, 0.12);
+  background: color-mix(in srgb, var(--el-color-white) 12%, transparent);
 }
 
 .brand-panel::after {
@@ -206,7 +206,7 @@ const submit = async () => {
   border-radius: 50%;
   left: -90px;
   bottom: -90px;
-  background: rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--el-color-white) 8%, transparent);
 }
 
 .brand-inner {
@@ -225,7 +225,7 @@ const submit = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.16);
+  background: color-mix(in srgb, var(--el-color-white) 16%, transparent);
 }
 
 .login-card {

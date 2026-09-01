@@ -15,8 +15,8 @@
           alt="封面"
         />
         <div v-else class="image-uploader__placeholder">
-          <Icon icon="ep:plus" class="wa-text-2xl" style="color: #c0c4cc" />
-          <span class="wa-mt-1 wa-text-xs" style="color: #909399">点击上传封面</span>
+          <Icon icon="ep:plus" class="wa-text-2xl placeholder-icon" />
+          <span class="wa-mt-1 wa-text-xs placeholder-text">点击上传封面</span>
         </div>
       </div>
     </el-upload>
@@ -85,7 +85,7 @@ const handleUpload = async (options: { file: File }) => {
 .image-uploader__trigger {
   width: 144px;
   height: 96px;
-  border: 1px dashed #d9d9d9;
+  border: 1px dashed var(--el-border-color);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -93,7 +93,7 @@ const handleUpload = async (options: { file: File }) => {
   justify-content: center;
   cursor: pointer;
   overflow: hidden;
-  background: #fafafa;
+  background: var(--el-fill-color-light);
 }
 
 .image-uploader__trigger:hover {
@@ -104,5 +104,13 @@ const handleUpload = async (options: { file: File }) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.placeholder-icon {
+  color: var(--el-text-color-placeholder);
+}
+
+.placeholder-text {
+  color: var(--el-text-color-secondary);
 }
 </style>

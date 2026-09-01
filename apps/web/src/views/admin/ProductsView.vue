@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <el-card shadow="never">
+  <div class="admin-page">
       <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
-        <div class="wa-text-base wa-font-medium" style="color: #303133">
-          商品管理
-        </div>
+        <div class="wa-text-base wa-font-medium">商品管理</div>
         <div class="wa-flex wa-items-center wa-gap-3">
           <el-select
             v-model="filterCategory"
@@ -66,8 +63,6 @@
           </template>
         </el-table-column>
       </el-table>
-    </el-card>
-
     <el-dialog
       v-model="dialogVisible"
       :title="editing ? '编辑商品' : '新增商品'"

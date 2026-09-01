@@ -109,9 +109,9 @@ onMounted(load)
   background: var(--el-color-primary-light-9);
 }
 
-.stat-icon-products { color: #67c23a; background: #f0f9eb; }
-.stat-icon-articles { color: #e6a23c; background: #fdf6ec; }
-.stat-icon-categories { color: #909399; background: #f4f4f5; }
+.stat-icon-products { color: var(--el-color-success); background: var(--el-color-success-light-9); }
+.stat-icon-articles { color: var(--el-color-warning); background: var(--el-color-warning-light-9); }
+.stat-icon-categories { color: var(--el-text-color-secondary); background: var(--el-fill-color-light); }
 
 .stat-label {
   color: var(--el-text-color-secondary);
