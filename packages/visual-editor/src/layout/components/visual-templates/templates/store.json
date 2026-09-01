@@ -235,9 +235,27 @@
         "showTime": true
       },
       "listData": [
-        { "icon": "bi:calendar2-check", "title": "预约到店", "desc": "线上预约时段，到店免排队", "time": "第 1 步", "status": "done" },
-        { "icon": "bi:hand-index-thumb", "title": "产品体验", "desc": "专人讲解，样品随心试用", "time": "第 2 步", "status": "doing" },
-        { "icon": "bi:bag-check", "title": "下单提货", "desc": "线上下单，门店自提或极速配送", "time": "第 3 步", "status": "todo" }
+        {
+          "icon": "bi:calendar2-check",
+          "title": "预约到店",
+          "desc": "线上预约时段，到店免排队",
+          "time": "第 1 步",
+          "status": "done"
+        },
+        {
+          "icon": "bi:hand-index-thumb",
+          "title": "产品体验",
+          "desc": "专人讲解，样品随心试用",
+          "time": "第 2 步",
+          "status": "doing"
+        },
+        {
+          "icon": "bi:bag-check",
+          "title": "下单提货",
+          "desc": "线上下单，门店自提或极速配送",
+          "time": "第 3 步",
+          "status": "todo"
+        }
       ]
     },
     {

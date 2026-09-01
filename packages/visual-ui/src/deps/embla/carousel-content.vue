@@ -18,7 +18,10 @@ const nodeRef = inject(carouselNodeInjectionKey)!
 </script>
 
 <template>
-  <div ref="nodeRef" class="vu-h-full vu-overflow-hidden">
+  <div
+    ref="nodeRef"
+    class="vu-h-full vu-overflow-hidden"
+  >
     <div
       class="vu-flex vu-h-full"
       :class="cn(props.vertical ? 'vu-flex-col' : '', props.class)"

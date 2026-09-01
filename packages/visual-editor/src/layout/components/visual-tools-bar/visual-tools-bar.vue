@@ -1,5 +1,8 @@
 <template>
-  <div class="visual-tools-bar" @click.stop>
+  <div
+    class="visual-tools-bar"
+    @click.stop
+  >
     <div class="visual-tools__icon">
       <Icon icon="bi:tools" />
     </div>

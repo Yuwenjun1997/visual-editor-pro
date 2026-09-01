@@ -1,6 +1,13 @@
 <template>
-  <visual-box class="visual-flash-sale" :styles="_props.styles" :class="_props.class">
-    <div class="visual-flash-sale__inner" :style="innerStyle">
+  <visual-box
+    class="visual-flash-sale"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      class="visual-flash-sale__inner"
+      :style="innerStyle"
+    >
       <div class="visual-flash-sale__head">
         <div class="visual-flash-sale__title-wrap">
           <i class="bi bi-lightning-charge-fill visual-flash-sale__title-icon" />
@@ -21,7 +28,10 @@
       <div class="visual-flash-sale__body">
         <div class="visual-flash-sale__prices">
           <span class="visual-flash-sale__price">{{ priceText }}</span>
-          <span v-if="originPriceText" class="visual-flash-sale__origin">
+          <span
+            v-if="originPriceText"
+            class="visual-flash-sale__origin"
+          >
             {{ originPriceText }}
           </span>
         </div>
@@ -34,7 +44,11 @@
             />
           </div>
         </div>
-        <a class="visual-flash-sale__btn" :href="href" @click="handleClick">
+        <a
+          class="visual-flash-sale__btn"
+          :href="href"
+          @click="handleClick"
+        >
           {{ buttonText || '立即抢购' }}
         </a>
       </div>
@@ -127,7 +141,7 @@ const startTimer = () => {
 
 watch(
   () => _props.props.endTime,
-  () => startTimer()
+  () => startTimer(),
 )
 
 onMounted(startTimer)

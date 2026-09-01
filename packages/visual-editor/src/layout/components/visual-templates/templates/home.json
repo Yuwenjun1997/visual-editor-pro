@@ -166,7 +166,13 @@
       "moduleName": "commerceWidgets",
       "componentName": "VisualProductCardList",
       "souceDataType": "VisualObjectArray",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "12px", "paddingRight": "12px", "paddingBottom": "8px" },
+      "styles": {
+        "opacity": 1,
+        "marginTop": "8px",
+        "paddingLeft": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "8px"
+      },
       "props": {
         "layout": "col-2",
         "gutter": "base",
@@ -177,10 +183,34 @@
         "round": "8px"
       },
       "listData": [
-        { "cover": "/image/cover.svg", "title": "无线蓝牙降噪耳机 超长续航 30 小时", "price": 199, "originPrice": 299, "tag": "热卖" },
-        { "cover": "/image/preview.svg", "title": "智能恒温保温杯 55℃ 恒温 喝水更规律", "price": 129, "originPrice": 169, "tag": "新品" },
-        { "cover": "/image/coding.svg", "title": "便携三脚支架 桌搭摄影两用 铝合金", "price": 59.9, "originPrice": 89, "tag": "爆款" },
-        { "cover": "/image/block.svg", "title": "桌面护眼氛围灯 无频闪 无极调光", "price": 89, "originPrice": 129, "tag": "推荐" }
+        {
+          "cover": "/image/cover.svg",
+          "title": "无线蓝牙降噪耳机 超长续航 30 小时",
+          "price": 199,
+          "originPrice": 299,
+          "tag": "热卖"
+        },
+        {
+          "cover": "/image/preview.svg",
+          "title": "智能恒温保温杯 55℃ 恒温 喝水更规律",
+          "price": 129,
+          "originPrice": 169,
+          "tag": "新品"
+        },
+        {
+          "cover": "/image/coding.svg",
+          "title": "便携三脚支架 桌搭摄影两用 铝合金",
+          "price": 59.9,
+          "originPrice": 89,
+          "tag": "爆款"
+        },
+        {
+          "cover": "/image/block.svg",
+          "title": "桌面护眼氛围灯 无频闪 无极调光",
+          "price": 89,
+          "originPrice": 129,
+          "tag": "推荐"
+        }
       ]
     },
     {
@@ -219,11 +249,7 @@
         "activeColor": "#2563EB",
         "textColor": "#64748B"
       },
-      "listData": [
-        { "label": "热销" },
-        { "label": "新品" },
-        { "label": "满减" }
-      ],
+      "listData": [{ "label": "热销" }, { "label": "新品" }, { "label": "满减" }],
       "slots": {
         "tab-0": {
           "name": "热销",
@@ -245,8 +271,20 @@
                 "round": "8px"
               },
               "listData": [
-                { "cover": "/image/coding.svg", "title": "机械键盘 87 键 热插拔 Gasket", "price": 299, "originPrice": 399, "tag": "热卖" },
-                { "cover": "/image/cover.svg", "title": "运动吨吨杯 大容量 2.2L 刻度", "price": 49.9, "originPrice": 79, "tag": "热卖" }
+                {
+                  "cover": "/image/coding.svg",
+                  "title": "机械键盘 87 键 热插拔 Gasket",
+                  "price": 299,
+                  "originPrice": 399,
+                  "tag": "热卖"
+                },
+                {
+                  "cover": "/image/cover.svg",
+                  "title": "运动吨吨杯 大容量 2.2L 刻度",
+                  "price": 49.9,
+                  "originPrice": 79,
+                  "tag": "热卖"
+                }
               ]
             }
           ]
@@ -271,8 +309,20 @@
                 "round": "8px"
               },
               "listData": [
-                { "cover": "/image/preview.svg", "title": "智能手环 血氧监测 14 天续航", "price": 159, "originPrice": 239, "tag": "新品" },
-                { "cover": "/image/block.svg", "title": "磁吸无线充电宝 10000mAh", "price": 99, "originPrice": 149, "tag": "新品" }
+                {
+                  "cover": "/image/preview.svg",
+                  "title": "智能手环 血氧监测 14 天续航",
+                  "price": 159,
+                  "originPrice": 239,
+                  "tag": "新品"
+                },
+                {
+                  "cover": "/image/block.svg",
+                  "title": "磁吸无线充电宝 10000mAh",
+                  "price": 99,
+                  "originPrice": 149,
+                  "tag": "新品"
+                }
               ]
             }
           ]
@@ -297,8 +347,20 @@
                 "round": "8px"
               },
               "listData": [
-                { "cover": "/image/cover.svg", "title": "立式无线充电器 三合一 快充", "price": 79, "originPrice": 109, "tag": "满减" },
-                { "cover": "/image/coding.svg", "title": "编织快充数据线套装 3 条装", "price": 39.9, "originPrice": 59, "tag": "满减" }
+                {
+                  "cover": "/image/cover.svg",
+                  "title": "立式无线充电器 三合一 快充",
+                  "price": 79,
+                  "originPrice": 109,
+                  "tag": "满减"
+                },
+                {
+                  "cover": "/image/coding.svg",
+                  "title": "编织快充数据线套装 3 条装",
+                  "price": 39.9,
+                  "originPrice": 59,
+                  "tag": "满减"
+                }
               ]
             }
           ]

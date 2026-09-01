@@ -1,5 +1,9 @@
 <template>
-  <visual-box class="visual-event-container" :styles="_props.styles" :class="_props.class">
+  <visual-box
+    class="visual-event-container"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
     <div
       class="visual-event-container__inner"
       @click="handleClick"
@@ -29,7 +33,7 @@ interface Props {
 }
 
 defineOptions({
-  name: 'visual-event-container',
+  name: 'VisualEventContainer',
 })
 
 const _props = defineProps<Props>()

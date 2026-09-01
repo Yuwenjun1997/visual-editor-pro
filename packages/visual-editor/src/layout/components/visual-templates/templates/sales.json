@@ -158,7 +158,13 @@
       "moduleName": "commerceWidgets",
       "componentName": "VisualProductCardList",
       "souceDataType": "VisualObjectArray",
-      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "12px", "paddingRight": "12px", "paddingBottom": "8px" },
+      "styles": {
+        "opacity": 1,
+        "marginTop": "4px",
+        "paddingLeft": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "8px"
+      },
       "props": {
         "layout": "col-2",
         "gutter": "base",
@@ -169,12 +175,48 @@
         "round": "8px"
       },
       "listData": [
-        { "cover": "/image/preview.svg", "title": "无线降噪耳机 主动降噪 40dB", "price": 199, "originPrice": 399, "tag": "热卖" },
-        { "cover": "/image/block.svg", "title": "浓香芝士蛋白粉 3kg 桶装", "price": 129, "originPrice": 199, "tag": "爆款" },
-        { "cover": "/image/coding.svg", "title": "蓝牙机械键盘 三模热插拔", "price": 269, "originPrice": 369, "tag": "满减" },
-        { "cover": "/image/cover.svg", "title": "智能恒温杯 55℃ 长效保温", "price": 109, "originPrice": 159, "tag": "热卖" },
-        { "cover": "/image/preview.svg", "title": "声波电动牙刷 5 档清洁", "price": 169, "originPrice": 229, "tag": "新品" },
-        { "cover": "/image/block.svg", "title": "直播补光灯 三色温 可调光", "price": 69, "originPrice": 99, "tag": "特惠" }
+        {
+          "cover": "/image/preview.svg",
+          "title": "无线降噪耳机 主动降噪 40dB",
+          "price": 199,
+          "originPrice": 399,
+          "tag": "热卖"
+        },
+        {
+          "cover": "/image/block.svg",
+          "title": "浓香芝士蛋白粉 3kg 桶装",
+          "price": 129,
+          "originPrice": 199,
+          "tag": "爆款"
+        },
+        {
+          "cover": "/image/coding.svg",
+          "title": "蓝牙机械键盘 三模热插拔",
+          "price": 269,
+          "originPrice": 369,
+          "tag": "满减"
+        },
+        {
+          "cover": "/image/cover.svg",
+          "title": "智能恒温杯 55℃ 长效保温",
+          "price": 109,
+          "originPrice": 159,
+          "tag": "热卖"
+        },
+        {
+          "cover": "/image/preview.svg",
+          "title": "声波电动牙刷 5 档清洁",
+          "price": 169,
+          "originPrice": 229,
+          "tag": "新品"
+        },
+        {
+          "cover": "/image/block.svg",
+          "title": "直播补光灯 三色温 可调光",
+          "price": 69,
+          "originPrice": 99,
+          "tag": "特惠"
+        }
       ]
     },
     {
@@ -198,7 +240,13 @@
       "label": "分享海报",
       "moduleName": "serviceWidgets",
       "componentName": "VisualPoster",
-      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "16px", "paddingRight": "16px", "paddingBottom": "16px" },
+      "styles": {
+        "opacity": 1,
+        "marginTop": "12px",
+        "paddingLeft": "16px",
+        "paddingRight": "16px",
+        "paddingBottom": "16px"
+      },
       "props": {
         "title": "邀请好友一起下单",
         "subtitle": "好友注册再得 ¥30，双向领券",

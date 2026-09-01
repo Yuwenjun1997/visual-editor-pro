@@ -1,5 +1,9 @@
 <template>
-  <visual-box class="visual-poster" :styles="_props.styles" :class="_props.class">
+  <visual-box
+    class="visual-poster"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
     <div class="visual-poster__card">
       <img
         v-if="_props.props.bgImage"
@@ -7,11 +11,19 @@
         :src="_props.props.bgImage"
         alt="海报背景"
       />
-      <div v-else class="visual-poster__bg visual-poster__bg--gradient" />
+      <div
+        v-else
+        class="visual-poster__bg visual-poster__bg--gradient"
+      />
       <div class="visual-poster__scrim" />
       <div class="visual-poster__content">
         <div class="visual-poster__title">{{ title || '邀请好友一起下单' }}</div>
-        <div v-if="subtitle" class="visual-poster__subtitle">{{ subtitle }}</div>
+        <div
+          v-if="subtitle"
+          class="visual-poster__subtitle"
+        >
+          {{ subtitle }}
+        </div>
         <img
           v-if="qrUrl"
           class="visual-poster__qr"
@@ -19,7 +31,12 @@
           :style="qrStyle"
           alt="二维码"
         />
-        <div v-if="footerText" class="visual-poster__footer">{{ footerText }}</div>
+        <div
+          v-if="footerText"
+          class="visual-poster__footer"
+        >
+          {{ footerText }}
+        </div>
         <a
           v-if="_props.props.shareLink"
           class="visual-poster__btn"
@@ -103,7 +120,7 @@ watch(
     _props.props.qrBgColor,
   ],
   render,
-  { immediate: true }
+  { immediate: true },
 )
 </script>
 

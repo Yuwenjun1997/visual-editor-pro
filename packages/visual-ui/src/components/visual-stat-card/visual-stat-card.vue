@@ -1,6 +1,13 @@
 <template>
-  <visual-box class="visual-stat-card" :styles="_props.styles" :class="_props.class">
-    <div class="visual-stat-card__body" :style="bodyStyle">
+  <visual-box
+    class="visual-stat-card"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      class="visual-stat-card__body"
+      :style="bodyStyle"
+    >
       <visual-icon
         v-if="_props.props.icon"
         class="visual-stat-card__icon"
@@ -12,7 +19,11 @@
         <div class="visual-stat-card__title">{{ _props.props.title }}</div>
         <div class="visual-stat-card__value">{{ _props.props.value }}</div>
       </div>
-      <div v-if="_props.props.delta" class="visual-stat-card__delta" :style="deltaStyle">
+      <div
+        v-if="_props.props.delta"
+        class="visual-stat-card__delta"
+        :style="deltaStyle"
+      >
         {{ deltaText }}
       </div>
     </div>
@@ -51,7 +62,9 @@ const deltaText = computed(() => {
 const deltaStyle = computed<CSSProperties>(() => {
   if (_props.props.deltaColor) return { color: _props.props.deltaColor }
   const descending = (_props.props.delta || '').startsWith('-')
-  return { color: `var(--v-${descending ? 'error' : 'success'}-1, ${descending ? '#e5484d' : '#0f9d6e'})` }
+  return {
+    color: `var(--v-${descending ? 'error' : 'success'}-1, ${descending ? '#e5484d' : '#0f9d6e'})`,
+  }
 })
 </script>
 

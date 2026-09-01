@@ -4,7 +4,11 @@
     :class="{ 'visual-product-item--horizontal': layout === 'horizontal' }"
     :style="itemStyle"
   >
-    <a class="visual-product-item__media" :href="href" @click="handleClick">
+    <a
+      class="visual-product-item__media"
+      :href="href"
+      @click="handleClick"
+    >
       <img
         v-if="cover"
         class="visual-product-item__cover"
@@ -17,22 +21,35 @@
       >
         <i class="bi bi-image" />
       </span>
-      <span v-if="showTag !== false && tag" class="visual-product-item__tag">
+      <span
+        v-if="showTag !== false && tag"
+        class="visual-product-item__tag"
+      >
         {{ tag }}
       </span>
     </a>
     <div class="visual-product-item__info">
-      <a class="visual-product-item__title" :href="href" @click="handleClick">
+      <a
+        class="visual-product-item__title"
+        :href="href"
+        @click="handleClick"
+      >
         {{ title || '商品标题' }}
       </a>
       <div class="visual-product-item__actions">
         <div class="visual-product-item__prices">
           <span class="visual-product-item__price">{{ priceText }}</span>
-          <span v-if="originPriceText" class="visual-product-item__origin">
+          <span
+            v-if="originPriceText"
+            class="visual-product-item__origin"
+          >
             {{ originPriceText }}
           </span>
         </div>
-        <span v-if="showBuy !== false" class="visual-product-item__buy">
+        <span
+          v-if="showBuy !== false"
+          class="visual-product-item__buy"
+        >
           {{ buttonText || '购买' }}
         </span>
       </div>
@@ -63,15 +80,11 @@ const cover = computed(() => _props.data?.cover || '')
 const title = computed(() => _props.data?.title || '')
 const tag = computed(() => _props.data?.tag || '')
 
-const priceText = computed(() =>
-  formatPrice(_props.data?.price, { currency: _props.currency }),
-)
+const priceText = computed(() => formatPrice(_props.data?.price, { currency: _props.currency }))
 
 const originPriceText = computed(() => {
   const origin = _props.data?.originPrice
-  return origin != null && origin !== ''
-    ? formatPrice(origin, { currency: _props.currency })
-    : ''
+  return origin != null && origin !== '' ? formatPrice(origin, { currency: _props.currency }) : ''
 })
 
 const href = computed(() => {

@@ -5,12 +5,18 @@
       @click="isCollapse = !isCollapse"
     >
       <div class="ve-flex ve-items-center ve-flex-1">
-        <Icon :icon="icon" class="ve-text-xs" />
+        <Icon
+          :icon="icon"
+          class="ve-text-xs"
+        />
         <span class="ve-text-sm ve-ml-1">{{ props.title }}</span>
       </div>
       <slot name="right" />
     </div>
-    <div class="visual-collapse-content" v-show="isCollapse">
+    <div
+      v-show="isCollapse"
+      class="visual-collapse-content"
+    >
       <slot />
     </div>
   </div>
@@ -32,9 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: '选项',
 })
 
-const icon = computed(() =>
-  isCollapse.value ? 'line-md:chevron-down' : 'line-md:chevron-right'
-)
+const icon = computed(() => (isCollapse.value ? 'line-md:chevron-down' : 'line-md:chevron-right'))
 </script>
 
 <style scoped lang="scss">

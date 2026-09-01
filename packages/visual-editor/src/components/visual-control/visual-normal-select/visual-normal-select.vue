@@ -1,11 +1,15 @@
 <template>
   <div class="visual-normal-select">
-    <el-select v-model="selectValue" :placeholder="props.placeholder" clearable>
+    <el-select
+      v-model="selectValue"
+      :placeholder="props.placeholder"
+      clearable
+    >
       <el-option
         v-for="(item, index) in options"
+        :key="index"
         :label="item.label"
         :value="item.value"
-        :key="index"
       />
     </el-select>
   </div>

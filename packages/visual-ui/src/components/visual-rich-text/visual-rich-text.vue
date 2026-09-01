@@ -1,7 +1,14 @@
 <template>
-  <visual-box class="visual-rich-text" :styles="_props.styles" :class="_props.class">
+  <visual-box
+    class="visual-rich-text"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
     <!-- sanctioned: v-html 内容已由 sanitizeRichText（DOMPurify）清理 -->
-    <div class="visual-rich-text__content" v-html="safeHtml" />
+    <div
+      class="visual-rich-text__content"
+      v-html="safeHtml"
+    />
   </visual-box>
 </template>
 

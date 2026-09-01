@@ -3,11 +3,7 @@ import type {
   VisualBlockSlots,
   VisualEditorComponent,
 } from '../types/visual-editor'
-import {
-  createVisualBlock,
-  createVisualEditorComponent,
-  isSameBlock,
-} from '../utils/visual.utils'
+import { createVisualBlock, createVisualEditorComponent, isSameBlock } from '../utils/visual.utils'
 import { defineStore } from 'pinia'
 
 interface VisualState {

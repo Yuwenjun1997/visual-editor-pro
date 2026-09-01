@@ -1,8 +1,11 @@
 <template>
-  <div class="visual-number-input" @click.stop>
+  <div
+    class="visual-number-input"
+    @click.stop
+  >
     <el-input
-      class="visual-number-input__input"
       v-model.number="modelValue"
+      class="visual-number-input__input"
       type="number"
       :placeholder="props.placeholder"
     />

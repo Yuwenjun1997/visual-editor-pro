@@ -1,7 +1,4 @@
-import type {
-  VisualEditorComponent,
-  VisualEditorProps,
-} from '../../types/visual-editor'
+import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
 import type {
   VisualImageTextCardItem,
   VisualImageTextCardProps,
@@ -16,10 +13,7 @@ import {
 
 const defaultCover = '/image/cover.svg'
 
-const createData = (): Record<
-  keyof VisualImageTextCardItem,
-  VisualEditorProps
-> => ({
+const createData = (): Record<keyof VisualImageTextCardItem, VisualEditorProps> => ({
   authorAvatar: createImageInputControl({
     label: '作者头像',
     defaultValue: defaultCover,

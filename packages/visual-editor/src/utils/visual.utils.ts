@@ -1,29 +1,26 @@
 import { customAlphabet } from 'nanoid'
 
-import type {
-  VisualBlockData,
-  VisualEditorComponent,
-} from '../types/visual-editor'
+import type { VisualBlockData, VisualEditorComponent } from '../types/visual-editor'
 import { visualConfig } from './visual.registry'
 import { cloneDeep } from 'lodash'
 
 export const generateNanoid = customAlphabet('123456ABCDEF', 6)
 
-export const createVisualBlock = (
-  visualComponent: VisualEditorComponent
-): VisualBlockData => {
+export const createVisualBlock = (visualComponent: VisualEditorComponent): VisualBlockData => {
   const component = cloneDeep(visualComponent)
 
   const createProps = (props: Record<string, any> = {}) => {
-    return Object.entries(props).reduce((prev, [propName, propSchema]) => {
-      prev[propName] = propSchema?.defaultValue
-      return prev
-    }, {} as Record<string, any>)
+    return Object.entries(props).reduce(
+      (prev, [propName, propSchema]) => {
+        prev[propName] = propSchema?.defaultValue
+        return prev
+      },
+      {} as Record<string, any>,
+    )
   }
 
-  const createListData = (
-    propsList: Record<string, any>[]
-  ): Record<string, any>[] => propsList.map((item) => createProps(item))
+  const createListData = (propsList: Record<string, any>[]): Record<string, any>[] =>
+    propsList.map((item) => createProps(item))
 
   const listData = component.listData
 
@@ -41,9 +38,7 @@ export const createVisualBlock = (
   }
 }
 
-export const createVisualEditorComponent = (
-  block: VisualBlockData
-): VisualEditorComponent => {
+export const createVisualEditorComponent = (block: VisualBlockData): VisualEditorComponent => {
   const component = cloneDeep(visualConfig.componentMap[block.key])
 
   // 处理默认属性值
@@ -93,9 +88,7 @@ export function extractValueAndUnit(cssValue: string, unit = 'px') {
   }
 }
 
-export const formatVisualBlockData = (
-  block: Partial<VisualBlockData>
-): VisualBlockData => {
+export const formatVisualBlockData = (block: Partial<VisualBlockData>): VisualBlockData => {
   if (typeof block !== 'object') block = {}
   if (!block.key) throw new Error('block.key is required')
   if (!block.label) throw new Error('block.label is required')
@@ -122,9 +115,6 @@ export const formatVisualBlockData = (
   }
 }
 
-export const isSameBlock = (
-  oldBlock: VisualBlockData,
-  newBlock: VisualBlockData
-) => {
+export const isSameBlock = (oldBlock: VisualBlockData, newBlock: VisualBlockData) => {
   return JSON.stringify(oldBlock) === JSON.stringify(newBlock)
 }

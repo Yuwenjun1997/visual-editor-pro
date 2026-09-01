@@ -25,7 +25,12 @@
             />
             <div class="visual-timeline__title">{{ item.title }}</div>
           </div>
-          <div v-if="item.desc" class="visual-timeline__desc">{{ item.desc }}</div>
+          <div
+            v-if="item.desc"
+            class="visual-timeline__desc"
+          >
+            {{ item.desc }}
+          </div>
           <div
             v-if="_props.props.showTime !== false && item.time"
             class="visual-timeline__time"

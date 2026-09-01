@@ -1,8 +1,14 @@
 <template>
-  <div :class="cn('visual-box', _props.class)" :style="bindBoxStyles">
+  <div
+    :class="cn('visual-box', _props.class)"
+    :style="bindBoxStyles"
+  >
     <visual-message v-if="showEmpty" />
     <template v-else>
-      <div class="visual-box__inner" :style="bindBoxInnerStyles">
+      <div
+        class="visual-box__inner"
+        :style="bindBoxInnerStyles"
+      >
         <slot />
       </div>
     </template>
@@ -42,9 +48,7 @@ const bindBoxStyles = computed<CSSProperties>(() => ({
   // }, {} as CSSProperties),
 }))
 
-const bindBoxInnerStyles = computed<CSSProperties>(() =>
-  getBoxInnerStyles(_props.styles)
-)
+const bindBoxInnerStyles = computed<CSSProperties>(() => getBoxInnerStyles(_props.styles))
 </script>
 
 <style scoped lang="scss">

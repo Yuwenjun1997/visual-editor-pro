@@ -1,14 +1,17 @@
 <template>
   <div class="visual-icon-picker">
     <el-popover
+      v-model:visible="visible"
       trigger="click"
       popper-class="visual-icon-picker__popover"
       width="300px"
-      v-model:visible="visible"
     >
       <template #reference>
         <el-button size="small">
-          <div class="icon-btn" :class="{ 'is-empty': isEmpty }">
+          <div
+            class="icon-btn"
+            :class="{ 'is-empty': isEmpty }"
+          >
             <Icon :icon="showIcon" />
           </div>
         </el-button>
@@ -16,8 +19,16 @@
 
       <div v-if="visible">
         <div class="ve-flex ve-items-center ve-gap-1">
-          <el-input v-model="keyword" size="small" placeholder="图标名称搜索" />
-          <el-button type="primary" @click="onSearch()" size="small">
+          <el-input
+            v-model="keyword"
+            size="small"
+            placeholder="图标名称搜索"
+          />
+          <el-button
+            type="primary"
+            size="small"
+            @click="onSearch()"
+          >
             <template #icon>
               <Icon icon="line-md:search-twotone" />
             </template>
@@ -32,7 +43,10 @@
             class="icon-item"
             @click="handleClick(item)"
           >
-            <Icon :icon="item" style="font-size: 24px" />
+            <Icon
+              :icon="item"
+              style="font-size: 24px"
+            />
           </div>
         </div>
 
@@ -71,8 +85,7 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
 
-const { icons, pageSize, iconTotal, keyword, onSearch, onCurrentChange } =
-  useIconList()
+const { icons, pageSize, iconTotal, keyword, onSearch, onCurrentChange } = useIconList()
 
 const modelValue = useVModel(props, 'modelValue', emit)
 

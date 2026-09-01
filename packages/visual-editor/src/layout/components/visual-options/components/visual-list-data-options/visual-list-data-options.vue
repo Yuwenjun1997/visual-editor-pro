@@ -1,12 +1,15 @@
 <template>
   <div class="visual-list-data-options">
-    <template v-for="(option, index) in visualOptions">
+    <template
+      v-for="(option, index) in visualOptions"
+      :key="index"
+    >
       <visual-collapse :title="`第${index + 1}项`">
         <template #right>
           <div
-            @click.stop="handleRemove(index)"
-            class="visual-del-btn"
             v-if="delAble"
+            class="visual-del-btn"
+            @click.stop="handleRemove(index)"
           >
             <Icon icon="bi:trash" />
           </div>
@@ -48,8 +51,15 @@
         </div>
       </visual-collapse>
     </template>
-    <div class="ve-p-1" v-if="addAble">
-      <el-button size="small" class="ve-w-full" @click="handleAdd">
+    <div
+      v-if="addAble"
+      class="ve-p-1"
+    >
+      <el-button
+        size="small"
+        class="ve-w-full"
+        @click="handleAdd"
+      >
         +添加项目
       </el-button>
     </div>
@@ -67,16 +77,11 @@ import VisualImageInput from '../../../../../components/visual-control/visual-im
 import VisualColorInput from '../../../../../components/visual-control/visual-color-input/visual-color-input.vue'
 import VisualIconInput from '../../../../../components/visual-control/visual-icon-input/visual-icon-input.vue'
 import VisualTextInput from '../../../../../components/visual-control/visual-text-input/visual-text-input.vue'
-import {
-  VisualEditorType,
-  type VisualEditorListData,
-} from '../../../../../types/visual-editor'
+import { VisualEditorType, type VisualEditorListData } from '../../../../../types/visual-editor'
 import { useViusalStore } from '../../../../../store/useVisual'
 
 const visualStore = useViusalStore()
-const visualOptions = computed(
-  () => visualStore.visualEditorComponent?.listData?.data,
-)
+const visualOptions = computed(() => visualStore.visualEditorComponent?.listData?.data)
 
 const canAdd = (listData?: VisualEditorListData<any>) => {
   if (!listData) return false

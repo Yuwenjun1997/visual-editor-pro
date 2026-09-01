@@ -14,7 +14,12 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "paddingTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": {
+        "opacity": 1,
+        "paddingTop": "4px",
+        "paddingLeft": "16px",
+        "paddingRight": "16px"
+      },
       "props": {
         "title": "资讯动态",
         "description": "最新趋势与深度内容",
@@ -220,11 +225,36 @@
         "showTime": true
       },
       "listData": [
-        { "title": "产品 3.0 全新升级", "desc": "重构视觉体系与交互体验，发布组件市场", "time": "2026-08-20", "status": "done" },
-        { "title": "多端适配上线", "desc": "H5 与小程序同步支持，一套模板多处投放", "time": "2026-08-12", "status": "done" },
-        { "title": "数据看板发布", "desc": "打通多平台数据源，转化效果一屏掌握", "time": "2026-08-03", "status": "doing" },
-        { "title": "订阅号内容改版", "desc": "栏目细分与个性化推荐优化", "time": "2026-07-28", "status": "done" },
-        { "title": "组件生态开放", "desc": "开放自定义组件接入能力，共建开发者社区", "time": "2026-07-15", "status": "todo" }
+        {
+          "title": "产品 3.0 全新升级",
+          "desc": "重构视觉体系与交互体验，发布组件市场",
+          "time": "2026-08-20",
+          "status": "done"
+        },
+        {
+          "title": "多端适配上线",
+          "desc": "H5 与小程序同步支持，一套模板多处投放",
+          "time": "2026-08-12",
+          "status": "done"
+        },
+        {
+          "title": "数据看板发布",
+          "desc": "打通多平台数据源，转化效果一屏掌握",
+          "time": "2026-08-03",
+          "status": "doing"
+        },
+        {
+          "title": "订阅号内容改版",
+          "desc": "栏目细分与个性化推荐优化",
+          "time": "2026-07-28",
+          "status": "done"
+        },
+        {
+          "title": "组件生态开放",
+          "desc": "开放自定义组件接入能力，共建开发者社区",
+          "time": "2026-07-15",
+          "status": "todo"
+        }
       ]
     },
     {

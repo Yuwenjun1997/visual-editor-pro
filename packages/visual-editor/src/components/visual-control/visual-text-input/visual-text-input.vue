@@ -1,8 +1,11 @@
 <template>
-  <div class="visual-px-input" @click.stop>
+  <div
+    class="visual-px-input"
+    @click.stop
+  >
     <el-input
-      class="visual-px-input__input"
       v-model="textValue"
+      class="visual-px-input__input"
       :placeholder="props.placeholder"
       :type="type"
     />

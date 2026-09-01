@@ -1,12 +1,18 @@
 <template>
-  <div class="visual-px-input" @click.stop>
+  <div
+    class="visual-px-input"
+    @click.stop
+  >
     <el-input
-      class="visual-px-input__input"
       v-model.number="inputValue"
+      class="visual-px-input__input"
       :placeholder="props.placeholder"
       @blur="onInputBlur"
     />
-    <div class="visual-px-input__unit" @click="onUnitClick">
+    <div
+      class="visual-px-input__unit"
+      @click="onUnitClick"
+    >
       {{ unitValue }}
     </div>
   </div>
@@ -23,7 +29,7 @@ interface Props {
 }
 
 defineOptions({
-  name: 'visual-px-input',
+  name: 'VisualPxInput',
 })
 
 const props = withDefaults(defineProps<Props>(), {
@@ -41,10 +47,7 @@ const pxValue = useVModel(props, 'modelValue', emit)
 
 const inputValue = ref<number>()
 const onInputBlur = () => {
-  if (
-    typeof inputValue.value !== 'undefined' &&
-    inputValue.value.toString() !== ''
-  ) {
+  if (typeof inputValue.value !== 'undefined' && inputValue.value.toString() !== '') {
     pxValue.value = `${inputValue.value}${unitValue.value}`
   } else {
     pxValue.value = ''
@@ -62,10 +65,7 @@ const onUnitClick = () => {
   } else {
     unitValue.value = props.unitList[index + 1]
   }
-  if (
-    typeof inputValue.value !== 'undefined' &&
-    inputValue.value.toString() !== ''
-  ) {
+  if (typeof inputValue.value !== 'undefined' && inputValue.value.toString() !== '') {
     pxValue.value = `${inputValue.value}${unitValue.value}`
   } else {
     pxValue.value = ''

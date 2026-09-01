@@ -7,7 +7,12 @@
     <visual-round-editor v-model="cssOptions" />
     <visual-border-editor v-model="cssOptions" />
     <visual-control-item title="透明度">
-      <el-slider v-model="opacity" :min="0" :max="1" :step="0.01" />
+      <el-slider
+        v-model="opacity"
+        :min="0"
+        :max="1"
+        :step="0.01"
+      />
     </visual-control-item>
   </div>
 </template>

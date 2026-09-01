@@ -6,7 +6,10 @@ const props = defineProps<{ class?: HTMLAttributes['class'] }>()
 </script>
 
 <template>
-  <div class="vu-min-w-0 vu-flex-[0_0_100%]" :class="cn('', props.class)">
+  <div
+    class="vu-min-w-0 vu-flex-[0_0_100%]"
+    :class="cn('', props.class)"
+  >
     <slot />
   </div>
 </template>

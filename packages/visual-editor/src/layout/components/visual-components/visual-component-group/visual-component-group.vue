@@ -5,8 +5,8 @@
     :group="group"
     :sort="false"
     :clone="cloneHandler"
-    itemKey="key"
-    :allbackOnBody="true"
+    item-key="key"
+    :allback-on-body="true"
     draggable=".visual-drag-item"
     @start="onStart"
     @end="onEnd"
@@ -17,7 +17,10 @@
         class="visual-group-item ve-text-xs more-components"
         :class="'span-' + element.span"
       >
-        <img class="visual-group-item-preview" src="/image/coding.svg" />
+        <img
+          class="visual-group-item-preview"
+          src="/image/coding.svg"
+        />
       </div>
       <div
         v-else
@@ -26,7 +29,10 @@
         @mousedown="onMouseDown(element)"
         @mouseup="onMouseUp"
       >
-        <img class="visual-group-item-preview" :src="element.previewImage" />
+        <img
+          class="visual-group-item-preview"
+          :src="element.previewImage"
+        />
         <div class="visual-group-item-label">{{ element.label }}</div>
       </div>
     </template>

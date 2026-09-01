@@ -1,5 +1,8 @@
 <template>
-  <div class="visual-app" :class="[_bindClassList, _props.class]">
+  <div
+    class="visual-app"
+    :class="[_bindClassList, _props.class]"
+  >
     <slot />
     <Sonner />
   </div>
@@ -14,7 +17,7 @@ import Sonner from '../../deps/toast/sonner.vue'
 import type { VisualAppProps } from './interface'
 
 defineOptions({
-  name: 'v-app',
+  name: 'VApp',
 })
 
 const _props = withDefaults(defineProps<VisualAppProps>(), {
@@ -26,9 +29,7 @@ const { themeName } = useTheme()
 
 const { bottom } = useSafeArea()
 
-const _safeAreaBottom = computed(() =>
-  _props.safeAreaBottom ? bottom.value : 0
-)
+const _safeAreaBottom = computed(() => (_props.safeAreaBottom ? bottom.value : 0))
 
 // 主题 CSS 变量挂到 <html>，供 .visual-app 子树及之外的编辑面板/teleport 弹层统一取用
 mountThemeToRoot({

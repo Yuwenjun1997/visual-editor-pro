@@ -6,25 +6,49 @@
       max-height="400"
       :data="modelValue.httpRequestParams"
     >
-      <el-table-column label="Key" prop="key">
+      <el-table-column
+        label="Key"
+        prop="key"
+      >
         <template #default="{ row }">
-          <el-input placeholder="Key" v-model="row.key" />
+          <el-input
+            v-model="row.key"
+            placeholder="Key"
+          />
         </template>
       </el-table-column>
-      <el-table-column label="Value" prop="value">
+      <el-table-column
+        label="Value"
+        prop="value"
+      >
         <template #default="{ row }">
-          <el-input placeholder="Value" v-model="row.value" />
+          <el-input
+            v-model="row.value"
+            placeholder="Value"
+          />
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="100">
+      <el-table-column
+        label="操作"
+        align="center"
+        width="100"
+      >
         <template #default="{ $index }">
-          <el-button size="small" type="danger" @click="handleRemove($index)">
+          <el-button
+            size="small"
+            type="danger"
+            @click="handleRemove($index)"
+          >
             删除
           </el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-button class="ve-w-full" size="small" @click="handleAdd">
+    <el-button
+      class="ve-w-full"
+      size="small"
+      @click="handleAdd"
+    >
       +添加字段
     </el-button>
   </div>

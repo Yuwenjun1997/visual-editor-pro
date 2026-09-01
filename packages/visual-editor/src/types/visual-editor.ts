@@ -63,9 +63,7 @@ export interface VisualEditorProps {
   options?: Array<VisualSelectOption>
 }
 
-export interface VisualEditorListData<
-  T extends Record<string, any> = Record<string, any>,
-> {
+export interface VisualEditorListData<T extends Record<string, any> = Record<string, any>> {
   label: string
   data: Record<keyof T, VisualEditorProps>[]
   maxLength?: number
@@ -116,19 +114,11 @@ export interface VisualSaveResult {
   blocks?: VisualBlockData[]
 }
 
-export type VisualSaveHandler = (
-  data: PageSchema
-) => Promise<VisualSaveResult | void>
+export type VisualSaveHandler = (data: PageSchema) => Promise<VisualSaveResult | void>
 
-export type VisualPageLoader = (
-  pageId: string | number
-) => Promise<PageSchema | null>
+export type VisualPageLoader = (pageId: string | number) => Promise<PageSchema | null>
 
 export interface BusinessDataProvider {
-  listCategories(
-    type: 'product' | 'article'
-  ): Promise<{ id: string; name: string }[]>
-  resolveRows(
-    ref: VisualBusinessDataRef
-  ): Promise<Record<string, any>[]>
+  listCategories(type: 'product' | 'article'): Promise<{ id: string; name: string }[]>
+  resolveRows(ref: VisualBusinessDataRef): Promise<Record<string, any>[]>
 }

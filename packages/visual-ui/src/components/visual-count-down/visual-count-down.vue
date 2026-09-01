@@ -1,25 +1,53 @@
 <template>
-  <visual-box class="visual-count-down" :styles="_props.styles" :class="_props.class">
-    <div class="visual-count-down__inner" :style="innerStyle" :class="variantClass">
+  <visual-box
+    class="visual-count-down"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      class="visual-count-down__inner"
+      :style="innerStyle"
+      :class="variantClass"
+    >
       <img
         v-if="_props.props.image"
         class="visual-count-down__image"
         :src="_props.props.image"
         :style="imageStyle"
       />
-      <span v-if="_props.props.title" class="visual-count-down__title">
+      <span
+        v-if="_props.props.title"
+        class="visual-count-down__title"
+      >
         {{ _props.props.title }}
       </span>
       <template v-if="showDays">
         <span class="visual-count-down__num">{{ days }}</span>
-        <span class="visual-count-down__colon" :style="colonStyle">天</span>
+        <span
+          class="visual-count-down__colon"
+          :style="colonStyle"
+          >天</span
+        >
       </template>
       <span class="visual-count-down__num">{{ pad(hours) }}</span>
-      <span class="visual-count-down__colon" :style="colonStyle">{{ hSep }}</span>
+      <span
+        class="visual-count-down__colon"
+        :style="colonStyle"
+        >{{ hSep }}</span
+      >
       <span class="visual-count-down__num">{{ pad(minutes) }}</span>
-      <span class="visual-count-down__colon" :style="colonStyle">{{ mSep }}</span>
+      <span
+        class="visual-count-down__colon"
+        :style="colonStyle"
+        >{{ mSep }}</span
+      >
       <span class="visual-count-down__num">{{ pad(seconds) }}</span>
-      <span v-if="isPlain" class="visual-count-down__colon" :style="colonStyle">秒</span>
+      <span
+        v-if="isPlain"
+        class="visual-count-down__colon"
+        :style="colonStyle"
+        >秒</span
+      >
     </div>
   </visual-box>
 </template>
@@ -46,7 +74,7 @@ const showDays = computed(() => _props.props.showDays)
 const variant = computed(() => _props.props.variant || 'default')
 const isPlain = computed(() => variant.value === 'plain')
 const variantClass = computed(() =>
-  variant.value === 'default' ? '' : `visual-count-down__inner--${variant.value}`
+  variant.value === 'default' ? '' : `visual-count-down__inner--${variant.value}`,
 )
 const imageStyle = computed<CSSProperties>(() => ({
   '--v-count-img-width': _props.props.imageWidth || '32px',
@@ -99,7 +127,7 @@ const startTimer = () => {
 
 watch(
   () => _props.props.endTime,
-  () => startTimer()
+  () => startTimer(),
 )
 
 onMounted(startTimer)

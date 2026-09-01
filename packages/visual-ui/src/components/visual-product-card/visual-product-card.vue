@@ -1,5 +1,9 @@
 <template>
-  <visual-box class="visual-product-card" :styles="_props.styles" :class="_props.class">
+  <visual-box
+    class="visual-product-card"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
     <visual-product-item
       :data="itemData"
       :layout="_props.props.layout"

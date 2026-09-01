@@ -1,12 +1,18 @@
 <template>
-  <div class="visual-image-input" @click.stop>
+  <div
+    class="visual-image-input"
+    @click.stop
+  >
     <el-input
+      v-model="iconValue"
       class="visual-image-input__input"
       :placeholder="props.placeholder"
-      v-model="iconValue"
     >
       <template #prefix>
-        <div @click.stop style="margin-left: 4px">
+        <div
+          style="margin-left: 4px"
+          @click.stop
+        >
           <visual-icon-picker v-model="iconValue" />
         </div>
       </template>

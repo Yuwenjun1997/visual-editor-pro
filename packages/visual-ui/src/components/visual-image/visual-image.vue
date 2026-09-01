@@ -1,6 +1,13 @@
 <template>
-  <visual-box class="visual-image" :styles="_props.styles" :class="_props.class">
-    <div class="visual-image__inner" :style="_bindInnerStyles">
+  <visual-box
+    class="visual-image"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      class="visual-image__inner"
+      :style="_bindInnerStyles"
+    >
       <img
         class="visual-image__img"
         :src="_bindProps.src"

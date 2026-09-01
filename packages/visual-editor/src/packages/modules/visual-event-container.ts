@@ -1,9 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type { VisualEventContainerProps } from '@visual/ui/components/visual-event-container/interface'
-import {
-  createNormalSelectControl,
-  createTextInputControl,
-} from '../../utils/visual.control'
+import { createNormalSelectControl, createTextInputControl } from '../../utils/visual.control'
 
 const actionOptions = [
   { label: '无', value: 'none' },

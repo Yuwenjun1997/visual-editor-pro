@@ -1,10 +1,16 @@
 <template>
   <el-config-provider :locale="zhCn">
-    <div class="visual-stage-container" :class="bindClassList">
+    <div
+      class="visual-stage-container"
+      :class="bindClassList"
+    >
       <visual-stage-bar />
       <div class="ve-relative ve-flex-1 ve-flex ve-flex-col">
         <template v-if="activePanel === 'viewJson'">
-          <visual-monaco-editor :options="viewJsonOptions" v-model="viewJson" />
+          <visual-monaco-editor
+            v-model="viewJson"
+            :options="viewJsonOptions"
+          />
         </template>
         <template v-else-if="activePanel === 'viewCode'">
           <visual-monaco-editor />
@@ -41,8 +47,7 @@ const disabled = computed(() => visualStore.activePanel !== 'design')
 
 const activePanel = computed(() => visualStore.activePanel)
 
-const { viewJson, viewJsonOptions, updateViewJson, restoreViewJson } =
-  useViewJson()
+const { viewJson, viewJsonOptions, updateViewJson, restoreViewJson } = useViewJson()
 
 const { pageConfig } = usePageConfig()
 
@@ -53,9 +58,7 @@ const route = useRoute()
 // 模块单例 ref(pageConfig/blockList)在路由间复用;按 :pageId 装载已保存页面,
 // id 消失时重置为空,避免"新建页面"串入上一页数据
 const applyPageSchema = (schema: PageSchema) => {
-  blockList.value = (schema.blocks || []).map((block) =>
-    formatVisualBlockData(block)
-  )
+  blockList.value = (schema.blocks || []).map((block) => formatVisualBlockData(block))
   pageConfig.value = {
     pageId: schema.pageId,
     title: schema.title,
@@ -91,7 +94,7 @@ watch(
       ElMessage.error(error?.message || '页面加载失败')
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 const bindClassList = computed(() => [
@@ -106,10 +109,7 @@ watchEffect(() => {
     updateViewJson()
     toggleRight(false)
     visualStore.clearCurrent()
-  } else if (
-    activePanel.value === 'design' ||
-    activePanel.value === 'preview'
-  ) {
+  } else if (activePanel.value === 'design' || activePanel.value === 'preview') {
     restoreViewJson()
     toggleRight(true)
     useReload().reload()

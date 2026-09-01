@@ -1,6 +1,9 @@
 <template>
   <div class="visual-props-options">
-    <template v-for="item in visualOptions">
+    <template
+      v-for="(item, index) in visualOptions"
+      :key="index"
+    >
       <visual-control-item :title="item.label">
         <template v-if="item.type === VisualEditorType.pxInput">
           <visual-px-input v-model="item.defaultValue" />
@@ -43,7 +46,7 @@
           <visual-source-data-control
             v-if="visualKey"
             v-model="item.defaultValue"
-            :visualKey="visualKey"
+            :visual-key="visualKey"
           />
         </template>
       </visual-control-item>

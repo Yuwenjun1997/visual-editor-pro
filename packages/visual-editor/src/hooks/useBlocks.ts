@@ -12,10 +12,7 @@ export const useBlocks = () => {
   const visualStore = useViusalStore()
   const { clearCurrent } = visualStore
 
-  const setCurrentBlockPosition = (
-    index: number,
-    blocks: VisualBlockData[]
-  ) => {
+  const setCurrentBlockPosition = (index: number, blocks: VisualBlockData[]) => {
     currentBlocks.value = blocks
     currentIndex.value = index
   }

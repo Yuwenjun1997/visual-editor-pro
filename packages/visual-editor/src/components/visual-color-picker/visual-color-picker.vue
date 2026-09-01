@@ -1,23 +1,33 @@
 <template>
   <div class="visual-color-picker">
     <el-popover
+      v-model:visible="visible"
       trigger="click"
       popper-class="visual-color-picker__popover"
       width="300px"
-      v-model:visible="visible"
     >
       <template #reference>
         <el-button size="small">
-          <div class="color-btn" :style="bindStyles">
-            <Icon icon="bi:x-lg" v-if="!modelValue" />
+          <div
+            class="color-btn"
+            :style="bindStyles"
+          >
+            <Icon
+              v-if="!modelValue"
+              icon="bi:x-lg"
+            />
           </div>
         </el-button>
       </template>
-      <div class="color-list" v-for="color in colorList" :key="color.value">
+      <div
+        v-for="color in colorList"
+        :key="color.value"
+        class="color-list"
+      >
         <span
-          class="color-item"
           v-for="(item, index) in getColors(color.value)"
           :key="index"
+          class="color-item"
           :style="{ backgroundColor: item }"
           @click="handleClick(item)"
         />
@@ -59,7 +69,7 @@ const _currentTheme = computed(() => themeConfig.value.theme[themeName.value])
 
 const getColors = (name: string) => {
   const keys = Object.keys(_currentTheme.value).filter(
-    (key) => key.indexOf(name) > -1 && key.indexOf('opacity') === -1
+    (key) => key.indexOf(name) > -1 && key.indexOf('opacity') === -1,
   )
   return keys.map((key) => _currentTheme.value[key])
 }

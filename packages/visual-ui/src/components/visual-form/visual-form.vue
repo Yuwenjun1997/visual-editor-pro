@@ -1,14 +1,28 @@
 <template>
-  <visual-box class="visual-form" :styles="_props.styles" :class="_props.class">
-    <div class="visual-form__inner" :style="innerStyle">
+  <visual-box
+    class="visual-form"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      class="visual-form__inner"
+      :style="innerStyle"
+    >
       <div
         v-for="(field, index) in _props.listData"
         :key="index"
         class="visual-form__field"
       >
-        <label v-if="field.label" class="visual-form__label">
+        <label
+          v-if="field.label"
+          class="visual-form__label"
+        >
           {{ field.label }}
-          <em v-if="field.required" class="visual-form__required">*</em>
+          <em
+            v-if="field.required"
+            class="visual-form__required"
+            >*</em
+          >
         </label>
         <textarea
           v-if="field.fieldType === 'textarea'"
@@ -27,7 +41,11 @@
           :maxlength="field.maxLength"
         />
       </div>
-      <button class="visual-form__submit" :style="submitStyle" @click="handleSubmit">
+      <button
+        class="visual-form__submit"
+        :style="submitStyle"
+        @click="handleSubmit"
+      >
         {{ submitText || '提交' }}
       </button>
     </div>
@@ -68,7 +86,7 @@ watch(
       if (Number(key) >= fieldCount.value) delete values[key]
     })
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 const innerStyle = computed<CSSProperties>(() => ({
@@ -81,7 +99,7 @@ const submitStyle = computed<CSSProperties>(() => ({
 
 const handleSubmit = () => {
   const requiredField = _props.listData.find(
-    (field, index) => field.required && !(values[String(index)] || '').trim()
+    (field, index) => field.required && !(values[String(index)] || '').trim(),
   )
   if (requiredField) {
     toast(`请填写${requiredField.label || '必填项'}`)

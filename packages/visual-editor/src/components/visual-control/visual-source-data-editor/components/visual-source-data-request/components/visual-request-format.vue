@@ -1,8 +1,16 @@
 <template>
   <div class="visual-request-format">
     <template v-if="!emptySchema">
-      <el-table size="small" border max-height="400" :data="tableData">
-        <el-table-column label="字段名" prop="label">
+      <el-table
+        size="small"
+        border
+        max-height="400"
+        :data="tableData"
+      >
+        <el-table-column
+          label="字段名"
+          prop="label"
+        >
           <template #default="{ row }">
             <el-select v-model="row.propName">
               <el-option
@@ -14,31 +22,59 @@
             </el-select>
           </template>
         </el-table-column>
-        <el-table-column label="字段Key" prop="propName">
+        <el-table-column
+          label="字段Key"
+          prop="propName"
+        >
           <template #default="{ row }">
-            <el-input placeholder="属性名" v-model="row.propName" disabled>
+            <el-input
+              v-model="row.propName"
+              placeholder="属性名"
+              disabled
+            >
               <template #prepend>$props.</template>
             </el-input>
           </template>
         </el-table-column>
-        <el-table-column label="映射值Value" prop="mapValue">
+        <el-table-column
+          label="映射值Value"
+          prop="mapValue"
+        >
           <template #default="{ row }">
-            <el-input placeholder="属性名" v-model="row.mapValue">
+            <el-input
+              v-model="row.mapValue"
+              placeholder="属性名"
+            >
               <template #prepend>$data.</template>
             </el-input>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" width="100">
+        <el-table-column
+          label="操作"
+          align="center"
+          width="100"
+        >
           <template #default="{ $index }">
-            <el-button size="small" type="danger" @click="handleRemove($index)">
+            <el-button
+              size="small"
+              type="danger"
+              @click="handleRemove($index)"
+            >
               删除
             </el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-button size="small" @click="handleAdd">+添加字段</el-button>
+      <el-button
+        size="small"
+        @click="handleAdd"
+        >+添加字段</el-button
+      >
     </template>
-    <el-empty v-else description="暂无需要映射的属性" />
+    <el-empty
+      v-else
+      description="暂无需要映射的属性"
+    />
   </div>
 </template>
 
@@ -87,7 +123,7 @@ const emitTableData = (data: TableData[]) => {
 watch(
   () => tableData,
   (data) => emitTableData(data.value),
-  { deep: true }
+  { deep: true },
 )
 
 onMounted(() => {

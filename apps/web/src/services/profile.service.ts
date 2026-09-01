@@ -4,7 +4,7 @@ import type { ProfileRow } from '../types/api'
 export const profileService = {
   async updateProfile(
     userId: string,
-    fields: { full_name?: string | null; avatar_url?: string | null }
+    fields: { full_name?: string | null; avatar_url?: string | null },
   ): Promise<ProfileRow> {
     const { data, error } = await supabase
       .from('profiles')

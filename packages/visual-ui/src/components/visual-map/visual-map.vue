@@ -1,10 +1,25 @@
 <template>
-  <visual-box class="visual-map" :styles="_props.styles" :class="_props.class">
-    <div class="visual-map__inner" :style="_bindInnerStyles">
-      <div class="visual-map__map" :style="_bindMapStyles">
+  <visual-box
+    class="visual-map"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      class="visual-map__inner"
+      :style="_bindInnerStyles"
+    >
+      <div
+        class="visual-map__map"
+        :style="_bindMapStyles"
+      >
         <div class="visual-map__placeholder">
           <div>Lat: {{ _latitude }}, Lng: {{ _longitude }}</div>
-          <div v-if="_bindProps.title" class="visual-map__title">{{ _bindProps.title }}</div>
+          <div
+            v-if="_bindProps.title"
+            class="visual-map__title"
+          >
+            {{ _bindProps.title }}
+          </div>
         </div>
       </div>
     </div>
@@ -56,7 +71,7 @@ onMounted(() => {
       },
       (error) => {
         console.log(error)
-      }
+      },
     )
   }
 })

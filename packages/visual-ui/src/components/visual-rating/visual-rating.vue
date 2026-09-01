@@ -1,6 +1,13 @@
 <template>
-  <visual-box class="visual-rating" :styles="_props.styles" :class="_props.class">
-    <div class="visual-rating__stars" :style="starsStyle">
+  <visual-box
+    class="visual-rating"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      class="visual-rating__stars"
+      :style="starsStyle"
+    >
       <span
         v-for="index in max"
         :key="index"

@@ -1,7 +1,4 @@
-import type {
-  VisualEditorComponent,
-  VisualEditorProps,
-} from '../../types/visual-editor'
+import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
 import type {
   VisualGridItemProps,
   VisualGridProps,
@@ -16,10 +13,7 @@ import {
 
 const defaultCover = '/image/cover.svg'
 
-const createListData = (): Record<
-  keyof VisualGridItemProps,
-  VisualEditorProps
-> => ({
+const createListData = (): Record<keyof VisualGridItemProps, VisualEditorProps> => ({
   icon: createIconInputControl({
     label: '图标名称',
     defaultValue: defaultCover,
@@ -58,12 +52,7 @@ const visualGrid: VisualEditorComponent<VisualGridProps> = {
   },
   listData: {
     label: '宫格数据',
-    data: [
-      createListData(),
-      createListData(),
-      createListData(),
-      createListData(),
-    ],
+    data: [createListData(), createListData(), createListData(), createListData()],
     minLength: 1,
     addData() {
       this.data.push(createListData())

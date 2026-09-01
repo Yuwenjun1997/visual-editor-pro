@@ -1,11 +1,5 @@
-import type {
-  VisualEditorComponent,
-  VisualEditorProps,
-} from '../../types/visual-editor'
-import type {
-  VisualMapMarker,
-  VisualMapProps,
-} from '@visual/ui/components/visual-map/interface'
+import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
+import type { VisualMapMarker, VisualMapProps } from '@visual/ui/components/visual-map/interface'
 import {
   createColorInputControl,
   createImageInputControl,

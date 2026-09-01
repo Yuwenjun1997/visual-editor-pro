@@ -2,13 +2,23 @@
   <div class="admin-page">
     <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
       <div class="wa-text-base wa-font-medium">页面列表</div>
-      <el-button v-if="can('page:create')" type="primary" @click="createPage">
+      <el-button
+        v-if="can('page:create')"
+        type="primary"
+        @click="createPage"
+      >
         新建页面
       </el-button>
     </div>
 
-    <div v-loading="loading" class="page-grid">
-      <el-empty v-if="!loading && !pages.length" description="暂无页面" />
+    <div
+      v-loading="loading"
+      class="page-grid"
+    >
+      <el-empty
+        v-if="!loading && !pages.length"
+        description="暂无页面"
+      />
       <div
         v-for="row in pages"
         :key="row.id"
@@ -16,7 +26,10 @@
       >
         <div class="wa-flex wa-items-start wa-justify-between wa-gap-3">
           <div class="wa-flex wa-min-w-0 wa-items-center wa-gap-2">
-            <Icon icon="ep:document" class="page-icon" />
+            <Icon
+              icon="ep:document"
+              class="page-icon"
+            />
             <span class="page-title">{{ row.title || '未命名页面' }}</span>
           </div>
           <el-tag
@@ -28,10 +41,17 @@
         </div>
         <div class="page-time">更新时间 {{ formatTime(row.updated_at) }}</div>
         <div class="page-actions">
-          <el-button v-if="can('page:edit')" size="small" @click="editPage(row)"
+          <el-button
+            v-if="can('page:edit')"
+            size="small"
+            @click="editPage(row)"
             >编辑</el-button
           >
-          <el-button size="small" type="primary" plain @click="previewPage(row)"
+          <el-button
+            size="small"
+            type="primary"
+            plain
+            @click="previewPage(row)"
             >预览</el-button
           >
           <el-button
@@ -94,11 +114,9 @@ const previewPage = (row: PageRow) => {
 }
 
 const removePage = async (row: PageRow) => {
-  await ElMessageBox.confirm(
-    `确定删除页面「${row.title}」吗?该操作不可恢复。`,
-    '删除确认',
-    { type: 'warning' },
-  )
+  await ElMessageBox.confirm(`确定删除页面「${row.title}」吗?该操作不可恢复。`, '删除确认', {
+    type: 'warning',
+  })
     .then(async () => {
       await pageService.remove(row.id)
       ElMessage.success('已删除')
@@ -113,7 +131,6 @@ const removePage = async (row: PageRow) => {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
-  min-height: 180px;
 }
 
 .page-item {
@@ -122,7 +139,9 @@ const removePage = async (row: PageRow) => {
   border: 1px solid var(--el-border-color-light);
   border-radius: 8px;
   background: var(--el-bg-color-overlay);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .page-item:hover {
@@ -152,7 +171,6 @@ const removePage = async (row: PageRow) => {
 .page-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
   margin-top: 16px;
 }
 </style>

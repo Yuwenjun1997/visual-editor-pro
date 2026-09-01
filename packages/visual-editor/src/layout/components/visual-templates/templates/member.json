@@ -14,7 +14,12 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "paddingTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": {
+        "opacity": 1,
+        "paddingTop": "4px",
+        "paddingLeft": "16px",
+        "paddingRight": "16px"
+      },
       "props": {
         "title": "我的资产",
         "description": "尊享会员权益一览",
@@ -133,11 +138,7 @@
         "activeColor": "#6D28D9",
         "textColor": "#64748B"
       },
-      "listData": [
-        { "label": "全部" },
-        { "label": "待付款" },
-        { "label": "待收货" }
-      ],
+      "listData": [{ "label": "全部" }, { "label": "待付款" }, { "label": "待收货" }],
       "slots": {
         "tab-0": {
           "name": "全部",
@@ -159,8 +160,20 @@
                 "round": "8px"
               },
               "listData": [
-                { "cover": "/image/cover.svg", "title": "无线降噪耳机 主动降噪 40dB", "price": 199, "originPrice": 399, "tag": "已完成" },
-                { "cover": "/image/preview.svg", "title": "智能恒温保温杯 55℃ 恒温", "price": 129, "originPrice": 169, "tag": "待发货" }
+                {
+                  "cover": "/image/cover.svg",
+                  "title": "无线降噪耳机 主动降噪 40dB",
+                  "price": 199,
+                  "originPrice": 399,
+                  "tag": "已完成"
+                },
+                {
+                  "cover": "/image/preview.svg",
+                  "title": "智能恒温保温杯 55℃ 恒温",
+                  "price": 129,
+                  "originPrice": 169,
+                  "tag": "待发货"
+                }
               ]
             }
           ]
@@ -185,8 +198,20 @@
                 "round": "8px"
               },
               "listData": [
-                { "cover": "/image/coding.svg", "title": "蓝牙机械键盘 三模热插拔", "price": 269, "originPrice": 369, "tag": "待付款" },
-                { "cover": "/image/block.svg", "title": "桌面护眼氛围灯 无极调光", "price": 89, "originPrice": 129, "tag": "待付款" }
+                {
+                  "cover": "/image/coding.svg",
+                  "title": "蓝牙机械键盘 三模热插拔",
+                  "price": 269,
+                  "originPrice": 369,
+                  "tag": "待付款"
+                },
+                {
+                  "cover": "/image/block.svg",
+                  "title": "桌面护眼氛围灯 无极调光",
+                  "price": 89,
+                  "originPrice": 129,
+                  "tag": "待付款"
+                }
               ]
             }
           ]
@@ -211,8 +236,20 @@
                 "round": "8px"
               },
               "listData": [
-                { "cover": "/image/preview.svg", "title": "运动吨吨杯 大容量 2.2L", "price": 49.9, "originPrice": 79, "tag": "运输中" },
-                { "cover": "/image/cover.svg", "title": "立式无线充电器 三合一快充", "price": 79, "originPrice": 109, "tag": "运输中" }
+                {
+                  "cover": "/image/preview.svg",
+                  "title": "运动吨吨杯 大容量 2.2L",
+                  "price": 49.9,
+                  "originPrice": 79,
+                  "tag": "运输中"
+                },
+                {
+                  "cover": "/image/cover.svg",
+                  "title": "立式无线充电器 三合一快充",
+                  "price": 79,
+                  "originPrice": 109,
+                  "tag": "运输中"
+                }
               ]
             }
           ]
@@ -389,7 +426,13 @@
       "label": "分享海报",
       "moduleName": "serviceWidgets",
       "componentName": "VisualPoster",
-      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px", "paddingBottom": "16px" },
+      "styles": {
+        "opacity": 1,
+        "marginTop": "4px",
+        "paddingLeft": "16px",
+        "paddingRight": "16px",
+        "paddingBottom": "16px"
+      },
       "props": {
         "title": "邀请好友开通会员",
         "subtitle": "双方各得 20 元无门槛优惠券",

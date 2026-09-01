@@ -1,6 +1,13 @@
 <template>
-  <visual-box class="visual-flex" :styles="_props.styles" :class="_props.class">
-    <div :class="_bindClass" :style="_bindStyles">
+  <visual-box
+    class="visual-flex"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      :class="_bindClass"
+      :style="_bindStyles"
+    >
       <slot></slot>
     </div>
   </visual-box>
@@ -18,7 +25,7 @@ interface Props {
 }
 
 defineOptions({
-  name: 'visual-flex',
+  name: 'VisualFlex',
 })
 
 const _props = defineProps<Props>()

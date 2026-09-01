@@ -1,5 +1,9 @@
 <template>
-  <visual-box class="visual-coupon" :styles="_props.styles" :class="_props.class">
+  <visual-box
+    class="visual-coupon"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
     <div
       class="visual-coupon__card"
       :class="[layoutClass, edgeClass, themeClass]"
@@ -59,13 +63,13 @@ const btnStyle = computed<CSSProperties>(() => ({
 }))
 
 const layoutClass = computed(() =>
-  _props.props.layout === 'column' ? 'visual-coupon__card--column' : ''
+  _props.props.layout === 'column' ? 'visual-coupon__card--column' : '',
 )
 
 const edgeClass = computed(() =>
   _props.props.layout !== 'column' && _props.props.edge === 'notch'
     ? 'visual-coupon__card--notch'
-    : ''
+    : '',
 )
 
 const themeClass = computed(() => {

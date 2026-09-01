@@ -1,7 +1,4 @@
-import type {
-  VisualEditorComponent,
-  VisualEditorProps,
-} from '../../types/visual-editor'
+import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
 import type {
   VisualImageTextListItem,
   VisualImageTextListProps,
@@ -15,10 +12,7 @@ import {
 
 const defaultCover = '/image/cover.svg'
 
-const createData = (): Record<
-  keyof VisualImageTextListItem,
-  VisualEditorProps
-> => ({
+const createData = (): Record<keyof VisualImageTextListItem, VisualEditorProps> => ({
   authorAvatar: createImageInputControl({
     label: '作者头像',
     defaultValue: defaultCover,

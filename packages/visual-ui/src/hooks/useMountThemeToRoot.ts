@@ -24,8 +24,7 @@ export const mountThemeToRoot = (options: MountThemeToRootOptions = {}) => {
       root.style.setProperty(`--v-${key}`, String(value))
     })
 
-    const bgColor =
-      typeof options.bgColor === 'function' ? options.bgColor() : options.bgColor
+    const bgColor = typeof options.bgColor === 'function' ? options.bgColor() : options.bgColor
     if (bgColor !== undefined) {
       root.style.setProperty('--v-bg-color', colorVar(bgColor) || 'transparent')
     }

@@ -80,36 +80,29 @@ export const processColor = (color: string, opacity: number): string => {
  * @param percentage
  * @returns
  */
-export const mixColors = (
-  color1: string,
-  color2: string,
-  percentage: number
-) => {
+export const mixColors = (color1: string, color2: string, percentage: number) => {
   // 将十六进制颜色转换为RGB
   function hexToRgb(hex: string) {
-    let bigint = parseInt(hex.slice(1), 16)
-    let r = (bigint >> 16) & 255
-    let g = (bigint >> 8) & 255
-    let b = bigint & 255
+    const bigint = parseInt(hex.slice(1), 16)
+    const r = (bigint >> 16) & 255
+    const g = (bigint >> 8) & 255
+    const b = bigint & 255
     return [r, g, b]
   }
 
   // 将RGB颜色转换为十六进制
   function rgbToHex(r: number, g: number, b: number) {
-    return (
-      '#' +
-      ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()
-    )
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()
   }
 
   // 混合颜色
-  let rgb1 = hexToRgb(color1)
-  let rgb2 = hexToRgb(color2)
-  let p = percentage / 100
+  const rgb1 = hexToRgb(color1)
+  const rgb2 = hexToRgb(color2)
+  const p = percentage / 100
 
-  let mixedR = Math.round(rgb1[0] * (1 - p) + rgb2[0] * p)
-  let mixedG = Math.round(rgb1[1] * (1 - p) + rgb2[1] * p)
-  let mixedB = Math.round(rgb1[2] * (1 - p) + rgb2[2] * p)
+  const mixedR = Math.round(rgb1[0] * (1 - p) + rgb2[0] * p)
+  const mixedG = Math.round(rgb1[1] * (1 - p) + rgb2[1] * p)
+  const mixedB = Math.round(rgb1[2] * (1 - p) + rgb2[2] * p)
 
   return rgbToHex(mixedR, mixedG, mixedB)
 }
@@ -121,7 +114,7 @@ export const mixColors = (
  */
 export const generateTheme = (
   colors: ThemeColors,
-  isDark: boolean = false
+  isDark: boolean = false,
 ): Record<string, any> => {
   const result: Record<string, any> = {}
   Object.entries(colors).forEach(([key, value]) => {

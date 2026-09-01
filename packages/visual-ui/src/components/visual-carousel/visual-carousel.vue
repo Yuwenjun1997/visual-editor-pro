@@ -13,8 +13,14 @@
       @slide-change="_onChange"
     >
       <carousel-content :vertical="_bindProps.vertical">
-        <carousel-item v-for="(item, index) in _props.listData" :key="index">
-          <div :style="_bindItemStyles" class="visual-carousel-item">
+        <carousel-item
+          v-for="(item, index) in _props.listData"
+          :key="index"
+        >
+          <div
+            :style="_bindItemStyles"
+            class="visual-carousel-item"
+          >
             <img
               :src="item.image"
               :style="_bindImageStyles"
@@ -62,9 +68,7 @@ const _bindProps = computed<VisualCarouselProps>(() => ({
 }))
 
 const _height = computed(() => _props.props.height || '200px')
-const _enableLoop = computed(
-  () => !!_props.props.circular && _props.listData.length > 1
-)
+const _enableLoop = computed(() => !!_props.props.circular && _props.listData.length > 1)
 const _interval = computed(() => Number(_props.props.interval) || 3000)
 const _duration = computed(() => Number(_props.props.duration) || 300)
 
@@ -95,7 +99,7 @@ watch(
   () => _props.listData.length,
   (len) => {
     if (_currentIndex.value >= len) _currentIndex.value = Math.max(0, len - 1)
-  }
+  },
 )
 </script>
 

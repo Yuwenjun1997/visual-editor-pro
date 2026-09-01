@@ -13,29 +13,18 @@ export const pageService = {
   },
 
   async get(id: string): Promise<PageRow | null> {
-    const { data, error } = await supabase
-      .from('pages')
-      .select('*')
-      .eq('id', id)
-      .maybeSingle()
+    const { data, error } = await supabase.from('pages').select('*').eq('id', id).maybeSingle()
     if (error) throw error
     return (data as PageRow) || null
   },
 
   async insert(payload: { user_id: string; title: string; schema: PageSchema }) {
-    const { data, error } = await supabase
-      .from('pages')
-      .insert(payload)
-      .select('id')
-      .single()
+    const { data, error } = await supabase.from('pages').insert(payload).select('id').single()
     if (error) throw error
     return (data as { id: string }).id
   },
 
-  async update(
-    id: string,
-    payload: { title: string; schema: PageSchema }
-  ) {
+  async update(id: string, payload: { title: string; schema: PageSchema }) {
     const { data, error } = await supabase
       .from('pages')
       .update(payload)

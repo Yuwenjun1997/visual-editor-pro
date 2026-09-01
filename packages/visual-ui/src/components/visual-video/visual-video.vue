@@ -1,6 +1,13 @@
 <template>
-  <visual-box class="visual-video" :styles="_props.styles" :class="_props.class">
-    <div class="visual-video__inner" :style="_bindInnerStyles">
+  <visual-box
+    class="visual-video"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      class="visual-video__inner"
+      :style="_bindInnerStyles"
+    >
       <video
         class="visual-video__video"
         :src="_bindProps.src"

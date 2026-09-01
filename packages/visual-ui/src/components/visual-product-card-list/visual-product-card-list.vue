@@ -7,10 +7,10 @@
   >
     <visual-scroll-x v-if="_bindProps.layout === 'scroll-x'">
       <div
-        class="visual-product-card-list__slide"
-        :style="slideStyle"
         v-for="(item, index) in _props.listData"
         :key="index"
+        class="visual-product-card-list__slide"
+        :style="slideStyle"
       >
         <visual-product-item
           :data="item"
@@ -48,10 +48,7 @@ import VisualBox from '../visual-box/visual-box.vue'
 import VisualScrollX from '../visual-scroll-x/visual-scroll-x.vue'
 import VisualProductItem from '../visual-product-item/visual-product-item.vue'
 import { cssSpacingVar } from '../../utils/styles.utils'
-import type {
-  VisualProductCardListItem,
-  VisualProductCardListProps,
-} from './interface'
+import type { VisualProductCardListItem, VisualProductCardListProps } from './interface'
 
 interface Props {
   props: VisualProductCardListProps

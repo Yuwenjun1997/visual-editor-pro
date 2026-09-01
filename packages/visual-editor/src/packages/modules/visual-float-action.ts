@@ -37,10 +37,7 @@ const visualFloatAction: VisualEditorComponent<VisualFloatActionProps> = {
       ],
       defaultValue: 'right',
     }),
-    bottom: createPxInputControl({label: '距底部',
-      tips: '如 96px',
-      defaultValue: '96px',
-    }),
+    bottom: createPxInputControl({ label: '距底部', tips: '如 96px', defaultValue: '96px' }),
     phone: createTextInputControl({ label: '电话号码', tips: '客服电话模式生效' }),
     link: createTextInputControl({ label: '跳转链接', tips: '跳转链接模式生效' }),
     showBackTopAfter: createNumberInputControl({

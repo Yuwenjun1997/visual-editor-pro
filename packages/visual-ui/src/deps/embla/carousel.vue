@@ -38,7 +38,7 @@ const plugins = computed(() =>
           stopOnMouseEnter: true,
         }),
       ]
-    : []
+    : [],
 )
 
 let api: EmblaCarouselType | undefined
@@ -60,21 +60,24 @@ watch(
       api.on('slidesChanged', syncIndex)
     }
   },
-  { flush: 'post' }
+  { flush: 'post' },
 )
 
 watch(
   () => [props.opts, props.autoplay, props.autoplayDelay] as const,
   () => {
     api?.reInit(props.opts, plugins.value)
-  }
+  },
 )
 
 onBeforeUnmount(() => api?.destroy())
 </script>
 
 <template>
-  <div class="vu-relative vu-w-full" :class="cn('', props.class)">
+  <div
+    class="vu-relative vu-w-full"
+    :class="cn('', props.class)"
+  >
     <slot />
   </div>
 </template>

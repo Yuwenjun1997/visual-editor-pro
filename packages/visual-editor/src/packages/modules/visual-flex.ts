@@ -1,9 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type { VisualFlexProps } from '@visual/ui/components/visual-flex/interface'
-import {
-  createNormalSelectControl,
-  createPxInputControl,
-} from '../../utils/visual.control'
+import { createNormalSelectControl, createPxInputControl } from '../../utils/visual.control'
 
 const visualFlex: VisualEditorComponent<VisualFlexProps> = {
   key: 'VisualFlex',

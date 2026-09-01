@@ -1,6 +1,14 @@
 <template>
-  <visual-box class="visual-search" :styles="_props.styles" :class="_props.class">
-    <form class="visual-search__inner" :style="innerStyle" @submit.prevent="handleSubmit">
+  <visual-box
+    class="visual-search"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <form
+      class="visual-search__inner"
+      :style="innerStyle"
+      @submit.prevent="handleSubmit"
+    >
       <i class="bi bi-search visual-search__search-icon" />
       <input
         v-model="keyword"
@@ -8,7 +16,11 @@
         type="search"
         :placeholder="_props.props.placeholder || '搜索关键词'"
       />
-      <button type="submit" class="visual-search__btn" :style="btnStyle">
+      <button
+        type="submit"
+        class="visual-search__btn"
+        :style="btnStyle"
+      >
         {{ _props.props.buttonText || '搜索' }}
       </button>
     </form>

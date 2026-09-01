@@ -4,11 +4,7 @@ import { createPinia } from 'pinia'
 import router from './router'
 import './plugins/element-ui/index'
 import { setupIconify } from './plugins/iconify'
-import {
-  setupVisual,
-  registryComponent,
-  visualConfig,
-} from '@visual/editor'
+import { setupVisual, registryComponent, visualConfig } from '@visual/editor'
 import type { PageSchema, VisualSaveResult } from '@visual/editor'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import '@visual/ui'
@@ -40,9 +36,7 @@ authStore.init()
 
 const isUuid = (value: string | number): boolean =>
   typeof value === 'string' &&
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-    value
-  )
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)
 
 visualConfig.onSave = async (data) => {
   if (!authStore.user) {
@@ -55,15 +49,11 @@ visualConfig.onSave = async (data) => {
 
   let title = (data.title || '').trim()
   if (!title) {
-    const promptResult = await ElMessageBox.prompt(
-      '请输入页面标题',
-      '保存页面',
-      {
-        inputValue: '未命名页面',
-        inputPattern: /\S+/,
-        inputErrorMessage: '标题不能为空',
-      }
-    ).catch(() => null)
+    const promptResult = await ElMessageBox.prompt('请输入页面标题', '保存页面', {
+      inputValue: '未命名页面',
+      inputPattern: /\S+/,
+      inputErrorMessage: '标题不能为空',
+    }).catch(() => null)
     if (!promptResult) return
     title = (promptResult.value || '').trim()
   }

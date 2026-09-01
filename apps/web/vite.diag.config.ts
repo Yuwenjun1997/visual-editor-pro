@@ -9,14 +9,22 @@ function diag(): Plugin {
   return {
     name: 'diag-scss',
     transform(_code, id) {
-      if (/[\\/](styles[/\\]index\.scss|visual\.layout\.scss|visual\.common\.scss|element-plus\.scss|assets[/\\]scss[/\\]index\.scss)$/.test(id)) {
+      if (
+        /[\\/](styles[/\\]index\.scss|visual\.layout\.scss|visual\.common\.scss|element-plus\.scss|assets[/\\]scss[/\\]index\.scss)$/.test(
+          id,
+        )
+      ) {
         console.log('DIAG transform:', norm(id))
       }
       return null
     },
     buildEnd() {
       for (const id of this.getModuleIds()) {
-        if (/[\\/](styles[/\\]index\.scss|visual\.layout\.scss|visual\.common\.scss|element-plus\.scss|assets[/\\]scss[/\\]index\.scss)$/.test(id)) {
+        if (
+          /[\\/](styles[/\\]index\.scss|visual\.layout\.scss|visual\.common\.scss|element-plus\.scss|assets[/\\]scss[/\\]index\.scss)$/.test(
+            id,
+          )
+        ) {
           const m = this.getModuleInfo(id)
           console.log('DIAG module:', norm(id))
           console.log('  included:', m?.isIncluded)

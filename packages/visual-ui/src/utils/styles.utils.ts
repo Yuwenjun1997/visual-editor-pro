@@ -38,12 +38,10 @@ export const visualBoxInnerStyles: CSSPropertiesKeys[] = [
 
 export const filterStylesByKeys = (
   keys: CSSPropertiesKeys[],
-  styles: CSSProperties
-): CSSProperties =>
-  keys.reduce((prev, key) => ({ [key]: styles[key], ...prev }), {})
+  styles: CSSProperties,
+): CSSProperties => keys.reduce((prev, key) => ({ [key]: styles[key], ...prev }), {})
 
-export const getBoxStyles = (styles: CSSProperties) =>
-  filterStylesByKeys(visualBoxStyles, styles)
+export const getBoxStyles = (styles: CSSProperties) => filterStylesByKeys(visualBoxStyles, styles)
 
 export const getBoxInnerStyles = (styles: CSSProperties) =>
   filterStylesByKeys(visualBoxInnerStyles, styles)

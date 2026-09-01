@@ -1,7 +1,13 @@
 <template>
-  <visual-collapse class="visual-padding-editor" title="内边距">
+  <visual-collapse
+    class="visual-padding-editor"
+    title="内边距"
+  >
     <template #right>
-      <visual-px-input v-model="padding" @change="onRootpaddingChange" />
+      <visual-px-input
+        v-model="padding"
+        @change="onRootpaddingChange"
+      />
     </template>
     <template #default>
       <div class="ve-grid ve-grid-cols-2 ve-p-2 ve-gap-2 visual-input-group">
@@ -9,25 +15,37 @@
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-top" />
           </div>
-          <visual-px-input v-model="paddingTop" @change="onPaddingChange" />
+          <visual-px-input
+            v-model="paddingTop"
+            @change="onPaddingChange"
+          />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-right" />
           </div>
-          <visual-px-input v-model="paddingRight" @change="onPaddingChange" />
+          <visual-px-input
+            v-model="paddingRight"
+            @change="onPaddingChange"
+          />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-bottom" />
           </div>
-          <visual-px-input v-model="paddingBottom" @change="onPaddingChange" />
+          <visual-px-input
+            v-model="paddingBottom"
+            @change="onPaddingChange"
+          />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-left" />
           </div>
-          <visual-px-input v-model="paddingLeft" @change="onPaddingChange" />
+          <visual-px-input
+            v-model="paddingLeft"
+            @change="onPaddingChange"
+          />
         </div>
       </div>
     </template>

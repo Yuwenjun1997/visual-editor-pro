@@ -36,7 +36,7 @@ export function createVisualBlockConfig() {
     registry: (
       moduleName: keyof ComponentModules,
       key: string,
-      component: VisualEditorComponent
+      component: VisualEditorComponent,
     ) => {
       const comp = { ...component, key, moduleName }
       componentModules[moduleName].push(comp)

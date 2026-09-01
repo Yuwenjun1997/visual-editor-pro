@@ -1,6 +1,14 @@
 <template>
-  <component :is="componentName" v-bind="blockAttrs" :ref="(node: any) => registerRef(node, vid)">
-    <template v-for="(_, key) in $slots" #[key] :key="key">
+  <component
+    :is="componentName"
+    v-bind="blockAttrs"
+    :ref="(node: any) => registerRef(node, vid)"
+  >
+    <template
+      v-for="(_, key) in $slots"
+      #[key]
+      :key="key"
+    >
       <slot :name="key" />
     </template>
   </component>
@@ -8,11 +16,7 @@
 
 <script setup lang="ts">
 import type { VisualBlockData } from '../../../types/visual-editor'
-import {
-  filterProps,
-  filterStyles,
-  VISUAL_OVERLAY_KEYS,
-} from '../../../utils/visual.filter'
+import { filterProps, filterStyles, VISUAL_OVERLAY_KEYS } from '../../../utils/visual.filter'
 import type { CSSProperties } from 'vue'
 import { useVisualRef } from '../../../hooks/useVisualRef'
 
@@ -30,9 +34,7 @@ const props = withDefaults(defineProps<Props>(), { isDesign: false })
 const { registerRef, getRef } = useVisualRef()
 
 // 悬浮/浮层类组件：仅在编辑器设计态转发 isDesign，避免多余 fallthrough 属性
-const isOverlayComponent = computed(() =>
-  VISUAL_OVERLAY_KEYS.includes(props.block.key)
-)
+const isOverlayComponent = computed(() => VISUAL_OVERLAY_KEYS.includes(props.block.key))
 
 // 浮层组件不透传 list-data / styles（自样式、非列表驱动；teleport 根无法自动继承属性）：
 // 绑定值 undefined 仍会留在 $attrs 触发告警，故用 v-bind 对象整键省略
@@ -43,7 +45,7 @@ const blockAttrs = computed<Record<string, any>>(() =>
         'list-data': listData.value,
         props: componentProps.value,
         styles: componentStyles.value,
-      }
+      },
 )
 
 // 注入数据

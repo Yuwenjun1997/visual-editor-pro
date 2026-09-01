@@ -4,14 +4,13 @@
     <div class="brand-panel wa-hidden lg:wa-flex">
       <div class="brand-inner">
         <div class="wa-flex wa-items-center wa-gap-3">
-          <img src="/vite.svg" class="wa-w-11 wa-h-11" />
-          <span class="wa-text-2xl wa-font-semibold wa-text-white"
-            >可视化设计</span
-          >
+          <img
+            src="/vite.svg"
+            class="wa-w-11 wa-h-11"
+          />
+          <span class="wa-text-2xl wa-font-semibold wa-text-white">可视化设计</span>
         </div>
-        <h1
-          class="wa-mt-12 wa-text-3xl wa-font-bold wa-leading-snug wa-text-white"
-        >
+        <h1 class="wa-mt-12 wa-text-3xl wa-font-bold wa-leading-snug wa-text-white">
           拖拽构建页面,<br />无需编写代码
         </h1>
         <p class="wa-mt-5 wa-text-white/80 wa-leading-relaxed wa-max-w-md">
@@ -24,7 +23,10 @@
             class="wa-flex wa-items-center wa-gap-3"
           >
             <span class="feature-dot">
-              <Icon :icon="item.icon" class="wa-text-lg" />
+              <Icon
+                :icon="item.icon"
+                class="wa-text-lg"
+              />
             </span>
             <span>{{ item.text }}</span>
           </li>
@@ -37,24 +39,31 @@
       <div class="wa-w-full wa-max-w-96">
         <div class="wa-text-center">
           <div class="wa-flex wa-items-center wa-justify-center wa-gap-2">
-            <img src="/vite.svg" class="wa-w-8 wa-h-8 lg:wa-hidden" />
+            <img
+              src="/vite.svg"
+              class="wa-w-8 wa-h-8 lg:wa-hidden"
+            />
             <span class="wa-text-xl wa-font-semibold">可视化设计</span>
           </div>
           <p class="wa-mt-2 wa-text-sm">
-            {{
-              isRegister ? '注册一个账号开始创作' : '欢迎回来,请登录你的账号'
-            }}
+            {{ isRegister ? '注册一个账号开始创作' : '欢迎回来,请登录你的账号' }}
           </p>
         </div>
 
-        <el-card shadow="never" class="wa-mt-6 login-card">
+        <el-card
+          shadow="never"
+          class="wa-mt-6 login-card"
+        >
           <el-form
             :model="form"
             label-position="top"
             size="large"
             @submit.prevent
           >
-            <el-form-item v-if="isRegister" label="昵称">
+            <el-form-item
+              v-if="isRegister"
+              label="昵称"
+            >
               <el-input
                 v-model="form.fullName"
                 placeholder="你的昵称(可选)"
@@ -91,7 +100,11 @@
           </el-form>
           <div class="wa-mt-4 wa-text-center wa-text-sm wa-text-gray-500">
             {{ isRegister ? '已有账号?' : '没有账号?' }}
-            <el-button link type="primary" @click="toggleMode">
+            <el-button
+              link
+              type="primary"
+              @click="toggleMode"
+            >
               {{ isRegister ? '去登录' : '去注册' }}
             </el-button>
           </div>
@@ -147,11 +160,7 @@ const submit = async () => {
   loading.value = true
   try {
     if (isRegister.value) {
-      const { session } = await authStore.register(
-        form.email,
-        form.password,
-        form.fullName,
-      )
+      const { session } = await authStore.register(form.email, form.password, form.fullName)
       ElMessage.success('注册成功')
       if (session) {
         router.replace(redirectTo())
@@ -165,9 +174,7 @@ const submit = async () => {
       router.replace(redirectTo())
     }
   } catch (error: any) {
-    ElMessage.error(
-      error?.message || (isRegister.value ? '注册失败' : '登录失败'),
-    )
+    ElMessage.error(error?.message || (isRegister.value ? '注册失败' : '登录失败'))
   } finally {
     loading.value = false
   }
@@ -183,7 +190,11 @@ const submit = async () => {
   width: 46%;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-dark-2) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--el-color-primary) 0%,
+    var(--el-color-primary-dark-2) 100%
+  );
 }
 
 /* 装饰性光斑 */

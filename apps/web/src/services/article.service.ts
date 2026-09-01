@@ -23,11 +23,7 @@ export const articleService = {
   },
 
   async create(payload: ArticlePayload & { user_id: string }) {
-    const { data, error } = await supabase
-      .from('articles')
-      .insert(payload)
-      .select()
-      .single()
+    const { data, error } = await supabase.from('articles').insert(payload).select().single()
     if (error) throw error
     return data as ArticleRow
   },

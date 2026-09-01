@@ -14,8 +14,14 @@
           class="image-uploader__preview"
           alt="封面"
         />
-        <div v-else class="image-uploader__placeholder">
-          <Icon icon="ep:plus" class="wa-text-2xl placeholder-icon" />
+        <div
+          v-else
+          class="image-uploader__placeholder"
+        >
+          <Icon
+            icon="ep:plus"
+            class="wa-text-2xl placeholder-icon"
+          />
           <span class="wa-mt-1 wa-text-xs placeholder-text">点击上传封面</span>
         </div>
       </div>

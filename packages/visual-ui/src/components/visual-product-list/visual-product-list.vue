@@ -5,7 +5,10 @@
     :show-empty="_noListData"
     :class="_props.class"
   >
-    <div class="visual-product-list__inner" :style="innerStyles">
+    <div
+      class="visual-product-list__inner"
+      :style="innerStyles"
+    >
       <visual-product-item
         v-for="(item, index) in _props.listData"
         :key="index"
@@ -28,10 +31,7 @@ import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import VisualProductItem from '../visual-product-item/visual-product-item.vue'
 import { cssSpacingVar } from '../../utils/styles.utils'
-import type {
-  VisualProductListItem,
-  VisualProductListProps,
-} from './interface'
+import type { VisualProductListItem, VisualProductListProps } from './interface'
 
 interface Props {
   props: VisualProductListProps

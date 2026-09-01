@@ -11,7 +11,7 @@ const pageConfig = ref<PageConfig>({
   pageId: '',
   title: '',
   globalStyle: {},
-  themeName: ''
+  themeName: '',
 })
 
 export const usePageConfig = () => {

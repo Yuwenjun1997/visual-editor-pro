@@ -1,11 +1,12 @@
 <template>
   <div class="wa-flex wa-min-h-screen wa-items-center wa-justify-center">
-    <el-icon :size="22" class="wa-is-loading preview-loading-icon">
+    <el-icon
+      :size="22"
+      class="wa-is-loading preview-loading-icon"
+    >
       <Icon icon="ep:loading" />
     </el-icon>
-    <span class="wa-ml-3 wa-text-sm preview-loading-text">
-      正在加载页面...
-    </span>
+    <span class="wa-ml-3 wa-text-sm preview-loading-text"> 正在加载页面... </span>
   </div>
 </template>
 
@@ -26,13 +27,8 @@ onMounted(async () => {
       router.replace({ name: 'pages' })
       return
     }
-    const blocks = await businessDataService.rehydrateBusinessRefs(
-      row.schema.blocks || []
-    )
-    sessionStorage.setItem(
-      'preview-data',
-      JSON.stringify({ ...row.schema, blocks })
-    )
+    const blocks = await businessDataService.rehydrateBusinessRefs(row.schema.blocks || [])
+    sessionStorage.setItem('preview-data', JSON.stringify({ ...row.schema, blocks }))
     router.replace({ name: 'preview', query: { device: 'h5' } })
   } catch (error: any) {
     ElMessage.error(error?.message || '页面加载失败')

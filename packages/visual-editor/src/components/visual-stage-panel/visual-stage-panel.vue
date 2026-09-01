@@ -1,8 +1,8 @@
 <template>
   <div class="visual-stage-panel ve-flex-1 visual-transparent-bg">
     <flex-full-layout
-      class="visual-stage-inner"
       id="visual-stage-inner"
+      class="visual-stage-inner"
       :class="visualStore.device"
     >
       <el-scrollbar height="100%">
@@ -12,7 +12,7 @@
         >
           <VisualBlocks
             v-model="blockList"
-            v-model:isDrag="visualStore.isDrag"
+            v-model:is-drag="visualStore.isDrag"
             class="visual-stage-wrap"
             :data-move-vid="visualStore.moveBlock?._vid"
             :data-source-type="visualStore.moveBlock?.souceDataType"

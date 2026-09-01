@@ -1,5 +1,9 @@
 <template>
-  <visual-box class="visual-qrcode" :styles="_props.styles" :class="_props.class">
+  <visual-box
+    class="visual-qrcode"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
     <div class="visual-qrcode__inner">
       <img
         v-if="qrUrl"
@@ -8,7 +12,12 @@
         :style="imgStyle"
         alt="二维码"
       />
-      <div v-else class="visual-qrcode__empty">请输入二维码内容</div>
+      <div
+        v-else
+        class="visual-qrcode__empty"
+      >
+        请输入二维码内容
+      </div>
     </div>
   </visual-box>
 </template>
@@ -69,7 +78,7 @@ watch(
     _props.props.bgColor,
   ],
   render,
-  { immediate: true }
+  { immediate: true },
 )
 </script>
 

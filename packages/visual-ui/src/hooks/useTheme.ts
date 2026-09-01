@@ -1,9 +1,5 @@
 import { computed, ref } from 'vue'
-import type {
-  ThemeConfig,
-  ThemeColors,
-  CustomThemeConfig,
-} from '../types/theme'
+import type { ThemeConfig, ThemeColors, CustomThemeConfig } from '../types/theme'
 import { generateTheme } from '../utils/theme-utils'
 import { isColorCode } from '../utils/validate'
 
@@ -28,10 +24,7 @@ const createTheme = (v: ThemeColors, d = false) => {
 
 const createAllTheme = (themes: Record<string, ThemeColors>) => {
   return {
-    ...Object.entries(themes).reduce(
-      (prev, [k, v]) => ({ ...prev, [k]: createTheme(v) }),
-      {}
-    ),
+    ...Object.entries(themes).reduce((prev, [k, v]) => ({ ...prev, [k]: createTheme(v) }), {}),
   }
 }
 

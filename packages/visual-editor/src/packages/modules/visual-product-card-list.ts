@@ -1,7 +1,4 @@
-import type {
-  VisualEditorComponent,
-  VisualEditorProps,
-} from '../../types/visual-editor'
+import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
 import type {
   VisualProductCardListItem,
   VisualProductCardListProps,

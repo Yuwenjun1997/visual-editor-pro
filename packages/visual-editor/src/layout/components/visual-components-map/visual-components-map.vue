@@ -1,7 +1,10 @@
 <template>
   <div class="visual-components-map ve-h-full">
     <div class="title ve-p-2">组件大纲</div>
-    <el-scrollbar height="100%" class="ve-flex-1 ve-min-h-0">
+    <el-scrollbar
+      height="100%"
+      class="ve-flex-1 ve-min-h-0"
+    >
       <el-tree
         ref="treeRef"
         class="ve-w-full"
@@ -43,7 +46,10 @@
           </div>
         </template>
         <template #empty>
-          <el-empty description="暂无数据" :image-size="60" />
+          <el-empty
+            description="暂无数据"
+            :image-size="60"
+          />
         </template>
       </el-tree>
     </el-scrollbar>

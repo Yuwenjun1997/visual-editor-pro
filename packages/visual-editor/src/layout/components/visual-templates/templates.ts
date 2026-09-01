@@ -20,11 +20,4 @@ export interface VisualTemplate {
   blocks: Array<Record<string, any>>
 }
 
-export const visualTemplates: VisualTemplate[] = [
-  home,
-  sales,
-  content,
-  form,
-  store,
-  member,
-]
+export const visualTemplates: VisualTemplate[] = [home, sales, content, form, store, member]

@@ -100,9 +100,7 @@ const handleClick = (event: MouseEvent) => {
   } else if (mode.value === 'share') {
     event.preventDefault()
     if (navigator.share) {
-      navigator
-        .share({ title: document.title, url: window.location.href })
-        .catch(() => {})
+      navigator.share({ title: document.title, url: window.location.href }).catch(() => {})
     } else {
       toast('分享功能暂未开启')
     }

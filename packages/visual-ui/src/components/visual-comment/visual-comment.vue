@@ -6,27 +6,40 @@
     :class="_props.class"
   >
     <div class="visual-comment__list">
-      <div v-for="(item, index) in _props.listData" :key="index" class="visual-comment__item">
+      <div
+        v-for="(item, index) in _props.listData"
+        :key="index"
+        class="visual-comment__item"
+      >
         <img
           v-if="item.avatar"
           class="visual-comment__avatar"
           :src="item.avatar"
           :alt="item.nickname"
         />
-        <span v-else class="visual-comment__avatar visual-comment__avatar--empty">
+        <span
+          v-else
+          class="visual-comment__avatar visual-comment__avatar--empty"
+        >
           <i class="bi bi-person" />
         </span>
         <div class="visual-comment__main">
           <div class="visual-comment__head">
             <span class="visual-comment__nickname">{{ item.nickname || '匿名用户' }}</span>
-            <span v-if="showRating !== false && item.rating" class="visual-comment__rating">
+            <span
+              v-if="showRating !== false && item.rating"
+              class="visual-comment__rating"
+            >
               <i
                 v-for="n in 5"
                 :key="n"
                 :class="n <= item.rating ? 'bi bi-star-fill' : 'bi bi-star'"
               />
             </span>
-            <span v-if="showTime !== false && item.time" class="visual-comment__time">
+            <span
+              v-if="showTime !== false && item.time"
+              class="visual-comment__time"
+            >
               {{ item.time }}
             </span>
           </div>

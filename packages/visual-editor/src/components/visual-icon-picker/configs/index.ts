@@ -30,9 +30,7 @@ export function useIconList(params: UseIconListParams = {}) {
   }
 
   const onSearch = () => {
-    filterIcons.value = sourceIcons.filter(
-      (icon) => icon.indexOf(keyword.value) > -1
-    )
+    filterIcons.value = sourceIcons.filter((icon) => icon.indexOf(keyword.value) > -1)
     icons.value = limitIcons(filterIcons.value)
   }
 

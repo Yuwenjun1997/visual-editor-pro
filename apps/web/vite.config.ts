@@ -11,7 +11,7 @@ const repoRoot = path.resolve(__dirname, '../..')
 export default defineConfig({
   resolve: {
     alias: {
-      '@/' : `${srcRoot}/`,
+      '@/': `${srcRoot}/`,
     },
   },
   server: {

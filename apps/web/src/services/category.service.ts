@@ -33,11 +33,7 @@ export const categoryService = {
     type: 'product' | 'article'
     sort: number
   }) {
-    const { data, error } = await supabase
-      .from('categories')
-      .insert(payload)
-      .select()
-      .single()
+    const { data, error } = await supabase.from('categories').insert(payload).select().single()
     if (error) throw error
     return data as CategoryRow
   },

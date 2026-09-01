@@ -1,10 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import {
-  EditorLayout,
-  EditorStage,
-  PreviewScenario,
-  DevScenario,
-} from '@visual/editor'
+import { EditorLayout, EditorStage, PreviewScenario, DevScenario } from '@visual/editor'
 import AdminLayout from '@/AdminLayoutV2.vue'
 import LoginView from '@/views/LoginView.vue'
 import EditorShell from '@/views/editor/EditorShell.vue'
@@ -153,9 +148,7 @@ router.beforeEach(async (to) => {
   if (required && !hasPermission(auth.role, required)) {
     ElMessage.warning('无权访问该页面')
     // 已登录但缺权限 → 落到人人可进的个人中心,避免回跳死循环
-    return auth.user
-      ? { name: 'profile' }
-      : { name: 'login', query: { redirect: to.fullPath } }
+    return auth.user ? { name: 'profile' } : { name: 'login', query: { redirect: to.fullPath } }
   }
 })
 

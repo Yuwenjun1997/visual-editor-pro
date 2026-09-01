@@ -1,18 +1,26 @@
 <template>
-  <visual-box class="visual-image-text" :styles="_props.styles" :show-empty="_noListData" :class="_props.class">
-    <div class="visual-image-text__content" :style="_bindInnerStyles">
+  <visual-box
+    class="visual-image-text"
+    :styles="_props.styles"
+    :show-empty="_noListData"
+    :class="_props.class"
+  >
+    <div
+      class="visual-image-text__content"
+      :style="_bindInnerStyles"
+    >
       <visual-scroll-x v-if="_bindProps.layout === 'scroll-x'">
         <div
-          class="visual-image-text__slide"
           v-for="(item, index) in _props.listData"
           :key="index"
+          class="visual-image-text__slide"
         >
           <component
-            class="visual-image-text-item"
             :is="_renderComponent"
+            class="visual-image-text-item"
             :data="item"
-            :showAuthor="_bindProps.showAuthor"
-            :showTime="_bindProps.showTime"
+            :show-author="_bindProps.showAuthor"
+            :show-time="_bindProps.showTime"
           ></component>
         </div>
       </visual-scroll-x>
@@ -22,13 +30,13 @@
         :class="_bindInnerClassList"
       >
         <component
-          class="visual-image-text-item"
           :is="_renderComponent"
           v-for="(item, index) in _props.listData"
           :key="index"
+          class="visual-image-text-item"
           :data="item"
-          :showAuthor="_bindProps.showAuthor"
-          :showTime="_bindProps.showTime"
+          :show-author="_bindProps.showAuthor"
+          :show-time="_bindProps.showTime"
         ></component>
       </div>
     </div>
@@ -41,10 +49,7 @@ import VisualBox from '../visual-box/visual-box.vue'
 import VisualScrollX from '../visual-scroll-x/visual-scroll-x.vue'
 import VisualImageTextOne from './components/visual-image-text-one.vue'
 import VisualImageTextTwo from './components/visual-image-text-two.vue'
-import type {
-  VisualImageTextCardItem,
-  VisualImageTextCardProps,
-} from './interface'
+import type { VisualImageTextCardItem, VisualImageTextCardProps } from './interface'
 import { cssRadiusVar, cssSpacingVar } from '../../utils/styles.utils'
 
 interface Props {

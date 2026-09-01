@@ -14,10 +14,16 @@
             :src="_props.props.bgImage"
             alt="弹窗背景"
           />
-          <div v-else class="visual-popup__bg visual-popup__bg--gradient" />
+          <div
+            v-else
+            class="visual-popup__bg visual-popup__bg--gradient"
+          />
           <div class="visual-popup__content">
             <div class="visual-popup__title">{{ title || '活动公告' }}</div>
-            <div v-if="description" class="visual-popup__desc">
+            <div
+              v-if="description"
+              class="visual-popup__desc"
+            >
               {{ description }}
             </div>
             <a
@@ -28,7 +34,11 @@
             >
               {{ buttonText || '去看看' }}
             </a>
-            <div v-else class="visual-popup__button" @click="close">
+            <div
+              v-else
+              class="visual-popup__button"
+              @click="close"
+            >
               {{ buttonText || '我知道了' }}
             </div>
           </div>
@@ -71,9 +81,7 @@ const buttonText = computed(() => _props.props.buttonText || '')
 
 const btnHref = computed(() => {
   if (!buttonLink.value) return undefined
-  return buttonLink.value.startsWith('http')
-    ? buttonLink.value
-    : `//${buttonLink.value}`
+  return buttonLink.value.startsWith('http') ? buttonLink.value : `//${buttonLink.value}`
 })
 
 const showRef = ref(false)

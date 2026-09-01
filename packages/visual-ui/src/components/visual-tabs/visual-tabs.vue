@@ -1,5 +1,9 @@
 <template>
-  <visual-box class="visual-tabs" :styles="_props.styles" :class="_props.class">
+  <visual-box
+    class="visual-tabs"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
     <TabsRoot v-model="activeKey">
       <TabsList
         class="visual-tabs__header"
@@ -71,7 +75,7 @@ watch(
       activeKey.value = list[0].key
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 </script>
 

@@ -8,9 +8,8 @@ export const storageService = {
     if (!file.type.startsWith('image/')) {
       throw new Error('仅支持图片文件')
     }
-    const ext = (file.name.match(/\.(\w+)$/)?.[1] || 'png')
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '') || 'png'
+    const ext =
+      (file.name.match(/\.(\w+)$/)?.[1] || 'png').toLowerCase().replace(/[^a-z0-9]/g, '') || 'png'
     const path = `${userId}/${crypto.randomUUID()}.${ext}`
     const { error } = await supabase.storage
       .from('covers')

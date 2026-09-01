@@ -62,14 +62,10 @@ export const useHistory = () => {
         if (current && current.data === data) return
         pointer.value++
         const historyItem = { time: new Date().getTime(), data }
-        historyStack.value.splice(
-          pointer.value,
-          historyStack.value.length,
-          historyItem
-        )
+        historyStack.value.splice(pointer.value, historyStack.value.length, historyItem)
       })
     }, 500),
-    { deep: true, immediate: true }
+    { deep: true, immediate: true },
   )
 
   return {

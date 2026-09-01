@@ -1,14 +1,28 @@
 <template>
-  <visual-box class="visual-picture-wrap" :styles="_props.styles" :show-empty="_noListData" :class="_props.class">
-    <div class="visual-picture-wrap__content" :style="_bindInnerStyles">
+  <visual-box
+    class="visual-picture-wrap"
+    :styles="_props.styles"
+    :show-empty="_noListData"
+    :class="_props.class"
+  >
+    <div
+      class="visual-picture-wrap__content"
+      :style="_bindInnerStyles"
+    >
       <visual-scroll-x v-if="_bindProps.layout === 'layout-card-type-scroll-x'">
         <div
-          class="visual-picture visual-picture--slide"
           v-for="(item, index) in _props.listData"
           :key="index"
+          class="visual-picture visual-picture--slide"
         >
-          <img class="visual-picture__image" :src="item.url" />
-          <span class="visual-picture__label" v-if="_bindProps.showLabel">
+          <img
+            class="visual-picture__image"
+            :src="item.url"
+          />
+          <span
+            v-if="_bindProps.showLabel"
+            class="visual-picture__label"
+          >
             {{ item.label }}
           </span>
         </div>
@@ -19,12 +33,18 @@
         :class="_bindProps.layout"
       >
         <div
-          class="visual-picture"
           v-for="(item, index) in _props.listData"
           :key="index"
+          class="visual-picture"
         >
-          <img class="visual-picture__image" :src="item.url" />
-          <span class="visual-picture__label" v-if="_bindProps.showLabel">
+          <img
+            class="visual-picture__image"
+            :src="item.url"
+          />
+          <span
+            v-if="_bindProps.showLabel"
+            class="visual-picture__label"
+          >
             {{ item.label }}
           </span>
         </div>

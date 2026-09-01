@@ -9,9 +9,7 @@ import {
   createTextInputControl,
 } from '../../utils/visual.control'
 
-const createListDataItem = (
-  label: string
-): Record<keyof VisualTabListDataItem, any> => ({
+const createListDataItem = (label: string): Record<keyof VisualTabListDataItem, any> => ({
   label: createTextInputControl({ label: '页签名称', defaultValue: label }),
 })
 
@@ -35,11 +33,7 @@ const visualTabs: VisualEditorComponent<VisualTabsProps> = {
   },
   listData: {
     label: '页签数据',
-    data: [
-      createListDataItem('推荐'),
-      createListDataItem('热销'),
-      createListDataItem('新品'),
-    ],
+    data: [createListDataItem('推荐'), createListDataItem('热销'), createListDataItem('新品')],
     minLength: 1,
     maxLength: 10,
     addData() {

@@ -1,5 +1,8 @@
 <template>
-  <visual-collapse class="visual-margin-editor" title="边框">
+  <visual-collapse
+    class="visual-margin-editor"
+    title="边框"
+  >
     <template #default>
       <div class="ve-gap-2 visual-input-group">
         <div class="ve-grid ve-grid-cols-3 border-btn-group">
@@ -55,9 +58,9 @@
         </div>
         <div class="ve-flex ve-flex-col ve-gap-2">
           <visual-normal-select
+            v-model="borderStyle"
             class="ve-w-full"
             :options="borderStyles"
-            v-model="borderStyle"
           />
           <visual-px-input v-model="borderWidth" />
           <visual-color-input v-model="borderColor" />

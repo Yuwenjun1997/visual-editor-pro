@@ -1,7 +1,7 @@
 <template>
   <div class="visual-image-text-two">
     <div class="visual-image-text__cover">
-      <img :src="_props.data.cover"></img>
+      <img :src="_props.data.cover" />
     </div>
     <div class="visual-image-text__content">
       <div class="visual-image-text__body">
@@ -13,7 +13,10 @@
           :author-avatar="_props.data.authorAvatar"
           :author-name="_props.data.authorName"
         />
-        <visual-time v-if="_props.showTime" :time="_props.data.publishTime" />
+        <visual-time
+          v-if="_props.showTime"
+          :time="_props.data.publishTime"
+        />
       </div>
     </div>
   </div>

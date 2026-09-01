@@ -1,13 +1,21 @@
 <template>
-  <visual-box class="visual-image-text" :styles="_props.styles" :show-empty="_noListData" :class="_props.class">
-    <div class="visual-image-text__inner" :style="_bindInnerStyles">
+  <visual-box
+    class="visual-image-text"
+    :styles="_props.styles"
+    :show-empty="_noListData"
+    :class="_props.class"
+  >
+    <div
+      class="visual-image-text__inner"
+      :style="_bindInnerStyles"
+    >
       <visual-image-text-one
-        class="visual-image-text-item"
         v-for="(item, index) in _props.listData"
         :key="index"
+        class="visual-image-text-item"
         :data="item"
-        :showAuthor="_bindProps.showAuthor"
-        :showTime="_bindProps.showTime"
+        :show-author="_bindProps.showAuthor"
+        :show-time="_bindProps.showTime"
         :corver-in-right="_bindProps.coverInRight"
       ></visual-image-text-one>
     </div>
@@ -18,10 +26,7 @@
 import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import VisualImageTextOne from './components/visual-image-text-one.vue'
-import type {
-  VisualImageTextListItem,
-  VisualImageTextListProps,
-} from './interface'
+import type { VisualImageTextListItem, VisualImageTextListProps } from './interface'
 import { cssRadiusVar, cssSpacingVar } from '../../utils/styles.utils'
 
 interface Props {

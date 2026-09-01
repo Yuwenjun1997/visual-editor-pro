@@ -27,14 +27,18 @@
         @mousedown.stop="onMouseDown(element)"
       >
         <use-component
+          :key="element._vid"
           :block="element"
           :is-design="isOverlayBlock(element)"
-          :key="element._vid"
         >
-          <template v-for="(value, key) in element.slots" #[key] :key="key">
+          <template
+            v-for="(value, key) in element.slots"
+            #[key]
+            :key="key"
+          >
             <visual-blocks
               v-model="value.blocks"
-              v-model:isDrag="dragging"
+              v-model:is-drag="dragging"
               :parent-component="element"
               :move-block="props.moveBlock"
               :disabled="isDisabled(element)"
@@ -50,17 +54,10 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import UseComponent from './components/use-component.vue'
-import type {
-  VisualBlockData,
-  VisualBlockSlotData,
-} from '../../types/visual-editor'
+import type { VisualBlockData, VisualBlockSlotData } from '../../types/visual-editor'
 import { useVModel } from '@vueuse/core'
 import { useViusalStore } from '../../store/useVisual'
-import {
-  collectionProps,
-  collectionStyles,
-  VISUAL_OVERLAY_KEYS,
-} from '../../utils/visual.filter'
+import { collectionProps, collectionStyles, VISUAL_OVERLAY_KEYS } from '../../utils/visual.filter'
 import { useBlocks } from '../../hooks/useBlocks'
 import { cloneDeep } from 'lodash'
 

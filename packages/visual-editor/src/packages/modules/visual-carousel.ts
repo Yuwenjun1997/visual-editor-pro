@@ -1,7 +1,4 @@
-import type {
-  VisualEditorComponent,
-  VisualEditorProps,
-} from '../../types/visual-editor'
+import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
 import type {
   VisualCarouselItem,
   VisualCarouselProps,
@@ -16,10 +13,7 @@ import {
 
 const defaultCover = '/image/cover.svg'
 
-const createListData = (): Record<
-  keyof VisualCarouselItem,
-  VisualEditorProps
-> => ({
+const createListData = (): Record<keyof VisualCarouselItem, VisualEditorProps> => ({
   image: createImageInputControl({
     label: '图片地址',
     defaultValue: defaultCover,
@@ -30,10 +24,7 @@ const createListData = (): Record<
   }),
 })
 
-const visualCarousel: VisualEditorComponent<
-  VisualCarouselProps,
-  VisualCarouselItem
-> = {
+const visualCarousel: VisualEditorComponent<VisualCarouselProps, VisualCarouselItem> = {
   key: 'VisualCarousel',
   moduleName: 'basicWidgets',
   componentName: 'VisualCarousel',

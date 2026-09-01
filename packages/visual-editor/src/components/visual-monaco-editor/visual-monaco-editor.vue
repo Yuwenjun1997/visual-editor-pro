@@ -1,6 +1,9 @@
 <template>
   <div class="ve-p-1 ve-flex-1 ve-w-full">
-    <div ref="editorEl" class="ve-w-full ve-h-full"></div>
+    <div
+      ref="editorEl"
+      class="ve-w-full ve-h-full"
+    ></div>
   </div>
 </template>
 

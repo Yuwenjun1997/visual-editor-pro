@@ -31,22 +31,12 @@ function toArticleListItem(row: any): ArticleListItem {
   }
 }
 
-async function resolveBusinessRows(
-  ref: VisualBusinessDataRef
-): Promise<Record<string, any>[]> {
+async function resolveBusinessRows(ref: VisualBusinessDataRef): Promise<Record<string, any>[]> {
   if (ref.businessType === 'products') {
-    let query = supabase
-      .from('products')
-      .select('*')
-      .order('sort', { ascending: true })
-      .limit(50)
+    let query = supabase.from('products').select('*').order('sort', { ascending: true }).limit(50)
     if (ref.refType === 'category' && typeof ref.refValue === 'string') {
       query = query.eq('category_id', ref.refValue)
-    } else if (
-      ref.refType === 'ids' &&
-      Array.isArray(ref.refValue) &&
-      ref.refValue.length
-    ) {
+    } else if (ref.refType === 'ids' && Array.isArray(ref.refValue) && ref.refValue.length) {
       query = query.in('id', ref.refValue)
     }
     const { data, error } = await query
@@ -61,11 +51,7 @@ async function resolveBusinessRows(
     .limit(50)
   if (ref.refType === 'category' && typeof ref.refValue === 'string') {
     query = query.eq('category_id', ref.refValue)
-  } else if (
-    ref.refType === 'ids' &&
-    Array.isArray(ref.refValue) &&
-    ref.refValue.length
-  ) {
+  } else if (ref.refType === 'ids' && Array.isArray(ref.refValue) && ref.refValue.length) {
     query = query.in('id', ref.refValue)
   }
   const { data, error } = await query
@@ -87,9 +73,7 @@ async function rehydrateBlock(block: VisualBlockData): Promise<void> {
   if (!options || options.dataSource !== 'custom') return
   const rows = await resolveBusinessRows(ref)
   options.customJsonData =
-    options.customDataType === 'VisualObject'
-      ? JSON.stringify(rows[0] ?? {})
-      : JSON.stringify(rows)
+    options.customDataType === 'VisualObject' ? JSON.stringify(rows[0] ?? {}) : JSON.stringify(rows)
 }
 
 export const businessDataService = {
@@ -97,9 +81,7 @@ export const businessDataService = {
   toArticleListItem,
   resolveBusinessRows,
 
-  async rehydrateBusinessRefs(
-    blocks: VisualBlockData[]
-  ): Promise<VisualBlockData[]> {
+  async rehydrateBusinessRefs(blocks: VisualBlockData[]): Promise<VisualBlockData[]> {
     const copy = deepClone(blocks)
     const visit = async (list: VisualBlockData[]) => {
       for (const block of list) {

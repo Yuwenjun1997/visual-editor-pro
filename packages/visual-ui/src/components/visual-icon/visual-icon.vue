@@ -1,5 +1,9 @@
 <template>
-  <div class="visual-icon" :class="[_bindClassList, _props.class]" :style="_bindStyles" />
+  <div
+    class="visual-icon"
+    :class="[_bindClassList, _props.class]"
+    :style="_bindStyles"
+  />
 </template>
 
 <script setup lang="ts">
@@ -24,9 +28,7 @@ const _props = defineProps<Props>()
 const _bindStyles = computed<CSSProperties>(() => ({
   '--v-icon-color': _props.color,
   '--v-icon-size': _props.size,
-  '--v-background-image-url': isPictureUrl(_props.icon)
-    ? `url(${_props.icon})`
-    : '',
+  '--v-background-image-url': isPictureUrl(_props.icon) ? `url(${_props.icon})` : '',
 }))
 
 const _iconName = computed(() => {

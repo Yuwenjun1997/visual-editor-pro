@@ -4,6 +4,5 @@ import type { EmblaCarouselType } from 'embla-carousel'
 export const carouselNodeInjectionKey: InjectionKey<Ref<HTMLElement | undefined>> =
   Symbol('carouselNode')
 
-export const carouselApiInjectionKey: InjectionKey<
-  Ref<EmblaCarouselType | undefined>
-> = Symbol('carouselApi')
+export const carouselApiInjectionKey: InjectionKey<Ref<EmblaCarouselType | undefined>> =
+  Symbol('carouselApi')

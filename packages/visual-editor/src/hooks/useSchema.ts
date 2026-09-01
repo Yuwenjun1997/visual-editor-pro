@@ -2,10 +2,7 @@ import { generateSchemas } from '../schemas'
 import { useViusalStore } from '../store/useVisual'
 import type { VisualBlockSlots } from '../types/visual-editor'
 
-const getVisualKeys = (
-  slots: VisualBlockSlots,
-  visualKeys = new Set<string>()
-) => {
+const getVisualKeys = (slots: VisualBlockSlots, visualKeys = new Set<string>()) => {
   Object.values(slots)
     .flatMap((slot) => slot.blocks)
     .forEach((block) => {
@@ -34,10 +31,13 @@ export const useSchema = () => {
   })
 
   const createOne = () => {
-    return schemaList.value.reduce((prev, schema) => {
-      prev[schema.propName] = ''
-      return prev
-    }, {} as Record<string, any>)
+    return schemaList.value.reduce(
+      (prev, schema) => {
+        prev[schema.propName] = ''
+        return prev
+      },
+      {} as Record<string, any>,
+    )
   }
 
   return {

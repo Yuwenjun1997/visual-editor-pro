@@ -1,11 +1,5 @@
-import type {
-  VisualEditorComponent,
-  VisualEditorProps,
-} from '../../types/visual-editor'
-import type {
-  VisualFormField,
-  VisualFormProps,
-} from '@visual/ui/components/visual-form/interface'
+import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
+import type { VisualFormField, VisualFormProps } from '@visual/ui/components/visual-form/interface'
 import {
   createColorInputControl,
   createNormalSelectControl,

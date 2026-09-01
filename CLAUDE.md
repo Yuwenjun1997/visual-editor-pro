@@ -64,11 +64,11 @@ pnpm clean          # 清空各包 dist 与根 node_modules/lockfile
 
 每个模块**独立编译** Tailwind，带各自 `prefix`，类名互不碰撞；**唯一的全局 Preflight reset 来自 web 应用**（两库 `corePlugins.preflight: false`，且库的 tailwind 输入不含 `@tailwind base`）。
 
-| 模块 | 前缀 | content 扫描 | preflight | 产物 |
-|---|---|---|---|---|
-| `@visual/ui` | `vu-` | `packages/visual-ui/src/**` | `false` | `dist/style.css`（`vu-*`） |
-| `@visual/editor` | `ve-` | `packages/visual-editor/src/**` | `false` | `dist/style.css`（`ve-*`） |
-| `@visual/web` | `wa-` | `apps/web/src/**` | `true`（全量唯一 reset） | PostCSS 内联编译 |
+| 模块             | 前缀  | content 扫描                    | preflight                | 产物                       |
+| ---------------- | ----- | ------------------------------- | ------------------------ | -------------------------- |
+| `@visual/ui`     | `vu-` | `packages/visual-ui/src/**`     | `false`                  | `dist/style.css`（`vu-*`） |
+| `@visual/editor` | `ve-` | `packages/visual-editor/src/**` | `false`                  | `dist/style.css`（`ve-*`） |
+| `@visual/web`    | `wa-` | `apps/web/src/**`               | `true`（全量唯一 reset） | PostCSS 内联编译           |
 
 - 编辑器的 `.vue` 模板中，Tailwind 布局类必须写 `ve-` 前缀（如 `ve-flex-1`、`ve-h-screen`）；应用模板用 `wa-`。visual-ui 的工具类用 `vu-`。
 - `--v-*` 主题变量 `--v-bg-color` 与安全区变量 `--v-safe-area-bottom`：全部由 visual-ui 的 `mountThemeToRoot`（`@visual/ui/hooks/useMountThemeToRoot`）挂到 `documentElement`；`VisualApp` 在自身 setup 传 `{ bgColor, safeAreaBottom }` 调用，`setupVisual` 无参调用仅挂 `--v-*` 主题变量。
@@ -94,6 +94,7 @@ pnpm clean          # 清空各包 dist 与根 node_modules/lockfile
 ### 宿主资产契约（未来 Electron 复用）
 
 编辑器代码通过绝对 URL 引用两块宿主资产，**宿主必须提供**：
+
 - `public/componets/visual-*.svg` —— 左侧块面板预览图（`previewImage`）。
 - `assets/fonts/iconfont.*`（类名 `iconfont`）—— 编辑器工具栏图标字体。
 

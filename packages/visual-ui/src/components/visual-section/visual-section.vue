@@ -1,6 +1,13 @@
 <template>
-  <visual-box class="visual-section" :styles="_props.styles" :class="_props.class">
-    <div class="visual-section__inner" :style="_bindInnerStyles">
+  <visual-box
+    class="visual-section"
+    :styles="_props.styles"
+    :class="_props.class"
+  >
+    <div
+      class="visual-section__inner"
+      :style="_bindInnerStyles"
+    >
       <div class="visual-section__title">
         <template v-if="_bindProps.showLine">
           <div class="visual-section__line"></div>
@@ -15,7 +22,10 @@
           :color="_bindProps.iconColor"
         />
       </div>
-      <div class="visual-section__desc" v-if="_bindProps.description">
+      <div
+        v-if="_bindProps.description"
+        class="visual-section__desc"
+      >
         {{ _bindProps.description }}
       </div>
     </div>
@@ -36,7 +46,7 @@ interface Props {
 }
 
 defineOptions({
-  name: 'visual-section',
+  name: 'VisualSection',
 })
 
 const _props = defineProps<Props>()
