@@ -72,6 +72,13 @@ export interface PageRow {
   updated_at: string
 }
 
+export interface DashboardStats {
+  pages: number
+  products: number
+  articles: number
+  categories: number
+}
+
 // 与 visual-ui 组件期望的 item 形状对齐
 export interface ProductCardItem {
   id?: string

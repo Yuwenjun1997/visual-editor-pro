@@ -1,13 +1,17 @@
 <template>
-  <div class="wa-flex wa-min-h-screen">
+  <div class="wa-flex wa-min-h-screen login-view">
     <!-- 品牌区 -->
     <div class="brand-panel wa-hidden lg:wa-flex">
       <div class="brand-inner">
         <div class="wa-flex wa-items-center wa-gap-3">
           <img src="/vite.svg" class="wa-w-11 wa-h-11" />
-          <span class="wa-text-2xl wa-font-semibold wa-text-white">可视化设计</span>
+          <span class="wa-text-2xl wa-font-semibold wa-text-white"
+            >可视化设计</span
+          >
         </div>
-        <h1 class="wa-mt-12 wa-text-3xl wa-font-bold wa-leading-snug wa-text-white">
+        <h1
+          class="wa-mt-12 wa-text-3xl wa-font-bold wa-leading-snug wa-text-white"
+        >
           拖拽构建页面,<br />无需编写代码
         </h1>
         <p class="wa-mt-5 wa-text-white/80 wa-leading-relaxed wa-max-w-md">
@@ -29,10 +33,7 @@
     </div>
 
     <!-- 表单区 -->
-    <div
-      class="wa-flex-1 wa-flex wa-items-center wa-justify-center wa-p-6"
-      style="background: #f7f8fa"
-    >
+    <div class="wa-flex-1 wa-flex wa-items-center wa-justify-center wa-p-6">
       <div class="wa-w-full wa-max-w-96">
         <div class="wa-text-center">
           <div class="wa-flex wa-items-center wa-justify-center wa-gap-2">
@@ -40,12 +41,19 @@
             <span class="wa-text-xl wa-font-semibold">可视化设计</span>
           </div>
           <p class="wa-mt-2 wa-text-sm">
-            {{ isRegister ? '注册一个账号开始创作' : '欢迎回来,请登录你的账号' }}
+            {{
+              isRegister ? '注册一个账号开始创作' : '欢迎回来,请登录你的账号'
+            }}
           </p>
         </div>
 
         <el-card shadow="never" class="wa-mt-6 login-card">
-          <el-form :model="form" label-position="top" size="large" @submit.prevent>
+          <el-form
+            :model="form"
+            label-position="top"
+            size="large"
+            @submit.prevent
+          >
             <el-form-item v-if="isRegister" label="昵称">
               <el-input
                 v-model="form.fullName"
@@ -100,6 +108,9 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { useAuthStore } from '../stores/auth'
+import { useDark } from '@vueuse/core'
+
+useDark()
 
 const authStore = useAuthStore()
 const route = useRoute()
@@ -122,7 +133,7 @@ const toggleMode = () => {
 }
 
 const redirectTo = () =>
-  (typeof route.query.redirect === 'string' && route.query.redirect) || '/'
+  (typeof route.query.redirect === 'string' && route.query.redirect) || '/admin'
 
 const submit = async () => {
   if (!form.email || !form.password) {
@@ -139,7 +150,7 @@ const submit = async () => {
       const { session } = await authStore.register(
         form.email,
         form.password,
-        form.fullName
+        form.fullName,
       )
       ElMessage.success('注册成功')
       if (session) {
@@ -155,7 +166,7 @@ const submit = async () => {
     }
   } catch (error: any) {
     ElMessage.error(
-      error?.message || (isRegister.value ? '注册失败' : '登录失败')
+      error?.message || (isRegister.value ? '注册失败' : '登录失败'),
     )
   } finally {
     loading.value = false
@@ -164,6 +175,10 @@ const submit = async () => {
 </script>
 
 <style scoped>
+.login-view {
+  background: var(--el-bg-color);
+}
+
 .brand-panel {
   width: 46%;
   position: relative;

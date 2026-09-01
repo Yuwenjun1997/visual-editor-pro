@@ -5,7 +5,7 @@ import {
   PreviewScenario,
   DevScenario,
 } from '@visual/editor'
-import AdminLayout from '@/layout/AdminLayout.vue'
+import AdminLayout from '@/AdminLayoutV2.vue'
 import LoginView from '@/views/LoginView.vue'
 import EditorShell from '@/views/editor/EditorShell.vue'
 import PagesView from '@/views/admin/PagesView.vue'
@@ -14,6 +14,7 @@ import ArticlesView from '@/views/admin/ArticlesView.vue'
 import CategoriesView from '@/views/admin/CategoriesView.vue'
 import ProfileView from '@/views/admin/ProfileView.vue'
 import UsersView from '@/views/admin/UsersView.vue'
+import DashboardView from '@/views/admin/DashboardView.vue'
 import PreviewBridgePage from '@/views/PreviewBridgePage.vue'
 import { useAuthStore } from '@/stores/auth'
 import { hasPermission } from '@/lib/rbac'
@@ -35,8 +36,8 @@ const router = createRouter({
       component: LoginView,
     },
     {
-      // 本地设计入口:需 editor 权限(未登录/无权限由守卫拦截)
-      path: '/',
+      // 新建页面入口:需登录与 editor 权限(未登录/无权限由守卫拦截)
+      path: '/editor',
       component: EditorShell,
       meta: { requiresAuth: true, permission: 'editor:access' },
       children: [
@@ -46,7 +47,7 @@ const router = createRouter({
           children: [
             {
               path: '',
-              name: 'editor',
+              name: 'editor-create',
               component: EditorStage,
             },
             {
@@ -80,11 +81,16 @@ const router = createRouter({
     {
       path: '/admin',
       component: AdminLayout,
-      meta: { requiresAuth: true, permission: 'admin:access' },
+      meta: { requiresAuth: true },
       children: [
         {
           path: '',
-          redirect: '/admin/pages',
+          redirect: '/admin/dashboard',
+        },
+        {
+          path: 'dashboard',
+          name: 'admin-dashboard',
+          component: DashboardView,
         },
         {
           path: 'pages',
@@ -132,6 +138,12 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const auth = useAuthStore()
   if (!auth.isInitialized) await auth.init()
+
+  if (to.path === '/') {
+    return auth.user
+      ? { name: 'admin-dashboard' }
+      : { name: 'login', query: { redirect: '/admin' } }
+  }
 
   if (to.meta.requiresAuth && !auth.user) {
     return { name: 'login', query: { redirect: to.fullPath } }

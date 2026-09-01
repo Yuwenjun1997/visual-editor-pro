@@ -9,11 +9,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     DefaultLayout: typeof import('./components/layout/DefaultLayout.vue')['default']
-    EditorHeader: typeof import('./components/editor/EditorHeader.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
-    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
-    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCard: typeof import('element-plus/es')['ElCard']

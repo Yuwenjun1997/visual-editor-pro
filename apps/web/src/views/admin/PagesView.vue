@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="never">
+  <el-card shadow="never" class="pages-card">
     <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
       <div class="wa-text-base wa-font-medium" style="color: #303133">
         页面列表
@@ -9,54 +9,26 @@
       </el-button>
     </div>
 
-    <el-table :data="pages" v-loading="loading">
-      <el-table-column prop="title" label="标题" min-width="220">
-        <template #default="{ row }">
-          <div class="wa-flex wa-items-center wa-gap-2">
-            <Icon icon="ep:document" style="color: #909399" />
-            <span style="color: #303133">{{ row.title }}</span>
+    <div v-loading="loading" class="page-grid">
+      <el-empty v-if="!loading && !pages.length" description="暂无页面" />
+      <el-card v-for="row in pages" :key="row.id" shadow="hover" class="page-item-card">
+        <div class="wa-flex wa-items-start wa-justify-between wa-gap-3">
+          <div class="wa-flex wa-min-w-0 wa-items-center wa-gap-2">
+            <Icon icon="ep:document" class="page-icon" />
+            <span class="page-title">{{ row.title || '未命名页面' }}</span>
           </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="状态" width="110">
-        <template #default="{ row }">
           <el-tag :type="row.status === 'published' ? 'success' : 'info'" size="small">
             {{ row.status === 'published' ? '已发布' : '草稿' }}
           </el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column label="更新时间" width="180">
-        <template #default="{ row }">{{ formatTime(row.updated_at) }}</template>
-      </el-table-column>
-      <el-table-column label="操作" width="230">
-        <template #default="{ row }">
-          <el-button
-            v-if="can('page:edit')"
-            size="small"
-            @click="editPage(row as PageRow)"
-          >
-            编辑
-          </el-button>
-          <el-button
-            size="small"
-            type="primary"
-            plain
-            @click="previewPage(row as PageRow)"
-          >
-            预览
-          </el-button>
-          <el-button
-            v-if="can('page:delete')"
-            size="small"
-            type="danger"
-            plain
-            @click="removePage(row as PageRow)"
-          >
-            删除
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+        </div>
+        <div class="page-time">更新时间 {{ formatTime(row.updated_at) }}</div>
+        <div class="page-actions">
+          <el-button v-if="can('page:edit')" size="small" @click="editPage(row)">编辑</el-button>
+          <el-button size="small" type="primary" plain @click="previewPage(row)">预览</el-button>
+          <el-button v-if="can('page:delete')" size="small" type="danger" plain @click="removePage(row)">删除</el-button>
+        </div>
+      </el-card>
+    </div>
   </el-card>
 </template>
 
@@ -94,7 +66,7 @@ const formatTime = (value: string) => {
 }
 
 const createPage = () => {
-  router.push('/')
+  router.push({ name: 'editor-create' })
 }
 
 const editPage = (row: PageRow) => {
@@ -119,3 +91,42 @@ const removePage = async (row: PageRow) => {
     .catch(() => {})
 }
 </script>
+
+<style scoped>
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  min-height: 180px;
+}
+
+.page-item-card {
+  min-width: 0;
+}
+
+.page-icon {
+  flex-shrink: 0;
+  color: var(--el-color-primary);
+}
+
+.page-title {
+  overflow: hidden;
+  color: var(--el-text-color-primary);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-time {
+  margin-top: 24px;
+  color: var(--el-text-color-secondary);
+  font-size: 13px;
+}
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+</style>
