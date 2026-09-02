@@ -3,7 +3,7 @@
     <el-icon :size="22" class="wa-is-loading preview-loading-icon">
       <Icon icon="ep:loading" />
     </el-icon>
-    <span class="wa-ml-3 wa-text-sm preview-loading-text"> 正在加载页面... </span>
+    <span class="wa-ml-3 wa-text-sm preview-loading-text">正在加载页面...</span>
   </div>
 </template>
 
@@ -11,9 +11,11 @@
 import { Icon } from '@iconify/vue'
 import { pageService } from '../services/page.service'
 import { businessDataService } from '../services/business-data.service'
+import { useAuthStore } from '../stores/auth'
 
 const route = useRoute()
 const router = useRouter()
+const auth = useAuthStore()
 
 onMounted(async () => {
   const pageId = route.params.pageId as string
@@ -24,8 +26,15 @@ onMounted(async () => {
       router.replace({ name: 'pages' })
       return
     }
-    const blocks = await businessDataService.rehydrateBusinessRefs(row.schema.blocks || [])
-    sessionStorage.setItem('preview-data', JSON.stringify({ ...row.schema, blocks }))
+    sessionStorage.setItem(
+      'preview-data',
+      JSON.stringify({
+        ...row.schema,
+        blocks: auth.user
+          ? await businessDataService.migrateLegacyBusinessRefs(row.schema.blocks || [], auth.user.id)
+          : row.schema.blocks || [],
+      }),
+    )
     router.replace({ name: 'preview', query: { device: 'h5' } })
   } catch (error: any) {
     ElMessage.error(error?.message || '页面加载失败')

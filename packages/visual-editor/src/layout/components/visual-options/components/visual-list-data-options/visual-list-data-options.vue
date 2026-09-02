@@ -38,7 +38,7 @@
       </visual-collapse>
     </template>
     <div v-if="addAble" class="ve-p-1">
-      <el-button size="small" class="ve-w-full" @click="handleAdd"> +添加项目 </el-button>
+      <el-button size="small" class="ve-w-full" @click="handleAdd">+添加项目</el-button>
     </div>
   </div>
 </template>

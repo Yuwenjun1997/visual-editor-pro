@@ -41,6 +41,7 @@ const VisualImageTextList: VisualEditorComponent<VisualImageTextListProps> = {
   componentName: 'VisualImageTextList',
   label: '图文列表',
   previewImage: '/componets/visual-image-text-list.svg',
+  dataContract: 'article-list',
   souceDataType: 'VisualObjectArray',
   props: {
     coverInRight: createSwitchControl({

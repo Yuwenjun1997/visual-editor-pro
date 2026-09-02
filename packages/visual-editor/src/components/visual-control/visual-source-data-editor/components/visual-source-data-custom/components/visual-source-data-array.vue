@@ -10,11 +10,11 @@
       </template>
       <el-table-column label="操作" width="100" align="center">
         <template #default="{ $index }">
-          <el-button size="small" type="danger" @click="handleRemove($index)"> 删除 </el-button>
+          <el-button size="small" type="danger" @click="handleRemove($index)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-button size="small" class="ve-w-full ve-mt-2" @click="handleAdd"> +添加一项 </el-button>
+    <el-button size="small" class="ve-w-full ve-mt-2" @click="handleAdd">+添加一项</el-button>
   </div>
 </template>
 

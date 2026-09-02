@@ -32,6 +32,7 @@ const visualProductCardList: VisualEditorComponent<VisualProductCardListProps> =
   componentName: 'VisualProductCardList',
   label: '商品卡片列表',
   previewImage: '/componets/visual-product-card-list.svg',
+  dataContract: 'product-list',
   souceDataType: 'VisualObjectArray',
   props: {
     layout: createNormalSelectControl({

@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <el-table v-loading="loading" size="small" :data="filteredProducts" >
+    <el-table v-loading="loading" size="small" :data="filteredProducts">
       <el-table-column label="封面" width="90">
         <template #default="{ row }">
           <el-image v-if="row.cover_url" fit="cover" :src="row.cover_url" class="wa-w-14 wa-h-14 wa-rounded" />
@@ -19,7 +19,7 @@
       </el-table-column>
       <el-table-column label="标题" prop="title" min-width="180" />
       <el-table-column label="售价" width="100">
-        <template #default="{ row }"> ¥{{ row.price ?? '-' }} </template>
+        <template #default="{ row }">¥{{ row.price ?? '-' }}</template>
       </el-table-column>
       <el-table-column label="分类" width="110">
         <template #default="{ row }">
@@ -39,7 +39,7 @@
       <el-table-column label="操作" width="140">
         <template #default="{ row }">
           <el-button size="small" @click="openEdit(row as ProductRow)">编辑</el-button>
-          <el-button plain size="small" type="danger" @click="remove(row as ProductRow)"> 删除 </el-button>
+          <el-button plain size="small" type="danger" @click="remove(row as ProductRow)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -84,7 +84,7 @@
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="saving" @click="save"> 保存 </el-button>
+        <el-button type="primary" :loading="saving" @click="save">保存</el-button>
       </template>
     </el-dialog>
   </div>

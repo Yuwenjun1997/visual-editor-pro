@@ -36,6 +36,8 @@ export default defineConfig([
       ],
       'vue/multi-word-component-names': 'off',
       'vue/require-default-prop': 'off',
+      'vue/multiline-html-element-content-newline': 'off',
+      'vue/singleline-html-element-content-newline': 'off',
       'vue/attributes-order': [
         'error',
         {

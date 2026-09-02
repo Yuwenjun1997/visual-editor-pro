@@ -9,10 +9,10 @@
       </el-radio-group>
       <el-input v-model="newName" placeholder="新分类名称" style="width: 200px" @keyup.enter="create" />
       <el-input-number v-model="newSort" :min="0" placeholder="排序" :controls="false" style="width: 90px" />
-      <el-button type="primary" :loading="saving" @click="create"> 新增 </el-button>
+      <el-button type="primary" :loading="saving" @click="create">新增</el-button>
     </div>
 
-    <el-table v-loading="loading" size="small" :data="visibleCategories" >
+    <el-table v-loading="loading" size="small" :data="visibleCategories">
       <el-table-column label="名称" prop="name" min-width="200" />
       <el-table-column label="类型" width="120">
         <template #default="{ row }">

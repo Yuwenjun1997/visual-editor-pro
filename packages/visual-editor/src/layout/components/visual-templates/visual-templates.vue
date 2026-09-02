@@ -26,7 +26,7 @@
               <span v-for="(label, i) in visibleChips(tpl)" :key="i" class="template-card__chip">
                 {{ label }}
               </span>
-              <span v-if="moreChips(tpl) > 0" class="template-card__chip is-more"> +{{ moreChips(tpl) }} </span>
+              <span v-if="moreChips(tpl) > 0" class="template-card__chip is-more">+{{ moreChips(tpl) }}</span>
             </div>
           </div>
         </div>

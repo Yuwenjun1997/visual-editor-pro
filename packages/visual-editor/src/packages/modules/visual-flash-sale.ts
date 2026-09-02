@@ -14,6 +14,7 @@ const visualFlashSale: VisualEditorComponent<VisualFlashSaleProps> = {
   componentName: 'VisualFlashSale',
   label: '限时秒杀',
   previewImage: '/componets/visual-flash-sale.svg',
+  souceDataType: 'VisualObject',
   props: {
     title: createTextInputControl({ label: '标题', defaultValue: '限时秒杀' }),
     endTime: createDatePickerControl({

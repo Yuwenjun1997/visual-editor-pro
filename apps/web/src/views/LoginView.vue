@@ -7,7 +7,11 @@
           <img src="/vite.svg" class="wa-w-11 wa-h-11" />
           <span class="wa-text-2xl wa-font-semibold wa-text-white">可视化设计</span>
         </div>
-        <h1 class="wa-mt-12 wa-text-3xl wa-font-bold wa-leading-snug wa-text-white">拖拽构建页面,<br />无需编写代码</h1>
+        <h1 class="wa-mt-12 wa-text-3xl wa-font-bold wa-leading-snug wa-text-white">
+          拖拽构建页面,
+          <br />
+          无需编写代码
+        </h1>
         <p class="wa-mt-5 wa-text-white/80 wa-leading-relaxed wa-max-w-md">
           面向业务的低代码可视化编辑器:左侧拖块、右侧配置、一键保存发布,数据按账号隔离、权限可控。
         </p>

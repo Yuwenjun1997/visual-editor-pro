@@ -13,14 +13,8 @@
         <el-tab-pane label="自定义数据" name="custom">
           <visual-source-data-custom v-model="modelValue" />
         </el-tab-pane>
-        <el-tab-pane label="接口请求" name="request">
-          <visual-source-data-request v-model="modelValue" />
-        </el-tab-pane>
-        <el-tab-pane label="栏目数据" name="column">
+        <el-tab-pane label="数据源" name="column">
           <visual-source-data-column v-model="modelValue" />
-        </el-tab-pane>
-        <el-tab-pane label="数据管理" name="business">
-          <visual-business-data v-model="modelValue" />
         </el-tab-pane>
       </el-tabs>
       <template #footer>
@@ -35,12 +29,11 @@
 
 <script setup lang="ts">
 import VisualSourceDataCustom from './components/visual-source-data-custom/visual-source-data-custom.vue'
-import VisualSourceDataRequest from './components/visual-source-data-request/visual-source-data-request.vue'
 import VisualSourceDataColumn from './components/visual-source-data-column.vue'
-import VisualBusinessData from './components/visual-business-data/visual-business-data.vue'
 import { useSourceDataEditor } from '../../../hooks/useSourceDataEditor'
 import { useVisualRef } from '../../../hooks/useVisualRef'
 import { useViusalStore } from '../../../store/useVisual'
+import { refreshColumnData, refreshManagedData } from '../../../utils/visual.data-source'
 
 defineOptions({
   name: 'VisualSourceDataEditor',
@@ -52,8 +45,12 @@ const visualStore = useViusalStore()
 
 const handleConfirm = () => {
   const { getRef } = useVisualRef()
-  if (modelValue.value.dataSource === 'request') {
-    const blockRef = getRef(visualStore.vid) as any
+  const blockRef = getRef(visualStore.vid) as any
+  if (modelValue.value.dataSource === 'managed') {
+    refreshManagedData(modelValue.value, blockRef)
+  } else if (modelValue.value.dataSource === 'column') {
+    refreshColumnData(modelValue.value, blockRef)
+  } else if (modelValue.value.dataSource === 'request') {
     blockRef?.loadData()
   }
   hide()

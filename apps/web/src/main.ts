@@ -14,9 +14,9 @@ import '@visual/editor/style.css'
 import './styles/tailwind/index.css'
 import './assets/fonts/iconfont.css'
 import { useAuthStore } from './stores/auth'
-import { categoryService } from './services/category.service'
 import { pageService } from './services/page.service'
 import { businessDataService } from './services/business-data.service'
+import { dataSourceService } from './services/data-source.service'
 
 setupIconify()
 
@@ -59,29 +59,14 @@ visualConfig.onSave = async (data) => {
   if (!title) return
   title = title.slice(0, 40) || '未命名页面'
 
-  // 保存前用最新数据重生成 businessDataRef 快照(deep-clone,不影响画布)
-  const blocks = await businessDataService.rehydrateBusinessRefs(data.blocks)
+  const blocks = await businessDataService.migrateLegacyBusinessRefs(data.blocks, authStore.user.id)
   const schema: PageSchema = { ...data, title, blocks }
 
-  let pageId: string | number = data.pageId
-  if (isUuid(pageId)) {
-    const existing = await pageService.get(pageId as string)
-    if (existing) {
-      await pageService.update(pageId as string, { title, schema })
-    } else {
-      pageId = await pageService.insert({
-        user_id: authStore.user.id,
-        title,
-        schema,
-      })
-    }
-  } else {
-    pageId = await pageService.insert({
-      user_id: authStore.user.id,
-      title,
-      schema,
-    })
-  }
+  const pageId = await pageService.saveWithBindings({
+    pageId: isUuid(data.pageId) ? String(data.pageId) : null,
+    title,
+    schema,
+  })
 
   ElMessage.success('保存成功')
   return { pageId, blocks } as VisualSaveResult
@@ -89,13 +74,15 @@ visualConfig.onSave = async (data) => {
 
 visualConfig.savedPageLoader = async (id) => {
   const row = await pageService.get(id as string)
-  return row?.schema ?? null
+  return row && authStore.user
+    ? {
+        ...row.schema,
+        blocks: await businessDataService.migrateLegacyBusinessRefs(row.schema.blocks || [], authStore.user.id),
+      }
+    : null
 }
 
-visualConfig.businessDataProvider = {
-  listCategories: (type) => categoryService.listByType(type),
-  resolveRows: (ref) => businessDataService.resolveBusinessRows(ref),
-}
+visualConfig.dataSourceProvider = dataSourceService
 
 setupVisual(app)
 

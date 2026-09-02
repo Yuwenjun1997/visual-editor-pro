@@ -2,7 +2,10 @@
   <div class="admin-page">
     <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
       <div class="wa-text-base wa-font-medium">页面列表</div>
-      <el-button v-if="can('page:create')" type="primary" @click="createPage"> 新建页面 </el-button>
+      <div class="wa-flex wa-gap-2">
+        <el-button v-if="can('editor:access')" @click="router.push({ name: 'data-sources' })">数据源管理</el-button>
+        <el-button v-if="can('page:create')" type="primary" @click="createPage">新建页面</el-button>
+      </div>
     </div>
 
     <div v-loading="loading" class="page-grid">
@@ -21,9 +24,9 @@
         <div class="page-actions">
           <el-button v-if="can('page:edit')" size="small" @click="editPage(row)">编辑</el-button>
           <el-button plain size="small" type="primary" @click="previewPage(row)">预览</el-button>
-          <el-button v-if="can('page:delete')" plain size="small" type="danger" @click="removePage(row)"
-            >删除</el-button
-          >
+          <el-button v-if="can('page:delete')" plain size="small" type="danger" @click="removePage(row)">
+            删除
+          </el-button>
         </div>
       </div>
     </div>

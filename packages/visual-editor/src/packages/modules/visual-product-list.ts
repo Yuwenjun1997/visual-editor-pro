@@ -29,6 +29,7 @@ const visualProductList: VisualEditorComponent<VisualProductListProps> = {
   componentName: 'VisualProductList',
   label: '商品列表',
   previewImage: '/componets/visual-product-list.svg',
+  dataContract: 'product-list',
   souceDataType: 'VisualObjectArray',
   props: {
     coverInRight: createSwitchControl({ label: '图片居右' }),

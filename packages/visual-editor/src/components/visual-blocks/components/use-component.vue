@@ -11,6 +11,8 @@ import type { VisualBlockData } from '../../../types/visual-editor'
 import { filterProps, filterStyles, VISUAL_OVERLAY_KEYS } from '../../../utils/visual.filter'
 import type { CSSProperties } from 'vue'
 import { useVisualRef } from '../../../hooks/useVisualRef'
+import { refreshColumnData, refreshManagedData } from '../../../utils/visual.data-source'
+import type { VisualSourceOptions } from '@visual/ui/types'
 
 interface Props {
   block: VisualBlockData
@@ -67,6 +69,15 @@ const componentStyles = computed<CSSProperties>(() => {
 
 onMounted(() => {
   const blockRef = getRef(vid.value) as any
+  const options = props.block.props?.options as VisualSourceOptions | undefined
+  if (options?.dataSource === 'managed') {
+    refreshManagedData(options, blockRef)
+    return
+  }
+  if (options?.dataSource === 'column') {
+    refreshColumnData(options, blockRef)
+    return
+  }
   if (blockRef && typeof blockRef.loadData === 'function') {
     blockRef?.loadData()
   }

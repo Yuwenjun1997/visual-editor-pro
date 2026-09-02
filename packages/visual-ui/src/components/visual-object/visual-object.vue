@@ -33,11 +33,20 @@ const _slotData = ref<JsonObject | JsonObjectArray>()
 const _isLoading = ref<boolean>(false)
 const _errorMsg = ref<string>()
 
+const _setData = (data: JsonObject | JsonObjectArray | undefined) => {
+  _errorMsg.value = undefined
+  _slotData.value = data
+}
+
+const _setDataError = (message: string) => {
+  _errorMsg.value = message
+}
+
 const _loadData = async () => {
   try {
     if (!_props.props.options) return
     _errorMsg.value = undefined
-    if (!_props.props.options.httpRequest) return
+    if (_props.props.options.dataSource !== 'request' || !_props.props.options.httpRequest) return
     _isLoading.value = true
     const { request } = useVisualRequest(_props.props.options)
     const response = await request()
@@ -53,6 +62,8 @@ provide('slotObject', readonly(_slotData))
 
 defineExpose({
   loadData: _loadData,
+  setData: _setData,
+  setDataError: _setDataError,
 })
 
 watchEffect(() => {

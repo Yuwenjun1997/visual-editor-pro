@@ -29,7 +29,7 @@
       <el-table-column label="操作" width="140">
         <template #default="{ row }">
           <el-button size="small" @click="openEdit(row as ArticleRow)">编辑</el-button>
-          <el-button plain size="small" type="danger" @click="remove(row as ArticleRow)"> 删除 </el-button>
+          <el-button plain size="small" type="danger" @click="remove(row as ArticleRow)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -78,7 +78,7 @@
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="saving" @click="save"> 保存 </el-button>
+        <el-button type="primary" :loading="saving" @click="save">保存</el-button>
       </template>
     </el-dialog>
   </div>

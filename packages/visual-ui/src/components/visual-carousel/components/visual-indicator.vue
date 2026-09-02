@@ -1,7 +1,7 @@
 <template>
   <div :class="bindClassList" class="visual-indicator">
     <span v-if="type === 'title'">{{ showTitle }}</span>
-    <span v-else-if="type === 'fixed-right'"> {{ current + 1 }}/{{ props.list.length }} </span>
+    <span v-else-if="type === 'fixed-right'">{{ current + 1 }}/{{ props.list.length }}</span>
     <template v-else>
       <div
         v-for="(item, index) in props.list"

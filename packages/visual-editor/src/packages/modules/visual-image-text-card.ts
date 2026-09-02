@@ -42,6 +42,7 @@ const VisualImageTextCard: VisualEditorComponent<VisualImageTextCardProps> = {
   componentName: 'VisualImageTextCard',
   label: '图文卡片',
   previewImage: '/componets/visual-image-text-card.svg',
+  dataContract: 'article-list',
   souceDataType: 'VisualObjectArray',
   props: {
     layout: createNormalSelectControl({

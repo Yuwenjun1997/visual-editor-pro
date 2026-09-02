@@ -10,6 +10,7 @@ import CategoriesView from '@/views/admin/CategoriesView.vue'
 import ProfileView from '@/views/admin/ProfileView.vue'
 import UsersView from '@/views/admin/UsersView.vue'
 import DashboardView from '@/views/admin/DashboardView.vue'
+import DataSourcesView from '@/views/admin/DataSourcesView.vue'
 import PreviewBridgePage from '@/views/PreviewBridgePage.vue'
 import { useAuthStore } from '@/stores/auth'
 import { hasPermission } from '@/lib/rbac'
@@ -106,6 +107,12 @@ const router = createRouter({
           path: 'categories',
           name: 'categories',
           component: CategoriesView,
+        },
+        {
+          path: 'data-sources',
+          name: 'data-sources',
+          component: DataSourcesView,
+          meta: { permission: 'editor:access' },
         },
         {
           path: 'profile',

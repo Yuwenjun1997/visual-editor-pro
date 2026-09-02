@@ -11,5 +11,6 @@
   "arrowParens": "always",
   "endOfLine": "lf",
   "vueIndentScriptAndStyle": false,
-  "singleAttributePerLine": false
+  "singleAttributePerLine": false,
+  "htmlWhitespaceSensitivity": "ignore"
 }

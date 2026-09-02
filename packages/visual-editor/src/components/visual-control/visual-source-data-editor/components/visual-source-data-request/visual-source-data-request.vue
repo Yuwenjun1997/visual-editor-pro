@@ -6,7 +6,7 @@
         <el-option label="POST" value="POST" />
       </el-select>
       <el-input v-model="modelValue.httpRequest" placeholder="请求地址" />
-      <el-button type="primary" class="ve-w-40" @click="sendResuest"> 测试请求 </el-button>
+      <el-button type="primary" class="ve-w-40" @click="sendResuest">测试请求</el-button>
     </div>
     <el-radio-group v-model="optionType" size="small">
       <el-radio-button label="请求参数" value="requestParams" />
