@@ -59,8 +59,23 @@ visualConfig.onSave = async (data) => {
   if (!title) return
   title = title.slice(0, 40) || '未命名页面'
 
+  let slug = (data.slug || '').trim().toLowerCase()
+  if (!slug) {
+    const promptResult = await ElMessageBox.prompt('请输入页面地址标识，只能使用小写字母、数字和连字符', '页面地址', {
+      inputValue: `page-${crypto.randomUUID().slice(0, 8)}`,
+      inputPattern: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+      inputErrorMessage: '请输入合法的 slug',
+    }).catch(() => null)
+    if (!promptResult) return
+    slug = (promptResult.value || '').trim().toLowerCase()
+  }
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 80) {
+    ElMessage.error('页面地址不合法')
+    return
+  }
+
   const blocks = await businessDataService.migrateLegacyBusinessRefs(data.blocks, authStore.user.id)
-  const schema: PageSchema = { ...data, title, blocks }
+  const schema: PageSchema = { ...data, title, slug, blocks }
 
   const pageId = await pageService.saveWithBindings({
     pageId: isUuid(data.pageId) ? String(data.pageId) : null,
@@ -70,6 +85,14 @@ visualConfig.onSave = async (data) => {
 
   ElMessage.success('保存成功')
   return { pageId, blocks } as VisualSaveResult
+}
+
+visualConfig.onPublish = async (data) => {
+  if (!authStore.user || !isUuid(String(data.pageId))) {
+    ElMessage.warning('请先保存页面草稿')
+    return
+  }
+  await pageService.publish(String(data.pageId))
 }
 
 visualConfig.savedPageLoader = async (id) => {
@@ -82,6 +105,7 @@ visualConfig.savedPageLoader = async (id) => {
         // an empty or stale schema.pageId, which would make the next save
         // look like a create operation.
         pageId: row.id,
+        slug: row.slug,
         blocks: await businessDataService.migrateLegacyBusinessRefs(row.schema.blocks || [], authStore.user.id),
       }
     : null

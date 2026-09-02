@@ -63,6 +63,11 @@
           <Icon icon="ion:save-outline" />
         </el-button>
       </el-tooltip>
+      <el-tooltip content="发布">
+        <el-button type="primary" :loading="publishing" @click="handlePublish">
+          发布
+        </el-button>
+      </el-tooltip>
     </el-button-group>
   </div>
 </template>
@@ -86,6 +91,7 @@ const router = useRouter()
 const { redo, undo, canRedo, canUndo } = useHistory()
 const { blockList } = useBlocks()
 const { pageConfig } = usePageConfig()
+const publishing = ref(false)
 
 const handleRun = () => {
   const data = { ...unref(pageConfig), blocks: unref(blockList) }
@@ -111,6 +117,26 @@ const handleSave = async () => {
     blockList.value = result.blocks
   }
   visualStore.clearCurrent()
+}
+
+const handlePublish = async () => {
+  if (!visualConfig.onPublish) {
+    ElMessage.warning('发布功能未配置')
+    return
+  }
+  if (!pageConfig.value.pageId) {
+    ElMessage.warning('请先保存页面草稿')
+    return
+  }
+  publishing.value = true
+  try {
+    await visualConfig.onPublish({ ...unref(pageConfig), blocks: unref(blockList) })
+    ElMessage.success('发布成功')
+  } catch (error: any) {
+    ElMessage.error(error?.message || '发布失败')
+  } finally {
+    publishing.value = false
+  }
 }
 </script>
 

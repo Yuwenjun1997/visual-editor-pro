@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase'
-import type { PageRow } from '../types/api'
+import type { PageRevision, PageRow, PublishedPage } from '../types/api'
 import type { PageSchema } from '@visual/editor'
 
 export interface PageDataSourceBinding {
@@ -46,14 +46,48 @@ export const pageService = {
   },
 
   async saveWithBindings(payload: { pageId: string | null; title: string; schema: PageSchema }) {
-    const { data, error } = await supabase.rpc('save_page_with_data_source_bindings', {
+    const slug = payload.schema.slug || `page-${crypto.randomUUID().slice(0, 8)}`
+    const { data, error } = await supabase.rpc('save_draft_page', {
       p_page_id: payload.pageId,
       p_title: payload.title,
+      p_slug: slug,
       p_schema: payload.schema,
       p_bindings: collectBindings(payload.schema.blocks),
     })
     if (error) throw error
     return data as string
+  },
+
+  async publish(id: string): Promise<string> {
+    const { data, error } = await supabase.rpc('publish_page', { p_page_id: id })
+    if (error) throw error
+    return data as string
+  },
+
+  async listRevisions(id: string): Promise<PageRevision[]> {
+    const { data, error } = await supabase
+      .from('page_revisions')
+      .select('id, page_id, version, title, schema, created_by, created_at')
+      .eq('page_id', id)
+      .order('version', { ascending: false })
+    if (error) throw error
+    return (data || []) as PageRevision[]
+  },
+
+  async rollback(id: string, revisionId: string): Promise<string> {
+    const { data, error } = await supabase.rpc('rollback_page', {
+      p_page_id: id,
+      p_revision_id: revisionId,
+    })
+    if (error) throw error
+    return data as string
+  },
+
+  async getPublishedBySlug(slug: string): Promise<PublishedPage | null> {
+    const { data, error } = await supabase.rpc('get_published_page_by_slug', { p_slug: slug })
+    if (error) throw error
+    const row = Array.isArray(data) ? data[0] : data
+    return (row as PublishedPage) || null
   },
 
   async listBindings(sourceId: string) {

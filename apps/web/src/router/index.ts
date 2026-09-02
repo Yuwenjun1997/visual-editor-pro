@@ -12,6 +12,7 @@ import UsersView from '@/views/admin/UsersView.vue'
 import DashboardView from '@/views/admin/DashboardView.vue'
 import DataSourcesView from '@/views/admin/DataSourcesView.vue'
 import PreviewBridgePage from '@/views/PreviewBridgePage.vue'
+import PublicPageView from '@/views/PublicPageView.vue'
 import { useAuthStore } from '@/stores/auth'
 import { hasPermission } from '@/lib/rbac'
 import type { PermissionCode } from '@/lib/rbac'
@@ -131,6 +132,11 @@ const router = createRouter({
           meta: { permission: 'user:manage' },
         },
       ],
+    },
+    {
+      path: '/p/:slug',
+      name: 'public-page',
+      component: PublicPageView,
     },
     {
       path: '/page/:pageId',

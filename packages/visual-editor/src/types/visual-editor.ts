@@ -149,6 +149,7 @@ export interface VisualDataSource {
 export interface PageSchema {
   pageId: string | number
   title: string
+  slug?: string
   themeName: string
   globalStyle: CSSProperties
   blocks: VisualBlockData[]
@@ -160,6 +161,7 @@ export interface VisualSaveResult {
 }
 
 export type VisualSaveHandler = (data: PageSchema) => Promise<VisualSaveResult | void>
+export type VisualPublishHandler = (data: PageSchema) => Promise<void>
 
 export type VisualPageLoader = (pageId: string | number) => Promise<PageSchema | null>
 

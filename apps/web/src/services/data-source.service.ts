@@ -102,6 +102,10 @@ const toArticleListItem = (row: Record<string, any>) => ({
 })
 
 export const dataSourceService = {
+  publicMode: false,
+  setPublicMode(value: boolean) {
+    this.publicMode = value
+  },
   async findOrCreateLegacy(userId: string, ref: any): Promise<VisualDataSource> {
     const entityType = ref.businessType === 'products' ? 'product' : 'article'
     const dataContract = entityType === 'product' ? 'product-list' : 'article-list'
@@ -183,6 +187,12 @@ export const dataSourceService = {
   },
 
   async resolveRows(sourceId: string): Promise<Record<string, any>[] | null> {
+    if (this.publicMode) {
+      const { data, error } = await supabase.rpc('resolve_public_data_source', { p_source_id: sourceId })
+      if (error) throw error
+      if (!data) return null
+      return (Array.isArray(data) ? data : [data]) as Record<string, any>[]
+    }
     const source = await this.resolve(sourceId)
     if (!source || source.status === 'disabled') return null
     if (source.sourceKind === 'manual') {

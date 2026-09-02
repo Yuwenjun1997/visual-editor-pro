@@ -3,6 +3,9 @@
     <visual-control-item title="页面标题">
       <visual-text-input v-model="pageConfig.title" />
     </visual-control-item>
+    <visual-control-item title="页面地址 slug">
+      <visual-text-input v-model="pageConfig.slug" placeholder="小写字母、数字和连字符" />
+    </visual-control-item>
     <!-- <visual-control-item title="主题色">
       <visual-theme-picker v-model="pageConfig.themeName" />
     </visual-control-item> -->

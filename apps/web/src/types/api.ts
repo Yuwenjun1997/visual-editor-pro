@@ -34,6 +34,7 @@ export interface ProductRow {
   user_id: string
   category_id: string | null
   title: string
+  slug: string
   cover_url: string
   price: number | null
   origin_price: number | null
@@ -44,6 +45,25 @@ export interface ProductRow {
   description: string
   created_at: string
   updated_at: string
+}
+
+export interface PublishedPage {
+  id: string
+  slug: string
+  title: string
+  description: string | null
+  schema: PageSchema
+  published_at: string
+}
+
+export interface PageRevision {
+  id: string
+  page_id: string
+  version: number
+  title: string
+  schema: PageSchema
+  created_by: string
+  created_at: string
 }
 
 export interface ArticleRow {
@@ -65,11 +85,14 @@ export interface PageRow {
   id: string
   user_id: string
   title: string
+  slug: string
   description: string | null
   status: 'draft' | 'published'
   schema: PageSchema
   created_at: string
   updated_at: string
+  published_revision_id: string | null
+  published_at: string | null
 }
 
 export interface DashboardStats {

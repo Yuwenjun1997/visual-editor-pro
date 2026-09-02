@@ -1,6 +1,8 @@
 # Supabase 迁移与回归说明
 
-按 `0001_init.sql` → `0002_rbac.sql` → `0003_visual_data_sources.sql` → `0004_page_data_source_bindings.sql` → `0005_reconcile_visual_data_sources.sql` → `0006_relax_legacy_visual_data_source_columns.sql` 顺序执行。
+按 `0001_init.sql` → `0002_rbac.sql` → `0003_visual_data_sources.sql` → `0004_page_data_source_bindings.sql` → `0005_reconcile_visual_data_sources.sql` → `0006_relax_legacy_visual_data_source_columns.sql` → `0007_page_publishing.sql` → `0008_page_revisions_insert_policy.sql` 顺序执行。
+
+`0007` 增加页面 slug、不可变发布版本、发布/回滚 RPC，以及仅返回已发布数据的匿名公开 RPC。执行后应运行 Supabase Security/Performance Advisors，并用匿名请求验证草稿不可见、已发布页面可见。
 
 `0005` 用于兼容已经存在旧版 `visual_data_sources` 表的环境；新环境执行时是幂等的。
 `0006` 放宽旧版字段的非空约束，避免新模型插入数据源时被废弃字段阻塞；新环境执行时也是幂等的。

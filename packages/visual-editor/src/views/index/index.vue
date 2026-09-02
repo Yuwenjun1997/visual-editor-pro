@@ -56,6 +56,7 @@ const applyPageSchema = (schema: PageSchema) => {
   pageConfig.value = {
     pageId: schema.pageId,
     title: schema.title,
+    slug: schema.slug || '',
     themeName: schema.themeName || '',
     globalStyle: schema.globalStyle || {},
   }
@@ -63,7 +64,7 @@ const applyPageSchema = (schema: PageSchema) => {
 
 const resetPage = () => {
   blockList.value = []
-  pageConfig.value = { pageId: '', title: '', globalStyle: {}, themeName: '' }
+  pageConfig.value = { pageId: '', title: '', slug: '', globalStyle: {}, themeName: '' }
 }
 
 watch(

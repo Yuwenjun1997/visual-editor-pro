@@ -3,6 +3,7 @@ import type {
   VisualEditorComponent,
   VisualPageLoader,
   VisualSaveHandler,
+  VisualPublishHandler,
   DataSourceProvider,
 } from '../types/visual-editor'
 
@@ -22,6 +23,7 @@ export function createVisualBlockConfig() {
     componentMap,
     // 宿主注入点(web 在 registryComponent 之后设置;clear() 不清除这些字段)
     onSave: undefined as VisualSaveHandler | undefined,
+    onPublish: undefined as VisualPublishHandler | undefined,
     savedPageLoader: undefined as VisualPageLoader | undefined,
     dataSourceProvider: undefined as DataSourceProvider | undefined,
     clear(): void {

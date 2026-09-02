@@ -117,3 +117,33 @@
 - **文件**: `apps/web/src/views/admin/CategoriesView.vue`
 - **决策**: 移除页面内嵌新增表单，改为“添加分类”按钮打开 Element Plus 对话框；新增时可选择商品/文章分类、填写名称和排序，成功后关闭弹窗并刷新列表。
 - **验证**: `pnpm type-check` 通过（3 个 workspace 包）。
+
+## [当前] - 功能实现: 页面发布与匿名公开页基础闭环
+
+- **文件**: `project-docs/*`, `apps/web/supabase/migrations/0007_page_publishing.sql`, `apps/web/src/services/page.service.ts`, `apps/web/src/services/data-source.service.ts`, `apps/web/src/views/PublicPageView.vue`, `apps/web/src/views/admin/PagesView.vue`, `apps/web/src/main.ts`, `apps/web/src/router/index.ts`, `packages/visual-editor/src/components/visual-stage-bar/visual-stage-bar.vue`, `packages/visual-editor/src/types/visual-editor.ts`, `packages/visual-editor/src/hooks/usePageConfig.ts`, `packages/visual-editor/src/utils/visual.config.ts`
+- **决策**: 页面以 user_id + slug 隔离；草稿保存、不可变 page_revisions、publish/rollback RPC 与匿名受限公开 RPC 分离；公开数据源只返回已发布商品/文章的白名单字段。
+- **验证**: `pnpm --filter @visual/web type-check` 通过；`pnpm --filter @visual/editor type-check` 通过；`pnpm --filter @visual/web build` 通过（4073 modules，1m19s）；`git diff --check` 通过。`pnpm lint` 受工作区缺少 `levn` 阻断；Supabase CLI 未安装，0007 尚未应用到远端项目。
+
+## [当前] - Bug 修复: page_revisions 插入缺少 RLS 策略
+
+- **文件**: `apps/web/supabase/migrations/0007_page_publishing.sql`, `apps/web/supabase/migrations/0008_page_revisions_insert_policy.sql`, `apps/web/supabase/README.md`
+- **决策**: `publish_page` 保持 SECURITY INVOKER；为 `page_revisions` 增加 authenticated 自有行 INSERT policy 与 grant，约束 `auth.uid()` 同时匹配 `user_id/created_by`。
+- **验证**: 已定位 `.env.local` 对应远端项目 `deilxqrmvynnwjshxpoa`；远端确认 `page_revisions` 存在但缺 INSERT policy；已成功应用 `page_revisions_insert_policy` migration；SQL 查询确认 SELECT/INSERT 两条策略。Supabase advisors 仍报告公开 SECURITY DEFINER RPC 警告（公开页面读取为有意设计），以及既有未索引外键/旧 RLS 性能提示。
+
+## [当前] - 功能完善: slug 配置与页面版本回滚界面
+
+- **文件**: `packages/visual-editor/src/layout/components/visual-options/components/visual-page-options/visual-page-options.vue`, `apps/web/src/views/admin/PagesView.vue`, `apps/web/src/types/api.ts`
+- **决策**: slug 在页面设置中可编辑；已发布页面基于 updated_at/published_at 区分是否存在未发布草稿；页面管理提供版本列表和回滚入口；发布按钮对已发布页面显示为再次发布。
+- **验证**: `pnpm --filter @visual/web type-check` 通过；`pnpm --filter @visual/editor type-check` 通过；`pnpm --filter @visual/web build` 通过（4073 modules，2m12s）；`git diff --check` 通过。
+
+## [当前] - UI 优化: 页面管理操作收纳到更多悬浮菜单
+
+- **文件**: `apps/web/src/views/admin/PagesView.vue`
+- **决策**: 卡片右上角保留状态与更多入口；编辑、预览/打开、发布、版本管理、删除按权限放入 hover popover，删除操作保留危险色，移除卡片底部按钮堆叠。
+- **验证**: `pnpm --filter @visual/web type-check` 通过；`pnpm --filter @visual/web build` 通过（4073 modules，2m33s）；`git diff --check` 通过。
+
+## [当前] - UI 调整: 页面管理改用 el-card 与 el-dropdown
+
+- **文件**: `apps/web/src/views/admin/PagesView.vue`
+- **决策**: 页面列表项改为 Element Plus `el-card`；桌面端最多 5 列，1400/1100/760/520px 断点降为 4/3/2/1 列；操作入口改为 hover `el-dropdown`，通过 command 统一处理动作。
+- **验证**: `pnpm --filter @visual/web type-check` 通过；`pnpm --filter @visual/web build` 通过（4073 modules，2m15s）；`git diff --check` 通过。
