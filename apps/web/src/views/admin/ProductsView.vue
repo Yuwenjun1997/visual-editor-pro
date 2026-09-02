@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <el-table v-loading="loading" size="small" :data="filteredProducts">
+    <el-table v-loading="loading" :data="filteredProducts">
       <el-table-column label="封面" width="90">
         <template #default="{ row }">
           <el-image v-if="row.cover_url" fit="cover" :src="row.cover_url" class="wa-w-14 wa-h-14 wa-rounded" />

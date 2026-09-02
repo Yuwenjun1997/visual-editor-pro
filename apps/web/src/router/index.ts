@@ -21,6 +21,10 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
+      path: '/',
+      redirect: '/admin',
+    },
+    {
       path: '/preview',
       name: 'preview',
       component: PreviewScenario,

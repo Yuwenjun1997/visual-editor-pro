@@ -77,6 +77,11 @@ visualConfig.savedPageLoader = async (id) => {
   return row && authStore.user
     ? {
         ...row.schema,
+        // `pages.id` is the source of truth. Older rows (and the first save
+        // before the returned id is applied to the editor state) may contain
+        // an empty or stale schema.pageId, which would make the next save
+        // look like a create operation.
+        pageId: row.id,
         blocks: await businessDataService.migrateLegacyBusinessRefs(row.schema.blocks || [], authStore.user.id),
       }
     : null

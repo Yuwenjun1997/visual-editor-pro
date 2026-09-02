@@ -8,7 +8,7 @@
       <el-button type="primary" @click="openCreate">新增数据源</el-button>
     </div>
 
-    <el-table v-loading="loading" size="small" :data="sources">
+    <el-table v-loading="loading" :data="sources">
       <el-table-column label="名称" prop="name" min-width="160" />
       <el-table-column label="类型" width="120">
         <template #default="{ row }">

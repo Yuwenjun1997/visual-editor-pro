@@ -99,3 +99,21 @@
 - **文件**: `packages/visual-editor/src/hooks/useBlocks.ts`, `packages/visual-editor/src/components/visual-blocks/visual-blocks.vue`
 - **决策**: 监听 vuedraggable 的 `change.removed` 事件，覆盖将子组件拖出 `VisualObject` / `VisualObjectArray` 的移除场景。
 - **验证**: `pnpm --filter @visual/editor type-check` 通过；`git diff --check` 通过。
+
+## [当前] - Bug 修复: 页面保存改为正确更新已有页面
+
+- **文件**: `apps/web/src/main.ts`
+- **决策**: 加载页面时以 `pages.id` 覆盖页面 JSON 中可能为空或过期的 `schema.pageId`，保证已有页面再次保存时传入更新 ID，而不是触发新增。
+- **验证**: `pnpm type-check` 通过（3 个 workspace 包）；格式检查未执行，当前环境找不到 Prettier 可执行文件。
+
+## [当前] - 配置修复: 全局统一 Element Plus 中文语言
+
+- **文件**: `apps/web/src/App.vue`
+- **决策**: 在应用根节点使用 `ElConfigProvider` 注入 `element-plus/dist/locale/zh-cn.mjs`，覆盖后台管理、编辑器、预览和开发沙盒中的 Element Plus 组件。
+- **验证**: `pnpm type-check` 通过（3 个 workspace 包）；`git diff --check` 通过。
+
+## [当前] - 交互修复: 分类新增改为弹窗
+
+- **文件**: `apps/web/src/views/admin/CategoriesView.vue`
+- **决策**: 移除页面内嵌新增表单，改为“添加分类”按钮打开 Element Plus 对话框；新增时可选择商品/文章分类、填写名称和排序，成功后关闭弹窗并刷新列表。
+- **验证**: `pnpm type-check` 通过（3 个 workspace 包）。

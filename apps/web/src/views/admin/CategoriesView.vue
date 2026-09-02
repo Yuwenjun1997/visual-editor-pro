@@ -1,18 +1,18 @@
 <template>
   <div class="admin-page">
-    <div class="wa-text-base wa-font-medium wa-mb-4">分类管理</div>
+    <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
+      <div class="wa-text-base wa-font-medium">分类管理</div>
+      <el-button type="primary" @click="openCreateDialog">添加分类</el-button>
+    </div>
 
     <div class="wa-flex wa-items-center wa-gap-3 wa-mb-4">
       <el-radio-group v-model="typeFilter">
         <el-radio-button label="商品分类" value="product" />
         <el-radio-button label="文章分类" value="article" />
       </el-radio-group>
-      <el-input v-model="newName" placeholder="新分类名称" style="width: 200px" @keyup.enter="create" />
-      <el-input-number v-model="newSort" :min="0" placeholder="排序" :controls="false" style="width: 90px" />
-      <el-button type="primary" :loading="saving" @click="create">新增</el-button>
     </div>
 
-    <el-table v-loading="loading" size="small" :data="visibleCategories">
+    <el-table v-loading="loading" :data="visibleCategories">
       <el-table-column label="名称" prop="name" min-width="200" />
       <el-table-column label="类型" width="120">
         <template #default="{ row }">
@@ -36,6 +36,27 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <el-dialog v-model="createDialogVisible" title="添加分类" width="420px" destroy-on-close>
+      <el-form label-width="80px" @submit.prevent="create">
+        <el-form-item label="分类类型">
+          <el-radio-group v-model="newType">
+            <el-radio-button label="商品分类" value="product" />
+            <el-radio-button label="文章分类" value="article" />
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="分类名称">
+          <el-input v-model="newName" placeholder="请输入分类名称" maxlength="40" show-word-limit @keyup.enter="create" />
+        </el-form-item>
+        <el-form-item label="排序">
+          <el-input-number v-model="newSort" :min="0" :controls="false" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="createDialogVisible = false">取消</el-button>
+        <el-button type="primary" :loading="saving" @click="create">确定</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -51,8 +72,10 @@ const typeFilter = ref<'product' | 'article'>('product')
 const categories = ref<CategoryRow[]>([])
 const loading = ref(false)
 const saving = ref(false)
+const createDialogVisible = ref(false)
 const newName = ref('')
 const newSort = ref(0)
+const newType = ref<'product' | 'article'>(typeFilter.value)
 
 const visibleCategories = computed(() => categories.value.filter((c) => c.type === typeFilter.value))
 
@@ -69,6 +92,13 @@ const load = async () => {
 
 onMounted(load)
 
+const openCreateDialog = () => {
+  newType.value = typeFilter.value
+  newName.value = ''
+  newSort.value = 0
+  createDialogVisible.value = true
+}
+
 const create = async () => {
   const name = newName.value.trim()
   if (!name) {
@@ -84,13 +114,14 @@ const create = async () => {
     await categoryService.create({
       user_id: authStore.user.id,
       name,
-      type: typeFilter.value,
+      type: newType.value,
       sort: newSort.value,
     })
     ElMessage.success('已创建')
     newName.value = ''
     newSort.value = 0
-    load()
+    createDialogVisible.value = false
+    await load()
   } catch (error: any) {
     ElMessage.error(error?.message || '创建失败')
   } finally {
