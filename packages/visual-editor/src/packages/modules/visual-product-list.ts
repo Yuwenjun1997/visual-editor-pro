@@ -1,8 +1,5 @@
 import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
-import type {
-  VisualProductListItem,
-  VisualProductListProps,
-} from '@visual/ui/components/visual-product-list/interface'
+import type { VisualProductListItem, VisualProductListProps } from '@visual/ui/components/visual-product-list/interface'
 import {
   createImageInputControl,
   createNormalSelectControl,

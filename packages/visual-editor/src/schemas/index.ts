@@ -8,7 +8,7 @@ const modules = import.meta.glob('./**/*.ts', { eager: true })
 
 const schemaMap: Record<string, VisualSchema> = {}
 
-Object.entries(modules).forEach(([key, module]) => {
+Object.entries(modules).forEach(([_key, module]) => {
   const result: VisualSchema = (module as any)?.default
   schemaMap[result.visualKey] = (module as any)?.default
 })

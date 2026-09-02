@@ -1,18 +1,12 @@
 <template>
-  <div
-    class="visual-px-input"
-    @click.stop
-  >
+  <div class="visual-px-input" @click.stop>
     <el-input
       v-model.number="inputValue"
       class="visual-px-input__input"
       :placeholder="props.placeholder"
       @blur="onInputBlur"
     />
-    <div
-      class="visual-px-input__unit"
-      @click="onUnitClick"
-    >
+    <div class="visual-px-input__unit" @click="onUnitClick">
       {{ unitValue }}
     </div>
   </div>

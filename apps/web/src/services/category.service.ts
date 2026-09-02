@@ -27,24 +27,14 @@ export const categoryService = {
     return (data || []) as CategoryRow[]
   },
 
-  async create(payload: {
-    user_id: string
-    name: string
-    type: 'product' | 'article'
-    sort: number
-  }) {
+  async create(payload: { user_id: string; name: string; type: 'product' | 'article'; sort: number }) {
     const { data, error } = await supabase.from('categories').insert(payload).select().single()
     if (error) throw error
     return data as CategoryRow
   },
 
   async update(id: string, payload: Partial<{ name: string; sort: number }>) {
-    const { data, error } = await supabase
-      .from('categories')
-      .update(payload)
-      .eq('id', id)
-      .select()
-      .single()
+    const { data, error } = await supabase.from('categories').update(payload).eq('id', id).select().single()
     if (error) throw error
     return data as CategoryRow
   },

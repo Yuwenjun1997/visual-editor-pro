@@ -1,25 +1,18 @@
 <template>
   <div class="visual-stage-panel ve-flex-1 visual-transparent-bg">
-    <flex-full-layout
-      id="visual-stage-inner"
-      class="visual-stage-inner"
-      :class="visualStore.device"
-    >
+    <flex-full-layout id="visual-stage-inner" class="visual-stage-inner" :class="visualStore.device">
       <el-scrollbar height="100%">
-        <visual-app
-          :bg-color="pageConfig.globalStyle.backgroundColor"
-          class="visual-stage-app"
-        >
+        <visual-app class="visual-stage-app" :bg-color="pageConfig.globalStyle.backgroundColor">
           <VisualBlocks
             v-model="blockList"
             v-model:is-drag="visualStore.isDrag"
-            class="visual-stage-wrap"
-            :data-move-vid="visualStore.moveBlock?._vid"
-            :data-source-type="visualStore.moveBlock?.souceDataType"
-            :class="[{ 'is-drag': visualStore.isDrag }]"
             :disabled="disabled"
+            class="visual-stage-wrap"
             :style="pageConfig.globalStyle"
             :move-block="visualStore.moveBlock"
+            :class="[{ 'is-drag': visualStore.isDrag }]"
+            :data-move-vid="visualStore.moveBlock?._vid"
+            :data-source-type="visualStore.moveBlock?.souceDataType"
           />
         </visual-app>
       </el-scrollbar>

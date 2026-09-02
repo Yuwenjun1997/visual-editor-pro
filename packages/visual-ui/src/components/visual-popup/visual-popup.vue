@@ -8,46 +8,21 @@
         @click.self="isDesign ? undefined : close"
       >
         <div class="visual-popup__card">
-          <img
-            v-if="_props.props.bgImage"
-            class="visual-popup__bg"
-            :src="_props.props.bgImage"
-            alt="弹窗背景"
-          />
-          <div
-            v-else
-            class="visual-popup__bg visual-popup__bg--gradient"
-          />
+          <img v-if="_props.props.bgImage" alt="弹窗背景" class="visual-popup__bg" :src="_props.props.bgImage" />
+          <div v-else class="visual-popup__bg visual-popup__bg--gradient" />
           <div class="visual-popup__content">
             <div class="visual-popup__title">{{ title || '活动公告' }}</div>
-            <div
-              v-if="description"
-              class="visual-popup__desc"
-            >
+            <div v-if="description" class="visual-popup__desc">
               {{ description }}
             </div>
-            <a
-              v-if="buttonLink"
-              class="visual-popup__button"
-              :href="btnHref"
-              @click="close"
-            >
+            <a v-if="buttonLink" :href="btnHref" class="visual-popup__button" @click="close">
               {{ buttonText || '去看看' }}
             </a>
-            <div
-              v-else
-              class="visual-popup__button"
-              @click="close"
-            >
+            <div v-else class="visual-popup__button" @click="close">
               {{ buttonText || '我知道了' }}
             </div>
           </div>
-          <button
-            v-if="_props.props.showClose !== false"
-            class="visual-popup__close"
-            aria-label="关闭"
-            @click="close"
-          >
+          <button v-if="_props.props.showClose !== false" aria-label="关闭" class="visual-popup__close" @click="close">
             <i class="bi bi-x" />
           </button>
         </div>

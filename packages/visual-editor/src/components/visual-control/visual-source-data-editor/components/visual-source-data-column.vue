@@ -16,7 +16,7 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: VisualSourceOptions): void
 }>()
 
-const modelValue = useVModel(props, 'modelValue', emit)
+const _modelValue = useVModel(props, 'modelValue', emit)
 </script>
 
 <style scoped></style>

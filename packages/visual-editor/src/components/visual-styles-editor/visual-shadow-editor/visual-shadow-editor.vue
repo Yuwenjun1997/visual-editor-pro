@@ -1,8 +1,5 @@
 <template>
-  <visual-collapse
-    class="visual-margin-editor"
-    title="阴影"
-  >
+  <visual-collapse title="阴影" class="visual-margin-editor">
     <template #right>
       <visual-color-input v-model="shadowColor" />
     </template>

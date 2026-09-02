@@ -135,9 +135,7 @@ router.beforeEach(async (to) => {
   if (!auth.isInitialized) await auth.init()
 
   if (to.path === '/') {
-    return auth.user
-      ? { name: 'admin-dashboard' }
-      : { name: 'login', query: { redirect: '/admin' } }
+    return auth.user ? { name: 'admin-dashboard' } : { name: 'login', query: { redirect: '/admin' } }
   }
 
   if (to.meta.requiresAuth && !auth.user) {

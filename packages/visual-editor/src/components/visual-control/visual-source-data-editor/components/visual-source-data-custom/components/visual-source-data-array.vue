@@ -1,51 +1,20 @@
 <template>
   <div class="visual-source-data-array">
-    <el-table
-      :data="tableData"
-      size="small"
-      border
-      max-height="400"
-    >
-      <template
-        v-for="column in schemaList"
-        :key="column.propName"
-      >
-        <el-table-column
-          :prop="column.propName"
-          :label="column.label"
-          min-width="120"
-        >
+    <el-table border size="small" max-height="400" :data="tableData">
+      <template v-for="column in schemaList" :key="column.propName">
+        <el-table-column min-width="120" :label="column.label" :prop="column.propName">
           <template #default="{ row }">
-            <el-input
-              v-model="row[column.propName]"
-              size="small"
-            />
+            <el-input v-model="row[column.propName]" size="small" />
           </template>
         </el-table-column>
       </template>
-      <el-table-column
-        label="操作"
-        align="center"
-        width="100"
-      >
+      <el-table-column label="操作" width="100" align="center">
         <template #default="{ $index }">
-          <el-button
-            size="small"
-            type="danger"
-            @click="handleRemove($index)"
-          >
-            删除
-          </el-button>
+          <el-button size="small" type="danger" @click="handleRemove($index)"> 删除 </el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-button
-      class="ve-w-full ve-mt-2"
-      size="small"
-      @click="handleAdd"
-    >
-      +添加一项
-    </el-button>
+    <el-button size="small" class="ve-w-full ve-mt-2" @click="handleAdd"> +添加一项 </el-button>
   </div>
 </template>
 

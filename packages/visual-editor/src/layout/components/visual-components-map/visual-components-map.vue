@@ -1,19 +1,16 @@
 <template>
   <div class="visual-components-map ve-h-full">
     <div class="title ve-p-2">组件大纲</div>
-    <el-scrollbar
-      height="100%"
-      class="ve-flex-1 ve-min-h-0"
-    >
+    <el-scrollbar height="100%" class="ve-flex-1 ve-min-h-0">
       <el-tree
         ref="treeRef"
-        class="ve-w-full"
-        :current-node-key="visualStore.vid"
+        node-key="_vid"
         :data="treeData"
+        class="ve-w-full"
+        highlight-current
         default-expand-all
         :expand-on-click-node="false"
-        highlight-current
-        node-key="_vid"
+        :current-node-key="visualStore.vid"
         @current-change="onCurrentChange"
       >
         <template #default="{ data }">
@@ -46,10 +43,7 @@
           </div>
         </template>
         <template #empty>
-          <el-empty
-            description="暂无数据"
-            :image-size="60"
-          />
+          <el-empty :image-size="60" description="暂无数据" />
         </template>
       </el-tree>
     </el-scrollbar>

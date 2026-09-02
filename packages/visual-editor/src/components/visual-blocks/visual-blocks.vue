@@ -1,48 +1,40 @@
 <template>
   <draggable
     v-model="moduleList"
-    item-key="_vid"
-    class="visual-group"
-    :class="{ 'is-empty': isEmpty }"
-    :group="props.group"
     animation="250"
-    :data-slot="isEmpty ? '组件拖拽到这里' : ''"
+    item-key="_vid"
+    :style="bindStyle"
+    class="visual-group"
+    :group="props.group"
+    :disabled="props.disabled"
     :data-component-key="parentKey"
     :data-disabled="props.disabled"
-    :style="bindStyle"
-    :disabled="props.disabled"
-    @start="onStart"
+    :class="{ 'is-empty': isEmpty }"
+    :data-slot="isEmpty ? '组件拖拽到这里' : ''"
     @end="onEnd"
+    @start="onStart"
   >
     <template #item="{ element, index }">
       <div
         class="visual-block"
+        :data-block-key="element.key"
+        :data-block-name="element.label"
         :class="{
           'has-children': !isEmptySlots(element),
           'is-active': isCurrentBlock(element),
         }"
-        :data-block-name="element.label"
-        :data-block-key="element.key"
-        @click.stop="handleClick(element, index)"
         @mousedown.stop="onMouseDown(element)"
+        @click.stop="handleClick(element, index)"
       >
-        <use-component
-          :key="element._vid"
-          :block="element"
-          :is-design="isOverlayBlock(element)"
-        >
-          <template
-            v-for="(value, key) in element.slots"
-            #[key]
-            :key="key"
-          >
+        <use-component :key="element._vid" :block="element" :is-design="isOverlayBlock(element)">
+          <template v-for="(value, key) in element.slots" #[key] :key="key">
             <visual-blocks
               v-model="value.blocks"
               v-model:is-drag="dragging"
               :parent-component="element"
               :move-block="props.moveBlock"
-              :disabled="isDisabled(element)"
               :group="getGroupOption(value)"
+              :disabled="isDisabled(element)"
             />
           </template>
         </use-component>

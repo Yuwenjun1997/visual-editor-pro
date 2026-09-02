@@ -1,17 +1,13 @@
 <template>
-  <visual-box
-    class="visual-product-card"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
+  <visual-box :class="_props.class" :styles="_props.styles" class="visual-product-card">
     <visual-product-item
       :data="itemData"
-      :layout="_props.props.layout"
-      :show-tag="_props.props.showTag"
-      :show-buy="_props.props.showBuy"
-      :button-text="_props.props.buttonText"
       :round="_props.props.round"
+      :layout="_props.props.layout"
+      :show-buy="_props.props.showBuy"
+      :show-tag="_props.props.showTag"
       :currency="_props.props.currency"
+      :button-text="_props.props.buttonText"
     />
   </visual-box>
 </template>

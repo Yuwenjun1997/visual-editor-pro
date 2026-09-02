@@ -1,17 +1,9 @@
 <template>
   <div class="visual-icon-picker">
-    <el-popover
-      v-model:visible="visible"
-      trigger="click"
-      popper-class="visual-icon-picker__popover"
-      width="300px"
-    >
+    <el-popover v-model:visible="visible" width="300px" trigger="click" popper-class="visual-icon-picker__popover">
       <template #reference>
         <el-button size="small">
-          <div
-            class="icon-btn"
-            :class="{ 'is-empty': isEmpty }"
-          >
+          <div class="icon-btn" :class="{ 'is-empty': isEmpty }">
             <Icon :icon="showIcon" />
           </div>
         </el-button>
@@ -19,16 +11,8 @@
 
       <div v-if="visible">
         <div class="ve-flex ve-items-center ve-gap-1">
-          <el-input
-            v-model="keyword"
-            size="small"
-            placeholder="图标名称搜索"
-          />
-          <el-button
-            type="primary"
-            size="small"
-            @click="onSearch()"
-          >
+          <el-input v-model="keyword" size="small" placeholder="图标名称搜索" />
+          <el-button size="small" type="primary" @click="onSearch()">
             <template #icon>
               <Icon icon="line-md:search-twotone" />
             </template>
@@ -37,25 +21,17 @@
         </div>
 
         <div class="icon-list ve-my-2">
-          <div
-            v-for="(item, index) in icons"
-            :key="index"
-            class="icon-item"
-            @click="handleClick(item)"
-          >
-            <Icon
-              :icon="item"
-              style="font-size: 24px"
-            />
+          <div v-for="(item, index) in icons" :key="index" class="icon-item" @click="handleClick(item)">
+            <Icon :icon="item" style="font-size: 24px" />
           </div>
         </div>
 
         <div class="ve-flex ve-items-start ve-justify-center">
           <el-pagination
-            layout="prev, pager, next"
-            :page-size="pageSize"
-            :total="iconTotal"
             small
+            :total="iconTotal"
+            :page-size="pageSize"
+            layout="prev, pager, next"
             @current-change="onCurrentChange"
           />
         </div>

@@ -1,10 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type { VisualNoticeBarProps } from '@visual/ui/components/visual-notice-bar/interface'
-import {
-  createColorInputControl,
-  createPxInputControl,
-  createTextInputControl,
-} from '../../utils/visual.control'
+import { createColorInputControl, createPxInputControl, createTextInputControl } from '../../utils/visual.control'
 
 const visualNoticeBar: VisualEditorComponent<VisualNoticeBarProps> = {
   key: 'VisualNoticeBar',

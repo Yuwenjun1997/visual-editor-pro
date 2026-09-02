@@ -1,19 +1,7 @@
 <template>
-  <visual-box
-    class="visual-customer-service"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <a
-      class="visual-customer-service__entry"
-      :style="entryStyle"
-      :href="href"
-      @click="handleClick"
-    >
-      <i
-        v-if="_props.props.iconVisible !== false"
-        class="bi bi-headset visual-customer-service__icon"
-      />
+  <visual-box :class="_props.class" :styles="_props.styles" class="visual-customer-service">
+    <a :href="href" :style="entryStyle" class="visual-customer-service__entry" @click="handleClick">
+      <i v-if="_props.props.iconVisible !== false" class="bi bi-headset visual-customer-service__icon" />
       <span class="visual-customer-service__text">{{ _props.props.text }}</span>
     </a>
   </visual-box>

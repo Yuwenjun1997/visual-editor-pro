@@ -2,47 +2,31 @@
   <div class="visual-source-data-editor">
     <el-dialog
       v-model="visible"
-      title="数据来源配置"
       draggable
       append-to-body
+      title="数据来源配置"
       destroy-on-close
       :close-on-click-modal="false"
       modal-class="visual-source-data-editor__dialog"
     >
       <el-tabs v-model="modelValue.dataSource">
-        <el-tab-pane
-          label="自定义数据"
-          name="custom"
-        >
+        <el-tab-pane label="自定义数据" name="custom">
           <visual-source-data-custom v-model="modelValue" />
         </el-tab-pane>
-        <el-tab-pane
-          label="接口请求"
-          name="request"
-        >
+        <el-tab-pane label="接口请求" name="request">
           <visual-source-data-request v-model="modelValue" />
         </el-tab-pane>
-        <el-tab-pane
-          label="栏目数据"
-          name="column"
-        >
+        <el-tab-pane label="栏目数据" name="column">
           <visual-source-data-column v-model="modelValue" />
         </el-tab-pane>
-        <el-tab-pane
-          label="数据管理"
-          name="business"
-        >
+        <el-tab-pane label="数据管理" name="business">
           <visual-business-data v-model="modelValue" />
         </el-tab-pane>
       </el-tabs>
       <template #footer>
         <span class="ve-text-right">
           <el-button @click="visible = false">取消</el-button>
-          <el-button
-            type="primary"
-            @click="handleConfirm"
-            >确定</el-button
-          >
+          <el-button type="primary" @click="handleConfirm">确定</el-button>
         </span>
       </template>
     </el-dialog>

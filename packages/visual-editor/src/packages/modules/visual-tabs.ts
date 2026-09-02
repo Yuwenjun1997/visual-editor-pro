@@ -1,13 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
-import type {
-  VisualTabListDataItem,
-  VisualTabsProps,
-} from '@visual/ui/components/visual-tabs/interface'
-import {
-  createColorInputControl,
-  createNormalSelectControl,
-  createTextInputControl,
-} from '../../utils/visual.control'
+import type { VisualTabListDataItem, VisualTabsProps } from '@visual/ui/components/visual-tabs/interface'
+import { createColorInputControl, createNormalSelectControl, createTextInputControl } from '../../utils/visual.control'
 
 const createListDataItem = (label: string): Record<keyof VisualTabListDataItem, any> => ({
   label: createTextInputControl({ label: '页签名称', defaultValue: label }),

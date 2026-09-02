@@ -1,24 +1,16 @@
 <template>
-  <visual-box
-    class="visual-grid"
-    :styles="_props.styles"
-    :show-empty="_noListData"
-    :class="_props.class"
-  >
-    <div
-      class="visual-grid__inner"
-      :style="_bindInnerStyles"
-    >
+  <visual-box class="visual-grid" :class="_props.class" :styles="_props.styles" :show-empty="_noListData">
+    <div :style="_bindInnerStyles" class="visual-grid__inner">
       <visual-grid-item
         v-for="(item, index) in _props.listData"
         :key="index"
-        :text="item.text"
         :icon="item.icon"
-        :icon-size="_bindProps.iconSize"
+        :text="item.text"
         :font-size="_bindProps.fontSize"
-        :icon-color="_bindProps.iconColor"
-        :font-color="_bindProps.fontColor"
+        :icon-size="_bindProps.iconSize"
         :direction="_bindProps.direction"
+        :font-color="_bindProps.fontColor"
+        :icon-color="_bindProps.iconColor"
       />
     </div>
   </visual-box>

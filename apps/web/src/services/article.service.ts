@@ -14,10 +14,7 @@ export type ArticlePayload = Partial<{
 
 export const articleService = {
   async list(): Promise<ArticleRow[]> {
-    const { data, error } = await supabase
-      .from('articles')
-      .select('*')
-      .order('publish_time', { ascending: false })
+    const { data, error } = await supabase.from('articles').select('*').order('publish_time', { ascending: false })
     if (error) throw error
     return (data || []) as ArticleRow[]
   },
@@ -29,12 +26,7 @@ export const articleService = {
   },
 
   async update(id: string, payload: ArticlePayload) {
-    const { data, error } = await supabase
-      .from('articles')
-      .update(payload)
-      .eq('id', id)
-      .select()
-      .single()
+    const { data, error } = await supabase.from('articles').update(payload).eq('id', id).select().single()
     if (error) throw error
     return data as ArticleRow
   },

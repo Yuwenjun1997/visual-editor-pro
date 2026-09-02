@@ -36,15 +36,12 @@ export const visualBoxInnerStyles: CSSPropertiesKeys[] = [
   'border',
 ]
 
-export const filterStylesByKeys = (
-  keys: CSSPropertiesKeys[],
-  styles: CSSProperties,
-): CSSProperties => keys.reduce((prev, key) => ({ [key]: styles[key], ...prev }), {})
+export const filterStylesByKeys = (keys: CSSPropertiesKeys[], styles: CSSProperties): CSSProperties =>
+  keys.reduce((prev, key) => ({ [key]: styles[key], ...prev }), {})
 
 export const getBoxStyles = (styles: CSSProperties) => filterStylesByKeys(visualBoxStyles, styles)
 
-export const getBoxInnerStyles = (styles: CSSProperties) =>
-  filterStylesByKeys(visualBoxInnerStyles, styles)
+export const getBoxInnerStyles = (styles: CSSProperties) => filterStylesByKeys(visualBoxInnerStyles, styles)
 
 // 获取spacing
 export const cssSpacingVar = (size?: string) => {

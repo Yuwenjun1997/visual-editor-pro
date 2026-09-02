@@ -1,9 +1,6 @@
 <template>
   <div class="visual-news-author">
-    <img
-      :src="props.authorAvatar"
-      style="object-fit: cover"
-    />
+    <img :src="props.authorAvatar" style="object-fit: cover" />
     <span class="author-name">{{ props.authorName }}</span>
   </div>
 </template>

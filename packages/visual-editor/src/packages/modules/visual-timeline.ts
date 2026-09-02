@@ -1,8 +1,5 @@
 import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
-import type {
-  VisualTimelineItem,
-  VisualTimelineProps,
-} from '@visual/ui/components/visual-timeline/interface'
+import type { VisualTimelineItem, VisualTimelineProps } from '@visual/ui/components/visual-timeline/interface'
 import {
   createIconInputControl,
   createNormalSelectControl,

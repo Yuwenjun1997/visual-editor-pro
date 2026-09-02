@@ -31,12 +31,7 @@ export const productService = {
   },
 
   async update(id: string, payload: ProductPayload) {
-    const { data, error } = await supabase
-      .from('products')
-      .update(payload)
-      .eq('id', id)
-      .select()
-      .single()
+    const { data, error } = await supabase.from('products').update(payload).eq('id', id).select().single()
     if (error) throw error
     return data as ProductRow
   },

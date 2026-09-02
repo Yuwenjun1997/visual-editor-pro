@@ -1,10 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type { VisualStatCardProps } from '@visual/ui/components/visual-stat-card/interface'
-import {
-  createColorInputControl,
-  createIconInputControl,
-  createTextInputControl,
-} from '../../utils/visual.control'
+import { createColorInputControl, createIconInputControl, createTextInputControl } from '../../utils/visual.control'
 
 const visualStatCard: VisualEditorComponent<VisualStatCardProps> = {
   key: 'VisualStatCard',

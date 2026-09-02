@@ -30,9 +30,7 @@ export const mountThemeToRoot = (options: MountThemeToRootOptions = {}) => {
     }
 
     const safeAreaBottom =
-      typeof options.safeAreaBottom === 'function'
-        ? options.safeAreaBottom()
-        : options.safeAreaBottom
+      typeof options.safeAreaBottom === 'function' ? options.safeAreaBottom() : options.safeAreaBottom
     if (safeAreaBottom !== undefined) {
       root.style.setProperty('--v-safe-area-bottom', `${safeAreaBottom}px`)
     }

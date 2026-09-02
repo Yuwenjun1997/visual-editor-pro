@@ -1,17 +1,14 @@
 <template>
-  <div
-    class="visual-indicator"
-    :class="bindClassList"
-  >
+  <div :class="bindClassList" class="visual-indicator">
     <span v-if="type === 'title'">{{ showTitle }}</span>
     <span v-else-if="type === 'fixed-right'"> {{ current + 1 }}/{{ props.list.length }} </span>
     <template v-else>
       <div
         v-for="(item, index) in props.list"
         :key="index"
+        :data-index="index + 1"
         class="visual-indicator-item"
         :class="{ 'is-active': index === current }"
-        :data-index="index + 1"
       />
     </template>
   </div>

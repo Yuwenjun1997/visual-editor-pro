@@ -1,30 +1,11 @@
 <template>
   <div class="visual-source-data-object">
-    <el-table
-      :data="tableData"
-      size="small"
-      border
-      max-height="400"
-    >
-      <el-table-column
-        prop="label"
-        label="属性名"
-        width="120"
-      />
-      <el-table-column
-        prop="propName"
-        label="Key"
-        width="120"
-      />
-      <el-table-column
-        prop="value"
-        label="Value"
-      >
+    <el-table border size="small" max-height="400" :data="tableData">
+      <el-table-column label="属性名" width="120" prop="label" />
+      <el-table-column label="Key" width="120" prop="propName" />
+      <el-table-column prop="value" label="Value">
         <template #default="{ row }">
-          <el-input
-            v-model="row.value"
-            size="small"
-          />
+          <el-input v-model="row.value" size="small" />
         </template>
       </el-table-column>
     </el-table>
@@ -65,10 +46,7 @@ const emitTableData = (data: any[]) => {
 
 const resetTableData = () => {
   const jsonData = formatJsonToObject(modelValue.value.customJsonData)
-  tableData.value = transformCustomJsonDataToTalbeData(
-    schemaList.value,
-    Array.isArray(jsonData) ? {} : jsonData,
-  )
+  tableData.value = transformCustomJsonDataToTalbeData(schemaList.value, Array.isArray(jsonData) ? {} : jsonData)
 }
 
 watch(

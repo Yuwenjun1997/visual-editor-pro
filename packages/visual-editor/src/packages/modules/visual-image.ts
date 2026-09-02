@@ -1,10 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type { VisualImageProps } from '@visual/ui/components/visual-image/interface'
-import {
-  createImageInputControl,
-  createNormalSelectControl,
-  createPxInputControl,
-} from '../../utils/visual.control'
+import { createImageInputControl, createNormalSelectControl, createPxInputControl } from '../../utils/visual.control'
 
 const defaultCover = '/image/cover.svg'
 

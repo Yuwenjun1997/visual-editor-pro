@@ -1,16 +1,10 @@
 <template>
   <el-config-provider :locale="zhCn">
-    <div
-      class="visual-stage-container"
-      :class="bindClassList"
-    >
+    <div :class="bindClassList" class="visual-stage-container">
       <visual-stage-bar />
       <div class="ve-relative ve-flex-1 ve-flex ve-flex-col">
         <template v-if="activePanel === 'viewJson'">
-          <visual-monaco-editor
-            v-model="viewJson"
-            :options="viewJsonOptions"
-          />
+          <visual-monaco-editor v-model="viewJson" :options="viewJsonOptions" />
         </template>
         <template v-else-if="activePanel === 'viewCode'">
           <visual-monaco-editor />

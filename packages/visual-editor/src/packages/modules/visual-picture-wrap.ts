@@ -1,8 +1,5 @@
 import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
-import type {
-  VisualPicture,
-  VisualPictureWrapProps,
-} from '@visual/ui/components/visual-picture-wrap/interface'
+import type { VisualPicture, VisualPictureWrapProps } from '@visual/ui/components/visual-picture-wrap/interface'
 import {
   createColorInputControl,
   createImageInputControl,

@@ -3,21 +3,14 @@
     <transition name="visual-float">
       <a
         v-if="visible"
-        class="visual-float-action"
-        :class="[
-          'visual-float-action--' + (position || 'right'),
-          { 'visual-float-action--design': isDesign },
-        ]"
-        :style="actionStyle"
         :href="href"
         :aria-label="mode"
+        :style="actionStyle"
+        class="visual-float-action"
+        :class="['visual-float-action--' + (position || 'right'), { 'visual-float-action--design': isDesign }]"
         @click="handleClick"
       >
-        <visual-icon
-          :icon="icon || defaultIcon"
-          :color="textColor"
-          size="22px"
-        />
+        <visual-icon size="22px" :color="textColor" :icon="icon || defaultIcon" />
       </a>
     </transition>
   </teleport-box>

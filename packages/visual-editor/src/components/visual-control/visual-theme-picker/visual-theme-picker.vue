@@ -1,21 +1,10 @@
 <template>
   <div class="visual-theme-picker">
-    <el-popover
-      v-model:visible="visible"
-      trigger="click"
-      popper-class="visual-theme-picker__popover"
-      width="300px"
-    >
+    <el-popover v-model:visible="visible" width="300px" trigger="click" popper-class="visual-theme-picker__popover">
       <template #reference>
         <el-button size="small">
-          <div
-            class="theme-btn"
-            :style="bindStyles"
-          >
-            <Icon
-              v-if="!modelValue"
-              icon="bi:x-lg"
-            />
+          <div class="theme-btn" :style="bindStyles">
+            <Icon v-if="!modelValue" icon="bi:x-lg" />
           </div>
         </el-button>
       </template>

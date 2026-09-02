@@ -44,11 +44,7 @@ async function resolveBusinessRows(ref: VisualBusinessDataRef): Promise<Record<s
     return (data || []).map(toProductCardItem)
   }
 
-  let query = supabase
-    .from('articles')
-    .select('*')
-    .order('publish_time', { ascending: false })
-    .limit(50)
+  let query = supabase.from('articles').select('*').order('publish_time', { ascending: false }).limit(50)
   if (ref.refType === 'category' && typeof ref.refValue === 'string') {
     query = query.eq('category_id', ref.refValue)
   } else if (ref.refType === 'ids' && Array.isArray(ref.refValue) && ref.refValue.length) {

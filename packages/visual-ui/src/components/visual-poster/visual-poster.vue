@@ -1,48 +1,19 @@
 <template>
-  <visual-box
-    class="visual-poster"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
+  <visual-box class="visual-poster" :class="_props.class" :styles="_props.styles">
     <div class="visual-poster__card">
-      <img
-        v-if="_props.props.bgImage"
-        class="visual-poster__bg"
-        :src="_props.props.bgImage"
-        alt="海报背景"
-      />
-      <div
-        v-else
-        class="visual-poster__bg visual-poster__bg--gradient"
-      />
+      <img v-if="_props.props.bgImage" alt="海报背景" class="visual-poster__bg" :src="_props.props.bgImage" />
+      <div v-else class="visual-poster__bg visual-poster__bg--gradient" />
       <div class="visual-poster__scrim" />
       <div class="visual-poster__content">
         <div class="visual-poster__title">{{ title || '邀请好友一起下单' }}</div>
-        <div
-          v-if="subtitle"
-          class="visual-poster__subtitle"
-        >
+        <div v-if="subtitle" class="visual-poster__subtitle">
           {{ subtitle }}
         </div>
-        <img
-          v-if="qrUrl"
-          class="visual-poster__qr"
-          :src="qrUrl"
-          :style="qrStyle"
-          alt="二维码"
-        />
-        <div
-          v-if="footerText"
-          class="visual-poster__footer"
-        >
+        <img v-if="qrUrl" alt="二维码" :src="qrUrl" :style="qrStyle" class="visual-poster__qr" />
+        <div v-if="footerText" class="visual-poster__footer">
           {{ footerText }}
         </div>
-        <a
-          v-if="_props.props.shareLink"
-          class="visual-poster__btn"
-          :href="btnHref"
-          @click="handleClick"
-        >
+        <a v-if="_props.props.shareLink" :href="btnHref" class="visual-poster__btn" @click="handleClick">
           {{ buttonText || '分享给好友' }}
         </a>
       </div>
@@ -112,16 +83,9 @@ const render = async () => {
   }
 }
 
-watch(
-  () => [
-    _props.props.qrContent,
-    _props.props.qrSize,
-    _props.props.qrFgColor,
-    _props.props.qrBgColor,
-  ],
-  render,
-  { immediate: true },
-)
+watch(() => [_props.props.qrContent, _props.props.qrSize, _props.props.qrFgColor, _props.props.qrBgColor], render, {
+  immediate: true,
+})
 </script>
 
 <style scoped lang="scss">

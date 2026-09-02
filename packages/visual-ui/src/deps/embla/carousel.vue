@@ -74,10 +74,7 @@ onBeforeUnmount(() => api?.destroy())
 </script>
 
 <template>
-  <div
-    class="vu-relative vu-w-full"
-    :class="cn('', props.class)"
-  >
+  <div :class="cn('', props.class)" class="vu-relative vu-w-full">
     <slot />
   </div>
 </template>

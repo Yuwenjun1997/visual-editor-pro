@@ -8,7 +8,7 @@
       />
     </el-tooltip>
     <el-tooltip :content="darkLabel">
-      <Icon class="header-btn" :icon="darkIcon" @click="toggleDark()" />
+      <Icon :icon="darkIcon" class="header-btn" @click="toggleDark()" />
     </el-tooltip>
   </div>
 </template>

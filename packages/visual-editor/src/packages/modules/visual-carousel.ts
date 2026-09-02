@@ -1,8 +1,5 @@
 import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
-import type {
-  VisualCarouselItem,
-  VisualCarouselProps,
-} from '@visual/ui/components/visual-carousel/interface'
+import type { VisualCarouselItem, VisualCarouselProps } from '@visual/ui/components/visual-carousel/interface'
 import {
   createImageInputControl,
   createNormalSelectControl,

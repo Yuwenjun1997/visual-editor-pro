@@ -1,30 +1,12 @@
 <template>
-  <visual-box
-    class="visual-tabs"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
+  <visual-box class="visual-tabs" :class="_props.class" :styles="_props.styles">
     <TabsRoot v-model="activeKey">
-      <TabsList
-        class="visual-tabs__header"
-        :class="`visual-tabs__header--${bindVariant}`"
-        :style="headerStyle"
-      >
-        <TabsTrigger
-          v-for="pane in panes"
-          :key="pane.key"
-          :value="pane.key"
-          class="visual-tabs__tab"
-        >
+      <TabsList :style="headerStyle" class="visual-tabs__header" :class="`visual-tabs__header--${bindVariant}`">
+        <TabsTrigger v-for="pane in panes" :key="pane.key" :value="pane.key" class="visual-tabs__tab">
           {{ pane.label }}
         </TabsTrigger>
       </TabsList>
-      <TabsContent
-        v-for="pane in panes"
-        :key="pane.key"
-        :value="pane.key"
-        class="visual-tabs__pane"
-      >
+      <TabsContent v-for="pane in panes" :key="pane.key" :value="pane.key" class="visual-tabs__pane">
         <slot :name="pane.key" />
       </TabsContent>
     </TabsRoot>

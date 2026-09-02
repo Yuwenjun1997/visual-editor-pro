@@ -1,16 +1,13 @@
 <template>
   <default-layout>
-    <el-aside
-      :width="collapsed ? '64px' : '220px'"
-      class="admin-aside"
-    >
+    <el-aside class="admin-aside" :width="collapsed ? '64px' : '220px'">
       <el-scrollbar class="wa-h-full">
         <el-menu
-          :default-active="activeMenu"
           router
+          class="admin-menu"
           :collapse="collapsed"
           :collapse-transition="false"
-          class="admin-menu"
+          :default-active="activeMenu"
         >
           <el-menu-item index="/admin/dashboard">
             <el-icon><Icon icon="ep:data-analysis" /></el-icon>
@@ -32,10 +29,7 @@
             <el-icon><Icon icon="ep:menu" /></el-icon>
             <template #title>分类管理</template>
           </el-menu-item>
-          <el-menu-item
-            v-if="can('user:manage')"
-            index="/admin/users"
-          >
+          <el-menu-item v-if="can('user:manage')" index="/admin/users">
             <el-icon><Icon icon="ep:user" /></el-icon>
             <template #title>用户管理</template>
           </el-menu-item>

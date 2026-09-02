@@ -1,39 +1,21 @@
 <template>
   <div class="image-uploader">
     <el-upload
+      name="cover"
+      accept="image/*"
       :show-file-list="false"
       :http-request="handleUpload"
       :before-upload="beforeUpload"
-      accept="image/*"
-      name="cover"
     >
       <div class="image-uploader__trigger">
-        <img
-          v-if="modelValue"
-          :src="modelValue"
-          class="image-uploader__preview"
-          alt="封面"
-        />
-        <div
-          v-else
-          class="image-uploader__placeholder"
-        >
-          <Icon
-            icon="ep:plus"
-            class="wa-text-2xl placeholder-icon"
-          />
+        <img v-if="modelValue" alt="封面" :src="modelValue" class="image-uploader__preview" />
+        <div v-else class="image-uploader__placeholder">
+          <Icon icon="ep:plus" class="wa-text-2xl placeholder-icon" />
           <span class="wa-mt-1 wa-text-xs placeholder-text">点击上传封面</span>
         </div>
       </div>
     </el-upload>
-    <el-button
-      v-if="modelValue"
-      link
-      type="danger"
-      size="small"
-      class="wa-mt-1"
-      @click="emitUpdate('')"
-    >
+    <el-button v-if="modelValue" link size="small" type="danger" class="wa-mt-1" @click="emitUpdate('')">
       移除图片
     </el-button>
   </div>

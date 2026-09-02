@@ -1,38 +1,28 @@
 <template>
   <draggable
-    class="visual-group"
-    :list="blocks"
-    :group="group"
     :sort="false"
-    :clone="cloneHandler"
+    :group="group"
     item-key="key"
+    :list="blocks"
+    class="visual-group"
+    :clone="cloneHandler"
     :allback-on-body="true"
     draggable=".visual-drag-item"
-    @start="onStart"
     @end="onEnd"
+    @start="onStart"
   >
     <template #item="{ element }">
-      <div
-        v-if="element.span"
-        class="visual-group-item ve-text-xs more-components"
-        :class="'span-' + element.span"
-      >
-        <img
-          class="visual-group-item-preview"
-          src="/image/coding.svg"
-        />
+      <div v-if="element.span" :class="'span-' + element.span" class="visual-group-item ve-text-xs more-components">
+        <img src="/image/coding.svg" class="visual-group-item-preview" />
       </div>
       <div
         v-else
-        class="visual-group-item visual-drag-item"
         :data-name="element.label"
-        @mousedown="onMouseDown(element)"
+        class="visual-group-item visual-drag-item"
         @mouseup="onMouseUp"
+        @mousedown="onMouseDown(element)"
       >
-        <img
-          class="visual-group-item-preview"
-          :src="element.previewImage"
-        />
+        <img :src="element.previewImage" class="visual-group-item-preview" />
         <div class="visual-group-item-label">{{ element.label }}</div>
       </div>
     </template>

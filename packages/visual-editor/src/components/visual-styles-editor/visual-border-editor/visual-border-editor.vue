@@ -1,8 +1,5 @@
 <template>
-  <visual-collapse
-    class="visual-margin-editor"
-    title="边框"
-  >
+  <visual-collapse title="边框" class="visual-margin-editor">
     <template #default>
       <div class="ve-gap-2 visual-input-group">
         <div class="ve-grid ve-grid-cols-3 border-btn-group">
@@ -25,11 +22,7 @@
             </div>
           </div>
           <div class="ve-col-span-1">
-            <div
-              class="border-btn"
-              :class="{ 'border-btn-active': active === 'border' }"
-              @click="active = 'border'"
-            >
+            <div class="border-btn" :class="{ 'border-btn-active': active === 'border' }" @click="active = 'border'">
               <span>╋</span>
             </div>
           </div>
@@ -57,11 +50,7 @@
           </div>
         </div>
         <div class="ve-flex ve-flex-col ve-gap-2">
-          <visual-normal-select
-            v-model="borderStyle"
-            class="ve-w-full"
-            :options="borderStyles"
-          />
+          <visual-normal-select v-model="borderStyle" class="ve-w-full" :options="borderStyles" />
           <visual-px-input v-model="borderWidth" />
           <visual-color-input v-model="borderColor" />
         </div>
@@ -116,9 +105,7 @@ const borderOptions = computed<CSSProperties>(() => ({
   '--border-width': borderWidth.value,
   '--border-color': borderColor.value,
   '--border-style': borderStyle.value,
-  [active.value]: useBorder()
-    ? `var(--border-width) var(--border-color) var(--border-style)`
-    : undefined,
+  [active.value]: useBorder() ? `var(--border-width) var(--border-color) var(--border-style)` : undefined,
 }))
 
 const cssRule = useVModel(props, 'modelValue', emit)

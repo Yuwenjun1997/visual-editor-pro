@@ -1,21 +1,13 @@
 <template>
-  <visual-box
-    class="visual-image-text"
-    :styles="_props.styles"
-    :show-empty="_noListData"
-    :class="_props.class"
-  >
-    <div
-      class="visual-image-text__inner"
-      :style="_bindInnerStyles"
-    >
+  <visual-box :class="_props.class" :styles="_props.styles" class="visual-image-text" :show-empty="_noListData">
+    <div :style="_bindInnerStyles" class="visual-image-text__inner">
       <visual-image-text-one
         v-for="(item, index) in _props.listData"
         :key="index"
-        class="visual-image-text-item"
         :data="item"
-        :show-author="_bindProps.showAuthor"
+        class="visual-image-text-item"
         :show-time="_bindProps.showTime"
+        :show-author="_bindProps.showAuthor"
         :corver-in-right="_bindProps.coverInRight"
       ></visual-image-text-one>
     </div>

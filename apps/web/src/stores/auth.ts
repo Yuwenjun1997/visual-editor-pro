@@ -17,8 +17,7 @@ export const useAuthStore = defineStore('auth', {
 
   getters: {
     role: (state): RoleCode | null => state.profile?.role ?? null,
-    displayName: (state): string =>
-      state.profile?.full_name || state.user?.email?.split('@')[0] || '',
+    displayName: (state): string => state.profile?.full_name || state.user?.email?.split('@')[0] || '',
     avatarUrl: (state): string | null => state.profile?.avatar_url ?? null,
   },
 

@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="visual-empty"
-    :class="_props.class"
-  >
+  <div class="visual-empty" :class="_props.class">
     <img :src="_imageList[_props.messageType]" />
     <slot>
       <span>{{ _props.message }}</span>

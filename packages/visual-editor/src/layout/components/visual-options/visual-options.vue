@@ -3,41 +3,23 @@
     <template #header>
       <div class="title ve-p-2">属性配置</div>
     </template>
-    <el-scrollbar
-      height="100%"
-      class="ve-h-full ve-min-h-0"
-    >
-      <el-collapse
-        v-model="activeNames"
-        accordion
-      >
-        <el-collapse-item
-          title="页面属性"
-          name="pageInfo"
-        >
+    <el-scrollbar height="100%" class="ve-h-full ve-min-h-0">
+      <el-collapse v-model="activeNames" accordion>
+        <el-collapse-item title="页面属性" name="pageInfo">
           <visual-page-options />
         </el-collapse-item>
         <template v-if="showProps">
-          <el-collapse-item
-            title="组件属性"
-            name="props"
-          >
+          <el-collapse-item name="props" title="组件属性">
             <visual-props-options :key="_vid" />
           </el-collapse-item>
         </template>
         <template v-if="showListData">
-          <el-collapse-item
-            :title="listDataLabel"
-            name="listData"
-          >
+          <el-collapse-item name="listData" :title="listDataLabel">
             <visual-list-data-options :key="_vid" />
           </el-collapse-item>
         </template>
         <template v-if="showStyles">
-          <el-collapse-item
-            title="组件样式"
-            name="styles"
-          >
+          <el-collapse-item title="组件样式" name="styles">
             <visual-styles-options :key="_vid" />
           </el-collapse-item>
         </template>

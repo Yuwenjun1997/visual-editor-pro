@@ -4,47 +4,29 @@
       <div class="title ve-p-2 ve-pb-0">内置模板</div>
       <p class="desc ve-px-2 ve-pt-1 ve-pb-2">点击卡片一键应用到画布</p>
     </template>
-    <el-scrollbar
-      height="100%"
-      class="ve-h-full ve-min-h-0"
-    >
+    <el-scrollbar height="100%" class="ve-h-full ve-min-h-0">
       <div class="ve-p-2 ve-flex ve-flex-col ve-gap-3">
         <div
           v-for="tpl in visualTemplates"
           :key="tpl.id"
-          class="template-card"
-          role="button"
           tabindex="0"
+          role="button"
+          class="template-card"
           @click="applyTemplate(tpl)"
           @keydown.enter="applyTemplate(tpl)"
         >
-          <div
-            class="template-card__thumb"
-            :style="thumbStyle(tpl)"
-          >
-            <Icon
-              class="template-card__thumb-icon"
-              :icon="tpl.icon"
-            />
+          <div :style="thumbStyle(tpl)" class="template-card__thumb">
+            <Icon :icon="tpl.icon" class="template-card__thumb-icon" />
             <span class="template-card__apply">应用</span>
           </div>
           <div class="template-card__body">
             <p class="template-card__name">{{ tpl.name }}</p>
             <p class="template-card__desc">{{ tpl.description }}</p>
             <div class="template-card__chips">
-              <span
-                v-for="(label, i) in visibleChips(tpl)"
-                :key="i"
-                class="template-card__chip"
-              >
+              <span v-for="(label, i) in visibleChips(tpl)" :key="i" class="template-card__chip">
                 {{ label }}
               </span>
-              <span
-                v-if="moreChips(tpl) > 0"
-                class="template-card__chip is-more"
-              >
-                +{{ moreChips(tpl) }}
-              </span>
+              <span v-if="moreChips(tpl) > 0" class="template-card__chip is-more"> +{{ moreChips(tpl) }} </span>
             </div>
           </div>
         </div>

@@ -1,13 +1,7 @@
 <template>
-  <visual-collapse
-    class="visual-round-editor"
-    title="圆角"
-  >
+  <visual-collapse title="圆角" class="visual-round-editor">
     <template #right>
-      <visual-px-input
-        v-model="round"
-        @change="onRootRoundChange"
-      />
+      <visual-px-input v-model="round" @change="onRootRoundChange" />
     </template>
     <template #default>
       <div class="ve-grid ve-grid-cols-2 ve-p-2 ve-gap-2 visual-input-group">
@@ -15,37 +9,25 @@
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-top" />
           </div>
-          <visual-px-input
-            v-model="topLeftRadius"
-            @change="onRoundChange"
-          />
+          <visual-px-input v-model="topLeftRadius" @change="onRoundChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-right" />
           </div>
-          <visual-px-input
-            v-model="topRightRadius"
-            @change="onRoundChange"
-          />
+          <visual-px-input v-model="topRightRadius" @change="onRoundChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-bottom" />
           </div>
-          <visual-px-input
-            v-model="bottomLeftRadius"
-            @change="onRoundChange"
-          />
+          <visual-px-input v-model="bottomLeftRadius" @change="onRoundChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-left" />
           </div>
-          <visual-px-input
-            v-model="bottomRightRadius"
-            @change="onRoundChange"
-          />
+          <visual-px-input v-model="bottomRightRadius" @change="onRoundChange" />
         </div>
       </div>
     </template>

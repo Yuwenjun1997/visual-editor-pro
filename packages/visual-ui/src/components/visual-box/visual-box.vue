@@ -1,14 +1,8 @@
 <template>
-  <div
-    :class="cn('visual-box', _props.class)"
-    :style="bindBoxStyles"
-  >
+  <div :style="bindBoxStyles" :class="cn('visual-box', _props.class)">
     <visual-message v-if="showEmpty" />
     <template v-else>
-      <div
-        class="visual-box__inner"
-        :style="bindBoxInnerStyles"
-      >
+      <div class="visual-box__inner" :style="bindBoxInnerStyles">
         <slot />
       </div>
     </template>

@@ -1,7 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type { VisualProductCardProps } from '@visual/ui/components/visual-product-card/interface'
 import {
-  createColorInputControl,
   createImageInputControl,
   createNormalSelectControl,
   createNumberInputControl,

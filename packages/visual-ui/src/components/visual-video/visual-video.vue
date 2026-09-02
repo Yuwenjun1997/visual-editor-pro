@@ -1,25 +1,18 @@
 <template>
-  <visual-box
-    class="visual-video"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-video__inner"
-      :style="_bindInnerStyles"
-    >
+  <visual-box class="visual-video" :class="_props.class" :styles="_props.styles">
+    <div :style="_bindInnerStyles" class="visual-video__inner">
       <video
-        class="visual-video__video"
         :src="_bindProps.src"
-        :autoplay="_bindProps.autoplay"
         :loop="_bindProps.loop"
         :muted="_bindProps.muted"
+        :title="_bindProps.title"
+        class="visual-video__video"
+        :autoplay="_bindProps.autoplay"
         :controls="_bindProps.controls"
+        :object-fit="_bindProps.objectFit"
+        :show-play-btn="_bindProps.showPlayBtn"
         :show-progress="_bindProps.showProgress"
         :show-fullscreen-btn="_bindProps.showFullscreenBtn"
-        :show-play-btn="_bindProps.showPlayBtn"
-        :object-fit="_bindProps.objectFit"
-        :title="_bindProps.title"
       />
     </div>
   </visual-box>

@@ -1,10 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type { VisualAudioProps } from '@visual/ui/components/visual-audio/interface'
-import {
-  createPxInputControl,
-  createSwitchControl,
-  createTextInputControl,
-} from '../../utils/visual.control'
+import { createPxInputControl, createSwitchControl, createTextInputControl } from '../../utils/visual.control'
 
 const visualAudio: VisualEditorComponent<VisualAudioProps> = {
   key: 'VisualAudio',

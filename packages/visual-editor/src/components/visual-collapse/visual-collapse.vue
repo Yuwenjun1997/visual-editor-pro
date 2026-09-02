@@ -1,22 +1,13 @@
 <template>
   <div class="visual-collapse">
-    <div
-      class="visual-collapse-btn ve-cursor-pointer"
-      @click="isCollapse = !isCollapse"
-    >
+    <div class="visual-collapse-btn ve-cursor-pointer" @click="isCollapse = !isCollapse">
       <div class="ve-flex ve-items-center ve-flex-1">
-        <Icon
-          :icon="icon"
-          class="ve-text-xs"
-        />
+        <Icon :icon="icon" class="ve-text-xs" />
         <span class="ve-text-sm ve-ml-1">{{ props.title }}</span>
       </div>
       <slot name="right" />
     </div>
-    <div
-      v-show="isCollapse"
-      class="visual-collapse-content"
-    >
+    <div v-show="isCollapse" class="visual-collapse-content">
       <slot />
     </div>
   </div>
@@ -27,7 +18,7 @@ import { Icon } from '@iconify/vue'
 const isCollapse = ref(false)
 
 interface Props {
-  title: string
+  title?: string
 }
 
 defineOptions({

@@ -1,9 +1,6 @@
 <template>
   <div class="ve-p-1 ve-flex-1 ve-w-full">
-    <div
-      ref="editorEl"
-      class="ve-w-full ve-h-full"
-    ></div>
+    <div ref="editorEl" class="ve-w-full ve-h-full"></div>
   </div>
 </template>
 
@@ -82,7 +79,7 @@ const editorInit = () => {
     } else {
       editor.setValue('')
     }
-    editor.onDidChangeModelContent((val: any) => {
+    editor.onDidChangeModelContent((_val: any) => {
       modelValue.value = editor.getValue()
     })
     editor.trigger('', 'editor.action.formatDocument', null)

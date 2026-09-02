@@ -2,175 +2,83 @@
   <div class="admin-page">
     <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
       <div class="wa-text-base wa-font-medium">文章管理</div>
-      <el-button
-        type="primary"
-        @click="openCreate"
-        >新增文章</el-button
-      >
+      <el-button type="primary" @click="openCreate">新增文章</el-button>
     </div>
 
-    <el-table
-      v-loading="loading"
-      :data="articles"
-    >
-      <el-table-column
-        label="封面"
-        width="90"
-      >
+    <el-table v-loading="loading" :data="articles">
+      <el-table-column label="封面" width="90">
         <template #default="{ row }">
-          <el-image
-            v-if="row.cover_url"
-            :src="row.cover_url"
-            fit="cover"
-            class="wa-w-14 wa-h-14 wa-rounded"
-          />
-          <div
-            v-else
-            class="wa-w-14 wa-h-14 wa-bg-gray-100 wa-rounded"
-          />
+          <el-image v-if="row.cover_url" fit="cover" :src="row.cover_url" class="wa-w-14 wa-h-14 wa-rounded" />
+          <div v-else class="wa-w-14 wa-h-14 wa-bg-gray-100 wa-rounded" />
         </template>
       </el-table-column>
-      <el-table-column
-        prop="title"
-        label="标题"
-        min-width="180"
-      />
-      <el-table-column
-        label="分类"
-        width="110"
-      >
+      <el-table-column label="标题" prop="title" min-width="180" />
+      <el-table-column label="分类" width="110">
         <template #default="{ row }">
           {{ categoryName(row.category_id) || '-' }}
         </template>
       </el-table-column>
-      <el-table-column
-        prop="author_name"
-        label="作者"
-        width="110"
-      />
-      <el-table-column
-        label="状态"
-        width="100"
-      >
+      <el-table-column label="作者" width="110" prop="author_name" />
+      <el-table-column label="状态" width="100">
         <template #default="{ row }">
-          <el-tag
-            size="small"
-            :type="row.status === 'published' ? 'success' : 'info'"
-          >
+          <el-tag size="small" :type="row.status === 'published' ? 'success' : 'info'">
             {{ row.status === 'published' ? '已发布' : '草稿' }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column
-        label="操作"
-        width="140"
-      >
+      <el-table-column label="操作" width="140">
         <template #default="{ row }">
-          <el-button
-            size="small"
-            @click="openEdit(row as ArticleRow)"
-            >编辑</el-button
-          >
-          <el-button
-            size="small"
-            type="danger"
-            plain
-            @click="remove(row as ArticleRow)"
-          >
-            删除
-          </el-button>
+          <el-button size="small" @click="openEdit(row as ArticleRow)">编辑</el-button>
+          <el-button plain size="small" type="danger" @click="remove(row as ArticleRow)"> 删除 </el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog
-      v-model="dialogVisible"
-      :title="editing ? '编辑文章' : '新增文章'"
-      width="640px"
-      destroy-on-close
-    >
-      <el-form
-        :model="form"
-        label-width="90px"
-      >
+    <el-dialog v-model="dialogVisible" width="640px" destroy-on-close :title="editing ? '编辑文章' : '新增文章'">
+      <el-form :model="form" label-width="90px">
         <el-form-item label="文章标题">
-          <el-input
-            v-model="form.title"
-            placeholder="文章标题"
-          />
+          <el-input v-model="form.title" placeholder="文章标题" />
         </el-form-item>
         <el-form-item label="封面图">
           <ImageUploader v-model="form.cover_url" />
         </el-form-item>
         <el-form-item label="分类">
-          <el-select
-            v-model="form.category_id"
-            clearable
-            placeholder="不选分类"
-            style="width: 100%"
-          >
-            <el-option
-              v-for="c in categories"
-              :key="c.id"
-              :label="c.name"
-              :value="c.id"
-            />
+          <el-select v-model="form.category_id" clearable placeholder="不选分类" style="width: 100%">
+            <el-option v-for="c in categories" :key="c.id" :value="c.id" :label="c.name" />
           </el-select>
         </el-form-item>
         <el-form-item label="作者">
-          <el-input
-            v-model="form.author_name"
-            placeholder="作者名"
-          />
+          <el-input v-model="form.author_name" placeholder="作者名" />
         </el-form-item>
         <el-form-item label="发布时间">
           <el-date-picker
             v-model="form.publish_time"
             type="datetime"
+            style="width: 100%"
             placeholder="选择发布时间"
             value-format="YYYY-MM-DD HH:mm:ss"
-            style="width: 100%"
           />
         </el-form-item>
         <el-form-item label="状态">
-          <el-select
-            v-model="form.status"
-            style="width: 160px"
-          >
-            <el-option
-              label="草稿"
-              value="draft"
-            />
-            <el-option
-              label="已发布"
-              value="published"
-            />
+          <el-select v-model="form.status" style="width: 160px">
+            <el-option label="草稿" value="draft" />
+            <el-option label="已发布" value="published" />
           </el-select>
         </el-form-item>
         <el-form-item label="摘要">
-          <el-input
-            v-model="form.summary"
-            type="textarea"
-            :rows="2"
-          />
+          <el-input v-model="form.summary" :rows="2" type="textarea" />
         </el-form-item>
         <el-form-item label="正文 HTML">
           <el-input
             v-model="form.html"
-            type="textarea"
             :rows="5"
+            type="textarea"
             placeholder="粘贴富文本 HTML,Paste 后可在页面用富文本组件展示"
           />
         </el-form-item>
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button
-          type="primary"
-          :loading="saving"
-          @click="save"
-        >
-          保存
-        </el-button>
+        <el-button type="primary" :loading="saving" @click="save"> 保存 </el-button>
       </template>
     </el-dialog>
   </div>
@@ -209,10 +117,7 @@ const categoryName = (id: string | null) => categories.value.find((c) => c.id ==
 const load = async () => {
   loading.value = true
   try {
-    const [articleData, categoryData] = await Promise.all([
-      articleService.list(),
-      categoryService.list(),
-    ])
+    const [articleData, categoryData] = await Promise.all([articleService.list(), categoryService.list()])
     articles.value = articleData
     categories.value = categoryData.filter((c) => c.type === 'article')
   } catch (error: any) {

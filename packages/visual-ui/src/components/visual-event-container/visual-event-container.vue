@@ -1,19 +1,15 @@
 <template>
-  <visual-box
-    class="visual-event-container"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
+  <visual-box :class="_props.class" :styles="_props.styles" class="visual-event-container">
     <div
       class="visual-event-container__inner"
       @click="handleClick"
-      @mouseenter="handleMouseEnter"
-      @touchstart.passive="handleTouchStart"
-      @touchend="handleTouchEnd"
-      @touchmove.passive="handleTouchMove"
-      @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
+      @touchend="handleTouchEnd"
+      @mousedown="handleMouseDown"
       @mousemove="handleMouseMove"
+      @mouseenter="handleMouseEnter"
+      @touchmove.passive="handleTouchMove"
+      @touchstart.passive="handleTouchStart"
     >
       <slot />
     </div>

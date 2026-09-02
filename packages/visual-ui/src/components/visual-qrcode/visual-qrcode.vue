@@ -1,23 +1,8 @@
 <template>
-  <visual-box
-    class="visual-qrcode"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
+  <visual-box class="visual-qrcode" :class="_props.class" :styles="_props.styles">
     <div class="visual-qrcode__inner">
-      <img
-        v-if="qrUrl"
-        class="visual-qrcode__img"
-        :src="qrUrl"
-        :style="imgStyle"
-        alt="二维码"
-      />
-      <div
-        v-else
-        class="visual-qrcode__empty"
-      >
-        请输入二维码内容
-      </div>
+      <img v-if="qrUrl" alt="二维码" :src="qrUrl" :style="imgStyle" class="visual-qrcode__img" />
+      <div v-else class="visual-qrcode__empty">请输入二维码内容</div>
     </div>
   </visual-box>
 </template>

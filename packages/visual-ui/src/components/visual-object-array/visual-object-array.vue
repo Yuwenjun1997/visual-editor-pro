@@ -1,13 +1,6 @@
 <template>
-  <visual-box
-    class="visual-object-array"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <visual-message
-      v-if="_errorMsg"
-      message-type="request-error"
-    >
+  <visual-box :class="_props.class" :styles="_props.styles" class="visual-object-array">
+    <visual-message v-if="_errorMsg" message-type="request-error">
       <span>发现错误：{{ _errorMsg || '未知错误' }}</span>
     </visual-message>
     <slot v-else />

@@ -1,8 +1,5 @@
 <template>
-  <div
-    :key="activeKey"
-    class="visual-page-options"
-  >
+  <div :key="activeKey" class="visual-page-options">
     <visual-control-item title="页面标题">
       <visual-text-input v-model="pageConfig.title" />
     </visual-control-item>

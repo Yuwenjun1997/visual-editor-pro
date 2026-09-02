@@ -1,41 +1,13 @@
 <template>
-  <div
-    class="visual-tools-bar"
-    @click.stop
-  >
+  <div class="visual-tools-bar" @click.stop>
     <div class="visual-tools__icon">
       <Icon icon="bi:tools" />
     </div>
-    <visual-tool-button
-      tool-tip="上移"
-      icon-name="line-md:arrow-close-up"
-      :disabled="disabled"
-      @click="moveUp"
-    />
-    <visual-tool-button
-      tool-tip="下移"
-      icon-name="line-md:arrow-close-down"
-      :disabled="disabled"
-      @click="moveDown"
-    />
-    <visual-tool-button
-      tool-tip="复制"
-      icon-name="ion:copy-outline"
-      :disabled="disabled"
-      @click="copy"
-    />
-    <visual-tool-button
-      tool-tip="删除"
-      icon-name="ep:delete"
-      :disabled="disabled"
-      @click="remove"
-    />
-    <visual-tool-button
-      tool-tip="重新加载组件"
-      icon-name="ep:refresh"
-      :disabled="disabled"
-      @click="reload"
-    />
+    <visual-tool-button tool-tip="上移" :disabled="disabled" icon-name="line-md:arrow-close-up" @click="moveUp" />
+    <visual-tool-button tool-tip="下移" :disabled="disabled" icon-name="line-md:arrow-close-down" @click="moveDown" />
+    <visual-tool-button tool-tip="复制" :disabled="disabled" icon-name="ion:copy-outline" @click="copy" />
+    <visual-tool-button tool-tip="删除" :disabled="disabled" icon-name="ep:delete" @click="remove" />
+    <visual-tool-button tool-tip="重新加载组件" :disabled="disabled" icon-name="ep:refresh" @click="reload" />
   </div>
 </template>
 

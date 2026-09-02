@@ -11,6 +11,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: '',
   vertical: false,
 })
 
@@ -18,14 +19,8 @@ const nodeRef = inject(carouselNodeInjectionKey)!
 </script>
 
 <template>
-  <div
-    ref="nodeRef"
-    class="vu-h-full vu-overflow-hidden"
-  >
-    <div
-      class="vu-flex vu-h-full"
-      :class="cn(props.vertical ? 'vu-flex-col' : '', props.class)"
-    >
+  <div ref="nodeRef" class="vu-h-full vu-overflow-hidden">
+    <div class="vu-flex vu-h-full" :class="cn(props.vertical ? 'vu-flex-col' : '', props.class)">
       <slot />
     </div>
   </div>

@@ -1,19 +1,7 @@
 <template>
-  <visual-box
-    class="visual-coupon"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-coupon__card"
-      :class="[layoutClass, edgeClass, themeClass]"
-      :style="cardStyle"
-    >
-      <span
-        v-if="_props.props.showBadge !== false"
-        class="visual-coupon__badge"
-        :style="badgeStyle"
-      >
+  <visual-box class="visual-coupon" :class="_props.class" :styles="_props.styles">
+    <div :style="cardStyle" class="visual-coupon__card" :class="[layoutClass, edgeClass, themeClass]">
+      <span v-if="_props.props.showBadge !== false" :style="badgeStyle" class="visual-coupon__badge">
         {{ _props.props.badgeText || '限时' }}
       </span>
       <div class="visual-coupon__amount">
@@ -24,11 +12,7 @@
       <div class="visual-coupon__info">
         <div class="visual-coupon__title">{{ _props.props.titleText }}</div>
         <div class="visual-coupon__condition">{{ _props.props.conditionText }}</div>
-        <div
-          v-if="_props.props.showBtn !== false"
-          class="visual-coupon__btn"
-          :style="btnStyle"
-        >
+        <div v-if="_props.props.showBtn !== false" :style="btnStyle" class="visual-coupon__btn">
           {{ _props.props.btnText }}
         </div>
       </div>
@@ -62,14 +46,10 @@ const btnStyle = computed<CSSProperties>(() => ({
   '--v-coupon-btn-bg': _props.props.btnColor,
 }))
 
-const layoutClass = computed(() =>
-  _props.props.layout === 'column' ? 'visual-coupon__card--column' : '',
-)
+const layoutClass = computed(() => (_props.props.layout === 'column' ? 'visual-coupon__card--column' : ''))
 
 const edgeClass = computed(() =>
-  _props.props.layout !== 'column' && _props.props.edge === 'notch'
-    ? 'visual-coupon__card--notch'
-    : '',
+  _props.props.layout !== 'column' && _props.props.edge === 'notch' ? 'visual-coupon__card--notch' : '',
 )
 
 const themeClass = computed(() => {

@@ -1,18 +1,7 @@
 <template>
-  <visual-box
-    class="visual-image"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-image__inner"
-      :style="_bindInnerStyles"
-    >
-      <img
-        class="visual-image__img"
-        :src="_bindProps.src"
-        :style="_bindImageStyles"
-      />
+  <visual-box class="visual-image" :class="_props.class" :styles="_props.styles">
+    <div :style="_bindInnerStyles" class="visual-image__inner">
+      <img :src="_bindProps.src" class="visual-image__img" :style="_bindImageStyles" />
     </div>
   </visual-box>
 </template>

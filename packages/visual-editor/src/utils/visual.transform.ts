@@ -14,11 +14,6 @@ export const transformCustomJsonDataToTalbeData = (
   }))
 }
 
-export const transformTableDataToCustomJsonData = (
-  tableData: CustomTableData[],
-): Record<string, any> => {
-  return tableData.reduce(
-    (prev, item) => ({ ...prev, [item.propName]: item.value }),
-    {} as Record<string, any>,
-  )
+export const transformTableDataToCustomJsonData = (tableData: CustomTableData[]): Record<string, any> => {
+  return tableData.reduce((prev, item) => ({ ...prev, [item.propName]: item.value }), {} as Record<string, any>)
 }

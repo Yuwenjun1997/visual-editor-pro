@@ -4,81 +4,35 @@
 
     <div class="wa-flex wa-items-center wa-gap-3 wa-mb-4">
       <el-radio-group v-model="typeFilter">
-        <el-radio-button
-          label="商品分类"
-          value="product"
-        />
-        <el-radio-button
-          label="文章分类"
-          value="article"
-        />
+        <el-radio-button label="商品分类" value="product" />
+        <el-radio-button label="文章分类" value="article" />
       </el-radio-group>
-      <el-input
-        v-model="newName"
-        placeholder="新分类名称"
-        style="width: 200px"
-        @keyup.enter="create"
-      />
-      <el-input-number
-        v-model="newSort"
-        :min="0"
-        :controls="false"
-        placeholder="排序"
-        style="width: 90px"
-      />
-      <el-button
-        type="primary"
-        :loading="saving"
-        @click="create"
-      >
-        新增
-      </el-button>
+      <el-input v-model="newName" placeholder="新分类名称" style="width: 200px" @keyup.enter="create" />
+      <el-input-number v-model="newSort" :min="0" placeholder="排序" :controls="false" style="width: 90px" />
+      <el-button type="primary" :loading="saving" @click="create"> 新增 </el-button>
     </div>
 
-    <el-table
-      v-loading="loading"
-      :data="visibleCategories"
-    >
-      <el-table-column
-        prop="name"
-        label="名称"
-        min-width="200"
-      />
-      <el-table-column
-        label="类型"
-        width="120"
-      >
+    <el-table v-loading="loading" :data="visibleCategories">
+      <el-table-column label="名称" prop="name" min-width="200" />
+      <el-table-column label="类型" width="120">
         <template #default="{ row }">
           {{ row.type === 'product' ? '商品分类' : '文章分类' }}
         </template>
       </el-table-column>
-      <el-table-column
-        label="排序"
-        width="160"
-      >
+      <el-table-column label="排序" width="160">
         <template #default="{ row }">
           <el-input-number
-            :model-value="row.sort"
             :min="0"
-            :controls="false"
             size="small"
+            :controls="false"
+            :model-value="row.sort"
             @change="(v: any) => updateSort(row as CategoryRow, v)"
           />
         </template>
       </el-table-column>
-      <el-table-column
-        label="操作"
-        width="100"
-      >
+      <el-table-column label="操作" width="100">
         <template #default="{ row }">
-          <el-button
-            size="small"
-            type="danger"
-            plain
-            @click="remove(row as CategoryRow)"
-          >
-            删除
-          </el-button>
+          <el-button plain size="small" type="danger" @click="remove(row as CategoryRow)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -100,9 +54,7 @@ const saving = ref(false)
 const newName = ref('')
 const newSort = ref(0)
 
-const visibleCategories = computed(() =>
-  categories.value.filter((c) => c.type === typeFilter.value),
-)
+const visibleCategories = computed(() => categories.value.filter((c) => c.type === typeFilter.value))
 
 const load = async () => {
   loading.value = true

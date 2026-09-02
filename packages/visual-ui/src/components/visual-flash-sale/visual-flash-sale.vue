@@ -1,13 +1,6 @@
 <template>
-  <visual-box
-    class="visual-flash-sale"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-flash-sale__inner"
-      :style="innerStyle"
-    >
+  <visual-box :class="_props.class" :styles="_props.styles" class="visual-flash-sale">
+    <div :style="innerStyle" class="visual-flash-sale__inner">
       <div class="visual-flash-sale__head">
         <div class="visual-flash-sale__title-wrap">
           <i class="bi bi-lightning-charge-fill visual-flash-sale__title-icon" />
@@ -28,27 +21,17 @@
       <div class="visual-flash-sale__body">
         <div class="visual-flash-sale__prices">
           <span class="visual-flash-sale__price">{{ priceText }}</span>
-          <span
-            v-if="originPriceText"
-            class="visual-flash-sale__origin"
-          >
+          <span v-if="originPriceText" class="visual-flash-sale__origin">
             {{ originPriceText }}
           </span>
         </div>
         <div class="visual-flash-sale__progress-wrap">
           <span class="visual-flash-sale__progress-label">已抢 {{ soldPercent }}%</span>
           <div class="visual-flash-sale__progress">
-            <div
-              class="visual-flash-sale__progress-bar"
-              :style="{ width: `${soldPercent}%` }"
-            />
+            <div :style="{ width: `${soldPercent}%` }" class="visual-flash-sale__progress-bar" />
           </div>
         </div>
-        <a
-          class="visual-flash-sale__btn"
-          :href="href"
-          @click="handleClick"
-        >
+        <a :href="href" class="visual-flash-sale__btn" @click="handleClick">
           {{ buttonText || '立即抢购' }}
         </a>
       </div>
@@ -122,8 +105,7 @@ const parseEnd = () => {
   if (!end) return 0
   const t = Number(end)
   const normalized = String(end).trim()
-  const target =
-    Number.isFinite(t) && normalized !== '' ? t : Date.parse(normalized.replace(' ', 'T'))
+  const target = Number.isFinite(t) && normalized !== '' ? t : Date.parse(normalized.replace(' ', 'T'))
   return Number.isFinite(target) ? target - Date.now() : 0
 }
 

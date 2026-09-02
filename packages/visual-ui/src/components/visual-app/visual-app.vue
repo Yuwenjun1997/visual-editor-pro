@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="visual-app"
-    :class="[_bindClassList, _props.class]"
-  >
+  <div class="visual-app" :class="[_bindClassList, _props.class]">
     <slot />
     <Sonner />
   </div>

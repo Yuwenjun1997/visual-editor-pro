@@ -1,13 +1,6 @@
 <template>
-  <visual-box
-    class="visual-text"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      :class="bindClass"
-      :style="bindStyle"
-    >
+  <visual-box class="visual-text" :class="_props.class" :styles="_props.styles">
+    <div :class="bindClass" :style="bindStyle">
       {{ _props.props.text }}
     </div>
   </visual-box>

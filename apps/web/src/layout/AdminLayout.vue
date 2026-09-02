@@ -1,13 +1,13 @@
 <template>
   <default-layout>
-    <el-aside :width="collapsed ? '64px' : '220px'" class="admin-aside">
+    <el-aside class="admin-aside" :width="collapsed ? '64px' : '220px'">
       <el-scrollbar class="wa-h-full">
         <el-menu
-          :default-active="activeMenu"
           router
+          class="admin-menu"
           :collapse="collapsed"
           :collapse-transition="false"
-          class="admin-menu"
+          :default-active="activeMenu"
         >
           <el-menu-item index="/admin/pages">
             <el-icon><Icon icon="ep:document" /></el-icon>

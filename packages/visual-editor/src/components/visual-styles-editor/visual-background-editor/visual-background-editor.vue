@@ -1,8 +1,5 @@
 <template>
-  <visual-collapse
-    class="visual-background-editor"
-    title="背景"
-  >
+  <visual-collapse title="背景" class="visual-background-editor">
     <template #right>
       <visual-color-input v-model="bgColor" />
     </template>
@@ -18,29 +15,19 @@
           <div class="ve-w-6 ve-flex-shrink-0">
             <span class="iconfont icon-rule"></span>
           </div>
-          <visual-px-input
-            v-model="bgSize"
-            placeholder="size"
-          />
+          <visual-px-input v-model="bgSize" placeholder="size" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <span class="iconfont icon-repeat"></span>
           </div>
-          <visual-normal-select
-            v-model="bgRepeat"
-            class="ve-w-full"
-            :options="repeatOptions"
-          />
+          <visual-normal-select v-model="bgRepeat" class="ve-w-full" :options="repeatOptions" />
         </div>
         <div class="ve-flex ve-items-center ve-col-span-2">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:map-marker" />
           </div>
-          <visual-text-input
-            v-model="bgPosition"
-            placeholder="center center"
-          />
+          <visual-text-input v-model="bgPosition" placeholder="center center" />
         </div>
       </div>
     </template>

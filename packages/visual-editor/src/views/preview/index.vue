@@ -1,45 +1,18 @@
 <template>
   <el-config-provider :locale="zhCn">
-    <div
-      v-if="hasData"
-      class="preview-page"
-      :class="data.themeName"
-    >
-      <el-radio-group
-        v-model="device"
-        class="preview-toolbar"
-        size="small"
-      >
-        <el-radio-button
-          label="H5"
-          value="h5"
-        />
-        <el-radio-button
-          label="Pad"
-          value="pad"
-        />
-        <el-radio-button
-          label="PC"
-          value="pc"
-        />
+    <div v-if="hasData" class="preview-page" :class="data.themeName">
+      <el-radio-group v-model="device" size="small" class="preview-toolbar">
+        <el-radio-button label="H5" value="h5" />
+        <el-radio-button label="Pad" value="pad" />
+        <el-radio-button label="PC" value="pc" />
       </el-radio-group>
-      <div
-        class="preview-frame"
-        :class="device"
-        :style="pageBgStyle"
-      >
-        <visual-app
-          :bg-color="data.globalStyle?.backgroundColor"
-          class="preview-app"
-        >
+      <div :class="device" :style="pageBgStyle" class="preview-frame">
+        <visual-app class="preview-app" :bg-color="data.globalStyle?.backgroundColor">
           <PreviewBlocks :blocks="data.blocks" />
         </visual-app>
       </div>
     </div>
-    <div
-      v-else
-      class="preview-empty"
-    >
+    <div v-else class="preview-empty">
       <p>页面暂无内容，请返回编辑器设计页面</p>
       <el-button @click="closeWindow">关闭窗口</el-button>
     </div>

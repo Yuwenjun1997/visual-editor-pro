@@ -1,53 +1,20 @@
 <template>
-  <visual-box
-    class="visual-count-down"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-count-down__inner"
-      :style="innerStyle"
-      :class="variantClass"
-    >
-      <img
-        v-if="_props.props.image"
-        class="visual-count-down__image"
-        :src="_props.props.image"
-        :style="imageStyle"
-      />
-      <span
-        v-if="_props.props.title"
-        class="visual-count-down__title"
-      >
+  <visual-box :class="_props.class" :styles="_props.styles" class="visual-count-down">
+    <div :style="innerStyle" :class="variantClass" class="visual-count-down__inner">
+      <img v-if="_props.props.image" :style="imageStyle" :src="_props.props.image" class="visual-count-down__image" />
+      <span v-if="_props.props.title" class="visual-count-down__title">
         {{ _props.props.title }}
       </span>
       <template v-if="showDays">
         <span class="visual-count-down__num">{{ days }}</span>
-        <span
-          class="visual-count-down__colon"
-          :style="colonStyle"
-          >天</span
-        >
+        <span :style="colonStyle" class="visual-count-down__colon">天</span>
       </template>
       <span class="visual-count-down__num">{{ pad(hours) }}</span>
-      <span
-        class="visual-count-down__colon"
-        :style="colonStyle"
-        >{{ hSep }}</span
-      >
+      <span :style="colonStyle" class="visual-count-down__colon">{{ hSep }}</span>
       <span class="visual-count-down__num">{{ pad(minutes) }}</span>
-      <span
-        class="visual-count-down__colon"
-        :style="colonStyle"
-        >{{ mSep }}</span
-      >
+      <span :style="colonStyle" class="visual-count-down__colon">{{ mSep }}</span>
       <span class="visual-count-down__num">{{ pad(seconds) }}</span>
-      <span
-        v-if="isPlain"
-        class="visual-count-down__colon"
-        :style="colonStyle"
-        >秒</span
-      >
+      <span v-if="isPlain" :style="colonStyle" class="visual-count-down__colon">秒</span>
     </div>
   </visual-box>
 </template>
@@ -73,9 +40,7 @@ const showDays = computed(() => _props.props.showDays)
 
 const variant = computed(() => _props.props.variant || 'default')
 const isPlain = computed(() => variant.value === 'plain')
-const variantClass = computed(() =>
-  variant.value === 'default' ? '' : `visual-count-down__inner--${variant.value}`,
-)
+const variantClass = computed(() => (variant.value === 'default' ? '' : `visual-count-down__inner--${variant.value}`))
 const imageStyle = computed<CSSProperties>(() => ({
   '--v-count-img-width': _props.props.imageWidth || '32px',
 }))
@@ -110,8 +75,7 @@ const parseEnd = () => {
   const t = Number(end)
   const normalized = String(end).trim()
   // 兼容时间戳与 'YYYY-MM-DD HH:mm:ss'（空格格式在部分浏览器 Date.parse 解析不一致）
-  const target =
-    Number.isFinite(t) && normalized !== '' ? t : Date.parse(normalized.replace(' ', 'T'))
+  const target = Number.isFinite(t) && normalized !== '' ? t : Date.parse(normalized.replace(' ', 'T'))
   return Number.isFinite(target) ? target - Date.now() : 0
 }
 

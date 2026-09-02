@@ -1,42 +1,32 @@
 <template>
-  <visual-box
-    class="visual-product-card-list"
-    :styles="_props.styles"
-    :show-empty="_noListData"
-    :class="_props.class"
-  >
+  <visual-box :class="_props.class" :styles="_props.styles" :show-empty="_noListData" class="visual-product-card-list">
     <visual-scroll-x v-if="_bindProps.layout === 'scroll-x'">
       <div
         v-for="(item, index) in _props.listData"
         :key="index"
-        class="visual-product-card-list__slide"
         :style="slideStyle"
+        class="visual-product-card-list__slide"
       >
         <visual-product-item
           :data="item"
-          :show-tag="_props.props.showTag"
-          :show-buy="_props.props.showBuy"
-          :button-text="_props.props.buttonText"
           :round="_props.props.round"
+          :show-buy="_props.props.showBuy"
+          :show-tag="_props.props.showTag"
           :currency="_props.props.currency"
+          :button-text="_props.props.buttonText"
         />
       </div>
     </visual-scroll-x>
-    <div
-      v-else
-      class="visual-product-card-list__grid"
-      :class="_gridClass"
-      :style="gridStyle"
-    >
+    <div v-else :style="gridStyle" :class="_gridClass" class="visual-product-card-list__grid">
       <visual-product-item
         v-for="(item, index) in _props.listData"
         :key="index"
         :data="item"
-        :show-tag="_props.props.showTag"
-        :show-buy="_props.props.showBuy"
-        :button-text="_props.props.buttonText"
         :round="_props.props.round"
+        :show-buy="_props.props.showBuy"
+        :show-tag="_props.props.showTag"
         :currency="_props.props.currency"
+        :button-text="_props.props.buttonText"
       />
     </div>
   </visual-box>

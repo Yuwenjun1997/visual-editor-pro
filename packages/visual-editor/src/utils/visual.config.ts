@@ -33,11 +33,7 @@ export function createVisualBlockConfig() {
       componentModules.serviceWidgets.length = 0
       componentModules.dataWidgets.length = 0
     },
-    registry: (
-      moduleName: keyof ComponentModules,
-      key: string,
-      component: VisualEditorComponent,
-    ) => {
+    registry: (moduleName: keyof ComponentModules, key: string, component: VisualEditorComponent) => {
       const comp = { ...component, key, moduleName }
       componentModules[moduleName].push(comp)
       componentMap[key] = comp

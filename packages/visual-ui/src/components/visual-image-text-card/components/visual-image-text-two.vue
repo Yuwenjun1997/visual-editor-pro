@@ -3,13 +3,10 @@
     <div class="visual-image-text__header">
       <visual-author
         v-if="_props.showAuthor"
-        :author-avatar="_props.data.authorAvatar"
         :author-name="_props.data.authorName"
+        :author-avatar="_props.data.authorAvatar"
       />
-      <visual-time
-        v-if="_props.showTime"
-        :time="_props.data.publishTime"
-      />
+      <visual-time v-if="_props.showTime" :time="_props.data.publishTime" />
     </div>
     <div class="visual-image-text__content">
       <div class="visual-image-text__cover">

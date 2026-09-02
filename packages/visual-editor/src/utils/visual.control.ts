@@ -1,8 +1,4 @@
-import {
-  VisualEditorType,
-  type VisualEditorProps,
-  type VisualSelectOption,
-} from '../types/visual-editor'
+import { VisualEditorType, type VisualEditorProps, type VisualSelectOption } from '../types/visual-editor'
 
 export interface VisualPropsEditorControl<O = any> {
   (option: O): VisualEditorProps

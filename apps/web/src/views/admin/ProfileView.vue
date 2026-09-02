@@ -3,22 +3,16 @@
     <div class="admin-page">
       <div class="wa-text-base wa-font-medium wa-mb-4">个人中心</div>
 
-      <el-form
-        label-position="left"
-        label-width="96px"
-      >
+      <el-form label-width="96px" label-position="left">
         <el-form-item label="头像">
           <div class="wa-flex wa-items-center wa-gap-4">
-            <el-avatar
-              :size="72"
-              :src="form.avatar_url || undefined"
-            >
+            <el-avatar :size="72" :src="form.avatar_url || undefined">
               {{ initial }}
             </el-avatar>
             <el-upload
+              accept="image/*"
               :show-file-list="false"
               :http-request="uploadAvatar"
-              accept="image/*"
               :before-upload="beforeUpload"
             >
               <el-button size="small">上传头像</el-button>
@@ -26,12 +20,7 @@
           </div>
         </el-form-item>
         <el-form-item label="昵称">
-          <el-input
-            v-model="form.full_name"
-            maxlength="24"
-            placeholder="你的昵称"
-            class="wa-max-w-sm"
-          />
+          <el-input v-model="form.full_name" maxlength="24" placeholder="你的昵称" class="wa-max-w-sm" />
         </el-form-item>
         <el-form-item label="角色">
           <el-tag :type="roleTagType">{{ roleLabel }}</el-tag>
@@ -40,21 +29,10 @@
           <span>{{ auth.user?.email }}</span>
         </el-form-item>
         <el-form-item label="修改密码">
-          <el-button
-            size="small"
-            plain
-            @click="changePassword"
-            >修改密码</el-button
-          >
+          <el-button plain size="small" @click="changePassword">修改密码</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button
-            type="primary"
-            :loading="saving"
-            @click="save"
-          >
-            保存修改
-          </el-button>
+          <el-button type="primary" :loading="saving" @click="save"> 保存修改 </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -81,8 +59,7 @@ const initial = computed(() => (auth.displayName || 'U').charAt(0).toUpperCase()
 
 const roleTagType = computed(
   () =>
-    (auth.role === 'admin' ? 'danger' : auth.role === 'editor' ? 'primary' : 'info') as
-      'danger' | 'primary' | 'info',
+    (auth.role === 'admin' ? 'danger' : auth.role === 'editor' ? 'primary' : 'info') as 'danger' | 'primary' | 'info',
 )
 
 const roleLabel = computed(() => (auth.role ? ROLE_LABELS[auth.role] : '访客'))

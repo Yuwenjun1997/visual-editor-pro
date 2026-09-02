@@ -1,21 +1,14 @@
 <template>
-  <visual-box
-    class="visual-rating"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-rating__stars"
-      :style="starsStyle"
-    >
+  <visual-box class="visual-rating" :class="_props.class" :styles="_props.styles">
+    <div :style="starsStyle" class="visual-rating__stars">
       <span
         v-for="index in max"
         :key="index"
         class="visual-rating__star"
         :class="{ 'visual-rating__star--interactive': !_props.props.readonly }"
+        @mouseleave="hover = 0"
         @click="handleClick(index, $event)"
         @mouseenter="handleHover(index, $event)"
-        @mouseleave="hover = 0"
       >
         <i :class="starClass(index)" />
       </span>

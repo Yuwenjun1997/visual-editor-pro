@@ -1,50 +1,18 @@
 <template>
-  <visual-box
-    class="visual-picture-wrap"
-    :styles="_props.styles"
-    :show-empty="_noListData"
-    :class="_props.class"
-  >
-    <div
-      class="visual-picture-wrap__content"
-      :style="_bindInnerStyles"
-    >
+  <visual-box :class="_props.class" :styles="_props.styles" :show-empty="_noListData" class="visual-picture-wrap">
+    <div :style="_bindInnerStyles" class="visual-picture-wrap__content">
       <visual-scroll-x v-if="_bindProps.layout === 'layout-card-type-scroll-x'">
-        <div
-          v-for="(item, index) in _props.listData"
-          :key="index"
-          class="visual-picture visual-picture--slide"
-        >
-          <img
-            class="visual-picture__image"
-            :src="item.url"
-          />
-          <span
-            v-if="_bindProps.showLabel"
-            class="visual-picture__label"
-          >
+        <div v-for="(item, index) in _props.listData" :key="index" class="visual-picture visual-picture--slide">
+          <img :src="item.url" class="visual-picture__image" />
+          <span v-if="_bindProps.showLabel" class="visual-picture__label">
             {{ item.label }}
           </span>
         </div>
       </visual-scroll-x>
-      <div
-        v-else
-        class="visual-picture-wrap__inner"
-        :class="_bindProps.layout"
-      >
-        <div
-          v-for="(item, index) in _props.listData"
-          :key="index"
-          class="visual-picture"
-        >
-          <img
-            class="visual-picture__image"
-            :src="item.url"
-          />
-          <span
-            v-if="_bindProps.showLabel"
-            class="visual-picture__label"
-          >
+      <div v-else :class="_bindProps.layout" class="visual-picture-wrap__inner">
+        <div v-for="(item, index) in _props.listData" :key="index" class="visual-picture">
+          <img :src="item.url" class="visual-picture__image" />
+          <span v-if="_bindProps.showLabel" class="visual-picture__label">
             {{ item.label }}
           </span>
         </div>

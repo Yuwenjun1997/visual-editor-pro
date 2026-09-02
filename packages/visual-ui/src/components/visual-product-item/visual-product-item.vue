@@ -1,55 +1,30 @@
 <template>
   <div
+    :style="itemStyle"
     class="visual-product-item"
     :class="{ 'visual-product-item--horizontal': layout === 'horizontal' }"
-    :style="itemStyle"
   >
-    <a
-      class="visual-product-item__media"
-      :href="href"
-      @click="handleClick"
-    >
-      <img
-        v-if="cover"
-        class="visual-product-item__cover"
-        :src="cover"
-        :alt="title"
-      />
-      <span
-        v-else
-        class="visual-product-item__cover visual-product-item__cover--empty"
-      >
+    <a :href="href" class="visual-product-item__media" @click="handleClick">
+      <img v-if="cover" :alt="title" :src="cover" class="visual-product-item__cover" />
+      <span v-else class="visual-product-item__cover visual-product-item__cover--empty">
         <i class="bi bi-image" />
       </span>
-      <span
-        v-if="showTag !== false && tag"
-        class="visual-product-item__tag"
-      >
+      <span v-if="showTag !== false && tag" class="visual-product-item__tag">
         {{ tag }}
       </span>
     </a>
     <div class="visual-product-item__info">
-      <a
-        class="visual-product-item__title"
-        :href="href"
-        @click="handleClick"
-      >
+      <a :href="href" class="visual-product-item__title" @click="handleClick">
         {{ title || '商品标题' }}
       </a>
       <div class="visual-product-item__actions">
         <div class="visual-product-item__prices">
           <span class="visual-product-item__price">{{ priceText }}</span>
-          <span
-            v-if="originPriceText"
-            class="visual-product-item__origin"
-          >
+          <span v-if="originPriceText" class="visual-product-item__origin">
             {{ originPriceText }}
           </span>
         </div>
-        <span
-          v-if="showBuy !== false"
-          class="visual-product-item__buy"
-        >
+        <span v-if="showBuy !== false" class="visual-product-item__buy">
           {{ buttonText || '购买' }}
         </span>
       </div>

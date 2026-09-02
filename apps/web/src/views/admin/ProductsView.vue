@@ -3,211 +3,88 @@
     <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
       <div class="wa-text-base wa-font-medium">商品管理</div>
       <div class="wa-flex wa-items-center wa-gap-3">
-        <el-select
-          v-model="filterCategory"
-          placeholder="全部分类"
-          clearable
-          size="default"
-          style="width: 160px"
-        >
-          <el-option
-            v-for="c in categories"
-            :key="c.id"
-            :label="c.name"
-            :value="c.id"
-          />
+        <el-select v-model="filterCategory" clearable size="default" placeholder="全部分类" style="width: 160px">
+          <el-option v-for="c in categories" :key="c.id" :value="c.id" :label="c.name" />
         </el-select>
-        <el-button
-          type="primary"
-          @click="openCreate"
-          >新增商品</el-button
-        >
+        <el-button type="primary" @click="openCreate">新增商品</el-button>
       </div>
     </div>
 
-    <el-table
-      v-loading="loading"
-      :data="filteredProducts"
-    >
-      <el-table-column
-        label="封面"
-        width="90"
-      >
+    <el-table v-loading="loading" :data="filteredProducts">
+      <el-table-column label="封面" width="90">
         <template #default="{ row }">
-          <el-image
-            v-if="row.cover_url"
-            :src="row.cover_url"
-            fit="cover"
-            class="wa-w-14 wa-h-14 wa-rounded"
-          />
-          <div
-            v-else
-            class="wa-w-14 wa-h-14 wa-bg-gray-100 wa-rounded"
-          />
+          <el-image v-if="row.cover_url" fit="cover" :src="row.cover_url" class="wa-w-14 wa-h-14 wa-rounded" />
+          <div v-else class="wa-w-14 wa-h-14 wa-bg-gray-100 wa-rounded" />
         </template>
       </el-table-column>
-      <el-table-column
-        prop="title"
-        label="标题"
-        min-width="180"
-      />
-      <el-table-column
-        label="售价"
-        width="100"
-      >
+      <el-table-column label="标题" prop="title" min-width="180" />
+      <el-table-column label="售价" width="100">
         <template #default="{ row }"> ¥{{ row.price ?? '-' }} </template>
       </el-table-column>
-      <el-table-column
-        label="分类"
-        width="110"
-      >
+      <el-table-column label="分类" width="110">
         <template #default="{ row }">
           {{ categoryName(row.category_id) || '-' }}
         </template>
       </el-table-column>
-      <el-table-column
-        label="状态"
-        width="100"
-      >
+      <el-table-column label="状态" width="100">
         <template #default="{ row }">
           <el-tag
             size="small"
-            :type="
-              row.status === 'published' ? 'success' : row.status === 'draft' ? 'info' : 'danger'
-            "
+            :type="row.status === 'published' ? 'success' : row.status === 'draft' ? 'info' : 'danger'"
           >
             {{ statusText(row.status) }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column
-        label="操作"
-        width="140"
-      >
+      <el-table-column label="操作" width="140">
         <template #default="{ row }">
-          <el-button
-            size="small"
-            @click="openEdit(row as ProductRow)"
-            >编辑</el-button
-          >
-          <el-button
-            size="small"
-            type="danger"
-            plain
-            @click="remove(row as ProductRow)"
-          >
-            删除
-          </el-button>
+          <el-button size="small" @click="openEdit(row as ProductRow)">编辑</el-button>
+          <el-button plain size="small" type="danger" @click="remove(row as ProductRow)"> 删除 </el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog
-      v-model="dialogVisible"
-      :title="editing ? '编辑商品' : '新增商品'"
-      width="600px"
-      destroy-on-close
-    >
-      <el-form
-        :model="form"
-        label-width="90px"
-      >
+    <el-dialog v-model="dialogVisible" width="600px" destroy-on-close :title="editing ? '编辑商品' : '新增商品'">
+      <el-form :model="form" label-width="90px">
         <el-form-item label="商品标题">
-          <el-input
-            v-model="form.title"
-            placeholder="商品名称"
-          />
+          <el-input v-model="form.title" placeholder="商品名称" />
         </el-form-item>
         <el-form-item label="封面图">
           <ImageUploader v-model="form.cover_url" />
         </el-form-item>
         <el-form-item label="售价">
-          <el-input-number
-            v-model="form.price"
-            :min="0"
-            :precision="2"
-            :controls="false"
-            style="width: 180px"
-          />
+          <el-input-number v-model="form.price" :min="0" :precision="2" :controls="false" style="width: 180px" />
         </el-form-item>
         <el-form-item label="原价">
-          <el-input-number
-            v-model="form.origin_price"
-            :min="0"
-            :precision="2"
-            :controls="false"
-            style="width: 180px"
-          />
+          <el-input-number v-model="form.origin_price" :min="0" :precision="2" :controls="false" style="width: 180px" />
         </el-form-item>
         <el-form-item label="角标文案">
-          <el-input
-            v-model="form.tag"
-            placeholder="如:新品 / 热卖"
-          />
+          <el-input v-model="form.tag" placeholder="如:新品 / 热卖" />
         </el-form-item>
         <el-form-item label="跳转链接">
-          <el-input
-            v-model="form.buy_link"
-            placeholder="https://..."
-          />
+          <el-input v-model="form.buy_link" placeholder="https://..." />
         </el-form-item>
         <el-form-item label="分类">
-          <el-select
-            v-model="form.category_id"
-            clearable
-            placeholder="不选分类"
-            style="width: 100%"
-          >
-            <el-option
-              v-for="c in categories"
-              :key="c.id"
-              :label="c.name"
-              :value="c.id"
-            />
+          <el-select v-model="form.category_id" clearable placeholder="不选分类" style="width: 100%">
+            <el-option v-for="c in categories" :key="c.id" :value="c.id" :label="c.name" />
           </el-select>
         </el-form-item>
         <el-form-item label="状态">
-          <el-select
-            v-model="form.status"
-            style="width: 160px"
-          >
-            <el-option
-              label="已上架"
-              value="published"
-            />
-            <el-option
-              label="草稿"
-              value="draft"
-            />
-            <el-option
-              label="下架"
-              value="off"
-            />
+          <el-select v-model="form.status" style="width: 160px">
+            <el-option label="已上架" value="published" />
+            <el-option label="草稿" value="draft" />
+            <el-option label="下架" value="off" />
           </el-select>
         </el-form-item>
         <el-form-item label="排序">
-          <el-input-number
-            v-model="form.sort"
-            :min="0"
-            :controls="false"
-          />
+          <el-input-number v-model="form.sort" :min="0" :controls="false" />
         </el-form-item>
         <el-form-item label="描述">
-          <el-input
-            v-model="form.description"
-            type="textarea"
-            :rows="3"
-          />
+          <el-input v-model="form.description" :rows="3" type="textarea" />
         </el-form-item>
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button
-          type="primary"
-          :loading="saving"
-          @click="save"
-        >
-          保存
-        </el-button>
+        <el-button type="primary" :loading="saving" @click="save"> 保存 </el-button>
       </template>
     </el-dialog>
   </div>
@@ -245,9 +122,7 @@ const form = reactive({
 })
 
 const filteredProducts = computed(() =>
-  filterCategory.value
-    ? products.value.filter((p) => p.category_id === filterCategory.value)
-    : products.value,
+  filterCategory.value ? products.value.filter((p) => p.category_id === filterCategory.value) : products.value,
 )
 
 const categoryName = (id: string | null) => categories.value.find((c) => c.id === id)?.name
@@ -257,10 +132,7 @@ const statusText = (s: string) => (s === 'published' ? '已上架' : s === 'draf
 const load = async () => {
   loading.value = true
   try {
-    const [productsData, categoryData] = await Promise.all([
-      productService.list(),
-      categoryService.list(),
-    ])
+    const [productsData, categoryData] = await Promise.all([productService.list(), categoryService.list()])
     products.value = productsData
     categories.value = categoryData.filter((c) => c.type === 'product')
   } catch (error: any) {

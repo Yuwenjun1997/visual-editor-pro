@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="visual-image-text-one"
-    :class="_bindClassList"
-  >
+  <div :class="_bindClassList" class="visual-image-text-one">
     <div class="visual-image-text__cover">
       <img :src="_props.data.cover" />
     </div>
@@ -13,13 +10,10 @@
       <div class="visual-image-text__footer">
         <visual-author
           v-if="_props.showAuthor"
-          :author-avatar="_props.data.authorAvatar"
           :author-name="_props.data.authorName"
+          :author-avatar="_props.data.authorAvatar"
         />
-        <visual-time
-          v-if="_props.showTime"
-          :time="_props.data.publishTime"
-        />
+        <visual-time v-if="_props.showTime" :time="_props.data.publishTime" />
       </div>
     </div>
   </div>

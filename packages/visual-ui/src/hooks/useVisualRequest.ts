@@ -8,10 +8,7 @@ interface VisualResuestCustomOptions {
 
 export const useVisualRequest = (options: VisualSourceOptions) => {
   const transformFieldsToObject = (fileds: VisualHttpField[] = []) => {
-    return fileds.reduce(
-      (prev, current) => ({ ...prev, [current.key]: current.value }),
-      {} as Record<string, any>,
-    )
+    return fileds.reduce((prev, current) => ({ ...prev, [current.key]: current.value }), {} as Record<string, any>)
   }
 
   const transformResultItem = (item: any, keyMap: Record<string, any>) => {

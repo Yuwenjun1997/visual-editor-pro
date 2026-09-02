@@ -112,18 +112,13 @@ export const mixColors = (color1: string, color2: string, percentage: number) =>
  * @param {object} colors 主题基本颜色键值对
  * @param {boolean} isDark 生成暗色主题
  */
-export const generateTheme = (
-  colors: ThemeColors,
-  isDark: boolean = false,
-): Record<string, any> => {
+export const generateTheme = (colors: ThemeColors, isDark: boolean = false): Record<string, any> => {
   const result: Record<string, any> = {}
   Object.entries(colors).forEach(([key, value]) => {
     for (let i = 0; i < 6; i++) {
       if (!['white', 'black', 'text'].includes(key)) {
         const colorKey = `${key}-${i + 1}`
-        result[colorKey] = isDark
-          ? mixColors(value, '#000000', i * 16)
-          : mixColors(value, '#ffffff', i * 16)
+        result[colorKey] = isDark ? mixColors(value, '#000000', i * 16) : mixColors(value, '#ffffff', i * 16)
       } else if (key === 'text') {
         const colorKey = `${key}-${i + 1}`
         result[colorKey] = mixColors(value, '#ffffff', i * 19.4)

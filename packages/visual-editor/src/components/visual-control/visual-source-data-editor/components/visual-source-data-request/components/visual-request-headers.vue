@@ -1,56 +1,23 @@
 <template>
   <div class="visual-request-panel">
-    <el-table
-      size="small"
-      border
-      max-height="400"
-      :data="modelValue.httpRequestHeaders"
-    >
-      <el-table-column
-        label="Key"
-        prop="key"
-      >
+    <el-table border size="small" max-height="400" :data="modelValue.httpRequestHeaders">
+      <el-table-column prop="key" label="Key">
         <template #default="{ row }">
-          <el-input
-            v-model="row.key"
-            placeholder="Key"
-          />
+          <el-input v-model="row.key" placeholder="Key" />
         </template>
       </el-table-column>
-      <el-table-column
-        label="Value"
-        prop="value"
-      >
+      <el-table-column prop="value" label="Value">
         <template #default="{ row }">
-          <el-input
-            v-model="row.value"
-            placeholder="Value"
-          />
+          <el-input v-model="row.value" placeholder="Value" />
         </template>
       </el-table-column>
-      <el-table-column
-        label="操作"
-        align="center"
-        width="100"
-      >
+      <el-table-column label="操作" width="100" align="center">
         <template #default="{ $index }">
-          <el-button
-            size="small"
-            type="danger"
-            @click="handleRemove($index)"
-          >
-            删除
-          </el-button>
+          <el-button size="small" type="danger" @click="handleRemove($index)"> 删除 </el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-button
-      class="ve-w-full"
-      size="small"
-      @click="handleAdd"
-    >
-      +添加字段
-    </el-button>
+    <el-button size="small" class="ve-w-full" @click="handleAdd"> +添加字段 </el-button>
   </div>
 </template>
 

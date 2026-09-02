@@ -1,21 +1,13 @@
 <template>
   <div
-    class="preview-group"
-    :class="{ 'preview-group--root': isRoot }"
-    :data-component-key="parentKey"
     :style="groupStyle"
+    class="preview-group"
+    :data-component-key="parentKey"
+    :class="{ 'preview-group--root': isRoot }"
   >
-    <div
-      v-for="element in blocks"
-      :key="element._vid"
-      class="preview-block"
-    >
+    <div v-for="element in blocks" :key="element._vid" class="preview-block">
       <use-component :block="element">
-        <template
-          v-for="(value, key) in element.slots"
-          #[key]
-          :key="key"
-        >
+        <template v-for="(value, key) in element.slots" #[key] :key="key">
           <PreviewBlocks
             :blocks="value.blocks"
             :parent-key="element.key"

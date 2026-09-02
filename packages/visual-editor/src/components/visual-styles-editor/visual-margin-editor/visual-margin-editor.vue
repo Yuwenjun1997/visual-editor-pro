@@ -1,13 +1,7 @@
 <template>
-  <visual-collapse
-    class="visual-margin-editor"
-    title="外边距"
-  >
+  <visual-collapse title="外边距" class="visual-margin-editor">
     <template #right>
-      <visual-px-input
-        v-model="margin"
-        @change="onRootmarginChange"
-      />
+      <visual-px-input v-model="margin" @change="onRootmarginChange" />
     </template>
     <template #default>
       <div class="ve-grid ve-grid-cols-2 ve-p-2 ve-gap-2 visual-input-group">
@@ -15,37 +9,25 @@
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-top" />
           </div>
-          <visual-px-input
-            v-model="marginTop"
-            @change="onMarginChange"
-          />
+          <visual-px-input v-model="marginTop" @change="onMarginChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-right" />
           </div>
-          <visual-px-input
-            v-model="marginRight"
-            @change="onMarginChange"
-          />
+          <visual-px-input v-model="marginRight" @change="onMarginChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-bottom" />
           </div>
-          <visual-px-input
-            v-model="marginBottom"
-            @change="onMarginChange"
-          />
+          <visual-px-input v-model="marginBottom" @change="onMarginChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <Icon icon="line-md:arrow-align-left" />
           </div>
-          <visual-px-input
-            v-model="marginLeft"
-            @change="onMarginChange"
-          />
+          <visual-px-input v-model="marginLeft" @change="onMarginChange" />
         </div>
       </div>
     </template>

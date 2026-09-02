@@ -1,13 +1,6 @@
 <template>
-  <visual-box
-    class="visual-flex"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      :class="_bindClass"
-      :style="_bindStyles"
-    >
+  <visual-box class="visual-flex" :class="_props.class" :styles="_props.styles">
+    <div :class="_bindClass" :style="_bindStyles">
       <slot></slot>
     </div>
   </visual-box>

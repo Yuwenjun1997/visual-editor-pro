@@ -5,27 +5,12 @@
         <h1 class="dashboard-title">工作台</h1>
         <p class="dashboard-subtitle">概览当前账号下的内容数据</p>
       </div>
-      <el-button
-        :loading="loading"
-        @click="load"
-        >刷新数据</el-button
-      >
+      <el-button :loading="loading" @click="load">刷新数据</el-button>
     </div>
 
-    <div
-      v-loading="loading"
-      class="stats-grid"
-    >
-      <el-card
-        v-for="item in statItems"
-        :key="item.key"
-        shadow="never"
-        class="stat-card"
-      >
-        <div
-          class="stat-icon"
-          :class="`stat-icon-${item.key}`"
-        >
+    <div v-loading="loading" class="stats-grid">
+      <el-card v-for="item in statItems" :key="item.key" shadow="never" class="stat-card">
+        <div class="stat-icon" :class="`stat-icon-${item.key}`">
           <Icon :icon="item.icon" />
         </div>
         <div>

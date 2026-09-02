@@ -1,13 +1,6 @@
 <template>
-  <visual-box
-    class="visual-section"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-section__inner"
-      :style="_bindInnerStyles"
-    >
+  <visual-box :class="_props.class" class="visual-section" :styles="_props.styles">
+    <div :style="_bindInnerStyles" class="visual-section__inner">
       <div class="visual-section__title">
         <template v-if="_bindProps.showLine">
           <div class="visual-section__line"></div>
@@ -22,10 +15,7 @@
           :color="_bindProps.iconColor"
         />
       </div>
-      <div
-        v-if="_bindProps.description"
-        class="visual-section__desc"
-      >
+      <div v-if="_bindProps.description" class="visual-section__desc">
         {{ _bindProps.description }}
       </div>
     </div>

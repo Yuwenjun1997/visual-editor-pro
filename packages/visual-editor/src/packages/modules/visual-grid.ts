@@ -1,8 +1,5 @@
 import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
-import type {
-  VisualGridItemProps,
-  VisualGridProps,
-} from '@visual/ui/components/visual-grid/interface'
+import type { VisualGridItemProps, VisualGridProps } from '@visual/ui/components/visual-grid/interface'
 import {
   createColorInputControl,
   createIconInputControl,

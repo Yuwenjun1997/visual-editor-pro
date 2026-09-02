@@ -1,48 +1,17 @@
 <template>
   <div class="visual-source-data-request">
     <div class="ve-flex ve-items-center ve-gap-1">
-      <el-select
-        v-model="modelValue.httpMethod"
-        class="ve-w-40"
-        placeholder="请求方式"
-      >
-        <el-option
-          label="GET"
-          value="GET"
-        />
-        <el-option
-          label="POST"
-          value="POST"
-        />
+      <el-select v-model="modelValue.httpMethod" class="ve-w-40" placeholder="请求方式">
+        <el-option label="GET" value="GET" />
+        <el-option label="POST" value="POST" />
       </el-select>
-      <el-input
-        v-model="modelValue.httpRequest"
-        placeholder="请求地址"
-      />
-      <el-button
-        type="primary"
-        class="ve-w-40"
-        @click="sendResuest"
-      >
-        测试请求
-      </el-button>
+      <el-input v-model="modelValue.httpRequest" placeholder="请求地址" />
+      <el-button type="primary" class="ve-w-40" @click="sendResuest"> 测试请求 </el-button>
     </div>
-    <el-radio-group
-      v-model="optionType"
-      size="small"
-    >
-      <el-radio-button
-        label="请求参数"
-        value="requestParams"
-      />
-      <el-radio-button
-        label="请求头信息"
-        value="requestHeaders"
-      />
-      <el-radio-button
-        label="响应数据映射信息"
-        value="responseTransform"
-      />
+    <el-radio-group v-model="optionType" size="small">
+      <el-radio-button label="请求参数" value="requestParams" />
+      <el-radio-button label="请求头信息" value="requestHeaders" />
+      <el-radio-button label="响应数据映射信息" value="responseTransform" />
     </el-radio-group>
     <template v-if="optionType === 'requestParams'">
       <visual-request-params v-model="modelValue" />

@@ -35,8 +35,7 @@ authStore.init()
 // 必须放在 registryComponent() 之后(clear() 只清模块数组,不影响这些字段)
 
 const isUuid = (value: string | number): boolean =>
-  typeof value === 'string' &&
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)
+  typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)
 
 visualConfig.onSave = async (data) => {
   if (!authStore.user) {

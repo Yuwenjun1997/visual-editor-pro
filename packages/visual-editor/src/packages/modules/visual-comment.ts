@@ -1,8 +1,5 @@
 import type { VisualEditorComponent, VisualEditorProps } from '../../types/visual-editor'
-import type {
-  VisualCommentItem,
-  VisualCommentProps,
-} from '@visual/ui/components/visual-comment/interface'
+import type { VisualCommentItem, VisualCommentProps } from '@visual/ui/components/visual-comment/interface'
 import {
   createImageInputControl,
   createNumberInputControl,

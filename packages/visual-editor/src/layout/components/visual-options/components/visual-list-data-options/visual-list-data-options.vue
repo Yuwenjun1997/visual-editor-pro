@@ -1,25 +1,14 @@
 <template>
   <div class="visual-list-data-options">
-    <template
-      v-for="(option, index) in visualOptions"
-      :key="index"
-    >
+    <template v-for="(option, index) in visualOptions" :key="index">
       <visual-collapse :title="`第${index + 1}项`">
         <template #right>
-          <div
-            v-if="delAble"
-            class="visual-del-btn"
-            @click.stop="handleRemove(index)"
-          >
+          <div v-if="delAble" class="visual-del-btn" @click.stop="handleRemove(index)">
             <Icon icon="bi:trash" />
           </div>
         </template>
         <div class="visual-list-item-options">
-          <visual-control-item
-            v-for="(item, propName) in option"
-            :key="propName"
-            :title="item.label"
-          >
+          <visual-control-item v-for="(item, propName) in option" :key="propName" :title="item.label">
             <template v-if="item.type === VisualEditorType.pxInput">
               <visual-px-input v-model="item.defaultValue" />
             </template>
@@ -27,10 +16,7 @@
               <visual-number-input v-model="item.defaultValue" />
             </template>
             <template v-else-if="item.type === VisualEditorType.normalSelect">
-              <visual-normal-select
-                v-model="item.defaultValue"
-                :options="item.options"
-              />
+              <visual-normal-select v-model="item.defaultValue" :options="item.options" />
             </template>
             <template v-else-if="item.type === VisualEditorType.imageInput">
               <visual-image-input v-model="item.defaultValue" />
@@ -51,17 +37,8 @@
         </div>
       </visual-collapse>
     </template>
-    <div
-      v-if="addAble"
-      class="ve-p-1"
-    >
-      <el-button
-        size="small"
-        class="ve-w-full"
-        @click="handleAdd"
-      >
-        +添加项目
-      </el-button>
+    <div v-if="addAble" class="ve-p-1">
+      <el-button size="small" class="ve-w-full" @click="handleAdd"> +添加项目 </el-button>
     </div>
   </div>
 </template>

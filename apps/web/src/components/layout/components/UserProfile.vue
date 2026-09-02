@@ -12,15 +12,15 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item command="profile">
-          <Icon icon="line-md:account" class="wa-mr-1" />
+          <Icon class="wa-mr-1" icon="line-md:account" />
           个人中心
         </el-dropdown-item>
         <el-dropdown-item v-if="can('admin:access')" command="admin">
-          <Icon icon="ep:setting" class="wa-mr-1" />
+          <Icon class="wa-mr-1" icon="ep:setting" />
           后台管理
         </el-dropdown-item>
         <el-dropdown-item divided command="logout">
-          <Icon icon="line-md:logout" class="wa-mr-1" />
+          <Icon class="wa-mr-1" icon="line-md:logout" />
           退出登录
         </el-dropdown-item>
       </el-dropdown-menu>

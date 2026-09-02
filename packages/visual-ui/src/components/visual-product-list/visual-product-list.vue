@@ -1,26 +1,18 @@
 <template>
-  <visual-box
-    class="visual-product-list"
-    :styles="_props.styles"
-    :show-empty="_noListData"
-    :class="_props.class"
-  >
-    <div
-      class="visual-product-list__inner"
-      :style="innerStyles"
-    >
+  <visual-box :class="_props.class" :styles="_props.styles" :show-empty="_noListData" class="visual-product-list">
+    <div :style="innerStyles" class="visual-product-list__inner">
       <visual-product-item
         v-for="(item, index) in _props.listData"
         :key="index"
-        class="visual-product-list__row"
+        :data="item"
         :class="_rowClass"
         :layout="'horizontal'"
-        :data="item"
-        :show-tag="_props.props.showTag"
-        :show-buy="_props.props.showBuy"
-        :button-text="_props.props.buttonText"
         :round="_props.props.round"
+        class="visual-product-list__row"
+        :show-buy="_props.props.showBuy"
+        :show-tag="_props.props.showTag"
         :currency="_props.props.currency"
+        :button-text="_props.props.buttonText"
       />
     </div>
   </visual-box>

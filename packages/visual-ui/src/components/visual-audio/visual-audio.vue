@@ -1,25 +1,15 @@
 <template>
-  <visual-box
-    class="visual-audio"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-audio__inner"
-      :style="innerStyle"
-    >
-      <div
-        v-if="title"
-        class="visual-audio__title"
-      >
+  <visual-box class="visual-audio" :class="_props.class" :styles="_props.styles">
+    <div :style="innerStyle" class="visual-audio__inner">
+      <div v-if="title" class="visual-audio__title">
         <i class="bi bi-music-note-beamed visual-audio__title-icon" />
         <span>{{ title }}</span>
       </div>
       <audio
-        class="visual-audio__player"
         :src="_props.props.src"
-        :autoplay="_props.props.autoplay"
         :loop="_props.props.loop"
+        class="visual-audio__player"
+        :autoplay="_props.props.autoplay"
         :controls="_props.props.controls !== false"
       />
     </div>

@@ -1,20 +1,9 @@
 <template>
   <div class="visual-image-input">
-    <el-input
-      v-model.trim="imageValue"
-      class="visual-image-input__input"
-      :placeholder="props.placeholder"
-      clearable
-    >
+    <el-input v-model.trim="imageValue" clearable :placeholder="props.placeholder" class="visual-image-input__input">
       <template #prefix>
-        <div
-          class="ve-w-8 visual-upload__btn"
-          @click.stop
-        >
-          <Icon
-            icon="line-md:cloud-up"
-            class="ve-text-base"
-          />
+        <div class="ve-w-8 visual-upload__btn" @click.stop>
+          <Icon class="ve-text-base" icon="line-md:cloud-up" />
         </div>
       </template>
     </el-input>

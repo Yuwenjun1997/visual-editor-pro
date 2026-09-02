@@ -2,64 +2,26 @@
   <div class="admin-page">
     <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
       <div class="wa-text-base wa-font-medium">页面列表</div>
-      <el-button
-        v-if="can('page:create')"
-        type="primary"
-        @click="createPage"
-      >
-        新建页面
-      </el-button>
+      <el-button v-if="can('page:create')" type="primary" @click="createPage"> 新建页面 </el-button>
     </div>
 
-    <div
-      v-loading="loading"
-      class="page-grid"
-    >
-      <el-empty
-        v-if="!loading && !pages.length"
-        description="暂无页面"
-      />
-      <div
-        v-for="row in pages"
-        :key="row.id"
-        class="page-item"
-      >
+    <div v-loading="loading" class="page-grid">
+      <el-empty v-if="!loading && !pages.length" description="暂无页面" />
+      <div v-for="row in pages" :key="row.id" class="page-item">
         <div class="wa-flex wa-items-start wa-justify-between wa-gap-3">
           <div class="wa-flex wa-min-w-0 wa-items-center wa-gap-2">
-            <Icon
-              icon="ep:document"
-              class="page-icon"
-            />
+            <Icon class="page-icon" icon="ep:document" />
             <span class="page-title">{{ row.title || '未命名页面' }}</span>
           </div>
-          <el-tag
-            :type="row.status === 'published' ? 'success' : 'info'"
-            size="small"
-          >
+          <el-tag size="small" :type="row.status === 'published' ? 'success' : 'info'">
             {{ row.status === 'published' ? '已发布' : '草稿' }}
           </el-tag>
         </div>
         <div class="page-time">更新时间 {{ formatTime(row.updated_at) }}</div>
         <div class="page-actions">
-          <el-button
-            v-if="can('page:edit')"
-            size="small"
-            @click="editPage(row)"
-            >编辑</el-button
-          >
-          <el-button
-            size="small"
-            type="primary"
-            plain
-            @click="previewPage(row)"
-            >预览</el-button
-          >
-          <el-button
-            v-if="can('page:delete')"
-            size="small"
-            type="danger"
-            plain
-            @click="removePage(row)"
+          <el-button v-if="can('page:edit')" size="small" @click="editPage(row)">编辑</el-button>
+          <el-button plain size="small" type="primary" @click="previewPage(row)">预览</el-button>
+          <el-button v-if="can('page:delete')" plain size="small" type="danger" @click="removePage(row)"
             >删除</el-button
           >
         </div>

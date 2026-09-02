@@ -1,41 +1,22 @@
 <template>
-  <visual-box
-    class="visual-carousel"
-    :styles="_props.styles"
-    :show-empty="_noListData"
-    :class="_props.class"
-  >
+  <visual-box :class="_props.class" class="visual-carousel" :styles="_props.styles" :show-empty="_noListData">
     <carousel
       :opts="carouselOpts"
-      :autoplay="_bindProps.autoplay"
       :autoplay-delay="_interval"
       :style="{ height: _height }"
+      :autoplay="_bindProps.autoplay"
       @slide-change="_onChange"
     >
       <carousel-content :vertical="_bindProps.vertical">
-        <carousel-item
-          v-for="(item, index) in _props.listData"
-          :key="index"
-        >
-          <div
-            :style="_bindItemStyles"
-            class="visual-carousel-item"
-          >
-            <img
-              :src="item.image"
-              :style="_bindImageStyles"
-              style="object-fit: cover"
-            />
+        <carousel-item v-for="(item, index) in _props.listData" :key="index">
+          <div :style="_bindItemStyles" class="visual-carousel-item">
+            <img :src="item.image" style="object-fit: cover" :style="_bindImageStyles" />
           </div>
         </carousel-item>
       </carousel-content>
     </carousel>
     <template v-if="_bindProps.indicatorDots">
-      <visual-indicator
-        v-model:current="_currentIndex"
-        :list="_props.listData"
-        :type="_bindProps.indicatorDotsType"
-      />
+      <visual-indicator v-model:current="_currentIndex" :list="_props.listData" :type="_bindProps.indicatorDotsType" />
     </template>
   </visual-box>
 </template>

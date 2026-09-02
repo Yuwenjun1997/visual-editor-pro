@@ -1,10 +1,5 @@
 <template>
-  <visual-box
-    class="visual-timeline"
-    :styles="_props.styles"
-    :show-empty="_noListData"
-    :class="_props.class"
-  >
+  <visual-box :class="_props.class" class="visual-timeline" :styles="_props.styles" :show-empty="_noListData">
     <div class="visual-timeline__list">
       <div
         v-for="(item, index) in _props.listData"
@@ -17,24 +12,13 @@
         </div>
         <div class="visual-timeline__content">
           <div class="visual-timeline__head">
-            <visual-icon
-              v-if="item.icon"
-              class="visual-timeline__head-icon"
-              :icon="item.icon"
-              size="16px"
-            />
+            <visual-icon v-if="item.icon" size="16px" :icon="item.icon" class="visual-timeline__head-icon" />
             <div class="visual-timeline__title">{{ item.title }}</div>
           </div>
-          <div
-            v-if="item.desc"
-            class="visual-timeline__desc"
-          >
+          <div v-if="item.desc" class="visual-timeline__desc">
             {{ item.desc }}
           </div>
-          <div
-            v-if="_props.props.showTime !== false && item.time"
-            class="visual-timeline__time"
-          >
+          <div v-if="_props.props.showTime !== false && item.time" class="visual-timeline__time">
             {{ item.time }}
           </div>
         </div>

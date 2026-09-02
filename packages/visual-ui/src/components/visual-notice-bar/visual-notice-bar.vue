@@ -1,13 +1,6 @@
 <template>
-  <visual-box
-    class="visual-notice-bar"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-notice-bar__inner"
-      :style="innerStyle"
-    >
+  <visual-box :class="_props.class" :styles="_props.styles" class="visual-notice-bar">
+    <div :style="innerStyle" class="visual-notice-bar__inner">
       <i class="bi bi-megaphone-fill visual-notice-bar__horn" />
       <div class="visual-notice-bar__viewport">
         <div class="visual-notice-bar__track">

@@ -4,10 +4,7 @@ import type { PageSchema } from '@visual/editor'
 
 export const pageService = {
   async list(): Promise<PageRow[]> {
-    const { data, error } = await supabase
-      .from('pages')
-      .select('*')
-      .order('updated_at', { ascending: false })
+    const { data, error } = await supabase.from('pages').select('*').order('updated_at', { ascending: false })
     if (error) throw error
     return (data || []) as PageRow[]
   },
@@ -25,12 +22,7 @@ export const pageService = {
   },
 
   async update(id: string, payload: { title: string; schema: PageSchema }) {
-    const { data, error } = await supabase
-      .from('pages')
-      .update(payload)
-      .eq('id', id)
-      .select('id')
-      .single()
+    const { data, error } = await supabase.from('pages').update(payload).eq('id', id).select('id').single()
     if (error) throw error
     return (data as { id: string }).id
   },

@@ -1,9 +1,6 @@
 <template>
   <div class="visual-props-options">
-    <template
-      v-for="(item, index) in visualOptions"
-      :key="index"
-    >
+    <template v-for="(item, index) in visualOptions" :key="index">
       <visual-control-item :title="item.label">
         <template v-if="item.type === VisualEditorType.pxInput">
           <visual-px-input v-model="item.defaultValue" />
@@ -12,10 +9,7 @@
           <visual-number-input v-model="item.defaultValue" />
         </template>
         <template v-else-if="item.type === VisualEditorType.normalSelect">
-          <visual-normal-select
-            v-model="item.defaultValue"
-            :options="item.options"
-          />
+          <visual-normal-select v-model="item.defaultValue" :options="item.options" />
         </template>
         <template v-else-if="item.type === VisualEditorType.imageInput">
           <visual-image-input v-model="item.defaultValue" />
@@ -36,18 +30,14 @@
           <el-date-picker
             v-model="item.defaultValue"
             type="datetime"
-            value-format="YYYY-MM-DD HH:mm:ss"
-            placeholder="选择结束时间"
             :clearable="true"
             style="width: 100%"
+            placeholder="选择结束时间"
+            value-format="YYYY-MM-DD HH:mm:ss"
           />
         </template>
         <template v-else-if="item.type === VisualEditorType.sourceData">
-          <visual-source-data-control
-            v-if="visualKey"
-            v-model="item.defaultValue"
-            :visual-key="visualKey"
-          />
+          <visual-source-data-control v-if="visualKey" v-model="item.defaultValue" :visual-key="visualKey" />
         </template>
       </visual-control-item>
     </template>

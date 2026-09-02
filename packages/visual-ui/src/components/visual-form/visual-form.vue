@@ -1,51 +1,29 @@
 <template>
-  <visual-box
-    class="visual-form"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-form__inner"
-      :style="innerStyle"
-    >
-      <div
-        v-for="(field, index) in _props.listData"
-        :key="index"
-        class="visual-form__field"
-      >
-        <label
-          v-if="field.label"
-          class="visual-form__label"
-        >
+  <visual-box class="visual-form" :class="_props.class" :styles="_props.styles">
+    <div :style="innerStyle" class="visual-form__inner">
+      <div v-for="(field, index) in _props.listData" :key="index" class="visual-form__field">
+        <label v-if="field.label" class="visual-form__label">
           {{ field.label }}
-          <em
-            v-if="field.required"
-            class="visual-form__required"
-            >*</em
-          >
+          <em v-if="field.required" class="visual-form__required">*</em>
         </label>
         <textarea
           v-if="field.fieldType === 'textarea'"
           v-model="values[String(index)]"
-          class="visual-form__control visual-form__control--textarea"
-          :placeholder="field.placeholder"
-          :maxlength="field.maxLength"
           rows="3"
+          :maxlength="field.maxLength"
+          :placeholder="field.placeholder"
+          class="visual-form__control visual-form__control--textarea"
         />
         <input
           v-else
           v-model="values[String(index)]"
           class="visual-form__control"
-          :type="field.fieldType === 'phone' ? 'tel' : 'text'"
-          :placeholder="field.placeholder"
           :maxlength="field.maxLength"
+          :placeholder="field.placeholder"
+          :type="field.fieldType === 'phone' ? 'tel' : 'text'"
         />
       </div>
-      <button
-        class="visual-form__submit"
-        :style="submitStyle"
-        @click="handleSubmit"
-      >
+      <button :style="submitStyle" class="visual-form__submit" @click="handleSubmit">
         {{ submitText || '提交' }}
       </button>
     </div>
@@ -98,9 +76,7 @@ const submitStyle = computed<CSSProperties>(() => ({
 }))
 
 const handleSubmit = () => {
-  const requiredField = _props.listData.find(
-    (field, index) => field.required && !(values[String(index)] || '').trim(),
-  )
+  const requiredField = _props.listData.find((field, index) => field.required && !(values[String(index)] || '').trim())
   if (requiredField) {
     toast(`请填写${requiredField.label || '必填项'}`)
     return

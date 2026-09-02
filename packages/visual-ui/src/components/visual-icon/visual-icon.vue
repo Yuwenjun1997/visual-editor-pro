@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="visual-icon"
-    :class="[_bindClassList, _props.class]"
-    :style="_bindStyles"
-  />
+  <div class="visual-icon" :style="_bindStyles" :class="[_bindClassList, _props.class]" />
 </template>
 
 <script setup lang="ts">
@@ -37,9 +33,7 @@ const _iconName = computed(() => {
   return ICON_PREFIX + name
 })
 
-const _bindClassList = computed(() => [
-  !isPictureUrl(_props.icon) ? _iconName.value : 'v-icon__is-image',
-])
+const _bindClassList = computed(() => [!isPictureUrl(_props.icon) ? _iconName.value : 'v-icon__is-image'])
 </script>
 
 <style lang="scss" scoped>

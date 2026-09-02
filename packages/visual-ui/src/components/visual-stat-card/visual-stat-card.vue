@@ -1,29 +1,18 @@
 <template>
-  <visual-box
-    class="visual-stat-card"
-    :styles="_props.styles"
-    :class="_props.class"
-  >
-    <div
-      class="visual-stat-card__body"
-      :style="bodyStyle"
-    >
+  <visual-box :class="_props.class" :styles="_props.styles" class="visual-stat-card">
+    <div :style="bodyStyle" class="visual-stat-card__body">
       <visual-icon
         v-if="_props.props.icon"
-        class="visual-stat-card__icon"
-        :icon="_props.props.icon"
-        :color="_props.props.iconColor"
         size="26px"
+        :icon="_props.props.icon"
+        class="visual-stat-card__icon"
+        :color="_props.props.iconColor"
       />
       <div class="visual-stat-card__content">
         <div class="visual-stat-card__title">{{ _props.props.title }}</div>
         <div class="visual-stat-card__value">{{ _props.props.value }}</div>
       </div>
-      <div
-        v-if="_props.props.delta"
-        class="visual-stat-card__delta"
-        :style="deltaStyle"
-      >
+      <div v-if="_props.props.delta" :style="deltaStyle" class="visual-stat-card__delta">
         {{ deltaText }}
       </div>
     </div>

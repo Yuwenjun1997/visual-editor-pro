@@ -1,18 +1,13 @@
 <template>
   <div
-    class="visual-grid-item"
-    hover-class="visual-block-hover"
-    hover-stop-propagation
+    :style="_bindStyles"
     :hover-start-time="0"
     :hover-stay-time="150"
-    :style="_bindStyles"
+    hover-stop-propagation
+    class="visual-grid-item"
+    hover-class="visual-block-hover"
   >
-    <visual-icon
-      v-if="_props.icon"
-      :icon="_props.icon"
-      :size="_props.iconSize"
-      :color="_props.iconColor"
-    />
+    <visual-icon v-if="_props.icon" :icon="_props.icon" :size="_props.iconSize" :color="_props.iconColor" />
     <span v-if="_props.text">{{ _props.text }}</span>
   </div>
 </template>
