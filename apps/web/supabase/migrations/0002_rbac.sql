@@ -50,7 +50,8 @@ set search_path = public
 as $$
 begin
   if not exists (
-    select 1 from public.profiles where id = auth.uid() and role = 'admin'
+    select 1 from public.profiles as caller_profile
+      where caller_profile.id = auth.uid() and caller_profile.role = 'admin'
   ) then
     raise exception 'privilege: admins only';
   end if;
@@ -58,7 +59,7 @@ begin
   return query
     select
       u.id,
-      u.email,
+      u.email::text,
       p.full_name,
       p.avatar_url,
       p.role,
@@ -84,7 +85,8 @@ declare
   admins int;
 begin
   if not exists (
-    select 1 from public.profiles where id = auth.uid() and role = 'admin'
+    select 1 from public.profiles as caller_profile
+      where caller_profile.id = auth.uid() and caller_profile.role = 'admin'
   ) then
     raise exception 'privilege: admins only';
   end if;
@@ -97,13 +99,15 @@ begin
     raise exception 'cannot change your own role';
   end if;
 
-  select role into current_role from public.profiles where id = target_user_id;
+  select target_profile.role into current_role
+    from public.profiles as target_profile
+    where target_profile.id = target_user_id;
   if current_role is null then
     raise exception 'target profile not found';
   end if;
 
   if current_role = 'admin' and new_role <> 'admin' then
-    select count(*) into admins from public.profiles where role = 'admin';
+    select count(*) into admins from public.profiles as admin_profile where admin_profile.role = 'admin';
     if admins <= 1 then
       raise exception 'cannot demote the last admin';
     end if;
@@ -111,7 +115,7 @@ begin
 
   update public.profiles
     set role = new_role, updated_at = now()
-    where id = target_user_id;
+    where public.profiles.id = target_user_id;
 end;
 $$;
 

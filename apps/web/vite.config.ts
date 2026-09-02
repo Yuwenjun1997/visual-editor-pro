@@ -15,6 +15,7 @@ export default defineConfig({
     },
   },
   server: {
+    host: true,
     fs: {
       // 允许 Vite 服务 monorepo 内 packages/* 下的源码与字体资源
       allow: [repoRoot],

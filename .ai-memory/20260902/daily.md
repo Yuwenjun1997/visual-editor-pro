@@ -147,3 +147,33 @@
 - **文件**: `apps/web/src/views/admin/PagesView.vue`
 - **决策**: 页面列表项改为 Element Plus `el-card`；桌面端最多 5 列，1400/1100/760/520px 断点降为 4/3/2/1 列；操作入口改为 hover `el-dropdown`，通过 command 统一处理动作。
 - **验证**: `pnpm --filter @visual/web type-check` 通过；`pnpm --filter @visual/web build` 通过（4073 modules，2m15s）；`git diff --check` 通过。
+
+## [当前] - Bug 修复: 权限初始化导致菜单闪烁
+
+- **文件**: `apps/web/src/stores/auth.ts`, `apps/web/src/main.ts`
+- **决策**: 应用等待 auth/profile 初始化后再挂载；token 刷新且用户 ID 不变时保留已有 profile；仅退出或切换账号时清空 profile；profile 刷新失败不覆盖已有角色。
+- **验证**: `pnpm --filter @visual/web type-check` 通过；`pnpm --filter @visual/web build` 通过（4073 modules，2m31s）；`git diff --check` 通过。
+
+## [当前] - Bug 修复: 重复挂载导致 runtime-dom insertBefore 异常
+
+- **文件**: `apps/web/src/main.ts`
+- **决策**: 保留认证初始化完成后的单次 `app.mount('#app')`，移除文件末尾遗留的第二次挂载调用。
+- **验证**: `pnpm --filter @visual/web type-check` 通过；`git diff --check` 通过。根因已由重复挂载与 runtime-dom 错误对应确认。
+
+## [当前] - 交互调整: 页面预览改为新窗口打开
+
+- **文件**: `apps/web/src/views/admin/PagesView.vue`
+- **决策**: 页面管理的已发布页面和草稿预览均通过 `router.resolve` + `window.open(..., '_blank', 'noopener,noreferrer')` 打开，保留当前列表页；增加浏览器拦截提示。
+- **验证**: `pnpm --filter @visual/web type-check` 通过；`git diff --check` 通过。
+
+## [当前] - Bug 修复: list_users 列名歧义
+
+- **文件**: `apps/web/supabase/migrations/0002_rbac.sql`, `apps/web/supabase/migrations/0009_fix_list_users_ambiguity.sql`, `apps/web/supabase/README.md`
+- **决策**: 对 `list_users` 和 `set_user_role` 中所有 `profiles` 列使用显式表别名，避免 RETURNS TABLE 输出变量与列名冲突。
+- **验证**: 远端项目 `deilxqrmvynnwjshxpoa` 已成功应用 `fix_list_users_ambiguity`；远端函数定义检查确认两个函数均使用限定列名；`git diff --check` 通过。
+
+## [当前] - Bug 修复: list_users email 返回类型不匹配
+
+- **文件**: `apps/web/supabase/migrations/0002_rbac.sql`, `apps/web/supabase/migrations/0009_fix_list_users_ambiguity.sql`, `apps/web/supabase/migrations/0010_fix_list_users_email_type.sql`, `apps/web/supabase/README.md`
+- **决策**: 将 `auth.users.email` 显式转换为 `text`，匹配 `list_users()` RETURNS TABLE 的第二列类型。
+- **验证**: 远端已成功应用 `fix_list_users_email_type`；函数定义检查确认存在 `u.email::text`；`git diff --check` 通过。

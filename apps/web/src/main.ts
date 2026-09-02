@@ -29,7 +29,11 @@ app.use(pinia)
 app.use(router)
 
 const authStore = useAuthStore(pinia)
-authStore.init()
+// 等待用户与 profile/role 初始化完成后再挂载，避免后台布局先以 null 权限渲染。
+// 后续 token 刷新由 auth store 保留已有 profile，不会造成菜单闪烁。
+authStore.init().then(() => {
+  app.mount('#app')
+})
 
 // —— 宿主注入:编辑器保存 / 加载已存页面 / 业务数据提供者 ——
 // 必须放在 registryComponent() 之后(clear() 只清模块数组,不影响这些字段)
@@ -114,5 +118,3 @@ visualConfig.savedPageLoader = async (id) => {
 visualConfig.dataSourceProvider = dataSourceService
 
 setupVisual(app)
-
-app.mount('#app')

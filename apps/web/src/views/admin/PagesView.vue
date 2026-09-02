@@ -153,7 +153,9 @@ const editPage = (row: PageRow) => {
 }
 
 const previewPage = (row: PageRow) => {
-  router.push(row.status === 'published' ? `/p/${row.slug}` : `/page/${row.id}`)
+  const target = router.resolve(row.status === 'published' ? `/p/${row.slug}` : `/page/${row.id}`)
+  const previewWindow = window.open(target.href, '_blank', 'noopener,noreferrer')
+  if (!previewWindow) ElMessage.warning('预览窗口被浏览器拦截，请允许打开新窗口')
 }
 
 const publishPage = async (row: PageRow) => {

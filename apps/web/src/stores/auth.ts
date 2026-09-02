@@ -12,6 +12,7 @@ export const useAuthStore = defineStore('auth', {
     user: null as User | null,
     session: null as Session | null,
     isInitialized: false,
+    profileLoading: false,
     profile: null as ProfileRow | null,
   }),
 
@@ -32,10 +33,18 @@ export const useAuthStore = defineStore('auth', {
           if (this.user) await this.refreshProfile()
           this.isInitialized = true
           supabase.auth.onAuthStateChange(async (_event, session) => {
+            const previousUserId = this.user?.id
+            const nextUserId = session?.user?.id
             this.session = session
             this.user = session?.user ?? null
-            this.profile = null
-            if (session?.user) await this.refreshProfile()
+            if (!session?.user) {
+              this.profile = null
+              return
+            }
+            // token 刷新时用户 ID 不变，保留旧 profile，避免权限菜单先消失再出现。
+            // 只有实际切换账号时才清空旧角色，防止短暂沿用上一账号权限。
+            if (previousUserId !== nextUserId) this.profile = null
+            await this.refreshProfile()
           })
         })()
       }
@@ -48,13 +57,18 @@ export const useAuthStore = defineStore('auth', {
         this.profile = null
         return
       }
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('id, full_name, avatar_url, role, created_at, updated_at')
-        .eq('id', userId)
-        .maybeSingle()
-      // 注册瞬间触发器行可能尚未可见:按未分配角色(null)处理,守卫据此重定向
-      this.profile = error ? null : (data ?? null)
+      this.profileLoading = true
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('id, full_name, avatar_url, role, created_at, updated_at')
+          .eq('id', userId)
+          .maybeSingle()
+        // 注册瞬间触发器行可能尚未可见:按未分配角色(null)处理,守卫据此重定向
+        if (!error && data) this.profile = data
+      } finally {
+        this.profileLoading = false
+      }
     },
 
     async login(email: string, password: string) {
