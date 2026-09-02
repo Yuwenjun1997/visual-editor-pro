@@ -9,11 +9,11 @@
       :close-on-click-modal="false"
       modal-class="visual-source-data-editor__dialog"
     >
-      <el-tabs v-model="modelValue.dataSource">
+      <el-tabs v-model="activeTab">
         <el-tab-pane label="自定义数据" name="custom">
           <visual-source-data-custom v-model="modelValue" />
         </el-tab-pane>
-        <el-tab-pane label="数据源" name="column">
+        <el-tab-pane label="数据源" name="managed">
           <visual-source-data-column v-model="modelValue" />
         </el-tab-pane>
       </el-tabs>
@@ -42,6 +42,15 @@ defineOptions({
 const { visible, modelValue, hide } = useSourceDataEditor()
 
 const visualStore = useViusalStore()
+
+// Tab 是编辑器交互状态，数据源类型则使用新模型的 managed 值。
+// 兼容旧页面的 column 值，避免 el-tabs 因找不到对应 pane 而渲染空白。
+const activeTab = computed({
+  get: () => (modelValue.value.dataSource === 'custom' ? 'custom' : 'managed'),
+  set: (value: 'custom' | 'managed') => {
+    modelValue.value.dataSource = value === 'custom' ? 'custom' : 'managed'
+  },
+})
 
 const handleConfirm = () => {
   const { getRef } = useVisualRef()

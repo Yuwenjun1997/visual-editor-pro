@@ -39,3 +39,27 @@
 - **文件**: `apps/web/src/services/data-source.service.ts`
 - **决策**: 旧 `businessDataRef.refType=ids` 在单值和数组两种形态下都统一为 `entityIds` 数组，保证重复迁移和查询语义一致。
 - **验证**: `pnpm type-check` 通过；`git diff --check` 通过。
+
+## [当前] - 功能实现: 统一组件 schema 与静态数据源配置
+
+- **文件**: `packages/visual-editor/src/schemas/modules/*`, `packages/visual-editor/src/schemas/index.ts`, `packages/visual-editor/src/types/visual-editor.ts`, `packages/visual-editor/src/hooks/useSchema.ts`, `packages/visual-editor/src/components/visual-control/visual-source-data-editor/`, `apps/web/src/views/admin/DataSourcesView.vue`, `apps/web/src/services/data-source.service.ts`
+- **决策**: 移除 `catalog.ts`，组件 schema 独立模块化并增加 object/list 元数据；对象数组递归聚合子组件 schema；管理页静态源改为 schema 选择与表格编辑，旧 manual 契约保留兼容模式。
+- **验证**: `pnpm type-check` 通过；`pnpm build` 通过；`git diff --check` 通过。
+
+## [当前] - 配置变更: 修复远端旧版数据源表缺少 data_contract
+
+- **文件**: `apps/web/supabase/migrations/0005_reconcile_visual_data_sources.sql`, `apps/web/supabase/README.md`
+- **决策**: 远端 `visual-design` 项目仍为旧表结构且迁移记录为空，新增幂等兼容迁移并保留旧数据映射为 `manual-object/manual-list`。
+- **验证**: 已应用 Supabase 迁移；远端表已出现 `data_contract/source_kind/query_config/manual_data/status/schema_version`；SQL 查询返回 2 条旧数据源；迁移记录为 `reconcile_visual_data_sources`。
+
+## [当前] - 配置变更: 放宽旧数据源字段约束
+
+- **文件**: `apps/web/supabase/migrations/0006_relax_legacy_visual_data_source_columns.sql`, `apps/web/supabase/README.md`
+- **决策**: 旧版 `column_key/component_key/data_type/data` 保留读取兼容，但改为可空，避免新模型插入时触发非空约束。
+- **验证**: 已应用 Supabase 迁移；远端四个旧字段均确认 `is_nullable=YES`。
+
+## [当前] - Bug 修复: 修复数据源配置弹窗切换空白与绑定回显失效
+
+- **文件**: `packages/visual-editor/src/components/visual-control/visual-source-data-editor/visual-source-data-editor.vue`
+- **决策**: Tab 使用独立的 `activeTab`，将新模型的 `managed` 与旧页面的 `column` 统一映射到“数据源”页，避免 `el-tabs` 因无对应 pane 渲染空白；选中数据源继续保存为 `managed`。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过；`git diff --check` 通过。未执行浏览器交互回归。

@@ -1,13 +1,11 @@
 import type { VisualSchema } from '../../types/visual-editor'
-
 const schema: VisualSchema = {
-  name: '宫格',
-  visualKey: 'VisualGrid',
+  name: '图片列表',
+  visualKey: 'VisualPictureWrap',
   dataType: 'list',
   schemas: [
-    { label: '图标名称', propName: 'icon' },
-    { label: '文字', propName: 'text' },
+    { label: '标题', propName: 'title' },
+    { label: '图片地址', propName: 'image' },
   ],
 }
-
 export default schema

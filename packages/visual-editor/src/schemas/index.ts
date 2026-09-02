@@ -1,5 +1,4 @@
 import type { VisualSchema, VisualSchemaItem } from '../types/visual-editor'
-import { schemaCatalog } from './catalog'
 
 export interface SchemaCollector {
   [propName: string]: Set<string>
@@ -12,10 +11,6 @@ const schemaMap: Record<string, VisualSchema> = {}
 Object.entries(modules).forEach(([_key, module]) => {
   const result: VisualSchema = (module as any)?.default
   if (result?.visualKey) schemaMap[result.visualKey] = result
-})
-
-schemaCatalog.forEach((item) => {
-  schemaMap[item.visualKey] = item
 })
 
 export default schemaMap
@@ -37,3 +32,5 @@ export const generateSchemas = (visualKeys: string[]): VisualSchemaItem[] => {
 
 export const getSchema = (visualKey: string): VisualSchema | undefined => schemaMap[visualKey]
 export const getSchemas = (): VisualSchema[] => Object.values(schemaMap)
+
+export const getSchemaDataType = (visualKey: string) => schemaMap[visualKey]?.dataType

@@ -1,10 +1,8 @@
 import type { VisualSchema } from '../../types/visual-editor'
-
 const schema: VisualSchema = {
-  name: '弹性布局',
-  visualKey: 'VisualFlex',
+  name: '公告栏',
+  visualKey: 'VisualNoticeBar',
   dataType: 'object',
-  schemas: [],
+  schemas: [{ label: '公告内容', propName: 'text' }],
 }
-
 export default schema

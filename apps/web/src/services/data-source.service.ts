@@ -161,16 +161,15 @@ export const dataSourceService = {
   async list(dataType?: VisualDataSourceType | VisualDataContract): Promise<VisualDataSource[]> {
     let query = supabase.from('visual_data_sources').select('*').order('updated_at', { ascending: false })
     if (dataType) {
-      query =
-        dataType === 'list'
-          ? query.in('data_contract', ['product-list', 'article-list'])
-          : dataType === 'object'
-            ? query.like('data_contract', 'manual-%')
-            : query.eq('data_contract', dataType)
+      query = dataType === 'list' ? query : dataType === 'object' ? query : query.eq('data_contract', dataType)
     }
     const { data, error } = await query
     if (error) throw error
-    return (data || []).map((row) => toLegacyView(toSource(row as DataSourceRow)))
+    const sources = (data || []).map((row) => toLegacyView(toSource(row as DataSourceRow)))
+    if (dataType === 'list' || dataType === 'object') {
+      return sources.filter((source) => toLegacyType(source) === dataType)
+    }
+    return sources
   },
 
   async resolve(sourceId: string): Promise<VisualDataSource | null> {

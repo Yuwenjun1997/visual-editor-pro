@@ -96,6 +96,7 @@ export interface VisualSchemaItem {
 export interface VisualSchema {
   name: string
   visualKey: string
+  dataType: VisualDataSourceType
   schemas: VisualSchemaItem[]
 }
 

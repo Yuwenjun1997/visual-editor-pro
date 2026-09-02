@@ -39,10 +39,10 @@ const load = async () => {
   loading.value = true
   try {
     const contract = modelValue.value.dataContract as VisualDataContract | undefined
+    const fallbackType = modelValue.value.customDataType === 'VisualObjectArray' ? 'list' : 'object'
+    const isContainerContract = contract === 'manual-VisualObject' || contract === 'manual-VisualObjectArray'
     sources.value =
-      (await visualConfig.dataSourceProvider?.list(
-        contract || (modelValue.value.customDataType === 'VisualObjectArray' ? 'list' : 'object'),
-      )) || []
+      (await visualConfig.dataSourceProvider?.list(contract && !isContainerContract ? contract : fallbackType)) || []
   } finally {
     loading.value = false
   }

@@ -14,7 +14,9 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-button size="small" class="ve-w-full ve-mt-2" @click="handleAdd">+添加一项</el-button>
+    <el-button size="small" class="ve-w-full ve-mt-2" :disabled="!schemaList.length" @click="handleAdd">
+      +添加一项
+    </el-button>
   </div>
 </template>
 
@@ -37,6 +39,7 @@ const { schemaList } = useSchema()
 const tableData = ref<TableData[]>([])
 
 const handleAdd = () => {
+  if (!schemaList.value.length) return
   const item = schemaList.value.reduce((prev, schema) => ({ ...prev, [schema.propName]: '' }), {})
   tableData.value.push(item)
 }
@@ -57,8 +60,16 @@ const emitTableData = (data: TableData[]) => {
 
 const resetTableData = () => {
   const jsonData = formatJsonToObjectArray(modelValue.value.customJsonData)
-  tableData.value = Array.isArray(jsonData) ? jsonData : []
+  tableData.value = Array.isArray(jsonData) ? normalizeRows(jsonData) : []
 }
+
+const normalizeRows = (rows: TableData[]) =>
+  rows.map((row) =>
+    schemaList.value.reduce(
+      (result, schema) => ({ ...result, [schema.propName]: row[schema.propName] ?? '' }),
+      {} as TableData,
+    ),
+  )
 
 watch(
   () => tableData,
@@ -68,5 +79,9 @@ watch(
 
 onMounted(() => {
   resetTableData()
+})
+
+watch(schemaList, () => {
+  tableData.value = normalizeRows(tableData.value)
 })
 </script>

@@ -75,12 +75,70 @@
           <el-form-item label="数量上限"><el-input-number v-model="form.limit" :min="1" :max="100" /></el-form-item>
         </template>
         <template v-else>
-          <el-form-item label="数据契约">
-            <el-input v-model="form.dataContract" placeholder="如：manual-notice" />
+          <el-form-item label="组件 schema">
+            <el-select
+              v-model="form.schemaKey"
+              filterable
+              style="width: 100%"
+              placeholder="请选择组件 schema"
+              @change="selectSchema"
+            >
+              <el-option
+                v-for="schema in schemas"
+                :key="schema.visualKey"
+                :label="schema.name"
+                :value="schema.visualKey"
+              />
+            </el-select>
           </el-form-item>
-          <el-form-item label="静态 JSON">
-            <el-input v-model="form.manualJson" :rows="10" type="textarea" placeholder="对象或对象数组" />
-          </el-form-item>
+          <template v-if="selectedSchema">
+            <el-form-item label="数据形态">
+              <el-tag>{{ selectedSchema.dataType === 'list' ? '对象数组' : '单对象' }}</el-tag>
+            </el-form-item>
+            <el-table v-if="selectedSchema.dataType === 'list'" border size="small" max-height="320" :data="manualRows">
+              <el-table-column
+                v-for="field in selectedSchema.schemas"
+                :key="field.propName"
+                :label="field.label"
+                :prop="field.propName"
+              >
+                <template #default="{ row }"><el-input v-model="row[field.propName]" size="small" /></template>
+              </el-table-column>
+              <el-table-column label="操作" width="80">
+                <template #default="{ $index }">
+                  <el-button link type="danger" @click="manualRows.splice($index, 1)">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-button
+              v-if="selectedSchema.dataType === 'list'"
+              size="small"
+              class="wa-w-full wa-mt-2"
+              @click="addManualRow"
+            >
+              + 添加一项
+            </el-button>
+            <el-table v-else border size="small" :data="manualObjectRows">
+              <el-table-column label="属性名" width="140" prop="label" />
+              <!-- <el-table-column label="Key" width="160" prop="propName" /> -->
+              <el-table-column label="值">
+                <template #default="{ row }"><el-input v-model="row.value" size="small" /></template>
+              </el-table-column>
+            </el-table>
+          </template>
+          <template v-else-if="legacyManual">
+            <el-alert
+              type="warning"
+              class="wa-mb-3"
+              :closable="false"
+              title="旧数据契约未匹配到组件 schema，将保留原 JSON。请选择 schema 后再保存为新契约。"
+            />
+            <el-form-item label="旧数据契约"><el-input v-model="form.dataContract" disabled /></el-form-item>
+            <el-form-item label="静态 JSON">
+              <el-input v-model="form.manualJson" :rows="10" type="textarea" placeholder="对象或对象数组" />
+            </el-form-item>
+          </template>
+          <el-empty v-else description="请选择组件 schema" />
           <div class="wa-ml-25 wa-mb-3 wa-text-xs wa-text-gray-500">
             仅当前数据源保存静态配置，不会随商品或文章后台自动同步。
           </div>
@@ -103,7 +161,13 @@
 </template>
 
 <script setup lang="ts">
-import type { VisualDataSource, VisualEntitySort, VisualEntityType } from '@visual/editor'
+import {
+  getSchemas,
+  type VisualDataSource,
+  type VisualEntitySort,
+  type VisualEntityType,
+  type VisualSchema,
+} from '@visual/editor'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { categoryService, type CategoryOption } from '../../services/category.service'
 import { productService } from '../../services/product.service'
@@ -124,6 +188,10 @@ const loading = ref(false)
 const saving = ref(false)
 const previewing = ref(false)
 const editing = ref<VisualDataSource | null>(null)
+const schemas = getSchemas().sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'))
+const manualRows = ref<Record<string, any>[]>([])
+const manualObjectRows = ref<Array<{ label: string; propName: string; value: any }>>([])
+const preserveManualExtras = ref(false)
 const form = reactive({
   name: '',
   sourceKind: 'entity_collection' as 'entity_collection' | 'manual',
@@ -134,7 +202,12 @@ const form = reactive({
   limit: 8,
   dataContract: 'manual-notice',
   manualJson: '[\n  {"text":"请输入公告内容"}\n]',
+  schemaKey: '',
 })
+const selectedSchema = computed<VisualSchema | undefined>(() =>
+  schemas.find((schema) => schema.visualKey === form.schemaKey),
+)
+const legacyManual = computed(() => !!editing.value && form.sourceKind === 'manual' && !selectedSchema.value)
 const sortOptions = computed(() =>
   form.entityType === 'product'
     ? [
@@ -184,9 +257,79 @@ const resetForm = () => {
     limit: 8,
     dataContract: 'manual-notice',
     manualJson: '[\n  {"text":"请输入公告内容"}\n]',
+    schemaKey: '',
   })
+  manualRows.value = []
+  manualObjectRows.value = []
+  preserveManualExtras.value = false
   preview.value = []
 }
+const parseManualJson = () => {
+  try {
+    return JSON.parse(form.manualJson)
+  } catch {
+    return undefined
+  }
+}
+const selectSchema = (visualKey: string) => {
+  const schema = schemas.find((item) => item.visualKey === visualKey)
+  if (!schema) return
+  form.dataContract = `manual-${schema.visualKey}`
+  const current = parseManualJson()
+  if (schema.dataType === 'list') {
+    const rows = Array.isArray(current) ? current : []
+    manualRows.value = rows.map((row) =>
+      schema.schemas.reduce((result, field) => ({ ...result, [field.propName]: row?.[field.propName] ?? '' }), {}),
+    )
+  } else {
+    const object = current && !Array.isArray(current) && typeof current === 'object' ? current : {}
+    manualObjectRows.value = schema.schemas.map((field) => ({ ...field, value: object[field.propName] ?? '' }))
+  }
+  syncManualJson()
+}
+const addManualRow = () => {
+  if (!selectedSchema.value) return
+  manualRows.value.push(Object.fromEntries(selectedSchema.value.schemas.map((field) => [field.propName, ''])))
+}
+const syncManualJson = () => {
+  if (!selectedSchema.value) return
+  if (selectedSchema.value.dataType === 'list') {
+    const current = preserveManualExtras.value ? parseManualJson() : []
+    const currentRows = Array.isArray(current) ? current : []
+    form.manualJson = JSON.stringify(
+      manualRows.value.map((row, index) => ({
+        ...(preserveManualExtras.value && currentRows[index] && typeof currentRows[index] === 'object'
+          ? currentRows[index]
+          : {}),
+        ...row,
+      })),
+      null,
+      2,
+    )
+  } else {
+    const value = manualObjectRows.value.reduce((result, field) => ({ ...result, [field.propName]: field.value }), {})
+    const current = preserveManualExtras.value ? parseManualJson() : {}
+    form.manualJson = JSON.stringify(
+      { ...(current && !Array.isArray(current) && typeof current === 'object' ? current : {}), ...value },
+      null,
+      2,
+    )
+  }
+}
+const syncManualEditor = (json: any) => {
+  if (!selectedSchema.value) return
+  if (selectedSchema.value.dataType === 'list') {
+    manualRows.value = Array.isArray(json) ? json.map((row) => ({ ...row })) : []
+  } else {
+    const object = json && !Array.isArray(json) && typeof json === 'object' ? json : {}
+    manualObjectRows.value = selectedSchema.value.schemas.map((field) => ({
+      ...field,
+      value: object[field.propName] ?? '',
+    }))
+  }
+}
+watch(manualRows, syncManualJson, { deep: true })
+watch(manualObjectRows, syncManualJson, { deep: true })
 const openCreate = async () => {
   editing.value = null
   resetForm()
@@ -195,6 +338,7 @@ const openCreate = async () => {
 }
 const openEdit = async (source: VisualDataSource) => {
   editing.value = source
+  preserveManualExtras.value = true
   Object.assign(form, {
     name: source.name,
     sourceKind: source.sourceKind,
@@ -205,7 +349,9 @@ const openEdit = async (source: VisualDataSource) => {
     limit: (source.queryConfig as any)?.limit || 8,
     dataContract: source.dataContract,
     manualJson: JSON.stringify(source.manualData ?? {}, null, 2),
+    schemaKey: source.dataContract?.startsWith('manual-') ? source.dataContract.slice('manual-'.length) : '',
   })
+  if (selectedSchema.value) syncManualEditor(parseManualJson())
   await loadEntities()
   visible.value = true
 }
@@ -226,8 +372,10 @@ const buildPayload = (): any =>
         sourceKind: 'manual' as const,
         entityType: null,
         queryConfig: {} as Record<string, never>,
-        dataContract: (form.dataContract.trim() || 'manual-notice') as `manual-${string}`,
-        manualData: JSON.parse(form.manualJson),
+        dataContract: (selectedSchema.value
+          ? `manual-${selectedSchema.value.visualKey}`
+          : form.dataContract.trim() || 'manual-notice') as `manual-${string}`,
+        manualData: selectedSchema.value ? JSON.parse(form.manualJson) : JSON.parse(form.manualJson),
         status: 'active' as const,
         schemaVersion: 1,
       }
@@ -246,6 +394,10 @@ const previewSource = async () => {
 const save = async () => {
   if (!auth.user || !form.name.trim()) return ElMessage.warning('请填写数据源名称')
   try {
+    if (form.sourceKind === 'manual' && !selectedSchema.value && !editing.value) {
+      return ElMessage.warning('请选择组件 schema')
+    }
+    if (selectedSchema.value) syncManualJson()
     const payload = buildPayload()
     saving.value = true
     if (editing.value) await dataSourceService.update(editing.value.id, payload)

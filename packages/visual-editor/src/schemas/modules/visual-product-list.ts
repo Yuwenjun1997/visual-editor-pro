@@ -3,6 +3,7 @@ import type { VisualSchema } from '../../types/visual-editor'
 const schema: VisualSchema = {
   name: '商品列表',
   visualKey: 'VisualProductList',
+  dataType: 'list',
   schemas: [
     { label: '商品封面', propName: 'cover' },
     { label: '商品标题', propName: 'title' },

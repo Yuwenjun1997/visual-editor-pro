@@ -2,7 +2,7 @@ import { generateSchemas } from '../schemas'
 import { useViusalStore } from '../store/useVisual'
 import type { VisualBlockSlots } from '../types/visual-editor'
 
-const getVisualKeys = (slots: VisualBlockSlots, visualKeys = new Set<string>()) => {
+export const getVisualKeys = (slots: VisualBlockSlots, visualKeys = new Set<string>()) => {
   Object.values(slots)
     .flatMap((slot) => slot.blocks)
     .forEach((block) => {
@@ -11,6 +11,8 @@ const getVisualKeys = (slots: VisualBlockSlots, visualKeys = new Set<string>()) 
     })
   return [...visualKeys]
 }
+
+export const getSchemasFromSlots = (slots: VisualBlockSlots) => generateSchemas(getVisualKeys(slots))
 
 export const useSchema = () => {
   const visualStore = useViusalStore()

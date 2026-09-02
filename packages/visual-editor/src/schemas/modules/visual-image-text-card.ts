@@ -1,8 +1,7 @@
 import type { VisualSchema } from '../../types/visual-editor'
-
 const schema: VisualSchema = {
-  name: '图文信息',
-  visualKey: 'VisualImageText',
+  name: '图文卡片',
+  visualKey: 'VisualImageTextCard',
   dataType: 'object',
   schemas: [
     { label: '作者头像', propName: 'authorAvatar' },
@@ -12,5 +11,4 @@ const schema: VisualSchema = {
     { label: '文章标题', propName: 'title' },
   ],
 }
-
 export default schema
