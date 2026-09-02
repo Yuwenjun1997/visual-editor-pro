@@ -16,6 +16,7 @@ const VisualVideo: VisualEditorComponent<VisualVideoProps> = {
   componentName: 'VisualVideo',
   label: '视频播放',
   previewImage: '/componets/visual-video.svg',
+  souceDataType: 'VisualObject',
   props: {
     title: createTextInputControl({ label: '标题', defaultValue: '' }),
     src: createImageInputControl({

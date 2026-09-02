@@ -26,6 +26,7 @@ const visualComment: VisualEditorComponent<VisualCommentProps> = {
   componentName: 'VisualComment',
   label: '评论列表',
   previewImage: '/componets/visual-comment.svg',
+  souceDataType: 'VisualObjectArray',
   props: {
     showTime: createSwitchControl({ label: '显示时间', defaultValue: true }),
     showRating: createSwitchControl({ label: '显示评分', defaultValue: true }),

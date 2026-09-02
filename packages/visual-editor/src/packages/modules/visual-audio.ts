@@ -8,6 +8,7 @@ const visualAudio: VisualEditorComponent<VisualAudioProps> = {
   componentName: 'VisualAudio',
   label: '音频播放',
   previewImage: '/componets/visual-audio.svg',
+  souceDataType: 'VisualObject',
   props: {
     src: createTextInputControl({ label: '音频地址', tips: 'mp3 等音频资源地址' }),
     title: createTextInputControl({ label: '标题' }),

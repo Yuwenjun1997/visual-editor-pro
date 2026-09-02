@@ -22,6 +22,7 @@ const visualEventContainer: VisualEditorComponent<VisualEventContainerProps> = {
   componentName: 'VisualEventContainer',
   label: '事件容器',
   previewImage: '/componets/visual-event-container.svg',
+  souceDataType: 'VisualObject',
   props: {
     eventType: createNormalSelectControl({
       label: '触发事件',

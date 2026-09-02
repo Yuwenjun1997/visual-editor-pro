@@ -14,6 +14,7 @@ const visualCustomerService: VisualEditorComponent<VisualCustomerServiceProps> =
   componentName: 'VisualCustomerService',
   label: '在线咨询',
   previewImage: '/componets/visual-customer-service.svg',
+  souceDataType: 'VisualObject',
   props: {
     type: createNormalSelectControl({
       label: '接入方式',

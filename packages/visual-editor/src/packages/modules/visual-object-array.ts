@@ -8,6 +8,7 @@ const visualObjectArray: VisualEditorComponent<VisualObjectArrayProps> = {
   componentName: 'VisualObjectArray',
   label: '对象数组',
   previewImage: '/componets/visual-object-array.svg',
+  souceDataType: 'VisualObjectArray',
   slots: {
     default: {
       name: '组件',

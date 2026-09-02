@@ -28,6 +28,7 @@ const VisualMap: VisualEditorComponent<VisualMapProps> = {
   componentName: 'VisualMap',
   label: '地图',
   previewImage: '/componets/visual-map.svg',
+  souceDataType: 'VisualObjectArray',
   props: {
     autoLocation: createSwitchControl({
       label: '自动定位',

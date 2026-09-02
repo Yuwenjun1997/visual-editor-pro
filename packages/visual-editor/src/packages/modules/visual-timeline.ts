@@ -29,6 +29,7 @@ const visualTimeline: VisualEditorComponent<VisualTimelineProps> = {
   componentName: 'VisualTimeline',
   label: '时间轴',
   previewImage: '/componets/visual-timeline.svg',
+  souceDataType: 'VisualObjectArray',
   props: {
     showTime: createSwitchControl({ label: '显示时间', defaultValue: true }),
   },

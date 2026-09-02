@@ -16,6 +16,7 @@ const visualCountDown: VisualEditorComponent<VisualCountDownProps> = {
   componentName: 'VisualCountDown',
   label: '倒计时',
   previewImage: '/componets/visual-count-down.svg',
+  souceDataType: 'VisualObject',
   props: {
     title: createTextInputControl({ label: '前置标题', defaultValue: '距结束仅剩' }),
     endTime: createDatePickerControl({

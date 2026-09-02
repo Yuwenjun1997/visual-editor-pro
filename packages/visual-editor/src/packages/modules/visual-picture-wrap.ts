@@ -28,6 +28,7 @@ const visualPictureWrap: VisualEditorComponent<VisualPictureWrapProps> = {
   componentName: 'VisualPictureWrap',
   label: '照片墙',
   previewImage: '/componets/visual-picture-wrap.svg',
+  souceDataType: 'VisualObjectArray',
   props: {
     layout: createNormalSelectControl({
       label: '列表类型',

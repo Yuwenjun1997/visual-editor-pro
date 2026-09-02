@@ -8,6 +8,7 @@ const visualSearch: VisualEditorComponent<VisualSearchProps> = {
   componentName: 'VisualSearch',
   label: '搜索框',
   previewImage: '/componets/visual-search.svg',
+  souceDataType: 'VisualObject',
   props: {
     placeholder: createTextInputControl({
       label: '占位文案',

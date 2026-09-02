@@ -12,6 +12,7 @@ const visualTabs: VisualEditorComponent<VisualTabsProps> = {
   componentName: 'VisualTabs',
   label: '页签切换',
   previewImage: '/componets/visual-tabs.svg',
+  souceDataType: 'VisualObjectArray',
   props: {
     variant: createNormalSelectControl({
       label: '页签样式',

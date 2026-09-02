@@ -10,6 +10,7 @@ const VisualImage: VisualEditorComponent<VisualImageProps> = {
   componentName: 'VisualImage',
   label: '图片',
   previewImage: '/componets/visual-image.svg',
+  souceDataType: 'VisualObject',
   props: {
     src: createImageInputControl({
       label: '图片地址',

@@ -17,6 +17,7 @@ const visualProductCard: VisualEditorComponent<VisualProductCardProps> = {
   componentName: 'VisualProductCard',
   label: '商品卡片',
   previewImage: '/componets/visual-product-card.svg',
+  souceDataType: 'VisualObject',
   props: {
     cover: createImageInputControl({ label: '商品图', defaultValue: defaultCover }),
     title: createTextInputControl({

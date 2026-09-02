@@ -13,6 +13,7 @@ const visualPoster: VisualEditorComponent<VisualPosterProps> = {
   componentName: 'VisualPoster',
   label: '分享海报',
   previewImage: '/componets/visual-poster.svg',
+  souceDataType: 'VisualObject',
   props: {
     bgImage: createImageInputControl({ label: '背景图' }),
     title: createTextInputControl({

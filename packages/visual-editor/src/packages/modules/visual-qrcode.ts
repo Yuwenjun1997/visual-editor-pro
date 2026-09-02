@@ -13,6 +13,7 @@ const visualQRCode: VisualEditorComponent<VisualQRCodeProps> = {
   componentName: 'VisualQRCode',
   label: '二维码',
   previewImage: '/componets/visual-qrcode.svg',
+  souceDataType: 'VisualObject',
   props: {
     content: createTextInputControl({
       label: '二维码内容',

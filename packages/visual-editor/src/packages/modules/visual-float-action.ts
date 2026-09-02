@@ -15,6 +15,7 @@ const visualFloatAction: VisualEditorComponent<VisualFloatActionProps> = {
   componentName: 'VisualFloatAction',
   label: '悬浮按钮',
   previewImage: '/componets/visual-float-action.svg',
+  souceDataType: 'VisualObject',
   props: {
     mode: createNormalSelectControl({
       label: '功能',

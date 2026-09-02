@@ -1,8 +1,8 @@
 import type { VisualSchema } from '../../types/visual-editor'
 const schema: VisualSchema = {
-  name: '图文卡片',
+  name: '图文卡片列表',
   visualKey: 'VisualImageTextCard',
-  dataType: 'object',
+  dataType: 'list',
   schemas: [
     { label: '作者头像', propName: 'authorAvatar' },
     { label: '作者名称', propName: 'authorName' },

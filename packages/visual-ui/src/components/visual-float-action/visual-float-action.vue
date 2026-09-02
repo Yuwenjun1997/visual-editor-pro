@@ -4,6 +4,8 @@
       <a
         v-if="visible"
         :href="href"
+        target="_blank"
+        rel="noopener noreferrer"
         :aria-label="mode"
         :style="actionStyle"
         class="visual-float-action"

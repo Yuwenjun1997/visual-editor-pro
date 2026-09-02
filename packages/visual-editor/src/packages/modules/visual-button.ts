@@ -13,6 +13,7 @@ const visualButton: VisualEditorComponent<VisualButtonProps> = {
   componentName: 'VisualButton',
   label: '按钮',
   previewImage: '/componets/visual-button.svg',
+  souceDataType: 'VisualObject',
   props: {
     text: createTextInputControl({ label: '按钮文案', defaultValue: '立即领取' }),
     variant: createNormalSelectControl({

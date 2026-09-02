@@ -8,6 +8,7 @@ const visualNoticeBar: VisualEditorComponent<VisualNoticeBarProps> = {
   componentName: 'VisualNoticeBar',
   label: '公告栏',
   previewImage: '/componets/visual-notice-bar.svg',
+  souceDataType: 'VisualObject',
   props: {
     text: createTextInputControl({
       label: '公告内容',

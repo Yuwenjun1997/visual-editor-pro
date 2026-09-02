@@ -8,6 +8,7 @@ const visualStatCard: VisualEditorComponent<VisualStatCardProps> = {
   componentName: 'VisualStatCard',
   label: '数据统计卡',
   previewImage: '/componets/visual-stat-card.svg',
+  souceDataType: 'VisualObject',
   props: {
     title: createTextInputControl({ label: '标题', defaultValue: '今日访问量' }),
     value: createTextInputControl({ label: '数值', defaultValue: '12,680' }),

@@ -11,6 +11,7 @@
     :data-disabled="props.disabled"
     :class="{ 'is-empty': isEmpty }"
     :data-slot="isEmpty ? '组件拖拽到这里' : ''"
+    @change="onChange"
     @end="onEnd"
     @start="onStart"
   >
@@ -85,7 +86,7 @@ const parentKey = computed(() => props.parentComponent?.key)
 const parentProps = computed(() => props.parentComponent?.props)
 const parentStyles = computed(() => props.parentComponent?.styles)
 
-const { setCurrentBlockPosition, clearCurrentBlockPosition } = useBlocks()
+const { setCurrentBlockPosition, clearCurrentBlockPosition, clearParentDataSource } = useBlocks()
 const visualStore = useViusalStore()
 
 const moduleList = useVModel(props, 'modelValue', emit)
@@ -100,6 +101,10 @@ const onStart = () => {
 const onEnd = () => {
   dragging.value = false
   visualStore.clearMoveBlock()
+}
+
+const onChange = (event: { removed?: unknown }) => {
+  if (event.removed) clearParentDataSource(props.parentComponent)
 }
 
 const isFlexDisabled = (block: VisualBlockData) => {
@@ -128,7 +133,7 @@ const onMouseDown = (block: VisualBlockData) => {
 
 const handleClick = (block: VisualBlockData, index: number) => {
   visualStore.setCurrentBlock(block)
-  setCurrentBlockPosition(index, moduleList.value)
+  setCurrentBlockPosition(index, moduleList.value, props.parentComponent)
 }
 const isCurrentBlock = (block: VisualBlockData) => {
   return block._vid === visualStore.vid

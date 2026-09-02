@@ -58,8 +58,44 @@
 - **决策**: 旧版 `column_key/component_key/data_type/data` 保留读取兼容，但改为可空，避免新模型插入时触发非空约束。
 - **验证**: 已应用 Supabase 迁移；远端四个旧字段均确认 `is_nullable=YES`。
 
+## [当前] - 功能修复: 补齐数据模块类型并统一 URL 新窗口跳转
+
+- **文件**: `packages/visual-editor/src/packages/modules/visual-comment.ts`, `visual-form.ts`, `visual-map.ts`, `visual-picture-wrap.ts`, `visual-tabs.ts`, `visual-timeline.ts`; `packages/visual-ui/src/components/visual-button/visual-button.vue`, `visual-customer-service/visual-customer-service.vue`, `visual-event-container/visual-event-container.vue`, `visual-flash-sale/visual-flash-sale.vue`, `visual-float-action/visual-float-action.vue`, `visual-form/visual-form.vue`, `visual-popup/visual-popup.vue`, `visual-poster/visual-poster.vue`, `visual-product-item/visual-product-item.vue`, `visual-search/visual-search.vue`
+- **决策**: 所有消费 `listData` 的编辑器模块声明 `souceDataType: 'VisualObjectArray'`；组件锚点统一使用 `_blank`、`noopener noreferrer`，脚本跳转统一使用 `window.open`。
+- **验证**: `pnpm type-check` 通过（3 个 workspace 包）；`git diff --check` 通过。
+
+## [当前] - 回归修复: 补齐普通对象型模块 souceDataType
+
+- **文件**: `packages/visual-editor/src/packages/modules/` 下 20 个普通组件模块
+- **决策**: 为未声明类型且非数据容器的模块补充 `souceDataType: 'VisualObject'`；已有列表数据模块保留 `VisualObjectArray`，数据容器模块不互相嵌套。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过；`git diff --check` 通过。
+
 ## [当前] - Bug 修复: 修复数据源配置弹窗切换空白与绑定回显失效
 
 - **文件**: `packages/visual-editor/src/components/visual-control/visual-source-data-editor/visual-source-data-editor.vue`
 - **决策**: Tab 使用独立的 `activeTab`，将新模型的 `managed` 与旧页面的 `column` 统一映射到“数据源”页，避免 `el-tabs` 因无对应 pane 渲染空白；选中数据源继续保存为 `managed`。
 - **验证**: `pnpm --filter @visual/editor type-check` 通过；`git diff --check` 通过。未执行浏览器交互回归。
+
+## [15:32] - 功能修复: 自定义数据按 souceDataType 使用组件 schema
+
+- **文件**: `packages/visual-editor/src/hooks/useSchema.ts`
+- **决策**: 当当前组件 schema 的 `dataType` 与 `souceDataType` 匹配且包含字段时优先使用自身 schema；通用容器继续回退到插槽组件 schema 聚合。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过。
+
+## [15:35] - Bug 修复: 补齐对象数组容器的数据类型声明
+
+- **文件**: `packages/visual-editor/src/packages/modules/visual-object-array.ts`
+- **决策**: 为 `VisualObjectArray` 编辑器元数据补充 `souceDataType: 'VisualObjectArray'`，避免打开自定义数据时按默认对象渲染。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过；`git diff --check` 通过。
+
+## [当前] - 功能修复: 移除容器子组件时清空父级数据源
+
+- **文件**: `packages/visual-editor/src/hooks/useBlocks.ts`, `packages/visual-editor/src/components/visual-blocks/visual-blocks.vue`
+- **决策**: 删除操作记录父组件；当父组件为 `VisualObject` 或 `VisualObjectArray` 时，将数据源重置为 custom 并清理 sourceId、栏目字段及自定义 JSON。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过；`git diff --check` 通过。
+
+## [当前] - 功能修复: 拖拽移出容器时清空父级数据源
+
+- **文件**: `packages/visual-editor/src/hooks/useBlocks.ts`, `packages/visual-editor/src/components/visual-blocks/visual-blocks.vue`
+- **决策**: 监听 vuedraggable 的 `change.removed` 事件，覆盖将子组件拖出 `VisualObject` / `VisualObjectArray` 的移除场景。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过；`git diff --check` 通过。

@@ -13,6 +13,7 @@ const visualCoupon: VisualEditorComponent<VisualCouponProps> = {
   componentName: 'VisualCoupon',
   label: '领券',
   previewImage: '/componets/visual-coupon.svg',
+  souceDataType: 'VisualObject',
   props: {
     currency: createTextInputControl({ label: '货币符号', defaultValue: '¥' }),
     amountText: createTextInputControl({ label: '面额', defaultValue: '50' }),

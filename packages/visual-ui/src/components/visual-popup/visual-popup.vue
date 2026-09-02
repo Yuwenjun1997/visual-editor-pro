@@ -15,7 +15,14 @@
             <div v-if="description" class="visual-popup__desc">
               {{ description }}
             </div>
-            <a v-if="buttonLink" :href="btnHref" class="visual-popup__button" @click="close">
+            <a
+              v-if="buttonLink"
+              :href="btnHref"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="visual-popup__button"
+              @click="close"
+            >
               {{ buttonText || '去看看' }}
             </a>
             <div v-else class="visual-popup__button" @click="close">

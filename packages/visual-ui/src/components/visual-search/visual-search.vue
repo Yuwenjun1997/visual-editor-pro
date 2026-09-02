@@ -48,7 +48,7 @@ const handleSubmit = () => {
   const link = _props.props.confirmLink
   if (link) {
     const sep = link.includes('?') ? '&' : '?'
-    window.location.href = `${link}${sep}keyword=${encodeURIComponent(value)}`
+    window.open(`${link}${sep}keyword=${encodeURIComponent(value)}`, '_blank', 'noopener,noreferrer')
   } else {
     toast(value ? `搜索：${value}` : '请输入搜索关键词')
   }

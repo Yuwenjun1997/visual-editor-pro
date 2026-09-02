@@ -13,7 +13,7 @@
         <visual-component-group v-if="searchList.length" :list="searchList" />
         <el-empty v-else :image-size="60" description="未找到匹配的组件" />
       </template>
-      <el-collapse v-else v-model="activeNames" @change="handleChange">
+      <el-collapse v-else v-model="activeNames" accordion @change="handleChange">
         <el-collapse-item name="basic" title="基础组件">
           <visual-component-group :list="componentModules.basicWidgets" />
         </el-collapse-item>

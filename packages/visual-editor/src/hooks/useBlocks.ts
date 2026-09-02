@@ -2,24 +2,28 @@ import { useViusalStore } from '../store/useVisual'
 import type { VisualBlockData } from '../types/visual-editor'
 import { generateNanoid } from '../utils/visual.utils'
 import { cloneDeep } from 'lodash'
+import type { VisualSourceOptions } from '@visual/ui/types'
 
 const blockList = ref<VisualBlockData[]>([])
 
 const currentBlocks = ref<VisualBlockData[]>([])
 const currentIndex = ref<number>()
+const currentParent = ref<VisualBlockData>()
 
 export const useBlocks = () => {
   const visualStore = useViusalStore()
   const { clearCurrent } = visualStore
 
-  const setCurrentBlockPosition = (index: number, blocks: VisualBlockData[]) => {
+  const setCurrentBlockPosition = (index: number, blocks: VisualBlockData[], parent?: VisualBlockData) => {
     currentBlocks.value = blocks
     currentIndex.value = index
+    currentParent.value = parent
   }
 
   const clearCurrentBlockPosition = () => {
     currentBlocks.value = []
     currentIndex.value = undefined
+    currentParent.value = undefined
   }
 
   const size = computed(() => currentBlocks.value.length)
@@ -54,8 +58,23 @@ export const useBlocks = () => {
   const remove = () => {
     if (typeof currentIndex.value === 'undefined') return
     currentBlocks.value.splice(currentIndex.value, 1)
+    clearParentDataSource()
     clearCurrent()
     clearCurrentBlockPosition()
+  }
+
+  const clearParentDataSource = (parent = currentParent.value) => {
+    if (!parent || !['VisualObject', 'VisualObjectArray'].includes(parent.key)) return
+
+    const options = parent.props?.options as VisualSourceOptions | undefined
+    if (!options) return
+
+    options.dataSource = 'custom'
+    options.customJsonData = undefined
+    options.sourceId = undefined
+    options.sourceKind = undefined
+    options.dataContract = `manual-${parent.key}`
+    options.columnKey = undefined
   }
 
   const reload = () => {
@@ -72,6 +91,7 @@ export const useBlocks = () => {
     moveDown,
     copy,
     remove,
+    clearParentDataSource,
     reload,
   }
 }

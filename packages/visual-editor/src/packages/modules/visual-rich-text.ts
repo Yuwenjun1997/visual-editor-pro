@@ -8,6 +8,7 @@ const visualRichText: VisualEditorComponent<VisualRichTextProps> = {
   componentName: 'VisualRichText',
   label: '富文本',
   previewImage: '/componets/visual-rich-text.svg',
+  souceDataType: 'VisualObject',
   props: {
     html: createTextInputControl({
       label: 'HTML 内容',

@@ -14,6 +14,7 @@ const visualPopup: VisualEditorComponent<VisualPopupProps> = {
   componentName: 'VisualPopup',
   label: '弹窗浮层',
   previewImage: '/componets/visual-popup.svg',
+  souceDataType: 'VisualObject',
   props: {
     mode: createNormalSelectControl({
       label: '触发方式',

@@ -2,6 +2,8 @@
   <visual-box class="visual-button" :class="_props.class" :styles="_props.styles">
     <a
       :href="bindHref"
+      target="_blank"
+      rel="noopener noreferrer"
       :style="bindStyle"
       class="visual-button__btn"
       :class="[bindVariantClass, bindSizeClass]"

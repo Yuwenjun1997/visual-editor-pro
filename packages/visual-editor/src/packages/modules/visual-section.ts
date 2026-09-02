@@ -15,6 +15,7 @@ const VisualSection: VisualEditorComponent<VisualSectionProps> = {
   componentName: 'VisualSection',
   label: '标题栏',
   previewImage: '/componets/visual-section.svg',
+  souceDataType: 'VisualObject',
   props: {
     title: createTextInputControl({ label: '标题', defaultValue: '标题栏' }),
     titleColor: createColorInputControl({ label: '标题颜色' }),

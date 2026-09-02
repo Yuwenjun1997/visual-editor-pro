@@ -13,6 +13,7 @@ const visualRating: VisualEditorComponent<VisualRatingProps> = {
   componentName: 'VisualRating',
   label: '评分',
   previewImage: '/componets/visual-rating.svg',
+  souceDataType: 'VisualObject',
   props: {
     max: createNumberInputControl({ label: '星星数量', defaultValue: 5 }),
     value: createNumberInputControl({ label: '默认评分', defaultValue: 3 }),

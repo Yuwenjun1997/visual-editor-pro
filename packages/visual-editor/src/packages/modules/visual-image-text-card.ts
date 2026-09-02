@@ -40,7 +40,7 @@ const VisualImageTextCard: VisualEditorComponent<VisualImageTextCardProps> = {
   key: 'VisualImageTextCard',
   moduleName: 'imageTextWidgets',
   componentName: 'VisualImageTextCard',
-  label: '图文卡片',
+  label: '图文卡片列表',
   previewImage: '/componets/visual-image-text-card.svg',
   dataContract: 'article-list',
   souceDataType: 'VisualObjectArray',

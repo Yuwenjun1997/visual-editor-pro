@@ -1,6 +1,13 @@
 <template>
   <visual-box :class="_props.class" :styles="_props.styles" class="visual-customer-service">
-    <a :href="href" :style="entryStyle" class="visual-customer-service__entry" @click="handleClick">
+    <a
+      :href="href"
+      target="_blank"
+      rel="noopener noreferrer"
+      :style="entryStyle"
+      class="visual-customer-service__entry"
+      @click="handleClick"
+    >
       <i v-if="_props.props.iconVisible !== false" class="bi bi-headset visual-customer-service__icon" />
       <span class="visual-customer-service__text">{{ _props.props.text }}</span>
     </a>

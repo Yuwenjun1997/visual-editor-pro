@@ -13,7 +13,14 @@
         <div v-if="footerText" class="visual-poster__footer">
           {{ footerText }}
         </div>
-        <a v-if="_props.props.shareLink" :href="btnHref" class="visual-poster__btn" @click="handleClick">
+        <a
+          v-if="_props.props.shareLink"
+          :href="btnHref"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="visual-poster__btn"
+          @click="handleClick"
+        >
           {{ buttonText || '分享给好友' }}
         </a>
       </div>

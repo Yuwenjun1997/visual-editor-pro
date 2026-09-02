@@ -91,7 +91,7 @@ const handleSubmit = () => {
     const query = Object.entries(payload)
       .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
       .join('&')
-    window.location.href = `${link}${sep}${query}`
+    window.open(`${link}${sep}${query}`, '_blank', 'noopener,noreferrer')
   } else {
     toast('提交成功')
   }

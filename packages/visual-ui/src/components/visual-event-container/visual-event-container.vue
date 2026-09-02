@@ -45,7 +45,7 @@ function executeAction() {
   if (!actionType || actionType === 'none') return
   if (actionType === 'url' && actionUrl) {
     const url = actionUrl.startsWith('http') ? actionUrl : `//${actionUrl}`
-    window.location.href = url
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
   if (actionType === 'toast' && actionText) {
     toast(actionText)

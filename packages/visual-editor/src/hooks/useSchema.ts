@@ -1,6 +1,6 @@
-import { generateSchemas } from '../schemas'
+import { generateSchemas, getSchema } from '../schemas'
 import { useViusalStore } from '../store/useVisual'
-import type { VisualBlockSlots } from '../types/visual-editor'
+import type { VisualBlockSlots, VisualDataSourceType } from '../types/visual-editor'
 
 export const getVisualKeys = (slots: VisualBlockSlots, visualKeys = new Set<string>()) => {
   Object.values(slots)
@@ -23,14 +23,25 @@ export const useSchema = () => {
     return getVisualKeys(visualStore.currentBlock.slots)
   })
 
-  const emptySchema = computed(() => {
-    return !visualKeys.value || visualKeys.value.length === 0
-  })
-
   const schemaList = computed(() => {
+    const component = visualStore.visualEditorComponent
+    const componentSchema = component ? getSchema(component.key) : undefined
+    const dataType: VisualDataSourceType =
+      component?.souceDataType === 'VisualObjectArray' ? 'list' : 'object'
+
+    // A component's own schema describes the shape of its custom data. This
+    // takes precedence over schemas collected from nested slot components.
+    if (componentSchema?.dataType === dataType && componentSchema.schemas.length > 0) {
+      return componentSchema.schemas
+    }
+
+    // Generic containers (for example VisualObject) do not define fields of
+    // their own, so their custom data is composed from the child blocks.
     if (!visualKeys.value) return []
     return generateSchemas(visualKeys.value)
   })
+
+  const emptySchema = computed(() => schemaList.value.length === 0)
 
   const createOne = () => {
     return schemaList.value.reduce(

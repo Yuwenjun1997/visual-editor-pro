@@ -31,6 +31,7 @@ const visualForm: VisualEditorComponent<VisualFormProps> = {
   componentName: 'VisualForm',
   label: '表单容器',
   previewImage: '/componets/visual-form.svg',
+  souceDataType: 'VisualObjectArray',
   props: {
     submitText: createTextInputControl({ label: '提交按钮文案', defaultValue: '提交' }),
     submitButtonColor: createColorInputControl({
