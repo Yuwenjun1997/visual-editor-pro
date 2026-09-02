@@ -9,6 +9,10 @@
           :collapse-transition="false"
           :default-active="activeMenu"
         >
+          <el-menu-item index="/admin/dashboard">
+            <el-icon><Icon icon="ep:data-analysis" /></el-icon>
+            <template #title>工作台</template>
+          </el-menu-item>
           <el-menu-item index="/admin/pages">
             <el-icon><Icon icon="ep:document" /></el-icon>
             <template #title>页面管理</template>
@@ -36,11 +40,8 @@
         </el-menu>
       </el-scrollbar>
     </el-aside>
-
     <el-container class="wa-min-w-0">
-      <el-main class="admin-main">
-        <router-view />
-      </el-main>
+      <el-main class="admin-main"><router-view /></el-main>
     </el-container>
   </default-layout>
 </template>
@@ -49,12 +50,9 @@
 import DefaultLayout from '@/components/layout/DefaultLayout.vue'
 import { usePermission } from '@/lib/rbac'
 import { Icon } from '@iconify/vue'
-
 const { can } = usePermission()
 const route = useRoute()
-
 const collapsed = ref(false)
-
 const activeMenu = computed(() => route.path)
 </script>
 
@@ -65,47 +63,28 @@ const activeMenu = computed(() => route.path)
   border-right: 1px solid var(--el-border-color);
   transition: width 0.2s;
 }
-
-.admin-logo {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  gap: 8px;
-  border-bottom: 1px solid var(--el-border-color);
-  overflow: hidden;
-}
-
 .admin-menu {
   border-right: none;
   padding: 8px;
 }
-
 .admin-menu :deep(.el-menu-item) {
   height: 42px;
   line-height: 42px;
   margin-bottom: 4px;
   border-radius: 8px;
 }
-
-.admin-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--el-border-color);
+.admin-menu :deep(.el-menu-item.is-active),
+.admin-menu :deep(.el-menu-item.is-active:hover) {
+  color: var(--el-color-white);
+  background: var(--el-color-primary);
 }
-
-.collapse-btn {
-  font-size: 18px;
-  cursor: pointer;
-  color: var(--el-text-color-primary);
+.admin-menu :deep(.el-menu-item.is-active .el-icon) {
+  color: var(--el-color-white);
 }
-
-.collapse-btn:hover {
-  color: var(--el-color-primary-light-5);
+.admin-menu :deep(.el-menu-item:hover) {
+  color: var(--el-color-primary);
+  background: var(--el-color-primary-light-9);
 }
-
 .admin-main {
   padding: 16px;
   overflow: auto;

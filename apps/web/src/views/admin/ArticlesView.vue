@@ -5,7 +5,7 @@
       <el-button type="primary" @click="openCreate">新增文章</el-button>
     </div>
 
-    <el-table v-loading="loading" :data="articles">
+    <el-table v-loading="loading" size="small" :data="articles">
       <el-table-column label="封面" width="90">
         <template #default="{ row }">
           <el-image v-if="row.cover_url" fit="cover" :src="row.cover_url" class="wa-w-14 wa-h-14 wa-rounded" />

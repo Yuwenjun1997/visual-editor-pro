@@ -12,7 +12,7 @@
       <el-button type="primary" :loading="saving" @click="create"> 新增 </el-button>
     </div>
 
-    <el-table v-loading="loading" :data="visibleCategories">
+    <el-table v-loading="loading" size="small" :data="visibleCategories" >
       <el-table-column label="名称" prop="name" min-width="200" />
       <el-table-column label="类型" width="120">
         <template #default="{ row }">

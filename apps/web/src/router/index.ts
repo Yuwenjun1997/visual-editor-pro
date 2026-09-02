@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { EditorLayout, EditorStage, PreviewScenario, DevScenario } from '@visual/editor'
-import AdminLayout from '@/AdminLayoutV2.vue'
+import AdminLayout from '@/layout/AdminLayout.vue'
 import LoginView from '@/views/LoginView.vue'
 import EditorShell from '@/views/editor/EditorShell.vue'
 import PagesView from '@/views/admin/PagesView.vue'
