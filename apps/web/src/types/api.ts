@@ -1,6 +1,19 @@
 import type { PageSchema } from '@visual/editor'
 import type { RoleCode } from '../lib/rbac'
 
+export interface ContentListOptions {
+  page: number
+  pageSize: number
+  keyword?: string
+  categoryId?: string
+  status?: string
+}
+
+export interface PaginatedResult<T> {
+  items: T[]
+  total: number
+}
+
 export interface ProfileRow {
   id: string
   full_name: string | null

@@ -12,7 +12,7 @@ export { default as visualComponents } from './packages'
 export { useViusalStore } from './store/useVisual'
 
 export { useBlocks } from './hooks/useBlocks'
-export { useHistory } from './hooks/useHistory'
+export { initializeHistory, resetHistory, suspendHistory, useHistory } from './hooks/useHistory'
 export { useLayout } from './hooks/useLayout'
 export { usePageConfig, type PageConfig } from './hooks/usePageConfig'
 export { useReload } from './hooks/useReload'

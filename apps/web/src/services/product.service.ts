@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase'
-import type { ProductRow } from '../types/api'
+import type { ContentListOptions, PaginatedResult, ProductRow } from '../types/api'
 
 export type ProductPayload = Partial<{
   category_id: string | null
@@ -15,13 +15,22 @@ export type ProductPayload = Partial<{
 }>
 
 export const productService = {
-  async list(opts?: { categoryId?: string; status?: string }): Promise<ProductRow[]> {
-    let query = supabase.from('products').select('*').order('sort', { ascending: true })
+  async list(opts: ContentListOptions = { page: 1, pageSize: 100 }): Promise<PaginatedResult<ProductRow>> {
+    const page = Math.max(1, opts.page)
+    const pageSize = Math.min(100, Math.max(1, opts.pageSize))
+    const from = (page - 1) * pageSize
+    const to = from + pageSize - 1
+    let query = supabase
+      .from('products')
+      .select('*', { count: 'exact' })
+      .order('updated_at', { ascending: false })
     if (opts?.categoryId) query = query.eq('category_id', opts.categoryId)
     if (opts?.status) query = query.eq('status', opts.status)
-    const { data, error } = await query
+    const keyword = opts.keyword?.trim().replace(/\\/g, '\\\\').replace(/%/g, '\\%').replace(/_/g, '\\_')
+    if (keyword) query = query.ilike('title', `%${keyword}%`)
+    const { data, error, count } = await query.range(from, to)
     if (error) throw error
-    return (data || []) as ProductRow[]
+    return { items: (data || []) as ProductRow[], total: count || 0 }
   },
 
   async create(payload: ProductPayload & { user_id: string }) {

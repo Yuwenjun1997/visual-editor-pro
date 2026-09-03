@@ -88,7 +88,7 @@ visualConfig.onSave = async (data) => {
   })
 
   ElMessage.success('保存成功')
-  return { pageId, blocks } as VisualSaveResult
+  return { pageId, title, slug, blocks } as VisualSaveResult
 }
 
 visualConfig.onPublish = async (data) => {

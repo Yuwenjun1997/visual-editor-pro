@@ -15,8 +15,8 @@ export const dashboardService = {
 
     return {
       pages: pages.length,
-      products: products.length,
-      articles: articles.length,
+      products: products.total,
+      articles: articles.total,
       categories: categories.length,
     }
   },

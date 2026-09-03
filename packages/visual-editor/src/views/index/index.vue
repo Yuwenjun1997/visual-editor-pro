@@ -29,9 +29,11 @@ import { useReload } from '../../hooks/useReload'
 import { usePageConfig } from '../../hooks/usePageConfig'
 import { useBlocks } from '../../hooks/useBlocks'
 import { visualConfig } from '../../utils/visual.registry'
-import { formatVisualBlockData } from '../../utils/visual.utils'
-import { ElMessage } from 'element-plus'
+import { formatVisualBlockData, getPageSchemaFingerprint } from '../../utils/visual.utils'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import type { PageSchema } from '../../types/visual-editor'
+import { autoSaveStatus, useAutoSave } from '../../hooks/useAutoSave'
+import { initializeHistory, suspendHistory } from '../../hooks/useHistory'
 
 const { toggleRight } = useLayout()
 
@@ -48,6 +50,13 @@ const { pageConfig } = usePageConfig()
 const { blockList } = useBlocks()
 
 const route = useRoute()
+const hydrating = ref(true)
+
+const { schedule: scheduleAutoSave, stop: stopAutoSave, loadDraft, setHydrated, discardDraft } = useAutoSave({
+  pageConfig,
+  blockList,
+  namespace: visualConfig.draftNamespace,
+})
 
 // 模块单例 ref(pageConfig/blockList)在路由间复用;按 :pageId 装载已保存页面,
 // id 消失时重置为空,避免"新建页面"串入上一页数据
@@ -67,14 +76,51 @@ const resetPage = () => {
   pageConfig.value = { pageId: '', title: '', slug: '', globalStyle: {}, themeName: '' }
 }
 
+const restoreLocalDraftIfNeeded = async (databaseSchema?: PageSchema) => {
+  const draft = loadDraft(databaseSchema?.pageId)
+  if (!draft) {
+    setHydrated(databaseSchema || { ...pageConfig.value, blocks: blockList.value })
+    return
+  }
+  if (databaseSchema && draft.fingerprint === getPageSchemaFingerprint(databaseSchema)) {
+    discardDraft()
+    setHydrated(databaseSchema)
+    return
+  }
+  const message = `检测到本地草稿，保存时间：${new Date(draft.savedAt).toLocaleString('zh-CN', { hour12: false })}`
+  const emptySchema: PageSchema = { ...pageConfig.value, blocks: [] }
+  const action = await ElMessageBox.confirm(message, '恢复本地草稿', {
+    confirmButtonText: '恢复本地草稿',
+    cancelButtonText: '放弃本地草稿',
+    distinguishCancelAndClose: true,
+    type: 'info',
+  }).catch((reason) => reason)
+  if (action === true || action === 'confirm') {
+    applyPageSchema(draft.schema)
+    setHydrated(draft.schema, { locallySaved: true, syncedSchema: databaseSchema || emptySchema })
+    autoSaveStatus.value = 'locally-saved'
+  } else if (action === 'cancel') {
+    discardDraft()
+    setHydrated(databaseSchema || emptySchema)
+  } else {
+    setHydrated(databaseSchema || emptySchema)
+  }
+}
+
 watch(
   () => route.params.pageId as string | undefined,
   async (pageId) => {
+    suspendHistory()
+    hydrating.value = true
     if (!pageId) {
       resetPage()
+      await restoreLocalDraftIfNeeded()
+      initializeHistory({ ...pageConfig.value, blocks: blockList.value }, 'new-page')
+      hydrating.value = false
       return
     }
     if (!visualConfig.savedPageLoader) {
+      hydrating.value = false
       ElMessage.error('未配置页面加载')
       return
     }
@@ -85,12 +131,22 @@ watch(
         return
       }
       applyPageSchema(schema)
+      await restoreLocalDraftIfNeeded(schema)
+      initializeHistory({ ...pageConfig.value, blocks: blockList.value }, String(pageId))
+      hydrating.value = false
     } catch (error: any) {
+      hydrating.value = false
       ElMessage.error(error?.message || '页面加载失败')
     }
   },
   { immediate: true },
 )
+
+watch([pageConfig, blockList], () => {
+  if (!hydrating.value) scheduleAutoSave()
+}, { deep: true })
+
+onBeforeUnmount(stopAutoSave)
 
 const bindClassList = computed(() => [
   pageConfig.value.themeName,

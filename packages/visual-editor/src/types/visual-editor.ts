@@ -155,6 +155,21 @@ export interface PageSchema {
   blocks: VisualBlockData[]
 }
 
+export type VisualSaveStatus = 'synced' | 'dirty' | 'locally-saved' | 'syncing' | 'sync-failed' | 'publishing'
+
+export interface LocalDraftRecord {
+  schema: PageSchema
+  savedAt: string
+  fingerprint: string
+}
+
+export interface LocalDraftStorage {
+  load(key: string): LocalDraftRecord | null
+  save(key: string, record: LocalDraftRecord): boolean
+  remove(key: string): void
+  has(key: string): boolean
+}
+
 export interface VisualPublishResult {
   revisionId?: string
   publishedAt?: string
@@ -162,6 +177,8 @@ export interface VisualPublishResult {
 
 export interface VisualSaveResult {
   pageId: string | number
+  title?: string
+  slug?: string
   blocks?: VisualBlockData[]
 }
 

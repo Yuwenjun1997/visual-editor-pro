@@ -116,5 +116,25 @@ export const formatVisualBlockData = (block: Partial<VisualBlockData>): VisualBl
 }
 
 export const isSameBlock = (oldBlock: VisualBlockData, newBlock: VisualBlockData) => {
-  return JSON.stringify(oldBlock) === JSON.stringify(newBlock)
+  // `_vid` is an editor-only identity. Rebuilding a block from the property
+  // panel creates a fresh id, which must not be treated as a content change.
+  const oldContent = { ...oldBlock, _vid: undefined }
+  const newContent = { ...newBlock, _vid: undefined }
+  return JSON.stringify(oldContent) === JSON.stringify(newContent)
 }
+
+const normalizeValue = (value: any): any => {
+  if (Array.isArray(value)) return value.map(normalizeValue)
+  if (!value || typeof value !== 'object') return value
+  return Object.keys(value)
+    .filter((key) => key !== '_vid')
+    .sort()
+    .reduce((result, key) => {
+      result[key] = normalizeValue(value[key])
+      return result
+    }, {} as Record<string, any>)
+}
+
+export const normalizePageSchema = (schema: any) => normalizeValue(schema)
+
+export const getPageSchemaFingerprint = (schema: any) => JSON.stringify(normalizePageSchema(schema))

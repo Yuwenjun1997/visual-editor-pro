@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase'
-import type { ArticleRow } from '../types/api'
+import type { ArticleRow, ContentListOptions, PaginatedResult } from '../types/api'
 
 export type ArticlePayload = Partial<{
   category_id: string | null
@@ -13,10 +13,22 @@ export type ArticlePayload = Partial<{
 }>
 
 export const articleService = {
-  async list(): Promise<ArticleRow[]> {
-    const { data, error } = await supabase.from('articles').select('*').order('publish_time', { ascending: false })
+  async list(opts: ContentListOptions = { page: 1, pageSize: 100 }): Promise<PaginatedResult<ArticleRow>> {
+    const page = Math.max(1, opts.page)
+    const pageSize = Math.min(100, Math.max(1, opts.pageSize))
+    const from = (page - 1) * pageSize
+    const to = from + pageSize - 1
+    let query = supabase
+      .from('articles')
+      .select('*', { count: 'exact' })
+      .order('updated_at', { ascending: false })
+    if (opts.categoryId) query = query.eq('category_id', opts.categoryId)
+    if (opts.status) query = query.eq('status', opts.status)
+    const keyword = opts.keyword?.trim().replace(/\\/g, '\\\\').replace(/%/g, '\\%').replace(/_/g, '\\_')
+    if (keyword) query = query.ilike('title', `%${keyword}%`)
+    const { data, error, count } = await query.range(from, to)
     if (error) throw error
-    return (data || []) as ArticleRow[]
+    return { items: (data || []) as ArticleRow[], total: count || 0 }
   },
 
   async create(payload: ArticlePayload & { user_id: string }) {

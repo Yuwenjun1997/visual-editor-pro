@@ -1,7 +1,7 @@
 <template>
-  <div class="wa-flex wa-items-center wa-gap-2">
+  <div class="wa-flex wa-items-center wa-gap-2 wa-select-none">
     <img src="/vite.svg" class="wa-w-8 wa-h-8" />
-    <span class="wa-text-base wa-font-semibold">可视化设计</span>
+     <img src="/logo-text.png" alt="可视化设计" class="wa-h-8">
   </div>
 </template>
 

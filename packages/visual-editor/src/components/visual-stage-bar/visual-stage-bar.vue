@@ -52,7 +52,7 @@
       </el-tooltip>
     </el-radio-group>
     <div class="ve-flex-1" />
-    <span v-if="statusText" class="publish-status">{{ statusText }}</span>
+    <span v-if="statusLabel" class="publish-status">{{ statusLabel }}</span>
     <el-button-group size="small">
       <el-tooltip content="运行">
         <el-button @click="handleRun">
@@ -60,7 +60,7 @@
         </el-button>
       </el-tooltip>
       <el-tooltip content="保存">
-        <el-button :loading="saving" @click="handleSave">
+        <el-button :loading="saving" @click="() => handleSave()">
           <Icon icon="ion:save-outline" />
         </el-button>
       </el-tooltip>
@@ -88,6 +88,7 @@ import { visualConfig } from '../../utils/visual.registry'
 import { ElMessage } from 'element-plus'
 import { Icon } from '@iconify/vue'
 import VisualRevisionPanel from '../visual-revision-panel/visual-revision-panel.vue'
+import { autoSavePaused, autoSaveStatus, getAutoSaveController } from '../../hooks/useAutoSave'
 
 defineOptions({
   name: 'VisualStageBar',
@@ -102,10 +103,18 @@ const { pageConfig } = usePageConfig()
 const publishing = ref(false)
 const saving = ref(false)
 const showRevisions = ref(false)
-const statusText = ref('')
+const autoSave = getAutoSaveController()
+const statusLabel = computed(() => ({
+  dirty: '有未保存修改',
+  'locally-saved': '已存为草稿',
+  syncing: '同步中',
+  synced: '已同步',
+  'sync-failed': '同步失败，请重试',
+  publishing: '发布中',
+}[autoSaveStatus.value] || ''))
 
 const handleRun = () => {
-  const data = { ...unref(pageConfig), blocks: unref(blockList) }
+  const data = autoSave?.getSchema() || { ...unref(pageConfig), blocks: unref(blockList) }
   sessionStorage.setItem('preview-data', JSON.stringify(data))
   const { href } = router.resolve({
     name: 'preview',
@@ -114,31 +123,54 @@ const handleRun = () => {
   window.open(href, '_blank')
 }
 
-const handleSave = async () => {
+const handleSave = async (options: { keepDraft?: boolean } = {}) => {
   if (!visualConfig.onSave) {
     ElMessage.warning('保存功能未配置')
     return null
   }
+  if (autoSave && !autoSave.needsSync() && pageConfig.value.pageId) {
+    autoSaveStatus.value = 'synced'
+    return { pageId: pageConfig.value.pageId }
+  }
   saving.value = true
-  statusText.value = '保存中'
-  const data = { ...unref(pageConfig), blocks: unref(blockList) }
+  const wasAutoSavePaused = autoSavePaused.value
+  autoSavePaused.value = true
+  autoSaveStatus.value = 'syncing'
+  const data = autoSave?.getSchema() || { ...unref(pageConfig), blocks: unref(blockList) }
   try {
     const result = await visualConfig.onSave(data)
+    if (!result) {
+      autoSaveStatus.value = 'dirty'
+      return null
+    }
     if (result?.pageId) {
-      pageConfig.value = { ...pageConfig.value, pageId: result.pageId }
+      pageConfig.value = {
+        ...pageConfig.value,
+        pageId: result.pageId,
+        title: result.title || pageConfig.value.title,
+        slug: result.slug || pageConfig.value.slug,
+      }
     }
     if (result?.blocks) {
       blockList.value = result.blocks
     }
     visualStore.clearCurrent()
-    statusText.value = '草稿已保存'
+    const syncedSchema = {
+      ...data,
+      pageId: result.pageId || data.pageId,
+      title: result.title || data.title,
+      slug: result.slug || data.slug,
+      blocks: result.blocks || data.blocks,
+    }
+    autoSave?.markSynced(syncedSchema, options)
     return result || null
   } catch (error) {
     ElMessage.error((error as any)?.message || '保存失败')
-    statusText.value = '保存失败'
+    autoSaveStatus.value = 'sync-failed'
     return null
   } finally {
     saving.value = false
+    autoSavePaused.value = wasAutoSavePaused
   }
 }
 
@@ -148,18 +180,22 @@ const handlePublish = async () => {
     return
   }
   publishing.value = true
-  statusText.value = '发布中'
+  autoSave?.saveLocal()
+  autoSavePaused.value = true
+  autoSaveStatus.value = 'publishing'
   try {
-    const saved = await handleSave()
+    const saved = await handleSave({ keepDraft: true })
     if (!saved) return
-    await visualConfig.onPublish({ ...unref(pageConfig), blocks: unref(blockList) })
-    statusText.value = '已发布'
+    await visualConfig.onPublish(autoSave?.getSchema() || { ...unref(pageConfig), blocks: unref(blockList) })
+    autoSave?.clearDraft()
+    autoSaveStatus.value = 'synced'
     ElMessage.success('发布成功')
   } catch (error: any) {
-    statusText.value = '发布失败'
+    autoSaveStatus.value = 'sync-failed'
     ElMessage.error(error?.message || '发布失败')
   } finally {
     publishing.value = false
+    autoSavePaused.value = false
   }
 }
 </script>

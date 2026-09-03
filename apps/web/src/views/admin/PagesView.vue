@@ -2,7 +2,7 @@
   <div class="admin-page">
     <div class="wa-flex wa-items-center wa-justify-between wa-mb-4">
       <div class="wa-text-base wa-font-medium">页面列表</div>
-      <div class="wa-flex wa-gap-2">
+      <div class="wa-flex">
         <el-button v-if="can('editor:access')" @click="router.push({ name: 'data-sources' })">数据源管理</el-button>
         <el-button v-if="can('page:create')" type="primary" @click="createPage">新建页面</el-button>
       </div>

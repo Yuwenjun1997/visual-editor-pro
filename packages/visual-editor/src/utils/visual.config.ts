@@ -26,6 +26,7 @@ export function createVisualBlockConfig() {
     onSave: undefined as VisualSaveHandler | undefined,
     onPublish: undefined as VisualPublishHandler | undefined,
     revisionProvider: undefined as VisualRevisionProvider | undefined,
+    draftNamespace: undefined as string | undefined,
     savedPageLoader: undefined as VisualPageLoader | undefined,
     dataSourceProvider: undefined as DataSourceProvider | undefined,
     clear(): void {

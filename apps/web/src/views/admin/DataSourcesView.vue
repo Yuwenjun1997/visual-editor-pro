@@ -243,8 +243,8 @@ const loadEntities = async () => {
   categories.value = await categoryService.listByType(form.entityType)
   entities.value =
     form.entityType === 'product'
-      ? (await productService.list()).map((item) => ({ id: item.id, title: item.title }))
-      : (await articleService.list()).map((item) => ({ id: item.id, title: item.title }))
+      ? (await productService.list()).items.map((item) => ({ id: item.id, title: item.title }))
+      : (await articleService.list()).items.map((item) => ({ id: item.id, title: item.title }))
 }
 const resetForm = () => {
   Object.assign(form, {
