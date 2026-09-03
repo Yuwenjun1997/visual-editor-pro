@@ -155,13 +155,36 @@ export interface PageSchema {
   blocks: VisualBlockData[]
 }
 
+export interface VisualPublishResult {
+  revisionId?: string
+  publishedAt?: string
+}
+
 export interface VisualSaveResult {
   pageId: string | number
   blocks?: VisualBlockData[]
 }
 
 export type VisualSaveHandler = (data: PageSchema) => Promise<VisualSaveResult | void>
-export type VisualPublishHandler = (data: PageSchema) => Promise<void>
+export type VisualPublishHandler = (data: PageSchema) => Promise<VisualPublishResult | void>
+
+export interface VisualRevision {
+  id: string
+  version: number
+  title: string
+  createdAt: string
+  isCurrent: boolean
+}
+
+export interface VisualRevisionList {
+  revisions: VisualRevision[]
+  currentRevisionId: string | null
+}
+
+export interface VisualRevisionProvider {
+  list(pageId: string | number): Promise<VisualRevisionList>
+  rollback(pageId: string | number, revisionId: string): Promise<void>
+}
 
 export type VisualPageLoader = (pageId: string | number) => Promise<PageSchema | null>
 

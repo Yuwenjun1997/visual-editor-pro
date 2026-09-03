@@ -9,6 +9,7 @@ const srcRoot = path.resolve(__dirname, 'src')
 const repoRoot = path.resolve(__dirname, '../..')
 
 export default defineConfig({
+  appType: 'spa',
   resolve: {
     alias: {
       '@/': `${srcRoot}/`,

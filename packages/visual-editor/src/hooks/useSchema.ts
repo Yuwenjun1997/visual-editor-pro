@@ -26,8 +26,7 @@ export const useSchema = () => {
   const schemaList = computed(() => {
     const component = visualStore.visualEditorComponent
     const componentSchema = component ? getSchema(component.key) : undefined
-    const dataType: VisualDataSourceType =
-      component?.souceDataType === 'VisualObjectArray' ? 'list' : 'object'
+    const dataType: VisualDataSourceType = component?.souceDataType === 'VisualObjectArray' ? 'list' : 'object'
 
     // A component's own schema describes the shape of its custom data. This
     // takes precedence over schemas collected from nested slot components.

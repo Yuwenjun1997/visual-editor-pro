@@ -3,8 +3,8 @@
     <a
       :href="href"
       target="_blank"
-      rel="noopener noreferrer"
       :style="entryStyle"
+      rel="noopener noreferrer"
       class="visual-customer-service__entry"
       @click="handleClick"
     >

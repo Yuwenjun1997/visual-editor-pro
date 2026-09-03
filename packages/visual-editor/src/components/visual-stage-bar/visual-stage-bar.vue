@@ -52,6 +52,7 @@
       </el-tooltip>
     </el-radio-group>
     <div class="ve-flex-1" />
+    <span v-if="statusText" class="publish-status">{{ statusText }}</span>
     <el-button-group size="small">
       <el-tooltip content="运行">
         <el-button @click="handleRun">
@@ -59,17 +60,23 @@
         </el-button>
       </el-tooltip>
       <el-tooltip content="保存">
-        <el-button @click="handleSave">
+        <el-button :loading="saving" @click="handleSave">
           <Icon icon="ion:save-outline" />
         </el-button>
       </el-tooltip>
       <el-tooltip content="发布">
-        <el-button type="primary" :loading="publishing" @click="handlePublish">
-          发布
+        <el-button aria-label="发布" :loading="publishing" @click="handlePublish">
+          <Icon icon="ep:upload" />
+        </el-button>
+      </el-tooltip>
+      <el-tooltip content="版本管理">
+        <el-button :disabled="!pageConfig.pageId || !visualConfig.revisionProvider" @click="showRevisions = true">
+          <Icon icon="ep:clock" />
         </el-button>
       </el-tooltip>
     </el-button-group>
   </div>
+  <visual-revision-panel v-model="showRevisions" :page-id="pageConfig.pageId" />
 </template>
 
 <script setup lang="ts">
@@ -80,6 +87,7 @@ import { useViusalStore } from '../../store/useVisual'
 import { visualConfig } from '../../utils/visual.registry'
 import { ElMessage } from 'element-plus'
 import { Icon } from '@iconify/vue'
+import VisualRevisionPanel from '../visual-revision-panel/visual-revision-panel.vue'
 
 defineOptions({
   name: 'VisualStageBar',
@@ -92,6 +100,9 @@ const { redo, undo, canRedo, canUndo } = useHistory()
 const { blockList } = useBlocks()
 const { pageConfig } = usePageConfig()
 const publishing = ref(false)
+const saving = ref(false)
+const showRevisions = ref(false)
+const statusText = ref('')
 
 const handleRun = () => {
   const data = { ...unref(pageConfig), blocks: unref(blockList) }
@@ -106,17 +117,29 @@ const handleRun = () => {
 const handleSave = async () => {
   if (!visualConfig.onSave) {
     ElMessage.warning('保存功能未配置')
-    return
+    return null
   }
+  saving.value = true
+  statusText.value = '保存中'
   const data = { ...unref(pageConfig), blocks: unref(blockList) }
-  const result = await visualConfig.onSave(data)
-  if (result?.pageId) {
-    pageConfig.value = { ...pageConfig.value, pageId: result.pageId }
+  try {
+    const result = await visualConfig.onSave(data)
+    if (result?.pageId) {
+      pageConfig.value = { ...pageConfig.value, pageId: result.pageId }
+    }
+    if (result?.blocks) {
+      blockList.value = result.blocks
+    }
+    visualStore.clearCurrent()
+    statusText.value = '草稿已保存'
+    return result || null
+  } catch (error) {
+    ElMessage.error((error as any)?.message || '保存失败')
+    statusText.value = '保存失败'
+    return null
+  } finally {
+    saving.value = false
   }
-  if (result?.blocks) {
-    blockList.value = result.blocks
-  }
-  visualStore.clearCurrent()
 }
 
 const handlePublish = async () => {
@@ -124,15 +147,16 @@ const handlePublish = async () => {
     ElMessage.warning('发布功能未配置')
     return
   }
-  if (!pageConfig.value.pageId) {
-    ElMessage.warning('请先保存页面草稿')
-    return
-  }
   publishing.value = true
+  statusText.value = '发布中'
   try {
+    const saved = await handleSave()
+    if (!saved) return
     await visualConfig.onPublish({ ...unref(pageConfig), blocks: unref(blockList) })
+    statusText.value = '已发布'
     ElMessage.success('发布成功')
   } catch (error: any) {
+    statusText.value = '发布失败'
     ElMessage.error(error?.message || '发布失败')
   } finally {
     publishing.value = false
@@ -150,5 +174,11 @@ const handlePublish = async () => {
   padding: 0 8px;
   border-bottom: 1px solid var(--el-border-color);
   background-color: var(--el-bg-color);
+}
+
+.publish-status {
+  color: var(--el-text-color-secondary);
+  font-size: 12px;
+  white-space: nowrap;
 }
 </style>

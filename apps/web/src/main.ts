@@ -5,7 +5,7 @@ import router from './router'
 import './plugins/element-ui/index'
 import { setupIconify } from './plugins/iconify'
 import { setupVisual, registryComponent, visualConfig } from '@visual/editor'
-import type { PageSchema, VisualSaveResult } from '@visual/editor'
+import type { PageSchema, VisualPublishResult, VisualSaveResult } from '@visual/editor'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import '@visual/ui'
 import '@visual/editor'
@@ -96,7 +96,27 @@ visualConfig.onPublish = async (data) => {
     ElMessage.warning('请先保存页面草稿')
     return
   }
-  await pageService.publish(String(data.pageId))
+  const revisionId = await pageService.publish(String(data.pageId))
+  return { revisionId } as VisualPublishResult
+}
+
+visualConfig.revisionProvider = {
+  async list(pageId) {
+    const [page, rows] = await Promise.all([pageService.get(String(pageId)), pageService.listRevisions(String(pageId))])
+    return {
+      currentRevisionId: page?.published_revision_id || null,
+      revisions: rows.map((row) => ({
+        id: row.id,
+        version: row.version,
+        title: row.title,
+        createdAt: row.created_at,
+        isCurrent: row.id === page?.published_revision_id,
+      })),
+    }
+  },
+  async rollback(pageId, revisionId) {
+    await pageService.rollback(String(pageId), revisionId)
+  },
 }
 
 visualConfig.savedPageLoader = async (id) => {

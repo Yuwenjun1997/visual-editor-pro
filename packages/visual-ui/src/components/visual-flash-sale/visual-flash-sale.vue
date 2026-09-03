@@ -31,13 +31,7 @@
             <div :style="{ width: `${soldPercent}%` }" class="visual-flash-sale__progress-bar" />
           </div>
         </div>
-        <a
-          :href="href"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="visual-flash-sale__btn"
-          @click="handleClick"
-        >
+        <a :href="href" target="_blank" rel="noopener noreferrer" class="visual-flash-sale__btn" @click="handleClick">
           {{ buttonText || '立即抢购' }}
         </a>
       </div>

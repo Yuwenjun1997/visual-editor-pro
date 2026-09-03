@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { EditorLayout, EditorStage, PreviewScenario, DevScenario } from '@visual/editor'
 import AdminLayout from '@/layout/AdminLayout.vue'
 import LoginView from '@/views/LoginView.vue'
@@ -19,7 +19,7 @@ import type { PermissionCode } from '@/lib/rbac'
 import { ElMessage } from 'element-plus'
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',

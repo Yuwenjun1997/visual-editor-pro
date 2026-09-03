@@ -46,7 +46,13 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="分类名称">
-          <el-input v-model="newName" placeholder="请输入分类名称" maxlength="40" show-word-limit @keyup.enter="create" />
+          <el-input
+            v-model="newName"
+            maxlength="40"
+            show-word-limit
+            placeholder="请输入分类名称"
+            @keyup.enter="create"
+          />
         </el-form-item>
         <el-form-item label="排序">
           <el-input-number v-model="newSort" :min="0" :controls="false" />

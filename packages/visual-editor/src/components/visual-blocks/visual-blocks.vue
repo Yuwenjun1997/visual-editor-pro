@@ -11,9 +11,9 @@
     :data-disabled="props.disabled"
     :class="{ 'is-empty': isEmpty }"
     :data-slot="isEmpty ? '组件拖拽到这里' : ''"
-    @change="onChange"
     @end="onEnd"
     @start="onStart"
+    @change="onChange"
   >
     <template #item="{ element, index }">
       <div

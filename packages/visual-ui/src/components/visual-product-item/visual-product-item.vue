@@ -4,13 +4,7 @@
     class="visual-product-item"
     :class="{ 'visual-product-item--horizontal': layout === 'horizontal' }"
   >
-    <a
-      :href="href"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="visual-product-item__media"
-      @click="handleClick"
-    >
+    <a :href="href" target="_blank" rel="noopener noreferrer" class="visual-product-item__media" @click="handleClick">
       <img v-if="cover" :alt="title" :src="cover" class="visual-product-item__cover" />
       <span v-else class="visual-product-item__cover visual-product-item__cover--empty">
         <i class="bi bi-image" />
@@ -20,13 +14,7 @@
       </span>
     </a>
     <div class="visual-product-item__info">
-      <a
-        :href="href"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="visual-product-item__title"
-        @click="handleClick"
-      >
+      <a :href="href" target="_blank" rel="noopener noreferrer" class="visual-product-item__title" @click="handleClick">
         {{ title || '商品标题' }}
       </a>
       <div class="visual-product-item__actions">
