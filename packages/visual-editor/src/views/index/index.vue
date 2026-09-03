@@ -34,6 +34,8 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import type { PageSchema } from '../../types/visual-editor'
 import { autoSaveStatus, useAutoSave } from '../../hooks/useAutoSave'
 import { initializeHistory, suspendHistory } from '../../hooks/useHistory'
+import { useTheme } from '@visual/ui/hooks/useTheme'
+import { DEFAULT_VISUAL_THEME, resolveVisualThemeName } from '../../configs/visual-theme'
 
 const { toggleRight } = useLayout()
 
@@ -46,6 +48,7 @@ const activePanel = computed(() => visualStore.activePanel)
 const { viewJson, viewJsonOptions, updateViewJson, restoreViewJson } = useViewJson()
 
 const { pageConfig } = usePageConfig()
+const { themeName } = useTheme()
 
 const { blockList } = useBlocks()
 
@@ -66,14 +69,14 @@ const applyPageSchema = (schema: PageSchema) => {
     pageId: schema.pageId,
     title: schema.title,
     slug: schema.slug || '',
-    themeName: schema.themeName || '',
+    themeName: resolveVisualThemeName(schema.themeName),
     globalStyle: schema.globalStyle || {},
   }
 }
 
 const resetPage = () => {
   blockList.value = []
-  pageConfig.value = { pageId: '', title: '', slug: '', globalStyle: {}, themeName: '' }
+  pageConfig.value = { pageId: '', title: '', slug: '', globalStyle: {}, themeName: DEFAULT_VISUAL_THEME }
 }
 
 const restoreLocalDraftIfNeeded = async (databaseSchema?: PageSchema) => {
@@ -149,11 +152,15 @@ watch([pageConfig, blockList], () => {
 onBeforeUnmount(stopAutoSave)
 
 const bindClassList = computed(() => [
-  pageConfig.value.themeName,
+  resolveVisualThemeName(pageConfig.value.themeName),
   {
     'visual-disabled': disabled.value,
   },
 ])
+
+watchEffect(() => {
+  themeName.value = resolveVisualThemeName(pageConfig.value.themeName)
+})
 
 watchEffect(() => {
   if (activePanel.value === 'viewJson') {

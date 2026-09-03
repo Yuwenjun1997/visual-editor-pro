@@ -7,7 +7,7 @@
 `0005` 用于兼容已经存在旧版 `visual_data_sources` 表的环境；新环境执行时是幂等的。
 `0006` 放宽旧版字段的非空约束，避免新模型插入数据源时被废弃字段阻塞；新环境执行时也是幂等的。
 
-Wave 4 的页面保存必须调用 `save_page_with_data_source_bindings`；该函数在同一事务中更新 `pages` 与 `page_data_source_bindings`。数据源删除使用 `ON DELETE RESTRICT`，应用层应先查询绑定并展示受影响页面。
+页面保存统一调用 `save_draft_page`（由 `0007_page_publishing.sql` 定义）；该函数在同一事务中更新 `pages` 与 `page_data_source_bindings`。早期 `0004_page_data_source_bindings.sql` 中的 `save_page_with_data_source_bindings` 仅作为历史兼容函数，不再作为应用调用入口。数据源删除使用 `ON DELETE RESTRICT`，应用层应先查询绑定并展示受影响页面。
 
 Wave 5 的旧业务引用迁移规则：
 

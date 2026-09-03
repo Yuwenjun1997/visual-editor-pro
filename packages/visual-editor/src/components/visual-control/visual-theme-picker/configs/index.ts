@@ -1,9 +1,5 @@
-export const themeMap = {
-  'theme-red': 'var(--v-color-red-1)',
-  'theme-orange': 'var(--v-color-orange-1)',
-  'theme-yellow': 'var(--v-color-yellow-1)',
-  'theme-green': 'var(--v-color-green-1)',
-  'theme-cyan': 'var(--v-color-cyan-1)',
-  'theme-blue': 'var(--v-color-blue-1)',
-  'theme-purple': 'var(--v-color-purple-1)',
-}
+import { VISUAL_THEME_PRESETS } from '../../../../configs/visual-theme'
+
+export const themeMap = Object.fromEntries(
+  Object.entries(VISUAL_THEME_PRESETS).map(([name, preset]) => [name, preset.color]),
+) as Record<keyof typeof VISUAL_THEME_PRESETS, string>

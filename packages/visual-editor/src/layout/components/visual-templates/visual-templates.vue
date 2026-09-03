@@ -45,6 +45,7 @@ import { useBlocks } from '../../../hooks/useBlocks'
 import { usePageConfig } from '../../../hooks/usePageConfig'
 import { useViusalStore } from '../../../store/useVisual'
 import { formatVisualBlockData } from '../../../utils/visual.utils'
+import { resolveVisualThemeName } from '../../../configs/visual-theme'
 import { visualTemplates, type VisualTemplate } from './templates'
 
 const { blockList, clearCurrentBlockPosition } = useBlocks()
@@ -82,6 +83,7 @@ async function applyTemplate(tpl: VisualTemplate) {
   }
   blockList.value = tpl.blocks.map((block) => formatVisualBlockData(cloneDeep(block)))
   if (tpl.theme?.title) pageConfig.value.title = tpl.theme.title
+  pageConfig.value.themeName = resolveVisualThemeName(tpl.theme?.themeName)
   if (tpl.theme?.globalStyle) {
     pageConfig.value.globalStyle = {
       ...pageConfig.value.globalStyle,

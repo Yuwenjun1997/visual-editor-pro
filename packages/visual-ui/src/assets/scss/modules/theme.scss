@@ -6,17 +6,17 @@
   --v-font-body:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
 
-  --v-gradient-primary: linear-gradient(135deg, #2563eb 0%, #6d28d9 100%);
+  --v-gradient-primary: linear-gradient(135deg, var(--v-primary-1) 0%, var(--v-primary-2) 100%);
 
   --v-radius-moody: 12px;
   --v-radius-moody-sm: 8px;
   --v-radius-moody-lg: 16px;
 
-  --v-shadow-soft: 0 8px 24px -12px rgba(37, 99, 235, 0.15);
-  --v-shadow-soft-lg: 0 16px 40px -16px rgba(37, 99, 235, 0.24);
+  --v-shadow-soft: 0 8px 24px -12px var(--v-primary-opacity-5);
+  --v-shadow-soft-lg: 0 16px 40px -16px var(--v-primary-opacity-4);
 
   --v-surface-1: #ffffff;
-  --v-surface-2: #f4f6fa;
+  --v-surface-2: var(--v-gray-1);
 
   --v-motion-fast: 180ms;
   --v-motion-base: 320ms;

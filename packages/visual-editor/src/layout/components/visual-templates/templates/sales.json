@@ -3,10 +3,11 @@
   "name": "电商营销",
   "description": "公告、秒杀、双券同领、商品瀑布流、分享海报",
   "icon": "bi:tag",
-  "accent": "linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)",
+  "accent": "linear-gradient(135deg, var(--v-primary-1) 0%, #7C3AED 100%)",
   "theme": {
+    "themeName": "theme-orange",
     "title": "电商营销模板",
-    "globalStyle": { "backgroundColor": "#f2f3f5" }
+    "globalStyle": { "backgroundColor": "var(--v-gray-1)" }
   },
   "blocks": [
     {
@@ -14,11 +15,11 @@
       "label": "公告栏",
       "moduleName": "commerceWidgets",
       "componentName": "VisualNoticeBar",
-      "styles": { "opacity": 1, "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "text": "双 11 狂欢盛典 · 跨店满 300 减 60，神券先到先得！",
         "speed": "14",
-        "bgColor": "linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%)",
+        "bgColor": "linear-gradient(90deg, var(--v-primary-1) 0%, #7C3AED 100%)",
         "textColor": "#FFFFFF",
         "radius": "999px"
       }
@@ -28,7 +29,7 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "今日大促",
         "description": "热卖爆款直降",
@@ -43,7 +44,7 @@
       "label": "限时秒杀",
       "moduleName": "commerceWidgets",
       "componentName": "VisualFlashSale",
-      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "限时秒杀",
         "endTime": "2099-12-31 23:59:59",
@@ -54,7 +55,7 @@
         "totalNum": 2000,
         "buttonText": "立即抢购",
         "currency": "¥",
-        "bgColor": "#4F46E5"
+        "bgColor": "var(--v-primary-1)"
       }
     },
     {
@@ -62,12 +63,12 @@
       "label": "倒计时",
       "moduleName": "commerceWidgets",
       "componentName": "VisualCountDown",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "距结束仅剩",
         "endTime": "2099-12-31 23:59:59",
         "showDays": true,
-        "bgColor": "#4F46E5",
+        "bgColor": "var(--v-primary-1)",
         "numColor": "#FFFFFF",
         "colonColor": "#B8C4D9"
       }
@@ -79,7 +80,7 @@
       "componentName": "VisualFlex",
       "styles": {
         "opacity": 1,
-        "marginTop": "8px",
+        "marginTop": "12px",
         "paddingLeft": "12px",
         "paddingRight": "12px"
       },
@@ -142,7 +143,7 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "为你推荐",
         "description": "猜你喜欢",
@@ -163,16 +164,16 @@
         "marginTop": "4px",
         "paddingLeft": "12px",
         "paddingRight": "12px",
-        "paddingBottom": "8px"
+        "paddingBottom": "12px"
       },
       "props": {
         "layout": "col-2",
-        "gutter": "base",
+        "gutter": "md",
         "showTag": true,
         "showBuy": true,
         "buttonText": "立即购买",
         "currency": "¥",
-        "round": "8px"
+        "round": "12px"
       },
       "listData": [
         {
@@ -183,21 +184,21 @@
           "tag": "热卖"
         },
         {
-          "cover": "/image/block.svg",
+          "cover": "/image/preview.svg",
           "title": "浓香芝士蛋白粉 3kg 桶装",
           "price": 129,
           "originPrice": 199,
           "tag": "爆款"
         },
         {
-          "cover": "/image/coding.svg",
+          "cover": "/image/preview.svg",
           "title": "蓝牙机械键盘 三模热插拔",
           "price": 269,
           "originPrice": 369,
           "tag": "满减"
         },
         {
-          "cover": "/image/cover.svg",
+          "cover": "/image/preview.svg",
           "title": "智能恒温杯 55℃ 长效保温",
           "price": 109,
           "originPrice": 159,
@@ -211,7 +212,7 @@
           "tag": "新品"
         },
         {
-          "cover": "/image/block.svg",
+          "cover": "/image/preview.svg",
           "title": "直播补光灯 三色温 可调光",
           "price": 69,
           "originPrice": 99,
@@ -243,9 +244,9 @@
       "styles": {
         "opacity": 1,
         "marginTop": "12px",
-        "paddingLeft": "16px",
-        "paddingRight": "16px",
-        "paddingBottom": "16px"
+        "paddingLeft": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px"
       },
       "props": {
         "title": "邀请好友一起下单",
@@ -265,7 +266,7 @@
       "styles": { "opacity": 1 },
       "props": {
         "mode": "backTop",
-        "bgColor": "#4F46E5",
+        "bgColor": "var(--v-primary-1)",
         "textColor": "#FFFFFF",
         "position": "right",
         "bottom": "120px"

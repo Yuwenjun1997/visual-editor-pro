@@ -1,6 +1,6 @@
 <template>
   <el-config-provider :locale="zhCn">
-    <div v-if="hasData" class="preview-page" :class="data.themeName">
+    <div v-if="hasData" class="preview-page" :class="themeName">
       <el-radio-group v-model="device" size="small" class="preview-toolbar">
         <el-radio-button label="H5" value="h5" />
         <el-radio-button label="Pad" value="pad" />
@@ -24,6 +24,8 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import PreviewBlocks from '../../components/preview-blocks/preview-blocks.vue'
 import type { VisualBlockData } from '../../types/visual-editor'
 import type { CSSProperties } from 'vue'
+import { useTheme } from '@visual/ui/hooks/useTheme'
+import { resolveVisualThemeName } from '../../configs/visual-theme'
 
 interface PreviewData {
   pageId: string | number
@@ -52,6 +54,8 @@ try {
 
 const hasData = !!parsed && (parsed.blocks?.length ?? 0) > 0
 const data = parsed || ({} as PreviewData)
+const { themeName } = useTheme()
+themeName.value = resolveVisualThemeName(data.themeName)
 
 if (data.title) {
   document.title = data.title

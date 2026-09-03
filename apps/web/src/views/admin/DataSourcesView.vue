@@ -364,7 +364,7 @@ const buildPayload = (): any =>
         queryConfig: { categoryId: form.categoryId, entityIds: form.entityIds, sort: form.sort, limit: form.limit },
         dataContract: form.entityType === 'product' ? ('product-list' as const) : ('article-list' as const),
         manualData: null,
-        status: 'active' as const,
+        status: editing.value?.status || ('active' as const),
         schemaVersion: 1,
       }
     : {

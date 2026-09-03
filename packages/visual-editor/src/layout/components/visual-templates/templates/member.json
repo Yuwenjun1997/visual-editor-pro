@@ -3,10 +3,11 @@
   "name": "会员中心",
   "description": "资产统计、订单页签、专属优惠券、会员码、邀请海报",
   "icon": "bi:person-badge",
-  "accent": "linear-gradient(135deg, #6D28D9 0%, #2563EB 100%)",
+  "accent": "linear-gradient(135deg, var(--v-primary-2) 0%, var(--v-primary-1) 100%)",
   "theme": {
+    "themeName": "theme-purple",
     "title": "会员中心模板",
-    "globalStyle": { "backgroundColor": "#f2f3f5" }
+    "globalStyle": { "backgroundColor": "var(--v-gray-1)" }
   },
   "blocks": [
     {
@@ -17,8 +18,8 @@
       "styles": {
         "opacity": 1,
         "paddingTop": "4px",
-        "paddingLeft": "16px",
-        "paddingRight": "16px"
+        "paddingLeft": "12px",
+        "paddingRight": "12px"
       },
       "props": {
         "title": "我的资产",
@@ -26,7 +27,7 @@
         "icon": "bi:vip-fill",
         "bold": true,
         "showLine": true,
-        "lineColor": "#6D28D9",
+        "lineColor": "var(--v-primary-2)",
         "titleSize": "lg"
       }
     },
@@ -35,12 +36,12 @@
       "label": "弹性布局",
       "moduleName": "layoutWidgets",
       "componentName": "VisualFlex",
-      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "flexDirection": "column",
         "justifyContent": "center",
         "alignItems": "stretch",
-        "gap": "8px"
+        "gap": "12px"
       },
       "slots": {
         "default": {
@@ -58,7 +59,7 @@
                 "delta": "8.5",
                 "icon": "bi:lightning-charge-fill",
                 "iconColor": "#FFFFFF",
-                "bgColor": "#2563EB",
+                "bgColor": "var(--v-primary-1)",
                 "textColor": "#FFFFFF",
                 "deltaColor": "#C7D2FE"
               }
@@ -75,7 +76,7 @@
                 "delta": "12.0",
                 "icon": "bi:coin",
                 "iconColor": "#FFFFFF",
-                "bgColor": "#6D28D9",
+                "bgColor": "var(--v-primary-2)",
                 "textColor": "#FFFFFF",
                 "deltaColor": "#DDD6FE"
               }
@@ -106,14 +107,14 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "我的订单",
         "description": "全部订单状态一目了然",
         "icon": "bi:inboxes",
         "bold": true,
         "showLine": true,
-        "lineColor": "#6D28D9",
+        "lineColor": "var(--v-primary-2)",
         "titleSize": "lg"
       }
     },
@@ -128,15 +129,15 @@
         "backgroundColor": "#ffffff",
         "borderRadius": "12px",
         "marginTop": "4px",
-        "paddingTop": "8px",
+        "paddingTop": "12px",
         "paddingRight": "12px",
-        "paddingBottom": "8px",
+        "paddingBottom": "12px",
         "paddingLeft": "12px"
       },
       "props": {
         "variant": "line",
-        "activeColor": "#6D28D9",
-        "textColor": "#64748B"
+        "activeColor": "var(--v-primary-2)",
+        "textColor": "var(--v-text-3)"
       },
       "listData": [{ "label": "全部" }, { "label": "待付款" }, { "label": "待收货" }],
       "slots": {
@@ -152,16 +153,16 @@
               "styles": { "opacity": 1 },
               "props": {
                 "layout": "col-2",
-                "gutter": "base",
+                "gutter": "md",
                 "showTag": true,
                 "showBuy": true,
                 "buttonText": "再次购买",
                 "currency": "¥",
-                "round": "8px"
+                "round": "12px"
               },
               "listData": [
                 {
-                  "cover": "/image/cover.svg",
+                  "cover": "/image/preview.svg",
                   "title": "无线降噪耳机 主动降噪 40dB",
                   "price": 199,
                   "originPrice": 399,
@@ -190,23 +191,23 @@
               "styles": { "opacity": 1 },
               "props": {
                 "layout": "col-2",
-                "gutter": "base",
+                "gutter": "md",
                 "showTag": true,
                 "showBuy": true,
                 "buttonText": "去支付",
                 "currency": "¥",
-                "round": "8px"
+                "round": "12px"
               },
               "listData": [
                 {
-                  "cover": "/image/coding.svg",
+                  "cover": "/image/preview.svg",
                   "title": "蓝牙机械键盘 三模热插拔",
                   "price": 269,
                   "originPrice": 369,
                   "tag": "待付款"
                 },
                 {
-                  "cover": "/image/block.svg",
+                  "cover": "/image/preview.svg",
                   "title": "桌面护眼氛围灯 无极调光",
                   "price": 89,
                   "originPrice": 129,
@@ -228,12 +229,12 @@
               "styles": { "opacity": 1 },
               "props": {
                 "layout": "col-2",
-                "gutter": "base",
+                "gutter": "md",
                 "showTag": true,
                 "showBuy": true,
                 "buttonText": "查看物流",
                 "currency": "¥",
-                "round": "8px"
+                "round": "12px"
               },
               "listData": [
                 {
@@ -244,7 +245,7 @@
                   "tag": "运输中"
                 },
                 {
-                  "cover": "/image/cover.svg",
+                  "cover": "/image/preview.svg",
                   "title": "立式无线充电器 三合一快充",
                   "price": 79,
                   "originPrice": 109,
@@ -261,14 +262,14 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "专属优惠券",
         "description": "会员每月自动到账",
         "icon": "bi:ticket-perforated-fill",
         "bold": true,
         "showLine": true,
-        "lineColor": "#6D28D9",
+        "lineColor": "var(--v-primary-2)",
         "titleSize": "lg"
       }
     },
@@ -277,7 +278,7 @@
       "label": "弹性布局",
       "moduleName": "layoutWidgets",
       "componentName": "VisualFlex",
-      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "4px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "flexDirection": "row",
         "justifyContent": "space-between",
@@ -337,14 +338,14 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "会员码",
         "description": "结账时向店员出示",
         "icon": "bi:qr-code-scan",
         "bold": true,
         "showLine": true,
-        "lineColor": "#6D28D9",
+        "lineColor": "var(--v-primary-2)",
         "titleSize": "lg"
       }
     },
@@ -358,16 +359,16 @@
         "backgroundColor": "#ffffff",
         "borderRadius": "12px",
         "marginTop": "4px",
-        "paddingTop": "16px",
-        "paddingRight": "16px",
-        "paddingBottom": "16px",
-        "paddingLeft": "16px"
+        "paddingTop": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px",
+        "paddingLeft": "12px"
       },
       "props": {
         "flexDirection": "column",
         "justifyContent": "center",
         "alignItems": "center",
-        "gap": "8px"
+        "gap": "12px"
       },
       "slots": {
         "default": {
@@ -384,7 +385,7 @@
                 "size": 140,
                 "margin": 2,
                 "level": "M",
-                "fgColor": "#2563EB",
+                "fgColor": "var(--v-primary-1)",
                 "bgColor": "#FFFFFF"
               }
             },
@@ -396,7 +397,7 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "会员号 8802 · 迎宾礼遇已到账",
-                "color": "#64748B",
+                "color": "var(--v-text-3)",
                 "fontSize": "sm",
                 "textAlign": "center"
               }
@@ -410,14 +411,14 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "邀请有礼",
         "description": "好友开通会员，双方同享",
         "icon": "bi:gift-fill",
         "bold": true,
         "showLine": true,
-        "lineColor": "#6D28D9",
+        "lineColor": "var(--v-primary-2)",
         "titleSize": "lg"
       }
     },
@@ -429,9 +430,9 @@
       "styles": {
         "opacity": 1,
         "marginTop": "4px",
-        "paddingLeft": "16px",
-        "paddingRight": "16px",
-        "paddingBottom": "16px"
+        "paddingLeft": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px"
       },
       "props": {
         "title": "邀请好友开通会员",
@@ -451,7 +452,7 @@
       "styles": { "opacity": 1 },
       "props": {
         "mode": "backTop",
-        "bgColor": "#6D28D9",
+        "bgColor": "var(--v-primary-2)",
         "textColor": "#FFFFFF",
         "position": "right",
         "bottom": "120px"

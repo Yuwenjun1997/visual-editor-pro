@@ -1,5 +1,5 @@
 <template>
-  <teleport :to="to" :disabled="props.disabled">
+  <teleport :to="to" :disabled="props.disabled" v-if="isInited">
     <slot></slot>
   </teleport>
 </template>
@@ -9,6 +9,12 @@ const props = withDefaults(
   defineProps<{ isDesign?: boolean; disabled?: boolean }>(),
   { isDesign: false, disabled: false },
 )
+
+const isInited = ref(false)
+
+nextTick(()=> {
+  isInited.value = true
+})
 
 const to = computed(() => (props.isDesign ? '#visual-stage-inner' : 'body'))
 </script>

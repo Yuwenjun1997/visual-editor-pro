@@ -75,10 +75,10 @@ export const createVisualEditorComponent = (block: VisualBlockData): VisualEdito
  * @param unit
  * @returns
  */
-export function extractValueAndUnit(cssValue: string, unit = 'px') {
+export function extractValueAndUnit(cssValue: string | null | undefined, unit = 'px') {
   // 使用正则表达式匹配数字和单位
   const pattern = /(\d+(?:\.\d+)?)(%|\w+)/
-  const match = cssValue.match(pattern)
+  const match = typeof cssValue === 'string' ? cssValue.match(pattern) : null
 
   // 如果匹配成功，则返回值和单位的数组，否则返回 null
   if (match) {

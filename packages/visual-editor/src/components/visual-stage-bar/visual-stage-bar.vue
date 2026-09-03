@@ -175,6 +175,7 @@ const handleSave = async (options: { keepDraft?: boolean } = {}) => {
 }
 
 const handlePublish = async () => {
+  if (publishing.value || saving.value) return
   if (!visualConfig.onPublish) {
     ElMessage.warning('发布功能未配置')
     return

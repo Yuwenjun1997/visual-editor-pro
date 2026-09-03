@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'vue'
+import { DEFAULT_VISUAL_THEME } from '../configs/visual-theme'
 
 export interface PageConfig {
   pageId: string | number
@@ -13,7 +14,7 @@ const pageConfig = ref<PageConfig>({
   title: '',
   slug: '',
   globalStyle: {},
-  themeName: '',
+  themeName: DEFAULT_VISUAL_THEME,
 })
 
 export const usePageConfig = () => {

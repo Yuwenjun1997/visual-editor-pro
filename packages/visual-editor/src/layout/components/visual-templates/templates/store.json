@@ -3,10 +3,11 @@
   "name": "门店到店",
   "description": "门店展示、位置导航、到店指南、用户评价",
   "icon": "bi:shop",
-  "accent": "linear-gradient(135deg, #06B6D4 0%, #2563EB 100%)",
+  "accent": "linear-gradient(135deg, #06B6D4 0%, var(--v-primary-1) 100%)",
   "theme": {
+    "themeName": "theme-purple",
     "title": "门店到店模板",
-    "globalStyle": { "backgroundColor": "#f2f3f5" }
+    "globalStyle": { "backgroundColor": "var(--v-gray-1)" }
   },
   "blocks": [
     {
@@ -14,11 +15,11 @@
       "label": "公告栏",
       "moduleName": "commerceWidgets",
       "componentName": "VisualNoticeBar",
-      "styles": { "opacity": 1, "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "text": "门店开业钜惠 · 到店送精美周边，会员消费享 88 折！",
         "speed": "14",
-        "bgColor": "linear-gradient(90deg, #06B6D4 0%, #2563EB 100%)",
+        "bgColor": "linear-gradient(90deg, #06B6D4 0%, var(--v-primary-1) 100%)",
         "textColor": "#FFFFFF",
         "radius": "999px"
       }
@@ -28,7 +29,7 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "门店展示",
         "description": "实拍环境，先睹为快",
@@ -59,15 +60,15 @@
         "layout": "layout-card-type-one",
         "showLabel": true,
         "bgColor": "#E0F2FE",
-        "gutter": "base",
+        "gutter": "md",
         "radius": "md",
         "height": "150px"
       },
       "listData": [
         { "label": "门店门头", "url": "/image/preview.svg" },
-        { "label": "店内陈列", "url": "/image/coding.svg" },
-        { "label": "智能体验区", "url": "/image/cover.svg" },
-        { "label": "休闲吧台", "url": "/image/block.svg" },
+        { "label": "店内陈列", "url": "/image/preview.svg" },
+        { "label": "智能体验区", "url": "/image/preview.svg" },
+        { "label": "休闲吧台", "url": "/image/preview.svg" },
         { "label": "会员接待区", "url": "/image/avatar.svg" }
       ]
     },
@@ -76,7 +77,7 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "门店位置",
         "description": "一键导航直达",
@@ -132,7 +133,7 @@
         "opacity": 1,
         "backgroundColor": "#ffffff",
         "borderRadius": "12px",
-        "marginTop": "8px",
+        "marginTop": "12px",
         "paddingTop": "14px",
         "paddingRight": "14px",
         "paddingBottom": "14px",
@@ -156,7 +157,7 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "云栖小镇旗舰店",
-                "color": "#1E293B",
+                "color": "var(--v-text-1)",
                 "isBold": true
               }
             },
@@ -168,7 +169,7 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "地址：杭州市西湖区云栖小镇 2026 号",
-                "color": "#64748B",
+                "color": "var(--v-text-3)",
                 "fontSize": "sm"
               }
             },
@@ -180,7 +181,7 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "营业时间：周一至周日 10:00 - 22:00",
-                "color": "#64748B",
+                "color": "var(--v-text-3)",
                 "fontSize": "sm"
               }
             },
@@ -192,7 +193,7 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "联系电话：0571-8888 2026",
-                "color": "#64748B",
+                "color": "var(--v-text-3)",
                 "fontSize": "sm"
               }
             }
@@ -205,7 +206,7 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "到店指南",
         "description": "三步玩转门店",
@@ -226,10 +227,10 @@
         "backgroundColor": "#ffffff",
         "borderRadius": "12px",
         "marginTop": "4px",
-        "paddingTop": "16px",
-        "paddingRight": "16px",
-        "paddingBottom": "16px",
-        "paddingLeft": "16px"
+        "paddingTop": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px",
+        "paddingLeft": "12px"
       },
       "props": {
         "showTime": true
@@ -263,7 +264,7 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "用户评价",
         "description": "真实到店反馈",
@@ -286,9 +287,9 @@
         "borderRadius": "12px",
         "marginTop": "4px",
         "paddingTop": "12px",
-        "paddingRight": "16px",
+        "paddingRight": "12px",
         "paddingBottom": "12px",
-        "paddingLeft": "16px"
+        "paddingLeft": "12px"
       },
       "props": {
         "showTime": true,

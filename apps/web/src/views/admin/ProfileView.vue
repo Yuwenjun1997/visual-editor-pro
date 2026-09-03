@@ -62,7 +62,7 @@ const roleTagType = computed(
     (auth.role === 'admin' ? 'danger' : auth.role === 'editor' ? 'primary' : 'info') as 'danger' | 'primary' | 'info',
 )
 
-const roleLabel = computed(() => (auth.role ? ROLE_LABELS[auth.role] : '访客'))
+const roleLabel = computed(() => (auth.role ? ROLE_LABELS[auth.role as keyof typeof ROLE_LABELS] : '访客'))
 
 const beforeUpload = (file: File) => {
   if (!file.type.startsWith('image/')) {

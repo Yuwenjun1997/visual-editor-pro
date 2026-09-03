@@ -14,6 +14,7 @@ export interface VisualTemplate {
   /** 模板卡片缩略图用的渐变背景 */
   accent?: string
   theme?: {
+    themeName?: string
     title?: string
     globalStyle?: CSSProperties
   }

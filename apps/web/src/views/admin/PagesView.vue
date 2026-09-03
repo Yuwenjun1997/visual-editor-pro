@@ -34,7 +34,7 @@
                     <Icon icon="ep:view" class="wa-mr-1" />
                     <span>{{ row.status === 'published' ? '打开页面' : '预览草稿' }}</span>
                   </el-dropdown-item>
-                  <el-dropdown-item v-if="can('page:publish')" command="publish">
+                  <el-dropdown-item v-if="can('page:publish')" command="publish" :disabled="publishing === row.id">
                     <Icon class="wa-mr-1" icon="ep:upload" />
                     <span>{{ row.status === 'published' ? '再次发布' : '发布页面' }}</span>
                   </el-dropdown-item>
@@ -94,6 +94,7 @@ const { can } = usePermission()
 
 const pages = ref<PageRow[]>([])
 const loading = ref(false)
+const publishing = ref<string | null>(null)
 const revisionDialogVisible = ref(false)
 const revisionLoading = ref(false)
 const revisions = ref<PageRevision[]>([])
@@ -159,12 +160,16 @@ const previewPage = (row: PageRow) => {
 }
 
 const publishPage = async (row: PageRow) => {
+  if (publishing.value) return
+  publishing.value = row.id
   try {
     await pageService.publish(row.id)
     ElMessage.success('发布成功')
     await load()
   } catch (error: any) {
     ElMessage.error(error?.message || '发布失败')
+  } finally {
+    publishing.value = null
   }
 }
 

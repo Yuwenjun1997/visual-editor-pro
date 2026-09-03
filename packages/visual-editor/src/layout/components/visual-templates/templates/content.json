@@ -3,10 +3,11 @@
   "name": "内容展示",
   "description": "资讯图文、深度专题、富文本正文、时间轴、读者评价",
   "icon": "bi:newspaper",
-  "accent": "linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%)",
+  "accent": "linear-gradient(135deg, #0EA5E9 0%, var(--v-primary-1) 100%)",
   "theme": {
+    "themeName": "theme-blue",
     "title": "内容展示模板",
-    "globalStyle": { "backgroundColor": "#f2f3f5" }
+    "globalStyle": {}
   },
   "blocks": [
     {
@@ -17,8 +18,8 @@
       "styles": {
         "opacity": 1,
         "paddingTop": "4px",
-        "paddingLeft": "16px",
-        "paddingRight": "16px"
+        "paddingLeft": "12px",
+        "paddingRight": "12px"
       },
       "props": {
         "title": "资讯动态",
@@ -26,7 +27,7 @@
         "icon": "bi:newspaper",
         "bold": true,
         "showLine": true,
-        "lineColor": "#2563EB",
+        "lineColor": "",
         "titleSize": "lg"
       }
     },
@@ -49,7 +50,7 @@
       "props": {
         "showAuthor": true,
         "showTime": true,
-        "gutter": "base",
+        "gutter": "md",
         "round": "sm"
       },
       "listData": [
@@ -61,21 +62,21 @@
           "publishTime": "08-26"
         },
         {
-          "cover": "/image/coding.svg",
+          "cover": "/image/preview.svg",
           "title": "可视化搭建的拖拽交互体验优化实践",
           "authorName": "设计周刊",
           "authorAvatar": "/image/avatar.svg",
           "publishTime": "08-18"
         },
         {
-          "cover": "/image/cover.svg",
+          "cover": "/image/preview.svg",
           "title": "AIGC 时代的内容生产工作流拆解",
           "authorName": "运营笔记",
           "authorAvatar": "/image/avatar.svg",
           "publishTime": "08-12"
         },
         {
-          "cover": "/image/block.svg",
+          "cover": "/image/preview.svg",
           "title": "移动端布局适配与降级策略详解",
           "authorName": "架构视野",
           "authorAvatar": "/image/avatar.svg",
@@ -88,14 +89,13 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "深度专题",
         "description": "值得花时间精读",
         "icon": "bi:journal-bookmark",
         "bold": true,
         "showLine": true,
-        "lineColor": "#2563EB",
         "titleSize": "lg"
       }
     },
@@ -119,28 +119,28 @@
         "layout": "col-2",
         "cardStyle": "partysu",
         "coverHeight": "120px",
-        "gutter": "base",
+        "gutter": "md",
         "round": "md",
         "showAuthor": true,
         "showTime": true
       },
       "listData": [
         {
-          "cover": "/image/block.svg",
+          "cover": "/image/preview.svg",
           "title": "AI 时代的产品设计：从辅助到融合",
           "authorName": "行业观察",
           "authorAvatar": "/image/avatar.svg",
           "publishTime": "08-09"
         },
         {
-          "cover": "/image/coding.svg",
+          "cover": "/image/preview.svg",
           "title": "低代码引擎的渲染器是如何工作的",
           "authorName": "研发前线",
           "authorAvatar": "/image/avatar.svg",
           "publishTime": "08-05"
         },
         {
-          "cover": "/image/cover.svg",
+          "cover": "/image/preview.svg",
           "title": "内容运营方法论：持续产出好内容",
           "authorName": "运营笔记",
           "authorAvatar": "/image/avatar.svg",
@@ -160,14 +160,13 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "编辑精选",
         "description": "本期深度长文",
         "icon": "bi:file-earmark-richtext",
         "bold": true,
         "showLine": true,
-        "lineColor": "#2563EB",
         "titleSize": "lg"
       }
     },
@@ -181,13 +180,13 @@
         "backgroundColor": "#ffffff",
         "borderRadius": "12px",
         "marginTop": "4px",
-        "paddingTop": "16px",
-        "paddingRight": "16px",
-        "paddingBottom": "16px",
-        "paddingLeft": "16px"
+        "paddingTop": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px",
+        "paddingLeft": "12px"
       },
       "props": {
-        "html": "<h2>为什么可视化搭建正在成为业务标配</h2><p>过去一年，我们观察到越来越多的业务团队开始拥抱<span style='color:#2563EB'>可视化页面搭建</span>。它把「排期 → 提需求 → 等开发 → 联调上线」的漫长链路，压缩成「<b>拖拽 → 配置 → 预览 → 发布</b>」的分钟级闭环。</p><p>低代码不是要替代工程师，而是把高频、同质化的页面需求自动化，让开发聚焦在真正有挑战的领域上。</p><ul><li>投放与运营团队：秒级产出落地页，AB 测试不再卡排期</li><li>产品与设计：把交互原型直接变成可上线页面</li><li>中后台：表单、列表、详情页按模板批量生成</li></ul><p>我们的目标很简单：<b>让每一次活动落地，都像搭积木一样简单。</b></p>"
+        "html": "<h2>为什么可视化搭建正在成为业务标配</h2><p>过去一年，我们观察到越来越多的业务团队开始拥抱<span style='color:var(--v-primary-1)'>可视化页面搭建</span>。它把「排期 → 提需求 → 等开发 → 联调上线」的漫长链路，压缩成「<b>拖拽 → 配置 → 预览 → 发布</b>」的分钟级闭环。</p><p>低代码不是要替代工程师，而是把高频、同质化的页面需求自动化，让开发聚焦在真正有挑战的领域上。</p><ul><li>投放与运营团队：秒级产出落地页，AB 测试不再卡排期</li><li>产品与设计：把交互原型直接变成可上线页面</li><li>中后台：表单、列表、详情页按模板批量生成</li></ul><p>我们的目标很简单：<b>让每一次活动落地，都像搭积木一样简单。</b></p>"
       }
     },
     {
@@ -195,14 +194,13 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "产品里程碑",
         "description": "一路向前",
         "icon": "bi:signpost-split",
         "bold": true,
         "showLine": true,
-        "lineColor": "#2563EB",
         "titleSize": "lg"
       }
     },
@@ -216,10 +214,10 @@
         "backgroundColor": "#ffffff",
         "borderRadius": "12px",
         "marginTop": "4px",
-        "paddingTop": "16px",
-        "paddingRight": "16px",
-        "paddingBottom": "16px",
-        "paddingLeft": "16px"
+        "paddingTop": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px",
+        "paddingLeft": "12px"
       },
       "props": {
         "showTime": true
@@ -262,14 +260,13 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "读者评价",
         "description": "来自真实读者的声音",
         "icon": "bi:chat-square-quote",
         "bold": true,
         "showLine": true,
-        "lineColor": "#2563EB",
         "titleSize": "lg"
       }
     },
@@ -285,9 +282,9 @@
         "borderRadius": "12px",
         "marginTop": "4px",
         "paddingTop": "12px",
-        "paddingRight": "16px",
+        "paddingRight": "12px",
         "paddingBottom": "12px",
-        "paddingLeft": "16px"
+        "paddingLeft": "12px"
       },
       "props": {
         "showTime": true,
@@ -325,7 +322,7 @@
       "styles": {
         "opacity": 1,
         "backgroundColor": "#ffffff",
-        "backgroundImage": "linear-gradient(135deg, #2563EB 0%, #6D28D9 100%)",
+        "backgroundImage": "linear-gradient(135deg, var(--v-primary-1) 0%, var(--v-primary-2) 100%)",
         "backgroundSize": "cover",
         "backgroundPosition": "center",
         "borderRadius": "14px",
@@ -339,7 +336,7 @@
         "flexDirection": "column",
         "justifyContent": "center",
         "alignItems": "center",
-        "gap": "8px"
+        "gap": "12px"
       },
       "slots": {
         "default": {
@@ -383,7 +380,6 @@
                 "variant": "primary",
                 "size": "default",
                 "bgColor": "#FFFFFF",
-                "textColor": "#2563EB",
                 "radius": "999px"
               }
             }

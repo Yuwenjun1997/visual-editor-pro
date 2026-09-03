@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "test": "pnpm --filter @visual/editor test",
     "preview": "turbo run preview",
     "type-check": "turbo run type-check",
     "lint": "eslint .",

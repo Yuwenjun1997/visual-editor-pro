@@ -3,10 +3,11 @@
   "name": "表单收集",
   "description": "在线留言、到店信息、地图导航、在线客服",
   "icon": "bi:card-checklist",
-  "accent": "linear-gradient(135deg, #6D28D9 0%, #4F46E5 100%)",
+  "accent": "linear-gradient(135deg, var(--v-primary-2) 0%, var(--v-primary-1) 100%)",
   "theme": {
+    "themeName": "theme-green",
     "title": "表单收集模板",
-    "globalStyle": { "backgroundColor": "#f2f3f5" }
+    "globalStyle": {}
   },
   "blocks": [
     {
@@ -17,11 +18,11 @@
       "styles": {
         "opacity": 1,
         "backgroundColor": "#ffffff",
-        "backgroundImage": "linear-gradient(135deg, #2563EB 0%, #6D28D9 100%)",
+        "backgroundImage": "linear-gradient(135deg, var(--v-primary-1) 0%, var(--v-primary-2) 100%)",
         "backgroundSize": "cover",
         "backgroundPosition": "center",
-        "borderRadius": "16px",
-        "marginTop": "8px",
+        "borderRadius": "12px",
+        "marginTop": "12px",
         "paddingTop": "24px",
         "paddingRight": "24px",
         "paddingBottom": "24px",
@@ -73,14 +74,13 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "在线留言",
         "description": "请如实填写，以便我们快速响应",
         "icon": "bi:clipboard-check",
         "bold": true,
         "showLine": true,
-        "lineColor": "#6D28D9",
         "titleSize": "lg"
       }
     },
@@ -92,14 +92,13 @@
       "styles": {
         "opacity": 1,
         "marginTop": "4px",
-        "paddingLeft": "16px",
-        "paddingRight": "16px",
-        "paddingBottom": "8px"
+        "paddingLeft": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px"
       },
       "props": {
         "submitText": "提交留言",
-        "submitButtonColor": "#2563EB",
-        "radius": "16px"
+        "radius": "12px"
       },
       "listData": [
         {
@@ -130,14 +129,13 @@
       "label": "标题栏",
       "moduleName": "basicWidgets",
       "componentName": "VisualSection",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "title": "到店信息",
         "description": "导航直达，欢迎莅临",
         "icon": "bi:geo-alt",
         "bold": true,
         "showLine": true,
-        "lineColor": "#6D28D9",
         "titleSize": "lg"
       }
     },
@@ -186,7 +184,7 @@
         "opacity": 1,
         "backgroundColor": "#ffffff",
         "borderRadius": "12px",
-        "marginTop": "8px",
+        "marginTop": "12px",
         "paddingTop": "14px",
         "paddingRight": "14px",
         "paddingBottom": "14px",
@@ -210,7 +208,6 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "到店信息",
-                "color": "#1E293B",
                 "isBold": true
               }
             },
@@ -222,7 +219,6 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "地址：杭州市西湖区云栖小镇 2026 号",
-                "color": "#64748B",
                 "fontSize": "sm"
               }
             },
@@ -234,7 +230,6 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "营业时间：09:00 - 21:00",
-                "color": "#64748B",
                 "fontSize": "sm"
               }
             },
@@ -246,7 +241,6 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "客服热线：400-888-2026",
-                "color": "#64748B",
                 "fontSize": "sm"
               }
             }
@@ -259,7 +253,7 @@
       "label": "弹性布局",
       "moduleName": "layoutWidgets",
       "componentName": "VisualFlex",
-      "styles": { "opacity": 1, "marginTop": "8px", "paddingLeft": "16px", "paddingRight": "16px" },
+      "styles": { "opacity": 1, "marginTop": "12px", "paddingLeft": "12px", "paddingRight": "12px" },
       "props": {
         "flexDirection": "row",
         "justifyContent": "space-between",
@@ -277,8 +271,7 @@
               "componentName": "VisualText",
               "styles": { "opacity": 1 },
               "props": {
-                "text": "想直接电话沟通？",
-                "color": "#1E293B"
+                "text": "想直接电话沟通？"
               }
             },
             {
@@ -289,7 +282,7 @@
               "styles": { "opacity": 1 },
               "props": {
                 "text": "电话咨询",
-                "variant": "outline",
+                "variant": "warning",
                 "size": "default",
                 "radius": "999px"
               }
@@ -306,15 +299,14 @@
       "styles": {
         "opacity": 1,
         "marginTop": "4px",
-        "paddingLeft": "16px",
-        "paddingRight": "16px",
-        "paddingBottom": "16px"
+        "paddingLeft": "12px",
+        "paddingRight": "12px",
+        "paddingBottom": "12px"
       },
       "props": {
         "type": "wechat",
         "text": "添加微信在线咨询",
         "iconVisible": true,
-        "bgColor": "#2563EB",
         "textColor": "#FFFFFF",
         "radius": "999px"
       }
@@ -328,7 +320,6 @@
       "props": {
         "mode": "customerService",
         "phone": "4008882026",
-        "bgColor": "#2563EB",
         "textColor": "#FFFFFF",
         "position": "right",
         "bottom": "120px"

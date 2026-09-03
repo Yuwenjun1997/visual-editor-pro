@@ -6,6 +6,13 @@ export { default as PreviewScenario } from './views/preview/index.vue'
 export { default as DevScenario } from './views/dev/index.vue'
 
 export { setupVisual } from './plugins/visual-components'
+export {
+  DEFAULT_VISUAL_THEME,
+  VISUAL_THEME_PRESETS,
+  resolveVisualThemeName,
+  visualThemeConfig,
+  type VisualThemeName,
+} from './configs/visual-theme'
 export { registryComponent, visualConfig } from './utils/visual.registry'
 export { default as visualComponents } from './packages'
 
@@ -21,5 +28,6 @@ export { getSchema, getSchemas } from './schemas'
 export { useSourceDataEditor } from './hooks/useSourceDataEditor'
 export { useViewJson } from './hooks/useViewJson'
 export { useVisualRef } from './hooks/useVisualRef'
+export { isValidPageSlug, normalizePageSlug } from './utils/visual.validation'
 
 export * from './types/visual-editor'

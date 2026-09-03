@@ -30,3 +30,5 @@ export interface VisualColumnSourceOptions {
   sourceKind?: 'entity_collection' | 'manual'
   dataContract?: string
 }
+
+export type { CustomThemeConfig, ThemeColors, ThemeConfig } from './theme'

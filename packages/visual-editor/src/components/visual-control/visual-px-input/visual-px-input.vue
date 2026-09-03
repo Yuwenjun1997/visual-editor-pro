@@ -41,7 +41,7 @@ const pxValue = useVModel(props, 'modelValue', emit)
 
 const inputValue = ref<number>()
 const onInputBlur = () => {
-  if (typeof inputValue.value !== 'undefined' && inputValue.value.toString() !== '') {
+  if (inputValue.value != null && inputValue.value.toString() !== '') {
     pxValue.value = `${inputValue.value}${unitValue.value}`
   } else {
     pxValue.value = ''
@@ -59,7 +59,7 @@ const onUnitClick = () => {
   } else {
     unitValue.value = props.unitList[index + 1]
   }
-  if (typeof inputValue.value !== 'undefined' && inputValue.value.toString() !== '') {
+  if (inputValue.value != null && inputValue.value.toString() !== '') {
     pxValue.value = `${inputValue.value}${unitValue.value}`
   } else {
     pxValue.value = ''

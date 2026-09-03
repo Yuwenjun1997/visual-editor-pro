@@ -59,7 +59,6 @@ const _bindInnerStyles = computed(() => ({
   .visual-section__inner {
     display: flex;
     flex-direction: column;
-    padding: var(--v-spacing-md);
     line-height: 1;
 
     .visual-section__title {

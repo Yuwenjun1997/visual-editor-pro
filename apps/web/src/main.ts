@@ -5,6 +5,7 @@ import router from './router'
 import './plugins/element-ui/index'
 import { setupIconify } from './plugins/iconify'
 import { setupVisual, registryComponent, visualConfig } from '@visual/editor'
+import { isValidPageSlug, normalizePageSlug } from '@visual/editor'
 import type { PageSchema, VisualPublishResult, VisualSaveResult } from '@visual/editor'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import '@visual/ui'
@@ -63,7 +64,7 @@ visualConfig.onSave = async (data) => {
   if (!title) return
   title = title.slice(0, 40) || '未命名页面'
 
-  let slug = (data.slug || '').trim().toLowerCase()
+  let slug = normalizePageSlug(data.slug || '')
   if (!slug) {
     const promptResult = await ElMessageBox.prompt('请输入页面地址标识，只能使用小写字母、数字和连字符', '页面地址', {
       inputValue: `page-${crypto.randomUUID().slice(0, 8)}`,
@@ -73,7 +74,7 @@ visualConfig.onSave = async (data) => {
     if (!promptResult) return
     slug = (promptResult.value || '').trim().toLowerCase()
   }
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 80) {
+  if (!isValidPageSlug(slug)) {
     ElMessage.error('页面地址不合法')
     return
   }

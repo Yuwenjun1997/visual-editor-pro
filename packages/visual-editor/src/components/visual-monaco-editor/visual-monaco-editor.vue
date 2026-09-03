@@ -50,7 +50,7 @@ const modelValue = useVModel(props, 'modelValue', emit)
 
 const editorEl = ref<HTMLElement>()
 
-let editor: monaco.editor.IStandaloneCodeEditor
+let editor: monaco.editor.IStandaloneCodeEditor | undefined
 
 const isDark = useDark()
 
@@ -76,15 +76,21 @@ const editorInit = () => {
         theme: isDark.value ? 'vs-dark' : 'vs',
         value: modelValue.value,
       })
-    } else {
-      editor.setValue('')
     }
-    editor.onDidChangeModelContent((_val: any) => {
-      modelValue.value = editor.getValue()
+    if (!editor) return
+    const activeEditor = editor
+    activeEditor.onDidChangeModelContent((_val: any) => {
+      modelValue.value = activeEditor.getValue()
     })
-    editor.trigger('', 'editor.action.formatDocument', null)
+    // Monaco 的命令参数不能传 null；部分版本会在内部读取参数的 toString。
+    activeEditor.trigger('', 'editor.action.formatDocument', {})
   })
 }
 
 editorInit()
+
+onBeforeUnmount(() => {
+  editor?.dispose()
+  editor = undefined
+})
 </script>

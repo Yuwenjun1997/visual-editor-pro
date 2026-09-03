@@ -88,16 +88,16 @@ const isMounted = ref(false)
 const resetHandler = () => {
   bgColor.value = cssValue.value.backgroundColor
   bgRepeat.value = cssValue.value.backgroundRepeat
-  if (cssValue.value.backgroundPosition) {
-    bgPosition.value = cssValue.value.backgroundPosition.toString()
+  if (cssValue.value.backgroundPosition != null) {
+    bgPosition.value = String(cssValue.value.backgroundPosition)
   }
-  if (cssValue.value.backgroundImage) {
+  if (typeof cssValue.value.backgroundImage === 'string') {
     const regex = /url\("([^"]+)"\)/
     const match = cssValue.value.backgroundImage.match(regex)
     if (match) bgImage.value = match[1]
   }
-  if (cssValue.value.backgroundSize) {
-    bgSize.value = cssValue.value.backgroundSize.toString().split(' ')[0]
+  if (cssValue.value.backgroundSize != null) {
+    bgSize.value = String(cssValue.value.backgroundSize).split(' ')[0]
   }
 }
 
