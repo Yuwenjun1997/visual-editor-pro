@@ -153,10 +153,15 @@ const editPage = (row: PageRow) => {
   router.push({ name: 'editor-review', params: { pageId: row.id } })
 }
 
-const previewPage = (row: PageRow) => {
-  const target = router.resolve(row.status === 'published' ? `/p/${row.slug}` : `/page/${row.id}`)
-  const previewWindow = window.open(target.href, '_blank', 'noopener,noreferrer')
-  if (!previewWindow) ElMessage.warning('预览窗口被浏览器拦截，请允许打开新窗口')
+const previewPage = async (row: PageRow) => {
+  try {
+    const token = await pageService.createPreviewToken(row.id)
+    const origin = import.meta.env.VITE_H5_ORIGIN || 'http://127.0.0.1:3000'
+    const previewWindow = window.open(`${origin.replace(/\/$/, '')}/_preview/${token}`, '_blank', 'noopener,noreferrer')
+    if (!previewWindow) ElMessage.warning('预览窗口被浏览器拦截，请允许打开新窗口')
+  } catch (error: any) {
+    ElMessage.error(error?.message || '预览创建失败')
+  }
 }
 
 const publishPage = async (row: PageRow) => {

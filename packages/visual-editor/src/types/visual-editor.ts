@@ -105,7 +105,8 @@ export type VisualDataSourceType = 'object' | 'list'
 /** 可复用数据源的来源类型。request 保留为旧页面兼容值，不属于新建入口。 */
 export type VisualDataSourceKind = 'entity_collection' | 'manual'
 export type VisualEntityType = 'product' | 'article'
-export type VisualDataContract = 'product-list' | 'article-list' | `manual-${string}`
+export type VisualDataContract =
+  'product-list' | 'product-detail' | 'article-list' | 'article-detail' | `manual-${string}`
 export type VisualDataSourceStatus = 'active' | 'disabled'
 export type VisualEntitySort = 'manual' | 'newest' | 'price_asc' | 'price_desc'
 
@@ -153,6 +154,32 @@ export interface PageSchema {
   themeName: string
   globalStyle: CSSProperties
   blocks: VisualBlockData[]
+  appId?: string
+  routeKey?: string
+  pageType?: AppPageType
+  layout?: AppLayoutConfig
+}
+
+export type AppPageType = 'home' | 'profile' | 'product-detail' | 'article-detail' | 'custom'
+
+export interface AppTabbarItem {
+  key: string
+  label: string
+  icon: string
+  routeKey: string
+  visible: boolean
+  sort: number
+}
+
+export interface AppLayoutConfig {
+  showTabbar: boolean
+  tabbarPosition: 'bottom'
+  tabbarHeight: number
+  backgroundColor: string
+  activeColor: string
+  inactiveColor: string
+  safeArea: boolean
+  items: AppTabbarItem[]
 }
 
 export type VisualSaveStatus = 'synced' | 'dirty' | 'locally-saved' | 'syncing' | 'sync-failed' | 'publishing'
@@ -184,6 +211,7 @@ export interface VisualSaveResult {
 
 export type VisualSaveHandler = (data: PageSchema) => Promise<VisualSaveResult | void>
 export type VisualPublishHandler = (data: PageSchema) => Promise<VisualPublishResult | void>
+export type VisualPreviewHandler = (data: PageSchema) => Promise<{ url: string } | void>
 
 export interface VisualRevision {
   id: string

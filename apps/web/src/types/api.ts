@@ -1,4 +1,4 @@
-import type { PageSchema } from '@visual/editor'
+import type { AppLayoutConfig, AppPageType, PageSchema } from '@visual/editor'
 import type { RoleCode } from '../lib/rbac'
 
 export interface ContentListOptions {
@@ -60,15 +60,6 @@ export interface ProductRow {
   updated_at: string
 }
 
-export interface PublishedPage {
-  id: string
-  slug: string
-  title: string
-  description: string | null
-  schema: PageSchema
-  published_at: string
-}
-
 export interface PageRevision {
   id: string
   page_id: string
@@ -105,6 +96,27 @@ export interface PageRow {
   created_at: string
   updated_at: string
   published_revision_id: string | null
+  published_at: string | null
+  app_id?: string | null
+  route_key?: string | null
+  page_type?: AppPageType | null
+  is_home?: boolean
+  show_in_tabbar?: boolean
+  sort?: number
+}
+
+export interface AppRow {
+  id: string
+  user_id: string
+  name: string
+  slug: string
+  logo: string | null
+  status: 'draft' | 'published' | 'offline'
+  home_route_key: string
+  theme_config: Record<string, any>
+  layout_config: AppLayoutConfig
+  created_at: string
+  updated_at: string
   published_at: string | null
 }
 

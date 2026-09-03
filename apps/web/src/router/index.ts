@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { EditorLayout, EditorStage, PreviewScenario, DevScenario } from '@visual/editor'
+import { EditorLayout, EditorStage } from '@visual/editor'
 import AdminLayout from '@/layout/AdminLayout.vue'
 import LoginView from '@/views/LoginView.vue'
 import EditorShell from '@/views/editor/EditorShell.vue'
@@ -11,8 +11,8 @@ import ProfileView from '@/views/admin/ProfileView.vue'
 import UsersView from '@/views/admin/UsersView.vue'
 import DashboardView from '@/views/admin/DashboardView.vue'
 import DataSourcesView from '@/views/admin/DataSourcesView.vue'
-import PreviewBridgePage from '@/views/PreviewBridgePage.vue'
-import PublicPageView from '@/views/PublicPageView.vue'
+import AppsView from '@/views/admin/AppsView.vue'
+import AppDetailView from '@/views/admin/AppDetailView.vue'
 import { useAuthStore } from '@/stores/auth'
 import { hasPermission } from '@/lib/rbac'
 import type { PermissionCode } from '@/lib/rbac'
@@ -24,12 +24,6 @@ const router = createRouter({
     {
       path: '/',
       redirect: '/admin',
-    },
-    {
-      path: '/preview',
-      name: 'preview',
-      component: PreviewScenario,
-      meta: { requiresAuth: true, permission: 'page:view' },
     },
     {
       path: '/login',
@@ -50,11 +44,6 @@ const router = createRouter({
               path: '',
               name: 'editor-create',
               component: EditorStage,
-            },
-            {
-              path: 'dev',
-              name: 'dev',
-              component: DevScenario,
             },
           ],
         },
@@ -93,6 +82,8 @@ const router = createRouter({
           name: 'admin-dashboard',
           component: DashboardView,
         },
+        { path: 'apps', name: 'apps', component: AppsView, meta: { permission: 'app:view' } },
+        { path: 'apps/:appId', name: 'app-detail', component: AppDetailView, meta: { permission: 'app:view' } },
         {
           path: 'pages',
           name: 'pages',
@@ -132,17 +123,6 @@ const router = createRouter({
           meta: { permission: 'user:manage' },
         },
       ],
-    },
-    {
-      path: '/p/:slug',
-      name: 'public-page',
-      component: PublicPageView,
-    },
-    {
-      path: '/page/:pageId',
-      name: 'page-preview',
-      component: PreviewBridgePage,
-      meta: { requiresAuth: true, permission: 'page:view' },
     },
   ],
 })

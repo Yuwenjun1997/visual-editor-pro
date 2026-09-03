@@ -62,13 +62,13 @@ export const processColor = (color: string, opacity: number): string => {
     g = 0,
     b = 0
   if (color.length === 4) {
-    r = parseInt(color[1] + color[1], 16)
-    g = parseInt(color[2] + color[2], 16)
-    b = parseInt(color[3] + color[3], 16)
+    r = parseInt(color[1]! + color[1]!, 16)
+    g = parseInt(color[2]! + color[2]!, 16)
+    b = parseInt(color[3]! + color[3]!, 16)
   } else if (color.length === 7) {
-    r = parseInt(color[1] + color[2], 16)
-    g = parseInt(color[3] + color[4], 16)
-    b = parseInt(color[5] + color[6], 16)
+    r = parseInt(color[1]! + color[2]!, 16)
+    g = parseInt(color[3]! + color[4]!, 16)
+    b = parseInt(color[5]! + color[6]!, 16)
   }
   return `rgba(${r}, ${g}, ${b}, ${opacity})`
 }
@@ -82,7 +82,7 @@ export const processColor = (color: string, opacity: number): string => {
  */
 export const mixColors = (color1: string, color2: string, percentage: number) => {
   // 将十六进制颜色转换为RGB
-  function hexToRgb(hex: string) {
+  function hexToRgb(hex: string): [number, number, number] {
     const bigint = parseInt(hex.slice(1), 16)
     const r = (bigint >> 16) & 255
     const g = (bigint >> 8) & 255

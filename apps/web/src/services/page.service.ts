@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase'
-import type { PageRevision, PageRow, PublishedPage } from '../types/api'
+import type { PageRevision, PageRow } from '../types/api'
 import type { PageSchema } from '@visual/editor'
 
 export interface PageDataSourceBinding {
@@ -64,6 +64,12 @@ export const pageService = {
     return data as string
   },
 
+  async createPreviewToken(id: string, context: Record<string, any> = {}): Promise<string> {
+    const { data, error } = await supabase.rpc('create_page_preview_token', { p_page_id: id, p_context: context })
+    if (error) throw error
+    return data as string
+  },
+
   async listRevisions(id: string): Promise<PageRevision[]> {
     const { data, error } = await supabase
       .from('page_revisions')
@@ -81,13 +87,6 @@ export const pageService = {
     })
     if (error) throw error
     return data as string
-  },
-
-  async getPublishedBySlug(slug: string): Promise<PublishedPage | null> {
-    const { data, error } = await supabase.rpc('get_published_page_by_slug', { p_slug: slug })
-    if (error) throw error
-    const row = Array.isArray(data) ? data[0] : data
-    return (row as PublishedPage) || null
   },
 
   async listBindings(sourceId: string) {

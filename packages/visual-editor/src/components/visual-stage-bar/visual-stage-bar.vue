@@ -54,8 +54,8 @@
     <div class="ve-flex-1" />
     <span v-if="statusLabel" class="publish-status">{{ statusLabel }}</span>
     <el-button-group size="small">
-      <el-tooltip content="运行">
-        <el-button @click="handleRun">
+      <el-tooltip content="运行 H5 预览">
+        <el-button :loading="previewing" @click="handleRun">
           <Icon icon="ion:play-outline" />
         </el-button>
       </el-tooltip>
@@ -95,32 +95,45 @@ defineOptions({
 })
 
 const visualStore = useViusalStore()
-const router = useRouter()
-
 const { redo, undo, canRedo, canUndo } = useHistory()
 const { blockList } = useBlocks()
 const { pageConfig } = usePageConfig()
 const publishing = ref(false)
+const previewing = ref(false)
 const saving = ref(false)
 const showRevisions = ref(false)
 const autoSave = getAutoSaveController()
-const statusLabel = computed(() => ({
-  dirty: '有未保存修改',
-  'locally-saved': '已存为草稿',
-  syncing: '同步中',
-  synced: '已同步',
-  'sync-failed': '同步失败，请重试',
-  publishing: '发布中',
-}[autoSaveStatus.value] || ''))
+const statusLabel = computed(
+  () =>
+    ({
+      dirty: '有未保存修改',
+      'locally-saved': '已存为草稿',
+      syncing: '同步中',
+      synced: '已同步',
+      'sync-failed': '同步失败，请重试',
+      publishing: '发布中',
+    })[autoSaveStatus.value] || '',
+)
 
-const handleRun = () => {
-  const data = autoSave?.getSchema() || { ...unref(pageConfig), blocks: unref(blockList) }
-  sessionStorage.setItem('preview-data', JSON.stringify(data))
-  const { href } = router.resolve({
-    name: 'preview',
-    query: { device: visualStore.device },
-  })
-  window.open(href, '_blank')
+const handleRun = async () => {
+  if (!visualConfig.onPreview || previewing.value) {
+    ElMessage.warning('H5 预览功能未配置')
+    return
+  }
+  previewing.value = true
+  try {
+    const saved = await handleSave({ keepDraft: true })
+    if (!saved) return
+    const result = await visualConfig.onPreview({
+      ...(autoSave?.getSchema() || { ...unref(pageConfig), blocks: unref(blockList) }),
+      pageId: saved.pageId,
+    })
+    if (result?.url) window.open(result.url, '_blank', 'noopener,noreferrer')
+  } catch (error: any) {
+    ElMessage.error(error?.message || 'H5 预览打开失败')
+  } finally {
+    previewing.value = false
+  }
 }
 
 const handleSave = async (options: { keepDraft?: boolean } = {}) => {

@@ -38,10 +38,15 @@ import VisualAudio from './components/visual-audio'
 import VisualPoster from './components/visual-poster'
 import VisualForm from './components/visual-form'
 import VisualPopup from './components/visual-popup'
+import VisualTabbar from './components/visual-tabbar'
+import VisualAppLayout from './components/visual-app-layout'
+import VisualPageRenderer from './components/visual-page-renderer'
 
 import type { App } from 'vue'
 import type { CustomThemeConfig } from './types/theme'
 import { useTheme } from './hooks/useTheme'
+
+export { useTheme } from './hooks/useTheme'
 
 export default {
   install(app: App, options: CustomThemeConfig = {}) {
@@ -83,5 +88,8 @@ export default {
     app.component('VisualPoster', VisualPoster)
     app.component('VisualForm', VisualForm)
     app.component('VisualPopup', VisualPopup)
+    app.component('VisualTabbar', VisualTabbar)
+    app.component('VisualAppLayout', VisualAppLayout)
+    app.component('VisualPageRenderer', VisualPageRenderer)
   },
 }

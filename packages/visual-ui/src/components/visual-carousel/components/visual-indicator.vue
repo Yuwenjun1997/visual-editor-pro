@@ -37,7 +37,7 @@ const current = computed({
   set: (value) => emit('update:current', value),
 })
 
-const showTitle = computed(() => props.list[current.value || 0].title)
+const showTitle = computed(() => props.list[current.value || 0]?.title)
 
 const bindClassList = computed(() => ['visual-indicator__' + props.type])
 </script>

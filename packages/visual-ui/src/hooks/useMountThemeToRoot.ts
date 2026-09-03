@@ -16,6 +16,8 @@ export interface MountThemeToRootOptions {
 export const mountThemeToRoot = (options: MountThemeToRootOptions = {}) => {
   const { currentTheme, colorVar } = useTheme()
   watchEffect(() => {
+    // 公开端会在 Nuxt SSR 中使用 visual-ui；服务端没有 document，主题变量会在 hydration 后挂载。
+    if (typeof document === 'undefined') return
     const theme = currentTheme.value
     if (!theme) return
     const root = document.documentElement

@@ -2,7 +2,6 @@ import './styles/index.scss'
 
 export { default as EditorLayout } from './layout/DefaultLayout.vue'
 export { default as EditorStage } from './views/index/index.vue'
-export { default as PreviewScenario } from './views/preview/index.vue'
 export { default as DevScenario } from './views/dev/index.vue'
 
 export { setupVisual } from './plugins/visual-components'

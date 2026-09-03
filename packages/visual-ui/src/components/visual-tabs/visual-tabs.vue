@@ -54,7 +54,7 @@ watch(
   panes,
   (list) => {
     if (list.length && !list.some((p) => p.key === activeKey.value)) {
-      activeKey.value = list[0].key
+      activeKey.value = list[0]?.key || ''
     }
   },
   { immediate: true },

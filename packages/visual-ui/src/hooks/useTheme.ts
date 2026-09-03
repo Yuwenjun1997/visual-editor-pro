@@ -54,7 +54,7 @@ export const useTheme = () => {
 
   const colorVal = (code: string) => {
     if (isColorCode(code)) return code
-    return themeConfig.value.theme[themeName.value][code]
+    return themeConfig.value.theme[themeName.value]?.[code] || code
   }
 
   const colorVar = (code: string) => {

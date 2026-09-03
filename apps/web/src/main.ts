@@ -101,6 +101,16 @@ visualConfig.onPublish = async (data) => {
   return { revisionId } as VisualPublishResult
 }
 
+visualConfig.onPreview = async (data) => {
+  if (!authStore.user || !isUuid(String(data.pageId))) {
+    ElMessage.warning('请先保存页面草稿')
+    return
+  }
+  const token = await pageService.createPreviewToken(String(data.pageId))
+  const origin = import.meta.env.VITE_H5_ORIGIN || 'http://127.0.0.1:3000'
+  return { url: `${origin.replace(/\/$/, '')}/_preview/${token}` }
+}
+
 visualConfig.revisionProvider = {
   async list(pageId) {
     const [page, rows] = await Promise.all([pageService.get(String(pageId)), pageService.listRevisions(String(pageId))])

@@ -17,6 +17,10 @@
             <el-icon><Icon icon="ep:document" /></el-icon>
             <template #title>页面管理</template>
           </el-menu-item>
+          <el-menu-item index="/admin/apps">
+            <el-icon><Icon icon="ep:monitor" /></el-icon>
+            <template #title>应用管理</template>
+          </el-menu-item>
           <el-menu-item index="/admin/products">
             <el-icon><Icon icon="ep:goods" /></el-icon>
             <template #title>商品管理</template>
