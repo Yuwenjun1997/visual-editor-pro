@@ -13,7 +13,7 @@
               <div>
                 {{ row.full_name || '未设置昵称' }}
               </div>
-              <div class="wa-text-xs user-email">
+              <div class="wa-text-xs wa-text-[var(--el-text-color-secondary)]">
                 {{ row.email }}
               </div>
             </div>
@@ -35,7 +35,7 @@
               <el-option v-for="(label, code) in ROLE_LABELS" :key="code" :value="code" :label="label" />
             </el-select>
             <el-tooltip v-if="row.id === auth.user?.id" placement="top" content="不能修改自己的角色">
-              <Icon icon="ep:warning" class="role-warning" />
+              <Icon icon="ep:warning" class="wa-text-[var(--el-text-color-placeholder)]" />
             </el-tooltip>
           </div>
         </template>
@@ -94,13 +94,3 @@ const changeRole = async (row: UserListItem, role: RoleCode) => {
   }
 }
 </script>
-
-<style scoped>
-.user-email {
-  color: var(--el-text-color-secondary);
-}
-
-.role-warning {
-  color: var(--el-text-color-placeholder);
-}
-</style>

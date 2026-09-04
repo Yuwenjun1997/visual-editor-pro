@@ -6,8 +6,8 @@
     />
     <DetailCard
       v-else-if="detail"
-      :kind="pagePayload.page.pageType === 'product-detail' ? 'product' : 'article'"
       :item="detail.item"
+      :kind="pagePayload.page.pageType === 'product-detail' ? 'product' : 'article'"
     />
     <ProfilePage v-else-if="pagePayload.page.pageType === 'profile'" />
     <main v-else class="vh-p-6">请选择预览数据</main>

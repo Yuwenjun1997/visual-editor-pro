@@ -20,10 +20,7 @@ export const productService = {
     const pageSize = Math.min(100, Math.max(1, opts.pageSize))
     const from = (page - 1) * pageSize
     const to = from + pageSize - 1
-    let query = supabase
-      .from('products')
-      .select('*', { count: 'exact' })
-      .order('updated_at', { ascending: false })
+    let query = supabase.from('products').select('*', { count: 'exact' }).order('updated_at', { ascending: false })
     if (opts?.categoryId) query = query.eq('category_id', opts.categoryId)
     if (opts?.status) query = query.eq('status', opts.status)
     const keyword = opts.keyword?.trim().replace(/\\/g, '\\\\').replace(/%/g, '\\%').replace(/_/g, '\\_')

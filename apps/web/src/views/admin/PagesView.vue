@@ -7,21 +7,29 @@
         <el-button v-if="can('page:create')" type="primary" @click="createPage">新建页面</el-button>
       </div>
     </div>
-
-    <div v-loading="loading" class="page-grid">
-      <el-empty v-if="!loading && !pages.length" description="暂无页面" />
-      <el-card v-for="row in pages" :key="row.id" shadow="hover" class="page-item">
+    <el-empty v-if="!loading && !pages.length" description="暂无页面" />
+    <div
+      v-loading="loading"
+      class="wa-grid wa-grid-cols-1 wa-gap-4 sm:wa-grid-cols-2 lg:wa-grid-cols-3 xl:wa-grid-cols-4"
+    >
+      <el-card v-for="row in pages" :key="row.id" shadow="hover" class="wa-min-w-0 [--el-card-padding:16px]">
         <div class="wa-flex wa-items-start wa-justify-between wa-gap-3">
           <div class="wa-flex wa-min-w-0 wa-items-center wa-gap-2">
-            <Icon class="page-icon" icon="ep:document" />
-            <span class="page-title">{{ row.title || '未命名页面' }}</span>
+            <Icon icon="ep:document" class="wa-shrink-0 wa-text-[var(--el-color-primary)]" />
+            <span class="wa-truncate wa-font-medium wa-text-[var(--el-text-color-primary)]">
+              {{ row.title || '未命名页面' }}
+            </span>
           </div>
-          <div class="page-card-tools">
+          <div class="wa-flex wa-items-center wa-gap-2">
             <el-tag size="small" :type="row.status === 'published' ? 'success' : 'info'">
               {{ row.status === 'published' ? (hasUnpublishedDraft(row) ? '已发布（有草稿）' : '已发布') : '草稿' }}
             </el-tag>
             <el-dropdown trigger="hover" placement="bottom-end" @command="handleAction($event, row)">
-              <el-button link aria-label="更多操作" class="more-button">
+              <el-button
+                link
+                aria-label="更多操作"
+                class="wa-h-7 wa-w-7 wa-rounded-md wa-p-0 wa-text-[var(--el-text-color-secondary)] hover:wa-bg-[var(--el-fill-color-light)] hover:wa-text-[var(--el-color-primary)]"
+              >
                 <Icon icon="ep:more-filled" />
               </el-button>
               <template #dropdown>
@@ -51,8 +59,12 @@
             </el-dropdown>
           </div>
         </div>
-        <div class="page-time">更新时间 {{ formatTime(row.updated_at) }}</div>
-        <div class="page-slug">公开地址：/p/{{ row.slug }}</div>
+        <div class="wa-mt-6 wa-text-[13px] wa-text-[var(--el-text-color-secondary)]">
+          更新时间 {{ formatTime(row.updated_at) }}
+        </div>
+        <div class="wa-mt-1.5 wa-truncate wa-text-xs wa-text-[var(--el-text-color-secondary)]">
+          公开地址：/p/{{ row.slug }}
+        </div>
       </el-card>
     </div>
     <el-dialog v-model="revisionDialogVisible" title="页面版本" width="680px">
@@ -216,93 +228,3 @@ const removePage = async (row: PageRow) => {
     .catch(() => {})
 }
 </script>
-
-<style scoped>
-.page-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.page-item {
-  min-width: 0;
-  --el-card-padding: 16px;
-}
-
-.page-icon {
-  flex-shrink: 0;
-  color: var(--el-color-primary);
-}
-
-.page-card-tools {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.more-button {
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  color: var(--el-text-color-secondary);
-  border-radius: 6px;
-}
-
-.more-button:hover {
-  color: var(--el-color-primary);
-  background: var(--el-fill-color-light);
-}
-
-.page-title {
-  overflow: hidden;
-  color: var(--el-text-color-primary);
-  font-weight: 500;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.page-time {
-  margin-top: 24px;
-  color: var(--el-text-color-secondary);
-  font-size: 13px;
-}
-
-.page-slug {
-  margin-top: 6px;
-  overflow: hidden;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.page-item :deep(.el-dropdown-menu__item) {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-@media (max-width: 1400px) {
-  .page-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 1100px) {
-  .page-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 760px) {
-  .page-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 520px) {
-  .page-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>

@@ -1,6 +1,7 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <main class="vh-mx-auto vh-max-w-2xl vh-p-4">
-    <img v-if="item.cover_url" :src="item.cover_url" :alt="item.title" class="vh-mb-4 vh-w-full vh-rounded-xl" />
+    <img v-if="item.cover_url" :alt="item.title" :src="item.cover_url" class="vh-mb-4 vh-w-full vh-rounded-xl" />
     <h1 class="vh-m-0 vh-text-2xl vh-font-bold">{{ item.title }}</h1>
     <template v-if="kind === 'product'">
       <p class="vh-text-xl vh-font-semibold vh-text-red-600">¥{{ item.price }}</p>

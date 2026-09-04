@@ -4,11 +4,11 @@
     <VisualTabbar
       v-if="layout.showTabbar && layout.items.length"
       :items="layout.items"
+      :safe-area="layout.safeArea"
+      :height="layout.tabbarHeight"
       :active-color="layout.activeColor"
       :inactive-color="layout.inactiveColor"
       :background-color="layout.backgroundColor"
-      :height="layout.tabbarHeight"
-      :safe-area="layout.safeArea"
       @navigate="$emit('navigate', $event)"
     />
   </div>
@@ -33,6 +33,13 @@ defineEmits<{ navigate: [item: LayoutConfig['items'][number]] }>()
 </script>
 
 <style scoped>
-.visual-app-layout { min-height: 100%; display: flex; flex-direction: column; }
-.visual-app-layout__content { flex: 1; min-height: 0; }
+.visual-app-layout {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.visual-app-layout__content {
+  flex: 1;
+  min-height: 0;
+}
 </style>

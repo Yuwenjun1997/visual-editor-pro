@@ -1,22 +1,22 @@
 <template>
   <main class="vh-mx-auto vh-max-w-md vh-p-6">
     <template v-if="profile">
-      <img v-if="profile.avatar_url" :src="profile.avatar_url" alt="头像" class="vh-h-16 vh-w-16 vh-rounded-full" />
+      <img v-if="profile.avatar_url" alt="头像" :src="profile.avatar_url" class="vh-h-16 vh-w-16 vh-rounded-full" />
       <h1 class="vh-text-xl vh-font-semibold">{{ profile.full_name || '我的账户' }}</h1>
       <button class="vh-rounded vh-border vh-px-4 vh-py-2" @click="signOut">退出登录</button>
     </template>
     <form v-else class="vh-space-y-3" @submit.prevent="signIn">
       <h1 class="vh-text-xl vh-font-semibold">登录</h1>
-      <input v-model="email" class="vh-w-full vh-rounded vh-border vh-p-2" type="email" required placeholder="邮箱" />
+      <input v-model="email" required type="email" placeholder="邮箱" class="vh-w-full vh-rounded vh-border vh-p-2" />
       <input
         v-model="password"
-        class="vh-w-full vh-rounded vh-border vh-p-2"
-        type="password"
         required
+        type="password"
         placeholder="密码"
+        class="vh-w-full vh-rounded vh-border vh-p-2"
       />
       <p v-if="error" class="vh-text-sm vh-text-red-600">{{ error }}</p>
-      <button class="vh-rounded vh-bg-blue-600 vh-px-4 vh-py-2 vh-text-white" :disabled="submitting">
+      <button :disabled="submitting" class="vh-rounded vh-bg-blue-600 vh-px-4 vh-py-2 vh-text-white">
         {{ submitting ? '登录中…' : '登录' }}
       </button>
     </form>

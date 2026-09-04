@@ -5,7 +5,23 @@ import tseslint from 'typescript-eslint'
 
 export default defineConfig([
   {
-    ignores: ['**/node_modules/**', '**/dist/**', '**/.turbo/**', '**/*.d.ts'],
+    ignores: [
+      '**/node_modules/**',
+      '.pnpm-store/**',
+      '**/dist/**',
+      '**/.nuxt/**',
+      '**/.output/**',
+      '**/.turbo/**',
+      '**/.vite/**',
+      '**/.cache/**',
+      '**/coverage/**',
+      '**/*.tsbuildinfo',
+      '**/*.d.ts',
+      '**/auto-imports.d.ts',
+      '**/components.d.ts',
+      '**/*.min.js',
+      '**/*.map',
+    ],
   },
   {
     files: ['**/*.{ts,mts,cts,vue}'],

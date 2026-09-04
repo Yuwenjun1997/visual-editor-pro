@@ -1,8 +1,12 @@
 <template>
-  <div class="wa-flex wa-min-h-screen login-view">
+  <div class="wa-flex wa-min-h-screen wa-bg-[var(--el-bg-color)]">
     <!-- 品牌区 -->
-    <div class="brand-panel wa-hidden lg:wa-flex">
-      <div class="brand-inner">
+    <div
+      class="wa-relative wa-hidden wa-w-[46%] wa-overflow-hidden wa-bg-gradient-to-br wa-from-[var(--el-color-primary)] wa-to-[var(--el-color-primary-dark-2)] lg:wa-flex"
+    >
+      <div class="wa-absolute wa--right-20 wa--top-20 wa-h-[340px] wa-w-[340px] wa-rounded-full wa-bg-white/10"></div>
+      <div class="wa-absolute wa--bottom-24 wa--left-24 wa-h-[260px] wa-w-[260px] wa-rounded-full wa-bg-white/10"></div>
+      <div class="wa-relative wa-z-10 wa-flex wa-w-full wa-flex-col wa-justify-center wa-p-12">
         <div class="wa-flex wa-items-center wa-gap-3">
           <img src="/vite.svg" class="wa-w-11 wa-h-11" />
           <span class="wa-text-2xl wa-font-semibold wa-text-white">可视化设计</span>
@@ -17,7 +21,7 @@
         </p>
         <ul class="wa-mt-12 wa-space-y-5 wa-text-white/90">
           <li v-for="item in features" :key="item.text" class="wa-flex wa-items-center wa-gap-3">
-            <span class="feature-dot">
+            <span class="wa-flex wa-h-9 wa-w-9 wa-items-center wa-justify-center wa-rounded-lg wa-bg-white/15">
               <Icon :icon="item.icon" class="wa-text-lg" />
             </span>
             <span>{{ item.text }}</span>
@@ -27,7 +31,7 @@
     </div>
 
     <!-- 表单区 -->
-    <div class="wa-flex-1 wa-flex wa-items-center wa-justify-center wa-p-6">
+    <div class="wa-flex wa-flex-1 wa-items-center wa-justify-center wa-p-6 sm:wa-p-10">
       <div class="wa-w-full wa-max-w-96">
         <div class="wa-text-center">
           <div class="wa-flex wa-items-center wa-justify-center wa-gap-2">
@@ -39,7 +43,7 @@
           </p>
         </div>
 
-        <el-card shadow="never" class="wa-mt-6 login-card">
+        <el-card shadow="never" class="wa-mt-6 wa-rounded-xl">
           <el-form size="large" :model="form" label-position="top" @submit.prevent>
             <el-form-item v-if="isRegister" label="昵称">
               <el-input v-model="form.fullName" maxlength="24" placeholder="你的昵称(可选)" autocomplete="nickname" />
@@ -136,63 +140,3 @@ const submit = async () => {
   }
 }
 </script>
-
-<style scoped>
-.login-view {
-  background: var(--el-bg-color);
-}
-
-.brand-panel {
-  width: 46%;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-dark-2) 100%);
-}
-
-/* 装饰性光斑 */
-.brand-panel::before {
-  content: '';
-  position: absolute;
-  width: 340px;
-  height: 340px;
-  border-radius: 50%;
-  right: -80px;
-  top: -80px;
-  background: color-mix(in srgb, var(--el-color-white) 12%, transparent);
-}
-
-.brand-panel::after {
-  content: '';
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  left: -90px;
-  bottom: -90px;
-  background: color-mix(in srgb, var(--el-color-white) 8%, transparent);
-}
-
-.brand-inner {
-  position: relative;
-  z-index: 1;
-  padding: 48px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.feature-dot {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: color-mix(in srgb, var(--el-color-white) 16%, transparent);
-}
-
-.login-card {
-  border-radius: 12px;
-  border: 1px solid var(--el-border-color);
-}
-</style>

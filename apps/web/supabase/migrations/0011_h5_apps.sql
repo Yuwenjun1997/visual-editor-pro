@@ -11,6 +11,7 @@ create table if not exists public.apps (
 alter table public.apps drop constraint if exists apps_status_check;
 alter table public.apps add constraint apps_status_check check (status in ('draft', 'published', 'offline'));
 alter table public.apps enable row level security;
+drop policy if exists "apps_all_own" on public.apps;
 create policy "apps_all_own" on public.apps for all to authenticated using ((select auth.uid()) = user_id) with check ((select auth.uid()) = user_id);
 grant select, insert, update, delete on public.apps to authenticated;
 
@@ -41,6 +42,7 @@ create table if not exists public.app_revisions (
 );
 create index if not exists idx_app_revisions_app_created on public.app_revisions(app_id, created_at desc);
 alter table public.app_revisions enable row level security;
+drop policy if exists "app_revisions_select_own" on public.app_revisions;
 create policy "app_revisions_select_own" on public.app_revisions for select to authenticated using ((select auth.uid()) = user_id);
 revoke all on public.app_revisions from anon, authenticated;
 grant select on public.app_revisions to authenticated;
@@ -100,14 +102,14 @@ begin
 end; $$;
 
 create or replace function public.create_page_preview_token(p_page_id uuid, p_context jsonb default '{}'::jsonb)
-returns text language plpgsql security invoker set search_path = public as $$
+returns text language plpgsql security definer set search_path = '' as $$
 declare raw_token text;
 begin
   if not exists(select 1 from public.profiles where id=auth.uid() and role in ('admin','editor')) then raise exception 'permission denied'; end if;
   if not exists(select 1 from public.pages where id=p_page_id and user_id=auth.uid()) then raise exception 'page not found or access denied'; end if;
-  raw_token := encode(gen_random_bytes(32), 'hex');
+  raw_token := encode(extensions.gen_random_bytes(32), 'hex');
   insert into public.page_preview_tokens(page_id,user_id,token_hash,context,expires_at)
-    values(p_page_id, auth.uid(), encode(digest(raw_token, 'sha256'), 'hex'), coalesce(p_context, '{}'::jsonb), now() + interval '15 minutes');
+    values(p_page_id, auth.uid(), encode(extensions.digest(raw_token, 'sha256'), 'hex'), coalesce(p_context, '{}'::jsonb), now() + interval '15 minutes');
   return raw_token;
 end; $$;
 
@@ -137,7 +139,7 @@ returns jsonb language sql stable security definer set search_path = public as $
   from public.page_preview_tokens t
   join public.pages p on p.id=t.page_id
   join public.apps a on a.id=p.app_id
-  where t.token_hash=encode(digest(p_token, 'sha256'), 'hex') and t.expires_at > now()
+  where t.token_hash=encode(extensions.digest(p_token, 'sha256'), 'hex') and t.expires_at > now()
   limit 1;
 $$;
 
@@ -168,7 +170,7 @@ returns jsonb language sql stable security definer set search_path = public as $
     'item', jsonb_build_object('id',x.id,'title',x.title,'cover_url',x.cover_url,'price',x.price,'origin_price',x.origin_price,'tag',x.tag,'buy_link',x.buy_link,'description',x.description)
   ) from public.page_preview_tokens t join public.pages p on p.id=t.page_id join public.apps a on a.id=p.app_id
   join public.products x on x.user_id=a.user_id
-  where t.token_hash=encode(digest(p_token,'sha256'),'hex') and t.expires_at>now() and x.id=p_entity_id and x.status='published' limit 1;
+  where t.token_hash=encode(extensions.digest(p_token,'sha256'),'hex') and t.expires_at>now() and x.id=p_entity_id and x.status='published' limit 1;
 $$;
 
 create or replace function public.get_preview_app_article(p_token text, p_entity_id uuid)
@@ -178,7 +180,7 @@ returns jsonb language sql stable security definer set search_path = public as $
     'item', jsonb_build_object('id',x.id,'title',x.title,'cover_url',x.cover_url,'summary',x.summary,'content',x.content,'author_name',x.author_name,'publish_time',x.publish_time)
   ) from public.page_preview_tokens t join public.pages p on p.id=t.page_id join public.apps a on a.id=p.app_id
   join public.articles x on x.user_id=a.user_id
-  where t.token_hash=encode(digest(p_token,'sha256'),'hex') and t.expires_at>now() and x.id=p_entity_id and x.status='published' limit 1;
+  where t.token_hash=encode(extensions.digest(p_token,'sha256'),'hex') and t.expires_at>now() and x.id=p_entity_id and x.status='published' limit 1;
 $$;
 
 create or replace function public.resolve_published_page_data_source(p_page_id uuid, p_source_id uuid)
@@ -196,7 +198,7 @@ returns jsonb language plpgsql stable security definer set search_path = public 
 declare preview_page_id uuid;
 begin
   select page_id into preview_page_id from public.page_preview_tokens
-    where token_hash=encode(digest(p_token, 'sha256'),'hex') and expires_at > now();
+    where token_hash=encode(extensions.digest(p_token, 'sha256'),'hex') and expires_at > now();
   if preview_page_id is null or not exists(select 1 from public.page_data_source_bindings where page_id=preview_page_id and source_id=p_source_id) then
     return null;
   end if;

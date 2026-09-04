@@ -55,7 +55,13 @@ const { blockList } = useBlocks()
 const route = useRoute()
 const hydrating = ref(true)
 
-const { schedule: scheduleAutoSave, stop: stopAutoSave, loadDraft, setHydrated, discardDraft } = useAutoSave({
+const {
+  schedule: scheduleAutoSave,
+  stop: stopAutoSave,
+  loadDraft,
+  setHydrated,
+  discardDraft,
+} = useAutoSave({
   pageConfig,
   blockList,
   namespace: visualConfig.draftNamespace,
@@ -145,9 +151,13 @@ watch(
   { immediate: true },
 )
 
-watch([pageConfig, blockList], () => {
-  if (!hydrating.value) scheduleAutoSave()
-}, { deep: true })
+watch(
+  [pageConfig, blockList],
+  () => {
+    if (!hydrating.value) scheduleAutoSave()
+  },
+  { deep: true },
+)
 
 onBeforeUnmount(stopAutoSave)
 

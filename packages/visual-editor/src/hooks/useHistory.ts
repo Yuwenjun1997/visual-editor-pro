@@ -67,14 +67,8 @@ export const useHistory = () => {
   const visualStore = useViusalStore()
 
   const historyData = computed<HistoryData>(() => ({ ...pageConfig.value, blocks: blockList.value }))
-  const canRedo = computed(() => {
-    historyVersion.value
-    return history.canRedo
-  })
-  const canUndo = computed(() => {
-    historyVersion.value
-    return history.canUndo
-  })
+  const canRedo = computed(() => history.canRedo)
+  const canUndo = computed(() => history.canUndo)
 
   const undo = () => {
     const entry = history.undo()
@@ -96,10 +90,14 @@ export const useHistory = () => {
   const cancelCommit = () => commitLater.cancel()
   cancelPendingCommit = cancelCommit
 
-  const stopWatch = watch(historyData, () => {
-    if (!initialized || suspended || applying) return
-    commitLater()
-  }, { deep: true })
+  const stopWatch = watch(
+    historyData,
+    () => {
+      if (!initialized || suspended || applying) return
+      commitLater()
+    },
+    { deep: true },
+  )
 
   const isEditableTarget = (target: EventTarget | null) => {
     const element = target instanceof HTMLElement ? target : null

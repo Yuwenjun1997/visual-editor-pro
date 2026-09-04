@@ -129,10 +129,13 @@ const normalizeValue = (value: any): any => {
   return Object.keys(value)
     .filter((key) => key !== '_vid')
     .sort()
-    .reduce((result, key) => {
-      result[key] = normalizeValue(value[key])
-      return result
-    }, {} as Record<string, any>)
+    .reduce(
+      (result, key) => {
+        result[key] = normalizeValue(value[key])
+        return result
+      },
+      {} as Record<string, any>,
+    )
 }
 
 export const normalizePageSchema = (schema: any) => normalizeValue(schema)

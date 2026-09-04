@@ -1,5 +1,6 @@
 <template>
   <nav
+    aria-label="应用导航"
     class="visual-tabbar"
     :style="{
       '--visual-tabbar-active': activeColor,
@@ -7,7 +8,6 @@
       '--visual-tabbar-background': backgroundColor,
       '--visual-tabbar-height': `${height}px`,
     }"
-    aria-label="应用导航"
   >
     <button
       v-for="item in visibleItems"
@@ -17,7 +17,7 @@
       :class="{ 'is-active': item.active }"
       @click="$emit('navigate', item)"
     >
-      <i v-if="item.icon" :class="item.icon" aria-hidden="true" />
+      <i v-if="item.icon" aria-hidden="true" :class="item.icon" />
       <span>{{ item.label }}</span>
     </button>
   </nav>
@@ -37,7 +37,11 @@ const props = withDefaults(defineProps<VisualTabbarProps>(), {
   safeArea: true,
 })
 defineEmits<{ navigate: [item: VisualTabbarItem] }>()
-const visibleItems = computed(() => [...props.items].filter((item) => item !== undefined && item.visible !== false).sort((a, b) => (a.sort || 0) - (b.sort || 0)))
+const visibleItems = computed(() =>
+  [...props.items]
+    .filter((item) => item !== undefined && item.visible !== false)
+    .sort((a, b) => (a.sort || 0) - (b.sort || 0)),
+)
 </script>
 
 <style scoped lang="scss">
@@ -59,6 +63,12 @@ const visibleItems = computed(() => [...props.items].filter((item) => item !== u
   font: inherit;
   cursor: pointer;
 }
-.visual-tabbar__item.is-active { color: var(--visual-tabbar-active); }
-.visual-tabbar__item i { display: block; margin-bottom: 2px; font-size: 18px; }
+.visual-tabbar__item.is-active {
+  color: var(--visual-tabbar-active);
+}
+.visual-tabbar__item i {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 18px;
+}
 </style>

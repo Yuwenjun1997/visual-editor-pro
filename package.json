@@ -8,6 +8,8 @@
   },
   "scripts": {
     "dev": "turbo run dev",
+    "dev:web": "turbo run --filter @visual/web dev",
+    "dev:h5": "turbo run --filter @visual/h5 dev",
     "build": "turbo run build",
     "test": "pnpm --filter @visual/editor test",
     "preview": "turbo run preview",

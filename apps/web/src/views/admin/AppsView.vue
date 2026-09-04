@@ -1,37 +1,47 @@
 <template>
   <div class="admin-page">
-    <div class="page-head">
-      <div>
-        <h2>应用管理</h2>
-        <p>创建并管理可发布的 H5 应用</p>
-      </div>
+    <div class="wa-mb-4 wa-flex wa-items-center wa-justify-between">
+      <div class="wa-text-base wa-font-medium">应用管理</div>
       <el-button type="primary" @click="createVisible = true">新建应用</el-button>
     </div>
     <el-empty v-if="!loading && !apps.length" description="还没有应用，先创建一个 H5 应用吧" />
-    <div v-else v-loading="loading" class="app-grid">
-      <el-card v-for="app in apps" :key="app.id" class="app-card" shadow="hover">
-        <div class="app-card__head">
-          <div class="app-logo">{{ app.name.slice(0, 1) }}</div>
-          <div>
-            <h3>{{ app.name }}</h3>
-            <el-tag size="small" :type="app.status === 'published' ? 'success' : app.status === 'offline' ? 'warning' : 'info'">
+    <div
+      v-else
+      v-loading="loading"
+      class="wa-grid wa-grid-cols-1 wa-gap-4 sm:wa-grid-cols-2 lg:wa-grid-cols-3 xl:wa-grid-cols-4"
+    >
+      <el-card v-for="app in apps" :key="app.id" shadow="hover">
+        <div class="wa-flex wa-items-center wa-gap-3">
+          <div
+            class="wa-grid wa-h-12 wa-w-12 wa-place-items-center wa-rounded-xl wa-bg-gradient-to-br wa-from-indigo-600 wa-to-blue-400 wa-text-[22px] wa-font-bold wa-text-white"
+          >
+            {{ app.name.slice(0, 1) }}
+          </div>
+          <div class="wa-min-w-0">
+            <h3 class="wa-mb-2 wa-truncate wa-font-semibold">{{ app.name }}</h3>
+            <el-tag
+              size="small"
+              :type="app.status === 'published' ? 'success' : app.status === 'offline' ? 'warning' : 'info'"
+            >
               {{ app.status === 'published' ? '已发布' : app.status === 'offline' ? '已下线' : '草稿' }}
             </el-tag>
           </div>
         </div>
-        <p class="muted">/{{ app.slug }}</p>
-        <div class="app-card__actions">
-          <el-button text type="primary" @click="openDetail(app)">页面管理</el-button>
+        <p class="wa-my-4 wa-truncate wa-text-[13px] wa-text-[var(--el-text-color-secondary)]">/{{ app.slug }}</p>
+        <div class="wa-flex wa-items-center wa-gap-2 wa-border-t wa-border-[var(--el-border-color-lighter)] wa-pt-2.5">
+          <el-button text type="primary" class="wa-flex-1" @click="openDetail(app)">页面管理</el-button>
           <el-dropdown trigger="hover" placement="bottom-end" @command="handleAction($event, app)">
-            <el-button link aria-label="更多操作" class="more-button"><Icon icon="ep:more-filled" /></el-button>
+            <el-button link aria-label="更多操作" class="wa-h-7 wa-w-7 wa-rounded-md wa-p-0">
+              <Icon icon="ep:more-filled" />
+            </el-button>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item command="settings">
-                  <Icon icon="ep:setting" class="wa-mr-1" />
+                  <Icon class="wa-mr-1" icon="ep:setting" />
                   应用设置
                 </el-dropdown-item>
                 <el-dropdown-item command="pages">
-                  <Icon icon="ep:document" class="wa-mr-1" />
+                  <Icon class="wa-mr-1" icon="ep:document" />
                   页面管理
                 </el-dropdown-item>
                 <el-dropdown-item command="preview">
@@ -39,15 +49,15 @@
                   预览应用
                 </el-dropdown-item>
                 <el-dropdown-item v-if="app.status !== 'published'" command="publish">
-                  <Icon icon="ep:upload" class="wa-mr-1" />
+                  <Icon class="wa-mr-1" icon="ep:upload" />
                   发布应用
                 </el-dropdown-item>
                 <el-dropdown-item v-else command="offline">
-                  <Icon icon="ep:turn-off" class="wa-mr-1" />
+                  <Icon class="wa-mr-1" icon="ep:turn-off" />
                   下线应用
                 </el-dropdown-item>
                 <el-dropdown-item divided command="delete">
-                  <Icon icon="ep:delete" class="wa-mr-1" />
+                  <Icon class="wa-mr-1" icon="ep:delete" />
                   删除应用
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -56,7 +66,7 @@
         </div>
       </el-card>
     </div>
-    <el-dialog v-model="createVisible" title="新建 H5 应用" width="460px">
+    <el-dialog v-model="createVisible" width="460px" title="新建 H5 应用">
       <el-form label-width="90px">
         <el-form-item label="应用名称"><el-input v-model="form.name" placeholder="例如：我的品牌商城" /></el-form-item>
         <el-form-item label="应用标识">
@@ -217,57 +227,3 @@ const removeApp = async (app: AppRow) => {
   }
 }
 </script>
-
-<style scoped>
-.admin-page {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.page-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.page-head h2 {
-  margin: 0 0 6px;
-}
-.page-head p,
-.muted {
-  color: var(--el-text-color-secondary);
-  margin: 0;
-}
-.app-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-.app-card__head,
-.app-card__actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.app-card__head h3 {
-  margin: 0 0 8px;
-}
-.app-logo {
-  width: 48px;
-  height: 48px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #4f46e5, #60a5fa);
-  color: #fff;
-  font-size: 22px;
-  font-weight: 700;
-}
-.app-card .muted {
-  margin: 16px 0;
-  font-size: 13px;
-}
-.app-card__actions {
-  border-top: 1px solid var(--el-border-color-lighter);
-  padding-top: 10px;
-}
-</style>

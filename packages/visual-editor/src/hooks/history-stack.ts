@@ -10,9 +10,15 @@ export class HistoryStack<T> {
 
   constructor(private readonly maxSize = 100) {}
 
-  get canUndo() { return this.pointer > 0 }
-  get canRedo() { return this.pointer >= 0 && this.pointer < this.entries.length - 1 }
-  get current() { return this.pointer >= 0 ? this.entries[this.pointer] : undefined }
+  get canUndo() {
+    return this.pointer > 0
+  }
+  get canRedo() {
+    return this.pointer >= 0 && this.pointer < this.entries.length - 1
+  }
+  get current() {
+    return this.pointer >= 0 ? this.entries[this.pointer] : undefined
+  }
 
   initialize(entry: HistoryEntry<T>) {
     this.entries = [entry]

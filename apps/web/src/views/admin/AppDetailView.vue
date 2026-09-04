@@ -1,16 +1,16 @@
 <template>
   <div class="admin-page">
-    <div class="page-head">
-      <div>
-        <el-button link @click="router.push({ name: 'apps' })">← 应用列表</el-button>
-        <h2>{{ app?.name || '应用详情' }}</h2>
-        <p>在这里管理应用内页面、页面地址和底部导航</p>
-      </div>
-      <el-button type="primary" @click="settingsVisible = true">配置底部导航</el-button>
-    </div>
+    <el-page-header title="应用管理" class="wa-mb-5" @back="router.push({ name: 'apps' })">
+      <template #content>
+        <span class="wa-text-base wa-font-medium">{{ app?.name || '应用详情' }}</span>
+      </template>
+      <template #extra>
+        <el-button type="primary" @click="settingsVisible = true">配置底部导航</el-button>
+      </template>
+    </el-page-header>
     <el-card>
       <template #header>
-        <div class="card-title">
+        <div class="wa-flex wa-items-center wa-justify-between wa-gap-3">
           <span>页面管理</span>
           <div>
             <el-button size="small" type="primary" @click="createCustomPage">新建自定义页</el-button>
@@ -18,38 +18,39 @@
           </div>
         </div>
       </template>
-      <el-table :data="pages" v-loading="loading">
-        <el-table-column prop="title" label="页面名称" />
-        <el-table-column prop="route_key" label="页面地址" />
+      <el-table v-loading="loading" :data="pages">
+        <el-table-column label="页面名称" prop="title" />
+        <el-table-column label="页面地址" prop="route_key" />
         <el-table-column label="页面类型">
           <template #default="{ row }">{{ pageTypeLabels[row.page_type || 'custom'] }}</template>
         </el-table-column>
         <el-table-column label="导航">
           <template #default="{ row }">
             <el-tag v-if="row.show_in_tabbar" size="small">TabBar</el-tag>
-            <span v-else class="muted">不显示</span>
+            <span v-else class="wa-text-[var(--el-text-color-secondary)]">不显示</span>
           </template>
         </el-table-column>
         <el-table-column label="首页">
-          <template #default="{ row }"><el-tag v-if="row.is_home" type="success" size="small">首页</el-tag></template>
+          <template #default="{ row }"><el-tag v-if="row.is_home" size="small" type="success">首页</el-tag></template>
         </el-table-column>
-        <el-table-column label="操作" width="150">
+        <el-table-column label="操作" width="180">
           <template #default="{ row }">
             <el-button
               v-if="!['profile', 'product-detail', 'article-detail'].includes(row.page_type || '')"
-              link
-              type="primary"
+              size="small"
               @click="router.push({ name: 'editor-review', params: { pageId: row.id } })"
             >
               编辑页面
             </el-button>
-            <el-button link @click="preview(row as PageRow)">预览</el-button>
+            <el-button size="small" @click="preview(row as PageRow)">预览</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
-    <el-dialog v-model="settingsVisible" title="底部导航配置" width="620px">
-      <p class="dialog-tip">选择要显示的页面，并可修改导航名称和图标。导航最多显示 5 项。</p>
+    <el-dialog v-model="settingsVisible" width="620px" title="底部导航配置">
+      <p class="wa-mb-[18px] wa-text-[13px] wa-text-[var(--el-text-color-secondary)]">
+        选择要显示的页面，并可修改导航名称和图标。导航最多显示 5 项。
+      </p>
       <el-form v-if="editing" label-width="90px">
         <el-form-item label="显示导航"><el-switch v-model="editing.layout_config.showTabbar" /></el-form-item>
         <el-form-item label="背景颜色">
@@ -60,8 +61,12 @@
           <el-color-picker v-model="editing.layout_config.inactiveColor" />
         </el-form-item>
         <el-form-item label="导航项目">
-          <div class="nav-list">
-            <div v-for="item in editing.layout_config.items" :key="item.key" class="nav-item">
+          <div class="wa-w-full">
+            <div
+              v-for="item in editing.layout_config.items"
+              :key="item.key"
+              class="wa-mb-2.5 wa-grid wa-grid-cols-[42px_120px_minmax(0,1fr)] wa-items-center wa-gap-2 last:wa-mb-0 lg:wa-grid-cols-[42px_120px_180px_minmax(0,1fr)_auto]"
+            >
               <el-switch v-model="item.visible" />
               <el-input v-model="item.label" placeholder="名称" />
               <el-input v-model="item.icon" placeholder="图标类名，如 bi bi-house" />
@@ -217,46 +222,3 @@ const createCustomPage = async () => {
   }
 }
 </script>
-<style scoped>
-.admin-page {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.page-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.page-head h2 {
-  margin: 8px 0 6px;
-}
-.page-head p,
-.muted,
-.dialog-tip {
-  margin: 0;
-  color: var(--el-text-color-secondary);
-}
-.card-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.dialog-tip {
-  margin-bottom: 18px;
-  font-size: 13px;
-}
-.nav-list {
-  width: 100%;
-}
-.nav-item {
-  display: grid;
-  grid-template-columns: 42px 120px 180px 1fr;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.nav-item:last-child {
-  margin-bottom: 0;
-}
-</style>

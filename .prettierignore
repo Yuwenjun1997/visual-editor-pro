@@ -1,10 +1,28 @@
-node_modules
-dist
-.turbo
-coverage
-*.min.js
-*.map
+# Dependencies and package-manager caches
+**/node_modules/**
+.pnpm-store/**
+
+# Build output and tool caches
+**/dist/**
+**/.nuxt/**
+**/.output/**
+**/.turbo/**
+**/.vite/**
+**/.cache/**
+**/coverage/**
+**/*.tsbuildinfo
+
+# Generated files
+**/auto-imports.d.ts
+**/components.d.ts
+**/*.min.js
+**/*.map
 pnpm-lock.yaml
+
+# Local environment files
+**/.env
+**/.env.*
+!**/.env.example
 
 # Third-party and host/editor files
 apps/web/src/assets/fonts/**
@@ -14,11 +32,7 @@ packages/visual-ui/src/assets/fonts/**
 # Files currently mounted read-only by the workspace host
 apps/web/src/components/layout/components/HeaderTools.vue
 apps/web/src/components/layout/components/UserProfile.vue
-packages/visual-editor/src/styles/index.scss
-packages/visual-ui/src/deps/teleport-box/index.vue
 apps/web/src/components/layout/components/LogoView.vue
 apps/web/src/layout/AdminLayout.vue
-
-# Generated declaration files
-**/auto-imports.d.ts
-**/components.d.ts
+packages/visual-editor/src/styles/index.scss
+packages/visual-ui/src/deps/teleport-box/index.vue

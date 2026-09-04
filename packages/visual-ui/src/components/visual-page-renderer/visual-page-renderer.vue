@@ -1,12 +1,12 @@
 <template>
   <div
-    class="visual-page-renderer"
-    :class="{ 'visual-page-renderer--root': !parentKey }"
     :style="groupStyle"
+    class="visual-page-renderer"
     :data-component-key="parentKey"
+    :class="{ 'visual-page-renderer--root': !parentKey }"
   >
-    <component v-for="block in blocks" :key="block._vid" :is="block.componentName" v-bind="blockAttrs(block)">
-      <template v-for="(slot, name) in block.slots" :key="name" #[name]>
+    <component :is="block.componentName" v-for="block in blocks" :key="block._vid" v-bind="blockAttrs(block)">
+      <template v-for="(slot, name) in block.slots" #[name] :key="name">
         <VisualPageRenderer
           :blocks="slot.blocks"
           :parent-key="block.key"
@@ -26,7 +26,7 @@ defineOptions({ name: 'VisualPageRenderer' })
 
 const props = withDefaults(
   defineProps<{
-    blocks: VisualRuntimeBlock[]
+    blocks?: VisualRuntimeBlock[]
     parentKey?: string
     parentProps?: Record<string, any>
     parentStyles?: CSSProperties

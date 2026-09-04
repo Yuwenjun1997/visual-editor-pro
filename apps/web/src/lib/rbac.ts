@@ -15,7 +15,11 @@ export type PermissionCode =
   | 'category:manage'
   | 'profile:manage'
   | 'page:view'
-  | 'app:view' | 'app:create' | 'app:edit' | 'app:publish' | 'app:delete'
+  | 'app:view'
+  | 'app:create'
+  | 'app:edit'
+  | 'app:publish'
+  | 'app:delete'
 
 const ALL_PERMISSIONS: readonly PermissionCode[] = [
   'admin:access',
@@ -30,12 +34,29 @@ const ALL_PERMISSIONS: readonly PermissionCode[] = [
   'category:manage',
   'profile:manage',
   'page:view',
-  'app:view', 'app:create', 'app:edit', 'app:publish', 'app:delete',
+  'app:view',
+  'app:create',
+  'app:edit',
+  'app:publish',
+  'app:delete',
 ]
 
 export const ROLE_PERMISSIONS: Record<RoleCode, readonly PermissionCode[]> = {
   admin: ALL_PERMISSIONS,
-  editor: ['editor:access', 'page:create', 'page:edit', 'page:delete', 'page:publish', 'profile:manage', 'page:view', 'app:view', 'app:create', 'app:edit', 'app:publish', 'app:delete'],
+  editor: [
+    'editor:access',
+    'page:create',
+    'page:edit',
+    'page:delete',
+    'page:publish',
+    'profile:manage',
+    'page:view',
+    'app:view',
+    'app:create',
+    'app:edit',
+    'app:publish',
+    'app:delete',
+  ],
   viewer: ['profile:manage', 'page:view'],
 }
 

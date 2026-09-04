@@ -1,5 +1,5 @@
 <template>
-  <teleport :to="to" :disabled="props.disabled" v-if="isInited">
+  <teleport v-if="isInited" :to="to" :disabled="props.disabled">
     <slot></slot>
   </teleport>
 </template>

@@ -1,11 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { visualTemplates } from '../layout/components/visual-templates/templates'
 import visualComponents from '../packages'
-import {
-  DEFAULT_VISUAL_THEME,
-  VISUAL_THEME_PRESETS,
-  resolveVisualThemeName,
-} from './visual-theme'
+import { DEFAULT_VISUAL_THEME, VISUAL_THEME_PRESETS, resolveVisualThemeName } from './visual-theme'
 
 const collectBlocks = (blocks: Array<Record<string, any>>): Array<Record<string, any>> =>
   blocks.flatMap((block) => [

@@ -82,6 +82,10 @@ pnpm clean          # 清空各包 dist 与根 node_modules/lockfile
 - 包内导入用相对路径；跨包用 `@visual/ui` / `@visual/editor` workspace 名。
 - 生成的 `auto-imports.d.ts` / `components.d.ts`（各包）为提交文件，勿手改。
 
+### Web 样式优先级
+
+`apps/web` 的页面实现优先使用 Element Plus 组件提供布局与交互；仅在其无法覆盖的间距、响应式和细节视觉需求中使用带 `wa-` 前缀的 Tailwind 工具类。除 Element Plus 无公开配置入口的必要覆盖外，不新增自定义 CSS。
+
 ### visual 组件库规范
 
 > **重要**：`@visual/ui` 是可独立发布/被宿重复用的组件包，必须解耦。

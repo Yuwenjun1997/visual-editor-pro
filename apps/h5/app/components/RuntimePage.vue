@@ -1,5 +1,5 @@
 <template>
-  <main class="runtime-page" :style="pageStyle">
+  <main :style="pageStyle" class="runtime-page">
     <VisualPageRenderer :blocks="page.schema.blocks" />
   </main>
 </template>
