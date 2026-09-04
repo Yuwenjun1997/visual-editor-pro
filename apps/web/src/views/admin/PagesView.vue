@@ -166,12 +166,15 @@ const editPage = (row: PageRow) => {
 }
 
 const previewPage = async (row: PageRow) => {
+  const previewWindow = window.open('about:blank', '_blank')
+  if (!previewWindow) return ElMessage.warning('预览窗口被浏览器拦截，请允许打开新窗口')
+  previewWindow.opener = null
   try {
     const token = await pageService.createPreviewToken(row.id)
     const origin = import.meta.env.VITE_H5_ORIGIN || 'http://127.0.0.1:3000'
-    const previewWindow = window.open(`${origin.replace(/\/$/, '')}/_preview/${token}`, '_blank', 'noopener,noreferrer')
-    if (!previewWindow) ElMessage.warning('预览窗口被浏览器拦截，请允许打开新窗口')
+    previewWindow.location.href = `${origin.replace(/\/$/, '')}/_preview/${token}`
   } catch (error: any) {
+    previewWindow.close()
     ElMessage.error(error?.message || '预览创建失败')
   }
 }

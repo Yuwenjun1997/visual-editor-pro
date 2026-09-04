@@ -13,6 +13,7 @@ import DashboardView from '@/views/admin/DashboardView.vue'
 import DataSourcesView from '@/views/admin/DataSourcesView.vue'
 import AppsView from '@/views/admin/AppsView.vue'
 import AppDetailView from '@/views/admin/AppDetailView.vue'
+import AppSettingsView from '@/views/admin/AppSettingsView.vue'
 import { useAuthStore } from '@/stores/auth'
 import { hasPermission } from '@/lib/rbac'
 import type { PermissionCode } from '@/lib/rbac'
@@ -83,6 +84,12 @@ const router = createRouter({
           component: DashboardView,
         },
         { path: 'apps', name: 'apps', component: AppsView, meta: { permission: 'app:view' } },
+        {
+          path: 'apps/:appId/settings',
+          name: 'app-settings',
+          component: AppSettingsView,
+          meta: { permission: 'app:view' },
+        },
         { path: 'apps/:appId', name: 'app-detail', component: AppDetailView, meta: { permission: 'app:view' } },
         {
           path: 'pages',

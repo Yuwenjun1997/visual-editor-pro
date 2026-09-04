@@ -120,6 +120,16 @@ export interface AppRow {
   published_at: string | null
 }
 
+export interface AppSnapshotRow {
+  id: string
+  app_id: string
+  user_id: string
+  name: string
+  app_config: Pick<AppRow, 'name' | 'slug' | 'logo' | 'home_route_key' | 'theme_config' | 'layout_config' | 'status'>
+  pages: PageRow[]
+  created_at: string
+}
+
 export interface DashboardStats {
   pages: number
   products: number

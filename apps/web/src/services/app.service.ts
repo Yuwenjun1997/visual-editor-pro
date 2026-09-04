@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase'
-import type { AppRow, PageRow } from '../types/api'
+import type { AppRow, AppSnapshotRow, PageRow } from '../types/api'
 import type { AppLayoutConfig, AppPageType, PageSchema } from '@visual/editor'
 import { isValidPageSlug, normalizePageSlug } from '@visual/editor'
 
@@ -132,11 +132,97 @@ export const appService = {
     if (error) throw error
     return data as string
   },
+  async snapshots(id: string): Promise<AppSnapshotRow[]> {
+    const { data, error } = await supabase
+      .from('app_snapshots')
+      .select('*')
+      .eq('app_id', id)
+      .order('created_at', { ascending: false })
+    if (error) throw error
+    return (data || []) as AppSnapshotRow[]
+  },
+  async createSnapshot(payload: { app: AppRow; pages: PageRow[]; name: string }) {
+    const { data, error } = await supabase
+      .from('app_snapshots')
+      .insert({
+        app_id: payload.app.id,
+        user_id: payload.app.user_id,
+        name: payload.name.trim().slice(0, 80) || '应用快照',
+        app_config: {
+          name: payload.app.name,
+          slug: payload.app.slug,
+          logo: payload.app.logo,
+          home_route_key: payload.app.home_route_key,
+          theme_config: payload.app.theme_config,
+          layout_config: payload.app.layout_config,
+          status: payload.app.status,
+        },
+        pages: payload.pages,
+      })
+      .select()
+      .single()
+    if (error) throw error
+    return data as AppSnapshotRow
+  },
+  async restoreSnapshot(snapshot: AppSnapshotRow) {
+    const { error: appError } = await supabase.from('apps').update(snapshot.app_config).eq('id', snapshot.app_id)
+    if (appError) throw appError
+    const currentPages = await this.pages(snapshot.app_id)
+    const snapshotPageIds = new Set(snapshot.pages.map((page) => page.id))
+    for (const page of currentPages.filter((page) => !snapshotPageIds.has(page.id))) {
+      const { error } = await supabase.from('pages').delete().eq('id', page.id).eq('app_id', snapshot.app_id)
+      if (error) throw error
+    }
+    for (const page of snapshot.pages) {
+      if (!currentPages.some((current) => current.id === page.id)) {
+        const { error } = await supabase.from('pages').insert({
+          user_id: snapshot.user_id,
+          app_id: snapshot.app_id,
+          title: page.title,
+          slug: page.slug,
+          description: page.description,
+          status: page.status,
+          schema: page.schema,
+          route_key: page.route_key,
+          page_type: page.page_type,
+          is_home: page.is_home,
+          show_in_tabbar: page.show_in_tabbar,
+          sort: page.sort,
+        })
+        if (error) throw error
+        continue
+      }
+      const { error } = await supabase
+        .from('pages')
+        .update({
+          title: page.title,
+          slug: page.slug,
+          description: page.description,
+          schema: page.schema,
+          route_key: page.route_key,
+          page_type: page.page_type,
+          is_home: page.is_home,
+          show_in_tabbar: page.show_in_tabbar,
+          sort: page.sort,
+        })
+        .eq('id', page.id)
+        .eq('app_id', snapshot.app_id)
+      if (error) throw error
+    }
+  },
   async createCustomPage(app: AppRow, payload: { title: string; routeKey: string }) {
     const routeKey = normalizeAppSlug(payload.routeKey)
     if (!isValidPageSlug(routeKey) || ['profile', 'product-detail', 'article-detail'].includes(routeKey)) {
       throw new Error('页面地址不合法或与系统页面冲突')
     }
+    const { data: lastPage, error: sortError } = await supabase
+      .from('pages')
+      .select('sort')
+      .eq('app_id', app.id)
+      .order('sort', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    if (sortError) throw sortError
     const { data, error } = await supabase
       .from('pages')
       .insert({
@@ -146,7 +232,8 @@ export const appService = {
         slug: `${app.slug}-${routeKey}`,
         route_key: routeKey,
         page_type: 'custom',
-        sort: Date.now(),
+        status: 'published',
+        sort: (lastPage?.sort ?? -1) + 1,
         schema: createTemplateSchema(app.id, routeKey, 'custom', payload.title.trim() || '未命名页面'),
       })
       .select()

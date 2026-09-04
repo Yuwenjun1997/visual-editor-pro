@@ -22,7 +22,12 @@ const collectBindings = (blocks: PageSchema['blocks'], output: PageDataSourceBin
 export const pageService = {
   collectBindings,
   async list(): Promise<PageRow[]> {
-    const { data, error } = await supabase.from('pages').select('*').order('updated_at', { ascending: false })
+    // 应用内页面必须从对应的应用页面管理入口维护，避免出现在全局页面管理中。
+    const { data, error } = await supabase
+      .from('pages')
+      .select('*')
+      .is('app_id', null)
+      .order('updated_at', { ascending: false })
     if (error) throw error
     return (data || []) as PageRow[]
   },
