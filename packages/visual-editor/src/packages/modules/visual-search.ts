@@ -1,6 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type { VisualSearchProps } from '@visual/ui/components/visual-search/interface'
-import { createColorInputControl, createPxInputControl, createTextInputControl } from '../../utils/visual.control'
+import { createColorInputControl, createPxInputControl, createTextInputControl, createUrlInputControl } from '../../utils/visual.control'
 
 const visualSearch: VisualEditorComponent<VisualSearchProps> = {
   key: 'VisualSearch',
@@ -20,7 +20,7 @@ const visualSearch: VisualEditorComponent<VisualSearchProps> = {
       defaultValue: '#2563EB',
     }),
     radius: createPxInputControl({ label: '圆角大小' }),
-    confirmLink: createTextInputControl({
+    confirmLink: createUrlInputControl({
       label: '跳转链接',
       tips: '为空时提交仅提示',
     }),

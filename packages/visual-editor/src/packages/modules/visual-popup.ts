@@ -6,6 +6,7 @@ import {
   createNumberInputControl,
   createSwitchControl,
   createTextInputControl,
+  createUrlInputControl,
 } from '../../utils/visual.control'
 
 const visualPopup: VisualEditorComponent<VisualPopupProps> = {
@@ -33,7 +34,7 @@ const visualPopup: VisualEditorComponent<VisualPopupProps> = {
       defaultValue: '限时领取专属优惠券，先到先得',
     }),
     buttonText: createTextInputControl({ label: '按钮文案', defaultValue: '立即领取' }),
-    buttonLink: createTextInputControl({ label: '按钮链接' }),
+    buttonLink: createUrlInputControl({ label: '按钮链接' }),
     showClose: createSwitchControl({ label: '显示关闭按钮', defaultValue: true }),
     frequency: createNormalSelectControl({
       label: '出现频率',

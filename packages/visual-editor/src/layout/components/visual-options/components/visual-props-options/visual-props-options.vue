@@ -23,6 +23,9 @@
         <template v-else-if="item.type === VisualEditorType.textInput">
           <visual-text-input v-model="item.defaultValue" />
         </template>
+        <template v-else-if="item.type === VisualEditorType.urlInput">
+          <visual-url-input v-model="item.defaultValue" />
+        </template>
         <template v-else-if="item.type === VisualEditorType.switch">
           <el-switch v-model="item.defaultValue" />
         </template>
@@ -52,6 +55,7 @@ import VisualNormalSelect from '../../../../../components/visual-control/visual-
 import VisualImageInput from '../../../../../components/visual-control/visual-image-input/visual-image-input.vue'
 import VisualColorInput from '../../../../../components/visual-control/visual-color-input/visual-color-input.vue'
 import VisualTextInput from '../../../../../components/visual-control/visual-text-input/visual-text-input.vue'
+import VisualUrlInput from '../../../../../components/visual-control/visual-url-input/visual-url-input.vue'
 import VisualIconInput from '../../../../../components/visual-control/visual-icon-input/visual-icon-input.vue'
 import VisualSourceDataControl from '../../../../../components/visual-control/visual-source-data-editor/visual-source-data-control.vue'
 import { VisualEditorType } from '../../../../../types/visual-editor'

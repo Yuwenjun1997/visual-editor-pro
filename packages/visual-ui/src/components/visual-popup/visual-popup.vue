@@ -21,7 +21,7 @@
               target="_blank"
               rel="noopener noreferrer"
               class="visual-popup__button"
-              @click="close"
+              @click="handleLink"
             >
               {{ buttonText || '去看看' }}
             </a>
@@ -42,6 +42,8 @@
 import TeleportBox from '../../deps/teleport-box/index.vue'
 import { getCurrentInstance } from 'vue'
 import type { VisualPopupProps } from './interface'
+import { navigateVisualUrl } from '../../utils/url'
+import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   props: VisualPopupProps
@@ -53,6 +55,7 @@ defineOptions({
 })
 
 const _props = withDefaults(defineProps<Props>(), { isDesign: false })
+const runtime = useH5Runtime()
 
 const isDesign = computed(() => _props.isDesign)
 
@@ -61,10 +64,7 @@ const description = computed(() => _props.props.description || '')
 const buttonLink = computed(() => _props.props.buttonLink || '')
 const buttonText = computed(() => _props.props.buttonText || '')
 
-const btnHref = computed(() => {
-  if (!buttonLink.value) return undefined
-  return buttonLink.value.startsWith('http') ? buttonLink.value : `//${buttonLink.value}`
-})
+const btnHref = computed(() => undefined)
 
 const showRef = ref(false)
 const show = computed(() => showRef.value)
@@ -93,6 +93,12 @@ const close = () => {
   showRef.value = false
   document.body.style.overflow = ''
   document.removeEventListener('keydown', onKeydown)
+}
+
+const handleLink = (event: MouseEvent) => {
+  event.preventDefault()
+  navigateVisualUrl(_props.props.buttonLink, runtime)
+  close()
 }
 
 const onKeydown = (event: KeyboardEvent) => {

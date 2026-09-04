@@ -35,6 +35,8 @@ import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import { toast } from '../../utils/toast'
 import type { VisualFormField, VisualFormProps } from './interface'
+import { appendVisualUrlQuery, navigateVisualUrl } from '../../utils/url'
+import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -50,6 +52,7 @@ defineOptions({
 const _props = withDefaults(defineProps<Props>(), {
   listData: () => [],
 })
+const runtime = useH5Runtime()
 
 const submitText = computed(() => _props.props.submitText || '')
 const fieldCount = computed(() => _props.listData.length)
@@ -87,11 +90,11 @@ const handleSubmit = () => {
   })
   const link = _props.props.submitLink
   if (link) {
-    const sep = link.includes('?') ? '&' : '?'
     const query = Object.entries(payload)
       .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
       .join('&')
-    window.open(`${link}${sep}${query}`, '_blank', 'noopener,noreferrer')
+    const target = appendVisualUrlQuery(link, query)
+    if (target) navigateVisualUrl(target, runtime)
   } else {
     toast('提交成功')
   }

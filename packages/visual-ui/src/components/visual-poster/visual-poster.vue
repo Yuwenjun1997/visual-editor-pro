@@ -33,6 +33,8 @@ import type { CSSProperties } from 'vue'
 import QRCode from 'qrcode'
 import VisualBox from '../visual-box/visual-box.vue'
 import type { VisualPosterProps } from './interface'
+import { navigateVisualUrl } from '../../utils/url'
+import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -45,6 +47,7 @@ defineOptions({
 })
 
 const _props = defineProps<Props>()
+const runtime = useH5Runtime()
 
 const title = computed(() => _props.props.title || '')
 const subtitle = computed(() => _props.props.subtitle || '')
@@ -53,13 +56,12 @@ const footerText = computed(() => _props.props.footerText || '')
 const buttonText = computed(() => _props.props.buttonText || '')
 
 const btnHref = computed(() => {
-  const link = _props.props.shareLink
-  if (!link) return undefined
-  return link.startsWith('http') ? link : `//${link}`
+  return undefined
 })
 
 const handleClick = (event: MouseEvent) => {
-  if (!btnHref.value) event.preventDefault()
+  event.preventDefault()
+  if (_props.props.shareLink) navigateVisualUrl(_props.props.shareLink, runtime)
 }
 
 const qrUrl = ref('')

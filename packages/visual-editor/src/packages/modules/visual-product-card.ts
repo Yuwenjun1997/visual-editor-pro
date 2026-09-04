@@ -7,6 +7,7 @@ import {
   createPxInputControl,
   createSwitchControl,
   createTextInputControl,
+  createUrlInputControl,
 } from '../../utils/visual.control'
 
 const defaultCover = '/image/cover.svg'
@@ -28,7 +29,7 @@ const visualProductCard: VisualEditorComponent<VisualProductCardProps> = {
     originPrice: createNumberInputControl({ label: '原价' }),
     tag: createTextInputControl({ label: '角标文案', defaultValue: '新品' }),
     buttonText: createTextInputControl({ label: '按钮文案', defaultValue: '立即购买' }),
-    buyLink: createTextInputControl({ label: '跳转链接' }),
+    buyLink: createUrlInputControl({ label: '跳转链接' }),
     layout: createNormalSelectControl({
       label: '卡片方向',
       options: [

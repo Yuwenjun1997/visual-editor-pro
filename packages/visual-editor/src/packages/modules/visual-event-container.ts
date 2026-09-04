@@ -1,6 +1,6 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type { VisualEventContainerProps } from '@visual/ui/components/visual-event-container/interface'
-import { createNormalSelectControl, createTextInputControl } from '../../utils/visual.control'
+import { createNormalSelectControl, createTextInputControl, createUrlInputControl } from '../../utils/visual.control'
 
 const actionOptions = [
   { label: '无', value: 'none' },
@@ -35,7 +35,7 @@ const visualEventContainer: VisualEditorComponent<VisualEventContainerProps> = {
       defaultValue: 'none',
       options: actionOptions,
     }),
-    actionUrl: createTextInputControl({ label: '链接地址', defaultValue: '' }),
+    actionUrl: createUrlInputControl({ label: '链接地址' }),
     actionText: createTextInputControl({ label: '提示内容', defaultValue: '' }),
     actionCode: createTextInputControl({ label: '自定义代码', defaultValue: '' }),
     eventName: createTextInputControl({ label: '事件名称', defaultValue: '' }),

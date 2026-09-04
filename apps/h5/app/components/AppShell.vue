@@ -31,6 +31,13 @@ const pageThemeConfig: CustomThemeConfig = {
 
 const runtime: H5Runtime = {
   async $navigateTo(url, options = {}) {
+    if (options.appPage) {
+      const [routeKey, suffix = ''] = url.split(/(?=[?#])/, 2)
+      const root = `/apps/${props.app.slug}`
+      const target = routeKey === props.app.homeRouteKey ? root : `${root}/${routeKey}`
+      await navigateTo(`${target}${suffix}`, { replace: options.replace })
+      return
+    }
     let parsed: URL
     try {
       parsed = new URL(url, window.location.href)

@@ -5,6 +5,7 @@ import {
   createNormalSelectControl,
   createPxInputControl,
   createTextInputControl,
+  createUrlInputControl,
 } from '../../utils/visual.control'
 
 const visualButton: VisualEditorComponent<VisualButtonProps> = {
@@ -38,7 +39,7 @@ const visualButton: VisualEditorComponent<VisualButtonProps> = {
     bgColor: createColorInputControl({ label: '背景颜色' }),
     textColor: createColorInputControl({ label: '文字颜色' }),
     radius: createPxInputControl({ label: '圆角大小' }),
-    link: createTextInputControl({ label: '跳转链接' }),
+    link: createUrlInputControl({ label: '跳转链接' }),
   },
 }
 

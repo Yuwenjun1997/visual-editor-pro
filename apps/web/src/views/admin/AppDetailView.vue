@@ -28,7 +28,7 @@
           <el-button
             v-if="!['profile', 'product-detail', 'article-detail'].includes(row.page_type || '')"
             size="small"
-            @click="router.push({ name: 'editor-review', params: { pageId: row.id } })"
+            @click="router.push({ name: 'editor-app-review', params: { appId: route.params.appId, pageId: row.id } })"
           >
             编辑页面
           </el-button>
@@ -171,7 +171,7 @@ const createCustomPage = async () => {
       inputErrorMessage: '请输入合法页面地址',
     })
     const page = await appService.createCustomPage(app.value, { title: titleResult.value, routeKey: routeResult.value })
-    router.push({ name: 'editor-review', params: { pageId: page.id } })
+    router.push({ name: 'editor-app-review', params: { appId: app.value.id, pageId: page.id } })
   } catch (error: any) {
     if (error !== 'cancel' && error !== 'close') ElMessage.error(error?.message || '创建页面失败')
   }

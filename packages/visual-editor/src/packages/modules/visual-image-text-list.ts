@@ -8,11 +8,12 @@ import {
   createNormalSelectControl,
   createSwitchControl,
   createTextInputControl,
+  createUrlInputControl,
 } from '../../utils/visual.control'
 
 const defaultCover = '/image/cover.svg'
 
-const createData = (): Record<Exclude<keyof VisualImageTextListItem, 'id' | 'link'>, VisualEditorProps> => ({
+const createData = (): Record<Exclude<keyof VisualImageTextListItem, 'id'>, VisualEditorProps> => ({
   authorAvatar: createImageInputControl({
     label: '作者头像',
     defaultValue: defaultCover,
@@ -33,6 +34,7 @@ const createData = (): Record<Exclude<keyof VisualImageTextListItem, 'id' | 'lin
     label: '标题',
     defaultValue: '举杯邀明月，对影成三人',
   }),
+  link: createUrlInputControl({ label: '跳转链接' }),
 })
 
 const VisualImageTextList: VisualEditorComponent<VisualImageTextListProps> = {

@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'vue'
+import type { VisualUrl } from '@visual/ui'
 
 export interface VisualBlockSlotData {
   name: string
@@ -46,6 +47,7 @@ export enum VisualEditorType {
   listData = 'listData',
   numberInput = 'numberInput',
   datePicker = 'datePicker',
+  urlInput = 'urlInput',
 }
 
 export interface VisualSelectOption {
@@ -154,6 +156,7 @@ export interface PageSchema {
   themeName: string
   globalStyle: CSSProperties
   blocks: VisualBlockData[]
+  /** @deprecated 应用归属由编辑器路由与 pages.app_id 决定，旧 schema 字段仅可读兼容。 */
   appId?: string
   routeKey?: string
   pageType?: AppPageType
@@ -231,7 +234,19 @@ export interface VisualRevisionProvider {
   rollback(pageId: string | number, revisionId: string): Promise<void>
 }
 
-export type VisualPageLoader = (pageId: string | number) => Promise<PageSchema | null>
+export type VisualPageLoader = (pageId: string | number, appId?: string) => Promise<PageSchema | null>
+
+export interface VisualUrlPageOption {
+  label: string
+  value: string
+}
+
+export interface VisualUrlPageProvider {
+  listGlobalPages(): Promise<VisualUrlPageOption[]>
+  listAppPages(appId: string): Promise<VisualUrlPageOption[]>
+}
+
+export type { VisualUrl }
 
 export interface DataSourceProvider {
   list(dataType?: VisualDataSourceType | VisualDataContract): Promise<VisualDataSource[]>

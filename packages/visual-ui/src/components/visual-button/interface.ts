@@ -1,4 +1,5 @@
 export { default as VisualButton } from './visual-button.vue'
+import type { VisualUrlValue } from '../../types/url'
 export interface VisualButtonProps {
   text?: string
   variant?: 'primary' | 'destructive' | 'warning' | 'outline'
@@ -6,5 +7,5 @@ export interface VisualButtonProps {
   bgColor?: string
   textColor?: string
   radius?: string
-  link?: string
+  link?: VisualUrlValue
 }

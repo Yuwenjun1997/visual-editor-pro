@@ -1,4 +1,5 @@
 import { VisualEditorType, type VisualEditorProps, type VisualSelectOption } from '../types/visual-editor'
+import type { VisualUrl } from '@visual/ui'
 
 export interface VisualPropsEditorControl<O = any> {
   (option: O): VisualEditorProps
@@ -69,3 +70,9 @@ export const createDatePickerControl: VisualPropsEditorControl<{
   defaultValue?: string
   tips?: string
 }> = (options) => ({ type: VisualEditorType.datePicker, ...options })
+
+export const createUrlInputControl: VisualPropsEditorControl<{
+  label: string
+  defaultValue?: VisualUrl
+  tips?: string
+}> = (options) => ({ type: VisualEditorType.urlInput, ...options })

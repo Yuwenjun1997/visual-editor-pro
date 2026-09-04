@@ -39,7 +39,7 @@ const clonePayload = (value: RuntimePagePayload): RuntimePagePayload => JSON.par
 const hydratePageData = async (
   event: H3Event,
   payload: RuntimePagePayload,
-  resolver: 'resolve_published_page_data_source' | 'resolve_preview_page_data_source',
+  resolver: 'resolve_published_page_data_source' | 'resolve_preview_page_data_source' | 'resolve_public_data_source',
   token?: string,
 ) => {
   const cloned = clonePayload(payload)
@@ -52,7 +52,9 @@ const hydratePageData = async (
       const args =
         resolver === 'resolve_preview_page_data_source'
           ? { p_token: token, p_source_id: sourceId }
-          : { p_page_id: cloned.page.id, p_source_id: sourceId }
+          : resolver === 'resolve_public_data_source'
+            ? { p_source_id: sourceId }
+            : { p_page_id: cloned.page.id, p_source_id: sourceId }
       const { data, error } = await client.rpc(resolver, args)
       if (error) throw createError({ statusCode: 500, statusMessage: '页面数据源加载失败' })
       return [sourceId, data] as const
@@ -75,6 +77,14 @@ export const loadRuntimePreview = async (event: H3Event, token: string) => {
   const { data, error } = await getClient(event).rpc('get_preview_page_by_token', { p_token: token })
   if (error || !data) throw createError({ statusCode: 404, statusMessage: '预览链接无效或已过期' })
   return hydratePageData(event, data as RuntimePagePayload, 'resolve_preview_page_data_source', token)
+}
+
+export const loadRuntimePublicPage = async (event: H3Event, slug: string) => {
+  const { data, error } = await getClient(event).rpc('get_published_page_by_slug', { p_slug: slug })
+  if (error || !data?.[0]) throw createError({ statusCode: 404, statusMessage: '页面不存在或尚未发布' })
+  const page = data[0] as { id: string; slug: string; title: string; schema: RuntimePagePayload['page']['schema'] }
+  const payload = { page: { id: page.id, title: page.title, routeKey: page.slug, pageType: 'custom' as const, schema: page.schema } }
+  return hydratePageData(event, payload as RuntimePagePayload, 'resolve_public_data_source')
 }
 
 export const loadRuntimeDetail = async (

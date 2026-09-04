@@ -20,6 +20,8 @@ import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import { toast } from '../../utils/toast'
 import type { VisualSearchProps } from './interface'
+import { appendVisualUrlQuery, navigateVisualUrl } from '../../utils/url'
+import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -32,6 +34,7 @@ defineOptions({
 })
 
 const _props = defineProps<Props>()
+const runtime = useH5Runtime()
 
 const keyword = ref('')
 
@@ -47,8 +50,8 @@ const handleSubmit = () => {
   const value = keyword.value.trim()
   const link = _props.props.confirmLink
   if (link) {
-    const sep = link.includes('?') ? '&' : '?'
-    window.open(`${link}${sep}keyword=${encodeURIComponent(value)}`, '_blank', 'noopener,noreferrer')
+    const target = appendVisualUrlQuery(link, `keyword=${encodeURIComponent(value)}`)
+    if (target) navigateVisualUrl(target, runtime)
   } else {
     toast(value ? `搜索：${value}` : '请输入搜索关键词')
   }

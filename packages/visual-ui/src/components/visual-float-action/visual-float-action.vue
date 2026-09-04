@@ -24,6 +24,8 @@ import type { CSSProperties } from 'vue'
 import VisualIcon from '../visual-icon/visual-icon.vue'
 import { toast } from '../../utils/toast'
 import type { VisualFloatActionProps } from './interface'
+import { navigateVisualUrl } from '../../utils/url'
+import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   props: VisualFloatActionProps
@@ -35,6 +37,7 @@ defineOptions({
 })
 
 const _props = withDefaults(defineProps<Props>(), { isDesign: false })
+const runtime = useH5Runtime()
 
 const isDesign = computed(() => _props.isDesign)
 
@@ -80,10 +83,7 @@ const href = computed(() => {
   if (mode.value === 'customerService' && _props.props.phone) {
     return `tel:${_props.props.phone}`
   }
-  if (mode.value === 'link' && _props.props.link) {
-    const link = _props.props.link
-    return link.startsWith('http') ? link : `//${link}`
-  }
+  if (mode.value === 'link' && _props.props.link) return undefined
   return undefined
 })
 
@@ -99,6 +99,9 @@ const handleClick = (event: MouseEvent) => {
     } else {
       toast('分享功能暂未开启')
     }
+  } else if (mode.value === 'link' && _props.props.link) {
+    event.preventDefault()
+    navigateVisualUrl(_props.props.link, runtime)
   } else if (!href.value) {
     event.preventDefault()
   }

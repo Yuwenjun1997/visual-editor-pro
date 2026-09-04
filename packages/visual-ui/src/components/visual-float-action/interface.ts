@@ -1,4 +1,5 @@
 export { default as VisualFloatAction } from './visual-float-action.vue'
+import type { VisualUrlValue } from '../../types/url'
 export interface VisualFloatActionProps {
   mode?: 'backTop' | 'customerService' | 'share' | 'link'
   icon?: string
@@ -7,6 +8,6 @@ export interface VisualFloatActionProps {
   position?: 'right' | 'left'
   bottom?: string
   phone?: string
-  link?: string
+  link?: VisualUrlValue
   showBackTopAfter?: number
 }

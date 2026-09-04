@@ -19,6 +19,7 @@ import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import type { VisualButtonProps } from './interface'
 import { useH5Runtime } from '../../hooks/useH5Runtime'
+import { navigateVisualUrl } from '../../utils/url'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -52,14 +53,11 @@ const bindStyle = computed<CSSProperties>(() => {
   return style
 })
 
-const bindHref = computed(() => {
-  const link = _props.props.link
-  return link || undefined
-})
+const bindHref = computed(() => undefined)
 
 const handleClick = (event: MouseEvent) => {
   event.preventDefault()
-  if (bindHref.value) runtime.$navigateTo(bindHref.value)
+  if (_props.props.link) navigateVisualUrl(_props.props.link, runtime)
   else runtime.$emit('button:click', {}, { interaction: 'click', event })
 }
 </script>

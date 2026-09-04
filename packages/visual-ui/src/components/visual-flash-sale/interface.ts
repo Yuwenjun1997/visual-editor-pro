@@ -1,4 +1,5 @@
 export { default as VisualFlashSale } from './visual-flash-sale.vue'
+import type { VisualUrlValue } from '../../types/url'
 export interface VisualFlashSaleProps {
   title?: string
   endTime?: string
@@ -10,6 +11,6 @@ export interface VisualFlashSaleProps {
   bgColor?: string
   numColor?: string
   buttonText?: string
-  buyLink?: string
+  buyLink?: VisualUrlValue
   currency?: string
 }

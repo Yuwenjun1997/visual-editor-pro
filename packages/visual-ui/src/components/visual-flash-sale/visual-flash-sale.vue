@@ -44,6 +44,8 @@ import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import { formatPrice } from '../../utils/format'
 import type { VisualFlashSaleProps } from './interface'
+import { navigateVisualUrl } from '../../utils/url'
+import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -56,6 +58,7 @@ defineOptions({
 })
 
 const _props = defineProps<Props>()
+const runtime = useH5Runtime()
 
 const title = computed(() => _props.props.title || '')
 const buttonText = computed(() => _props.props.buttonText || '')
@@ -75,13 +78,12 @@ const soldPercent = computed(() => {
 })
 
 const href = computed(() => {
-  const link = _props.props.buyLink
-  if (!link) return undefined
-  return link.startsWith('http') ? link : `//${link}`
+  return undefined
 })
 
 const handleClick = (event: MouseEvent) => {
-  if (!href.value) event.preventDefault()
+  event.preventDefault()
+  if (_props.props.buyLink) navigateVisualUrl(_props.props.buyLink, runtime)
 }
 
 const innerStyle = computed<CSSProperties>(() => ({

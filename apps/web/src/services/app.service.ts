@@ -42,18 +42,17 @@ const block = (text: string) => ({
 })
 
 export const createTemplateSchema = (
-  appId: string,
+  _appId: string,
   routeKey: string,
   pageType: AppPageType,
   title: string,
 ): PageSchema => ({
   pageId: '',
   title,
-  slug: `${appId}-${routeKey}`,
+  slug: `${_appId}-${routeKey}`,
   themeName: 'theme-blue',
   globalStyle: { backgroundColor: '#f7f8fa' },
   blocks: [block(title)],
-  appId,
   routeKey,
   pageType,
 })

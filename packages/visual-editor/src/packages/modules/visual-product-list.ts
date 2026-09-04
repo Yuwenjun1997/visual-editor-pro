@@ -7,6 +7,7 @@ import {
   createPxInputControl,
   createSwitchControl,
   createTextInputControl,
+  createUrlInputControl,
 } from '../../utils/visual.control'
 
 const defaultCover = '/image/cover.svg'
@@ -20,7 +21,7 @@ const createData = (): Record<Exclude<keyof VisualProductListItem, 'id'>, Visual
   price: createNumberInputControl({ label: '售价', defaultValue: 59.9 }),
   originPrice: createNumberInputControl({ label: '原价' }),
   tag: createTextInputControl({ label: '角标文案', defaultValue: '新品' }),
-  buyLink: createTextInputControl({ label: '跳转链接' }),
+  buyLink: createUrlInputControl({ label: '跳转链接' }),
 })
 
 const visualProductList: VisualEditorComponent<VisualProductListProps> = {

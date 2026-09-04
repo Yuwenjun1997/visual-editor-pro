@@ -1,4 +1,5 @@
 export { default as VisualForm } from './visual-form.vue'
+import type { VisualUrlValue } from '../../types/url'
 export interface VisualFormField {
   label?: string
   fieldType?: 'text' | 'phone' | 'textarea'
@@ -9,6 +10,6 @@ export interface VisualFormField {
 export interface VisualFormProps {
   submitText?: string
   submitButtonColor?: string
-  submitLink?: string
+  submitLink?: VisualUrlValue
   radius?: string
 }

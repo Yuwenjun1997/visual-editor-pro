@@ -3,6 +3,7 @@ import { inject, provide, type InjectionKey } from 'vue'
 export interface H5NavigateOptions {
   replace?: boolean
   external?: boolean
+  appPage?: boolean
 }
 
 export interface H5RequestConfig {

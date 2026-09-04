@@ -1,4 +1,5 @@
 export { default as VisualPoster } from './visual-poster.vue'
+import type { VisualUrlValue } from '../../types/url'
 export interface VisualPosterProps {
   bgImage?: string
   title?: string
@@ -9,5 +10,5 @@ export interface VisualPosterProps {
   qrFgColor?: string
   qrBgColor?: string
   buttonText?: string
-  shareLink?: string
+  shareLink?: VisualUrlValue
 }

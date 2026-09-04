@@ -18,6 +18,8 @@
 import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import type { VisualCustomerServiceProps } from './interface'
+import { navigateVisualUrl } from '../../utils/url'
+import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -30,6 +32,7 @@ defineOptions({
 })
 
 const _props = defineProps<Props>()
+const runtime = useH5Runtime()
 
 const entryStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {}
@@ -44,16 +47,16 @@ const href = computed(() => {
   if (type === 'phone' && _props.props.phone) {
     return `tel:${_props.props.phone}`
   }
-  const link = _props.props.link
-  if (link && type === 'link') {
-    return link.startsWith('http') ? link : `//${link}`
-  }
+  if (_props.props.link && type === 'link') return undefined
   // wechat 或空：作为占位，不跳外部
   return undefined
 })
 
 const handleClick = (event: MouseEvent) => {
-  if (!href.value) event.preventDefault()
+  if (_props.props.type === 'link' && _props.props.link) {
+    event.preventDefault()
+    navigateVisualUrl(_props.props.link, runtime)
+  } else if (!href.value) event.preventDefault()
 }
 </script>
 

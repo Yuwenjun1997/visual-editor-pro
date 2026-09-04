@@ -22,6 +22,7 @@ import VisualBox from '../visual-box/visual-box.vue'
 import { toast } from '../../utils/toast'
 import type { VisualEventContainerProps } from './interface'
 import { useH5Runtime, useH5RuntimeContext } from '../../hooks/useH5Runtime'
+import { navigateVisualUrl } from '../../utils/url'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -47,7 +48,7 @@ function executeAction() {
 
   if (!actionType || actionType === 'none') return
   if (actionType === 'url' && actionUrl) {
-    runtime.$navigateTo(actionUrl)
+    navigateVisualUrl(actionUrl, runtime)
   }
   if (actionType === 'toast' && actionText) {
     toast(actionText)

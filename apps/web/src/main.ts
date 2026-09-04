@@ -130,8 +130,9 @@ visualConfig.revisionProvider = {
   },
 }
 
-visualConfig.savedPageLoader = async (id) => {
+visualConfig.savedPageLoader = async (id, appId) => {
   const row = await pageService.get(id as string)
+  if (appId ? row?.app_id !== appId : !!row?.app_id) return null
   return row && authStore.user
     ? {
         ...row.schema,
@@ -140,8 +141,6 @@ visualConfig.savedPageLoader = async (id) => {
         // an empty or stale schema.pageId, which would make the next save
         // look like a create operation.
         pageId: row.id,
-        // 应用页面的归属以 pages.app_id 为准；历史 schema 可能未持久化 appId。
-        appId: row.app_id || row.schema.appId,
         slug: row.slug,
         blocks: await businessDataService.migrateLegacyBusinessRefs(row.schema.blocks || [], authStore.user.id),
       }
@@ -149,5 +148,20 @@ visualConfig.savedPageLoader = async (id) => {
 }
 
 visualConfig.dataSourceProvider = dataSourceService
+
+visualConfig.urlPageProvider = {
+  async listGlobalPages() {
+    return (await pageService.list())
+      .filter((page) => page.status === 'published')
+      .map((page) => ({ label: page.title, value: `/p/${page.slug}` }))
+  },
+  async listAppPages(appId) {
+    const { appService } = await import('./services/app.service')
+    return (await appService.pages(appId))
+      .filter((page) => page.status === 'published')
+      .map((page) => ({ label: page.title, value: page.route_key || '' }))
+      .filter((page) => !!page.value)
+  },
+}
 
 setupVisual(app)

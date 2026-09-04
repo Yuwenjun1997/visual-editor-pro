@@ -7,6 +7,7 @@ import {
   createPxInputControl,
   createSwitchControl,
   createTextInputControl,
+  createUrlInputControl,
 } from '../../utils/visual.control'
 
 const createData = (): Record<keyof VisualFormField, VisualEditorProps> => ({
@@ -38,7 +39,7 @@ const visualForm: VisualEditorComponent<VisualFormProps> = {
       label: '按钮颜色',
       defaultValue: '#2563EB',
     }),
-    submitLink: createTextInputControl({
+    submitLink: createUrlInputControl({
       label: '提交地址',
       tips: '为空时提交仅提示',
     }),

@@ -6,6 +6,7 @@ import {
   createNumberInputControl,
   createSwitchControl,
   createTextInputControl,
+  createUrlInputControl,
 } from '../../utils/visual.control'
 
 const visualFlashSale: VisualEditorComponent<VisualFlashSaleProps> = {
@@ -29,7 +30,7 @@ const visualFlashSale: VisualEditorComponent<VisualFlashSaleProps> = {
     bgColor: createColorInputControl({ label: '背景颜色' }),
     numColor: createColorInputControl({ label: '数字块颜色' }),
     buttonText: createTextInputControl({ label: '按钮文案', defaultValue: '立即抢购' }),
-    buyLink: createTextInputControl({ label: '跳转链接' }),
+    buyLink: createUrlInputControl({ label: '跳转链接' }),
     currency: createTextInputControl({ label: '货币符号', defaultValue: '¥' }),
   },
 }

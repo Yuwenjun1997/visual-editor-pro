@@ -69,11 +69,11 @@ const {
 
 // 模块单例 ref(pageConfig/blockList)在路由间复用;按 :pageId 装载已保存页面,
 // id 消失时重置为空,避免"新建页面"串入上一页数据
-const applyPageSchema = (schema: PageSchema) => {
+const applyPageSchema = (schema: PageSchema, appId?: string) => {
   blockList.value = (schema.blocks || []).map((block) => formatVisualBlockData(block))
   pageConfig.value = {
     pageId: schema.pageId,
-    appId: schema.appId,
+    appId,
     title: schema.title,
     slug: schema.slug || '',
     themeName: resolveVisualThemeName(schema.themeName),
@@ -118,8 +118,8 @@ const restoreLocalDraftIfNeeded = async (databaseSchema?: PageSchema) => {
 }
 
 watch(
-  () => route.params.pageId as string | undefined,
-  async (pageId) => {
+  () => [route.params.pageId as string | undefined, route.params.appId as string | undefined] as const,
+  async ([pageId, appId]) => {
     suspendHistory()
     hydrating.value = true
     if (!pageId) {
@@ -135,12 +135,12 @@ watch(
       return
     }
     try {
-      const schema = await visualConfig.savedPageLoader(pageId)
+      const schema = await visualConfig.savedPageLoader(pageId, appId)
       if (!schema) {
         ElMessage.error('页面不存在或无权访问')
         return
       }
-      applyPageSchema(schema)
+      applyPageSchema(schema, appId)
       await restoreLocalDraftIfNeeded(schema)
       initializeHistory({ ...pageConfig.value, blocks: blockList.value }, String(pageId))
       hydrating.value = false

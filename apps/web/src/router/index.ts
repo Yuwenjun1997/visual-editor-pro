@@ -70,6 +70,15 @@ const router = createRouter({
       ],
     },
     {
+      // 应用页面归属仅从路由参数取得，不依赖 schema 内的历史 appId。
+      path: '/editor/:appId/:pageId',
+      component: EditorShell,
+      meta: { requiresAuth: true, permission: 'editor:access' },
+      children: [
+        { path: '', component: EditorLayout, children: [{ path: '', name: 'editor-app-review', component: EditorStage }] },
+      ],
+    },
+    {
       path: '/admin',
       component: AdminLayout,
       meta: { requiresAuth: true },

@@ -5,6 +5,7 @@ import {
   createImageInputControl,
   createNumberInputControl,
   createTextInputControl,
+  createUrlInputControl,
 } from '../../utils/visual.control'
 
 const visualPoster: VisualEditorComponent<VisualPosterProps> = {
@@ -37,7 +38,7 @@ const visualPoster: VisualEditorComponent<VisualPosterProps> = {
     qrFgColor: createColorInputControl({ label: '二维码颜色' }),
     qrBgColor: createColorInputControl({ label: '二维码底色' }),
     buttonText: createTextInputControl({ label: '按钮文案', defaultValue: '分享给好友' }),
-    shareLink: createTextInputControl({ label: '跳转链接' }),
+    shareLink: createUrlInputControl({ label: '跳转链接' }),
   },
 }
 
