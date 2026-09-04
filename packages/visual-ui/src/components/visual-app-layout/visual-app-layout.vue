@@ -34,7 +34,7 @@ defineEmits<{ navigate: [item: LayoutConfig['items'][number]] }>()
 
 <style scoped>
 .visual-app-layout {
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }

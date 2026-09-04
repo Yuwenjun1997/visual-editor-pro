@@ -4,6 +4,7 @@ import type { VisualThemeName } from '../configs/visual-theme'
 
 export interface PageConfig {
   pageId: string | number
+  appId?: string
   title: string
   slug?: string
   globalStyle: CSSProperties

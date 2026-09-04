@@ -5,22 +5,21 @@
     :data-component-key="parentKey"
     :class="{ 'visual-page-renderer--root': !parentKey }"
   >
-    <component :is="block.componentName" v-for="block in blocks" :key="block._vid" v-bind="blockAttrs(block)">
-      <template v-for="(slot, name) in block.slots" #[name] :key="name">
-        <VisualPageRenderer
-          :blocks="slot.blocks"
-          :parent-key="block.key"
-          :parent-props="block.props"
-          :parent-styles="block.styles"
-        />
-      </template>
-    </component>
+    <VisualRuntimeBlockRenderer
+      v-for="block in blocks"
+      :key="block._vid"
+      :block="block"
+      :slots="block.slots"
+      :attrs="blockAttrs(block)"
+      :component-name="block.componentName"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import type { VisualRuntimeBlock } from './interface'
+import VisualRuntimeBlockRenderer from './visual-runtime-block.vue'
 
 defineOptions({ name: 'VisualPageRenderer' })
 
@@ -55,7 +54,8 @@ const groupStyle = computed<CSSProperties>(() => {
 })
 
 const blockAttrs = (block: VisualRuntimeBlock) => ({
-  'list-data': block.listData || [],
+  ...(block.listData ? { listData: block.listData } : {}),
+  ...(block.data ? { data: block.data } : {}),
   props: withoutFlexProps(block.key, block.props),
   styles: withoutFlexStyles(block.key, block.styles),
 })

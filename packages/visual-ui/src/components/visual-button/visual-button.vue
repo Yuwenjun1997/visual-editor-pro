@@ -18,6 +18,7 @@
 import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import type { VisualButtonProps } from './interface'
+import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -30,6 +31,7 @@ defineOptions({
 })
 
 const _props = defineProps<Props>()
+const runtime = useH5Runtime()
 
 const bindVariantClass = computed(() => {
   const variant = _props.props.variant || 'primary'
@@ -52,11 +54,13 @@ const bindStyle = computed<CSSProperties>(() => {
 
 const bindHref = computed(() => {
   const link = _props.props.link
-  return link ? (link.startsWith('http') ? link : `//${link}`) : undefined
+  return link || undefined
 })
 
 const handleClick = (event: MouseEvent) => {
-  if (!bindHref.value) event.preventDefault()
+  event.preventDefault()
+  if (bindHref.value) runtime.$navigateTo(bindHref.value)
+  else runtime.$emit('button:click', {}, { interaction: 'click', event })
 }
 </script>
 

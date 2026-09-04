@@ -21,6 +21,7 @@ import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import { toast } from '../../utils/toast'
 import type { VisualEventContainerProps } from './interface'
+import { useH5Runtime, useH5RuntimeContext } from '../../hooks/useH5Runtime'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -33,6 +34,8 @@ defineOptions({
 })
 
 const _props = defineProps<Props>()
+const runtime = useH5Runtime()
+const runtimeContext = useH5RuntimeContext()
 
 let longPressTimer: ReturnType<typeof setTimeout> | null = null
 let isTouchActive = false
@@ -44,8 +47,7 @@ function executeAction() {
 
   if (!actionType || actionType === 'none') return
   if (actionType === 'url' && actionUrl) {
-    const url = actionUrl.startsWith('http') ? actionUrl : `//${actionUrl}`
-    window.open(url, '_blank', 'noopener,noreferrer')
+    runtime.$navigateTo(actionUrl)
   }
   if (actionType === 'toast' && actionText) {
     toast(actionText)
@@ -56,6 +58,9 @@ function executeAction() {
     } catch (e) {
       console.error('Event Container custom code error:', e)
     }
+  }
+  if (actionType === 'event' && _props.props.eventName) {
+    runtime.$emit(_props.props.eventName, { actionUrl, actionText }, { ...runtimeContext, interaction: _props.props.eventType || 'click' })
   }
 }
 

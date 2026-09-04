@@ -12,7 +12,7 @@ import {
 
 const defaultCover = '/image/cover.svg'
 
-const createData = (): Record<keyof VisualImageTextListItem, VisualEditorProps> => ({
+const createData = (): Record<Exclude<keyof VisualImageTextListItem, 'id' | 'link'>, VisualEditorProps> => ({
   authorAvatar: createImageInputControl({
     label: '作者头像',
     defaultValue: defaultCover,

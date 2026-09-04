@@ -1,5 +1,5 @@
 <template>
-  <div class="visual-app" :class="[_bindClassList, _props.class]">
+  <div class="visual-app" :style="themeStyle" :class="[_bindClassList, _props.class]">
     <slot />
     <Sonner />
   </div>
@@ -22,7 +22,13 @@ const _props = withDefaults(defineProps<VisualAppProps>(), {
   bgColor: 'transparent',
 })
 
-const { themeName } = useTheme()
+const { themeName, currentTheme } = useTheme()
+
+// Keep the theme on the rendered root as well as documentElement. This makes
+// SSR output use the resolved app theme before hydration can run.
+const themeStyle = computed(() =>
+  Object.fromEntries(Object.entries(currentTheme.value || {}).map(([key, value]) => [`--v-${key}`, String(value)])),
+)
 
 const { bottom } = useSafeArea()
 
@@ -43,7 +49,7 @@ const _bindClassList = computed(() => ({
 .visual-app {
   height: 100%;
   flex: 1;
-  overflow: hidden;
+  // overflow: hidden;
   background-color: var(--v-bg-color);
   color: var(--v-text-1);
   font-family: var(--v-font-body);

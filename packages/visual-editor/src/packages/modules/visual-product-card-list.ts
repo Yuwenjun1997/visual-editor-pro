@@ -14,7 +14,7 @@ import {
 
 const defaultCover = '/image/cover.svg'
 
-const createData = (): Record<keyof VisualProductCardListItem, VisualEditorProps> => ({
+const createData = (): Record<Exclude<keyof VisualProductCardListItem, 'id'>, VisualEditorProps> => ({
   cover: createImageInputControl({ label: '商品图', defaultValue: defaultCover }),
   title: createTextInputControl({
     label: '商品标题',

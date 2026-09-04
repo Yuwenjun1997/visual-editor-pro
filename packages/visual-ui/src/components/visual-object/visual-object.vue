@@ -20,6 +20,7 @@ interface Props {
   styles?: CSSProperties
   props: VisualObjectProps
   class?: string
+  data?: JsonObject
 }
 
 defineOptions({
@@ -68,6 +69,11 @@ defineExpose({
 
 watchEffect(() => {
   const { options } = _props.props
+  if (options?.dataSource === 'managed' && _props.data) {
+    _errorMsg.value = undefined
+    _slotData.value = _props.data
+    return
+  }
   if (options?.dataSource === 'custom') {
     _errorMsg.value = undefined
     _slotData.value = transformCustomSlotObject(options)

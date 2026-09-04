@@ -7,6 +7,7 @@ const actionOptions = [
   { label: '跳转链接', value: 'url' },
   { label: '弹窗提示', value: 'toast' },
   { label: '执行代码', value: 'jscode' },
+  { label: '业务事件', value: 'event' },
 ]
 
 const eventOptions = [
@@ -37,6 +38,7 @@ const visualEventContainer: VisualEditorComponent<VisualEventContainerProps> = {
     actionUrl: createTextInputControl({ label: '链接地址', defaultValue: '' }),
     actionText: createTextInputControl({ label: '提示内容', defaultValue: '' }),
     actionCode: createTextInputControl({ label: '自定义代码', defaultValue: '' }),
+    eventName: createTextInputControl({ label: '事件名称', defaultValue: '' }),
   },
   slots: {
     default: {

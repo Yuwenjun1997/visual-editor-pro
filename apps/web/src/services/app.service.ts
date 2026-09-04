@@ -141,6 +141,10 @@ export const appService = {
     if (error) throw error
     return (data || []) as AppSnapshotRow[]
   },
+  async removeSnapshot(id: string) {
+    const { error } = await supabase.from('app_snapshots').delete().eq('id', id)
+    if (error) throw error
+  },
   async createSnapshot(payload: { app: AppRow; pages: PageRow[]; name: string }) {
     const { data, error } = await supabase
       .from('app_snapshots')

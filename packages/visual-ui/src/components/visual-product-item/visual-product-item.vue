@@ -4,7 +4,7 @@
     class="visual-product-item"
     :class="{ 'visual-product-item--horizontal': layout === 'horizontal' }"
   >
-    <a :href="href" target="_blank" rel="noopener noreferrer" class="visual-product-item__media" @click="handleClick">
+    <a :href="href" class="visual-product-item__media" @click="handleClick">
       <img v-if="cover" :alt="title" :src="cover" class="visual-product-item__cover" />
       <span v-else class="visual-product-item__cover visual-product-item__cover--empty">
         <i class="bi bi-image" />
@@ -14,7 +14,7 @@
       </span>
     </a>
     <div class="visual-product-item__info">
-      <a :href="href" target="_blank" rel="noopener noreferrer" class="visual-product-item__title" @click="handleClick">
+      <a :href="href" class="visual-product-item__title" @click="handleClick">
         {{ title || '商品标题' }}
       </a>
       <div class="visual-product-item__actions">
@@ -36,6 +36,7 @@
 import type { CSSProperties } from 'vue'
 import { formatPrice } from '../../utils/format'
 import type { VisualProductItemProps } from './interface'
+import { useH5Runtime, useH5RuntimeContext } from '../../hooks/useH5Runtime'
 
 defineOptions({
   name: 'VisualProductItem',
@@ -65,11 +66,15 @@ const originPriceText = computed(() => {
 const href = computed(() => {
   const link = _props.data?.buyLink
   if (!link) return undefined
-  return link.startsWith('http') ? link : `//${link}`
+  return link
 })
+const runtime = useH5Runtime()
+const runtimeContext = useH5RuntimeContext()
 
 const handleClick = (event: MouseEvent) => {
-  if (!href.value) event.preventDefault()
+  event.preventDefault()
+  if (href.value) runtime.$navigateTo(href.value)
+  else runtime.$emit('product:click', { item: _props.data }, { ...runtimeContext, interaction: 'click', item: _props.data, event })
 }
 
 const itemStyle = computed<CSSProperties>(() => ({

@@ -39,20 +39,21 @@
     </el-card>
     <el-dialog v-model="snapshotVisible" title="应用快照" width="620px">
       <div class="wa-mb-3 wa-flex wa-justify-end">
-        <el-button type="primary" @click="createSnapshot">
+        <el-button size="small" type="primary" @click="createSnapshot">
           <Icon icon="ep:plus" class="wa-mr-1" />
           添加快照
         </el-button>
       </div>
       <el-empty v-if="!snapshots.length" description="暂无快照" />
       <el-table v-else row-key="id" :data="snapshots">
-        <el-table-column label="名称" prop="name" />
+        <el-table-column label="名称" prop="name" min-width="180" />
         <el-table-column label="创建时间" min-width="180">
           <template #default="{ row }">{{ formatTime(row.created_at) }}</template>
         </el-table-column>
-        <el-table-column label="操作" width="100">
+        <el-table-column label="操作" width="160">
           <template #default="{ row }">
             <el-button size="small" @click="restoreSnapshot(row as AppSnapshotRow)">恢复</el-button>
+            <el-button plain size="small" type="danger" @click="removeSnapshot(row as AppSnapshotRow)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -81,7 +82,12 @@
               <el-input v-model="item.label" placeholder="名称" />
               <el-input v-model="item.icon" placeholder="图标类名，如 bi bi-house" />
               <el-select v-model="item.routeKey" placeholder="目标页面">
-                <el-option v-for="page in pages" :key="page.id" :label="page.title" :value="page.route_key || page.slug" />
+                <el-option
+                  v-for="page in pages"
+                  :key="page.id"
+                  :label="page.title"
+                  :value="page.route_key || page.slug"
+                />
               </el-select>
               <el-button link type="danger" @click="removeNavItem(item.key)">移除</el-button>
             </div>
@@ -172,12 +178,28 @@ const createSnapshot = async () => {
 }
 const restoreSnapshot = async (snapshot: AppSnapshotRow) => {
   try {
-    await ElMessageBox.confirm(`确定恢复快照「${snapshot.name}」吗？当前应用信息将被覆盖。`, '恢复快照', { type: 'warning' })
+    await ElMessageBox.confirm(`确定恢复快照「${snapshot.name}」吗？当前应用信息将被覆盖。`, '恢复快照', {
+      type: 'warning',
+    })
     await appService.restoreSnapshot(snapshot)
     await load()
     ElMessage.success('快照已恢复')
   } catch (error: any) {
     if (error !== 'cancel' && error !== 'close') ElMessage.error(error?.message || '快照恢复失败')
+  }
+}
+const removeSnapshot = async (snapshot: AppSnapshotRow) => {
+  try {
+    await ElMessageBox.confirm(`确定删除快照「${snapshot.name}」吗？删除后无法恢复。`, '删除快照', {
+      type: 'warning',
+      confirmButtonText: '删除',
+      cancelButtonText: '取消',
+    })
+    await appService.removeSnapshot(snapshot.id)
+    snapshots.value = snapshots.value.filter((item) => item.id !== snapshot.id)
+    ElMessage.success('快照已删除')
+  } catch (error: any) {
+    if (error !== 'cancel' && error !== 'close') ElMessage.error(error?.message || '快照删除失败')
   }
 }
 const addNavItem = () => {

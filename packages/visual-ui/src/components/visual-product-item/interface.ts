@@ -1,5 +1,6 @@
 export { default as VisualProductItem } from './visual-product-item.vue'
 export interface VisualProductItemData {
+  id?: string
   cover?: string
   title?: string
   price?: number | string

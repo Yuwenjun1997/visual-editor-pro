@@ -73,6 +73,7 @@ const applyPageSchema = (schema: PageSchema) => {
   blockList.value = (schema.blocks || []).map((block) => formatVisualBlockData(block))
   pageConfig.value = {
     pageId: schema.pageId,
+    appId: schema.appId,
     title: schema.title,
     slug: schema.slug || '',
     themeName: resolveVisualThemeName(schema.themeName),

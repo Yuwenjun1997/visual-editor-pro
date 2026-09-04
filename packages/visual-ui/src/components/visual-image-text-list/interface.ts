@@ -7,6 +7,8 @@ export interface VisualImageTextListProps {
 }
 
 export interface VisualImageTextListItem {
+  id?: string
+  link?: string
   cover: string
   title: string
   authorName: string

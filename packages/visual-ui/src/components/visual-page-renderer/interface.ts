@@ -9,4 +9,5 @@ export interface VisualRuntimeBlock {
   styles?: CSSProperties
   slots?: Record<string, { blocks: VisualRuntimeBlock[] }>
   listData?: Array<Record<string, any>>
+  data?: Record<string, any>
 }

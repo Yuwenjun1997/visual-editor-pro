@@ -22,11 +22,13 @@ const collectManagedSources = (blocks: VisualRuntimeBlock[], sourceIds = new Set
   return sourceIds
 }
 
-const applyData = (blocks: VisualRuntimeBlock[], values: Map<string, Array<Record<string, any>>>) => {
+const applyData = (blocks: VisualRuntimeBlock[], values: Map<string, any>) => {
   for (const block of blocks) {
     const options = block.props?.options as { dataSource?: string; sourceId?: string } | undefined
     if (options?.dataSource === 'managed' && options.sourceId && values.has(options.sourceId)) {
-      block.listData = values.get(options.sourceId)
+      const value = values.get(options.sourceId)
+      if (Array.isArray(value)) block.listData = value
+      else if (value && typeof value === 'object') block.data = value
     }
     Object.values(block.slots || {}).forEach((slot) => applyData(slot.blocks, values))
   }
@@ -53,7 +55,7 @@ const hydratePageData = async (
           : { p_page_id: cloned.page.id, p_source_id: sourceId }
       const { data, error } = await client.rpc(resolver, args)
       if (error) throw createError({ statusCode: 500, statusMessage: '页面数据源加载失败' })
-      return [sourceId, Array.isArray(data) ? data : []] as const
+      return [sourceId, data] as const
     }),
   )
   applyData(cloned.page.schema.blocks, new Map(entries))

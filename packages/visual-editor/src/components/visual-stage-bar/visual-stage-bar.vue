@@ -64,12 +64,12 @@
           <Icon icon="ion:save-outline" />
         </el-button>
       </el-tooltip>
-      <el-tooltip content="发布">
+      <el-tooltip v-if="!pageConfig.appId" content="发布">
         <el-button aria-label="发布" :loading="publishing" @click="handlePublish">
           <Icon icon="ep:upload" />
         </el-button>
       </el-tooltip>
-      <el-tooltip content="版本管理">
+      <el-tooltip v-if="!pageConfig.appId" content="版本管理">
         <el-button :disabled="!pageConfig.pageId || !visualConfig.revisionProvider" @click="showRevisions = true">
           <Icon icon="ep:clock" />
         </el-button>

@@ -47,6 +47,8 @@ import type { CustomThemeConfig } from './types/theme'
 import { useTheme } from './hooks/useTheme'
 
 export { useTheme } from './hooks/useTheme'
+export { provideH5Runtime, provideH5RuntimeContext, useH5Runtime, useH5RuntimeContext } from './hooks/useH5Runtime'
+export type { H5NavigateOptions, H5RequestConfig, H5Runtime, H5RuntimeContext } from './hooks/useH5Runtime'
 
 export default {
   install(app: App, options: CustomThemeConfig = {}) {

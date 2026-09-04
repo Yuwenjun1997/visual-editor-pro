@@ -1,5 +1,6 @@
 import { cloneDeep, get as getObjectValue } from 'lodash'
 import type { VisualHttpField, VisualSourceOptions } from '../types'
+import { useH5Runtime } from './useH5Runtime'
 
 interface VisualResuestCustomOptions {
   pageNum: number
@@ -7,6 +8,7 @@ interface VisualResuestCustomOptions {
 }
 
 export const useVisualRequest = (options: VisualSourceOptions) => {
+  const runtime = useH5Runtime()
   const transformFieldsToObject = (fileds: VisualHttpField[] = []) => {
     return fileds.reduce((prev, current) => ({ ...prev, [current.key]: current.value }), {} as Record<string, any>)
   }
@@ -43,17 +45,14 @@ export const useVisualRequest = (options: VisualSourceOptions) => {
       ...customOption,
     }
 
-    const fetchOptions: RequestInit = {
-      method,
-      headers,
-    }
-
-    if (method !== 'GET' && method !== 'HEAD') {
-      fetchOptions.body = JSON.stringify(body)
-    }
-
-    return fetch(url, fetchOptions)
-      .then((response) => response.json())
+    return runtime
+      .$request({
+        url,
+        method,
+        headers,
+        params: method === 'GET' || method === 'HEAD' ? body : undefined,
+        body: method === 'GET' || method === 'HEAD' ? undefined : body,
+      })
       .then((data) => transformResult(data))
   }
 

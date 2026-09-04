@@ -140,6 +140,8 @@ visualConfig.savedPageLoader = async (id) => {
         // an empty or stale schema.pageId, which would make the next save
         // look like a create operation.
         pageId: row.id,
+        // 应用页面的归属以 pages.app_id 为准；历史 schema 可能未持久化 appId。
+        appId: row.app_id || row.schema.appId,
         slug: row.slug,
         blocks: await businessDataService.migrateLegacyBusinessRefs(row.schema.blocks || [], authStore.user.id),
       }

@@ -1,5 +1,5 @@
 <template>
-  <nav
+  <div
     aria-label="应用导航"
     class="visual-tabbar"
     :style="{
@@ -9,18 +9,20 @@
       '--visual-tabbar-height': `${height}px`,
     }"
   >
-    <button
-      v-for="item in visibleItems"
-      :key="item.key"
-      type="button"
-      class="visual-tabbar__item"
-      :class="{ 'is-active': item.active }"
-      @click="$emit('navigate', item)"
-    >
-      <i v-if="item.icon" aria-hidden="true" :class="item.icon" />
-      <span>{{ item.label }}</span>
-    </button>
-  </nav>
+    <nav class="visual-tabbar__inner">
+      <button
+        v-for="item in visibleItems"
+        :key="item.key"
+        type="button"
+        class="visual-tabbar__item"
+        :class="{ 'is-active': item.active }"
+        @click="$emit('navigate', item)"
+      >
+        <i v-if="item.icon" aria-hidden="true" :class="item.icon" />
+        <span>{{ item.label }}</span>
+      </button>
+    </nav>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -46,15 +48,22 @@ const visibleItems = computed(() =>
 
 <style scoped lang="scss">
 .visual-tabbar {
-  position: sticky;
+  flex-shrink: 0;
+  min-height: var(--visual-tabbar-height);
+}
+.visual-tabbar__inner {
+  position: fixed;
   bottom: 0;
-  z-index: 10;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display: flex;
   min-height: var(--visual-tabbar-height);
   padding-bottom: var(--v-safe-area-bottom, 0px);
   background: var(--visual-tabbar-background);
   border-top: 1px solid color-mix(in srgb, var(--visual-tabbar-inactive) 18%, transparent);
 }
+
 .visual-tabbar__item {
   flex: 1;
   border: 0;

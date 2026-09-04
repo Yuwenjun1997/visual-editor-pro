@@ -1,4 +1,4 @@
-export type EventActionType = 'none' | 'url' | 'toast' | 'jscode'
+export type EventActionType = 'none' | 'url' | 'toast' | 'jscode' | 'event'
 
 export type EventTriggerType = 'none' | 'click' | 'hover' | 'longPress'
 
@@ -8,4 +8,5 @@ export interface VisualEventContainerProps {
   actionUrl?: string
   actionText?: string
   actionCode?: string
+  eventName?: string
 }

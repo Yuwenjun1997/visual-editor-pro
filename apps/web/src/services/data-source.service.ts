@@ -99,6 +99,7 @@ const toArticleListItem = (row: Record<string, any>) => ({
   authorName: row.author_name || '',
   authorAvatar: '',
   publishTime: row.publish_time ? String(row.publish_time) : '',
+  link: row.link || '',
 })
 
 export const dataSourceService = {

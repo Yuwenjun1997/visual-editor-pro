@@ -10,6 +10,8 @@ export interface VisualImageTextCardProps {
 }
 
 export interface VisualImageTextCardItem {
+  id?: string
+  link?: string
   cover: string
   title: string
   authorName: string
