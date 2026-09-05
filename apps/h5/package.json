@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt dev --dotenv .env.local --host 127.0.0.1 --port 3000",
-    "build": "nuxt build --dotenv .env.local",
+    "build": "nuxt build --dotenv .env.production",
     "preview": "node .output/server/index.mjs",
     "type-check": "nuxt typecheck",
     "clean": "rimraf .nuxt .output"

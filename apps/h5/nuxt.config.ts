@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   ssr: true,
   compatibilityDate: '2026-09-03',
-  nitro: { preset: 'node-server' },
+  // nitro: { preset: 'node-server' },
   css: ['@visual/ui', '@visual/ui/style.css', '~/assets/css/tailwind.css'],
   postcss: {
     plugins: {
