@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:vercel": "pnpm --filter @visual/ui build && pnpm --filter @visual/editor build && pnpm --filter @visual/web build",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit",
     "clean": "rimraf dist"
