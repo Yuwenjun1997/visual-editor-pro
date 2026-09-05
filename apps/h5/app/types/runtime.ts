@@ -1,3 +1,4 @@
+import type { AppLoginConfig } from '@visual/ui/types'
 import type { VisualRuntimeBlock } from '@visual/ui/types'
 
 export type RuntimePageType = 'home' | 'profile' | 'product-detail' | 'article-detail' | 'custom'
@@ -7,6 +8,7 @@ export interface RuntimeApp {
   slug: string
   name: string
   homeRouteKey: string
+  loginConfig?: AppLoginConfig
   themeConfig?: Record<string, any>
   layoutConfig: {
     showTabbar: boolean

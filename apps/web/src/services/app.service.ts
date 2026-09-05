@@ -1,3 +1,5 @@
+import { defaultPageBlocks } from '@visual/ui/utils'
+import { normalizeLoginConfig } from '@visual/ui/types'
 import { supabase } from '../lib/supabase'
 import type { AppRow, AppSnapshotRow, PageRow } from '../types/api'
 import type { AppLayoutConfig, AppPageType, PageSchema } from '@visual/editor'
@@ -52,7 +54,10 @@ export const createTemplateSchema = (
   slug: `${_appId}-${routeKey}`,
   themeName: 'theme-blue',
   globalStyle: { backgroundColor: '#f7f8fa' },
-  blocks: [block(title)],
+  blocks:
+    pageType === 'home' || pageType === 'custom'
+      ? [block(title)]
+      : (defaultPageBlocks(pageType) as PageSchema['blocks']),
   routeKey,
   pageType,
 })
@@ -115,7 +120,10 @@ export const appService = {
   async update(
     id: string,
     payload: Partial<
-      Pick<AppRow, 'name' | 'slug' | 'logo' | 'home_route_key' | 'layout_config' | 'theme_config' | 'status'>
+      Pick<
+        AppRow,
+        'name' | 'slug' | 'logo' | 'home_route_key' | 'layout_config' | 'theme_config' | 'login_config' | 'status'
+      >
     >,
   ) {
     const { data, error } = await supabase.from('apps').update(payload).eq('id', id).select().single()
@@ -158,6 +166,7 @@ export const appService = {
           home_route_key: payload.app.home_route_key,
           theme_config: payload.app.theme_config,
           layout_config: payload.app.layout_config,
+          login_config: normalizeLoginConfig(payload.app.login_config),
           status: payload.app.status,
         },
         pages: payload.pages,
@@ -168,7 +177,10 @@ export const appService = {
     return data as AppSnapshotRow
   },
   async restoreSnapshot(snapshot: AppSnapshotRow) {
-    const { error: appError } = await supabase.from('apps').update(snapshot.app_config).eq('id', snapshot.app_id)
+    const { error: appError } = await supabase
+      .from('apps')
+      .update({ ...snapshot.app_config, login_config: normalizeLoginConfig(snapshot.app_config.login_config) })
+      .eq('id', snapshot.app_id)
     if (appError) throw appError
     const currentPages = await this.pages(snapshot.app_id)
     const snapshotPageIds = new Set(snapshot.pages.map((page) => page.id))
@@ -215,7 +227,10 @@ export const appService = {
   },
   async createCustomPage(app: AppRow, payload: { title: string; routeKey: string }) {
     const routeKey = normalizeAppSlug(payload.routeKey)
-    if (!isValidPageSlug(routeKey) || ['profile', 'product-detail', 'article-detail'].includes(routeKey)) {
+    if (
+      !isValidPageSlug(routeKey) ||
+      ['login', 'profile', 'product', 'article', 'product-detail', 'article-detail'].includes(routeKey)
+    ) {
       throw new Error('页面地址不合法或与系统页面冲突')
     }
     const { data: lastPage, error: sortError } = await supabase

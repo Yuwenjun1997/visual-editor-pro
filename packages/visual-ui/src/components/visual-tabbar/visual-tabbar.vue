@@ -71,6 +71,7 @@ const visibleItems = computed(() =>
   color: var(--visual-tabbar-inactive);
   font: inherit;
   cursor: pointer;
+  font-size: 14px;
 }
 .visual-tabbar__item.is-active {
   color: var(--visual-tabbar-active);

@@ -26,3 +26,6 @@ export const formatJsonToObjectArray = (jsonText?: string): JsonObjectArray => {
 export const getErrorMsg = (error: any) => {
   return error.message || error.msg || error.errMsg || JSON.stringify(error)
 }
+
+export * from './page-template'
+export * from './auth'

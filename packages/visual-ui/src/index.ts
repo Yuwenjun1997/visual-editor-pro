@@ -1,3 +1,8 @@
+import './assets/scss/content.scss'
+import VisualAuthGuard from './components/visual-auth-guard'
+import VisualUserCard from './components/visual-user-card'
+import VisualArticleDetail from './components/visual-article-detail'
+import VisualProductDetail from './components/visual-product-detail'
 import './assets/scss/index.scss'
 import './assets/fonts/bootstrap/bootstrap-icons.css'
 
@@ -55,6 +60,10 @@ export { appendVisualUrlQuery, isVisualUrl, navigateVisualUrl, normalizeVisualUr
 export default {
   install(app: App, options: CustomThemeConfig = {}) {
     useTheme().initTheme(options)
+    app.component('VisualProductDetail', VisualProductDetail)
+    app.component('VisualArticleDetail', VisualArticleDetail)
+    app.component('VisualUserCard', VisualUserCard)
+    app.component('VisualAuthGuard', VisualAuthGuard)
     app.component('VisualApp', VisualApp)
     app.component('VisualText', VisualText)
     app.component('VisualFlex', VisualFlex)
@@ -97,3 +106,6 @@ export default {
     app.component('VisualPageRenderer', VisualPageRenderer)
   },
 }
+
+export { VisualProductDetail, VisualArticleDetail, VisualUserCard, VisualAuthGuard }
+export { default as VisualLoginPanel } from './components/visual-login-panel'

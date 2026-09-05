@@ -11,10 +11,16 @@ export type ProductPayload = Partial<{
   buy_link: string
   status: 'published' | 'draft' | 'off'
   sort: number
+  content: { html?: string }
   description: string
 }>
 
 export const productService = {
+  async get(id: string): Promise<ProductRow | null> {
+    const { data, error } = await supabase.from('products').select('*').eq('id', id).maybeSingle()
+    if (error) throw error
+    return data as ProductRow | null
+  },
   async list(opts: ContentListOptions = { page: 1, pageSize: 100 }): Promise<PaginatedResult<ProductRow>> {
     const page = Math.max(1, opts.page)
     const pageSize = Math.min(100, Math.max(1, opts.pageSize))

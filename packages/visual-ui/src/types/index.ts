@@ -33,3 +33,6 @@ export interface VisualColumnSourceOptions {
 
 export type { CustomThemeConfig, ThemeColors, ThemeConfig } from './theme'
 export type { VisualRuntimeBlock } from '../components/visual-page-renderer/interface'
+
+export * from './app-login'
+export type { H5AuthState, H5DetailContext } from '../hooks/useH5Runtime'

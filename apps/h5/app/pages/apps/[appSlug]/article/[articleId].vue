@@ -1,14 +1,18 @@
 <template>
-  <AppShell :app="detailPayload.app"><DetailCard kind="article" :item="detailPayload.item" /></AppShell>
+  <AppShell :detail="context" :app="pagePayload.app"><RuntimePage :page="pagePayload.page" /></AppShell>
 </template>
 <script setup lang="ts">
+import type { RuntimePagePayload, RuntimeDetailPayload } from '../../../../types/runtime'
 const route = useRoute()
-import type { RuntimeDetailPayload } from '../../../../types/runtime'
-
-const { data: payload } = await useFetch<RuntimeDetailPayload>(
-  '/api/runtime/article/' + route.params.appSlug + '/' + route.params.articleId,
-)
-if (!payload.value) throw createError({ statusCode: 404, statusMessage: '文章不存在或尚未发布' })
-const detailPayload = computed<RuntimeDetailPayload>(() => payload.value!)
-useHead({ title: String(detailPayload.value.item.title || '文章详情') })
+const appSlug = String(route.params.appSlug)
+const id = String(route.params.articleId)
+const [page, detail] = await Promise.all([
+  useFetch<RuntimePagePayload>('/api/runtime/route', { query: { app: appSlug, route: 'article-detail' } }),
+  useFetch<RuntimeDetailPayload>('/api/runtime/article/' + encodeURIComponent(appSlug) + '/' + encodeURIComponent(id)),
+])
+if (!page.data.value || !detail.data.value)
+  throw createError({ statusCode: 404, statusMessage: '内容不存在或尚未发布' })
+const pagePayload = computed(() => page.data.value!)
+const context = computed(() => ({ kind: 'article' as const, id, item: detail.data.value!.item }))
+useHead({ title: String(detail.data.value.item.title || '详情') })
 </script>

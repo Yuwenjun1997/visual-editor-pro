@@ -44,8 +44,12 @@
         </el-menu>
       </el-scrollbar>
     </el-aside>
-    <el-container class="wa-min-w-0">
-      <el-main class="admin-main"><router-view /></el-main>
+    <el-container class="wa-min-w-0 wa-relative">
+      <el-scrollbar class="wa-h-full wa-absolute wa-inset-0">
+         <el-main class="admin-main ">
+        <router-view />
+       </el-main>
+       </el-scrollbar>
     </el-container>
   </default-layout>
 </template>

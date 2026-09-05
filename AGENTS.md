@@ -103,3 +103,12 @@ pnpm clean          # 清空各包 dist 与根 node_modules/lockfile
 - `assets/fonts/iconfont.*`（类名 `iconfont`）—— 编辑器工具栏图标字体。
 
 未来 `apps/electron` 以 workspace 依赖复用 `@visual/editor` / `@visual/ui` 并注册相同路由即可复用 web 的全部场景，需在自己的 `public` 与资源导入中镜像上述两块资产。
+
+## 后台功能目录与组件化约定
+
+- apps/web/src/views/admin 按 dashboard、apps、pages、products、articles、categories、data-sources、users、profile 划分功能目录。
+- 路由页面负责装配；业务状态和请求放在功能目录 composables/，表单、预览等独立区域放 components/。跨功能共享组件放 apps/web/src/components/。
+- 内容新建、编辑使用独立路由页，保留列表查询参数，并处理未保存离开提示。
+- 预定义页面可编辑 schema，系统路由及 page_type 保持稳定；登录布局在应用设置中配置。
+- H5 用户与详情数据通过可选 H5Runtime 能力注入 visual-ui，组件库不得直接依赖 Nuxt、Supabase 或 Element Plus。
+- 富文本统一经 sanitizeRichText 清洗后展示，保持 SSR 与浏览器一致。

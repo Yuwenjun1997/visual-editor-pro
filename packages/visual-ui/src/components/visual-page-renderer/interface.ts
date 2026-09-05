@@ -5,9 +5,11 @@ export interface VisualRuntimeBlock {
   _vid: string
   key: string
   componentName: string
+  label?: string
+  moduleName?: string
   props?: Record<string, any>
   styles?: CSSProperties
-  slots?: Record<string, { blocks: VisualRuntimeBlock[] }>
+  slots?: Record<string, { name?: string; blocks: VisualRuntimeBlock[] }>
   listData?: Array<Record<string, any>>
   data?: Record<string, any>
 }

@@ -1,4 +1,4 @@
-import { inject, provide, type InjectionKey } from 'vue'
+import { inject, provide, type Ref, type InjectionKey } from 'vue'
 
 export interface H5NavigateOptions {
   replace?: boolean
@@ -21,7 +21,23 @@ export interface H5RuntimeContext {
   event?: unknown
 }
 
+export interface H5AuthState {
+  status: 'loading' | 'authenticated' | 'anonymous' | 'error'
+  profile: { id: string; full_name?: string | null; avatar_url?: string | null; role?: string | null } | null
+}
+export interface H5DetailContext {
+  kind: 'product' | 'article'
+  id: string
+  item: Record<string, any>
+}
 export interface H5Runtime {
+  auth?: Readonly<Ref<H5AuthState>>
+  detail?: Readonly<Ref<H5DetailContext | undefined>>
+  editor?: boolean
+  $login?(): void | Promise<void>
+  $logout?(): void | Promise<void>
+  $detail?(kind: 'product' | 'article', id: string): Promise<Record<string, any>>
+
   $navigateTo(url: string, options?: H5NavigateOptions): void | Promise<void>
   $request<T = any>(config: H5RequestConfig): Promise<T>
   $emit(name: string, payload?: Record<string, any>, context?: H5RuntimeContext): void
@@ -36,11 +52,13 @@ const fallbackRuntime: H5Runtime = {
   },
   async $request<T = any>({ url, method = 'GET', params, body, headers }: H5RequestConfig) {
     const requestUrl = new URL(url, typeof window === 'undefined' ? 'http://localhost' : window.location.href)
-    if (params && method.toUpperCase() === 'GET') Object.entries(params).forEach(([key, value]) => requestUrl.searchParams.set(key, String(value)))
+    if (params && method.toUpperCase() === 'GET')
+      Object.entries(params).forEach(([key, value]) => requestUrl.searchParams.set(key, String(value)))
     const response = await fetch(requestUrl.toString(), {
       method,
       headers: { 'Content-Type': 'application/json', ...headers },
-      body: method.toUpperCase() === 'GET' || method.toUpperCase() === 'HEAD' ? undefined : JSON.stringify(body ?? params),
+      body:
+        method.toUpperCase() === 'GET' || method.toUpperCase() === 'HEAD' ? undefined : JSON.stringify(body ?? params),
     })
     if (!response.ok) throw new Error(`Request failed: ${response.status}`)
     return response.json() as Promise<T>

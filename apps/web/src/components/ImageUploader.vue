@@ -88,6 +88,12 @@ const handleUpload = async (options: { file: File }) => {
   border-color: var(--el-color-primary);
 }
 
+.image-uploader__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .image-uploader__preview {
   width: 100%;
   height: 100%;

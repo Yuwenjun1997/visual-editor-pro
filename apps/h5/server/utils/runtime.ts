@@ -1,3 +1,4 @@
+import { upgradeTemplateBlocks } from '@visual/ui/utils'
 import { createClient } from '@supabase/supabase-js'
 import type { H3Event } from 'h3'
 import type { VisualRuntimeBlock } from '@visual/ui/types'
@@ -43,6 +44,7 @@ const hydratePageData = async (
   token?: string,
 ) => {
   const cloned = clonePayload(payload)
+  cloned.page.schema.blocks = upgradeTemplateBlocks(cloned.page.schema.blocks, cloned.page.pageType, cloned.page.title)
   const sourceIds = [...collectManagedSources(cloned.page.schema.blocks)]
   if (!sourceIds.length) return cloned
 
@@ -83,7 +85,9 @@ export const loadRuntimePublicPage = async (event: H3Event, slug: string) => {
   const { data, error } = await getClient(event).rpc('get_published_page_by_slug', { p_slug: slug })
   if (error || !data?.[0]) throw createError({ statusCode: 404, statusMessage: '页面不存在或尚未发布' })
   const page = data[0] as { id: string; slug: string; title: string; schema: RuntimePagePayload['page']['schema'] }
-  const payload = { page: { id: page.id, title: page.title, routeKey: page.slug, pageType: 'custom' as const, schema: page.schema } }
+  const payload = {
+    page: { id: page.id, title: page.title, routeKey: page.slug, pageType: 'custom' as const, schema: page.schema },
+  }
   return hydratePageData(event, payload as RuntimePagePayload, 'resolve_public_data_source')
 }
 
@@ -113,4 +117,10 @@ export const loadRuntimePreviewDetail = async (
   )
   if (error || !data) throw createError({ statusCode: 404, statusMessage: '预览数据不存在或链接已过期' })
   return data as { app: RuntimePagePayload['app']; item: Record<string, any> }
+}
+
+export const loadRuntimeApp = async (event: H3Event, appSlug: string) => {
+  const { data, error } = await getClient(event).rpc('get_published_app_config', { p_app_slug: appSlug })
+  if (error || !data) throw createError({ statusCode: 404, statusMessage: '应用不存在或尚未发布' })
+  return data as RuntimePagePayload['app']
 }

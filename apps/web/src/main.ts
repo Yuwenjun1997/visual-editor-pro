@@ -18,6 +18,8 @@ import { useAuthStore } from './stores/auth'
 import { pageService } from './services/page.service'
 import { businessDataService } from './services/business-data.service'
 import { dataSourceService } from './services/data-source.service'
+import 'nprogress/nprogress.css'
+import './styles/nprogress.css'
 
 setupIconify()
 

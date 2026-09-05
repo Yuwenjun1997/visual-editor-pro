@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@visual/ui": ["../visual-ui/src/index.ts"],
+      "@visual/ui/*": ["../visual-ui/src/*"]
+    },
+    "types": ["element-plus/global"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "vite.config.ts"]
+}

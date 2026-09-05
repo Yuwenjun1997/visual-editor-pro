@@ -1,5 +1,5 @@
 <template>
-  <AppShell :app="pagePayload.app" active-route-key="profile"><ProfilePage /></AppShell>
+  <AppShell :app="pagePayload.app" active-route-key="profile"><RuntimePage :page="pagePayload.page" /></AppShell>
 </template>
 
 <script setup lang="ts">

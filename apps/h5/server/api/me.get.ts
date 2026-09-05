@@ -6,7 +6,12 @@ export default defineEventHandler(async (event) => {
   const supabase = createRequestSupabase(event)
   const { data: claims } = await supabase.auth.getClaims()
   const userId = claims?.claims?.sub
-  if (!userId) return { profile: null }
-  const { data } = await supabase.from('profiles').select('id, full_name, avatar_url').eq('id', userId).maybeSingle()
-  return { profile: data || null }
+  if (!userId) return { authenticated: false, profile: null }
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('id, full_name, avatar_url, role')
+    .eq('id', userId)
+    .maybeSingle()
+  if (error) throw createError({ statusCode: 503, statusMessage: '账户资料加载失败' })
+  return { authenticated: true, profile: data || { id: userId, full_name: null, avatar_url: null, role: null } }
 })

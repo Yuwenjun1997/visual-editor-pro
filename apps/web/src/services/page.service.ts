@@ -1,3 +1,4 @@
+import { upgradeTemplateBlocks } from '@visual/ui/utils'
 import { supabase } from '../lib/supabase'
 import type { PageRevision, PageRow } from '../types/api'
 import type { PageSchema } from '@visual/editor'
@@ -35,7 +36,11 @@ export const pageService = {
   async get(id: string): Promise<PageRow | null> {
     const { data, error } = await supabase.from('pages').select('*').eq('id', id).maybeSingle()
     if (error) throw error
-    return (data as PageRow) || null
+    if (!data) return null
+    const page = data as PageRow
+    if (page.app_id && page.page_type)
+      page.schema.blocks = upgradeTemplateBlocks(page.schema.blocks, page.page_type, page.title) as PageSchema['blocks']
+    return page
   },
 
   async insert(payload: { user_id: string; title: string; schema: PageSchema }) {

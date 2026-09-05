@@ -1,3 +1,4 @@
+import type { AppLoginConfig } from '@visual/ui/types'
 import type { AppLayoutConfig, AppPageType, PageSchema } from '@visual/editor'
 import type { RoleCode } from '../lib/rbac'
 
@@ -55,6 +56,7 @@ export interface ProductRow {
   buy_link: string
   status: 'published' | 'draft' | 'off'
   sort: number
+  content: { html?: string }
   description: string
   created_at: string
   updated_at: string
@@ -114,6 +116,7 @@ export interface AppRow {
   status: 'draft' | 'published' | 'offline'
   home_route_key: string
   theme_config: Record<string, any>
+  login_config: AppLoginConfig
   layout_config: AppLayoutConfig
   created_at: string
   updated_at: string
@@ -125,7 +128,10 @@ export interface AppSnapshotRow {
   app_id: string
   user_id: string
   name: string
-  app_config: Pick<AppRow, 'name' | 'slug' | 'logo' | 'home_route_key' | 'theme_config' | 'layout_config' | 'status'>
+  app_config: Pick<
+    AppRow,
+    'name' | 'slug' | 'logo' | 'home_route_key' | 'theme_config' | 'layout_config' | 'login_config' | 'status'
+  >
   pages: PageRow[]
   created_at: string
 }

@@ -1,16 +1,11 @@
 <template>
-  <AppShell :app="pagePayload.app" :active-route-key="pagePayload.page.routeKey">
-    <RuntimePage
-      v-if="pagePayload.page.pageType === 'home' || pagePayload.page.pageType === 'custom'"
-      :page="pagePayload.page"
-    />
-    <DetailCard
-      v-else-if="detail"
-      :item="detail.item"
-      :kind="pagePayload.page.pageType === 'product-detail' ? 'product' : 'article'"
-    />
-    <ProfilePage v-else-if="pagePayload.page.pageType === 'profile'" />
-    <main v-else class="vh-p-6">请选择预览数据</main>
+  <AppShell
+    :detail="context"
+    :app="pagePayload.app"
+    :preview-token="String(route.params.token)"
+    :active-route-key="pagePayload.page.routeKey"
+  >
+    <RuntimePage :page="pagePayload.page" />
   </AppShell>
 </template>
 
@@ -31,4 +26,14 @@ if (pagePayload.value.previewContext?.entityId && pagePayload.value.page.pageTyp
     query: { kind: 'article', id: pagePayload.value.previewContext.entityId },
   })
 }
+
+const context = computed(() =>
+  detail.value
+    ? {
+        kind: pagePayload.value.page.pageType === 'product-detail' ? ('product' as const) : ('article' as const),
+        id: String(pagePayload.value.previewContext?.entityId),
+        item: detail.value.item,
+      }
+    : undefined,
+)
 </script>
