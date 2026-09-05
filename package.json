@@ -11,6 +11,8 @@
     "dev:web": "turbo run --filter @visual/web dev",
     "dev:h5": "turbo run --filter @visual/h5 dev",
     "build": "turbo run build",
+    "build:web": "turbo run --filter @visual/web build",
+    "build:h5": "turbo run --filter @visual/h5 build",
     "test": "pnpm --filter @visual/editor test",
     "preview": "turbo run preview",
     "type-check": "turbo run type-check",
