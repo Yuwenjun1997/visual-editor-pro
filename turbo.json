@@ -1,6 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["tsconfig.base.json", "pnpm-workspace.yaml", ".npmrc"],
+  "globalEnv": [
+    "NUXT_PUBLIC_SUPABASE_URL",
+    "NUXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+    "NUXT_PUBLIC_H5_ORIGIN",
+    "NUXT_PUBLIC_WEB_ADMIN_URL"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
