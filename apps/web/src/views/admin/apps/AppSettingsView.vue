@@ -1,6 +1,6 @@
 <template>
   <div class="admin-page">
-    <el-page-header title="应用管理" class="wa-mb-5" @back="router.push({ name: 'apps' })">
+    <el-page-header title="应用管理" @back="router.push({ name: 'apps' })">
       <template #content>
         <span class="wa-text-base wa-font-medium">应用设置</span>
       </template>
