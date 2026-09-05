@@ -9,3 +9,9 @@
 - **文件**: `packages/visual-rich-text/`, `apps/web/src/views/admin/products/components/ProductForm.vue`, `apps/web/src/views/admin/articles/components/ArticleForm.vue`, `apps/web/src/composables/useRichTextImageUpload.ts`, `apps/web/package.json`, `apps/web/tsconfig.json`, `pnpm-lock.yaml`
 - **决策**: 新包仅封装 Tiptap 编辑器与基础命令，不引入 Element Plus 或自定义 CSS；图片上传由 web 通过 `uploadImage` 回调注入。
 - **验证**: frozen lockfile 检查通过；确认 web 不再直接引用 Tiptap 或旧组件；包级 `vue-tsc` 因当前 node_modules 未完成链接而未执行。
+
+## [当前] - 文档生成: 创建仓库贡献指南
+
+- **文件**: `AGENTS.md`
+- **决策**: 根据 pnpm/Turborepo、Vue/TypeScript、Vitest 配置及 Git 历史编写简明指南。
+- **验证**: 待执行字数检查与 Git diff 检查。
