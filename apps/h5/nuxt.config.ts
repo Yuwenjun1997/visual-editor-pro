@@ -15,6 +15,7 @@ export default defineNuxtConfig({
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
       supabasePublishableKey: process.env.NUXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '',
       h5Origin: process.env.NUXT_PUBLIC_H5_ORIGIN || 'http://127.0.0.1:3000',
+      webAdminUrl: process.env.NUXT_PUBLIC_WEB_ADMIN_URL || 'http://127.0.0.1:5173/admin',
     },
   },
   typescript: { strict: true },
