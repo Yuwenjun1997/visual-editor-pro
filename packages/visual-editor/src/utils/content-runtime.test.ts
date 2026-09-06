@@ -74,4 +74,12 @@ describe('SSR rich text sanitization', () => {
     )
     expect(html).not.toMatch(/script|onerror|iframe|javascript:/)
   })
+  it('keeps safe media but omits incomplete media uploads', () => {
+    const html = sanitizeRichText(
+      '<video src="https://example.com/a.mp4" controls></video><audio src="https://example.com/a.mp3" controls></audio><div data-media-upload="true">上传中</div>',
+    )
+    expect(html).toContain('<video src="https://example.com/a.mp4" controls></video>')
+    expect(html).toContain('<audio src="https://example.com/a.mp3" controls></audio>')
+    expect(html).not.toContain('上传中')
+  })
 })

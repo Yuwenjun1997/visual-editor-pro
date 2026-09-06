@@ -1,0 +1,326 @@
+@config '../tailwind.config.js';
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  html.dark .vrt-editor-shell {
+    @apply vrt-border-slate-800 vrt-bg-[#17171b];
+  }
+
+  html.dark .vrt-editor-toolbar {
+    @apply vrt-border-slate-800 vrt-bg-[#19191e];
+  }
+
+  html.dark .vrt-editor-toolbar > div {
+    @apply vrt-border-slate-800;
+  }
+
+  html.dark .vrt-editor-toolbar-button {
+    @apply vrt-text-slate-400;
+  }
+
+  html.dark .vrt-editor-toolbar-button:hover {
+    @apply vrt-border-slate-700 vrt-bg-slate-800 vrt-text-slate-100;
+  }
+
+  html.dark .vrt-editor-toolbar-button.is-active {
+    @apply vrt-border-indigo-500/50 vrt-bg-indigo-500/15 vrt-text-indigo-300;
+  }
+
+  .vrt-rich-text-editor {
+    @apply vrt-min-h-[280px] vrt-bg-white vrt-p-4 vrt-text-sm vrt-leading-7 vrt-text-slate-700;
+  }
+  .vrt-editor-shell.is-fullscreen {
+    @apply vrt-fixed vrt-inset-0 vrt-z-[3000] vrt-flex vrt-flex-col vrt-rounded-none;
+  }
+  .vrt-editor-shell.is-fullscreen .vrt-rich-text-editor {
+    @apply vrt-flex-1 vrt-overflow-y-auto;
+  }
+  .vrt-rich-text-preview {
+    @apply vrt-min-h-[160px] vrt-text-sm vrt-leading-7 vrt-text-slate-700;
+  }
+  .vrt-preview-header {
+    @apply vrt-flex vrt-w-full vrt-items-center vrt-justify-between vrt-gap-4;
+  }
+  .vrt-rich-text-preview.is-width-pc {
+    @apply vrt-w-full;
+  }
+  .vrt-rich-text-preview.is-width-ipad {
+    @apply vrt-mx-auto vrt-max-w-[768px];
+  }
+  .vrt-rich-text-preview.is-width-h5 {
+    @apply vrt-mx-auto vrt-max-w-[375px];
+  }
+  .vrt-rich-text-preview img,
+  .vrt-rich-text-preview video,
+  .vrt-rich-text-preview audio {
+    @apply vrt-my-3 vrt-block vrt-h-auto vrt-w-full vrt-max-w-full;
+  }
+  .vrt-rich-text-preview img {
+    margin-block: 0 !important;
+  }
+  html.dark .vrt-rich-text-preview {
+    @apply vrt-text-slate-200;
+  }
+
+  .vrt-rich-text-editor:focus-within {
+    @apply vrt-outline-none;
+  }
+
+  .vrt-rich-text-editor .ProseMirror {
+    @apply vrt-min-h-[248px] vrt-w-full vrt-max-w-none vrt-outline-none;
+  }
+  .vrt-rich-text-editor.is-width-pc .ProseMirror {
+    @apply vrt-w-full vrt-max-w-none;
+  }
+  .vrt-rich-text-editor.is-width-ipad .ProseMirror {
+    @apply vrt-mx-auto vrt-max-w-[768px];
+  }
+  .vrt-rich-text-editor.is-width-h5 .ProseMirror {
+    @apply vrt-mx-auto vrt-max-w-[375px];
+  }
+
+  .vrt-rich-text-editor .ProseMirror > * {
+    @apply vrt-m-0 vrt-mb-3;
+  }
+
+  .vrt-rich-text-editor .ProseMirror > *:last-child {
+    @apply vrt-mb-0;
+  }
+
+  .vrt-rich-text-editor .ProseMirror h1 {
+    @apply vrt-mt-6 vrt-text-4xl vrt-font-bold vrt-leading-tight vrt-text-slate-900;
+  }
+  .vrt-rich-text-editor .ProseMirror h2 {
+    @apply vrt-mt-5 vrt-text-3xl vrt-font-bold vrt-leading-tight vrt-text-slate-900;
+  }
+  .vrt-rich-text-editor .ProseMirror h3 {
+    @apply vrt-mt-5 vrt-text-2xl vrt-font-semibold vrt-leading-8 vrt-text-slate-900;
+  }
+  .vrt-rich-text-editor .ProseMirror h4 {
+    @apply vrt-mt-4 vrt-text-xl vrt-font-semibold vrt-leading-7 vrt-text-slate-900;
+  }
+  .vrt-rich-text-editor .ProseMirror h5 {
+    @apply vrt-mt-4 vrt-text-lg vrt-font-semibold vrt-leading-7 vrt-text-slate-900;
+  }
+  .vrt-rich-text-editor .ProseMirror h6 {
+    @apply vrt-mt-3 vrt-text-base vrt-font-semibold vrt-leading-6 vrt-text-slate-900;
+  }
+
+  .vrt-rich-text-editor .ProseMirror ul,
+  .vrt-rich-text-editor .ProseMirror ol {
+    @apply vrt-pl-6;
+  }
+
+  .vrt-rich-text-editor .ProseMirror li {
+    @apply vrt-pl-1;
+  }
+
+  .vrt-rich-text-editor .ProseMirror ul[data-type='taskList'] {
+    @apply vrt-list-none vrt-pl-0;
+  }
+  .vrt-rich-text-editor .ProseMirror ul[data-type='taskList'] li {
+    @apply vrt-flex vrt-items-start vrt-gap-2;
+  }
+  .vrt-rich-text-editor .ProseMirror ul[data-type='taskList'] li > label {
+    @apply vrt-mt-2 vrt-flex vrt-shrink-0;
+  }
+  .vrt-rich-text-editor .ProseMirror ul[data-type='taskList'] li > div {
+    @apply vrt-min-w-0 vrt-flex-1;
+  }
+  .vrt-rich-text-editor .ProseMirror code {
+    @apply vrt-rounded vrt-bg-slate-100 vrt-px-1.5 vrt-py-0.5 vrt-font-mono vrt-text-[0.9em] vrt-text-pink-600;
+  }
+  .vrt-rich-text-editor .ProseMirror pre {
+    @apply vrt-overflow-x-auto vrt-rounded-md vrt-bg-slate-900 vrt-p-4 vrt-font-mono vrt-text-sm vrt-leading-6 vrt-text-slate-100;
+  }
+  .vrt-rich-text-editor .ProseMirror pre code {
+    @apply vrt-bg-transparent vrt-p-0 vrt-text-inherit;
+  }
+  .vrt-editor-group {
+    @apply vrt-flex vrt-items-center vrt-gap-1;
+  }
+  .vrt-editor-toolbar {
+    @apply vrt-flex vrt-flex-wrap vrt-items-center vrt-gap-1 vrt-border-b vrt-border-slate-200 vrt-bg-slate-50 vrt-p-2;
+  }
+  .vrt-editor-toolbar-button {
+    @apply vrt-inline-flex vrt-size-8 vrt-items-center vrt-justify-center vrt-gap-0.5 vrt-rounded-md vrt-border vrt-border-transparent vrt-text-sm vrt-text-slate-600 vrt-transition-colors hover:vrt-border-slate-200 hover:vrt-bg-white hover:vrt-text-slate-900 focus-visible:vrt-outline-none focus-visible:vrt-ring-2 focus-visible:vrt-ring-blue-500/40 disabled:vrt-cursor-not-allowed disabled:vrt-opacity-40;
+  }
+  .vrt-editor-toolbar-button svg {
+    @apply vrt-size-4;
+  }
+  .vrt-editor-toolbar-button .vrt-toolbar-dropdown-indicator {
+    @apply vrt-size-2;
+  }
+  .vrt-editor-toolbar-button.is-active {
+    @apply vrt-border-blue-200 vrt-bg-blue-50 vrt-text-blue-700;
+  }
+  .vrt-color-swatch {
+    @apply vrt-size-5 vrt-rounded-full vrt-border-2 vrt-border-transparent vrt-shadow-sm vrt-transition-transform hover:vrt-scale-110;
+  }
+  .vrt-color-swatch.is-active {
+    @apply vrt-border-slate-900 vrt-ring-2 vrt-ring-blue-500/30;
+  }
+  .vrt-color-swatch.is-empty {
+    @apply vrt-inline-flex vrt-items-center vrt-justify-center vrt-border-slate-300 vrt-bg-white vrt-text-slate-500;
+  }
+  .vrt-color-swatch.is-empty svg {
+    @apply vrt-size-3;
+  }
+  .vrt-dropdown-item-content {
+    @apply vrt-flex vrt-items-center vrt-gap-2;
+  }
+  .vrt-dropdown-item-content svg {
+    @apply vrt-size-4;
+  }
+  .vrt-editor-separator {
+    @apply vrt-mx-1 vrt-h-5 vrt-w-px vrt-bg-slate-200;
+  }
+  .vrt-editor-select {
+    @apply vrt-h-8 vrt-rounded-md vrt-border-0 vrt-bg-transparent vrt-px-2 vrt-text-xs vrt-text-slate-600 vrt-outline-none hover:vrt-bg-white focus:vrt-ring-2 focus:vrt-ring-blue-500/40;
+  }
+
+  .vrt-media-upload-node {
+    @apply vrt-my-3 vrt-w-full vrt-text-center;
+  }
+  .vrt-media-upload-node .el-upload {
+    @apply vrt-w-full;
+  }
+  .vrt-media-upload-node .el-progress {
+    @apply vrt-w-full;
+  }
+  .vrt-media-upload-node.is-selected .el-upload > div {
+    @apply vrt-border-blue-500 vrt-ring-2 vrt-ring-blue-500/20;
+  }
+  .vrt-rich-text-editor .ProseMirror > .is-selected {
+    position: relative !important;
+    z-index: 50 !important;
+  }
+  .vrt-media-node {
+    @apply vrt-relative vrt-my-3 vrt-w-full;
+  }
+  .vrt-media-node.is-center {
+    @apply vrt-text-center;
+  }
+  .vrt-media-node.is-right {
+    @apply vrt-text-right;
+  }
+  /* 图片节点本身不保留外边距，连续插入时形成无缝图片组。 */
+  .vrt-rich-text-editor .ProseMirror > .vrt-media-node.is-image {
+    margin: 0 !important;
+  }
+  .vrt-rich-text-editor .ProseMirror > .vrt-media-node.is-image > img,
+  .vrt-rich-text-editor .ProseMirror > img {
+    margin-block: 0 !important;
+  }
+  .vrt-media-node img,
+  .vrt-media-node video {
+    @apply vrt-block vrt-h-auto vrt-w-full vrt-max-w-full vrt-rounded-md;
+  }
+  .vrt-media-node audio {
+    @apply vrt-w-full vrt-max-w-full;
+  }
+  .vrt-media-node.is-selected {
+    @apply vrt-rounded-md vrt-outline vrt-outline-2 vrt-outline-blue-500;
+  }
+  .vrt-media-node-actions {
+    @apply vrt-absolute vrt-right-1 vrt-top-1 vrt-z-10 vrt-flex vrt-gap-1 vrt-rounded vrt-bg-white/95 vrt-p-1 vrt-shadow;
+  }
+  .vrt-media-node-actions button {
+    @apply vrt-rounded vrt-px-2 vrt-py-1 vrt-text-xs hover:vrt-bg-slate-100;
+  }
+  .vrt-media-node-actions button.is-active {
+    @apply vrt-bg-blue-100 vrt-text-blue-700;
+  }
+  .vrt-rich-text-editor .ProseMirror video {
+    @apply vrt-my-3 vrt-block vrt-h-auto vrt-max-w-full vrt-rounded-md;
+  }
+  .vrt-rich-text-editor .ProseMirror audio {
+    @apply vrt-my-3 vrt-block vrt-w-full vrt-max-w-full;
+  }
+
+  .vrt-rich-text-editor .ProseMirror blockquote {
+    @apply vrt-border-l-4 vrt-border-blue-200 vrt-bg-blue-50/60 vrt-px-4 vrt-py-2 vrt-italic vrt-text-slate-600;
+  }
+
+  .vrt-rich-text-editor .ProseMirror a {
+    @apply vrt-text-blue-600 vrt-underline vrt-underline-offset-2;
+  }
+
+  .vrt-rich-text-editor .ProseMirror img {
+    @apply vrt-my-3 vrt-block vrt-h-auto vrt-max-w-full vrt-rounded-md vrt-border vrt-border-slate-200;
+  }
+
+  .vrt-rich-text-editor .ProseMirror video,
+  .vrt-rich-text-editor .ProseMirror audio {
+    @apply vrt-my-3 vrt-block vrt-h-auto vrt-max-w-full vrt-rounded-md;
+  }
+
+  .vrt-rich-text-editor .ProseMirror audio {
+    @apply vrt-w-full;
+  }
+
+  .vrt-rich-text-editor .ProseMirror p:first-child:last-child:empty::before {
+    content: '请输入正文内容…';
+    @apply vrt-pointer-events-none vrt-float-left vrt-h-0 vrt-text-slate-400;
+  }
+
+  html.dark .vrt-rich-text-editor {
+    @apply vrt-bg-[#17171b] vrt-text-slate-200;
+  }
+
+  html.dark .vrt-rich-text-editor .ProseMirror h1,
+  html.dark .vrt-rich-text-editor .ProseMirror h2,
+  html.dark .vrt-rich-text-editor .ProseMirror h3,
+  html.dark .vrt-rich-text-editor .ProseMirror h4,
+  html.dark .vrt-rich-text-editor .ProseMirror h5,
+  html.dark .vrt-rich-text-editor .ProseMirror h6 {
+    @apply vrt-text-slate-100;
+  }
+
+  html.dark .vrt-rich-text-editor .ProseMirror blockquote {
+    @apply vrt-border-indigo-400/70 vrt-bg-indigo-400/10 vrt-text-slate-300;
+  }
+
+  html.dark .vrt-rich-text-editor .ProseMirror a {
+    @apply vrt-text-indigo-300;
+  }
+
+  html.dark .vrt-rich-text-editor .ProseMirror img {
+    @apply vrt-border-slate-700;
+  }
+
+  html.dark .vrt-rich-text-editor .ProseMirror p:first-child:last-child:empty::before {
+    @apply vrt-text-slate-500;
+  }
+
+  .vrt-rich-text-editor .ProseMirror ::selection {
+    @apply vrt-bg-blue-100;
+  }
+
+  html.dark .vrt-rich-text-editor .ProseMirror ::selection {
+    @apply vrt-bg-indigo-500/30;
+  }
+
+  html.dark .vrt-editor-separator {
+    @apply vrt-bg-slate-700;
+  }
+  html.dark .vrt-editor-select {
+    @apply vrt-text-slate-300 hover:vrt-bg-slate-800;
+  }
+  html.dark .vrt-rich-text-editor .ProseMirror code {
+    @apply vrt-bg-slate-800 vrt-text-pink-300;
+  }
+  html.dark .vrt-media-node-actions {
+    @apply vrt-bg-slate-800;
+  }
+  html.dark .vrt-media-node-actions button {
+    @apply vrt-text-slate-200 hover:vrt-bg-slate-700;
+  }
+  html.dark .vrt-media-node-actions button.is-active {
+    @apply vrt-bg-indigo-500/25 vrt-text-indigo-200 hover:vrt-bg-indigo-500/35;
+  }
+  html.dark .vrt-color-swatch.is-active {
+    @apply vrt-border-white;
+  }
+}

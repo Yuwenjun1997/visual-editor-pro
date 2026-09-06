@@ -4,13 +4,15 @@
     <el-alert v-if="error" type="error" :title="error" class="wa-my-4" :closable="false">
       <el-button @click="load">重新加载</el-button>
     </el-alert>
-    <el-card v-loading="loading" class="wa-mt-5">
-      <ProductForm v-if="!loading && !error" v-model="form" :categories="categories" />
-      <div class="wa-flex wa-justify-end wa-gap-3">
-        <el-button @click="back">取消</el-button>
-        <el-button type="primary" :loading="saving" :disabled="loading || !!error" @click="save">保存</el-button>
-      </div>
-    </el-card>
+    <div v-loading="loading" class="wa-mt-5">
+      <el-card>
+        <ProductForm v-if="!loading && !error" v-model="form" :categories="categories" />
+        <div class="wa-flex wa-justify-end wa-gap-3">
+          <el-button @click="back">取消</el-button>
+          <el-button type="primary" :loading="saving" :disabled="loading || !!error" @click="save">保存</el-button>
+        </div>
+      </el-card>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
