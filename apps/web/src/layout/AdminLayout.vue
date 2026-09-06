@@ -61,7 +61,10 @@ import { Icon } from '@iconify/vue'
 const { can } = usePermission()
 const route = useRoute()
 const collapsed = ref(false)
-const activeMenu = computed(() => (route.path.startsWith('/admin/apps/') ? '/admin/apps' : route.path))
+const activeMenu = computed(() => {
+  const section = route.path.split('/')[2]
+  return section ? `/admin/${section}` : route.path
+})
 </script>
 
 <style scoped>

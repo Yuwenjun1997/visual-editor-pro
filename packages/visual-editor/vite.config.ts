@@ -43,6 +43,7 @@ export default defineConfig({
         'nanoid',
         'uuid',
         'vuedraggable',
+        '@visual/rich-text',
         '@visual/ui',
       ],
     },

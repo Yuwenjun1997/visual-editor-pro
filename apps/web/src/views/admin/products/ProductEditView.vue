@@ -7,7 +7,7 @@
     <div v-loading="loading" class="wa-mt-5">
       <el-card>
         <ProductForm v-if="!loading && !error" v-model="form" :categories="categories" />
-        <div class="wa-flex wa-justify-end wa-gap-3">
+        <div class="wa-flex wa-justify-end">
           <el-button @click="back">取消</el-button>
           <el-button type="primary" :loading="saving" :disabled="loading || !!error" @click="save">保存</el-button>
         </div>

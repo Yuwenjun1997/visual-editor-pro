@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body,
+#app {
+  min-height: 100%;
+  background-color: var(--el-bg-color);
+}
+
+/* Element Plus 暗色模式下卡片使用 overlay 背景，分割线文字需与所属卡片保持一致。 */
+.el-card .el-divider__text {
+  background-color: var(--el-card-bg-color);
+}

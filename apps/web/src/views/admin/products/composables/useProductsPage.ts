@@ -67,8 +67,7 @@ export const useProductsPage = () => {
     pageSize: String(pageSize.value),
   })
   const openCreate = () => router.push({ name: 'product-create', query: listQuery() })
-  const openEdit = (row: ProductRow) =>
-    router.push({ name: 'product-edit', params: { id: row.id }, query: listQuery() })
+  const openEdit = (row: ProductRow) => router.push({ name: 'product-edit', params: { id: row.id } })
   const remove = async (row: ProductRow) => {
     await ElMessageBox.confirm(`确定删除商品「${row.title}」吗?`, '删除确认', {
       type: 'warning',

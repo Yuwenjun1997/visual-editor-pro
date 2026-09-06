@@ -11,6 +11,12 @@ export const createTextInputControl: VisualPropsEditorControl<{
   tips?: string
 }> = (options) => ({ type: VisualEditorType.textInput, ...options })
 
+export const createRichTextInputControl: VisualPropsEditorControl<{
+  label: string
+  defaultValue?: string
+  tips?: string
+}> = (options) => ({ type: VisualEditorType.richTextInput, ...options })
+
 export const createPxInputControl: VisualPropsEditorControl<{
   label: string
   defaultValue?: any

@@ -175,6 +175,9 @@ importers:
       '@iconify/vue':
         specifier: ^4.3.0
         version: 4.3.0(vue@3.5.42)
+      '@visual/rich-text':
+        specifier: workspace:*
+        version: link:../visual-rich-text
       '@visual/ui':
         specifier: workspace:*
         version: link:../visual-ui

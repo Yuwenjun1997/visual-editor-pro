@@ -48,6 +48,7 @@ export enum VisualEditorType {
   numberInput = 'numberInput',
   datePicker = 'datePicker',
   urlInput = 'urlInput',
+  richTextInput = 'richTextInput',
 }
 
 export interface VisualSelectOption {

@@ -99,6 +99,16 @@ const router = createRouter({
           component: () => import('../views/admin/products/ProductEditView.vue'),
         },
         {
+          path: 'articles/new',
+          name: 'article-create',
+          component: () => import('../views/admin/articles/ArticleEditView.vue'),
+        },
+        {
+          path: 'articles/:id/edit',
+          name: 'article-edit',
+          component: () => import('../views/admin/articles/ArticleEditView.vue'),
+        },
+        {
           path: '',
           redirect: '/admin/dashboard',
         },
