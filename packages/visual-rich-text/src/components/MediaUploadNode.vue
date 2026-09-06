@@ -6,7 +6,7 @@
       >
         <Icon class="vrt-size-6" icon="tabler:cloud-upload" />
         <span>{{ uploading ? `上传中 ${progress}%` : error || `点击选择${typeLabel}文件（支持多选）` }}</span>
-        <el-progress v-show="uploading" class="vrt-w-full" :stroke-width="6" :percentage="progress" />
+        <el-progress v-show="uploading" :stroke-width="6" class="vrt-w-full" :percentage="progress" />
       </div>
     </el-upload>
   </NodeViewWrapper>

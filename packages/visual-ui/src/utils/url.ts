@@ -2,7 +2,10 @@ import type { H5Runtime } from '../hooks/useH5Runtime'
 import type { VisualUrl, VisualUrlValue } from '../types/url'
 
 export const isVisualUrl = (value: unknown): value is VisualUrl =>
-  !!value && typeof value === 'object' && ['global-page', 'app-page', 'external'].includes((value as VisualUrl).mode) && typeof (value as VisualUrl).url === 'string'
+  !!value &&
+  typeof value === 'object' &&
+  ['global-page', 'app-page', 'external'].includes((value as VisualUrl).mode) &&
+  typeof (value as VisualUrl).url === 'string'
 
 export const normalizeVisualUrl = (value?: VisualUrlValue): VisualUrl | null => {
   if (!value) return null

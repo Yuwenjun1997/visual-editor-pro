@@ -1,6 +1,6 @@
 <template>
   <el-dropdown trigger="click" @command="emit('select', $event)">
-    <ToolbarButton label="标题级别" :icon="current.icon" :active="value !== 'paragraph'" dropdown />
+    <ToolbarButton dropdown label="标题级别" :icon="current.icon" :active="value !== 'paragraph'" />
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item command="paragraph">

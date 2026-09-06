@@ -25,8 +25,8 @@
       <ToolbarButton
         v-for="mark in marks"
         :key="mark.name"
-        :label="mark.label"
         :icon="mark.icon"
+        :label="mark.label"
         :active="editor.isActive(mark.name)"
         @click="editor.chain().focus().toggleMark(mark.name).run()"
       />
@@ -105,7 +105,7 @@ withDefaults(
     highlight: string
     color: string
     contentWidth: ContentWidth
-    fullscreen: boolean
+    fullscreen?: boolean
     uploadImage?: (file: File) => Promise<string>
     uploadMedia?: (file: File, type: MediaType) => Promise<string>
   }>(),

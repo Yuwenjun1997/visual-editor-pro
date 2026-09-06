@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" @command="emit('select', $event)">
-    <ToolbarButton label="列表类型" :icon="current.icon" :active="value !== 'none'" dropdown>
-      <svg v-if="value === 'none'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <ToolbarButton dropdown label="列表类型" :icon="current.icon" :active="value !== 'none'">
+      <svg v-if="value === 'none'" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
         <path d="M8 6h13M8 12h9M8 18h5M3 6v.01M3 12v.01M3 18v.01M3 3l18 18" />
       </svg>
     </ToolbarButton>
@@ -9,7 +9,7 @@
       <el-dropdown-menu>
         <el-dropdown-item v-for="item in items" :key="item.value" :command="item.value">
           <span class="vrt-dropdown-item-content">
-            <svg v-if="item.value === 'none'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg v-if="item.value === 'none'" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
               <path d="M8 6h13M8 12h9M8 18h5M3 6v.01M3 12v.01M3 18v.01M3 3l18 18" />
             </svg>
             <Icon v-else :icon="item.icon" />

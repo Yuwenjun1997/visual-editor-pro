@@ -161,9 +161,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  type VisualDataSource,
-} from '@visual/editor'
+import { type VisualDataSource } from '@visual/editor'
 import { useDataSourcesPage } from './composables/useDataSourcesPage'
 const {
   sources,

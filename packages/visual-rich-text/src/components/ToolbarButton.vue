@@ -10,7 +10,7 @@
       >
         <template v-if="icon"><Icon :icon="icon" /></template>
         <template v-else><slot /></template>
-        <Icon v-if="dropdown" class="vrt-toolbar-dropdown-indicator" icon="tabler:chevron-down" />
+        <Icon v-if="dropdown" icon="tabler:chevron-down" class="vrt-toolbar-dropdown-indicator" />
       </button>
     </el-tooltip>
   </span>

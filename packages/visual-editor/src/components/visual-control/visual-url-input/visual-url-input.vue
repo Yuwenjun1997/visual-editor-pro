@@ -1,18 +1,18 @@
 <template>
   <div class="visual-url-input">
     <el-button class="ve-w-full" @click="open">{{ summary }}</el-button>
-    <el-dialog v-model="visible" title="选择跳转链接" width="520px" append-to-body @closed="reset">
+    <el-dialog v-model="visible" width="520px" append-to-body title="选择跳转链接" @closed="reset">
       <el-radio-group v-model="draft.mode">
         <el-radio-button value="global-page">全局页面</el-radio-button>
-        <el-radio-button :disabled="!appId" value="app-page">应用内页面</el-radio-button>
+        <el-radio-button value="app-page" :disabled="!appId">应用内页面</el-radio-button>
         <el-radio-button value="external">外部 URL</el-radio-button>
       </el-radio-group>
       <div class="ve-mt-4">
         <el-select
           v-if="draft.mode !== 'external'"
           v-model="draft.url"
-          class="ve-w-full"
           filterable
+          class="ve-w-full"
           :loading="loading"
           :placeholder="draft.mode === 'global-page' ? '选择已发布全局页面' : '选择已发布应用页面'"
         >

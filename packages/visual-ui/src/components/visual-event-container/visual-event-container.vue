@@ -61,7 +61,11 @@ function executeAction() {
     }
   }
   if (actionType === 'event' && _props.props.eventName) {
-    runtime.$emit(_props.props.eventName, { actionUrl, actionText }, { ...runtimeContext, interaction: _props.props.eventType || 'click' })
+    runtime.$emit(
+      _props.props.eventName,
+      { actionUrl, actionText },
+      { ...runtimeContext, interaction: _props.props.eventType || 'click' },
+    )
   }
 }
 

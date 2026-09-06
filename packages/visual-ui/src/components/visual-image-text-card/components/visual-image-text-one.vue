@@ -38,7 +38,12 @@ const href = computed(() => _props.data.link)
 const handleClick = (event: MouseEvent) => {
   event.preventDefault()
   if (href.value) runtime.$navigateTo(href.value)
-  else runtime.$emit('article:click', { item: _props.data }, { ...runtimeContext, interaction: 'click', item: _props.data, event })
+  else
+    runtime.$emit(
+      'article:click',
+      { item: _props.data },
+      { ...runtimeContext, interaction: 'click', item: _props.data, event },
+    )
 }
 </script>
 

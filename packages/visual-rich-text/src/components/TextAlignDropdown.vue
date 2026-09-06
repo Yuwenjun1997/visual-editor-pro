@@ -1,6 +1,6 @@
 <template>
   <el-dropdown trigger="click" @command="emit('select', $event)">
-    <ToolbarButton label="文本对齐" :icon="current.icon" :active="value !== 'left'" dropdown />
+    <ToolbarButton dropdown label="文本对齐" :icon="current.icon" :active="value !== 'left'" />
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item v-for="item in items" :key="item.value" :command="item.value">

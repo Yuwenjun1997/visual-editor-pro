@@ -74,7 +74,12 @@ const runtimeContext = useH5RuntimeContext()
 const handleClick = (event: MouseEvent) => {
   event.preventDefault()
   if (href.value) runtime.$navigateTo(href.value)
-  else runtime.$emit('product:click', { item: _props.data }, { ...runtimeContext, interaction: 'click', item: _props.data, event })
+  else
+    runtime.$emit(
+      'product:click',
+      { item: _props.data },
+      { ...runtimeContext, interaction: 'click', item: _props.data, event },
+    )
 }
 
 const itemStyle = computed<CSSProperties>(() => ({

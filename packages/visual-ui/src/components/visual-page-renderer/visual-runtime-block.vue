@@ -1,9 +1,14 @@
 <template>
   <div :style="styles">
     <component :is="componentName" v-bind="componentAttrs">
-    <template v-for="(slot, name) in slots" #[name] :key="name">
-      <VisualPageRenderer :blocks="slot.blocks" :parent-key="block.key" :parent-props="block.props" :parent-styles="block.styles" />
-    </template>
+      <template v-for="(slot, name) in slots" #[name] :key="name">
+        <VisualPageRenderer
+          :blocks="slot.blocks"
+          :parent-key="block.key"
+          :parent-props="block.props"
+          :parent-styles="block.styles"
+        />
+      </template>
     </component>
   </div>
 </template>

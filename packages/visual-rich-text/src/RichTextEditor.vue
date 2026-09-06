@@ -27,7 +27,11 @@
       @fullscreen="fullscreen = !fullscreen"
       @link-open="linkUrl = editor.getAttributes('link').href || ''"
     />
-    <EditorContent :editor="editor" :class="['vrt-rich-text-editor', `is-width-${editorContentWidth}`]" />
+    <EditorContent
+      :editor="editor"
+      :class="['vrt-rich-text-editor', `is-width-${editorContentWidth}`]"
+      @mousedown="focusEditorFromGutter"
+    />
     <el-drawer v-model="previewVisible" title="内容预览" append-to-body size="min(960px, calc(100vw - 32px))">
       <template #header>
         <div class="vrt-preview-header vrt-mr-4">
@@ -163,6 +167,12 @@ const removeLink = () => editor.value?.chain().focus().unsetLink().run()
 const setContentWidth = (value: ContentWidth) => {
   editorContentWidth.value = value
   emit('update:contentWidth', value)
+}
+const focusEditorFromGutter = (event: MouseEvent) => {
+  if (editorContentWidth.value === 'pc' || event.target !== event.currentTarget) return
+
+  event.preventDefault()
+  editor.value?.commands.focus()
 }
 watch(
   () => props.contentWidth,
