@@ -16,25 +16,23 @@ import type { VisualSourceOptions } from '@visual/ui/types'
 
 interface Props {
   block: VisualBlockData
-  isDesign?: boolean
 }
 
 defineOptions({
   name: 'UseComponent',
 })
 
-const props = withDefaults(defineProps<Props>(), { isDesign: false })
+const props = defineProps<Props>()
 
 const { registerRef, getRef } = useVisualRef()
 
-// 悬浮/浮层类组件：仅在编辑器设计态转发 isDesign，避免多余 fallthrough 属性
+// 浮层组件不透传 list-data / styles（自样式、非列表驱动；teleport 根无法自动继承属性）：
 const isOverlayComponent = computed(() => VISUAL_OVERLAY_KEYS.includes(props.block.key))
 
-// 浮层组件不透传 list-data / styles（自样式、非列表驱动；teleport 根无法自动继承属性）：
 // 绑定值 undefined 仍会留在 $attrs 触发告警，故用 v-bind 对象整键省略
 const blockAttrs = computed<Record<string, any>>(() =>
   isOverlayComponent.value
-    ? { props: componentProps.value, 'is-design': props.isDesign }
+    ? { props: componentProps.value }
     : {
         'list-data': listData.value,
         props: componentProps.value,

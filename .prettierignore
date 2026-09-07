@@ -35,4 +35,3 @@ apps/web/src/components/layout/components/UserProfile.vue
 apps/web/src/components/layout/components/LogoView.vue
 apps/web/src/layout/AdminLayout.vue
 packages/visual-editor/src/styles/index.scss
-packages/visual-ui/src/deps/teleport-box/index.vue

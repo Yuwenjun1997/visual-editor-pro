@@ -9,7 +9,7 @@ export const getVisualKeys = (slots: VisualBlockSlots, visualKeys = new Set<stri
       visualKeys.add(block.key)
       if (block.slots) getVisualKeys(block.slots, visualKeys)
     })
-  return [...visualKeys]
+  return Array.from(visualKeys)
 }
 
 export const getSchemasFromSlots = (slots: VisualBlockSlots) => generateSchemas(getVisualKeys(slots))

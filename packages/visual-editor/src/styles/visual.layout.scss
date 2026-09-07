@@ -21,6 +21,16 @@ html {
     }
   }
 
+  .visual-app {
+    .visual-group.visual-disabled {
+      .visual-block {
+        outline-width: 0 !important;
+        padding: 0 !important;
+        pointer-events: none;
+      }
+    }
+  }
+
   .sortable-drag {
     opacity: 0 !important;
   }

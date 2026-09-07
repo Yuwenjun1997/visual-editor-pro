@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'vue'
 
-// 悬浮/浮层类组件：设计态仅在舞台内以真实效果 + 名称占位呈现（isDesign），不改其运行时 teleport 行为
+// 悬浮/浮层类组件不透传列表数据和容器样式
 export const VISUAL_OVERLAY_KEYS = ['VisualPopup', 'VisualFloatAction']
 
 const filterPropsMap: Record<string, string[]> = {

@@ -3,12 +3,30 @@ import type { VisualBlockData } from '../types/visual-editor'
 import { generateNanoid } from '../utils/visual.utils'
 import { cloneDeep } from 'lodash'
 import type { VisualSourceOptions } from '@visual/ui/types'
+import { applyBlockOperation as executeBlockOperation } from '../components/visual-stage-sandbox/stage-block-operations'
+import type { StageBlockOperation } from '../components/visual-stage-sandbox/stage-sandbox-protocol'
 
 const blockList = ref<VisualBlockData[]>([])
 
 const currentBlocks = ref<VisualBlockData[]>([])
 const currentIndex = ref<number>()
 const currentParent = ref<VisualBlockData>()
+
+const findBlockPosition = (
+  blocks: VisualBlockData[],
+  vid: string,
+  parent?: VisualBlockData,
+): { blocks: VisualBlockData[]; index: number; parent?: VisualBlockData } | undefined => {
+  const index = blocks.findIndex((block) => block._vid === vid)
+  if (index >= 0) return { blocks, index, parent }
+
+  for (const block of blocks) {
+    for (const slot of Object.values(block.slots || {})) {
+      const result = findBlockPosition(slot.blocks, vid, block)
+      if (result) return result
+    }
+  }
+}
 
 export const useBlocks = () => {
   const visualStore = useViusalStore()
@@ -24,6 +42,22 @@ export const useBlocks = () => {
     currentBlocks.value = []
     currentIndex.value = undefined
     currentParent.value = undefined
+  }
+
+  const refreshCurrentBlockPosition = () => {
+    if (!visualStore.vid) {
+      clearCurrentBlockPosition()
+      return
+    }
+
+    const position = findBlockPosition(blockList.value, visualStore.vid)
+    if (position) {
+      currentBlocks.value = position.blocks
+      currentIndex.value = position.index
+      currentParent.value = position.parent
+    } else {
+      clearCurrentBlockPosition()
+    }
   }
 
   const size = computed(() => currentBlocks.value.length)
@@ -77,6 +111,15 @@ export const useBlocks = () => {
     options.columnKey = undefined
   }
 
+  const applyBlockOperation = (operation: StageBlockOperation) => {
+    const result = executeBlockOperation(blockList.value, operation)
+    if (!result.ok || !result.changed) return result
+    blockList.value = result.blocks
+    clearParentDataSource(result.sourceParent)
+    refreshCurrentBlockPosition()
+    return result
+  }
+
   const reload = () => {
     if (!visualStore.currentBlock) return
     visualStore.currentBlock._vid = `vid_${generateNanoid()}`
@@ -87,11 +130,13 @@ export const useBlocks = () => {
     blockList,
     setCurrentBlockPosition,
     clearCurrentBlockPosition,
+    refreshCurrentBlockPosition,
     moveUp,
     moveDown,
     copy,
     remove,
     clearParentDataSource,
+    applyBlockOperation,
     reload,
   }
 }

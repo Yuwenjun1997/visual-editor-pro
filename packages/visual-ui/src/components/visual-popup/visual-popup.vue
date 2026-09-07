@@ -1,11 +1,10 @@
 <template>
-  <teleport-box :is-design="isDesign">
+  <teleport to="body">
     <transition name="visual-popup">
       <div
         v-if="show"
         class="visual-popup"
-        :class="{ 'visual-popup--design': isDesign }"
-        @click.self="isDesign ? undefined : close"
+        @click.self="close"
       >
         <div class="visual-popup__card">
           <img v-if="_props.props.bgImage" alt="弹窗背景" class="visual-popup__bg" :src="_props.props.bgImage" />
@@ -35,11 +34,10 @@
         </div>
       </div>
     </transition>
-  </teleport-box>
+  </teleport>
 </template>
 
 <script setup lang="ts">
-import TeleportBox from '../../deps/teleport-box/index.vue'
 import { getCurrentInstance } from 'vue'
 import type { VisualPopupProps } from './interface'
 import { navigateVisualUrl } from '../../utils/url'
@@ -47,17 +45,14 @@ import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   props: VisualPopupProps
-  isDesign?: boolean
 }
 
 defineOptions({
   name: 'VisualPopup',
 })
 
-const _props = withDefaults(defineProps<Props>(), { isDesign: false })
+const _props = defineProps<Props>()
 const runtime = useH5Runtime()
-
-const isDesign = computed(() => _props.isDesign)
 
 const title = computed(() => _props.props.title || '')
 const description = computed(() => _props.props.description || '')
@@ -143,15 +138,6 @@ onBeforeUnmount(() => {
   padding: 32px;
   background: rgba(15, 18, 40, 0.6);
   backdrop-filter: blur(2px);
-}
-
-// 设计态：锚定舞台页容器（浮层块 .visual-block.is-overlay 为 static），蒙层可穿透不拦截下层编辑
-.visual-popup--design {
-  pointer-events: none;
-
-  .visual-popup__card {
-    pointer-events: auto; // 点卡片冒泡到外层 .visual-block 选中该组件
-  }
 }
 
 .visual-popup__card {

@@ -1,44 +1,33 @@
 <template>
-  <draggable
-    :sort="false"
-    :group="group"
-    item-key="key"
-    :list="blocks"
-    class="visual-group"
-    :clone="cloneHandler"
-    :allback-on-body="true"
-    draggable=".visual-drag-item"
-    @end="onEnd"
-    @start="onStart"
-  >
-    <template #item="{ element }">
-      <div v-if="element.span" :class="'span-' + element.span" class="visual-group-item ve-text-xs more-components">
-        <img src="/image/coding.svg" class="visual-group-item-preview" />
-      </div>
-      <div
-        v-else
-        :data-name="element.label"
-        class="visual-group-item visual-drag-item"
-        @mouseup="onMouseUp"
-        @mousedown="onMouseDown(element)"
-      >
+  <div class="visual-group">
+    <div
+      v-for="element in blocks"
+      :key="element.span ? `span-${element.span}` : element.key"
+      :data-name="element.span ? undefined : element.label"
+      :class="[
+        'visual-group-item',
+        element.span ? ['ve-text-xs', 'more-components', `span-${element.span}`] : 'visual-drag-item',
+      ]"
+      @pointerdown="element.span ? undefined : onPointerDown(element, $event)"
+    >
+      <img v-if="element.span" src="/image/coding.svg" class="visual-group-item-preview" />
+      <div v-else class="visual-group-item-label">
         <img :src="element.previewImage" class="visual-group-item-preview" />
-        <div class="visual-group-item-label">{{ element.label }}</div>
+        <div class="ve-text-center">{{ element.label }}</div>
       </div>
-    </template>
-  </draggable>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import draggable from 'vuedraggable'
 import { cloneDeep } from 'lodash'
 import { useViusalStore } from '../../../../store/useVisual'
 import type { VisualEditorComponent } from '../../../../types/visual-editor'
-import { createVisualBlock } from '../../../../utils/visual.utils'
+import { getActiveStageSandbox } from '../../../../components/visual-stage-sandbox/stage-sandbox-controller'
 
 interface Props {
   list?: any[]
-  group?: Record<string, any>
+  group?: any
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -48,32 +37,19 @@ const props = withDefaults(defineProps<Props>(), {
 
 const visualStore = useViusalStore()
 
-const onStart = () => {
-  visualStore.isDrag = true
-}
-
-const onEnd = () => {
-  visualStore.isDrag = false
-  visualStore.clearMoveBlock()
-}
-
-const onMouseDown = (block: VisualEditorComponent) => {
-  visualStore.setMoveBlock(createVisualBlock(block))
-}
-
-const onMouseUp = () => {
-  visualStore.clearMoveBlock()
-}
-
-const cloneHandler = (original: VisualEditorComponent) => {
-  return createVisualBlock(cloneDeep(original))
+const onPointerDown = (block: VisualEditorComponent, event: PointerEvent) => {
+  const started = getActiveStageSandbox()?.beginMaterialDrag(block, event)
+  if (started) {
+    event.preventDefault()
+  } else {
+    visualStore.clearMoveBlock()
+  }
 }
 
 const blocks = computed(() => {
-  const fillCount = 3 - (props.list.length % 3)
   const result = cloneDeep(unref(props.list))
-  if (fillCount === 0) return result
-  result.push({ span: fillCount })
+  const remainder = result.length % 3
+  if (remainder) result.push({ span: 3 - remainder })
   return result
 })
 </script>
@@ -118,6 +94,7 @@ const blocks = computed(() => {
 
     &.visual-drag-item {
       cursor: move;
+      touch-action: none;
     }
 
     &.visual-drag-item:hover {

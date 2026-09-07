@@ -40,7 +40,7 @@ const props = withDefaults(defineProps<VisualTabbarProps>(), {
 })
 defineEmits<{ navigate: [item: VisualTabbarItem] }>()
 const visibleItems = computed(() =>
-  [...props.items]
+  Array.from(props.items)
     .filter((item) => item !== undefined && item.visible !== false)
     .sort((a, b) => (a.sort || 0) - (b.sort || 0)),
 )

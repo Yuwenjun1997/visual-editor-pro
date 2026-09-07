@@ -9,7 +9,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ElAside: typeof import('element-plus/es')['ElAside']
-    ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCollapse: typeof import('element-plus/es')['ElCollapse']
@@ -18,11 +17,8 @@ declare module 'vue' {
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
     ElDialog: typeof import('element-plus/es')['ElDialog']
-    ElDropdown: typeof import('element-plus/es')['ElDropdown']
-    ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
-    ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
+    ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElEmpty: typeof import('element-plus/es')['ElEmpty']
-    ElHeader: typeof import('element-plus/es')['ElHeader']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElOption: typeof import('element-plus/es')['ElOption']
@@ -40,6 +36,7 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
+    FlexFullLayout: typeof import('./components/flex-full-layout/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     UseComponent: typeof import('./components/visual-blocks/components/use-component.vue')['default']
@@ -60,9 +57,11 @@ declare module 'vue' {
     VisualNumberInput: typeof import('./components/visual-control/visual-number-input/visual-number-input.vue')['default']
     VisualPaddingEditor: typeof import('./components/visual-styles-editor/visual-padding-editor/visual-padding-editor.vue')['default']
     VisualPxInput: typeof import('./components/visual-control/visual-px-input/visual-px-input.vue')['default']
+    VisualRemoteEntitySelect: typeof import('./components/visual-control/visual-remote-entity-select/visual-remote-entity-select.vue')['default']
     VisualRequestFormat: typeof import('./components/visual-control/visual-source-data-editor/components/visual-source-data-request/components/visual-request-format.vue')['default']
     VisualRequestHeaders: typeof import('./components/visual-control/visual-source-data-editor/components/visual-source-data-request/components/visual-request-headers.vue')['default']
     VisualRequestParams: typeof import('./components/visual-control/visual-source-data-editor/components/visual-source-data-request/components/visual-request-params.vue')['default']
+    VisualRevisionPanel: typeof import('./components/visual-revision-panel/visual-revision-panel.vue')['default']
     VisualRoundEditor: typeof import('./components/visual-styles-editor/visual-round-editor/visual-round-editor.vue')['default']
     VisualShadowEditor: typeof import('./components/visual-styles-editor/visual-shadow-editor/visual-shadow-editor.vue')['default']
     VisualSourceDataArray: typeof import('./components/visual-control/visual-source-data-editor/components/visual-source-data-custom/components/visual-source-data-array.vue')['default']
@@ -73,9 +72,15 @@ declare module 'vue' {
     VisualSourceDataObject: typeof import('./components/visual-control/visual-source-data-editor/components/visual-source-data-custom/components/visual-source-data-object.vue')['default']
     VisualSourceDataRequest: typeof import('./components/visual-control/visual-source-data-editor/components/visual-source-data-request/visual-source-data-request.vue')['default']
     VisualStageBar: typeof import('./components/visual-stage-bar/visual-stage-bar.vue')['default']
+    VisualStageCanvas: typeof import('./components/visual-stage-sandbox/visual-stage-canvas.vue')['default']
+    VisualStageCanvasContent: typeof import('./components/visual-stage-panel/visual-stage-canvas-content.vue')['default']
     VisualStagePanel: typeof import('./components/visual-stage-panel/visual-stage-panel.vue')['default']
     VisualTextInput: typeof import('./components/visual-control/visual-text-input/visual-text-input.vue')['default']
     VisualThemePicker: typeof import('./components/visual-control/visual-theme-picker/visual-theme-picker.vue')['default']
     VisualToolButton: typeof import('./components/visual-tool-button/visual-tool-button.vue')['default']
+    VisualUrlInput: typeof import('./components/visual-control/visual-url-input/visual-url-input.vue')['default']
+  }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

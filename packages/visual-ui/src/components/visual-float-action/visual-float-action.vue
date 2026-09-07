@@ -1,5 +1,5 @@
 <template>
-  <teleport-box :is-design="isDesign">
+  <teleport to="body">
     <transition name="visual-float">
       <a
         v-if="visible"
@@ -9,17 +9,16 @@
         :style="actionStyle"
         rel="noopener noreferrer"
         class="visual-float-action"
-        :class="['visual-float-action--' + (position || 'right'), { 'visual-float-action--design': isDesign }]"
+        :class="'visual-float-action--' + (position || 'right')"
         @click="handleClick"
       >
         <visual-icon size="22px" :color="textColor" :icon="icon || defaultIcon" />
       </a>
     </transition>
-  </teleport-box>
+  </teleport>
 </template>
 
 <script setup lang="ts">
-import TeleportBox from '../../deps/teleport-box/index.vue'
 import type { CSSProperties } from 'vue'
 import VisualIcon from '../visual-icon/visual-icon.vue'
 import { toast } from '../../utils/toast'
@@ -29,17 +28,14 @@ import { useH5Runtime } from '../../hooks/useH5Runtime'
 
 interface Props {
   props: VisualFloatActionProps
-  isDesign?: boolean
 }
 
 defineOptions({
   name: 'VisualFloatAction',
 })
 
-const _props = withDefaults(defineProps<Props>(), { isDesign: false })
+const _props = defineProps<Props>()
 const runtime = useH5Runtime()
-
-const isDesign = computed(() => _props.isDesign)
 
 const mode = computed(() => _props.props.mode || 'backTop')
 const position = computed(() => _props.props.position || 'right')
@@ -57,7 +53,7 @@ const defaultIcon = computed(() => {
 })
 
 const visibleRef = ref(mode.value !== 'backTop')
-const visible = computed(() => isDesign.value || visibleRef.value)
+const visible = computed(() => visibleRef.value)
 
 const syncScrollVisible = () => {
   if (mode.value !== 'backTop') return
@@ -66,7 +62,6 @@ const syncScrollVisible = () => {
 }
 
 onMounted(() => {
-  if (isDesign.value) return
   if (mode.value === 'backTop') {
     window.addEventListener('scroll', syncScrollVisible)
     syncScrollVisible()
@@ -88,7 +83,6 @@ const href = computed(() => {
 })
 
 const handleClick = (event: MouseEvent) => {
-  if (isDesign.value) return
   if (mode.value === 'backTop') {
     event.preventDefault()
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -137,11 +131,6 @@ const actionStyle = computed<CSSProperties>(() => ({
   &--left {
     left: 16px;
   }
-}
-
-// 设计态：锚定舞台页容器（浮层块 .visual-block.is-overlay 为 static），悬浮于舞台相应角落
-.visual-float-action--design {
-  pointer-events: none;
 }
 
 .visual-float-enter-active,

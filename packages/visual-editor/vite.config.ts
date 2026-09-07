@@ -42,7 +42,7 @@ export default defineConfig({
         'lodash',
         'nanoid',
         'uuid',
-        'vuedraggable',
+        'vue-draggable-plus',
         '@visual/rich-text',
         '@visual/ui',
       ],

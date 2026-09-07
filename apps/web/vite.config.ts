@@ -10,6 +10,14 @@ const repoRoot = path.resolve(__dirname, '../..')
 
 export default defineConfig({
   appType: 'spa',
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        visualStage: path.resolve(__dirname, 'visual-stage.html'),
+      },
+    },
+  },
   resolve: {
     alias: {
       '@/': `${srcRoot}/`,
