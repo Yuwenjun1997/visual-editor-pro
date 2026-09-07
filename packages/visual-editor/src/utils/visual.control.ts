@@ -1,4 +1,4 @@
-import { VisualEditorType, type VisualEditorProps, type VisualSelectOption } from '../types/visual-editor'
+import { VisualEditorType, type VisualEditorProps, type VisualEntityType, type VisualSelectOption } from '../types/visual-editor'
 import type { VisualUrl } from '@visual/ui'
 
 export interface VisualPropsEditorControl<O = any> {
@@ -52,6 +52,13 @@ export const createNormalSelectControl: VisualPropsEditorControl<{
   options: VisualSelectOption[]
   defaultValue?: any
 }> = (options) => ({ type: VisualEditorType.normalSelect, ...options })
+
+export const createRemoteEntitySelectControl: VisualPropsEditorControl<{
+  label: string
+  entityType: VisualEntityType
+  defaultValue?: string
+  tips?: string
+}> = (options) => ({ type: VisualEditorType.remoteEntitySelect, ...options })
 
 export const createSwitchControl: VisualPropsEditorControl<{
   label: string

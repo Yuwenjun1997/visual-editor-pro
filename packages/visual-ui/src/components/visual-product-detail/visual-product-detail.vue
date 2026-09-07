@@ -1,6 +1,5 @@
 <template>
   <section class="v-detail">
-    <slot name="top" />
     <p v-if="loading" role="status">正在加载…</p>
     <p v-else-if="error" role="alert">
       {{ error }}
@@ -36,7 +35,6 @@
       <!-- eslint-disable-next-line vue/no-v-html -->
       <article v-if="props.showContent !== false && html" class="v-rich-content" v-html="html" />
     </template>
-    <slot name="bottom" />
   </section>
 </template>
 <script setup lang="ts">

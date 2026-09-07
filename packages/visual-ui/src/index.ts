@@ -53,7 +53,7 @@ import { useTheme } from './hooks/useTheme'
 
 export { useTheme } from './hooks/useTheme'
 export { provideH5Runtime, provideH5RuntimeContext, useH5Runtime, useH5RuntimeContext } from './hooks/useH5Runtime'
-export type { H5NavigateOptions, H5RequestConfig, H5Runtime, H5RuntimeContext } from './hooks/useH5Runtime'
+export type { H5NavigateOptions, H5RequestConfig, H5Runtime, H5RuntimeContext, H5UserProfile } from './hooks/useH5Runtime'
 export type { VisualUrl, VisualUrlMode, VisualUrlValue } from './types/url'
 export { appendVisualUrlQuery, isVisualUrl, navigateVisualUrl, normalizeVisualUrl } from './utils/url'
 

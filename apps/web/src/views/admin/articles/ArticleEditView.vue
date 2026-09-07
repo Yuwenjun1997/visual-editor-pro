@@ -39,7 +39,7 @@ const form = reactive({
   summary: '',
   html: '',
 })
-const back = () => router.push({ name: 'articles', query: route.query })
+const back = () => router.push({ name: 'articles' })
 const load = async () => {
   loading.value = true
   error.value = ''

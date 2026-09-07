@@ -1,8 +1,8 @@
 <template>
   <section>
     <div v-if="runtime.editor" class="v-auth-preview">
-      <label>
-        模拟身份
+      <label class="v-auth-preview__identity">
+        <span>模拟身份</span>
         <select v-model="simulation">
           <option value="anonymous">未登录</option>
           <option value="viewer">普通用户</option>
@@ -10,7 +10,7 @@
           <option value="admin">管理员</option>
         </select>
       </label>
-      <span>{{ allowed ? '允许显示' : '无权限：下方为替代内容' }}</span>
+      <span class="v-auth-preview__result">{{ allowed ? '允许显示' : '无权限：下方为替代内容' }}</span>
     </div>
     <slot v-if="allowed" />
     <slot v-else-if="state.status !== 'loading' && state.status !== 'error'" name="fallback" />

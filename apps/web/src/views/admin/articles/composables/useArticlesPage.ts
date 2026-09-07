@@ -58,16 +58,8 @@ export const useArticlesPage = () => {
     page.value = 1
     load()
   }
-  const listQuery = () => ({
-    keyword: keyword.value,
-    category: filterCategory.value,
-    status: filterStatus.value,
-    page: String(page.value),
-    pageSize: String(pageSize.value),
-  })
-  const openCreate = () => router.push({ name: 'article-create', query: listQuery() })
-  const openEdit = (row: ArticleRow) =>
-    router.push({ name: 'article-edit', params: { id: row.id }, query: listQuery() })
+  const openCreate = () => router.push({ name: 'article-create' })
+  const openEdit = (row: ArticleRow) => router.push({ name: 'article-edit', params: { id: row.id } })
   const remove = async (row: ArticleRow) => {
     await ElMessageBox.confirm(`确定删除文章「${row.title}」吗?`, '删除确认', {
       type: 'warning',

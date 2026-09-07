@@ -7,6 +7,7 @@ const component: VisualEditorComponent = {
   moduleName: 'serviceWidgets',
   previewImage: '/componets/visual-user-card.svg',
   props: {
+    userId: createTextInputControl({ label: '用户 ID', defaultValue: '', tips: '留空时显示当前登录用户' }),
     title: createTextInputControl({ label: '未登录标题', defaultValue: '你还未登录' }),
     buttonText: createTextInputControl({ label: '登录按钮', defaultValue: '去登录' }),
     background: createColorInputControl({ label: '背景', defaultValue: '#ffffff' }),

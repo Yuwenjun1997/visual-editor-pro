@@ -25,6 +25,12 @@ export interface H5AuthState {
   status: 'loading' | 'authenticated' | 'anonymous' | 'error'
   profile: { id: string; full_name?: string | null; avatar_url?: string | null; role?: string | null } | null
 }
+export interface H5UserProfile {
+  id: string
+  full_name?: string | null
+  avatar_url?: string | null
+  role?: string | null
+}
 export interface H5DetailContext {
   kind: 'product' | 'article'
   id: string
@@ -37,6 +43,7 @@ export interface H5Runtime {
   $login?(): void | Promise<void>
   $logout?(): void | Promise<void>
   $detail?(kind: 'product' | 'article', id: string): Promise<Record<string, any>>
+  $user?(id: string): Promise<H5UserProfile>
 
   $navigateTo(url: string, options?: H5NavigateOptions): void | Promise<void>
   $request<T = any>(config: H5RequestConfig): Promise<T>

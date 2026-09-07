@@ -5,6 +5,10 @@ import { defaultPageBlocks, upgradeTemplateBlocks } from '../../../visual-ui/src
 import { normalizeLoginConfig, safeLoginRedirect } from '../../../visual-ui/src/types/app-login'
 import type { H5AuthState } from '../../../visual-ui/src/hooks/useH5Runtime'
 import type { VisualRuntimeBlock } from '../../../visual-ui/src/types'
+import articleDetail from '../packages/modules/visual-article-detail'
+import productDetail from '../packages/modules/visual-product-detail'
+import userCard from '../packages/modules/visual-user-card'
+import { VisualEditorType } from '../types/visual-editor'
 describe('authorization display policies', () => {
   const member: H5AuthState = { status: 'authenticated', profile: { id: '1', role: 'viewer' } }
   it('hides contents while identity is unavailable', () => {
@@ -60,6 +64,21 @@ describe('legacy template conversion', () => {
     edited[0]!.props!.text = '自定义内容'
     expect(upgradeTemplateBlocks(edited, 'product-detail', '商品详情')).toBe(edited)
     expect(upgradeTemplateBlocks(blocks, 'custom', '商品详情')).toBe(blocks)
+  })
+})
+describe('detail and user card editor configuration', () => {
+  it('does not expose unused content slots on detail blocks', () => {
+    expect(articleDetail.slots).toEqual({})
+    expect(productDetail.slots).toEqual({})
+  })
+  it('uses remote entity selectors for detail IDs', () => {
+    expect(articleDetail.props?.articleId?.type).toBe(VisualEditorType.remoteEntitySelect)
+    expect(articleDetail.props?.articleId?.entityType).toBe('article')
+    expect(productDetail.props?.productId?.type).toBe(VisualEditorType.remoteEntitySelect)
+    expect(productDetail.props?.productId?.entityType).toBe('product')
+  })
+  it('allows a user card to target a user ID', () => {
+    expect(userCard.props?.userId?.defaultValue).toBe('')
   })
 })
 describe('SSR rich text sanitization', () => {

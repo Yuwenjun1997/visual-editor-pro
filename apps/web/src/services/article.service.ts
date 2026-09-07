@@ -14,7 +14,7 @@ export type ArticlePayload = Partial<{
 
 export const articleService = {
   async get(id: string): Promise<ArticleRow | null> {
-    const { data, error } = await supabase.from('articles').select('*').eq('id', id).maybeSingle()
+    const { data, error } = await supabase.from('articles').select('*, category:categories(name)').eq('id', id).maybeSingle()
     if (error) throw error
     return data as ArticleRow | null
   },

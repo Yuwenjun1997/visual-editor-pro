@@ -85,6 +85,7 @@ export interface ArticleRow {
   status: 'draft' | 'published'
   created_at: string
   updated_at: string
+  category?: { name: string } | null
 }
 
 export interface PageRow {

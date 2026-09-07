@@ -7,6 +7,7 @@ import type {
   VisualPreviewHandler,
   VisualRevisionProvider,
   DataSourceProvider,
+  VisualEntityProvider,
   VisualUrlPageProvider,
 } from '../types/visual-editor'
 
@@ -32,6 +33,7 @@ export function createVisualBlockConfig() {
     draftNamespace: undefined as string | undefined,
     savedPageLoader: undefined as VisualPageLoader | undefined,
     dataSourceProvider: undefined as DataSourceProvider | undefined,
+    entityProvider: undefined as VisualEntityProvider | undefined,
     urlPageProvider: undefined as VisualUrlPageProvider | undefined,
     clear(): void {
       componentModules.basicWidgets.length = 0

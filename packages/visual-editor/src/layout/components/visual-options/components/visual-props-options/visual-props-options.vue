@@ -11,6 +11,9 @@
         <template v-else-if="item.type === VisualEditorType.normalSelect">
           <visual-normal-select v-model="item.defaultValue" :options="item.options" />
         </template>
+        <template v-else-if="item.type === VisualEditorType.remoteEntitySelect && item.entityType">
+          <visual-remote-entity-select v-model="item.defaultValue" :entity-type="item.entityType" />
+        </template>
         <template v-else-if="item.type === VisualEditorType.imageInput">
           <visual-image-input v-model="item.defaultValue" />
         </template>
@@ -55,6 +58,7 @@ import VisualControlItem from '../../../../../components/visual-control-item/vis
 import VisualPxInput from '../../../../../components/visual-control/visual-px-input/visual-px-input.vue'
 import VisualNumberInput from '../../../../../components/visual-control/visual-number-input/visual-number-input.vue'
 import VisualNormalSelect from '../../../../../components/visual-control/visual-normal-select/visual-normal-select.vue'
+import VisualRemoteEntitySelect from '../../../../../components/visual-control/visual-remote-entity-select/visual-remote-entity-select.vue'
 import VisualImageInput from '../../../../../components/visual-control/visual-image-input/visual-image-input.vue'
 import VisualColorInput from '../../../../../components/visual-control/visual-color-input/visual-color-input.vue'
 import VisualTextInput from '../../../../../components/visual-control/visual-text-input/visual-text-input.vue'

@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { provideH5Runtime, type H5Runtime, type H5RequestConfig } from '@visual/ui'
+import { provideH5Runtime, type H5Runtime, type H5RequestConfig, type H5UserProfile } from '@visual/ui'
 import type { H5DetailContext } from '@visual/ui/types'
 import type { CustomThemeConfig } from '@visual/ui/types'
 import { useTheme } from '@visual/ui'
@@ -22,6 +22,7 @@ const props = defineProps<{
 const route = useRoute()
 const { initTheme } = useTheme()
 const nuxtApp = useNuxtApp()
+const requestFetch = useRequestFetch()
 
 // H5 不依赖编辑器包；在这里注册编辑器 schema 可选的内置页面主题，
 // 使 `schema.themeName` 在运行时能解析为实际的 CSS 变量。
@@ -54,6 +55,10 @@ const runtime: H5Runtime = {
           '/api/runtime/' + kind + '/' + encodeURIComponent(props.app.slug) + '/' + encodeURIComponent(id),
         )
     return payload.item
+  },
+  async $user(id) {
+    const payload = await requestFetch<{ profile: H5UserProfile }>('/api/user/' + encodeURIComponent(id))
+    return payload.profile
   },
   async $navigateTo(url, options = {}) {
     if (options.appPage) {

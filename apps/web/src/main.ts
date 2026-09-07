@@ -18,6 +18,8 @@ import { useAuthStore } from './stores/auth'
 import { pageService } from './services/page.service'
 import { businessDataService } from './services/business-data.service'
 import { dataSourceService } from './services/data-source.service'
+import { articleService } from './services/article.service'
+import { productService } from './services/product.service'
 import 'nprogress/nprogress.css'
 import './styles/nprogress.css'
 
@@ -150,6 +152,20 @@ visualConfig.savedPageLoader = async (id, appId) => {
 }
 
 visualConfig.dataSourceProvider = dataSourceService
+
+visualConfig.entityProvider = {
+  async list(entityType, keyword = '') {
+    const result =
+      entityType === 'product'
+        ? await productService.list({ page: 1, pageSize: 10, keyword })
+        : await articleService.list({ page: 1, pageSize: 10, keyword })
+    return result.items.map((item) => ({ id: item.id, title: item.title }))
+  },
+  async get(entityType, id) {
+    const item = entityType === 'product' ? await productService.get(id) : await articleService.get(id)
+    return item ? { id: item.id, title: item.title } : null
+  },
+}
 
 visualConfig.urlPageProvider = {
   async listGlobalPages() {

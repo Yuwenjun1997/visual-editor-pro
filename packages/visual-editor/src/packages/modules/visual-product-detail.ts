@@ -1,5 +1,5 @@
 import type { VisualEditorComponent } from '../../types/visual-editor'
-import { createSwitchControl, createTextInputControl } from '../../utils/visual.control'
+import { createRemoteEntitySelectControl, createSwitchControl } from '../../utils/visual.control'
 const component: VisualEditorComponent = {
   key: 'VisualProductDetail',
   componentName: 'VisualProductDetail',
@@ -7,7 +7,7 @@ const component: VisualEditorComponent = {
   moduleName: 'commerceWidgets',
   previewImage: '/componets/visual-product-detail.svg',
   props: {
-    productId: createTextInputControl({ label: '商品 ID', defaultValue: '' }),
+    productId: createRemoteEntitySelectControl({ label: '商品', entityType: 'product', defaultValue: '' }),
     showCover: createSwitchControl({ label: '封面', defaultValue: true }),
     showTitle: createSwitchControl({ label: '标题', defaultValue: true }),
     showPrice: createSwitchControl({ label: '售价', defaultValue: true }),
@@ -17,6 +17,6 @@ const component: VisualEditorComponent = {
     showContent: createSwitchControl({ label: '正文', defaultValue: true }),
     showBuyLink: createSwitchControl({ label: '购买链接', defaultValue: true }),
   },
-  slots: { top: { name: '顶部内容', blocks: [] }, bottom: { name: '底部内容', blocks: [] } },
+  slots: {},
 }
 export default component

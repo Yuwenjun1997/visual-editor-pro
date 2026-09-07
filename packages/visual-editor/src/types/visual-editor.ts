@@ -49,6 +49,7 @@ export enum VisualEditorType {
   datePicker = 'datePicker',
   urlInput = 'urlInput',
   richTextInput = 'richTextInput',
+  remoteEntitySelect = 'remoteEntitySelect',
 }
 
 export interface VisualSelectOption {
@@ -63,6 +64,17 @@ export interface VisualEditorProps {
   tips?: string
   defaultValue?: any
   options?: Array<VisualSelectOption>
+  entityType?: VisualEntityType
+}
+
+export interface VisualEntityOption {
+  id: string
+  title: string
+}
+
+export interface VisualEntityProvider {
+  list(entityType: VisualEntityType, keyword?: string): Promise<VisualEntityOption[]>
+  get(entityType: VisualEntityType, id: string): Promise<VisualEntityOption | null>
 }
 
 export interface VisualEditorListData<T extends Record<string, any> = Record<string, any>> {
