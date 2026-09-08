@@ -87,3 +87,9 @@
 - **文件**: `packages/visual-editor/src/utils/visual.utils.ts`、`packages/visual-editor/src/utils/visual.utils.test.ts`
 - **决策**: 页面数据格式化时按 `listData` 自动补齐缺失的 `tab-*` slots，并保留已有页签内容，避免历史页面仍无法拖放。
 - **验证**: `pnpm --filter @visual/editor type-check` 通过；`pnpm --filter @visual/editor test` 通过（44/44）；目标文件 `git diff --check` 无空白错误。
+
+## [18:32] - Bug 修复: 显式打包 Web 与舞台的 Element Plus 基础样式
+
+- **文件**: `apps/web/src/plugins/element-ui/index.ts`、`apps/web/src/editor-stage-main.ts`
+- **决策**: 主应用与独立 iframe 舞台均显式引入 `element-plus/dist/index.css`，不再依赖开发环境的组件按需样式注入。
+- **验证**: `pnpm --filter @visual/web build` 通过；生产产物 CSS 检索到 `.el-button`、`.el-tabs`、`--el-color-primary` 等 Element Plus 规则。
