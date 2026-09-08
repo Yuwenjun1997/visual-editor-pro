@@ -51,7 +51,7 @@ const _rowClass = computed(() => ({
 }))
 
 const innerStyles = computed<CSSProperties>(() => ({
-  '--v-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
+  '--visual-product-list-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
 }))
 </script>
 
@@ -60,7 +60,7 @@ const innerStyles = computed<CSSProperties>(() => ({
   .visual-product-list__inner {
     display: flex;
     flex-direction: column;
-    gap: var(--v-inner-gutter);
+    gap: var(--visual-product-list-inner-gutter);
   }
 
   .visual-product-list .visual-product-list__row--reverse {
@@ -68,3 +68,6 @@ const innerStyles = computed<CSSProperties>(() => ({
   }
 }
 </style>
+
+
+

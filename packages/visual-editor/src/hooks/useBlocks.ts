@@ -3,7 +3,10 @@ import type { VisualBlockData } from '../types/visual-editor'
 import { generateNanoid } from '../utils/visual.utils'
 import { cloneDeep } from 'lodash'
 import type { VisualSourceOptions } from '@visual/ui/types'
-import { applyBlockOperation as executeBlockOperation } from '../components/visual-stage-sandbox/stage-block-operations'
+import {
+  applyBlockOperation as executeBlockOperation,
+  removeBlockByVid as executeRemoveBlockByVid,
+} from '../components/visual-stage-sandbox/stage-block-operations'
 import type { StageBlockOperation } from '../components/visual-stage-sandbox/stage-sandbox-protocol'
 
 const blockList = ref<VisualBlockData[]>([])
@@ -97,6 +100,24 @@ export const useBlocks = () => {
     clearCurrentBlockPosition()
   }
 
+  const removeByVid = (vid: string) => {
+    const result = executeRemoveBlockByVid(blockList.value, vid)
+    if (!result) return false
+    blockList.value = result.blocks
+    clearParentDataSource(result.sourceParent)
+    if (visualStore.vid === vid) visualStore.clearCurrent()
+    refreshCurrentBlockPosition()
+    return true
+  }
+
+  const clearAll = () => {
+    if (!blockList.value.length) return false
+    blockList.value = []
+    visualStore.clearCurrent()
+    clearCurrentBlockPosition()
+    return true
+  }
+
   const clearParentDataSource = (parent = currentParent.value) => {
     if (!parent || !['VisualObject', 'VisualObjectArray'].includes(parent.key)) return
 
@@ -135,6 +156,8 @@ export const useBlocks = () => {
     moveDown,
     copy,
     remove,
+    removeByVid,
+    clearAll,
     clearParentDataSource,
     applyBlockOperation,
     reload,

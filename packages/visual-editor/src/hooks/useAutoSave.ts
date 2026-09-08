@@ -14,7 +14,7 @@ export const autoSavePaused = ref(false)
 export const autoSaveDraftKey = ref('')
 
 export interface AutoSavePayload {
-  pageConfig: Ref<{ pageId: string | number; title: string; slug?: string; globalStyle: any; themeName: string }>
+  pageConfig: Ref<{ pageId: string | number; title: string; slug?: string; globalStyle: any; themeName: string | null }>
   blockList: Ref<VisualBlockData[]>
   namespace?: string
   storage?: LocalDraftStorage

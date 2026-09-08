@@ -129,6 +129,12 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .visual-popup {
+  --visual-popup-radius-moody: var(--v-radius-moody);
+  --visual-popup-gradient-primary: var(--v-gradient-primary);
+  --visual-popup-shadow-soft: var(--v-shadow-soft);
+  --visual-popup-primary-1: var(--v-primary-1);
+  --visual-popup-overlay: var(--v-black-opacity-4, rgba(15, 18, 40, 0.6));
+  --visual-popup-white: var(--v-white);
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -136,7 +142,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   padding: 32px;
-  background: rgba(15, 18, 40, 0.6);
+  background: var(--visual-popup-overlay);
   backdrop-filter: blur(2px);
 }
 
@@ -144,9 +150,9 @@ onBeforeUnmount(() => {
   position: relative;
   width: 300px;
   overflow: hidden;
-  border-radius: var(--v-radius-moody);
-  background: var(--v-gradient-primary);
-  box-shadow: var(--v-shadow-soft);
+  border-radius: var(--visual-popup-radius-moody);
+  background: var(--visual-popup-gradient-primary);
+  box-shadow: var(--visual-popup-shadow-soft);
 }
 
 .visual-popup__bg {
@@ -157,7 +163,7 @@ onBeforeUnmount(() => {
   object-fit: cover;
 
   &--gradient {
-    background: linear-gradient(160deg, #35407d 0%, #4f6ef7 55%, #7b8cff 100%);
+    background: var(--visual-popup-gradient-primary);
   }
 }
 
@@ -169,7 +175,7 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 10px;
   padding: 44px 24px 26px;
-  color: #fff;
+  color: var(--visual-popup-white);
   text-align: center;
 }
 
@@ -192,9 +198,9 @@ onBeforeUnmount(() => {
   font-weight: 700;
   line-height: 1;
   text-decoration: none;
-  color: var(--v-primary-1, #4f6ef7);
-  background: #fff;
-  box-shadow: var(--v-shadow-soft);
+  color: var(--visual-popup-primary-1, #4f6ef7);
+  background: var(--visual-popup-white);
+  box-shadow: var(--visual-popup-shadow-soft);
   cursor: pointer;
   user-select: none;
 }
@@ -211,8 +217,8 @@ onBeforeUnmount(() => {
   justify-content: center;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
-  color: #fff;
+  background: color-mix(in srgb, var(--visual-popup-white) 25%, transparent);
+  color: var(--visual-popup-white);
   font-size: 18px;
   cursor: pointer;
 }

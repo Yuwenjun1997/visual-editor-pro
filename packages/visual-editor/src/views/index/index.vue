@@ -35,7 +35,7 @@ import type { PageSchema } from '../../types/visual-editor'
 import { autoSaveStatus, useAutoSave } from '../../hooks/useAutoSave'
 import { initializeHistory, suspendHistory } from '../../hooks/useHistory'
 import { useTheme } from '@visual/ui/hooks/useTheme'
-import { DEFAULT_VISUAL_THEME, resolveVisualThemeName } from '../../configs/visual-theme'
+import { resolvePageThemeName, resolveVisualThemeName, visualThemeConfig } from '../../configs/visual-theme'
 
 const { toggleRight } = useLayout()
 
@@ -48,7 +48,7 @@ const activePanel = computed(() => visualStore.activePanel)
 const { viewJson, viewJsonOptions, updateViewJson, restoreViewJson } = useViewJson()
 
 const { pageConfig } = usePageConfig()
-const { themeName } = useTheme()
+const { themeName, baseThemeName, initTheme } = useTheme()
 
 const { blockList } = useBlocks()
 
@@ -87,14 +87,14 @@ const applyPageSchema = (schema: PageSchema, appId?: string) => {
     appId,
     title: schema.title,
     slug: schema.slug || '',
-    themeName: resolveVisualThemeName(schema.themeName),
+    themeName: resolvePageThemeName(schema.themeName),
     globalStyle: schema.globalStyle || {},
   }
 }
 
 const resetPage = () => {
   blockList.value = []
-  pageConfig.value = { pageId: '', title: '', slug: '', globalStyle: {}, themeName: DEFAULT_VISUAL_THEME }
+  pageConfig.value = { pageId: '', title: '', slug: '', globalStyle: {}, themeName: null }
 }
 
 const restoreLocalDraftIfNeeded = async (databaseSchema?: PageSchema) => {
@@ -133,6 +133,14 @@ watch(
   async ([pageId, appId]) => {
     suspendHistory()
     hydrating.value = true
+    if (appId && visualConfig.appThemeLoader) {
+      const appTheme = await visualConfig.appThemeLoader(appId)
+      initTheme({
+        ...visualThemeConfig,
+        ...(appTheme || {}),
+        theme: { ...visualThemeConfig.theme, ...appTheme?.theme },
+      })
+    }
     if (!pageId) {
       resetPage()
       await restoreLocalDraftIfNeeded()
@@ -174,14 +182,16 @@ watch(
 onBeforeUnmount(stopAutoSave)
 
 const bindClassList = computed(() => [
-  resolveVisualThemeName(pageConfig.value.themeName),
+  pageConfig.value.themeName ? resolveVisualThemeName(pageConfig.value.themeName) : 'inherit',
   {
     'visual-disabled': disabled.value,
   },
 ])
 
 watchEffect(() => {
-  themeName.value = resolveVisualThemeName(pageConfig.value.themeName)
+  themeName.value = pageConfig.value.themeName
+    ? resolveVisualThemeName(pageConfig.value.themeName)
+    : baseThemeName.value
 })
 
 watchEffect(() => {

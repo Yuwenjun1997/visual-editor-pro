@@ -11,6 +11,7 @@ describe('stage sandbox protocol', () => {
       activePanel: 'design',
       selectedVid: 'block-1',
       themeMode: 'light',
+      previewIdentity: 'viewer',
     })
 
     const cloned = cloneStageMessage(message)
@@ -28,4 +29,11 @@ it('marks only complete protocol envelopes as stage messages', () => {
   expect(message.channel).toBe(STAGE_CHANNEL)
   expect(message.protocolVersion).toBe(STAGE_PROTOCOL_VERSION)
   expect(isStageMessage({ ...message, messageId: undefined })).toBe(false)
+})
+
+it('supports block delete requests from the iframe stage', () => {
+  const message = createStageMessage('stage-block-delete', 'editor', { vid: 'block-1' })
+
+  expect(isStageMessage(message)).toBe(true)
+  expect(cloneStageMessage(message).payload).toEqual({ vid: 'block-1' })
 })

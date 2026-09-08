@@ -35,8 +35,8 @@ const _props = defineProps<Props>()
 
 const _bindStyles = computed<CSSProperties>(() => ({
   flexDirection: _props.direction as any,
-  '--v-item-text-color': _props.fontColor,
-  '--v-item-text-size': _props.fontSize,
+  '--visual-grid-item-text-color': _props.fontColor,
+  '--visual-grid-item-text-size': _props.fontSize,
 }))
 </script>
 
@@ -55,8 +55,11 @@ const _bindStyles = computed<CSSProperties>(() => ({
 
   span {
     line-height: 1;
-    color: var(--v-item-text-color);
-    font-size: var(--v-item-text-size);
+    color: var(--visual-grid-item-text-color);
+    font-size: var(--visual-grid-item-text-size);
   }
 }
 </style>
+
+
+

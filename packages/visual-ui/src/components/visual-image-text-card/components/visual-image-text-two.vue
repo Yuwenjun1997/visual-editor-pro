@@ -51,18 +51,31 @@ const handleClick = (event: MouseEvent) => {
 @use '../../../assets/scss/utils/index.scss' as *;
 
 .visual-image-text-two {
+  --visual-image-text-two-surface-1: var(--v-surface-1);
+  --visual-image-text-two-text-md: var(--v-text-md);
+  --visual-image-text-two-spacing-sm: var(--v-spacing-sm);
+  --visual-image-text-two-black-opacity-6: var(--v-black-opacity-6);
+  --visual-image-text-two-white: var(--v-white);
+  --visual-image-text-two-spacing-md: var(--v-spacing-md);
+  --components-surface-1: var(--visual-image-text-two-surface-1);
+  --components-text-md: var(--visual-image-text-two-text-md);
+  --components-cover-height: var(--visual-image-text-two-cover-height);
+  --components-spacing-sm: var(--visual-image-text-two-spacing-sm);
+  --components-black-opacity-6: var(--visual-image-text-two-black-opacity-6);
+  --components-white: var(--visual-image-text-two-white);
+  --components-spacing-md: var(--visual-image-text-two-spacing-md);
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: var(--v-surface-1);
-  font-size: var(--v-text-md);
+  background-color: var(--components-surface-1);
+  font-size: var(--components-text-md);
 
   .visual-image-text__content {
     position: relative;
 
     .visual-image-text__cover {
       width: 100%;
-      height: var(--v-cover-height, 150px);
+      height: var(--components-cover-height, 150px);
 
       img {
         display: block;
@@ -75,10 +88,10 @@ const handleClick = (event: MouseEvent) => {
       position: absolute;
       bottom: 0;
       width: 100%;
-      padding: var(--v-spacing-sm);
-      background-color: var(--v-black-opacity-6);
-      color: var(--v-white);
-      font-size: var(--v-text-md);
+      padding: var(--components-spacing-sm);
+      background-color: var(--components-black-opacity-6);
+      color: var(--components-white);
+      font-size: var(--components-text-md);
       @include ellipsis(2);
     }
   }
@@ -87,8 +100,11 @@ const handleClick = (event: MouseEvent) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--v-spacing-md);
-    gap: var(--v-spacing-sm);
+    padding: var(--components-spacing-md);
+    gap: var(--components-spacing-sm);
   }
 }
 </style>
+
+
+

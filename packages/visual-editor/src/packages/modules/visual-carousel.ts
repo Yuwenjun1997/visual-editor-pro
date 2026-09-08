@@ -11,14 +11,8 @@ import {
 const defaultCover = '/image/cover.svg'
 
 const createListData = (): Record<keyof VisualCarouselItem, VisualEditorProps> => ({
-  image: createImageInputControl({
-    label: '图片地址',
-    defaultValue: defaultCover,
-  }),
-  title: createTextInputControl({
-    label: '图片标题',
-    defaultValue: '举杯邀明月，对影成三人',
-  }),
+  image: createImageInputControl({ label: '图片地址', defaultValue: defaultCover }),
+  title: createTextInputControl({ label: '图片标题', defaultValue: '举杯邀明月，对影成三人' }),
 })
 
 const visualCarousel: VisualEditorComponent<VisualCarouselProps, VisualCarouselItem> = {

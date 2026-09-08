@@ -52,7 +52,7 @@ export const createTemplateSchema = (
   pageId: '',
   title,
   slug: `${_appId}-${routeKey}`,
-  themeName: 'theme-blue',
+  themeName: null,
   globalStyle: { backgroundColor: '#f7f8fa' },
   blocks:
     pageType === 'home' || pageType === 'custom'
@@ -93,7 +93,13 @@ export const appService = {
     if (!isValidPageSlug(slug)) throw new Error('应用标识只能使用小写字母、数字和连字符，长度不超过 80 个字符')
     const { data, error } = await supabase
       .from('apps')
-      .insert({ user_id: payload.userId, name: payload.name, slug, layout_config: DEFAULT_LAYOUT, theme_config: {} })
+      .insert({
+        user_id: payload.userId,
+        name: payload.name,
+        slug,
+        layout_config: DEFAULT_LAYOUT,
+        theme_config: { themeName: 'theme-blue' },
+      })
       .select()
       .single()
     if (error) throw error

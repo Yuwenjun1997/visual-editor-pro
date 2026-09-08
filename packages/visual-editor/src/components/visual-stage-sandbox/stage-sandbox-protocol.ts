@@ -41,6 +41,7 @@ export interface StageStatePayload {
   activePanel: string
   selectedVid: string
   themeMode: 'light' | 'dark'
+  previewIdentity: 'anonymous' | 'viewer' | 'editor' | 'admin'
 }
 
 export interface InsertOperation {
@@ -79,6 +80,7 @@ export interface StageMessageMap {
   'stage-ready-request': Record<string, never>
   'stage-state-sync': StageStatePayload
   'stage-block-select': { vid: string }
+  'stage-block-delete': { vid: string }
   'stage-drag-start': { block: VisualBlockData }
   'stage-drag-move': { point: StagePoint }
   'stage-drag-end': Record<string, never>

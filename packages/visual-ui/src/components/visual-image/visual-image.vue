@@ -23,10 +23,10 @@ const _props = defineProps<Props>()
 const _bindProps = computed(() => _props.props)
 
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-image-width': _bindProps.value.width,
-  '--v-image-height': _bindProps.value.height,
-  '--v-image-radius': cssRadiusVar(_bindProps.value.round),
-  '--v-image-align': _bindProps.value.align,
+  '--visual-image-image-width': _bindProps.value.width,
+  '--visual-image-image-height': _bindProps.value.height,
+  '--visual-image-image-radius': cssRadiusVar(_bindProps.value.round),
+  '--visual-image-image-align': _bindProps.value.align,
 }))
 
 const _bindImageStyles = computed<CSSProperties>(() => {
@@ -44,14 +44,17 @@ const _bindImageStyles = computed<CSSProperties>(() => {
 .visual-image {
   .visual-image__inner {
     display: flex;
-    justify-content: var(--v-image-align, flex-start);
+    justify-content: var(--visual-image-image-align, flex-start);
     .visual-image__img {
       display: block;
-      width: var(--v-image-width, 100%);
-      height: var(--v-image-height, 180px);
-      border-radius: var(--v-image-radius);
+      width: var(--visual-image-image-width, 100%);
+      height: var(--visual-image-image-height, 180px);
+      border-radius: var(--visual-image-image-radius);
       overflow: hidden;
     }
   }
 }
 </style>
+
+
+

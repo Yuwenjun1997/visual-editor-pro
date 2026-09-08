@@ -1,5 +1,6 @@
 import { watchEffect } from 'vue'
 import { useTheme } from './useTheme'
+import { getThemeCssVariableValue } from '../utils/theme-utils'
 
 export interface MountThemeToRootOptions {
   /** 页面背景色：字面色值或主题 key（同 VisualAppProps.bgColor），传 getter 以保持响应式 */
@@ -23,7 +24,7 @@ export const mountThemeToRoot = (options: MountThemeToRootOptions = {}) => {
     const root = document.documentElement
 
     Object.entries(theme).forEach(([key, value]) => {
-      root.style.setProperty(`--v-${key}`, String(value))
+      root.style.setProperty(`--v-${key}`, getThemeCssVariableValue(key, String(value)))
     })
 
     const bgColor = typeof options.bgColor === 'function' ? options.bgColor() : options.bgColor

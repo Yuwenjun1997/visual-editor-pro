@@ -67,11 +67,11 @@ const _gridClass = computed(() => ({
 }))
 
 const gridStyle = computed<CSSProperties>(() => ({
-  '--v-product-gutter': cssSpacingVar(_bindProps.value.gutter),
+  '--visual-product-card-list-product-gutter': cssSpacingVar(_bindProps.value.gutter),
 }))
 
 const slideStyle = computed<CSSProperties>(() => ({
-  '--v-slide-width': _bindProps.value.cardWidth,
+  '--visual-product-card-list-slide-width': _bindProps.value.cardWidth,
 }))
 </script>
 
@@ -79,7 +79,7 @@ const slideStyle = computed<CSSProperties>(() => ({
 .visual-product-card-list {
   .visual-product-card-list__grid {
     display: grid;
-    gap: var(--v-product-gutter);
+    gap: var(--visual-product-card-list-product-gutter);
 
     &.layout-product-card-col-1 {
       grid-template-columns: repeat(1, 1fr);
@@ -91,9 +91,12 @@ const slideStyle = computed<CSSProperties>(() => ({
   }
 
   .visual-product-card-list__slide {
-    flex: 0 0 var(--v-slide-width, 240px);
+    flex: 0 0 var(--visual-product-card-list-slide-width, 240px);
     min-width: 0;
-    margin-right: var(--v-product-gutter);
+    margin-right: var(--visual-product-card-list-product-gutter);
   }
 }
 </style>
+
+
+

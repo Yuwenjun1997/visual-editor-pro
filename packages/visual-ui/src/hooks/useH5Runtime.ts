@@ -40,6 +40,7 @@ export interface H5Runtime {
   auth?: Readonly<Ref<H5AuthState>>
   detail?: Readonly<Ref<H5DetailContext | undefined>>
   editor?: boolean
+  $setEditorPreviewIdentity?(identity: 'anonymous' | 'viewer' | 'editor' | 'admin'): void
   $login?(): void | Promise<void>
   $logout?(): void | Promise<void>
   $detail?(kind: 'product' | 'article', id: string): Promise<Record<string, any>>

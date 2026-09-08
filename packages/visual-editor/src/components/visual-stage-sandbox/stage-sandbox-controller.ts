@@ -29,6 +29,7 @@ export interface StageSandboxController {
   onReady(callback: () => void): void
   onDropRequest(callback: (request: StageDropRequest, baseRevision: number, sessionId?: string) => void): void
   onBlockSelect(callback: (vid: string) => void): void
+  onBlockDelete(callback: (vid: string) => void): void
 }
 
 const activeController = shallowRef<StageSandboxController>()
@@ -61,6 +62,7 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
   let readyCallback: (() => void) | undefined
   let dropRequestCallback: ((request: StageDropRequest, baseRevision: number, sessionId?: string) => void) | undefined
   let blockSelectCallback: ((vid: string) => void) | undefined
+  let blockDeleteCallback: ((vid: string) => void) | undefined
   let readyTimer = 0
   let readyRequestListener: (() => void) | undefined
   let startPoint: { x: number; y: number } | undefined
@@ -99,6 +101,8 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
       dropRequestCallback?.(message.payload, message.baseRevision, message.sessionId)
     } else if (message.type === 'stage-block-select') {
       blockSelectCallback?.(message.payload.vid)
+    } else if (message.type === 'stage-block-delete') {
+      blockDeleteCallback?.(message.payload.vid)
     } else if (message.type === 'stage-drop-ack') {
       if (session.value && message.sessionId === session.value.id) finish()
     } else if (message.type === 'stage-drop-reject') {
@@ -242,5 +246,6 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
     onReady: (callback) => { readyCallback = callback },
     onDropRequest: (callback) => { dropRequestCallback = callback },
     onBlockSelect: (callback) => { blockSelectCallback = callback },
+    onBlockDelete: (callback) => { blockDeleteCallback = callback },
   }
 }

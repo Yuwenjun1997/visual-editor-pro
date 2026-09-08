@@ -17,18 +17,9 @@ const visualPoster: VisualEditorComponent<VisualPosterProps> = {
   souceDataType: 'VisualObject',
   props: {
     bgImage: createImageInputControl({ label: '背景图' }),
-    title: createTextInputControl({
-      label: '标题',
-      defaultValue: '邀请好友一起下单',
-    }),
-    subtitle: createTextInputControl({
-      label: '副标题',
-      defaultValue: '扫码领取专属优惠券',
-    }),
-    footerText: createTextInputControl({
-      label: '底部文案',
-      defaultValue: '长按识别二维码',
-    }),
+    title: createTextInputControl({ label: '标题', defaultValue: '邀请好友一起下单' }),
+    subtitle: createTextInputControl({ label: '副标题', defaultValue: '扫码领取专属优惠券' }),
+    footerText: createTextInputControl({ label: '底部文案', defaultValue: '长按识别二维码' }),
     qrContent: createTextInputControl({
       label: '二维码内容',
       tips: '网页地址或文本',

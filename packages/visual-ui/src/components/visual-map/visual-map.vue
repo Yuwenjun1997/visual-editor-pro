@@ -33,10 +33,10 @@ const _props = withDefaults(defineProps<Props>(), {
 const _bindProps = computed(() => _props.props)
 
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-map-width': _bindProps.value.width,
-  '--v-map-height': _bindProps.value.height,
-  '--v-map-radius': cssRadiusVar(_bindProps.value.round),
-  '--v-map-align': _bindProps.value.align,
+  '--visual-map-map-width': _bindProps.value.width,
+  '--visual-map-map-height': _bindProps.value.height,
+  '--visual-map-map-radius': cssRadiusVar(_bindProps.value.round),
+  '--visual-map-map-align': _bindProps.value.align,
 }))
 
 const _bindMapStyles = computed<CSSProperties>(() => ({
@@ -66,33 +66,40 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .visual-map {
+  --visual-map-gray-6: var(--v-gray-6);
+  --visual-map-gray-4: var(--v-gray-4);
+  --visual-map-text-4: var(--v-text-4);
+  --visual-map-text-1: var(--v-text-1);
   .visual-map__inner {
     display: flex;
-    justify-content: var(--v-map-align, flex-start);
+    justify-content: var(--visual-map-map-align, flex-start);
 
     .visual-map__map {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: var(--v-map-width, 100%);
-      height: var(--v-map-height, 180px);
-      border-radius: var(--v-map-radius);
+      width: var(--visual-map-map-width, 100%);
+      height: var(--visual-map-map-height, 180px);
+      border-radius: var(--visual-map-map-radius);
       overflow: hidden;
-      background-color: var(--v-gray-6, #f5f7fa);
-      border: 1px solid var(--v-gray-4, #dcdfe6);
+      background-color: var(--visual-map-gray-6, #f5f7fa);
+      border: 1px solid var(--visual-map-gray-4, #dcdfe6);
     }
 
     .visual-map__placeholder {
       text-align: center;
       font-size: 12px;
-      color: var(--v-text-4, #909399);
+      color: var(--visual-map-text-4, #909399);
     }
 
     .visual-map__title {
       margin-top: 4px;
       font-weight: 500;
-      color: var(--v-text-1, #303133);
+      color: var(--visual-map-text-1, #303133);
     }
   }
 }
 </style>
+
+
+

@@ -22,9 +22,9 @@ const ICON_PREFIX = 'bi-'
 const _props = defineProps<Props>()
 
 const _bindStyles = computed<CSSProperties>(() => ({
-  '--v-icon-color': _props.color,
-  '--v-icon-size': _props.size,
-  '--v-background-image-url': isPictureUrl(_props.icon) ? `url(${_props.icon})` : '',
+  '--visual-icon-icon-color': _props.color,
+  '--visual-icon-icon-size': _props.size,
+  '--visual-icon-background-image-url': isPictureUrl(_props.icon) ? `url(${_props.icon})` : '',
 }))
 
 const _iconName = computed(() => {
@@ -33,22 +33,25 @@ const _iconName = computed(() => {
   return ICON_PREFIX + name
 })
 
-const _bindClassList = computed(() => [!isPictureUrl(_props.icon) ? _iconName.value : 'v-icon__is-image'])
+const _bindClassList = computed(() => [!isPictureUrl(_props.icon) ? _iconName.value : 'visual-icon--image'])
 </script>
 
 <style lang="scss" scoped>
 .visual-icon {
   line-height: 1;
-  font-size: var(--v-icon-size);
-  color: var(--v-icon-color);
+  font-size: var(--visual-icon-icon-size);
+  color: var(--visual-icon-icon-color);
 
-  &.v-icon__is-image {
-    width: var(--v-icon-size);
-    height: var(--v-icon-size);
-    background-image: var(--v-background-image-url);
+  &--image {
+    width: var(--visual-icon-icon-size);
+    height: var(--visual-icon-icon-size);
+    background-image: var(--visual-icon-background-image-url);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
 }
 </style>
+
+
+

@@ -25,16 +25,8 @@ const visualEventContainer: VisualEditorComponent<VisualEventContainerProps> = {
   previewImage: '/componets/visual-event-container.svg',
   souceDataType: 'VisualObject',
   props: {
-    eventType: createNormalSelectControl({
-      label: '触发事件',
-      defaultValue: 'none',
-      options: eventOptions,
-    }),
-    actionType: createNormalSelectControl({
-      label: '执行动作',
-      defaultValue: 'none',
-      options: actionOptions,
-    }),
+    eventType: createNormalSelectControl({ label: '触发事件', defaultValue: 'none', options: eventOptions }),
+    actionType: createNormalSelectControl({ label: '执行动作', defaultValue: 'none', options: actionOptions }),
     actionUrl: createUrlInputControl({ label: '链接地址' }),
     actionText: createTextInputControl({ label: '提示内容', defaultValue: '' }),
     actionCode: createTextInputControl({ label: '自定义代码', defaultValue: '' }),

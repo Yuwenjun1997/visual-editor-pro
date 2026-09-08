@@ -36,15 +36,17 @@ const _props = defineProps<Props>()
 const title = computed(() => _props.props.title || '')
 
 const innerStyle = computed<CSSProperties>(() => ({
-  '--v-audio-width': _props.props.width || '100%',
-  '--v-audio-round': _props.props.round || '0px',
+  '--visual-audio-audio-width': _props.props.width || '100%',
+  '--visual-audio-audio-round': _props.props.round || '0px',
 }))
 </script>
 
 <style scoped lang="scss">
 .visual-audio {
+  --visual-audio-text-1: var(--v-text-1);
+  --visual-audio-primary-1: var(--v-primary-1);
   .visual-audio__inner {
-    width: var(--v-audio-width, 100%);
+    width: var(--visual-audio-audio-width, 100%);
   }
 
   .visual-audio__title {
@@ -54,18 +56,21 @@ const innerStyle = computed<CSSProperties>(() => ({
     margin-bottom: 8px;
     font-size: 14px;
     font-weight: 600;
-    color: var(--v-text-1, #2b2f3a);
+    color: var(--visual-audio-text-1, #2b2f3a);
   }
 
   .visual-audio__title-icon {
-    color: var(--v-primary-1, #4f6ef7);
+    color: var(--visual-audio-primary-1, #4f6ef7);
   }
 
   .visual-audio__player {
     display: block;
     width: 100%;
     height: 44px;
-    border-radius: var(--v-audio-round, 0);
+    border-radius: var(--visual-audio-audio-round, 0);
   }
 }
 </style>
+
+
+

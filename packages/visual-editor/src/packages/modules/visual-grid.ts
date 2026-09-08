@@ -11,10 +11,7 @@ import {
 const defaultCover = '/image/cover.svg'
 
 const createListData = (): Record<keyof VisualGridItemProps, VisualEditorProps> => ({
-  icon: createIconInputControl({
-    label: '图标名称',
-    defaultValue: defaultCover,
-  }),
+  icon: createIconInputControl({ label: '图标名称', defaultValue: defaultCover }),
   text: createTextInputControl({ label: '文字', defaultValue: '文字' }),
 })
 
@@ -26,11 +23,7 @@ const visualGrid: VisualEditorComponent<VisualGridProps> = {
   previewImage: '/componets/visual-grid.svg',
   souceDataType: 'VisualObjectArray',
   slots: {
-    default: {
-      name: '组件',
-      size: 1,
-      blocks: [],
-    },
+    default: { name: '组件', size: 1, blocks: [] },
   },
   props: {
     columnNum: createTextInputControl({ label: '列数', defaultValue: '4' }),

@@ -51,9 +51,20 @@
         </el-radio-button>
       </el-tooltip>
     </el-radio-group>
+    <el-select v-model="visualStore.previewIdentity" aria-label="模拟身份" size="small" style="width: 112px">
+      <el-option label="未登录" value="anonymous" />
+      <el-option label="普通用户" value="viewer" />
+      <el-option label="编辑者" value="editor" />
+      <el-option label="管理员" value="admin" />
+    </el-select>
     <div class="ve-flex-1" />
     <span v-if="statusLabel" class="publish-status">{{ statusLabel }}</span>
     <el-button-group size="small">
+      <el-tooltip content="清空舞台">
+        <el-button :disabled="!blockList.length" @click="handleClear">
+          <Icon icon="ion:trash-outline" />
+        </el-button>
+      </el-tooltip>
       <el-tooltip content="运行 H5 预览">
         <el-button :loading="previewing" @click="handleRun">
           <Icon icon="ion:play-outline" />
@@ -85,7 +96,7 @@ import { useBlocks } from '../../hooks/useBlocks'
 import { usePageConfig } from '../../hooks/usePageConfig'
 import { useViusalStore } from '../../store/useVisual'
 import { visualConfig } from '../../utils/visual.registry'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { Icon } from '@iconify/vue'
 import VisualRevisionPanel from '../visual-revision-panel/visual-revision-panel.vue'
 import { autoSavePaused, autoSaveStatus, getAutoSaveController } from '../../hooks/useAutoSave'
@@ -96,7 +107,7 @@ defineOptions({
 
 const visualStore = useViusalStore()
 const { redo, undo, canRedo, canUndo } = useHistory()
-const { blockList } = useBlocks()
+const { blockList, clearAll } = useBlocks()
 const { pageConfig } = usePageConfig()
 const publishing = ref(false)
 const previewing = ref(false)
@@ -114,6 +125,20 @@ const statusLabel = computed(
       publishing: '发布中',
     })[autoSaveStatus.value] || '',
 )
+
+const handleClear = async () => {
+  if (!blockList.value.length) return
+  try {
+    await ElMessageBox.confirm('清空后可通过撤销恢复，确定清空舞台中的全部组件吗？', '清空舞台', {
+      confirmButtonText: '清空',
+      cancelButtonText: '取消',
+      type: 'warning',
+    })
+    if (clearAll()) ElMessage.success('舞台已清空')
+  } catch {
+    // 用户取消清空时无需提示。
+  }
+}
 
 const handleRun = async () => {
   if (!visualConfig.onPreview || previewing.value) {

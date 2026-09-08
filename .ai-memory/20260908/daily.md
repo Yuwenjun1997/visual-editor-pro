@@ -33,3 +33,57 @@
 - **文件**: `apps/web/supabase/migrations/20260908150000_rpc_function_naming_cleanup.sql`、`apps/web/src/services/`、`apps/h5/server/utils/runtime.ts`
 - **决策**: 采用 `域_动作_资源_场景` 命名，更新全部仓内调用；删除已被 `page_write_draft` 替代的 `save_page_with_data_source_bindings`，不保留旧名兼容层。
 - **验证**: 全仓旧 RPC 调用检索为空；`pnpm --filter @visual/editor test` 通过（38/38）；`pnpm --filter @visual/editor type-check` 通过。
+
+## [14:25] - 功能实现: 完善编辑器舞台操作与详情空态
+
+- **文件**: `packages/visual-editor/src/components/visual-stage-{bar,panel,sandbox}/`、`packages/visual-editor/src/hooks/useBlocks.ts`、`packages/visual-ui/src/components/visual-detail-empty-state/`、`apps/web/src/editor-stage-main.ts`
+- **决策**: 模拟身份由舞台工具栏全局控制并同步至 iframe runtime；详情组件共用带图标的未配置内容空态。
+- **验证**: `pnpm --filter @visual/editor test` 通过（40/40）；编辑器与 Web type-check 通过。
+
+## [14:45] - 代码重构: 详情组件样式本地化并统一 visual-ui BEM 类名
+
+- **文件**: `packages/visual-ui/src/components/visual-{article-detail,product-detail,detail-empty-state,user-card,login-panel}/`、`packages/visual-ui/src/assets/scss/content.scss`
+- **决策**: 组件统一使用 `visual-<block>__<element>--<modifier>`；详情与富文本规则随各自组件加载，移除全局内容样式入口。
+- **验证**: 目标文件 Prettier 检查通过；BEM 历史类扫描为空。`type-check` 与 ESLint 被工作区缺失的 React/Tiptap / optionator 依赖阻断。
+
+## [16:40] - 功能实现: 精简颜色输入预设并支持自定义颜色
+
+- **文件**: `packages/visual-editor/src/components/visual-color-picker/`、`packages/visual-editor/src/components/visual-control/visual-color-input/`
+- **决策**: 颜色预设仅展示当前主题的语义色，不再展开深浅阶梯色；增加 `el-color-picker` 支持用户自由选择颜色。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过。
+
+## [16:52] - 主题调整: 语义 CSS 变量改为引用基础令牌
+
+- **文件**: `packages/visual-ui/src/utils/theme-utils.ts`、`packages/visual-ui/src/components/visual-app/visual-app.vue`、`packages/visual-ui/src/hooks/useMountThemeToRoot.ts`、`packages/visual-editor/src/configs/visual-theme.test.ts`
+- **决策**: `--v-*-color` 与 `--v-bg-color` 的 CSS 值统一引用现有 `--v-*` 基础令牌，避免重复写入实际颜色值。
+- **验证**: `pnpm --filter @visual/editor test` 通过（42/42）；`pnpm --filter @visual/editor type-check` 通过。
+
+## [17:54] - Bug 修复: 修复舞台空插槽、页签内容与五个组件主题背景适配
+
+- **文件**: `packages/visual-ui/src/components/visual-flex/visual-flex.vue`、`visual-tabs/visual-tabs.vue`、`visual-notice-bar/visual-notice-bar.vue`、`visual-popup/visual-popup.vue`、`visual-float-action/visual-float-action.vue`
+- **决策**: Flex 内容区占满可用高度；Tabs 设置首个页签初始值并强制保留插槽内容挂载；通知条、弹窗和浮动按钮统一使用 `--v-*` 主题令牌，弹窗渐变背景移除硬编码覆盖层。
+- **验证**: `pnpm --filter @visual/ui build:lib -- --minify false` 通过；`pnpm --filter @visual/editor test` 通过（42/42）；`pnpm --filter @visual/editor type-check` 通过；目标文件 `git diff --check` 无空白错误。
+
+## [18:00] - Bug 修复: 进一步修复 Flex 高度链与 Tabs 舞台插槽生命周期
+
+- **文件**: `packages/visual-ui/src/components/visual-flex/visual-flex.vue`、`packages/visual-ui/src/components/visual-tabs/visual-tabs.vue`
+- **决策**: 通过 `:deep(.visual-box__inner)` 补齐 Flex 子组件内层高度；Tabs 内容改为组件自身的 `v-show` 活动面板，保留舞台插槽实例，避免 Reka `TabsContent` 的 Presence 卸载影响编辑器拖拽插槽。
+- **验证**: `pnpm --filter @visual/ui build:lib -- --minify false` 通过；`pnpm --filter @visual/editor type-check` 通过；`pnpm --filter @visual/editor test` 通过（42/42）。
+
+## [18:08] - Bug 修复: 统一组件库 library CSS 输出文件名
+
+- **文件**: `packages/visual-ui/vite.config.ts`、`packages/visual-editor/vite.config.ts`
+- **决策**: Vite library build 的 CSS 文件名统一为 `style.css`，与两个包的 `exports` 和 Web/H5 入口导入路径一致，避免构建清理 dist 后丢失入口样式。
+- **验证**: `pnpm --filter @visual/ui build` 通过且 `packages/visual-ui/dist/style.css` 存在；`@visual/ui build:lib` 通过并生成 `dist/style.css`。`@visual/editor build:lib` 仍被既有 `/image/coding.svg` unresolved import 阻断。
+
+## [18:14] - Bug 修复: 初始化 VisualTabs 物料默认内容插槽
+
+- **文件**: `packages/visual-editor/src/packages/modules/visual-tabs.ts`
+- **决策**: 为默认三页签创建 `tab-0`、`tab-1`、`tab-2` 空 slots，使从物料面板新拖入的页签也能在舞台注册内容拖放容器；页签增删仍由现有状态同步逻辑维护。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过；`pnpm --filter @visual/editor test` 通过（42/42）。
+
+## [18:18] - Bug 修复: 兼容旧 VisualTabs 数据并补充插槽回归测试
+
+- **文件**: `packages/visual-editor/src/utils/visual.utils.ts`、`packages/visual-editor/src/utils/visual.utils.test.ts`
+- **决策**: 页面数据格式化时按 `listData` 自动补齐缺失的 `tab-*` slots，并保留已有页签内容，避免历史页面仍无法拖放。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过；`pnpm --filter @visual/editor test` 通过（44/44）；目标文件 `git diff --check` 无空白错误。

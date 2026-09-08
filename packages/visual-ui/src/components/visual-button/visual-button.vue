@@ -20,6 +20,7 @@ import VisualBox from '../visual-box/visual-box.vue'
 import type { VisualButtonProps } from './interface'
 import { useH5Runtime } from '../../hooks/useH5Runtime'
 import { navigateVisualUrl } from '../../utils/url'
+import { useTheme } from '../../hooks/useTheme'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -33,6 +34,7 @@ defineOptions({
 
 const _props = defineProps<Props>()
 const runtime = useH5Runtime()
+const { colorVar } = useTheme()
 
 const bindVariantClass = computed(() => {
   const variant = _props.props.variant || 'primary'
@@ -47,8 +49,8 @@ const bindSizeClass = computed(() => {
 
 const bindStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {}
-  if (_props.props.bgColor) style.backgroundColor = _props.props.bgColor
-  if (_props.props.textColor) style.color = _props.props.textColor
+  if (_props.props.bgColor) style['--visual-button-background-color'] = colorVar(_props.props.bgColor)
+  if (_props.props.textColor) style['--visual-button-text-color'] = colorVar(_props.props.textColor)
   if (_props.props.radius) style.borderRadius = _props.props.radius
   return style
 })
@@ -64,7 +66,25 @@ const handleClick = (event: MouseEvent) => {
 
 <style scoped lang="scss">
 .visual-button {
+  --visual-button-primary-color: var(--v-primary-color);
+  --visual-button-white: var(--v-white);
+  --visual-button-radius-moody-sm: var(--v-radius-moody-sm);
+  --visual-button-font-display: var(--v-font-display);
+  --visual-button-motion-fast: var(--v-motion-fast);
+  --visual-button-ease-soft: var(--v-ease-soft);
+  --visual-button-shadow-soft: var(--v-shadow-soft);
+  --visual-button-shadow-soft-lg: var(--v-shadow-soft-lg);
+  --visual-button-warning-color: var(--v-warning-color);
+  --visual-button-error-color: var(--v-error-color);
+  --visual-button-gray-2: var(--v-gray-2);
+  --visual-button-text-color: var(--v-text-color);
+  --visual-button-surface-2: var(--v-surface-2);
+  --visual-button-text-4: var(--v-text-4);
+  --visual-button-font-body: var(--v-font-body);
+  --visual-button-gray-1: var(--v-gray-1);
   .visual-button__btn {
+    --visual-button-background-color: var(--visual-button-primary-color);
+    --visual-button-text-color: var(--visual-button-white);
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
@@ -77,16 +97,16 @@ const handleClick = (event: MouseEvent) => {
     cursor: pointer;
     user-select: none;
     border: none;
-    border-radius: var(--v-radius-moody-sm);
-    font-family: var(--v-font-display);
+    border-radius: var(--visual-button-radius-moody-sm);
+    font-family: var(--visual-button-font-display);
     font-size: 14px;
     font-weight: 600;
     transition:
-      transform var(--v-motion-fast) var(--v-ease-soft),
-      box-shadow var(--v-motion-fast) var(--v-ease-soft),
-      background-color var(--v-motion-fast) var(--v-ease-soft),
-      color var(--v-motion-fast) var(--v-ease-soft),
-      opacity var(--v-motion-fast) var(--v-ease-soft);
+      transform var(--visual-button-motion-fast) var(--visual-button-ease-soft),
+      box-shadow var(--visual-button-motion-fast) var(--visual-button-ease-soft),
+      background-color var(--visual-button-motion-fast) var(--visual-button-ease-soft),
+      color var(--visual-button-motion-fast) var(--visual-button-ease-soft),
+      opacity var(--visual-button-motion-fast) var(--visual-button-ease-soft);
 
     &:active {
       opacity: 0.85;
@@ -94,52 +114,58 @@ const handleClick = (event: MouseEvent) => {
     }
 
     &--default {
-      background-color: var(--v-primary-1);
-      color: var(--v-white);
-      box-shadow: var(--v-shadow-soft);
+      background-color: var(--visual-button-background-color);
+      color: var(--visual-button-text-color);
+      box-shadow: var(--visual-button-shadow-soft);
 
       &:hover {
-        box-shadow: var(--v-shadow-soft-lg);
+        box-shadow: var(--visual-button-shadow-soft-lg);
       }
     }
 
     &--warning {
-      background-color: var(--v-warning-1);
-      color: var(--v-white);
-      box-shadow: var(--v-shadow-soft);
+      --visual-button-background-color: var(--visual-button-warning-color);
+      background-color: var(--visual-button-background-color);
+      color: var(--visual-button-text-color);
+      box-shadow: var(--visual-button-shadow-soft);
 
       &:hover {
-        box-shadow: var(--v-shadow-soft-lg);
+        box-shadow: var(--visual-button-shadow-soft-lg);
       }
     }
 
     &--destructive {
-      background-color: var(--v-error-1);
-      color: var(--v-white);
-      box-shadow: var(--v-shadow-soft);
+      --visual-button-background-color: var(--visual-button-error-color);
+      background-color: var(--visual-button-background-color);
+      color: var(--visual-button-text-color);
+      box-shadow: var(--visual-button-shadow-soft);
 
       &:hover {
-        box-shadow: var(--v-shadow-soft-lg);
+        box-shadow: var(--visual-button-shadow-soft-lg);
       }
     }
 
     &--outline {
       background-color: transparent;
-      border: 1px solid var(--v-gray-2);
-      color: var(--v-text-1);
+      border: 1px solid var(--visual-button-gray-2);
+      --visual-button-background-color: transparent;
+      --visual-button-text-color: var(--visual-button-text-4);
+      color: var(--visual-button-text-color);
 
       &:hover {
-        background-color: var(--v-surface-2);
+        background-color: var(--visual-button-surface-2);
       }
     }
 
     &--ghost {
       background-color: transparent;
-      color: var(--v-text-4);
-      font-family: var(--v-font-body);
+      --visual-button-background-color: transparent;
+      --visual-button-text-color: var(--visual-button-text-4);
+      color: var(--visual-button-text-color);
+      font-family: var(--visual-button-font-body);
 
       &:hover {
-        background-color: var(--v-gray-1);
+        background-color: var(--visual-button-gray-1);
       }
     }
 

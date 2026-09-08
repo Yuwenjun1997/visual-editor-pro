@@ -71,11 +71,11 @@ watch(
 )
 
 const innerStyle = computed<CSSProperties>(() => ({
-  '--v-form-round': _props.props.radius || '0px',
+  '--visual-form-form-round': _props.props.radius || '0px',
 }))
 
 const submitStyle = computed<CSSProperties>(() => ({
-  '--v-form-btn-bg': _props.props.submitButtonColor,
+  '--visual-form-form-btn-bg': _props.props.submitButtonColor,
 }))
 
 const handleSubmit = () => {
@@ -103,12 +103,20 @@ const handleSubmit = () => {
 
 <style scoped lang="scss">
 .visual-form {
+  --visual-form-text-1: var(--v-text-1);
+  --visual-form-error-1: var(--v-error-1);
+  --visual-form-border-1: var(--v-border-1);
+  --visual-form-radius-moody-sm: var(--v-radius-moody-sm);
+  --visual-form-motion-fast: var(--v-motion-fast);
+  --visual-form-ease-soft: var(--v-ease-soft);
+  --visual-form-primary-1: var(--v-primary-1);
+  --visual-form-text-3: var(--v-text-3);
   .visual-form__inner {
     display: flex;
     flex-direction: column;
     gap: 14px;
     padding: 18px 16px;
-    border-radius: var(--v-form-round, 0);
+    border-radius: var(--visual-form-form-round, 0);
     background: #ffffff;
   }
 
@@ -121,29 +129,29 @@ const handleSubmit = () => {
   .visual-form__label {
     font-size: 14px;
     font-weight: 600;
-    color: var(--v-text-1, #2b2f3a);
+    color: var(--visual-form-text-1, #2b2f3a);
   }
 
   .visual-form__required {
     margin-left: 2px;
     font-style: normal;
-    color: var(--v-error-1, #ff5c7a);
+    color: var(--visual-form-error-1, #ff5c7a);
   }
 
   .visual-form__control {
     width: 100%;
     box-sizing: border-box;
     padding: 10px 12px;
-    border: 1px solid var(--v-border-1, #e5e8f2);
-    border-radius: var(--v-radius-moody-sm);
+    border: 1px solid var(--visual-form-border-1, #e5e8f2);
+    border-radius: var(--visual-form-radius-moody-sm);
     background: #f8f9fe;
     font-size: 14px;
     color: inherit;
     outline: none;
-    transition: border-color var(--v-motion-fast) var(--v-ease-soft);
+    transition: border-color var(--visual-form-motion-fast) var(--visual-form-ease-soft);
 
     &:focus {
-      border-color: var(--v-primary-1, #4f6ef7);
+      border-color: var(--visual-form-primary-1, #4f6ef7);
       background: #fff;
     }
 
@@ -153,7 +161,7 @@ const handleSubmit = () => {
     }
 
     &::placeholder {
-      color: var(--v-text-3, #b3bac7);
+      color: var(--visual-form-text-3, #b3bac7);
     }
   }
 
@@ -162,14 +170,14 @@ const handleSubmit = () => {
     margin-top: 4px;
     padding: 12px;
     border: 0;
-    border-radius: var(--v-radius-moody-sm);
+    border-radius: var(--visual-form-radius-moody-sm);
     font-size: 15px;
     font-weight: 700;
     line-height: 1;
-    background-color: var(--v-form-btn-bg, var(--v-primary-1, #2563eb));
+    background-color: var(--visual-form-form-btn-bg, var(--visual-form-primary-1, #2563eb));
     color: #fff;
     cursor: pointer;
-    transition: opacity var(--v-motion-fast) var(--v-ease-soft);
+    transition: opacity var(--visual-form-motion-fast) var(--visual-form-ease-soft);
 
     &:active {
       opacity: 0.85;
@@ -177,3 +185,6 @@ const handleSubmit = () => {
   }
 }
 </style>
+
+
+

@@ -22,6 +22,11 @@ export const resolveVisualThemeName = (themeName?: string | null): VisualThemeNa
   return (themeName && legacyThemeAliases[themeName]) || DEFAULT_VISUAL_THEME
 }
 
+export const resolvePageThemeName = (themeName?: string | null): VisualThemeName | null =>
+  themeName === null || themeName === 'inherit' || typeof themeName === 'undefined'
+    ? null
+    : resolveVisualThemeName(themeName)
+
 export const visualThemeConfig: CustomThemeConfig = {
   themeName: DEFAULT_VISUAL_THEME,
   theme: Object.fromEntries(

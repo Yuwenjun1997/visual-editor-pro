@@ -10,10 +10,7 @@ const visualNoticeBar: VisualEditorComponent<VisualNoticeBarProps> = {
   previewImage: '/componets/visual-notice-bar.svg',
   souceDataType: 'VisualObject',
   props: {
-    text: createTextInputControl({
-      label: '公告内容',
-      defaultValue: '欢迎来到 xxx，更多优惠敬请期待～',
-    }),
+    text: createTextInputControl({ label: '公告内容', defaultValue: '欢迎来到 xxx，更多优惠敬请期待～' }),
     speed: createTextInputControl({
       label: '滚动时长（秒）',
       tips: '一轮完整滚动耗时，数字越大越慢',

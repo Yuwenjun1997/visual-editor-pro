@@ -10,6 +10,7 @@ interface VisualState {
   currentBlock: VisualBlockData | null
   visualEditorComponent: VisualEditorComponent | null
   moveBlock: VisualBlockData | null
+  previewIdentity: 'anonymous' | 'viewer' | 'editor' | 'admin'
 }
 
 export const useViusalStore = defineStore('visual', {
@@ -21,6 +22,7 @@ export const useViusalStore = defineStore('visual', {
     currentBlock: null,
     visualEditorComponent: null,
     moveBlock: null,
+    previewIdentity: 'viewer',
   }),
 
   actions: {
@@ -35,6 +37,9 @@ export const useViusalStore = defineStore('visual', {
     },
     setDevice(device: 'h5' | 'pad' | 'pc') {
       this.device = device
+    },
+    setPreviewIdentity(identity: VisualState['previewIdentity']) {
+      this.previewIdentity = identity
     },
     updateCurrentBlock() {
       if (!this.currentBlock) return

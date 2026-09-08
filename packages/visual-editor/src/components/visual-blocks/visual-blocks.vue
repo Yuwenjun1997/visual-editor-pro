@@ -15,8 +15,8 @@
     :class="{ 'is-empty': isEmpty }"
     :data-slot="isEmpty ? '组件拖拽到这里' : ''"
     fallback-class="visual-stage-sortable-fallback"
-    @end="onEnd($event)"
     @start="onStart"
+    @end="onEnd($event)"
   >
     <div
       v-for="(element, index) in moduleList"
@@ -189,6 +189,7 @@ const bindStyle = computed(() => ({
 .visual-group {
   // 舞台页锚定容器：悬浮/浮层效果（absolute）锚定至此，而非浏览器视口
   position: relative;
+  flex: 1;
 
   &.is-empty {
     position: relative;

@@ -102,16 +102,19 @@ const handleClick = (event: MouseEvent) => {
 }
 
 const actionStyle = computed<CSSProperties>(() => ({
-  '--v-float-bg': _props.props.bgColor,
-  '--v-float-color': textColor.value,
-  '--v-float-bottom': _props.props.bottom || '96px',
+  '--visual-float-action-float-bg': _props.props.bgColor,
+  '--visual-float-action-float-color': textColor.value,
+  '--visual-float-action-float-bottom': _props.props.bottom || '96px',
 }))
 </script>
 
 <style scoped lang="scss">
 .visual-float-action {
+  --visual-float-action-primary-1: var(--v-primary-1);
+  --visual-float-action-shadow-soft: var(--v-shadow-soft);
+  --visual-float-action-white: var(--v-white);
   position: fixed;
-  bottom: var(--v-float-bottom, 96px);
+  bottom: var(--visual-float-action-float-bottom, 96px);
   z-index: 999;
   display: flex;
   align-items: center;
@@ -119,9 +122,9 @@ const actionStyle = computed<CSSProperties>(() => ({
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: var(--v-float-bg, var(--v-primary-1, #2563eb));
-  color: var(--v-float-color, #fff);
-  box-shadow: var(--v-shadow-soft);
+  background: var(--visual-float-action-float-bg, var(--visual-float-action-primary-1, #2563eb));
+  color: var(--visual-float-action-float-color, var(--visual-float-action-white));
+  box-shadow: var(--visual-float-action-shadow-soft);
   text-decoration: none;
 
   &--right {

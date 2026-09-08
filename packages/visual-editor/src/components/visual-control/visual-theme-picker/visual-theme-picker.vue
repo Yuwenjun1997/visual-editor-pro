@@ -10,6 +10,14 @@
       </template>
       <div class="theme-list">
         <span
+          class="theme-item theme-item--inherit"
+          :class="{ 'is-active': !modelValue }"
+          title="继承应用主题"
+          @click="handleClick(null)"
+        >
+          <Icon icon="bi:link" />
+        </span>
+        <span
           v-for="(color, theme) in themeMap"
           :key="theme"
           class="theme-item"
@@ -30,7 +38,7 @@ import type { CSSProperties } from 'vue'
 type ThemeType = keyof typeof themeMap
 
 interface Props {
-  modelValue?: ThemeType
+  modelValue?: ThemeType | null
 }
 
 defineOptions({
@@ -38,11 +46,11 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: 'theme-blue',
+  modelValue: null,
 })
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+  (e: 'update:modelValue', value: string | null): void
 }>()
 
 const modelValue = useVModel(props, 'modelValue', emit)
@@ -50,10 +58,10 @@ const modelValue = useVModel(props, 'modelValue', emit)
 const visible = ref(false)
 
 const bindStyles = computed<CSSProperties>(() => ({
-  backgroundColor: themeMap[modelValue.value],
+  backgroundColor: modelValue.value ? themeMap[modelValue.value] : 'transparent',
 }))
 
-const handleClick = (color: ThemeType) => {
+const handleClick = (color: ThemeType | null) => {
   modelValue.value = color
   visible.value = false
 }
@@ -92,6 +100,14 @@ const handleClick = (color: ThemeType) => {
       height: 36px;
       outline-offset: -2px;
       cursor: pointer;
+
+      &--inherit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--el-text-color-secondary);
+        background: repeating-linear-gradient(135deg, #fff 0 6px, #e5e7eb 6px 12px);
+      }
 
       &:hover {
         outline: 2px solid var(--el-color-primary);

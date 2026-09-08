@@ -38,12 +38,12 @@ defineOptions({
 const _props = defineProps<Props>()
 
 const cardStyle = computed<CSSProperties>(() => ({
-  '--v-coupon-bg': _props.props.cardBgColor,
-  '--v-coupon-color': _props.props.textColor,
+  '--visual-coupon-coupon-bg': _props.props.cardBgColor,
+  '--visual-coupon-coupon-color': _props.props.textColor,
 }))
 
 const btnStyle = computed<CSSProperties>(() => ({
-  '--v-coupon-btn-bg': _props.props.btnColor,
+  '--visual-coupon-coupon-btn-bg': _props.props.btnColor,
 }))
 
 const layoutClass = computed(() => (_props.props.layout === 'column' ? 'visual-coupon__card--column' : ''))
@@ -58,20 +58,24 @@ const themeClass = computed(() => {
 })
 
 const badgeStyle = computed<CSSProperties>(() => ({
-  '--v-coupon-badge-bg': _props.props.badgeColor,
+  '--visual-coupon-coupon-badge-bg': _props.props.badgeColor,
 }))
 </script>
 
 <style scoped lang="scss">
 .visual-coupon {
+  --visual-coupon-gradient-primary: var(--v-gradient-primary);
+  --visual-coupon-shadow-soft: var(--v-shadow-soft);
+  --visual-coupon-error-1: var(--v-error-1);
+  --visual-coupon-primary-1: var(--v-primary-1);
   .visual-coupon__card {
     position: relative;
     display: flex;
     align-items: stretch;
     overflow: hidden;
-    background: var(--v-coupon-bg, var(--v-gradient-primary));
-    color: var(--v-coupon-color, #fff);
-    box-shadow: var(--v-shadow-soft);
+    background: var(--visual-coupon-coupon-bg, var(--visual-coupon-gradient-primary));
+    color: var(--visual-coupon-coupon-color, #fff);
+    box-shadow: var(--visual-coupon-shadow-soft);
 
     // 纵向布局：金额在上、信息在下
     &--column {
@@ -122,21 +126,21 @@ const badgeStyle = computed<CSSProperties>(() => ({
 
     // 配色主题：inline cardBgColor（--v-coupon-bg）优先级更高，用户自定义色仍生效
     &--theme-pink {
-      --v-coupon-bg: linear-gradient(135deg, #ff6a88, #ff99ac);
-      --v-coupon-btn-bg: #fff;
-      --v-coupon-btn-text: #ff5c7a;
+      --visual-coupon-coupon-bg: linear-gradient(135deg, #ff6a88, #ff99ac);
+      --visual-coupon-coupon-btn-bg: #fff;
+      --visual-coupon-coupon-btn-text: #ff5c7a;
     }
 
     &--theme-gold {
-      --v-coupon-bg: linear-gradient(135deg, #f6c445, #f08a4b);
-      --v-coupon-btn-bg: #fff;
-      --v-coupon-btn-text: #e07a2f;
+      --visual-coupon-coupon-bg: linear-gradient(135deg, #f6c445, #f08a4b);
+      --visual-coupon-coupon-btn-bg: #fff;
+      --visual-coupon-coupon-btn-text: #e07a2f;
     }
 
     &--theme-cool {
-      --v-coupon-bg: linear-gradient(135deg, #2193b0, #6dd5ed);
-      --v-coupon-btn-bg: #fff;
-      --v-coupon-btn-text: #2a9dbb;
+      --visual-coupon-coupon-bg: linear-gradient(135deg, #2193b0, #6dd5ed);
+      --visual-coupon-coupon-btn-bg: #fff;
+      --visual-coupon-coupon-btn-text: #2a9dbb;
     }
   }
 
@@ -151,7 +155,7 @@ const badgeStyle = computed<CSSProperties>(() => ({
     font-size: 12px;
     font-weight: 700;
     line-height: 1;
-    background-color: var(--v-coupon-badge-bg, var(--v-error-1));
+    background-color: var(--visual-coupon-coupon-badge-bg, var(--visual-coupon-error-1));
     color: #fff;
   }
 
@@ -217,9 +221,12 @@ const badgeStyle = computed<CSSProperties>(() => ({
       font-size: 13px;
       font-weight: 600;
       text-align: center;
-      background-color: var(--v-coupon-btn-bg, #ffffff);
-      color: var(--v-coupon-btn-text, var(--v-coupon-bg, var(--v-primary-1)));
+      background-color: var(--visual-coupon-coupon-btn-bg, #ffffff);
+      color: var(--visual-coupon-coupon-btn-text, var(--visual-coupon-coupon-bg, var(--visual-coupon-primary-1)));
     }
   }
 }
 </style>
+
+
+

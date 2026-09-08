@@ -36,10 +36,10 @@ const duration = computed(() => {
 
 const innerStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {
-    '--v-notice-duration': `${duration.value}s`,
+    '--visual-notice-bar-notice-duration': `${duration.value}s`,
   }
-  if (_props.props.bgColor) style['--v-notice-bg'] = _props.props.bgColor
-  if (_props.props.textColor) style['--v-notice-color'] = _props.props.textColor
+  if (_props.props.bgColor) style['--visual-notice-bar-notice-bg'] = _props.props.bgColor
+  if (_props.props.textColor) style['--visual-notice-bar-notice-color'] = _props.props.textColor
   if (_props.props.radius) style.borderRadius = _props.props.radius
   return style
 })
@@ -47,15 +47,18 @@ const innerStyle = computed<CSSProperties>(() => {
 
 <style scoped lang="scss">
 .visual-notice-bar {
+  --visual-notice-bar-radius-moody-sm: var(--v-radius-moody-sm);
+  --visual-notice-bar-gradient-primary: var(--v-gradient-primary);
+  --visual-notice-bar-white: var(--v-white);
   .visual-notice-bar__inner {
     display: flex;
     align-items: center;
     gap: 8px;
     overflow: hidden;
     padding: 9px 12px;
-    border-radius: var(--v-radius-moody-sm);
-    background: var(--v-notice-bg, linear-gradient(135deg, #2b3a67, #5b6fb8));
-    color: var(--v-notice-color, #fff);
+    border-radius: var(--visual-notice-bar-radius-moody-sm);
+    background: var(--visual-notice-bar-notice-bg, var(--visual-notice-bar-gradient-primary));
+    color: var(--visual-notice-bar-notice-color, var(--visual-notice-bar-white));
   }
 
   .visual-notice-bar__horn {
@@ -73,7 +76,7 @@ const innerStyle = computed<CSSProperties>(() => {
   .visual-notice-bar__track {
     display: inline-flex;
     white-space: nowrap;
-    animation: visual-notice-marquee var(--v-notice-duration) linear infinite;
+    animation: visual-notice-marquee var(--visual-notice-bar-notice-duration) linear infinite;
 
     &:hover {
       animation-play-state: paused;

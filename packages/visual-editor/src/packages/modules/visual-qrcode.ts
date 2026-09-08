@@ -15,10 +15,7 @@ const visualQRCode: VisualEditorComponent<VisualQRCodeProps> = {
   previewImage: '/componets/visual-qrcode.svg',
   souceDataType: 'VisualObject',
   props: {
-    content: createTextInputControl({
-      label: '二维码内容',
-      defaultValue: 'https://example.com',
-    }),
+    content: createTextInputControl({ label: '二维码内容', defaultValue: 'https://example.com' }),
     size: createNumberInputControl({ label: '尺寸', defaultValue: 200 }),
     margin: createNumberInputControl({ label: '白边', defaultValue: 2 }),
     level: createNormalSelectControl({

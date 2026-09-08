@@ -15,11 +15,7 @@ const visualAudio: VisualEditorComponent<VisualAudioProps> = {
     autoplay: createSwitchControl({ label: '自动播放' }),
     loop: createSwitchControl({ label: '循环播放', defaultValue: true }),
     controls: createSwitchControl({ label: '显示控制条', defaultValue: true }),
-    width: createTextInputControl({
-      label: '宽度',
-      tips: '如 100% 或 300px',
-      defaultValue: '100%',
-    }),
+    width: createTextInputControl({ label: '宽度', tips: '如 100% 或 300px', defaultValue: '100%' }),
     round: createPxInputControl({ label: '圆角大小' }),
   },
 }

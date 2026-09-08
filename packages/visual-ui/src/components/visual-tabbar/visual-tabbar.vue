@@ -15,7 +15,7 @@
         :key="item.key"
         type="button"
         class="visual-tabbar__item"
-        :class="{ 'is-active': item.active }"
+        :class="{ 'visual-tabbar__item--active': item.active }"
         @click="$emit('navigate', item)"
       >
         <i v-if="item.icon" aria-hidden="true" :class="item.icon" />
@@ -48,6 +48,7 @@ const visibleItems = computed(() =>
 
 <style scoped lang="scss">
 .visual-tabbar {
+  --visual-tabbar-safe-area-bottom: var(--v-safe-area-bottom);
   flex-shrink: 0;
   min-height: var(--visual-tabbar-height);
 }
@@ -59,7 +60,7 @@ const visibleItems = computed(() =>
   z-index: 100;
   display: flex;
   min-height: var(--visual-tabbar-height);
-  padding-bottom: var(--v-safe-area-bottom, 0px);
+  padding-bottom: var(--visual-tabbar-safe-area-bottom, 0px);
   background: var(--visual-tabbar-background);
   border-top: 1px solid color-mix(in srgb, var(--visual-tabbar-inactive) 18%, transparent);
 }
@@ -73,7 +74,7 @@ const visibleItems = computed(() =>
   cursor: pointer;
   font-size: 14px;
 }
-.visual-tabbar__item.is-active {
+.visual-tabbar__item--active {
   color: var(--visual-tabbar-active);
 }
 .visual-tabbar__item i {

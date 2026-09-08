@@ -42,7 +42,7 @@ const variant = computed(() => _props.props.variant || 'default')
 const isPlain = computed(() => variant.value === 'plain')
 const variantClass = computed(() => (variant.value === 'default' ? '' : `visual-count-down__inner--${variant.value}`))
 const imageStyle = computed<CSSProperties>(() => ({
-  '--v-count-img-width': _props.props.imageWidth || '32px',
+  '--visual-count-down-count-img-width': _props.props.imageWidth || '32px',
 }))
 // 简约数字模式用 时/分/秒 文字单位替代冒号
 const hSep = computed(() => (isPlain.value ? '时' : ':'))
@@ -58,9 +58,9 @@ const seconds = computed(() => remain.value % 60)
 const pad = (num: number) => String(num).padStart(2, '0')
 
 const innerStyle = computed<CSSProperties>(() => ({
-  '--v-count-num-bg': _props.props.bgColor,
-  '--v-count-num-color': _props.props.numColor,
-  '--v-count-colon-color': _props.props.colonColor,
+  '--visual-count-down-count-num-bg': _props.props.bgColor,
+  '--visual-count-down-count-num-color': _props.props.numColor,
+  '--visual-count-down-count-colon-color': _props.props.colonColor,
 }))
 
 const colonStyle = computed<CSSProperties>(() => ({
@@ -103,6 +103,10 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .visual-count-down {
+  --visual-count-down-text-1: var(--v-text-1);
+  --visual-count-down-radius-moody-sm: var(--v-radius-moody-sm);
+  --visual-count-down-font-body: var(--v-font-body);
+  --visual-count-down-gradient-primary: var(--v-gradient-primary);
   .visual-count-down__inner {
     display: flex;
     align-items: center;
@@ -111,7 +115,7 @@ onBeforeUnmount(() => {
   }
 
   .visual-count-down__image {
-    width: var(--v-count-img-width, 32px);
+    width: var(--visual-count-down-count-img-width, 32px);
     height: auto;
     object-fit: contain;
     flex-shrink: 0;
@@ -121,17 +125,17 @@ onBeforeUnmount(() => {
 
   // 纯色块：双停同色渐变表现为实色；用户 bgColor inline 覆盖后即为该色实块
   .visual-count-down__inner--flat {
-    --v-count-num-bg: linear-gradient(135deg, #4f46e5 0%, #4f46e5 100%);
+    --visual-count-down-count-num-bg: linear-gradient(135deg, #4f46e5 0%, #4f46e5 100%);
   }
 
   // 描边块：透明底 + 彩色描边，数字为同色
   .visual-count-down__inner--outline {
-    --v-count-colon-color: #4f46e5;
+    --visual-count-down-count-colon-color: #4f46e5;
 
     .visual-count-down__num {
       background: transparent;
-      border: 1px solid var(--v-count-num-bg, #4f46e5);
-      color: var(--v-count-num-color, #4f46e5);
+      border: 1px solid var(--visual-count-down-count-num-bg, #4f46e5);
+      color: var(--visual-count-down-count-num-color, #4f46e5);
     }
   }
 
@@ -144,13 +148,13 @@ onBeforeUnmount(() => {
       padding: 0;
       min-width: 0;
       font-size: 20px;
-      color: var(--v-count-num-color, #111827);
+      color: var(--visual-count-down-count-num-color, #111827);
     }
 
     .visual-count-down__colon {
       margin: 0 2px;
       font-size: 14px;
-      color: var(--v-count-colon-color, var(--v-text-1));
+      color: var(--visual-count-down-count-colon-color, var(--visual-count-down-text-1));
     }
   }
 
@@ -167,18 +171,21 @@ onBeforeUnmount(() => {
     min-width: 24px;
     height: 24px;
     padding: 0 4px;
-    border-radius: var(--v-radius-moody-sm);
-    font-family: var(--v-font-body);
+    border-radius: var(--visual-count-down-radius-moody-sm);
+    font-family: var(--visual-count-down-font-body);
     font-size: 16px;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
-    background: var(--v-count-num-bg, var(--v-gradient-primary));
-    color: var(--v-count-num-color, #fff);
+    background: var(--visual-count-down-count-num-bg, var(--visual-count-down-gradient-primary));
+    color: var(--visual-count-down-count-num-color, #fff);
   }
 
   .visual-count-down__colon {
     font-weight: 600;
-    color: var(--v-count-colon-color, var(--v-text-1));
+    color: var(--visual-count-down-count-colon-color, var(--visual-count-down-text-1));
   }
 }
 </style>
+
+
+

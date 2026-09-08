@@ -19,10 +19,7 @@ const visualCountDown: VisualEditorComponent<VisualCountDownProps> = {
   souceDataType: 'VisualObject',
   props: {
     title: createTextInputControl({ label: '前置标题', defaultValue: '距结束仅剩' }),
-    endTime: createDatePickerControl({
-      label: '结束时间',
-      defaultValue: '2099-12-31 23:59:59',
-    }),
+    endTime: createDatePickerControl({ label: '结束时间', defaultValue: '2099-12-31 23:59:59' }),
     bgColor: createColorInputControl({ label: '数字背景色' }),
     numColor: createColorInputControl({ label: '数字颜色', defaultValue: '#ffffff' }),
     colonColor: createColorInputControl({ label: '分隔符颜色', defaultValue: '#9CA3AF' }),

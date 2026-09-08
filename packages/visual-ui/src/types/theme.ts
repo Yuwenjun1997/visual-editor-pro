@@ -6,6 +6,11 @@ export interface ThemeColors {
   [key: string]: string
 }
 
+export interface ThemeSelection {
+  themeName?: string | null
+  primary?: string
+}
+
 export interface ThemeConfig {
   themeName: string
   theme: {
@@ -14,7 +19,8 @@ export interface ThemeConfig {
 }
 
 export interface CustomThemeConfig {
-  themeName?: string
+  themeName?: string | null
+  primary?: string
   theme?: {
     [key: string]: ThemeColors
   }

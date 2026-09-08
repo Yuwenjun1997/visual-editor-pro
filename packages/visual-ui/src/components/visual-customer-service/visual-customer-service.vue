@@ -36,7 +36,7 @@ const runtime = useH5Runtime()
 
 const entryStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {}
-  if (_props.props.bgColor) style['--v-cs-bg'] = _props.props.bgColor
+  if (_props.props.bgColor) style['--visual-customer-service-cs-bg'] = _props.props.bgColor
   if (_props.props.textColor) style.color = _props.props.textColor
   if (_props.props.radius) style.borderRadius = _props.props.radius
   return style
@@ -62,19 +62,23 @@ const handleClick = (event: MouseEvent) => {
 
 <style scoped lang="scss">
 .visual-customer-service {
+  --visual-customer-service-gradient-primary: var(--v-gradient-primary);
+  --visual-customer-service-radius-moody-sm: var(--v-radius-moody-sm);
+  --visual-customer-service-motion-fast: var(--v-motion-fast);
+  --visual-customer-service-ease-soft: var(--v-ease-soft);
   .visual-customer-service__entry {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
     padding: 8px 16px;
-    background: var(--v-cs-bg, var(--v-gradient-primary));
-    color: var(--v-cs-color, #fff);
-    border-radius: var(--v-radius-moody-sm);
+    background: var(--visual-customer-service-cs-bg, var(--visual-customer-service-gradient-primary));
+    color: var(--visual-customer-service-cs-color, #fff);
+    border-radius: var(--visual-customer-service-radius-moody-sm);
     text-decoration: none;
     cursor: pointer;
     user-select: none;
-    transition: opacity var(--v-motion-fast) var(--v-ease-soft);
+    transition: opacity var(--visual-customer-service-motion-fast) var(--visual-customer-service-ease-soft);
 
     &:active {
       opacity: 0.85;
@@ -91,3 +95,6 @@ const handleClick = (event: MouseEvent) => {
   }
 }
 </style>
+
+
+

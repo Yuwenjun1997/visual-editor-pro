@@ -12,10 +12,7 @@ const VisualImage: VisualEditorComponent<VisualImageProps> = {
   previewImage: '/componets/visual-image.svg',
   souceDataType: 'VisualObject',
   props: {
-    src: createImageInputControl({
-      label: '图片地址',
-      defaultValue: defaultCover,
-    }),
+    src: createImageInputControl({ label: '图片地址', defaultValue: defaultCover }),
     width: createPxInputControl({ label: '图片宽度' }),
     height: createPxInputControl({ label: '图片高度' }),
     mode: createNormalSelectControl({

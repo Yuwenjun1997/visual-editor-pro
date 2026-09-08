@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'vue'
 import type { VisualUrl } from '@visual/ui'
+import type { CustomThemeConfig } from '@visual/ui/types'
 
 export interface VisualBlockSlotData {
   name: string
@@ -166,7 +167,7 @@ export interface PageSchema {
   pageId: string | number
   title: string
   slug?: string
-  themeName: string
+  themeName: string | null
   globalStyle: CSSProperties
   blocks: VisualBlockData[]
   /** @deprecated 应用归属由编辑器路由与 pages.app_id 决定，旧 schema 字段仅可读兼容。 */
@@ -248,6 +249,7 @@ export interface VisualRevisionProvider {
 }
 
 export type VisualPageLoader = (pageId: string | number, appId?: string) => Promise<PageSchema | null>
+export type VisualAppThemeLoader = (appId: string) => Promise<CustomThemeConfig | null>
 
 export interface VisualUrlPageOption {
   label: string

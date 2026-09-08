@@ -11,7 +11,7 @@
     placeholder="选择内容"
     @visible-change="handleVisibleChange"
   >
-    <el-option v-for="item in options" :key="item.id" :label="`${item.title} · ${item.id}`" :value="item.id" />
+    <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.id" />
     <template #empty>
       <span class="visual-remote-entity-select__empty">{{ error || '暂无可选内容' }}</span>
     </template>

@@ -99,10 +99,12 @@ watch(() => [_props.props.qrContent, _props.props.qrSize, _props.props.qrFgColor
 
 <style scoped lang="scss">
 .visual-poster {
+  --visual-poster-gradient-primary: var(--v-gradient-primary);
+  --visual-poster-shadow-soft: var(--v-shadow-soft);
   .visual-poster__card {
     position: relative;
     overflow: hidden;
-    background: var(--v-gradient-primary);
+    background: var(--visual-poster-gradient-primary);
   }
 
   .visual-poster__bg {
@@ -171,7 +173,9 @@ watch(() => [_props.props.qrContent, _props.props.qrSize, _props.props.qrFgColor
     text-decoration: none;
     color: #4f6ef7;
     background: #fff;
-    box-shadow: var(--v-shadow-soft);
+    box-shadow: var(--visual-poster-shadow-soft);
   }
 }
 </style>
+
+

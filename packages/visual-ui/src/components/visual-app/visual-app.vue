@@ -41,18 +41,23 @@ const _bindClassList = computed(() => ({
 
 <style lang="scss">
 .visual-app {
+  --visual-app-bg-color: var(--v-background-color);
+  --visual-app-text-color: var(--v-text-color);
+  --visual-app-font-body: var(--v-font-body);
+  --visual-app-text-md: var(--v-text-md);
+  --visual-app-safe-area-bottom: var(--v-safe-area-bottom);
   height: 100%;
   flex: 1;
-  // overflow: hidden;
-  background-color: var(--v-bg-color);
-  color: var(--v-text-1);
-  font-family: var(--v-font-body);
-  font-size: var(--v-text-md);
+  overflow: hidden;
+  background-color: var(--visual-app-bg-color);
+  color: var(--visual-app-text-color);
+  font-family: var(--visual-app-font-body);
+  font-size: var(--visual-app-text-md);
 
   &::after {
     content: '';
     display: block;
-    height: var(--v-safe-area-bottom);
+    height: var(--visual-app-safe-area-bottom);
   }
 }
 </style>

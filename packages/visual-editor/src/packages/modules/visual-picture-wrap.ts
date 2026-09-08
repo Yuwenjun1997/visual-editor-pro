@@ -12,14 +12,8 @@ import {
 const defaultCover = '/image/cover.svg'
 
 const createData = (): Record<keyof VisualPicture, VisualEditorProps> => ({
-  label: createTextInputControl({
-    label: '标题',
-    defaultValue: '举杯邀明月，对影成三人',
-  }),
-  url: createImageInputControl({
-    label: '图片地址',
-    defaultValue: defaultCover,
-  }),
+  label: createTextInputControl({ label: '标题', defaultValue: '举杯邀明月，对影成三人' }),
+  url: createImageInputControl({ label: '图片地址', defaultValue: defaultCover }),
 })
 
 const visualPictureWrap: VisualEditorComponent<VisualPictureWrapProps> = {

@@ -1,21 +1,27 @@
 <template>
   <visual-box class="visual-tabs" :class="_props.class" :styles="_props.styles">
-    <TabsRoot v-model="activeKey">
+    <TabsRoot v-model="activeKey" :default-value="panes[0]?.key">
       <TabsList :style="headerStyle" class="visual-tabs__header" :class="`visual-tabs__header--${bindVariant}`">
         <TabsTrigger v-for="pane in panes" :key="pane.key" :value="pane.key" class="visual-tabs__tab">
           {{ pane.label }}
         </TabsTrigger>
       </TabsList>
-      <TabsContent v-for="pane in panes" :key="pane.key" :value="pane.key" class="visual-tabs__pane">
+      <div
+        v-for="pane in panes"
+        v-show="activeKey === pane.key"
+        :key="pane.key"
+        role="tabpanel"
+        class="visual-tabs__pane"
+      >
         <slot :name="pane.key" />
-      </TabsContent>
+      </div>
     </TabsRoot>
   </visual-box>
 </template>
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
-import { TabsRoot, TabsList, TabsTrigger, TabsContent } from 'reka-ui'
+import { TabsRoot, TabsList, TabsTrigger } from 'reka-ui'
 import VisualBox from '../visual-box/visual-box.vue'
 import type { VisualTabItem, VisualTabsProps } from './interface'
 
@@ -37,8 +43,8 @@ const activeKey = ref('')
 const bindVariant = computed(() => _props.props.variant || 'line')
 
 const headerStyle = computed<CSSProperties>(() => ({
-  '--v-tabs-active': _props.props.activeColor || 'var(--v-primary-1)',
-  '--v-tabs-text': _props.props.textColor || 'var(--v-text-4)',
+  '--visual-tabs-tabs-active': _props.props.activeColor || 'var(--visual-tabs-primary-1)',
+  '--visual-tabs-tabs-text': _props.props.textColor || 'var(--visual-tabs-text-4)',
 }))
 
 const panes = computed(() => {
@@ -63,20 +69,29 @@ watch(
 
 <style scoped lang="scss">
 .visual-tabs {
+  --visual-tabs-primary-1: var(--v-primary-1);
+  --visual-tabs-text-4: var(--v-text-4);
+  --visual-tabs-gray-2: var(--v-gray-2);
+  --visual-tabs-radius-moody-sm: var(--v-radius-moody-sm);
+  --visual-tabs-surface-2: var(--v-surface-2);
+  --visual-tabs-font-display: var(--v-font-display);
+  --visual-tabs-motion-fast: var(--v-motion-fast);
+  --visual-tabs-ease-soft: var(--v-ease-soft);
+  --visual-tabs-white: var(--v-white);
   .visual-tabs__header {
     display: flex;
     align-items: center;
     padding: 0;
     justify-content: flex-start;
-    border-bottom: 1px solid var(--v-gray-2);
+    border-bottom: 1px solid var(--visual-tabs-gray-2);
 
     &--pill {
       gap: 6px;
       padding: 5px 8px;
       justify-content: center;
       border-bottom: 0;
-      border-radius: var(--v-radius-moody-sm);
-      background-color: var(--v-surface-2);
+      border-radius: var(--visual-tabs-radius-moody-sm);
+      background-color: var(--visual-tabs-surface-2);
     }
   }
 
@@ -90,13 +105,13 @@ watch(
     cursor: pointer;
     background: none;
     border: none;
-    color: var(--v-tabs-text);
+    color: var(--visual-tabs-tabs-text);
 
     &[data-state='active'] {
-      color: var(--v-tabs-active);
+      color: var(--visual-tabs-tabs-active);
       font-weight: 600;
-      font-family: var(--v-font-display);
-      border-bottom: 3px solid var(--v-tabs-active);
+      font-family: var(--visual-tabs-font-display);
+      border-bottom: 3px solid var(--visual-tabs-tabs-active);
       margin-bottom: -1px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
@@ -107,26 +122,26 @@ watch(
     .visual-tabs__tab {
       margin: 0;
       padding: 6px 16px;
-      border-radius: var(--v-radius-moody-sm);
+      border-radius: var(--visual-tabs-radius-moody-sm);
       transition:
-        background-color var(--v-motion-fast) var(--v-ease-soft),
-        color var(--v-motion-fast) var(--v-ease-soft),
-        box-shadow var(--v-motion-fast) var(--v-ease-soft);
+        background-color var(--visual-tabs-motion-fast) var(--visual-tabs-ease-soft),
+        color var(--visual-tabs-motion-fast) var(--visual-tabs-ease-soft),
+        box-shadow var(--visual-tabs-motion-fast) var(--visual-tabs-ease-soft);
 
       &[data-state='active'] {
-        background-color: var(--v-tabs-active);
-        color: var(--v-white);
-        font-family: var(--v-font-display);
+        background-color: var(--visual-tabs-tabs-active);
+        color: var(--visual-tabs-white);
+        font-family: var(--visual-tabs-font-display);
         border-bottom: 0;
         margin-bottom: 0;
-        border-radius: var(--v-radius-moody-sm);
+        border-radius: var(--visual-tabs-radius-moody-sm);
       }
     }
   }
 
   .visual-tabs__pane {
     min-height: 40px;
-    animation: vu-fade-up 0.4s var(--v-ease-soft);
+    animation: vu-fade-up 0.4s var(--visual-tabs-ease-soft);
   }
 }
 </style>

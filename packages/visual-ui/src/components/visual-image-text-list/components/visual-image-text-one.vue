@@ -56,12 +56,21 @@ const _bindClassList = computed(() => ({
 @use '../../../assets/scss/utils/index.scss' as *;
 
 .visual-image-text-one {
+  --visual-image-text-one-surface-1: var(--v-surface-1);
+  --visual-image-text-one-text-md: var(--v-text-md);
+  --visual-image-text-one-spacing-md: var(--v-spacing-md);
+  --visual-image-text-one-spacing-sm: var(--v-spacing-sm);
+  --components-surface-1: var(--visual-image-text-one-surface-1);
+  --components-item-round: var(--visual-image-text-one-item-round);
+  --components-text-md: var(--visual-image-text-one-text-md);
+  --components-spacing-md: var(--visual-image-text-one-spacing-md);
+  --components-spacing-sm: var(--visual-image-text-one-spacing-sm);
   display: flex;
   align-items: center;
   height: 92px;
-  background-color: var(--v-surface-1);
-  border-radius: var(--v-item-round);
-  font-size: var(--v-text-md);
+  background-color: var(--components-surface-1);
+  border-radius: var(--components-item-round);
+  font-size: var(--components-text-md);
 
   &.cover-in-right {
     flex-direction: row-reverse;
@@ -82,8 +91,8 @@ const _bindClassList = computed(() => ({
   .visual-image-text__content {
     display: flex;
     flex-direction: column;
-    padding: var(--v-spacing-md);
-    gap: var(--v-spacing-sm);
+    padding: var(--components-spacing-md);
+    gap: var(--components-spacing-sm);
     flex: 1;
   }
 
@@ -99,3 +108,6 @@ const _bindClassList = computed(() => ({
   }
 }
 </style>
+
+
+

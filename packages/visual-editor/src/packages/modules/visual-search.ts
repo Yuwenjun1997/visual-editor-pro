@@ -15,20 +15,11 @@ const visualSearch: VisualEditorComponent<VisualSearchProps> = {
   previewImage: '/componets/visual-search.svg',
   souceDataType: 'VisualObject',
   props: {
-    placeholder: createTextInputControl({
-      label: '占位文案',
-      defaultValue: '搜索商品 / 店铺',
-    }),
+    placeholder: createTextInputControl({ label: '占位文案', defaultValue: '搜索商品 / 店铺' }),
     buttonText: createTextInputControl({ label: '按钮文案', defaultValue: '搜索' }),
-    buttonColor: createColorInputControl({
-      label: '按钮颜色',
-      defaultValue: '#2563EB',
-    }),
+    buttonColor: createColorInputControl({ label: '按钮颜色' }),
     radius: createPxInputControl({ label: '圆角大小' }),
-    confirmLink: createUrlInputControl({
-      label: '跳转链接',
-      tips: '为空时提交仅提示',
-    }),
+    confirmLink: createUrlInputControl({ label: '跳转链接', tips: '为空时提交仅提示' }),
   },
 }
 

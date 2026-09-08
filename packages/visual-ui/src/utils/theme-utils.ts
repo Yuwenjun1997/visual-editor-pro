@@ -1,5 +1,23 @@
 import type { ThemeColors } from '../types/theme'
 
+export const semanticThemeVariableAliases: Record<string, string> = {
+  'primary-color': 'primary-1',
+  'text-color': 'text-1',
+  'background-color': 'gray-1',
+  'surface-color': 'surface-1',
+  'border-color': 'border-1',
+  'success-color': 'success-1',
+  'warning-color': 'warning-1',
+  'error-color': 'error-1',
+  'info-color': 'info-1',
+  'bg-color': 'background-color',
+}
+
+export const getThemeCssVariableValue = (key: string, value: string) => {
+  const alias = semanticThemeVariableAliases[key]
+  return alias ? `var(--v-${alias})` : String(value)
+}
+
 /**
  * 使颜色变暗的函数
  * @param {string} color - 要调整的颜色，以#RRGGBB格式
@@ -131,5 +149,18 @@ export const generateTheme = (colors: ThemeColors, isDark: boolean = false): Rec
       result[colorKey] = processColor(value, 0.1 * (6 - i))
     }
   })
+  const primary = result['primary-1'] || colors.primary
+  const text = result['text-1'] || colors.text || '#1F2937'
+  const surface = result['surface-1'] || '#ffffff'
+  const border = result['border-1'] || result['gray-2'] || '#E5E7EB'
+  result['primary-color'] = primary
+  result['text-color'] = text
+  result['background-color'] = result['gray-1'] || '#F8FAFC'
+  result['surface-color'] = surface
+  result['border-color'] = border
+  result['success-color'] = result['success-1'] || colors.success
+  result['warning-color'] = result['warning-1'] || colors.warning
+  result['error-color'] = result['error-1'] || colors.error
+  result['info-color'] = result['info-1'] || colors.info
   return result
 }

@@ -51,15 +51,24 @@ const handleClick = (event: MouseEvent) => {
 @use '../../../assets/scss/utils/index.scss' as *;
 
 .visual-image-text-two {
+  --visual-image-text-one-surface-1: var(--v-surface-1);
+  --visual-image-text-one-text-md: var(--v-text-md);
+  --visual-image-text-one-spacing-md: var(--v-spacing-md);
+  --visual-image-text-one-spacing-sm: var(--v-spacing-sm);
+  --components-surface-1: var(--visual-image-text-one-surface-1);
+  --components-text-md: var(--visual-image-text-one-text-md);
+  --components-cover-height: var(--visual-image-text-one-cover-height);
+  --components-spacing-md: var(--visual-image-text-one-spacing-md);
+  --components-spacing-sm: var(--visual-image-text-one-spacing-sm);
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: var(--v-surface-1);
-  font-size: var(--v-text-md);
+  background-color: var(--components-surface-1);
+  font-size: var(--components-text-md);
 
   .visual-image-text__cover {
     width: 100%;
-    height: var(--v-cover-height, 150px);
+    height: var(--components-cover-height, 150px);
 
     img {
       display: block;
@@ -71,14 +80,14 @@ const handleClick = (event: MouseEvent) => {
   .visual-image-text__content {
     display: flex;
     flex-direction: column;
-    padding: var(--v-spacing-md);
-    gap: var(--v-spacing-sm);
+    padding: var(--components-spacing-md);
+    gap: var(--components-spacing-sm);
     flex: 1;
   }
 
   .visual-image-text__body {
     @include ellipsis(2);
-    font-size: var(--v-text-md);
+    font-size: var(--components-text-md);
     line-height: 22px;
   }
 
@@ -89,3 +98,6 @@ const handleClick = (event: MouseEvent) => {
   }
 }
 </style>
+
+
+

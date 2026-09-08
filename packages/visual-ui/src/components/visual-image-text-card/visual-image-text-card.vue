@@ -61,10 +61,10 @@ const _renderComponent = computed(() => {
 })
 
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
-  '--v-item-round': cssRadiusVar(_bindProps.value.round),
-  '--v-cover-height': _bindProps.value.coverHeight,
-  '--v-slide-width': _bindProps.value.cardWidth,
+  '--visual-image-text-card-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
+  '--visual-image-text-card-item-round': cssRadiusVar(_bindProps.value.round),
+  '--visual-image-text-card-cover-height': _bindProps.value.coverHeight,
+  '--visual-image-text-card-slide-width': _bindProps.value.cardWidth,
 }))
 
 const _bindInnerClassList = computed(() => ({
@@ -75,13 +75,13 @@ const _bindInnerClassList = computed(() => ({
 <style scoped lang="scss">
 .visual-image-text {
   .visual-image-text-item {
-    border-radius: var(--v-item-round);
+    border-radius: var(--visual-image-text-card-item-round);
     overflow: hidden;
   }
 
   &__inner {
     display: grid;
-    gap: var(--v-inner-gutter);
+    gap: var(--visual-image-text-card-inner-gutter);
 
     &.layout-item-card-col-1 {
       grid-template-columns: repeat(1, 1fr);
@@ -93,9 +93,12 @@ const _bindInnerClassList = computed(() => ({
   }
 
   &__slide {
-    flex: 0 0 var(--v-slide-width, 320px);
+    flex: 0 0 var(--visual-image-text-card-slide-width, 320px);
     min-width: 0;
-    margin-right: var(--v-inner-gutter);
+    margin-right: var(--visual-image-text-card-inner-gutter);
   }
 }
 </style>
+
+
+

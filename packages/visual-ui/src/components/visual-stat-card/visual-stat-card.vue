@@ -24,6 +24,7 @@ import type { CSSProperties } from 'vue'
 import VisualBox from '../visual-box/visual-box.vue'
 import VisualIcon from '../visual-icon/visual-icon.vue'
 import type { VisualStatCardProps } from './interface'
+import { useTheme } from '../../hooks/useTheme'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -36,10 +37,11 @@ defineOptions({
 })
 
 const _props = defineProps<Props>()
+const { colorVar } = useTheme()
 
 const bodyStyle = computed<CSSProperties>(() => ({
-  '--v-stat-bg': _props.props.bgColor,
-  '--v-stat-text': _props.props.textColor,
+  '--visual-stat-card-stat-bg': _props.props.bgColor,
+  '--visual-stat-card-stat-text': _props.props.textColor,
 }))
 
 const deltaText = computed(() => {
@@ -49,24 +51,27 @@ const deltaText = computed(() => {
 })
 
 const deltaStyle = computed<CSSProperties>(() => {
-  if (_props.props.deltaColor) return { color: _props.props.deltaColor }
+  if (_props.props.deltaColor) return { '--visual-stat-card-delta-color': colorVar(_props.props.deltaColor) }
   const descending = (_props.props.delta || '').startsWith('-')
   return {
-    color: `var(--v-${descending ? 'error' : 'success'}-1, ${descending ? '#e5484d' : '#0f9d6e'})`,
+    '--visual-stat-card-delta-color': colorVar(`${descending ? 'error' : 'success'}-1`),
   }
 })
 </script>
 
 <style scoped lang="scss">
 .visual-stat-card {
+  --visual-stat-card-radius-moody: var(--v-radius-moody);
+  --visual-stat-card-gradient-primary: var(--v-gradient-primary);
+  --visual-stat-card-delta-color: var(--v-success-color);
   .visual-stat-card__body {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 16px 18px;
-    border-radius: var(--v-radius-moody);
-    background: var(--v-stat-bg, var(--v-gradient-primary));
-    color: var(--v-stat-text, #fff);
+    border-radius: var(--visual-stat-card-radius-moody);
+    background: var(--visual-stat-card-stat-bg, var(--visual-stat-card-gradient-primary));
+    color: var(--visual-stat-card-stat-text, #fff);
   }
 
   .visual-stat-card__icon {
@@ -107,6 +112,8 @@ const deltaStyle = computed<CSSProperties>(() => {
     font-size: 14px;
     font-weight: 700;
     background: rgba(255, 255, 255, 0.16);
+    color: var(--visual-stat-card-delta-color);
   }
 }
 </style>
+

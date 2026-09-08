@@ -8,13 +8,20 @@
           </div>
         </el-button>
       </template>
-      <div v-for="color in colorList" :key="color.value" class="color-list">
-        <span
-          v-for="(item, index) in getColors(color.value)"
-          :key="index"
+      <div class="color-picker__custom">
+        <span class="color-picker__label">自定义颜色</span>
+        <el-color-picker v-model="customColor" show-alpha />
+      </div>
+      <div class="color-list">
+        <button
+          v-for="color in colorList"
+          :key="color.value"
+          type="button"
           class="color-item"
-          :style="{ backgroundColor: item }"
-          @click="handleClick(item)"
+          :title="color.label"
+          :aria-label="color.label"
+          :style="{ backgroundColor: colorVal(color.value) }"
+          @click="handleClick(colorVal(color.value))"
         />
       </div>
     </el-popover>
@@ -48,14 +55,17 @@ const emit = defineEmits<{
 
 const modelValue = useVModel(props, 'modelValue', emit)
 
-const { themeConfig, themeName, colorVal } = useTheme()
+const { colorVal } = useTheme()
 
-const _currentTheme = computed(() => themeConfig.value.theme[themeName.value])
-
-const getColors = (name: string) => {
-  const keys = Object.keys(_currentTheme.value).filter((key) => key.indexOf(name) > -1 && key.indexOf('opacity') === -1)
-  return keys.map((key) => _currentTheme.value[key])
-}
+const customColor = computed({
+  get: () => {
+    const value = colorVal(modelValue.value)
+    return value.startsWith('#') || value.startsWith('rgb') || value.startsWith('hsl') ? value : undefined
+  },
+  set: (value: string | null) => {
+    modelValue.value = value || ''
+  },
+})
 
 const visible = ref(false)
 
@@ -86,14 +96,30 @@ const handleClick = (color: string) => {
 }
 
 .visual-color-picker__popover {
+  .color-picker__custom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+  }
+
+  .color-picker__label {
+    color: var(--el-text-color-primary);
+    font-size: 13px;
+  }
+
   .color-list {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
 
     .color-item {
+      padding: 0;
       display: block;
-      width: 100%;
+      width: 36px;
       height: 36px;
+      border: 0;
+      border-radius: 4px;
       outline-offset: -2px;
       cursor: pointer;
 

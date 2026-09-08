@@ -29,10 +29,7 @@ const visualPopup: VisualEditorComponent<VisualPopupProps> = {
     delaySeconds: createNumberInputControl({ label: '延迟秒数', defaultValue: 3 }),
     bgImage: createImageInputControl({ label: '背景图' }),
     title: createTextInputControl({ label: '标题', defaultValue: '新人礼包' }),
-    description: createTextInputControl({
-      label: '描述',
-      defaultValue: '限时领取专属优惠券，先到先得',
-    }),
+    description: createTextInputControl({ label: '描述', defaultValue: '限时领取专属优惠券，先到先得' }),
     buttonText: createTextInputControl({ label: '按钮文案', defaultValue: '立即领取' }),
     buttonLink: createUrlInputControl({ label: '按钮链接' }),
     showClose: createSwitchControl({ label: '显示关闭按钮', defaultValue: true }),

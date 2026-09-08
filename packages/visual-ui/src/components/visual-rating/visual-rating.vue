@@ -42,8 +42,8 @@ const hover = ref(0)
 const displayValue = computed(() => hover.value || model.value)
 
 const starsStyle = computed<CSSProperties>(() => ({
-  '--v-rating-color': _props.props.color,
-  '--v-rating-size': _props.props.size || '20px',
+  '--visual-rating-rating-color': _props.props.color,
+  '--visual-rating-rating-size': _props.props.size || '20px',
 }))
 
 const starClass = (index: number) => {
@@ -72,14 +72,15 @@ const handleClick = (index: number, event: MouseEvent) => {
 
 <style scoped lang="scss">
 .visual-rating {
+  --visual-rating-primary-1: var(--v-primary-1);
   .visual-rating__stars {
     display: inline-flex;
     gap: 4px;
-    color: var(--v-rating-color, var(--v-primary-1, #2563eb));
+    color: var(--visual-rating-rating-color, var(--visual-rating-primary-1, #2563eb));
   }
 
   .visual-rating__star {
-    font-size: var(--v-rating-size, 20px);
+    font-size: var(--visual-rating-rating-size, 20px);
     line-height: 1;
 
     &--interactive {
@@ -88,3 +89,7 @@ const handleClick = (index: number, event: MouseEvent) => {
   }
 }
 </style>
+
+
+
+

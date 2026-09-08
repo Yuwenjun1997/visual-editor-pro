@@ -37,6 +37,11 @@ const visualTabs: VisualEditorComponent<VisualTabsProps> = {
       this.data.splice(index, 1)
     },
   },
+  slots: {
+    'tab-0': { name: '推荐', blocks: [] },
+    'tab-1': { name: '热销', blocks: [] },
+    'tab-2': { name: '新品', blocks: [] },
+  },
 }
 
 export default visualTabs

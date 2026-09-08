@@ -100,6 +100,7 @@ export const useAppSettingsPage = () => {
         name: editing.value.name,
         home_route_key: editing.value.home_route_key,
         layout_config: editing.value.layout_config,
+        theme_config: editing.value.theme_config,
         login_config: normalizeLoginConfig(editing.value.login_config),
       })
       editing.value = ensureLayout(saved)

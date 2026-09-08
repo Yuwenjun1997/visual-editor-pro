@@ -19,6 +19,32 @@
       <el-card>
         <template #header>
           <div>
+            <div class="wa-text-base wa-font-medium">应用主题</div>
+            <div class="wa-mt-1 wa-text-[13px] wa-text-[var(--el-text-color-secondary)]">
+              页面未单独设置主题时，将继承这里的应用主题。
+            </div>
+          </div>
+        </template>
+        <el-form label-width="90px">
+          <el-form-item label="预定主题">
+            <el-select v-model="model.theme_config.themeName" class="wa-w-52">
+              <el-option v-for="item in themePresets" :key="item.name" :label="item.label" :value="item.name" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="主色覆盖">
+            <div class="wa-flex wa-items-center wa-gap-3">
+              <el-color-picker v-model="model.theme_config.primary" />
+              <el-button v-if="model.theme_config.primary" link @click="model.theme_config.primary = undefined">
+                恢复主题默认色
+              </el-button>
+            </div>
+          </el-form-item>
+        </el-form>
+      </el-card>
+
+      <el-card>
+        <template #header>
+          <div>
             <div class="wa-text-base wa-font-medium">底部导航配置</div>
             <div class="wa-mt-1 wa-text-[13px] wa-text-[var(--el-text-color-secondary)]">
               选择要显示的页面，并可修改导航名称和图标。导航最多显示 5 项。
@@ -133,9 +159,14 @@ import { Icon } from '@iconify/vue'
 import VisualTabbar from '@visual/ui/components/visual-tabbar/index'
 import type { AppRow, PageRow } from '../../../../types/api'
 import PreviewPhoneFrame from '../../../../components/PreviewPhoneFrame.vue'
+import { VISUAL_THEME_PRESETS } from '@visual/editor'
 
 const model = defineModel<AppRow>({ required: true })
 const props = defineProps<{ pages: PageRow[]; pageKey: (page: PageRow) => string }>()
+const themePresets = Object.entries(VISUAL_THEME_PRESETS).map(([name, value]) => ({ name, ...value }))
+
+if (!model.value.theme_config || typeof model.value.theme_config !== 'object') model.value.theme_config = {}
+if (!model.value.theme_config.themeName) model.value.theme_config.themeName = 'theme-blue'
 
 const previewItems = computed(() =>
   model.value.layout_config.items.map((item) => ({

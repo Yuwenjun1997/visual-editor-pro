@@ -27,6 +27,7 @@ import { useViusalStore } from '../../store/useVisual'
 import { useBlocks } from '../../hooks/useBlocks'
 import { usePageConfig } from '../../hooks/usePageConfig'
 import { useTheme } from '@visual/ui/hooks/useTheme'
+import { useH5Runtime } from '@visual/ui/hooks/useH5Runtime'
 import type { VisualBlockData } from '../../types/visual-editor'
 import { createStageSelectionSync } from './stage-selection-sync'
 
@@ -34,7 +35,8 @@ const editorInstanceId = new URLSearchParams(window.location.search).get('editor
 const visualStore = useViusalStore()
 const { blockList } = useBlocks()
 const { pageConfig } = usePageConfig()
-const { themeName } = useTheme()
+const { themeName, baseThemeName } = useTheme()
+const runtime = useH5Runtime()
 let revision = 0
 let sequence = 0
 let currentSessionId = ''
@@ -154,6 +156,17 @@ const selectBlockFromPointer = (event: PointerEvent) => {
   if (selectionSync.shouldBroadcastSelection(vid)) sendForSession('stage-block-select', { vid }, undefined)
 }
 
+const isEditableTarget = (target: EventTarget | null) => {
+  const element = target instanceof HTMLElement ? target : null
+  return !!element?.closest('input, textarea, select, [contenteditable="true"], .monaco-editor')
+}
+
+const requestSelectedBlockDelete = (event: KeyboardEvent) => {
+  if (event.key !== 'Delete' || isEditableTarget(event.target) || !visualStore.vid) return
+  event.preventDefault()
+  sendForSession('stage-block-delete', { vid: visualStore.vid }, undefined)
+}
+
 const onMessage = (event: MessageEvent<unknown>) => {
   if (event.origin !== window.location.origin || event.source !== window.parent || !isStageMessage(event.data)) return
   const message = event.data
@@ -171,9 +184,10 @@ const onMessage = (event: MessageEvent<unknown>) => {
     revision = message.baseRevision
     blockList.value = message.payload.blocks
     pageConfig.value = message.payload.pageConfig as typeof pageConfig.value
-    themeName.value = message.payload.pageConfig.themeName
+    themeName.value = message.payload.pageConfig.themeName || baseThemeName.value
     visualStore.setDevice(message.payload.device)
     visualStore.activePanel = message.payload.activePanel
+    runtime.$setEditorPreviewIdentity?.(message.payload.previewIdentity)
     const selectedBlock = findBlockByVid(blockList.value, message.payload.selectedVid)
     if (selectionSync.shouldApplySelection(message.payload.selectedVid, visualStore.vid)) {
       if (selectedBlock) visualStore.setCurrentBlock(selectedBlock)
@@ -198,6 +212,7 @@ const onMessage = (event: MessageEvent<unknown>) => {
 onMounted(() => {
   window.addEventListener('message', onMessage)
   document.addEventListener('pointerdown', selectBlockFromPointer, true)
+  document.addEventListener('keydown', requestSelectedBlockDelete, true)
   setInternalMoveHandler(requestMove)
   sendForSession('stage-ready', {}, undefined)
 })
@@ -212,6 +227,7 @@ watch(
 onBeforeUnmount(() => {
   window.removeEventListener('message', onMessage)
   document.removeEventListener('pointerdown', selectBlockFromPointer, true)
+  document.removeEventListener('keydown', requestSelectedBlockDelete, true)
   setInternalMoveHandler(undefined)
   clearDropTargets()
   cancelAnimationFrame(autoScrollFrame)

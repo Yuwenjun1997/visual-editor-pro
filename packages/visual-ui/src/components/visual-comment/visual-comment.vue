@@ -51,6 +51,11 @@ const showRating = computed(() => _props.props.showRating)
 
 <style scoped lang="scss">
 .visual-comment {
+  --visual-comment-border-1: var(--v-border-1);
+  --visual-comment-text-1: var(--v-text-1);
+  --visual-comment-warning-1: var(--v-warning-1);
+  --visual-comment-text-3: var(--v-text-3);
+  --visual-comment-text-2: var(--v-text-2);
   .visual-comment__list {
     padding: 4px 0;
   }
@@ -61,7 +66,7 @@ const showRating = computed(() => _props.props.showRating)
     padding: 14px 0;
 
     & + & {
-      border-top: 1px solid var(--v-border-1, #f0f2f8);
+      border-top: 1px solid var(--visual-comment-border-1, #f0f2f8);
     }
   }
 
@@ -97,7 +102,7 @@ const showRating = computed(() => _props.props.showRating)
   .visual-comment__nickname {
     font-size: 14px;
     font-weight: 600;
-    color: var(--v-text-1, #2b2f3a);
+    color: var(--visual-comment-text-1, #2b2f3a);
   }
 
   .visual-comment__rating {
@@ -105,21 +110,23 @@ const showRating = computed(() => _props.props.showRating)
     align-items: center;
     gap: 1px;
     font-size: 12px;
-    color: var(--v-warning-1, #f6b73c);
+    color: var(--visual-comment-warning-1, #f6b73c);
   }
 
   .visual-comment__time {
     margin-left: auto;
     flex-shrink: 0;
     font-size: 12px;
-    color: var(--v-text-3, #b3bac7);
+    color: var(--visual-comment-text-3, #b3bac7);
   }
 
   .visual-comment__content {
     margin-top: 5px;
     font-size: 14px;
     line-height: 1.6;
-    color: var(--v-text-2, #464c59);
+    color: var(--visual-comment-text-2, #464c59);
   }
 }
 </style>
+
+

@@ -30,22 +30,10 @@ const VisualMap: VisualEditorComponent<VisualMapProps> = {
   previewImage: '/componets/visual-map.svg',
   souceDataType: 'VisualObjectArray',
   props: {
-    autoLocation: createSwitchControl({
-      label: '自动定位',
-      defaultValue: false,
-    }),
-    title: createTextInputControl({
-      label: '标题',
-      defaultValue: '当前位置',
-    }),
-    latitude: createNumberInputControl({
-      label: '纬度',
-      defaultValue: 39.909,
-    }),
-    longitude: createNumberInputControl({
-      label: '经度',
-      defaultValue: 116.39742,
-    }),
+    autoLocation: createSwitchControl({ label: '自动定位', defaultValue: false }),
+    title: createTextInputControl({ label: '标题', defaultValue: '当前位置' }),
+    latitude: createNumberInputControl({ label: '纬度', defaultValue: 39.909 }),
+    longitude: createNumberInputControl({ label: '经度', defaultValue: 116.39742 }),
     titleColor: createColorInputControl({ label: '标题颜色' }),
     titleFontSize: createTextInputControl({ label: '标题字号' }),
     scale: createTextInputControl({ label: '缩放级别' }),

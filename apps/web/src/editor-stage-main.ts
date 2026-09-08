@@ -1,4 +1,4 @@
-import { createApp, defineComponent, h } from 'vue'
+import { computed, createApp, defineComponent, h, ref } from 'vue'
 import { createPinia } from 'pinia'
 import { setupVisual, registryComponent, VisualStageCanvas } from '@visual/editor'
 import { provideH5Runtime } from '@visual/ui'
@@ -9,8 +9,19 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 
 const StageRuntimeRoot = defineComponent({
   setup() {
+    const previewIdentity = ref<'anonymous' | 'viewer' | 'editor' | 'admin'>('viewer')
     provideH5Runtime({
       editor: true,
+      auth: computed(() => ({
+        status: previewIdentity.value === 'anonymous' ? 'anonymous' : 'authenticated',
+        profile:
+          previewIdentity.value === 'anonymous'
+            ? null
+            : { id: 'editor-preview', role: previewIdentity.value },
+      })),
+      $setEditorPreviewIdentity(identity) {
+        previewIdentity.value = identity
+      },
       async $detail(kind, id) {
         const { data, error } = await supabase.rpc('editor_read_preview_detail', {
           p_kind: kind,

@@ -53,6 +53,12 @@ const _noListData = computed(() => _props.listData.length <= 0)
 
 <style scoped lang="scss">
 .visual-timeline {
+  --visual-timeline-border-1: var(--v-border-1);
+  --visual-timeline-success-1: var(--v-success-1);
+  --visual-timeline-primary-1: var(--v-primary-1);
+  --visual-timeline-text-3: var(--v-text-3);
+  --visual-timeline-text-1: var(--v-text-1);
+  --visual-timeline-text-2: var(--v-text-2);
   .visual-timeline__list {
     padding: 8px 0;
   }
@@ -73,21 +79,21 @@ const _noListData = computed(() => _props.listData.length <= 0)
         left: 50%;
         width: 2px;
         transform: translateX(-1px);
-        background: var(--v-border-1, #e5e8f2);
+        background: var(--visual-timeline-border-1, #e5e8f2);
       }
     }
 
     &--done .visual-timeline__dot {
-      background: var(--v-success-1, #3ecf8e);
+      background: var(--visual-timeline-success-1, #3ecf8e);
     }
 
     &--doing .visual-timeline__dot {
-      background: var(--v-primary-1, #4f6ef7);
+      background: var(--visual-timeline-primary-1, #4f6ef7);
       box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.18);
     }
 
     &--todo .visual-timeline__dot {
-      background: var(--v-text-3, #b3bac7);
+      background: var(--visual-timeline-text-3, #b3bac7);
     }
   }
 
@@ -119,26 +125,28 @@ const _noListData = computed(() => _props.listData.length <= 0)
 
   .visual-timeline__head-icon {
     flex-shrink: 0;
-    color: var(--v-primary-1, #2563eb);
+    color: var(--visual-timeline-primary-1, #2563eb);
   }
 
   .visual-timeline__title {
     font-size: 15px;
     font-weight: 600;
-    color: var(--v-text-1, #2b2f3a);
+    color: var(--visual-timeline-text-1, #2b2f3a);
   }
 
   .visual-timeline__desc {
     margin-top: 3px;
     font-size: 13px;
     line-height: 1.5;
-    color: var(--v-text-2, #6b7280);
+    color: var(--visual-timeline-text-2, #6b7280);
   }
 
   .visual-timeline__time {
     margin-top: 4px;
     font-size: 12px;
-    color: var(--v-text-3, #b3bac7);
+    color: var(--visual-timeline-text-3, #b3bac7);
   }
 }
 </style>
+
+

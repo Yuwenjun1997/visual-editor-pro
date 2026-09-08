@@ -69,6 +69,9 @@ watch(
 
 <style scoped lang="scss">
 .visual-qrcode {
+  --visual-qrcode-text-4: var(--v-text-4);
+  --visual-qrcode-gray-2: var(--v-gray-2);
+  --visual-qrcode-radius-moody-sm: var(--v-radius-moody-sm);
   .visual-qrcode__inner {
     display: flex;
     justify-content: center;
@@ -87,10 +90,12 @@ watch(
     justify-content: center;
     padding: 0 24px;
     font-size: 13px;
-    color: var(--v-text-4);
-    border: 1px dashed var(--v-gray-2);
-    border-radius: var(--v-radius-moody-sm);
+    color: var(--visual-qrcode-text-4);
+    border: 1px dashed var(--visual-qrcode-gray-2);
+    border-radius: var(--visual-qrcode-radius-moody-sm);
     box-sizing: border-box;
   }
 }
 </style>
+
+

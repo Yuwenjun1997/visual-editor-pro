@@ -83,16 +83,20 @@ const handleClick = (event: MouseEvent) => {
 }
 
 const itemStyle = computed<CSSProperties>(() => ({
-  '--v-product-radius': _props.round || undefined,
+  '--visual-product-item-product-radius': _props.round || undefined,
 }))
 </script>
 
 <style scoped lang="scss">
 .visual-product-item {
+  --visual-product-item-error-1: var(--v-error-1);
+  --visual-product-item-text-1: var(--v-text-1);
+  --visual-product-item-text-3: var(--v-text-3);
+  --visual-product-item-gradient-primary: var(--v-gradient-primary);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: var(--v-product-radius);
+  border-radius: var(--visual-product-item-product-radius);
   background: #fff;
 
   &--horizontal {
@@ -142,7 +146,7 @@ const itemStyle = computed<CSSProperties>(() => ({
     font-size: 11px;
     font-weight: 700;
     line-height: 1;
-    background: var(--v-error-1, #ff5c7a);
+    background: var(--visual-product-item-error-1, #ff5c7a);
     color: #fff;
   }
 
@@ -160,7 +164,7 @@ const itemStyle = computed<CSSProperties>(() => ({
     overflow: hidden;
     font-size: 14px;
     line-height: 1.4;
-    color: var(--v-text-1, #2b2f3a);
+    color: var(--visual-product-item-text-1, #2b2f3a);
     text-decoration: none;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -184,14 +188,14 @@ const itemStyle = computed<CSSProperties>(() => ({
   .visual-product-item__price {
     font-size: 18px;
     font-weight: 700;
-    color: var(--v-error-1, #ff5c7a);
+    color: var(--visual-product-item-error-1, #ff5c7a);
     font-variant-numeric: tabular-nums;
   }
 
   .visual-product-item__origin {
     flex-shrink: 0;
     font-size: 12px;
-    color: var(--v-text-3, #b3bac7);
+    color: var(--visual-product-item-text-3, #b3bac7);
     text-decoration: line-through;
   }
 
@@ -202,8 +206,11 @@ const itemStyle = computed<CSSProperties>(() => ({
     font-size: 12px;
     font-weight: 600;
     line-height: 1;
-    background: var(--v-gradient-primary);
+    background: var(--visual-product-item-gradient-primary);
     color: #fff;
   }
 }
 </style>
+
+
+

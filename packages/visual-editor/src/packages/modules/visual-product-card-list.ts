@@ -17,10 +17,7 @@ const defaultCover = '/image/cover.svg'
 
 const createData = (): Record<Exclude<keyof VisualProductCardListItem, 'id'>, VisualEditorProps> => ({
   cover: createImageInputControl({ label: '商品图', defaultValue: defaultCover }),
-  title: createTextInputControl({
-    label: '商品标题',
-    defaultValue: '科技渐变限量手办，遇见心动好物',
-  }),
+  title: createTextInputControl({ label: '商品标题', defaultValue: '科技渐变限量手办，遇见心动好物' }),
   price: createNumberInputControl({ label: '售价', defaultValue: 59.9 }),
   originPrice: createNumberInputControl({ label: '原价' }),
   tag: createTextInputControl({ label: '角标文案', defaultValue: '新品' }),

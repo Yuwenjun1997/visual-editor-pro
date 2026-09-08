@@ -31,7 +31,7 @@ export interface VisualColumnSourceOptions {
   dataContract?: string
 }
 
-export type { CustomThemeConfig, ThemeColors, ThemeConfig } from './theme'
+export type { CustomThemeConfig, ThemeColors, ThemeConfig, ThemeSelection } from './theme'
 export type { VisualRuntimeBlock } from '../components/visual-page-renderer/interface'
 
 export * from './app-login'

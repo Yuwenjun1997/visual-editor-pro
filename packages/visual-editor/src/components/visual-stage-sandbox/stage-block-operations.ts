@@ -51,6 +51,17 @@ export const findBlockContainer = (blocks: VisualBlockData[], target: StageDragT
   return { blocks: slot.blocks, parent, slot }
 }
 
+export const removeBlockByVid = (
+  blocks: VisualBlockData[],
+  vid: string,
+): { blocks: VisualBlockData[]; sourceParent?: VisualBlockData } | undefined => {
+  const next = cloneDeep(blocks)
+  const source = findBlockLocation(next, vid)
+  if (!source) return undefined
+  source.container.blocks.splice(source.index, 1)
+  return { blocks: next, sourceParent: source.container.parent }
+}
+
 const isDescendant = (block: VisualBlockData, vid: string): boolean => {
   if (block._vid === vid) return true
   return Object.values(block.slots || {}).some((slot) => slot.blocks.some((child) => isDescendant(child, vid)))

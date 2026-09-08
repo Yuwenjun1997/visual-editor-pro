@@ -10,13 +10,13 @@ import type { RuntimePage } from '../types/runtime'
 
 const props = defineProps<{ page: RuntimePage }>()
 const pageStyle = computed(() => props.page.schema.globalStyle || {})
-const { themeConfig, themeName } = useTheme()
+const { themeConfig, themeName, baseThemeName } = useTheme()
 
 // 页面 schema 的 themeName 优先于应用默认主题。仅接受已注册的主题，
 // 避免历史或手工输入的无效名称导致主题 CSS 变量为空。
 watchEffect(() => {
   const name = props.page.schema.themeName
-  if (name && themeConfig.value.theme[name]) themeName.value = name
+  themeName.value = name && themeConfig.value.theme[name] ? name : baseThemeName.value
 })
 </script>
 

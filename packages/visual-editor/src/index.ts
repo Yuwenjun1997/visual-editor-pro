@@ -10,6 +10,7 @@ export {
   DEFAULT_VISUAL_THEME,
   VISUAL_THEME_PRESETS,
   resolveVisualThemeName,
+  resolvePageThemeName,
   visualThemeConfig,
   type VisualThemeName,
 } from './configs/visual-theme'

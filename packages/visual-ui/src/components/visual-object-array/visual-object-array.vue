@@ -83,12 +83,16 @@ watchEffect(() => {
 
 <style lang="scss" scoped>
 .visual-object-array {
+  --visual-object-array-spacing-md: var(--v-spacing-md);
+  --visual-object-array-spacing-xs: var(--v-spacing-xs);
+  --visual-object-array-text-xs: var(--v-text-xs);
+  --visual-object-array-text-3: var(--v-text-3);
   .visual-error-message {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--v-spacing-md);
-    gap: var(--v-spacing-xs);
+    padding: var(--visual-object-array-spacing-md);
+    gap: var(--visual-object-array-spacing-xs);
 
     img {
       width: 40px;
@@ -96,9 +100,11 @@ watchEffect(() => {
     }
 
     span {
-      font-size: var(--v-text-xs);
-      color: var(--v-text-3);
+      font-size: var(--visual-object-array-text-xs);
+      color: var(--visual-object-array-text-3);
     }
   }
 }
 </style>
+
+

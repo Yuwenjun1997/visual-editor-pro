@@ -1,6 +1,6 @@
 <template>
   <visual-box class="visual-flex" :class="_props.class" :styles="_props.styles">
-    <div :class="_bindClass" :style="_bindStyles">
+    <div :style="_bindStyles" class="visual-flex__content">
       <slot></slot>
     </div>
   </visual-box>
@@ -23,8 +23,6 @@ defineOptions({
 
 const _props = defineProps<Props>()
 
-const _bindClass = computed(() => [])
-
 const _bindStyles = computed<CSSProperties>(() => ({
   flexDirection: _props.props.flexDirection,
   justifyContent: _props.props.justifyContent,
@@ -36,22 +34,24 @@ const _bindStyles = computed<CSSProperties>(() => ({
 <style scoped lang="scss">
 .visual-flex {
   display: flex;
+  height: 100%;
+  min-height: 100%;
   width: 100%;
 }
 
-.v-gap-xs {
-  gap: var(--v-spacing-xs, 4px);
+.visual-flex :deep(.visual-box__inner) {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
 }
 
-.v-gap-sm {
-  gap: var(--v-spacing-sm, 8px);
-}
-
-.v-gap-md {
-  gap: var(--v-spacing-md, 12px);
-}
-
-.v-gap-lg {
-  gap: var(--v-spacing-lg, 24px);
+.visual-flex__content {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  min-height: 100%;
+  min-width: 0;
+  width: 100%;
 }
 </style>

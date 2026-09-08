@@ -41,8 +41,8 @@ const _bindProps = computed<VisualImageTextListProps>(() => ({
 }))
 
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
-  '--v-item-round': cssRadiusVar(_bindProps.value.round),
+  '--visual-image-text-list-inner-gutter': cssSpacingVar(_bindProps.value.gutter),
+  '--visual-image-text-list-item-round': cssRadiusVar(_bindProps.value.round),
 }))
 </script>
 
@@ -50,7 +50,7 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
 .visual-image-text {
   &__inner {
     display: grid;
-    gap: var(--v-inner-gutter);
+    gap: var(--visual-image-text-list-inner-gutter);
 
     &.layout-item-list {
       grid-template-columns: repeat(1, 1fr);
@@ -58,3 +58,6 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
   }
 }
 </style>
+
+
+

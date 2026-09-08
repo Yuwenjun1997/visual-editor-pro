@@ -14,7 +14,15 @@ const props = withDefaults(defineProps<Props>(), {
 
 <style scoped lang="scss">
 .visual-news-time {
-  font-size: var(--v-text-sm);
-  color: var(--v-text-3);
+  --visual-time-text-sm: var(--v-text-sm);
+  --visual-time-text-3: var(--v-text-3);
+  --components-text-sm: var(--visual-time-text-sm);
+  --components-text-3: var(--visual-time-text-3);
+  font-size: var(--components-text-sm);
+  color: var(--components-text-3);
 }
 </style>
+
+
+
+

@@ -32,7 +32,6 @@ const safeHtml = computed(() => sanitizeRichText(_props.props.html))
   .visual-rich-text__content {
     font-size: 14px;
     line-height: 1.7;
-    color: var(--v-text-1, #2b2f3a);
     overflow-wrap: break-word;
 
     :deep(> *) {
@@ -49,7 +48,6 @@ const safeHtml = computed(() => sanitizeRichText(_props.props.html))
     :deep(h4),
     :deep(h5),
     :deep(h6) {
-      color: var(--v-text-1, #2b2f3a);
       font-weight: 700;
     }
 
@@ -163,7 +161,6 @@ const safeHtml = computed(() => sanitizeRichText(_props.props.html))
     }
 
     :deep(a) {
-      color: #2563eb;
       text-decoration: underline;
       text-underline-offset: 2px;
     }

@@ -48,11 +48,14 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
 
 <style scoped lang="scss">
 .visual-grid {
+  --visual-grid-spacing-sm: var(--v-spacing-sm);
   overflow: hidden;
 
   .visual-grid__inner {
     display: grid;
-    gap: var(--v-spacing-sm);
+    gap: var(--visual-grid-spacing-sm);
   }
 }
 </style>
+
+

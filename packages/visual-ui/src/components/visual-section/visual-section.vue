@@ -44,18 +44,22 @@ const _props = defineProps<Props>()
 const _bindProps = computed(() => _props.props)
 
 const _bindInnerStyles = computed(() => ({
-  '--v-section-line-color': _bindProps.value.lineColor,
-  '--v-section-line-width': _bindProps.value.lineWidth,
-  '--v-section-title-size': cssTextSizeVar(_bindProps.value.titleSize),
-  '--v-section-title-color': _bindProps.value.titleColor,
-  '--v-section-desc-size': cssTextSizeVar(_bindProps.value.descriptionSize),
-  '--v-section-desc-color': _bindProps.value.descriptionColor,
-  '--v-section-title-bold': _bindProps.value.bold ? 'bold' : '',
+  '--visual-section-section-line-color': _bindProps.value.lineColor,
+  '--visual-section-section-line-width': _bindProps.value.lineWidth,
+  '--visual-section-section-title-size': cssTextSizeVar(_bindProps.value.titleSize),
+  '--visual-section-section-title-color': _bindProps.value.titleColor,
+  '--visual-section-section-desc-size': cssTextSizeVar(_bindProps.value.descriptionSize),
+  '--visual-section-section-desc-color': _bindProps.value.descriptionColor,
+  '--visual-section-section-title-bold': _bindProps.value.bold ? 'bold' : '',
 }))
 </script>
 
 <style scoped lang="scss">
 .visual-section {
+  --visual-section-spacing-sm: var(--v-spacing-sm);
+  --visual-section-primary-1: var(--v-primary-1);
+  --visual-section-text-3: var(--v-text-3);
+  --visual-section-text-sm: var(--v-text-sm);
   .visual-section__inner {
     display: flex;
     flex-direction: column;
@@ -63,28 +67,31 @@ const _bindInnerStyles = computed(() => ({
 
     .visual-section__title {
       display: flex;
-      color: var(--v-section-title-color);
-      font-size: var(--v-section-title-size);
-      gap: var(--v-spacing-sm);
+      color: var(--visual-section-section-title-color);
+      font-size: var(--visual-section-section-title-size);
+      gap: var(--visual-section-spacing-sm);
 
       .visual-section__title_text {
-        font-weight: var(--v-section-title-bold);
+        font-weight: var(--visual-section-section-title-bold);
       }
 
       .visual-section__line {
-        width: var(--v-section-line-width, 2px);
-        // margin-right: var(--v-spacing-sm);
-        background-color: var(--v-section-line-color, var(--v-primary-1));
-        border-radius: var(--v-section-line-width, 2px);
+        width: var(--visual-section-section-line-width, 2px);
+        // margin-right: var(--visual-section-spacing-sm);
+        background-color: var(--visual-section-section-line-color, var(--visual-section-primary-1));
+        border-radius: var(--visual-section-section-line-width, 2px);
       }
     }
 
     .visual-section__desc {
-      color: var(--v-section-desc-color, var(--v-text-3));
-      font-size: var(--v-section-desc-size, var(--v-text-sm));
-      margin-top: var(--v-spacing-sm);
+      color: var(--visual-section-section-desc-color, var(--visual-section-text-3));
+      font-size: var(--visual-section-section-desc-size, var(--visual-section-text-sm));
+      margin-top: var(--visual-section-spacing-sm);
       line-height: 1.5;
     }
   }
 }
 </style>
+
+
+

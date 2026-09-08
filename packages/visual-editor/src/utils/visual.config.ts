@@ -9,6 +9,7 @@ import type {
   DataSourceProvider,
   VisualEntityProvider,
   VisualUrlPageProvider,
+  VisualAppThemeLoader,
 } from '../types/visual-editor'
 
 export function createVisualBlockConfig() {
@@ -32,6 +33,7 @@ export function createVisualBlockConfig() {
     revisionProvider: undefined as VisualRevisionProvider | undefined,
     draftNamespace: undefined as string | undefined,
     savedPageLoader: undefined as VisualPageLoader | undefined,
+    appThemeLoader: undefined as VisualAppThemeLoader | undefined,
     dataSourceProvider: undefined as DataSourceProvider | undefined,
     entityProvider: undefined as VisualEntityProvider | undefined,
     urlPageProvider: undefined as VisualUrlPageProvider | undefined,

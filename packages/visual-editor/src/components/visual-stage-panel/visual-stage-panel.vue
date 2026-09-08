@@ -50,7 +50,7 @@ defineOptions({ name: 'VisualStagePanel' })
 
 const iframeRef = ref<HTMLIFrameElement>()
 const controller: StageSandboxController = createStageSandboxController(generateNanoid())
-const { applyBlockOperation, blockList, refreshCurrentBlockPosition } = useBlocks()
+const { applyBlockOperation, blockList, refreshCurrentBlockPosition, removeByVid } = useBlocks()
 const { pageConfig } = usePageConfig()
 const visualStore = useViusalStore()
 const themeMode = ref<'light' | 'dark'>('light')
@@ -68,6 +68,7 @@ const stageState = (): StageStatePayload => ({
   activePanel: visualStore.activePanel,
   selectedVid: visualStore.vid,
   themeMode: themeMode.value,
+  previewIdentity: visualStore.previewIdentity,
 })
 
 const publishState = (increment = false) => {
@@ -107,7 +108,18 @@ const onPointerMove = (event: PointerEvent) => controller.move(event)
 const onPointerUp = (event: PointerEvent) => controller.end(event)
 const onPointerCancel = () => controller.cancel('指针已取消')
 const onKeydown = (event: KeyboardEvent) => {
-  if (event.key === 'Escape') controller.cancel('用户取消拖拽')
+  if (event.key === 'Escape') {
+    controller.cancel('用户取消拖拽')
+    return
+  }
+  if (event.key !== 'Delete' || isEditableTarget(event.target) || !visualStore.vid) return
+  event.preventDefault()
+  removeByVid(visualStore.vid)
+}
+
+const isEditableTarget = (target: EventTarget | null) => {
+  const element = target instanceof HTMLElement ? target : null
+  return !!element?.closest('input, textarea, select, [contenteditable="true"], .monaco-editor')
 }
 
 onMounted(() => {
@@ -135,6 +147,7 @@ onMounted(() => {
       refreshCurrentBlockPosition()
     }
   })
+  controller.onBlockDelete((vid) => removeByVid(vid))
   if (iframeRef.value) controller.attach(iframeRef.value)
   window.addEventListener('pointermove', onPointerMove, true)
   window.addEventListener('pointerup', onPointerUp, true)
@@ -144,7 +157,14 @@ onMounted(() => {
 })
 
 watch(
-  [blockList, pageConfig, () => visualStore.device, () => visualStore.activePanel, () => visualStore.vid],
+  [
+    blockList,
+    pageConfig,
+    () => visualStore.device,
+    () => visualStore.activePanel,
+    () => visualStore.vid,
+    () => visualStore.previewIdentity,
+  ],
   () => {
     if (suppressStateWatch) return
     publishState(true)

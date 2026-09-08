@@ -29,23 +29,25 @@ const createAllTheme = (themes: Record<string, ThemeColors>) => {
 }
 
 // 初始化主题配置
-const initThemeConfig = (config: CustomThemeConfig = {}): ThemeConfig => ({
+export const initThemeConfig = (config: CustomThemeConfig = {}): ThemeConfig => ({
   themeName: config.themeName || 'normal',
   theme: {
     normal: createTheme(normalColorMap),
     'normal-dark': createTheme(normalColorMap, true),
-    ...createAllTheme(config.theme || {}),
+    ...createAllTheme({ ...config.theme, ...(config.primary ? { [config.themeName || 'normal']: { ...normalColorMap, primary: config.primary } } : {}) }),
   },
 })
 
 const themeConfig = ref<ThemeConfig>(initThemeConfig())
+
 const themeName = ref<string>('normal')
+const baseThemeName = ref<string>('normal')
 
 export const useTheme = () => {
   const initTheme = (config: CustomThemeConfig = {}) => {
     themeConfig.value = initThemeConfig(config)
     themeName.value = themeConfig.value.themeName
-    console.log(themeConfig.value)
+    baseThemeName.value = themeConfig.value.themeName
   }
 
   const getUsedTheme = (themeName: string) => themeConfig.value.theme[themeName]
@@ -57,13 +59,14 @@ export const useTheme = () => {
     return themeConfig.value.theme[themeName.value]?.[code] || code
   }
 
-  const colorVar = (code: string) => {
+  const colorVar = (code?: string) => {
     if (typeof code === 'undefined') return
-    return isColorCode(code) ? code : `var(--v-${code})`
+    return isColorCode(code) || code.includes('(') || code.includes('gradient') ? code : `var(--v-${code})`
   }
 
   return {
     themeName,
+    baseThemeName,
     currentTheme,
     themeConfig,
     colorVal,
@@ -71,4 +74,12 @@ export const useTheme = () => {
     initTheme,
     getUsedTheme,
   }
+}
+
+export const resolveThemeName = (name: string | null | undefined, available: Record<string, unknown>) =>
+  name && available[name] ? name : 'normal'
+
+export const resolveColorValue = (value: string | undefined, theme: Record<string, string>) => {
+  if (!value) return undefined
+  return isColorCode(value) || value.includes('(') || value.includes('gradient') ? value : theme[value] || value
 }

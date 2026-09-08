@@ -100,6 +100,22 @@ export const formatVisualBlockData = (block: Partial<VisualBlockData>): VisualBl
   block.styles = Object.assign({ opacity: 1 }, block.styles || {})
   block.props = block.props || {}
 
+  if (block.key === 'VisualTabs' && Array.isArray(block.listData)) {
+    const currentSlots = block.slots || {}
+    block.slots = Object.fromEntries(
+      block.listData.map((item, index) => {
+        const key = `tab-${index}`
+        return [
+          key,
+          currentSlots[key] || {
+            name: item.label || `页签${index + 1}`,
+            blocks: [],
+          },
+        ]
+      }),
+    )
+  }
+
   Object.entries(block.slots || {}).forEach(([, slot]) => {
     slot.blocks = slot.blocks.map((block) => formatVisualBlockData(block))
   })

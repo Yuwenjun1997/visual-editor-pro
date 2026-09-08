@@ -1,9 +1,11 @@
 export const colorList = [
-  { label: '主题', value: 'primary' },
-  { label: '成功', value: 'success' },
-  { label: '警告', value: 'warning' },
-  { label: '危险', value: 'error' },
-  { label: '信息', value: 'info' },
-  { label: '灰色', value: 'gray' },
-  { label: '文本', value: 'text' },
+  { label: '主题色', value: 'primary-color' },
+  { label: '成功色', value: 'success-color' },
+  { label: '警告色', value: 'warning-color' },
+  { label: '错误色', value: 'error-color' },
+  { label: '信息色', value: 'info-color' },
+  { label: '文本色', value: 'text-color' },
+  { label: '背景色', value: 'background-color' },
+  { label: '表面色', value: 'surface-color' },
+  { label: '边框色', value: 'border-color' },
 ]

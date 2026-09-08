@@ -111,6 +111,11 @@ export const setupVisualHostConfig = (authStore: ReturnType<typeof useAuthStore>
       : null
   }
 
+  visualConfig.appThemeLoader = async (appId) => {
+    const app = await appService.get(appId)
+    return (app?.theme_config || null) as any
+  }
+
   visualConfig.dataSourceProvider = dataSourceService
   visualConfig.entityProvider = {
     async list(entityType, keyword = '') {

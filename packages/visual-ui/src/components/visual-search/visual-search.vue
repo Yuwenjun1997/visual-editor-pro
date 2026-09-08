@@ -22,6 +22,7 @@ import { toast } from '../../utils/toast'
 import type { VisualSearchProps } from './interface'
 import { appendVisualUrlQuery, navigateVisualUrl } from '../../utils/url'
 import { useH5Runtime } from '../../hooks/useH5Runtime'
+import { useTheme } from '../../hooks/useTheme'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -35,15 +36,16 @@ defineOptions({
 
 const _props = defineProps<Props>()
 const runtime = useH5Runtime()
+const { colorVar } = useTheme()
 
 const keyword = ref('')
 
 const innerStyle = computed<CSSProperties>(() => ({
-  '--v-search-radius': _props.props.radius || '999px',
+  '--visual-search-search-radius': _props.props.radius || '999px',
 }))
 
 const btnStyle = computed<CSSProperties>(() => ({
-  '--v-search-btn-bg': _props.props.buttonColor,
+  '--visual-search-search-btn-bg': colorVar(_props.props.buttonColor),
 }))
 
 const handleSubmit = () => {
@@ -60,23 +62,31 @@ const handleSubmit = () => {
 
 <style scoped lang="scss">
 .visual-search {
+  --visual-search-background-color: var(--v-surface-color);
+  --visual-search-button-text-color: var(--v-white);
+  --visual-search-primary-2: var(--v-primary-2);
+  --visual-search-text-2: var(--v-text-2);
+  --visual-search-text-3: var(--v-text-3);
+  --visual-search-primary-1: var(--v-primary-1);
+  --visual-search-motion-fast: var(--v-motion-fast);
+  --visual-search-ease-soft: var(--v-ease-soft);
   .visual-search__inner {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 6px 6px 6px 12px;
-    border-radius: var(--v-search-radius, 999px);
-    background: #f3f5ff;
+    border-radius: var(--visual-search-search-radius, 999px);
+    background: var(--visual-search-background-color);
 
     &:focus-within {
-      box-shadow: inset 0 0 0 2px var(--v-primary-2, rgba(37, 99, 235, 0.35));
+      box-shadow: inset 0 0 0 2px var(--visual-search-primary-2, rgba(37, 99, 235, 0.35));
     }
   }
 
   .visual-search__search-icon {
     flex-shrink: 0;
     font-size: 16px;
-    color: var(--v-text-2, #8a93a6);
+    color: var(--visual-search-text-2, #8a93a6);
   }
 
   .visual-search__input {
@@ -89,7 +99,7 @@ const handleSubmit = () => {
     color: inherit;
 
     &::placeholder {
-      color: var(--v-text-3, #b3bac7);
+      color: var(--visual-search-text-3, #b3bac7);
     }
   }
 
@@ -97,14 +107,14 @@ const handleSubmit = () => {
     flex-shrink: 0;
     padding: 9px 18px;
     border: 0;
-    border-radius: var(--v-search-radius, 999px);
+    border-radius: var(--visual-search-search-radius, 999px);
     font-size: 14px;
     font-weight: 600;
     line-height: 1;
-    background-color: var(--v-search-btn-bg, var(--v-primary-1, #2563eb));
-    color: #fff;
+    background-color: var(--visual-search-search-btn-bg, var(--visual-search-primary-1, #2563eb));
+    color: var(--visual-search-button-text-color);
     cursor: pointer;
-    transition: opacity var(--v-motion-fast) var(--v-ease-soft);
+    transition: opacity var(--visual-search-motion-fast) var(--visual-search-ease-soft);
 
     &:hover {
       opacity: 0.92;
@@ -116,3 +126,5 @@ const handleSubmit = () => {
   }
 }
 </style>
+
+

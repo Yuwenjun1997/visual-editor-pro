@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { VisualBlockData, VisualBlockSlotData } from '../../types/visual-editor'
-import { applyBlockOperation } from './stage-block-operations'
+import { applyBlockOperation, removeBlockByVid } from './stage-block-operations'
 
 const slot = (blocks: VisualBlockData[] = [], size?: number): VisualBlockSlotData => ({ name: 'content', blocks, size })
 
@@ -76,5 +76,14 @@ describe('applyBlockOperation', () => {
     })
 
     expect(result).toMatchObject({ ok: false, reason: '不能将组件移动到自身内部' })
+  })
+
+  it('removes a nested block without mutating the input tree', () => {
+    const container = block('container', { content: slot([block('child')]) })
+    const result = removeBlockByVid([container], 'child')
+
+    expect(result?.blocks[0].slots?.content.blocks).toEqual([])
+    expect(result?.sourceParent?._vid).toBe('container')
+    expect(container.slots?.content.blocks.map((item) => item._vid)).toEqual(['child'])
   })
 })

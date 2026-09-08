@@ -16,6 +16,7 @@ export const visualBoxStyles: CSSPropertiesKeys[] = [
   'marginBottom',
   'marginLeft',
   'opacity',
+  'color',
   'boxShadow',
 ]
 

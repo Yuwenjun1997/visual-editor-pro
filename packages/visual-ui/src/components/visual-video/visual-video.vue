@@ -35,10 +35,10 @@ const _props = defineProps<Props>()
 const _bindProps = computed(() => _props.props)
 
 const _bindInnerStyles = computed<CSSProperties>(() => ({
-  '--v-video-width': _bindProps.value.width,
-  '--v-video-height': _bindProps.value.height,
-  '--v-video-radius': cssRadiusVar(_bindProps.value.round),
-  '--v-video-align': _bindProps.value.align,
+  '--visual-video-video-width': _bindProps.value.width,
+  '--visual-video-video-height': _bindProps.value.height,
+  '--visual-video-video-radius': cssRadiusVar(_bindProps.value.round),
+  '--visual-video-video-align': _bindProps.value.align,
 }))
 </script>
 
@@ -46,14 +46,17 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
 .visual-video {
   .visual-video__inner {
     display: flex;
-    justify-content: var(--v-video-align, flex-start);
+    justify-content: var(--visual-video-video-align, flex-start);
     .visual-video__video {
       display: block;
-      width: var(--v-video-width, 100%);
-      height: var(--v-video-height, 180px);
-      border-radius: var(--v-video-radius);
+      width: var(--visual-video-video-width, 100%);
+      height: var(--visual-video-video-height, 180px);
+      border-radius: var(--visual-video-video-radius);
       overflow: hidden;
     }
   }
 }
 </style>
+
+
+

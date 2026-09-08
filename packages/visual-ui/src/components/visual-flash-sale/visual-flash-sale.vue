@@ -87,8 +87,8 @@ const handleClick = (event: MouseEvent) => {
 }
 
 const innerStyle = computed<CSSProperties>(() => ({
-  '--v-flash-bg': _props.props.bgColor,
-  '--v-flash-num-bg': _props.props.numColor,
+  '--visual-flash-sale-flash-bg': _props.props.bgColor,
+  '--visual-flash-sale-flash-num-bg': _props.props.numColor,
 }))
 
 // —— 倒计时：与 visual-count-down 同一套解析/计时逻辑 ——
@@ -137,9 +137,12 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .visual-flash-sale {
+  --visual-flash-sale-radius-moody-sm: var(--v-radius-moody-sm);
+  --visual-flash-sale-font-body: var(--v-font-body);
+  --visual-flash-sale-shadow-soft: var(--v-shadow-soft);
   .visual-flash-sale__inner {
     padding: 14px 16px;
-    background: var(--v-flash-bg, linear-gradient(120deg, #ff4d6a, #ff6f5e));
+    background: var(--visual-flash-sale-flash-bg, linear-gradient(120deg, #ff4d6a, #ff6f5e));
     color: #fff;
   }
 
@@ -178,12 +181,12 @@ onBeforeUnmount(() => {
     min-width: 24px;
     height: 24px;
     padding: 0 4px;
-    border-radius: var(--v-radius-moody-sm);
-    font-family: var(--v-font-body);
+    border-radius: var(--visual-flash-sale-radius-moody-sm);
+    font-family: var(--visual-flash-sale-font-body);
     font-size: 15px;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
-    background: var(--v-flash-num-bg, rgba(0, 0, 0, 0.35));
+    background: var(--visual-flash-sale-flash-num-bg, rgba(0, 0, 0, 0.35));
     color: #fff;
   }
 
@@ -255,8 +258,11 @@ onBeforeUnmount(() => {
     line-height: 1;
     text-decoration: none;
     background: #fff;
-    color: var(--v-flash-bg, #ff4d6a);
-    box-shadow: var(--v-shadow-soft);
+    color: var(--visual-flash-sale-flash-bg, #ff4d6a);
+    box-shadow: var(--visual-flash-sale-shadow-soft);
   }
 }
 </style>
+
+
+

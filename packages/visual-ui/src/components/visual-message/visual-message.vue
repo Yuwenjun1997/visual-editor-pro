@@ -34,13 +34,17 @@ const _props = withDefaults(defineProps<Props>(), {
 
 <style scoped lang="scss">
 .visual-empty {
+  --visual-message-spacing-md: var(--v-spacing-md);
+  --visual-message-spacing-xs: var(--v-spacing-xs);
+  --visual-message-text-xs: var(--v-text-xs);
+  --visual-message-text-4: var(--v-text-4);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--v-spacing-md);
-  gap: var(--v-spacing-xs);
-  font-size: var(--v-text-xs);
-  color: var(--v-text-4);
+  padding: var(--visual-message-spacing-md);
+  gap: var(--visual-message-spacing-xs);
+  font-size: var(--visual-message-text-xs);
+  color: var(--visual-message-text-4);
 
   img {
     width: 40px;
@@ -48,3 +52,5 @@ const _props = withDefaults(defineProps<Props>(), {
   }
 }
 </style>
+
+
