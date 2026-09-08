@@ -15,9 +15,8 @@
     :class="{ 'is-empty': isEmpty }"
     :data-slot="isEmpty ? '组件拖拽到这里' : ''"
     fallback-class="visual-stage-sortable-fallback"
-    @change="onChange"
     @end="onEnd($event)"
-    @start="onStart($event)"
+    @start="onStart"
   >
     <div
       v-for="(element, index) in moduleList"
@@ -60,11 +59,7 @@ import { useViusalStore } from '../../store/useVisual'
 import { collectionProps, collectionStyles, VISUAL_OVERLAY_KEYS } from '../../utils/visual.filter'
 import { useBlocks } from '../../hooks/useBlocks'
 import { cloneDeep } from 'lodash'
-import {
-  notifyInternalDragEnd,
-  notifyInternalDragStart,
-  registerDropTarget,
-} from '../visual-stage-sandbox/drop-registry'
+import { notifyInternalDragEnd, registerDropTarget } from '../visual-stage-sandbox/drop-registry'
 import { canAcceptBlock } from '../visual-stage-sandbox/stage-block-operations'
 
 defineOptions({
@@ -100,7 +95,7 @@ const parentKey = computed(() => props.parentComponent?.key)
 const parentProps = computed(() => props.parentComponent?.props)
 const parentStyles = computed(() => props.parentComponent?.styles)
 
-const { setCurrentBlockPosition, clearCurrentBlockPosition, clearParentDataSource } = useBlocks()
+const { setCurrentBlockPosition, clearCurrentBlockPosition } = useBlocks()
 const visualStore = useViusalStore()
 
 const moduleList = useVModel(props, 'modelValue', emit)
@@ -133,24 +128,13 @@ const registerDropElement = (value: any) => {
       }
       return children.length
     },
-    getRect: (index) => {
-      const children = Array.from(element.querySelectorAll<HTMLElement>(':scope > .visual-block'))
-      const containerRect = element.getBoundingClientRect()
-      if (!children.length) return new DOMRect(containerRect.left, containerRect.top, containerRect.width, 2)
-      const reference = children[Math.min(index, children.length - 1)].getBoundingClientRect()
-      const top = index < children.length ? reference.top : reference.bottom
-      return new DOMRect(containerRect.left, top, containerRect.width, 2)
-    },
-    insert: (block, index) => moduleList.value.splice(index, 0, cloneDeep(block)),
   })
 }
 
-const onStart = (event: { item?: HTMLElement }) => {
+const onStart = () => {
   dragging.value = true
   visualStore.clearCurrent()
   clearCurrentBlockPosition()
-  const blockVid = event.item?.dataset.blockVid
-  if (blockVid) notifyInternalDragStart(blockVid)
 }
 
 const onEnd = (event: { item?: HTMLElement; to?: HTMLElement; newIndex?: number }) => {
@@ -159,10 +143,6 @@ const onEnd = (event: { item?: HTMLElement; to?: HTMLElement; newIndex?: number 
   const blockVid = event.item?.dataset.blockVid
   const dropId = event.to?.dataset.dropId
   if (blockVid && dropId && typeof event.newIndex === 'number') notifyInternalDragEnd(blockVid, dropId, event.newIndex)
-}
-
-const onChange = (event: any) => {
-  if (event.removed) clearParentDataSource(props.parentComponent)
 }
 
 const isFlexDisabled = (block: VisualBlockData) => {

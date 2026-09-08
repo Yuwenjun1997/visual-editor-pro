@@ -1,12 +1,41 @@
-import { createApp } from 'vue'
+import { createApp, defineComponent, h } from 'vue'
 import { createPinia } from 'pinia'
-import { setupVisual, registryComponent } from '@visual/editor'
-import VisualStageCanvas from '../../../packages/visual-editor/src/components/visual-stage-sandbox/visual-stage-canvas.vue'
+import { setupVisual, registryComponent, VisualStageCanvas } from '@visual/editor'
+import { provideH5Runtime } from '@visual/ui'
+import { supabase } from './lib/supabase'
 import '@visual/ui/style.css'
 import '@visual/editor/style.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
-const app = createApp(VisualStageCanvas)
+const StageRuntimeRoot = defineComponent({
+  setup() {
+    provideH5Runtime({
+      editor: true,
+      async $detail(kind, id) {
+        const { data, error } = await supabase.rpc('editor_read_preview_detail', {
+          p_kind: kind,
+          p_entity_id: id,
+        })
+        if (error || !data) throw error || new Error('内容不存在、未发布或无访问权限')
+        return data as Record<string, any>
+      },
+      async $dataSource(sourceId) {
+        const { data, error } = await supabase.rpc('editor_read_preview_data_source', { p_source_id: sourceId })
+        if (error) throw error
+        if (data == null) return null
+        return (Array.isArray(data) ? data : [data]) as Record<string, any>[]
+      },
+      $navigateTo() {},
+      async $request() {
+        throw new Error('编辑舞台不发送请求')
+      },
+      $emit() {},
+    })
+    return () => h(VisualStageCanvas)
+  },
+})
+
+const app = createApp(StageRuntimeRoot)
 app.use(createPinia())
 registryComponent()
 setupVisual(app, undefined, { mountTheme: true })

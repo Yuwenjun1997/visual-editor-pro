@@ -4,7 +4,6 @@ import { createVisualBlock, generateNanoid } from '../../utils/visual.utils'
 import type { VisualEditorComponent } from '../../types/visual-editor'
 import type {
   StageDragSession,
-  StageDropPreview,
   StageDropRequest,
   StageMessage,
   StagePoint,
@@ -16,7 +15,6 @@ export interface StageSandboxController {
   readonly editorInstanceId: string
   readonly ready: Readonly<Ref<boolean>>
   readonly error: Readonly<Ref<string | null>>
-  readonly preview: Readonly<Ref<StageDropPreview>>
   readonly dragPoint: Readonly<Ref<{ x: number; y: number }>>
   readonly session: Readonly<Ref<StageDragSession | null>>
   attach(iframe: HTMLIFrameElement): void
@@ -52,7 +50,6 @@ const toFramePoint = (iframe: HTMLIFrameElement, event: PointerEvent): StagePoin
 export const createStageSandboxController = (editorInstanceId = generateNanoid()): StageSandboxController => {
   const ready = ref(false)
   const error = ref<string | null>(null)
-  const preview = ref<StageDropPreview>({ status: 'none' })
   const dragPoint = ref({ x: 0, y: 0 })
   const session = ref<StageDragSession | null>(null)
   let iframe: HTMLIFrameElement | undefined
@@ -86,7 +83,6 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
     pendingPoint = undefined
     startPoint = undefined
     session.value = null
-    preview.value = { status: 'none' }
   }
 
   const onMessage = (event: MessageEvent<unknown>) => {
@@ -99,11 +95,6 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
       frameReady = true
       ready.value = true
       readyCallback?.()
-    } else if (message.type === 'stage-drag-preview') {
-      preview.value = message.payload.preview
-      if (session.value && message.sessionId === session.value.id) {
-        session.value.target = preview.value.status === 'valid' ? preview.value.target : undefined
-      }
     } else if (message.type === 'stage-drop-request') {
       dropRequestCallback?.(message.payload, message.baseRevision, message.sessionId)
     } else if (message.type === 'stage-block-select') {
@@ -112,7 +103,6 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
       if (session.value && message.sessionId === session.value.id) finish()
     } else if (message.type === 'stage-drop-reject') {
       if (session.value && message.sessionId === session.value.id) {
-        session.value.phase = 'error'
         finish()
       }
     }
@@ -161,7 +151,6 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
     const block = createVisualBlock(cloneDeep(component))
     session.value = {
       id: generateNanoid(),
-      sourceType: 'material',
       block,
       previewImage: component.previewImage,
       label: component.label,
@@ -239,7 +228,6 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
     editorInstanceId,
     ready,
     error,
-    preview,
     dragPoint,
     session,
     attach,

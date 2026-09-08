@@ -189,7 +189,7 @@ export const dataSourceService = {
 
   async resolveRows(sourceId: string): Promise<Record<string, any>[] | null> {
     if (this.publicMode) {
-      const { data, error } = await supabase.rpc('resolve_public_data_source', { p_source_id: sourceId })
+      const { data, error } = await supabase.rpc('data_source_read_public', { p_source_id: sourceId })
       if (error) throw error
       if (!data) return null
       return (Array.isArray(data) ? data : [data]) as Record<string, any>[]

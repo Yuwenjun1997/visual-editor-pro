@@ -43,6 +43,7 @@ export interface H5Runtime {
   $login?(): void | Promise<void>
   $logout?(): void | Promise<void>
   $detail?(kind: 'product' | 'article', id: string): Promise<Record<string, any>>
+  $dataSource?(sourceId: string): Promise<Record<string, any>[] | null>
   $user?(id: string): Promise<H5UserProfile>
 
   $navigateTo(url: string, options?: H5NavigateOptions): void | Promise<void>

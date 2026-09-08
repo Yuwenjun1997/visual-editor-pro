@@ -19,7 +19,7 @@
 
 ## 本次迭代进展
 
-- 统一应用保存入口为 `save_draft_page`，并在 Supabase 文档中说明旧函数仅为历史兼容入口。
+- 统一应用保存入口为 `page_write_draft`；旧 `save_page_with_data_source_bindings` 已由 RPC 清洗迁移删除。
 - 增加 `project-docs/DEPLOYMENT.md`，记录环境变量、migration、构建、SPA fallback 和回滚流程。
 - 根目录增加 `pnpm test`，指向编辑器 Vitest 测试。
 - 数据源编辑会保留 `disabled` 状态；发布操作增加重复调用保护。

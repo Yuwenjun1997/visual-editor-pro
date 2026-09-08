@@ -10,7 +10,7 @@ import {
   clearDropTargets,
   previewDrop,
   setDropPreview,
-  setInternalDragHandlers,
+  setInternalMoveHandler,
 } from './drop-registry'
 import {
   cloneStageMessage,
@@ -85,7 +85,6 @@ const sendPreview = (point: { x: number; y: number }) => {
   if (!currentSessionId || !currentBlock) return
   currentPreview = previewDrop(currentBlock, point)
   setDropPreview(currentPreview)
-  sendForSession('stage-drag-preview', { preview: currentPreview, point })
   autoScrollPoint = point
   if (!autoScrollFrame) autoScrollFrame = requestAnimationFrame(autoScroll)
 }
@@ -199,10 +198,7 @@ const onMessage = (event: MessageEvent<unknown>) => {
 onMounted(() => {
   window.addEventListener('message', onMessage)
   document.addEventListener('pointerdown', selectBlockFromPointer, true)
-  setInternalDragHandlers({
-    start: () => undefined,
-    end: requestMove,
-  })
+  setInternalMoveHandler(requestMove)
   sendForSession('stage-ready', {}, undefined)
 })
 
@@ -216,7 +212,7 @@ watch(
 onBeforeUnmount(() => {
   window.removeEventListener('message', onMessage)
   document.removeEventListener('pointerdown', selectBlockFromPointer, true)
-  setInternalDragHandlers(undefined)
+  setInternalMoveHandler(undefined)
   clearDropTargets()
   cancelAnimationFrame(autoScrollFrame)
 })

@@ -57,7 +57,7 @@ export const pageService = {
 
   async saveWithBindings(payload: { pageId: string | null; title: string; schema: PageSchema }) {
     const slug = payload.schema.slug || `page-${crypto.randomUUID().slice(0, 8)}`
-    const { data, error } = await supabase.rpc('save_draft_page', {
+    const { data, error } = await supabase.rpc('page_write_draft', {
       p_page_id: payload.pageId,
       p_title: payload.title,
       p_slug: slug,
@@ -69,13 +69,13 @@ export const pageService = {
   },
 
   async publish(id: string): Promise<string> {
-    const { data, error } = await supabase.rpc('publish_page', { p_page_id: id })
+    const { data, error } = await supabase.rpc('page_write_publish', { p_page_id: id })
     if (error) throw error
     return data as string
   },
 
   async createPreviewToken(id: string, context: Record<string, any> = {}): Promise<string> {
-    const { data, error } = await supabase.rpc('create_page_preview_token', { p_page_id: id, p_context: context })
+    const { data, error } = await supabase.rpc('page_write_preview_token', { p_page_id: id, p_context: context })
     if (error) throw error
     return data as string
   },
@@ -91,7 +91,7 @@ export const pageService = {
   },
 
   async rollback(id: string, revisionId: string): Promise<string> {
-    const { data, error } = await supabase.rpc('rollback_page', {
+    const { data, error } = await supabase.rpc('page_write_restore_published_revision', {
       p_page_id: id,
       p_revision_id: revisionId,
     })

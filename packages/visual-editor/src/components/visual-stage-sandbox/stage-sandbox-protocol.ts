@@ -17,22 +17,20 @@ export interface StageDragTarget {
 }
 
 export type StageDropPreview =
-  | { status: 'valid'; target: StageDragTarget; rect: { left: number; top: number; width: number; height: number } }
+  | { status: 'valid'; target: StageDragTarget }
   | { status: 'invalid'; dropId?: string; reason: string }
   | { status: 'error'; dropId?: string; reason: string }
   | { status: 'none' }
 
-export type StageDragPhase = 'pending' | 'dragging' | 'awaitingCommit' | 'committed' | 'cancelled' | 'error'
+export type StageDragPhase = 'pending' | 'dragging' | 'awaitingCommit'
 
 export interface StageDragSession {
   id: string
-  sourceType: 'material' | 'canvas'
   block: VisualBlockData
   previewImage?: string
   label?: string
   phase: StageDragPhase
   pointerId?: number
-  target?: StageDragTarget
   startedAt: number
 }
 
@@ -85,7 +83,6 @@ export interface StageMessageMap {
   'stage-drag-move': { point: StagePoint }
   'stage-drag-end': Record<string, never>
   'stage-drag-cancel': { reason?: string }
-  'stage-drag-preview': { preview: StageDropPreview; point: StagePoint }
   'stage-drop-request': StageDropRequest
   'stage-drop-ack': StageDropAck
   'stage-drop-reject': StageDropReject

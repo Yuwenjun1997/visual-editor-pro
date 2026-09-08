@@ -11,7 +11,7 @@
 
 ## 发布数据流
 
-编辑器 → `save_draft_page` 保存草稿与数据源绑定 → `publish_page` 生成不可变 `page_revisions` → `/p/:slug` 调用 `get_published_page_by_slug` → 组件数据通过 `resolve_public_data_source` 白名单读取。
+编辑器 → `page_write_draft` 保存草稿与数据源绑定 → `page_write_publish` 生成不可变 `page_revisions` → `/p/:slug` 调用 `page_read_published_by_slug` → 组件数据通过 `data_source_read_public` 白名单读取。
 
 ## 安全边界
 

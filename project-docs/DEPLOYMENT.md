@@ -13,11 +13,11 @@
 
 按 `apps/web/supabase/README.md` 中列出的顺序执行 `apps/web/supabase/migrations`。执行完成后检查：
 
-- `save_draft_page`
-- `publish_page`
-- `rollback_page`
-- `get_published_page_by_slug`
-- `resolve_public_data_source`
+- `page_write_draft`
+- `page_write_publish`
+- `page_write_restore_published_revision`
+- `page_read_published_by_slug`
+- `data_source_read_public`
 
 然后运行 Security Advisor、Performance Advisor，并使用匿名客户端验证草稿不可见、已发布页面可见。
 

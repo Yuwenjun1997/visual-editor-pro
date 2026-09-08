@@ -10,10 +10,11 @@
 <script setup lang="ts">
 import type { VisualBlockData } from '../../../types/visual-editor'
 import { filterProps, filterStyles, VISUAL_OVERLAY_KEYS } from '../../../utils/visual.filter'
-import type { CSSProperties } from 'vue'
+import { watch, type CSSProperties } from 'vue'
 import { useVisualRef } from '../../../hooks/useVisualRef'
 import { refreshColumnData, refreshManagedData } from '../../../utils/visual.data-source'
 import type { VisualSourceOptions } from '@visual/ui/types'
+import { useH5Runtime } from '@visual/ui'
 
 interface Props {
   block: VisualBlockData
@@ -26,6 +27,7 @@ defineOptions({
 const props = defineProps<Props>()
 
 const { registerRef, getRef } = useVisualRef()
+const runtime = useH5Runtime()
 
 // 浮层组件不透传 list-data / styles（自样式、非列表驱动；teleport 根无法自动继承属性）：
 const isOverlayComponent = computed(() => VISUAL_OVERLAY_KEYS.includes(props.block.key))
@@ -66,11 +68,11 @@ const componentStyles = computed<CSSProperties>(() => {
   return filterStyles(props.block.key, props.block.styles)
 })
 
-onMounted(() => {
+const loadBlockData = () => {
   const blockRef = getRef(vid.value) as any
   const options = props.block.props?.options as VisualSourceOptions | undefined
   if (options?.dataSource === 'managed') {
-    refreshManagedData(options, blockRef)
+    refreshManagedData(options, blockRef, runtime.$dataSource)
     return
   }
   if (options?.dataSource === 'column') {
@@ -80,7 +82,19 @@ onMounted(() => {
   if (blockRef && typeof blockRef.loadData === 'function') {
     blockRef?.loadData()
   }
-})
+}
+
+onMounted(loadBlockData)
+
+watch(
+  () => {
+    const options = props.block.props?.options as VisualSourceOptions | undefined
+    return [options?.dataSource, options?.sourceId, options?.customDataType]
+  },
+  (next, previous) => {
+    if (next.join('|') !== previous.join('|')) loadBlockData()
+  },
+)
 </script>
 
 <style scoped>

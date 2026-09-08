@@ -135,7 +135,7 @@ export const appService = {
     if (error) throw error
   },
   async publish(id: string): Promise<string> {
-    const { data, error } = await supabase.rpc('publish_app', { p_app_id: id })
+    const { data, error } = await supabase.rpc('app_write_publish', { p_app_id: id })
     if (error) throw error
     return data as string
   },

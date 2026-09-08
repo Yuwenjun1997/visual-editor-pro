@@ -3,6 +3,7 @@ import './styles/index.scss'
 export { default as EditorLayout } from './layout/DefaultLayout.vue'
 export { default as EditorStage } from './views/index/index.vue'
 export { default as DevScenario } from './views/dev/index.vue'
+export { default as VisualStageCanvas } from './components/visual-stage-sandbox/visual-stage-canvas.vue'
 
 export { setupVisual } from './plugins/visual-components'
 export {
