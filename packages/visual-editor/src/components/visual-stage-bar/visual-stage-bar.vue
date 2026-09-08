@@ -120,16 +120,32 @@ const handleRun = async () => {
     ElMessage.warning('H5 预览功能未配置')
     return
   }
+  // 新窗口必须在用户点击事件中同步创建；等保存完成后再打开会被浏览器拦截为弹窗。
+  const previewWindow = window.open('', '_blank')
+  if (!previewWindow) {
+    ElMessage.warning('浏览器拦截了预览窗口，请允许此站点打开新窗口后重试')
+    return
+  }
+  previewWindow.opener = null
   previewing.value = true
   try {
     const saved = await handleSave({ keepDraft: true })
-    if (!saved) return
+    if (!saved) {
+      previewWindow.close()
+      return
+    }
     const result = await visualConfig.onPreview({
       ...(autoSave?.getSchema() || { ...unref(pageConfig), blocks: unref(blockList) }),
       pageId: saved.pageId,
     })
-    if (result?.url) window.open(result.url, '_blank', 'noopener,noreferrer')
+    if (!result?.url) {
+      previewWindow.close()
+      ElMessage.warning('未获取到 H5 预览地址')
+      return
+    }
+    previewWindow.location.replace(result.url)
   } catch (error: any) {
+    previewWindow.close()
     ElMessage.error(error?.message || 'H5 预览打开失败')
   } finally {
     previewing.value = false

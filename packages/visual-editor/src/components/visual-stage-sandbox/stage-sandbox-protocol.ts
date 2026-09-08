@@ -41,6 +41,7 @@ export interface StageStatePayload {
   pageConfig: Record<string, any>
   device: 'h5' | 'pad' | 'pc'
   activePanel: string
+  selectedVid: string
   themeMode: 'light' | 'dark'
 }
 

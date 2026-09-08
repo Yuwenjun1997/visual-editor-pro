@@ -67,8 +67,15 @@ export const useHistory = () => {
   const visualStore = useViusalStore()
 
   const historyData = computed<HistoryData>(() => ({ ...pageConfig.value, blocks: blockList.value }))
-  const canRedo = computed(() => history.canRedo)
-  const canUndo = computed(() => history.canUndo)
+  // HistoryStack 不是响应式对象；通过版本号让工具栏在提交、撤销和重做后重新计算可用状态。
+  const canRedo = computed(() => {
+    historyVersion.value
+    return history.canRedo
+  })
+  const canUndo = computed(() => {
+    historyVersion.value
+    return history.canUndo
+  })
 
   const undo = () => {
     const entry = history.undo()

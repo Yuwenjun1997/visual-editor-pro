@@ -1,5 +1,5 @@
 <template>
-  <visual-app :bg-color="pageConfig.globalStyle.backgroundColor">
+  <visual-app :class="isPreview ? 'is-preview' : ''" :bg-color="pageConfig.globalStyle.backgroundColor">
     <VisualBlocks
       v-model="blockList"
       v-model:is-drag="visualStore.isDrag"
@@ -7,9 +7,9 @@
       class="visual-stage-wrap"
       :style="pageConfig.globalStyle"
       :move-block="visualStore.moveBlock"
-      :class="[{ 'is-drag': visualStore.isDrag, 'visual-disabled': disabled }]"
       :data-move-vid="visualStore.moveBlock?._vid"
       :data-source-type="visualStore.moveBlock?.souceDataType"
+      :class="[{ 'is-drag': visualStore.isDrag, 'visual-disabled': disabled }]"
     />
   </visual-app>
 </template>
@@ -24,16 +24,20 @@ defineOptions({ name: 'VisualStageCanvasContent' })
 
 const { blockList } = useBlocks()
 const visualStore = useViusalStore()
-const disabled = computed(() => visualStore.activePanel !== 'design')
+const isPreview = computed(() => visualStore.activePanel === 'preview')
+const disabled = computed(() => isPreview.value)
 const { pageConfig } = usePageConfig()
 </script>
 
 <style scoped lang="scss">
 .visual-stage-wrap {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  min-height: 100% !important;
+  min-height: 100vh !important;
   overflow-x: hidden;
+}
+
+.is-preview :deep(.visual-block) {
+  padding: 0 !important;
+  outline-width: 0 !important;
+  pointer-events: none;
 }
 </style>

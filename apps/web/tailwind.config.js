@@ -5,6 +5,6 @@ module.exports = {
   corePlugins: {
     preflight: true,
   },
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: ['./index.html', './visual-stage.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   plugins: [require('tailwindcss-animate')],
 }

@@ -109,9 +109,16 @@ async function applyTemplate(tpl: VisualTemplate) {
     display: flex;
     gap: 10px;
     padding: 8px;
-    border: 1px solid var(--el-border-color);
+    border: 1px solid transparent;
     border-radius: 10px;
-    background-color: var(--el-bg-color-overlay);
+    background:
+      linear-gradient(rgb(15 23 42 / 0.48), rgb(15 23 42 / 0.48)),
+      linear-gradient(
+        135deg,
+        #86149f 0%,
+        var(--v-primary-1, #4f46e5) 48%,
+        #0f647d 100%
+      );
     cursor: pointer;
     transition:
       border-color 0.2s,
@@ -120,8 +127,8 @@ async function applyTemplate(tpl: VisualTemplate) {
 
     &:hover,
     &:focus-visible {
-      border-color: var(--el-color-primary);
-      box-shadow: 0 6px 18px rgb(37 99 235 / 0.12);
+      border-color: rgb(255 255 255 / 0.7);
+      box-shadow: 0 6px 18px var(--v-primary-opacity-4, rgb(37 99 235 / 0.24));
       transform: translateY(-1px);
       outline: none;
     }
@@ -174,14 +181,14 @@ async function applyTemplate(tpl: VisualTemplate) {
     .template-card__name {
       font-size: 13px;
       font-weight: 600;
-      color: var(--el-text-color-primary);
+      color: #fff;
     }
 
     .template-card__desc {
       margin-top: 2px;
       overflow: hidden;
       font-size: 12px;
-      color: var(--el-text-color-secondary);
+      color: rgb(255 255 255 / 0.8);
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -197,12 +204,12 @@ async function applyTemplate(tpl: VisualTemplate) {
         border-radius: 4px;
         font-size: 10px;
         line-height: 16px;
-        background-color: var(--el-color-primary-light-9);
-        color: var(--el-color-primary);
+        background-color: rgb(255 255 255 / 0.2);
+        color: #fff;
 
         &.is-more {
-          background-color: var(--el-fill-color-light);
-          color: var(--el-text-color-secondary);
+          background-color: rgb(255 255 255 / 0.14);
+          color: rgb(255 255 255 / 0.8);
         }
       }
     }

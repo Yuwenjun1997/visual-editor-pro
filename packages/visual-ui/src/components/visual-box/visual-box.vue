@@ -14,7 +14,6 @@ import VisualMessage from '../visual-message/visual-message.vue'
 import type { CSSProperties } from 'vue'
 import { cn } from '../../utils/cn'
 import { getBoxStyles, getBoxInnerStyles } from '../../utils/styles.utils'
-import { useTheme } from '../../hooks/useTheme'
 
 interface Props {
   styles?: CSSProperties
@@ -26,9 +25,6 @@ defineOptions({
   name: 'VisualBox',
 })
 
-const { themeConfig, themeName } = useTheme()
-const _currentTheme = computed(() => themeConfig.value.theme[themeName.value])
-
 const _props = withDefaults(defineProps<Props>(), {
   styles: () => ({}),
   showEmpty: false,
@@ -36,10 +32,6 @@ const _props = withDefaults(defineProps<Props>(), {
 
 const bindBoxStyles = computed<CSSProperties>(() => ({
   ...getBoxStyles(_props.styles),
-  // ...Object.entries(_currentTheme.value).reduce((prev, [key, value]) => {
-  //   prev[`--v-${key}`] = value
-  //   return prev
-  // }, {} as CSSProperties),
 }))
 
 const bindBoxInnerStyles = computed<CSSProperties>(() => getBoxInnerStyles(_props.styles))
@@ -47,11 +39,13 @@ const bindBoxInnerStyles = computed<CSSProperties>(() => getBoxInnerStyles(_prop
 
 <style scoped lang="scss">
 .visual-box {
+  display: flex;
   position: relative;
   max-width: 750px;
+
   .visual-box__inner {
     overflow: hidden;
-    width: 100%;
+    flex: 1;
   }
 }
 </style>

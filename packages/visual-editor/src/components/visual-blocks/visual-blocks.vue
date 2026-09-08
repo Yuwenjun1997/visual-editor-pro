@@ -3,21 +3,21 @@
     :ref="registerDropElement"
     v-model="moduleList"
     :animation="250"
-    :force-fallback="true"
-    :fallback-on-body="true"
-    fallback-class="visual-stage-sortable-fallback"
     :style="bindStyle"
     class="visual-group"
     :group="props.group"
     :data-drop-id="dropId"
+    :force-fallback="true"
+    :fallback-on-body="true"
     :disabled="props.disabled"
     :data-component-key="parentKey"
     :data-disabled="props.disabled"
     :class="{ 'is-empty': isEmpty }"
     :data-slot="isEmpty ? '组件拖拽到这里' : ''"
+    fallback-class="visual-stage-sortable-fallback"
+    @change="onChange"
     @end="onEnd($event)"
     @start="onStart($event)"
-    @change="onChange"
   >
     <div
       v-for="(element, index) in moduleList"
@@ -60,7 +60,11 @@ import { useViusalStore } from '../../store/useVisual'
 import { collectionProps, collectionStyles, VISUAL_OVERLAY_KEYS } from '../../utils/visual.filter'
 import { useBlocks } from '../../hooks/useBlocks'
 import { cloneDeep } from 'lodash'
-import { notifyInternalDragEnd, notifyInternalDragStart, registerDropTarget } from '../visual-stage-sandbox/drop-registry'
+import {
+  notifyInternalDragEnd,
+  notifyInternalDragStart,
+  registerDropTarget,
+} from '../visual-stage-sandbox/drop-registry'
 import { canAcceptBlock } from '../visual-stage-sandbox/stage-block-operations'
 
 defineOptions({

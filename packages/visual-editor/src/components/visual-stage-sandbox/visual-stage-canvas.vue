@@ -8,7 +8,6 @@ import VisualStageCanvasContent from '../visual-stage-panel/visual-stage-canvas-
 import {
   clearDropPreview,
   clearDropTargets,
-  notifyInternalDragEnd,
   previewDrop,
   setDropPreview,
   setInternalDragHandlers,
@@ -28,6 +27,8 @@ import { useViusalStore } from '../../store/useVisual'
 import { useBlocks } from '../../hooks/useBlocks'
 import { usePageConfig } from '../../hooks/usePageConfig'
 import { useTheme } from '@visual/ui/hooks/useTheme'
+import type { VisualBlockData } from '../../types/visual-editor'
+import { createStageSelectionSync } from './stage-selection-sync'
 
 const editorInstanceId = new URLSearchParams(window.location.search).get('editorInstanceId') || 'visual-editor'
 const visualStore = useViusalStore()
@@ -37,21 +38,38 @@ const { themeName } = useTheme()
 let revision = 0
 let sequence = 0
 let currentSessionId = ''
-let currentBlock: import('../../types/visual-editor').VisualBlockData | undefined
+let currentBlock: VisualBlockData | undefined
 let currentPreview: StageDropPreview = { status: 'none' }
 let autoScrollFrame = 0
 let autoScrollPoint: { x: number; y: number } | undefined
+const selectionSync = createStageSelectionSync()
+
+const findBlockByVid = (blocks: VisualBlockData[], vid: string): VisualBlockData | undefined => {
+  for (const block of blocks) {
+    if (block._vid === vid) return block
+    for (const slot of Object.values(block.slots || {})) {
+      const found = findBlockByVid(slot.blocks, vid)
+      if (found) return found
+    }
+  }
+}
 
 const send = <T extends StageMessage['type']>(message: StageMessage<T>) => {
   window.parent.postMessage(cloneStageMessage(message), window.location.origin)
 }
 
-const sendForSession = <T extends StageMessage['type']>(type: T, payload: StageMessageMap[T], sessionId = currentSessionId) => {
-  send(createStageMessage(type, editorInstanceId, payload, {
-    baseRevision: revision,
-    sequence: ++sequence,
-    sessionId: sessionId || undefined,
-  }))
+const sendForSession = <T extends StageMessage['type']>(
+  type: T,
+  payload: StageMessageMap[T],
+  sessionId = currentSessionId,
+) => {
+  send(
+    createStageMessage(type, editorInstanceId, payload, {
+      baseRevision: revision,
+      sequence: ++sequence,
+      sessionId: sessionId || undefined,
+    }),
+  )
 }
 
 const resetMaterialDrag = () => {
@@ -79,8 +97,12 @@ const autoScroll = () => {
   const maxSpeed = 18
   const y = autoScrollPoint.y
   const height = window.innerHeight
-  const delta = y < edge ? -Math.ceil((edge - y) / edge * maxSpeed) :
-    y > height - edge ? Math.ceil((y - (height - edge)) / edge * maxSpeed) : 0
+  const delta =
+    y < edge
+      ? -Math.ceil(((edge - y) / edge) * maxSpeed)
+      : y > height - edge
+        ? Math.ceil(((y - (height - edge)) / edge) * maxSpeed)
+        : 0
   if (!delta) return
   window.scrollBy({ top: delta })
   sendPreview(autoScrollPoint)
@@ -107,14 +129,30 @@ const requestMaterialDrop = () => {
 }
 
 const requestMove = (blockVid: string, target: StageDragTarget) => {
-  sendForSession('stage-drop-request', {
-    operation: {
-      kind: 'move',
-      operationId: generateNanoid(),
-      blockVid,
-      target,
+  sendForSession(
+    'stage-drop-request',
+    {
+      operation: {
+        kind: 'move',
+        operationId: generateNanoid(),
+        blockVid,
+        target,
+      },
     },
-  }, `canvas-${blockVid}`)
+    `canvas-${blockVid}`,
+  )
+}
+
+const selectBlockFromPointer = (event: PointerEvent) => {
+  if (visualStore.isDrag || visualStore.activePanel === 'preview') return
+  if (!(event.target instanceof Element)) return
+  const blockElement = event.target.closest<HTMLElement>('.visual-block[data-block-vid]')
+  const vid = blockElement?.dataset.blockVid
+  if (!vid || vid === visualStore.vid) return
+  const block = findBlockByVid(blockList.value, vid)
+  if (!block) return
+  visualStore.setCurrentBlock(block)
+  if (selectionSync.shouldBroadcastSelection(vid)) sendForSession('stage-block-select', { vid }, undefined)
 }
 
 const onMessage = (event: MessageEvent<unknown>) => {
@@ -130,12 +168,18 @@ const onMessage = (event: MessageEvent<unknown>) => {
     visualStore.setMoveBlock(currentBlock)
     visualStore.isDrag = true
   } else if (message.type === 'stage-state-sync') {
+    if (!selectionSync.shouldApplyState(message.baseRevision)) return
     revision = message.baseRevision
     blockList.value = message.payload.blocks
     pageConfig.value = message.payload.pageConfig as typeof pageConfig.value
     themeName.value = message.payload.pageConfig.themeName
     visualStore.setDevice(message.payload.device)
     visualStore.activePanel = message.payload.activePanel
+    const selectedBlock = findBlockByVid(blockList.value, message.payload.selectedVid)
+    if (selectionSync.shouldApplySelection(message.payload.selectedVid, visualStore.vid)) {
+      if (selectedBlock) visualStore.setCurrentBlock(selectedBlock)
+      else visualStore.clearCurrent()
+    }
     document.documentElement.classList.toggle('dark', message.payload.themeMode === 'dark')
     document.documentElement.style.colorScheme = message.payload.themeMode === 'dark' ? 'dark' : 'light'
   } else if (message.type === 'stage-drag-move' && message.sessionId === currentSessionId) {
@@ -144,13 +188,17 @@ const onMessage = (event: MessageEvent<unknown>) => {
     requestMaterialDrop()
   } else if (message.type === 'stage-drag-cancel' && message.sessionId === currentSessionId) {
     resetMaterialDrag()
-  } else if ((message.type === 'stage-drop-ack' || message.type === 'stage-drop-reject') && message.sessionId === currentSessionId) {
+  } else if (
+    (message.type === 'stage-drop-ack' || message.type === 'stage-drop-reject') &&
+    message.sessionId === currentSessionId
+  ) {
     resetMaterialDrag()
   }
 }
 
 onMounted(() => {
   window.addEventListener('message', onMessage)
+  document.addEventListener('pointerdown', selectBlockFromPointer, true)
   setInternalDragHandlers({
     start: () => undefined,
     end: requestMove,
@@ -158,29 +206,18 @@ onMounted(() => {
   sendForSession('stage-ready', {}, undefined)
 })
 
-watch(() => visualStore.vid, (vid) => {
-  if (vid) sendForSession('stage-block-select', { vid }, undefined)
-})
+watch(
+  () => visualStore.vid,
+  (vid) => {
+    if (selectionSync.shouldBroadcastSelection(vid)) sendForSession('stage-block-select', { vid }, undefined)
+  },
+)
 
 onBeforeUnmount(() => {
   window.removeEventListener('message', onMessage)
+  document.removeEventListener('pointerdown', selectBlockFromPointer, true)
   setInternalDragHandlers(undefined)
   clearDropTargets()
   cancelAnimationFrame(autoScrollFrame)
 })
 </script>
-
-<style>
-html,
-body,
-#app,
-.visual-editor-app {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  min-width: 0;
-  margin: 0;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-</style>

@@ -66,6 +66,7 @@ const stageState = (): StageStatePayload => ({
   pageConfig: pageConfig.value,
   device: visualStore.device,
   activePanel: visualStore.activePanel,
+  selectedVid: visualStore.vid,
   themeMode: themeMode.value,
 })
 
@@ -143,7 +144,7 @@ onMounted(() => {
 })
 
 watch(
-  [blockList, pageConfig, () => visualStore.device, () => visualStore.activePanel],
+  [blockList, pageConfig, () => visualStore.device, () => visualStore.activePanel, () => visualStore.vid],
   () => {
     if (suppressStateWatch) return
     publishState(true)

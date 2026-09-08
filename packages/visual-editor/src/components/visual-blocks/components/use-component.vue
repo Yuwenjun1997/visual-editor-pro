@@ -4,6 +4,7 @@
       <slot :name="key" />
     </template>
   </component>
+  <div v-if="isOverlayComponent" class="overlay-placeholder">{{ props.block.label }}</div>
 </template>
 
 <script setup lang="ts">
@@ -81,3 +82,20 @@ onMounted(() => {
   }
 })
 </script>
+
+<style scoped>
+.overlay-placeholder {
+  position: relative;
+  min-height: 30px;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--el-text-color-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: var(--el-color-info-light-9);
+}
+</style>

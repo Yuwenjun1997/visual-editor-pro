@@ -9,6 +9,7 @@ describe('stage sandbox protocol', () => {
       pageConfig: reactive({ globalStyle: reactive({ backgroundColor: '#fff' }) }),
       device: 'pc',
       activePanel: 'design',
+      selectedVid: 'block-1',
       themeMode: 'light',
     })
 

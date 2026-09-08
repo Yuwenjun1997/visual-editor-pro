@@ -7,7 +7,7 @@
           <visual-monaco-editor v-model="viewJson" :options="viewJsonOptions" />
         </template>
         <template v-else-if="activePanel === 'viewCode'">
-          <visual-monaco-editor />
+          <visual-monaco-editor :model-value="viewCode" :options="viewCodeOptions" />
         </template>
         <template v-else>
           <visual-stage-panel />
@@ -51,6 +51,17 @@ const { pageConfig } = usePageConfig()
 const { themeName } = useTheme()
 
 const { blockList } = useBlocks()
+
+const pageSchema = computed(() => ({ ...pageConfig.value, blocks: blockList.value }))
+const viewCode = computed(
+  () =>
+    `import type { PageSchema } from '@visual/editor'\n\nexport const pageSchema: PageSchema = ${JSON.stringify(
+      pageSchema.value,
+      null,
+      2,
+    )}\n`,
+)
+const viewCodeOptions = { language: 'typescript', readOnly: true }
 
 const route = useRoute()
 const hydrating = ref(true)
@@ -178,10 +189,12 @@ watchEffect(() => {
     updateViewJson()
     toggleRight(false)
     visualStore.clearCurrent()
-  } else if (activePanel.value === 'design' || activePanel.value === 'preview') {
+  } else {
     restoreViewJson()
-    toggleRight(true)
-    useReload().reload()
+    if (activePanel.value === 'design' || activePanel.value === 'preview') {
+      toggleRight(true)
+      useReload().reload()
+    }
   }
 })
 </script>
