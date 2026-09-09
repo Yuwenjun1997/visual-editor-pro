@@ -4,8 +4,8 @@ export const semanticThemeVariableAliases: Record<string, string> = {
   'primary-color': 'primary-1',
   'text-color': 'text-1',
   'background-color': 'gray-1',
-  'surface-color': 'surface-1',
-  'border-color': 'border-1',
+  'surface-color': 'white',
+  'border-color': 'gray-2',
   'success-color': 'success-1',
   'warning-color': 'warning-1',
   'error-color': 'error-1',
@@ -151,12 +151,11 @@ export const generateTheme = (colors: ThemeColors, isDark: boolean = false): Rec
   })
   const primary = result['primary-1'] || colors.primary
   const text = result['text-1'] || colors.text || '#1F2937'
-  const surface = result['surface-1'] || '#ffffff'
-  const border = result['border-1'] || result['gray-2'] || '#E5E7EB'
+  const border = result['gray-2'] || '#E5E7EB'
   result['primary-color'] = primary
   result['text-color'] = text
   result['background-color'] = result['gray-1'] || '#F8FAFC'
-  result['surface-color'] = surface
+  result['surface-color'] = result.white || '#ffffff'
   result['border-color'] = border
   result['success-color'] = result['success-1'] || colors.success
   result['warning-color'] = result['warning-1'] || colors.warning

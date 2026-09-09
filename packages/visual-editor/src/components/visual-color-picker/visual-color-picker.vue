@@ -116,12 +116,12 @@ const handleClick = (color: string) => {
     .color-item {
       padding: 0;
       display: block;
-      width: 36px;
       height: 36px;
       border: 0;
       border-radius: 4px;
       outline-offset: -2px;
       cursor: pointer;
+      border: 1px solid var(--el-border-color);
 
       &:hover {
         outline: 2px solid var(--el-color-primary);

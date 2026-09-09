@@ -5,21 +5,45 @@
     </template>
     <el-scrollbar height="100%" class="ve-h-full ve-min-h-0">
       <el-collapse v-model="activeNames" accordion>
-        <el-collapse-item title="页面属性" name="pageInfo">
+        <el-collapse-item name="pageInfo">
+          <template #title>
+            <div class="collapse-title">
+              <Icon icon="ion:document-text-outline" class="collapse-title-icon" />
+              <span>页面属性</span>
+            </div>
+          </template>
           <visual-page-options />
         </el-collapse-item>
         <template v-if="showProps">
-          <el-collapse-item name="props" title="组件属性">
+          <el-collapse-item name="props">
+            <template #title>
+              <div class="collapse-title">
+                <Icon icon="ion:options-outline" class="collapse-title-icon" />
+                <span>组件属性</span>
+              </div>
+            </template>
             <visual-props-options :key="_vid" />
           </el-collapse-item>
         </template>
         <template v-if="showListData">
-          <el-collapse-item name="listData" :title="listDataLabel">
+          <el-collapse-item name="listData">
+            <template #title>
+              <div class="collapse-title">
+                <Icon icon="ion:list-outline" class="collapse-title-icon" />
+                <span>{{ listDataLabel }}</span>
+              </div>
+            </template>
             <visual-list-data-options :key="_vid" />
           </el-collapse-item>
         </template>
         <template v-if="showStyles">
-          <el-collapse-item title="组件样式" name="styles">
+          <el-collapse-item name="styles">
+            <template #title>
+              <div class="collapse-title">
+                <Icon icon="ion:color-palette-outline" class="collapse-title-icon" />
+                <span>组件样式</span>
+              </div>
+            </template>
             <visual-styles-options :key="_vid" />
           </el-collapse-item>
         </template>
@@ -40,6 +64,7 @@ import VisualPageOptions from './components/visual-page-options/visual-page-opti
 import VisualListDataOptions from './components/visual-list-data-options/visual-list-data-options.vue'
 import VisualSourceDataEditor from '../../../components/visual-control/visual-source-data-editor/visual-source-data-editor.vue'
 import { debounce } from 'lodash'
+import { Icon } from '@iconify/vue'
 
 const activeNames = ref([])
 
@@ -77,6 +102,16 @@ watch(
 .visual-options {
   .title {
     color: var(--el-text-color-regular);
+  }
+
+  .collapse-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .collapse-title-icon {
+    font-size: 16px;
   }
 }
 </style>

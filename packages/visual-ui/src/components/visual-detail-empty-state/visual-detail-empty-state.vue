@@ -1,7 +1,7 @@
 <template>
   <div role="status" class="visual-detail-empty-state">
     <span aria-hidden="true" class="visual-detail-empty-state__icon">
-      <svg fill="none" viewBox="0 0 24 24">
+      <svg focusable="false" tabindex="-1" fill="none" viewBox="0 0 24 24">
         <path d="M7 3.5h7l3 3V20.5H7z" />
         <path d="M14 3.5v4h3M10 12h4M10 15.5h4" />
       </svg>
@@ -65,5 +65,4 @@ withDefaults(defineProps<{ label?: string }>(), {
   }
 }
 </style>
-
 

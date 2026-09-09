@@ -56,7 +56,7 @@ const _bindClassList = computed(() => ({
 @use '../../../assets/scss/utils/index.scss' as *;
 
 .visual-image-text-one {
-  --visual-image-text-one-surface-1: var(--v-surface-1);
+  --visual-image-text-one-surface-1: var(--v-white);
   --visual-image-text-one-text-md: var(--v-text-md);
   --visual-image-text-one-spacing-md: var(--v-spacing-md);
   --visual-image-text-one-spacing-sm: var(--v-spacing-sm);
@@ -108,6 +108,5 @@ const _bindClassList = computed(() => ({
   }
 }
 </style>
-
 
 

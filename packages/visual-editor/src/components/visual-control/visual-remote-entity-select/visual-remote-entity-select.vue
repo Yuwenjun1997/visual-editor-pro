@@ -1,17 +1,17 @@
 <template>
   <el-select
     v-model="model"
+    remote
     clearable
     filterable
-    remote
     reserve-keyword
-    class="visual-remote-entity-select"
-    :remote-method="search"
     :loading="loading"
     placeholder="选择内容"
+    :remote-method="search"
+    class="visual-remote-entity-select"
     @visible-change="handleVisibleChange"
   >
-    <el-option v-for="item in options" :key="item.id" :label="item.title" :value="item.id" />
+    <el-option v-for="item in options" :key="item.id" :value="item.id" :label="item.title" />
     <template #empty>
       <span class="visual-remote-entity-select__empty">{{ error || '暂无可选内容' }}</span>
     </template>

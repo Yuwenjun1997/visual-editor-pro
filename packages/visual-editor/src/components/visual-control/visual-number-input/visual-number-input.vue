@@ -22,7 +22,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<Props>(), {
-  placeholder: 'input',
+  placeholder: '输入数值',
 })
 
 const emit = defineEmits<{

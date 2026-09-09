@@ -1,6 +1,8 @@
 <template>
   <div class="visual-control-item">
-    <span class="ve-text-sm">{{ props.title }}</span>
+    <slot name="title">
+      <span class="ve-text-sm">{{ props.title }}</span>
+    </slot>
     <div class="control-content">
       <slot />
     </div>
@@ -26,8 +28,8 @@ const props = withDefaults(defineProps<Props>(), {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;
-  min-height: 49px;
+  padding: 0 8px;
+  min-height: 44px;
 
   .control-content {
     width: 140px;

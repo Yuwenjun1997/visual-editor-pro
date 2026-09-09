@@ -7,25 +7,33 @@
       <div class="ve-grid ve-grid-cols-2 ve-p-2 ve-gap-2 visual-input-group">
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="bi:box-arrow-right" />
+            <el-tooltip content="水平偏移" placement="top">
+              <Icon icon="mdi:arrow-right-bold-outline" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="offsetX" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="bi:box-arrow-down" />
+            <el-tooltip content="垂直偏移" placement="top">
+              <Icon icon="mdi:arrow-down-bold-outline" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="offsetY" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="bi:droplet-half" />
+            <el-tooltip content="模糊半径" placement="top">
+              <Icon icon="mdi:blur-radial" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="blurRadius" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="bi:back" />
+            <el-tooltip content="扩散半径" placement="top">
+              <Icon icon="mdi:expand-all" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="spreadRadius" />
         </div>
@@ -107,7 +115,7 @@ watchEffect(() => {
 .visual-margin-editor {
   .visual-input-group {
     padding: 8px;
-    background-color: var(--el-color-info-light-7);
+    background-color: var(--el-color-info-light-8);
   }
 }
 </style>

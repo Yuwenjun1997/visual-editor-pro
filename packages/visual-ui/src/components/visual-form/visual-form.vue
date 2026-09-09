@@ -105,7 +105,7 @@ const handleSubmit = () => {
 .visual-form {
   --visual-form-text-1: var(--v-text-1);
   --visual-form-error-1: var(--v-error-1);
-  --visual-form-border-1: var(--v-border-1);
+  --visual-form-border-1: var(--v-gray-2, var(--v-border-color));
   --visual-form-radius-moody-sm: var(--v-radius-moody-sm);
   --visual-form-motion-fast: var(--v-motion-fast);
   --visual-form-ease-soft: var(--v-ease-soft);
@@ -185,6 +185,5 @@ const handleSubmit = () => {
   }
 }
 </style>
-
 
 

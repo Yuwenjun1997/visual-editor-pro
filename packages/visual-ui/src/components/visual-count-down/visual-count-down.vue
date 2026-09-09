@@ -174,6 +174,7 @@ onBeforeUnmount(() => {
     border-radius: var(--visual-count-down-radius-moody-sm);
     font-family: var(--visual-count-down-font-body);
     font-size: 16px;
+    line-height: 1;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
     background: var(--visual-count-down-count-num-bg, var(--visual-count-down-gradient-primary));
@@ -186,6 +187,5 @@ onBeforeUnmount(() => {
   }
 }
 </style>
-
 
 

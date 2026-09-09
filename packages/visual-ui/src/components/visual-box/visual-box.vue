@@ -39,13 +39,11 @@ const bindBoxInnerStyles = computed<CSSProperties>(() => getBoxInnerStyles(_prop
 
 <style scoped lang="scss">
 .visual-box {
-  display: flex;
   position: relative;
   max-width: 750px;
 
   .visual-box__inner {
     overflow: hidden;
-    flex: 1;
   }
 }
 </style>

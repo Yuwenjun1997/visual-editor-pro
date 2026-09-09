@@ -187,12 +187,9 @@ const bindStyle = computed(() => ({
 
 <style scoped lang="scss">
 .visual-group {
-  // 舞台页锚定容器：悬浮/浮层效果（absolute）锚定至此，而非浏览器视口
   position: relative;
-  flex: 1;
 
   &.is-empty {
-    position: relative;
     min-height: 60px;
     min-width: 100px;
 
@@ -214,14 +211,11 @@ const bindStyle = computed(() => ({
 
   .visual-block {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    z-index: 10;
     padding: 2px;
     outline: 1px dashed var(--el-border-color);
-    cursor: move;
-    z-index: 10;
     outline-offset: -1px;
-    flex: 1;
+    cursor: move;
 
     .visual-group {
       height: 100%;

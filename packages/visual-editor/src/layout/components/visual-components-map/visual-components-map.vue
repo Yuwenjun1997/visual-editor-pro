@@ -15,30 +15,7 @@
       >
         <template #default="{ data }">
           <div class="ve-flex ve-items-center ve-gap-1">
-            <template v-if="data.moduleName === 'basicWidgets'">
-              <Icon icon="ion:color-palette-outline" />
-            </template>
-            <template v-else-if="data.moduleName === 'layoutWidgets'">
-              <Icon icon="bi:grid-3x3-gap" />
-            </template>
-            <template v-else-if="data.moduleName === 'imageTextWidgets'">
-              <Icon icon="bi:card-list" />
-            </template>
-            <template v-else-if="data.moduleName === 'mediaWidgets'">
-              <Icon icon="bi:play-circle" />
-            </template>
-            <template v-else-if="data.moduleName === 'commerceWidgets'">
-              <Icon icon="bi:cart" />
-            </template>
-            <template v-else-if="data.moduleName === 'serviceWidgets'">
-              <Icon icon="bi:layout-text-window-reverse" />
-            </template>
-            <template v-else-if="data.moduleName === 'dataWidgets'">
-              <Icon icon="bi:database" />
-            </template>
-            <template v-else>
-              <Icon icon="bi:box" />
-            </template>
+            <img :src="data.icon" :alt="`${data.label}图标`" class="component-icon" />
             <div>{{ data.label }}</div>
           </div>
         </template>
@@ -53,14 +30,14 @@
 <script setup lang="ts">
 import { useBlocks } from '../../../hooks/useBlocks'
 import { useViusalStore } from '../../../store/useVisual'
-import type { ComponentModules, VisualBlockData } from '../../../types/visual-editor'
-import { Icon } from '@iconify/vue'
+import type { VisualBlockData } from '../../../types/visual-editor'
 import type { TreeInstance } from 'element-plus'
+import { visualConfig } from '../../../utils/visual.registry'
 
 interface TreeNode {
   _vid: string
   label: string
-  moduleName: keyof ComponentModules
+  icon: string
   data: VisualBlockData
   children?: TreeNode[]
 }
@@ -78,7 +55,7 @@ const formatTreeNode = (node: VisualBlockData): TreeNode => {
   return {
     _vid: node._vid,
     label: node.label,
-    moduleName: node.moduleName,
+    icon: visualConfig.componentMap[node.key]?.previewImage || '/image/visual-default.svg',
     data: node,
     children: children,
   }
@@ -105,6 +82,12 @@ watchEffect(() => {
   flex-direction: column;
   .title {
     color: var(--el-text-color-regular);
+  }
+
+  .component-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
   }
 }
 </style>

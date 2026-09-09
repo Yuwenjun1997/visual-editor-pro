@@ -95,8 +95,10 @@ const handleRemove = (index: number) => {
 
 <style scoped lang="scss">
 .visual-list-data-options {
+  background-color: var(--el-color-info-light-9);
+
   & > div {
-    border-bottom: 1px solid var(--el-border-color);
+    border-bottom: 1px dashed var(--el-border-color);
 
     &:last-child {
       border-bottom: 0;
@@ -110,7 +112,7 @@ const handleRemove = (index: number) => {
   .visual-list-item-options {
     display: flex;
     flex-direction: column;
-    background-color: var(--el-color-info-light-9);
+    background-color: var(--el-color-info-light-8);
   }
 
   .visual-del-btn {

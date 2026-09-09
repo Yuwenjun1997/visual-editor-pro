@@ -9,7 +9,9 @@
               :class="{ 'border-btn-active': active === 'borderTop' }"
               @click="active = 'borderTop'"
             >
-              <span>┳</span>
+              <el-tooltip content="上边框" placement="top">
+                <Icon icon="mdi:border-top" />
+              </el-tooltip>
             </div>
           </div>
           <div class="ve-col-span-1">
@@ -18,12 +20,16 @@
               :class="{ 'border-btn-active': active === 'borderLeft' }"
               @click="active = 'borderLeft'"
             >
-              <span>┣</span>
+              <el-tooltip content="左边框" placement="top">
+                <Icon icon="mdi:border-left" />
+              </el-tooltip>
             </div>
           </div>
           <div class="ve-col-span-1">
             <div class="border-btn" :class="{ 'border-btn-active': active === 'border' }" @click="active = 'border'">
-              <span>╋</span>
+              <el-tooltip content="全部边框" placement="top">
+                <Icon icon="mdi:border-all" />
+              </el-tooltip>
             </div>
           </div>
           <div class="ve-col-span-1">
@@ -34,7 +40,9 @@
               }"
               @click="active = 'borderRight'"
             >
-              <span>┫</span>
+              <el-tooltip content="右边框" placement="top">
+                <Icon icon="mdi:border-right" />
+              </el-tooltip>
             </div>
           </div>
           <div class="ve-col-span-3">
@@ -45,7 +53,9 @@
               }"
               @click="active = 'borderBottom'"
             >
-              <span>┻</span>
+              <el-tooltip content="下边框" placement="top">
+                <Icon icon="mdi:border-bottom" />
+              </el-tooltip>
             </div>
           </div>
         </div>
@@ -61,6 +71,7 @@
 
 <script setup lang="ts">
 import VisualCollapse from '../../visual-collapse/visual-collapse.vue'
+import { Icon } from '@iconify/vue'
 import VisualPxInput from '../../visual-control/visual-px-input/visual-px-input.vue'
 import VisualNormalSelect from '../../visual-control/visual-normal-select/visual-normal-select.vue'
 import VisualColorInput from '../../visual-control/visual-color-input/visual-color-input.vue'
@@ -149,7 +160,7 @@ watchEffect(() => {
     align-items: center;
     justify-content: space-between;
     padding: 8px;
-    background-color: var(--el-color-info-light-7);
+    background-color: var(--el-color-info-light-8);
 
     .border-btn-group {
       flex-shrink: 0;

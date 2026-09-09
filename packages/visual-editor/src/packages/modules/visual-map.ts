@@ -49,14 +49,6 @@ const VisualMap: VisualEditorComponent<VisualMapProps> = {
         { label: '较大', value: 'lg' },
       ],
     }),
-    align: createNormalSelectControl({
-      label: '对齐方式',
-      options: [
-        { label: '左对齐', value: 'flex-start' },
-        { label: '居中对齐', value: 'center' },
-        { label: '右对齐', value: 'flex-end' },
-      ],
-    }),
   },
   listData: {
     label: '地图标记点',

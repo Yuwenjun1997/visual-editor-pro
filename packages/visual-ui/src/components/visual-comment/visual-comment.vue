@@ -51,7 +51,7 @@ const showRating = computed(() => _props.props.showRating)
 
 <style scoped lang="scss">
 .visual-comment {
-  --visual-comment-border-1: var(--v-border-1);
+  --visual-comment-border-1: var(--v-gray-2, var(--v-border-color));
   --visual-comment-text-1: var(--v-text-1);
   --visual-comment-warning-1: var(--v-warning-1);
   --visual-comment-text-3: var(--v-text-3);
@@ -128,5 +128,4 @@ const showRating = computed(() => _props.props.showRating)
   }
 }
 </style>
-
 

@@ -66,6 +66,11 @@ html.dark {
       display: flex;
     }
 
+    &[data-component-key='VisualFlex'],
+    &[data-component-key='VisualFlex'] > .visual-block {
+      flex: 1;
+    }
+
     .visual-block {
       &.is-drop-before,
       &.is-drop-after {

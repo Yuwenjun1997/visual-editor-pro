@@ -3,6 +3,9 @@
     <transition name="visual-popup">
       <div
         v-if="show"
+        ref="popupRef"
+        role="dialog"
+        aria-modal="true"
         class="visual-popup"
         @click.self="close"
       >
@@ -28,7 +31,14 @@
               {{ buttonText || '我知道了' }}
             </div>
           </div>
-          <button v-if="_props.props.showClose !== false" aria-label="关闭" class="visual-popup__close" @click="close">
+          <button
+            v-if="_props.props.showClose !== false"
+            ref="closeButton"
+            type="button"
+            aria-label="关闭"
+            class="visual-popup__close"
+            @click="close"
+          >
             <i class="bi bi-x" />
           </button>
         </div>
@@ -38,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance } from 'vue'
+import { getCurrentInstance, nextTick } from 'vue'
 import type { VisualPopupProps } from './interface'
 import { navigateVisualUrl } from '../../utils/url'
 import { useH5Runtime } from '../../hooks/useH5Runtime'
@@ -63,6 +73,9 @@ const btnHref = computed(() => undefined)
 
 const showRef = ref(false)
 const show = computed(() => showRef.value)
+const popupRef = ref<HTMLDivElement>()
+const closeButton = ref<HTMLButtonElement>()
+let previousActiveElement: HTMLElement | null = null
 
 // 实例级命名空间，避免同一页面多个弹窗的触发标记互相串扰
 const KEY_PREFIX = 'visualPopup'
@@ -79,12 +92,18 @@ const shouldShow = () => {
 }
 
 const doOpen = () => {
+  previousActiveElement = document.activeElement instanceof HTMLElement ? document.activeElement : null
   showRef.value = true
   document.body.style.overflow = 'hidden'
   document.addEventListener('keydown', onKeydown)
+  nextTick(() => closeButton.value?.focus())
 }
 
 const close = () => {
+  const restoreTarget = previousActiveElement
+  previousActiveElement = null
+  if (restoreTarget?.isConnected) restoreTarget.focus()
+  else if (popupRef.value?.contains(document.activeElement)) (document.activeElement as HTMLElement).blur()
   showRef.value = false
   document.body.style.overflow = ''
   document.removeEventListener('keydown', onKeydown)
@@ -105,7 +124,7 @@ let timer: ReturnType<typeof setTimeout> | null = null
 onMounted(() => {
   const mode = _props.props.mode || 'delay'
   if (mode === 'manual') {
-    showRef.value = true
+    doOpen()
     return
   }
   const openPopup = () => {
@@ -129,12 +148,12 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .visual-popup {
-  --visual-popup-radius-moody: var(--v-radius-moody);
-  --visual-popup-gradient-primary: var(--v-gradient-primary);
-  --visual-popup-shadow-soft: var(--v-shadow-soft);
-  --visual-popup-primary-1: var(--v-primary-1);
+  --visual-popup-radius-moody: var(--v-radius-moody, 12px);
+  --visual-popup-gradient-primary: var(--v-gradient-primary, linear-gradient(135deg, #4f6ef7 0%, #7c3aed 100%));
+  --visual-popup-shadow-soft: var(--v-shadow-soft, 0 8px 24px -12px rgba(79, 110, 247, 0.5));
+  --visual-popup-primary-1: var(--v-primary-1, #4f6ef7);
   --visual-popup-overlay: var(--v-black-opacity-4, rgba(15, 18, 40, 0.6));
-  --visual-popup-white: var(--v-white);
+  --visual-popup-white: var(--v-white, #ffffff);
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -217,10 +236,16 @@ onBeforeUnmount(() => {
   justify-content: center;
   border: 0;
   border-radius: 50%;
+  padding: 0;
   background: color-mix(in srgb, var(--visual-popup-white) 25%, transparent);
   color: var(--visual-popup-white);
   font-size: 18px;
   cursor: pointer;
+
+  i {
+    display: block;
+    line-height: 1;
+  }
 }
 
 .visual-popup-enter-active,

@@ -1,5 +1,11 @@
 <template>
-  <visual-box :class="_props.class" class="visual-timeline" :styles="_props.styles" :show-empty="_noListData">
+  <visual-box
+    :class="_props.class"
+    class="visual-timeline"
+    :styles="_props.styles"
+    :show-empty="_noListData"
+    :style="{ '--visual-timeline-line-color': _props.props.lineColor }"
+  >
     <div class="visual-timeline__list">
       <div
         v-for="(item, index) in _props.listData"
@@ -53,12 +59,12 @@ const _noListData = computed(() => _props.listData.length <= 0)
 
 <style scoped lang="scss">
 .visual-timeline {
-  --visual-timeline-border-1: var(--v-border-1);
-  --visual-timeline-success-1: var(--v-success-1);
-  --visual-timeline-primary-1: var(--v-primary-1);
-  --visual-timeline-text-3: var(--v-text-3);
-  --visual-timeline-text-1: var(--v-text-1);
-  --visual-timeline-text-2: var(--v-text-2);
+  --visual-timeline-border-1: var(--visual-timeline-line-color, var(--v-gray-2, var(--v-border-color, #e5e8f2)));
+  --visual-timeline-success-1: var(--v-success-1, #3ecf8e);
+  --visual-timeline-primary-1: var(--v-primary-1, #4f6ef7);
+  --visual-timeline-text-3: var(--v-text-3, #b3bac7);
+  --visual-timeline-text-1: var(--v-text-1, #2b2f3a);
+  --visual-timeline-text-2: var(--v-text-2, #6b7280);
   .visual-timeline__list {
     padding: 8px 0;
   }
@@ -148,5 +154,3 @@ const _noListData = computed(() => _props.listData.length <= 0)
   }
 }
 </style>
-
-

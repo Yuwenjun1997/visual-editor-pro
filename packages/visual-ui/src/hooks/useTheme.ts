@@ -61,7 +61,9 @@ export const useTheme = () => {
 
   const colorVar = (code?: string) => {
     if (typeof code === 'undefined') return
-    return isColorCode(code) || code.includes('(') || code.includes('gradient') ? code : `var(--v-${code})`
+    return isColorCode(code) || code === 'transparent' || code.includes('(') || code.includes('gradient')
+      ? code
+      : `var(--v-${code})`
   }
 
   return {

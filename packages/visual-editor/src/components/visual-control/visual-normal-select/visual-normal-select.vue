@@ -22,7 +22,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
-  placeholder: 'select',
+  placeholder: '请选择',
   options: () => [],
 })
 

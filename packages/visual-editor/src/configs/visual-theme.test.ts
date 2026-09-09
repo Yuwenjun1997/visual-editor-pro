@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { visualTemplates } from '../layout/components/visual-templates/templates'
 import visualComponents from '../packages'
 import { DEFAULT_VISUAL_THEME, VISUAL_THEME_PRESETS, resolvePageThemeName, resolveVisualThemeName } from './visual-theme'
-import { getThemeCssVariableValue, initThemeConfig, resolveColorValue, resolveThemeName } from '@visual/ui'
+import { getThemeCssVariableValue, initThemeConfig, resolveColorValue, resolveThemeName, useTheme } from '@visual/ui'
 
 const collectBlocks = (blocks: Array<Record<string, any>>): Array<Record<string, any>> =>
   blocks.flatMap((block) => [
@@ -35,8 +35,14 @@ describe('visual themes', () => {
   it('maps semantic css variables to the existing theme tokens', () => {
     expect(getThemeCssVariableValue('primary-color', '#123456')).toBe('var(--v-primary-1)')
     expect(getThemeCssVariableValue('background-color', '#f8fafc')).toBe('var(--v-gray-1)')
+    expect(getThemeCssVariableValue('surface-color', '#ffffff')).toBe('var(--v-white)')
+    expect(getThemeCssVariableValue('border-color', '#e5e7eb')).toBe('var(--v-gray-2)')
     expect(getThemeCssVariableValue('bg-color', '#f8fafc')).toBe('var(--v-background-color)')
     expect(getThemeCssVariableValue('custom-color', '#123456')).toBe('#123456')
+  })
+
+  it('keeps transparent as a literal CSS color value', () => {
+    expect(useTheme().colorVar('transparent')).toBe('transparent')
   })
 })
 

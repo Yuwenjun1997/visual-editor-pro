@@ -3,10 +3,10 @@
     <visual-control-item title="页面标题">
       <visual-text-input v-model="pageConfig.title" />
     </visual-control-item>
-    <visual-control-item title="页面地址 slug">
+    <visual-control-item title="页面地址">
       <visual-text-input v-model="pageConfig.slug" placeholder="小写字母、数字和连字符" />
     </visual-control-item>
-    <visual-control-item title="主题色">
+    <visual-control-item title="主题颜色">
       <visual-theme-picker v-model="pageConfig.themeName" />
     </visual-control-item>
     <visual-background-editor v-model="pageConfig.globalStyle" />
@@ -29,8 +29,10 @@ const { activeKey } = useReload()
 
 <style scoped lang="scss">
 .visual-page-options {
+  background-color: var(--el-color-info-light-9);
+
   & > div {
-    border-bottom: 1px solid var(--el-border-color);
+    border-bottom: 1px dashed var(--el-border-color);
 
     &:last-child {
       border-bottom: 0;

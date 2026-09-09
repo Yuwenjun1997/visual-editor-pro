@@ -62,7 +62,7 @@
     <el-button-group size="small">
       <el-tooltip content="清空舞台">
         <el-button :disabled="!blockList.length" @click="handleClear">
-          <Icon icon="ion:trash-outline" />
+          <Icon icon="mdi:broom" />
         </el-button>
       </el-tooltip>
       <el-tooltip content="运行 H5 预览">

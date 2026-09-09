@@ -51,7 +51,7 @@ const handleClick = (event: MouseEvent) => {
 @use '../../../assets/scss/utils/index.scss' as *;
 
 .visual-image-text-two {
-  --visual-image-text-two-surface-1: var(--v-surface-1);
+  --visual-image-text-two-surface-1: var(--v-white);
   --visual-image-text-two-text-md: var(--v-text-md);
   --visual-image-text-two-spacing-sm: var(--v-spacing-sm);
   --visual-image-text-two-black-opacity-6: var(--v-black-opacity-6);
@@ -105,6 +105,5 @@ const handleClick = (event: MouseEvent) => {
   }
 }
 </style>
-
 
 

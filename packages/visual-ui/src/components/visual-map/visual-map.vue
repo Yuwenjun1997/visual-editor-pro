@@ -2,11 +2,15 @@
   <visual-box class="visual-map" :class="_props.class" :styles="_props.styles">
     <div class="visual-map__inner" :style="_bindInnerStyles">
       <div class="visual-map__map" :style="_bindMapStyles">
-        <div class="visual-map__placeholder">
-          <div>Lat: {{ _latitude }}, Lng: {{ _longitude }}</div>
-          <div v-if="_bindProps.title" class="visual-map__title">
-            {{ _bindProps.title }}
-          </div>
+        <iframe
+          title="地图"
+          :src="mapUrl"
+          loading="lazy"
+          class="visual-map__frame"
+          referrerpolicy="no-referrer-when-downgrade"
+        />
+        <div v-if="_bindProps.title" class="visual-map__title">
+          {{ _bindProps.title }}
         </div>
       </div>
     </div>
@@ -36,7 +40,6 @@ const _bindInnerStyles = computed<CSSProperties>(() => ({
   '--visual-map-map-width': _bindProps.value.width,
   '--visual-map-map-height': _bindProps.value.height,
   '--visual-map-map-radius': cssRadiusVar(_bindProps.value.round),
-  '--visual-map-map-align': _bindProps.value.align,
 }))
 
 const _bindMapStyles = computed<CSSProperties>(() => ({
@@ -48,17 +51,33 @@ const _bindMapStyles = computed<CSSProperties>(() => ({
 const _longitude = ref(_bindProps.value.longitude || 0)
 const _latitude = ref(_bindProps.value.latitude || 0)
 
+const mapUrl = computed(() => {
+  const longitude = Math.min(180, Math.max(-180, Number(_longitude.value) || 0))
+  const latitude = Math.min(85, Math.max(-85, Number(_latitude.value) || 0))
+  const zoom = Math.min(19, Math.max(1, Number(_bindProps.value.scale) || 12))
+  const longitudeDelta = 180 / 2 ** zoom
+  const latitudeDelta = 85 / 2 ** zoom
+  const params = new URLSearchParams({
+    bbox: [
+      longitude - longitudeDelta,
+      latitude - latitudeDelta,
+      longitude + longitudeDelta,
+      latitude + latitudeDelta,
+    ].join(','),
+    layer: 'mapnik',
+    marker: `${latitude},${longitude}`,
+  })
+  return `https://www.openstreetmap.org/export/embed.html?${params.toString()}`
+})
+
 onMounted(() => {
   if (_bindProps.value.autoLocation && navigator.geolocation) {
-    console.log('正在获取定位信息...')
     navigator.geolocation.getCurrentPosition(
       (position) => {
         _longitude.value = position.coords.longitude
         _latitude.value = position.coords.latitude
       },
-      (error) => {
-        console.log(error)
-      },
+      () => undefined,
     )
   }
 })
@@ -66,18 +85,13 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .visual-map {
-  --visual-map-gray-6: var(--v-gray-6);
-  --visual-map-gray-4: var(--v-gray-4);
-  --visual-map-text-4: var(--v-text-4);
-  --visual-map-text-1: var(--v-text-1);
+  --visual-map-gray-6: var(--v-gray-6, #f5f7fa);
+  --visual-map-gray-4: var(--v-gray-4, #dcdfe6);
+  --visual-map-text-4: var(--v-text-4, #909399);
+  --visual-map-text-1: var(--v-text-1, #303133);
   .visual-map__inner {
-    display: flex;
-    justify-content: var(--visual-map-map-align, flex-start);
-
     .visual-map__map {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
       width: var(--visual-map-map-width, 100%);
       height: var(--visual-map-map-height, 180px);
       border-radius: var(--visual-map-map-radius);
@@ -86,20 +100,25 @@ onMounted(() => {
       border: 1px solid var(--visual-map-gray-4, #dcdfe6);
     }
 
-    .visual-map__placeholder {
-      text-align: center;
-      font-size: 12px;
-      color: var(--visual-map-text-4, #909399);
+    .visual-map__frame {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     .visual-map__title {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 1;
       margin-top: 4px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgb(255 255 255 / 88%);
       font-weight: 500;
       color: var(--visual-map-text-1, #303133);
     }
   }
 }
 </style>
-
-
-

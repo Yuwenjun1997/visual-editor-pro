@@ -14,25 +14,67 @@
         <el-empty v-else :image-size="60" description="未找到匹配的组件" />
       </template>
       <el-collapse v-else v-model="activeNames" accordion @change="handleChange">
-        <el-collapse-item name="basic" title="基础组件">
+        <el-collapse-item name="basic">
+          <template #title>
+            <div class="collapse-title">
+              <Icon icon="ion:grid-outline" class="collapse-title-icon" />
+              <span>基础组件</span>
+            </div>
+          </template>
           <visual-component-group :list="componentModules.basicWidgets" />
         </el-collapse-item>
-        <el-collapse-item title="布局容器" name="layout">
+        <el-collapse-item name="layout">
+          <template #title>
+            <div class="collapse-title">
+              <Icon icon="ion:albums-outline" class="collapse-title-icon" />
+              <span>布局容器</span>
+            </div>
+          </template>
           <visual-component-group :list="componentModules.layoutWidgets" />
         </el-collapse-item>
-        <el-collapse-item title="图文内容" name="imageText">
+        <el-collapse-item name="imageText">
+          <template #title>
+            <div class="collapse-title">
+              <Icon icon="ion:images-outline" class="collapse-title-icon" />
+              <span>图文内容</span>
+            </div>
+          </template>
           <visual-component-group :list="componentModules.imageTextWidgets" />
         </el-collapse-item>
-        <el-collapse-item name="media" title="媒体组件">
+        <el-collapse-item name="media">
+          <template #title>
+            <div class="collapse-title">
+              <Icon icon="ion:play-circle-outline" class="collapse-title-icon" />
+              <span>媒体组件</span>
+            </div>
+          </template>
           <visual-component-group :list="componentModules.mediaWidgets" />
         </el-collapse-item>
-        <el-collapse-item title="电商营销" name="commerce">
+        <el-collapse-item name="commerce">
+          <template #title>
+            <div class="collapse-title">
+              <Icon icon="ion:cart-outline" class="collapse-title-icon" />
+              <span>电商营销</span>
+            </div>
+          </template>
           <visual-component-group :list="componentModules.commerceWidgets" />
         </el-collapse-item>
-        <el-collapse-item title="互动服务" name="service">
+        <el-collapse-item name="service">
+          <template #title>
+            <div class="collapse-title">
+              <Icon icon="ion:chatbubbles-outline" class="collapse-title-icon" />
+              <span>互动服务</span>
+            </div>
+          </template>
           <visual-component-group :list="componentModules.serviceWidgets" />
         </el-collapse-item>
-        <el-collapse-item name="data" title="数据组件">
+        <el-collapse-item name="data">
+          <template #title>
+            <div class="collapse-title">
+              <Icon icon="ion:bar-chart-outline" class="collapse-title-icon" />
+              <span>数据组件</span>
+            </div>
+          </template>
           <visual-component-group :list="componentModules.dataWidgets" />
         </el-collapse-item>
       </el-collapse>
@@ -75,6 +117,16 @@ const handleChange = () => {}
 .visual-components {
   .title {
     color: var(--el-text-color-regular);
+  }
+
+  .collapse-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .collapse-title-icon {
+    font-size: 16px;
   }
 
   .search-input {

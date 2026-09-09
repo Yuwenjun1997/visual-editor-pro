@@ -25,7 +25,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
-  placeholder: 'color',
+  placeholder: '选择颜色',
 })
 
 const emit = defineEmits<{

@@ -7,25 +7,33 @@
       <div class="ve-grid ve-grid-cols-2 ve-p-2 ve-gap-2 visual-input-group">
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-top" />
+            <el-tooltip content="上边距" placement="top">
+              <Icon icon="mdi:arrow-up" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="marginTop" @change="onMarginChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-right" />
+            <el-tooltip content="右边距" placement="top">
+              <Icon icon="mdi:arrow-right" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="marginRight" @change="onMarginChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-bottom" />
+            <el-tooltip content="下边距" placement="top">
+              <Icon icon="mdi:arrow-down" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="marginBottom" @change="onMarginChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-left" />
+            <el-tooltip content="左边距" placement="top">
+              <Icon icon="mdi:arrow-left" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="marginLeft" @change="onMarginChange" />
         </div>
@@ -114,7 +122,7 @@ watchEffect(() => {
 .visual-margin-editor {
   .visual-input-group {
     padding: 8px;
-    background-color: var(--el-color-info-light-7);
+    background-color: var(--el-color-info-light-8);
   }
 }
 </style>

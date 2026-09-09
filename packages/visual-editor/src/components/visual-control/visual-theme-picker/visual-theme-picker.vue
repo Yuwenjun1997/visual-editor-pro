@@ -10,9 +10,9 @@
       </template>
       <div class="theme-list">
         <span
-          class="theme-item theme-item--inherit"
-          :class="{ 'is-active': !modelValue }"
           title="继承应用主题"
+          :class="{ 'is-active': !modelValue }"
+          class="theme-item theme-item--inherit"
           @click="handleClick(null)"
         >
           <Icon icon="bi:link" />

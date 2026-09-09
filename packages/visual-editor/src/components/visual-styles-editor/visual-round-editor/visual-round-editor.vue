@@ -7,25 +7,33 @@
       <div class="ve-grid ve-grid-cols-2 ve-p-2 ve-gap-2 visual-input-group">
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-top" />
+            <el-tooltip content="左上圆角" placement="top">
+              <Icon icon="mdi:vector-curve" :style="{ transform: 'rotate(0deg)' }" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="topLeftRadius" @change="onRoundChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-right" />
+            <el-tooltip content="右上圆角" placement="top">
+              <Icon icon="mdi:vector-curve" :style="{ transform: 'rotate(90deg)' }" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="topRightRadius" @change="onRoundChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-bottom" />
+            <el-tooltip content="左下圆角" placement="top">
+              <Icon icon="mdi:vector-curve" :style="{ transform: 'rotate(270deg)' }" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="bottomLeftRadius" @change="onRoundChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-left" />
+            <el-tooltip content="右下圆角" placement="top">
+              <Icon icon="mdi:vector-curve" :style="{ transform: 'rotate(180deg)' }" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="bottomRightRadius" @change="onRoundChange" />
         </div>
@@ -114,7 +122,7 @@ watchEffect(() => {
 .visual-round-editor {
   .visual-input-group {
     padding: 8px;
-    background-color: var(--el-color-info-light-7);
+    background-color: var(--el-color-info-light-8);
   }
 }
 </style>

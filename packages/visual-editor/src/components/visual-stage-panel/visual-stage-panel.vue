@@ -8,7 +8,7 @@
       </div>
       <div v-else-if="!controller.ready.value" role="status" aria-live="polite" class="visual-stage-loading">
         <div class="visual-stage-loader">
-          <svg aria-hidden="true" viewBox="0 0 64 64" class="visual-stage-loader-orbit">
+          <svg aria-hidden="true" focusable="false" tabindex="-1" viewBox="0 0 64 64" class="visual-stage-loader-orbit">
             <circle r="24" cx="32" cy="32" class="visual-stage-loader-track" />
             <circle r="24" cx="32" cy="32" class="visual-stage-loader-arc" />
             <circle r="4" cy="8" cx="32" class="visual-stage-loader-dot" />

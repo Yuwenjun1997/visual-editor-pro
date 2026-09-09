@@ -77,8 +77,10 @@ const visualKey = computed(() => visualStore.currentBlock?.key)
 
 <style scoped lang="scss">
 .visual-props-options {
+  background-color: var(--el-color-info-light-9);
+
   & > div {
-    border-bottom: 1px solid var(--el-border-color);
+    border-bottom: 1px dashed var(--el-border-color);
 
     &:last-child {
       border-bottom: 0;

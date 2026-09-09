@@ -2,7 +2,7 @@
   <div class="visual-collapse">
     <div class="visual-collapse-btn ve-cursor-pointer" @click="isCollapse = !isCollapse">
       <div class="ve-flex ve-items-center ve-flex-1">
-        <Icon :icon="icon" class="ve-text-xs" />
+        <Icon :icon="icon" />
         <span class="ve-text-sm ve-ml-1">{{ props.title }}</span>
       </div>
       <slot name="right" />
@@ -38,8 +38,8 @@ const icon = computed(() => (isCollapse.value ? 'line-md:chevron-down' : 'line-m
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px;
-    min-height: 49px;
+    padding: 0 8px;
+    min-height: 44px;
   }
 
   .visual-collapse-content {

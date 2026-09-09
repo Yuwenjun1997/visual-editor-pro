@@ -32,7 +32,7 @@ const disabled = computed<boolean>(() => !visualStore.currentBlock)
   gap: 4px;
   height: 100%;
   padding: 0 4px;
-  border-right: 1px dashed var(--el-border-color);
+  border-right: 1px solid var(--el-border-color);
 
   .visual-tools__icon {
     display: flex;

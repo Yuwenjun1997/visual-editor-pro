@@ -8,4 +8,5 @@ export interface VisualTimelineItem {
 }
 export interface VisualTimelineProps {
   showTime?: boolean
+  lineColor?: string
 }

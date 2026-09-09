@@ -20,7 +20,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
-  placeholder: 'input',
+  placeholder: '请输入文本',
   type: 'text',
 })
 

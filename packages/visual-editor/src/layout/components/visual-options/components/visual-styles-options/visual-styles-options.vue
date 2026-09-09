@@ -6,8 +6,16 @@
     <visual-padding-editor v-model="cssOptions" />
     <visual-round-editor v-model="cssOptions" />
     <visual-border-editor v-model="cssOptions" />
-    <visual-control-item title="透明度">
-      <el-slider v-model="opacity" :max="1" :min="0" :step="0.01" />
+    <visual-control-item>
+      <template #title>
+        <div class="control-label">
+          <Icon icon="mdi:opacity" />
+          <span class="ve-text-sm ve-ml-1">透明度</span>
+        </div>
+      </template>
+      <div style="padding-right: 8px">
+        <el-slider v-model="opacity" :max="1" :min="0" :step="0.01" />
+      </div>
     </visual-control-item>
   </div>
 </template>
@@ -21,6 +29,7 @@ import VisualRoundEditor from '../../../../../components/visual-styles-editor/vi
 import VisualShadowEditor from '../../../../../components/visual-styles-editor/visual-shadow-editor/visual-shadow-editor.vue'
 import VisualBorderEditor from '../../../../../components/visual-styles-editor/visual-border-editor/visual-border-editor.vue'
 import { useViusalStore } from '../../../../../store/useVisual'
+import { Icon } from '@iconify/vue'
 
 const visualStore = useViusalStore()
 const cssOptions = computed({
@@ -43,8 +52,10 @@ const opacity = computed<number>({
 
 <style scoped lang="scss">
 .visual-styles-options {
+  background-color: var(--el-color-info-light-9);
+
   & > div {
-    border-bottom: 1px solid var(--el-border-color);
+    border-bottom: 1px dashed var(--el-border-color);
 
     &:last-child {
       border-bottom: 0;
@@ -53,6 +64,11 @@ const opacity = computed<number>({
     &:nth-child(1) {
       border-top: 1px solid var(--el-border-color);
     }
+  }
+
+  .control-label {
+    display: flex;
+    align-items: center;
   }
 }
 </style>

@@ -7,25 +7,33 @@
       <div class="ve-grid ve-grid-cols-2 ve-p-2 ve-gap-2 visual-input-group">
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-top" />
+            <el-tooltip content="上内边距" placement="top">
+              <Icon icon="mdi:arrow-up" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="paddingTop" @change="onPaddingChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-right" />
+            <el-tooltip content="右内边距" placement="top">
+              <Icon icon="mdi:arrow-right" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="paddingRight" @change="onPaddingChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-bottom" />
+            <el-tooltip content="下内边距" placement="top">
+              <Icon icon="mdi:arrow-down" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="paddingBottom" @change="onPaddingChange" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:arrow-align-left" />
+            <el-tooltip content="左内边距" placement="top">
+              <Icon icon="mdi:arrow-left" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="paddingLeft" @change="onPaddingChange" />
         </div>
@@ -114,7 +122,7 @@ watchEffect(() => {
 .visual-padding-editor {
   .visual-input-group {
     padding: 8px;
-    background-color: var(--el-color-info-light-7);
+    background-color: var(--el-color-info-light-8);
   }
 }
 </style>

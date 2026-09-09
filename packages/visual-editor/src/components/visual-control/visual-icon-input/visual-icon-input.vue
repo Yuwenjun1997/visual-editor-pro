@@ -25,7 +25,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
-  placeholder: 'icon name',
+  placeholder: '图标名称',
 })
 
 const emit = defineEmits<{

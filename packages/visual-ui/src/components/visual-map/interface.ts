@@ -8,7 +8,6 @@ export interface VisualMapProps {
   width?: string
   height?: string
   round?: 'xs' | 'sm' | 'md' | 'lg' | 'base'
-  align?: 'flex-start' | 'center' | 'flex-right'
   autoLocation?: boolean
 }
 

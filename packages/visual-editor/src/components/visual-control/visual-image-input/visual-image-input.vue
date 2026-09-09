@@ -25,7 +25,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
-  placeholder: 'image url',
+  placeholder: '图片地址',
 })
 
 const emit = defineEmits<{

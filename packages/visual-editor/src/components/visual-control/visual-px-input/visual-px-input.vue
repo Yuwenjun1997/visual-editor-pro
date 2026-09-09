@@ -28,7 +28,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
-  placeholder: '',
+  placeholder: '尺寸',
   unitList: () => ['px', 'em', 'rem', '%', 'vw', 'vh'],
 })
 

@@ -7,25 +7,33 @@
       <div class="visual-input-group ve-grid ve-grid-cols-2 ve-p-2 ve-gap-2">
         <div class="ve-flex ve-items-center ve-col-span-2">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:image" />
+            <el-tooltip content="背景图片" placement="top">
+              <Icon icon="mdi:image-outline" />
+            </el-tooltip>
           </div>
           <visual-image-input v-model="bgImage" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <span class="iconfont icon-rule"></span>
+            <el-tooltip content="背景尺寸" placement="top">
+              <Icon icon="mdi:resize" />
+            </el-tooltip>
           </div>
           <visual-px-input v-model="bgSize" placeholder="size" />
         </div>
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <span class="iconfont icon-repeat"></span>
+            <el-tooltip content="背景重复" placement="top">
+              <Icon icon="mdi:repeat" />
+            </el-tooltip>
           </div>
           <visual-normal-select v-model="bgRepeat" class="ve-w-full" :options="repeatOptions" />
         </div>
         <div class="ve-flex ve-items-center ve-col-span-2">
           <div class="ve-w-6 ve-flex-shrink-0">
-            <Icon icon="line-md:map-marker" />
+            <el-tooltip content="背景位置" placement="top">
+              <Icon icon="mdi:crosshairs-gps" />
+            </el-tooltip>
           </div>
           <visual-text-input v-model="bgPosition" placeholder="center center" />
         </div>
@@ -114,7 +122,7 @@ watchEffect(() => {
 .visual-background-editor {
   .visual-input-group {
     padding: 8px;
-    background-color: var(--el-color-info-light-7);
+    background-color: var(--el-color-info-light-8);
   }
 }
 </style>
