@@ -27,6 +27,13 @@ export const resolvePageThemeName = (themeName?: string | null): VisualThemeName
     ? null
     : resolveVisualThemeName(themeName)
 
+export const resolvePageThemeValue = (themeName?: string | null): string | null =>
+  themeName === null || themeName === 'inherit' || typeof themeName === 'undefined'
+    ? null
+    : themeName in VISUAL_THEME_PRESETS
+      ? resolveVisualThemeName(themeName)
+      : themeName
+
 export const visualThemeConfig: CustomThemeConfig = {
   themeName: DEFAULT_VISUAL_THEME,
   theme: Object.fromEntries(

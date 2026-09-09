@@ -1,8 +1,10 @@
-import { isValidPageSlug, normalizePageSlug, visualConfig } from '@visual/editor'
+import { createPageSlug, isValidPageSlug, normalizePageSlug, visualConfig } from '@visual/editor'
 import type { PageSchema, VisualPublishResult, VisualSaveResult } from '@visual/editor'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElInput, ElMessage, ElMessageBox } from 'element-plus'
+import { h, ref } from 'vue'
 import router from '../router'
 import { articleService } from '../services/article.service'
+import { appService } from '../services/app.service'
 import { businessDataService } from '../services/business-data.service'
 import { dataSourceService } from '../services/data-source.service'
 import { pageService } from '../services/page.service'
@@ -12,6 +14,59 @@ import type { useAuthStore } from '../stores/auth'
 const isUuid = (value: string | number): boolean =>
   typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)
 
+const requestPageMeta = async (initialTitle: string, initialSlug: string) => {
+  const title = ref(initialTitle || '未命名页面')
+  const slug = ref(initialSlug || createPageSlug())
+
+  const action = await ElMessageBox({
+    title: '保存页面',
+    customClass: 'page-meta-message-box wa-w-[420px] wa-max-w-[calc(100vw-32px)]',
+    message: h('div', { class: 'wa-block wa-w-full wa-flex wa-flex-col wa-gap-2 wa-py-1' }, [
+      h('label', { class: 'wa-mt-1 wa-text-sm' }, '页面标题'),
+      h(ElInput, {
+        modelValue: title.value,
+        maxlength: 40,
+        placeholder: '请输入页面标题',
+        'show-word-limit': true,
+        'onUpdate:modelValue': (value: string) => (title.value = value),
+        class: 'wa-w-full',
+      }),
+      h('label', { class: 'wa-mt-2 wa-text-sm' }, '页面地址'),
+      h(ElInput, {
+        modelValue: slug.value,
+        placeholder: '只能使用小写字母、数字和连字符',
+        'onUpdate:modelValue': (value: string) => (slug.value = value),
+        class: 'wa-w-full',
+      }),
+    ]),
+    showCancelButton: true,
+    confirmButtonText: '保存',
+    cancelButtonText: '取消',
+    distinguishCancelAndClose: true,
+    beforeClose: (action, _instance, done) => {
+      if (action === 'confirm') {
+        const normalizedTitle = title.value.trim()
+        const normalizedSlug = normalizePageSlug(slug.value)
+        if (!normalizedTitle) {
+          ElMessage.warning('页面标题不能为空')
+          return
+        }
+        if (!isValidPageSlug(normalizedSlug)) {
+          ElMessage.warning('页面地址不合法，只能使用小写字母、数字和连字符')
+          return
+        }
+      }
+      done()
+    },
+  }).catch(() => null)
+
+  if (!action || action !== 'confirm') return null
+  return {
+    title: title.value.trim().slice(0, 40) || '未命名页面',
+    slug: normalizePageSlug(slug.value),
+  }
+}
+
 export const setupVisualHostConfig = (authStore: ReturnType<typeof useAuthStore>) => {
   visualConfig.onSave = async (data) => {
     if (!authStore.user) {
@@ -20,31 +75,12 @@ export const setupVisualHostConfig = (authStore: ReturnType<typeof useAuthStore>
     }
 
     let title = (data.title || '').trim()
-    if (!title) {
-      const promptResult = await ElMessageBox.prompt('请输入页面标题', '保存页面', {
-        inputValue: '未命名页面',
-        inputPattern: /\S+/,
-        inputErrorMessage: '标题不能为空',
-      }).catch(() => null)
-      if (!promptResult) return
-      title = (promptResult.value || '').trim()
-    }
-    if (!title) return
-    title = title.slice(0, 40) || '未命名页面'
-
     let slug = normalizePageSlug(data.slug || '')
-    if (!slug) {
-      const promptResult = await ElMessageBox.prompt('请输入页面地址标识，只能使用小写字母、数字和连字符', '页面地址', {
-        inputValue: `page-${crypto.randomUUID().slice(0, 8)}`,
-        inputPattern: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-        inputErrorMessage: '请输入合法的 slug',
-      }).catch(() => null)
-      if (!promptResult) return
-      slug = (promptResult.value || '').trim().toLowerCase()
-    }
-    if (!isValidPageSlug(slug)) {
-      ElMessage.error('页面地址不合法')
-      return
+    if (!title || !isValidPageSlug(slug)) {
+      const pageMeta = await requestPageMeta(title, slug)
+      if (!pageMeta) return
+      title = pageMeta.title
+      slug = pageMeta.slug
     }
 
     const blocks = await businessDataService.migrateLegacyBusinessRefs(data.blocks, authStore.user.id)
@@ -80,7 +116,10 @@ export const setupVisualHostConfig = (authStore: ReturnType<typeof useAuthStore>
 
   visualConfig.revisionProvider = {
     async list(pageId) {
-      const [page, rows] = await Promise.all([pageService.get(String(pageId)), pageService.listRevisions(String(pageId))])
+      const [page, rows] = await Promise.all([
+        pageService.get(String(pageId)),
+        pageService.listRevisions(String(pageId)),
+      ])
       return {
         currentRevisionId: page?.published_revision_id || null,
         revisions: rows.map((row) => ({

@@ -1,14 +1,5 @@
 <template>
-  <div
-    aria-label="应用导航"
-    class="visual-tabbar"
-    :style="{
-      '--visual-tabbar-active': activeColor,
-      '--visual-tabbar-inactive': inactiveColor,
-      '--visual-tabbar-background': backgroundColor,
-      '--visual-tabbar-height': `${height}px`,
-    }"
-  >
+  <div aria-label="应用导航" :style="tabbarStyle" class="visual-tabbar">
     <nav class="visual-tabbar__inner">
       <button
         v-for="item in visibleItems"
@@ -28,6 +19,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { VisualTabbarItem, VisualTabbarProps } from './interface'
+import { useTheme } from '../../hooks/useTheme'
 
 defineOptions({ name: 'VisualTabbar' })
 const props = withDefaults(defineProps<VisualTabbarProps>(), {
@@ -38,6 +30,13 @@ const props = withDefaults(defineProps<VisualTabbarProps>(), {
   height: 52,
   safeArea: true,
 })
+const { colorVar } = useTheme()
+const tabbarStyle = computed(() => ({
+  '--visual-tabbar-active': colorVar(props.activeColor),
+  '--visual-tabbar-inactive': colorVar(props.inactiveColor),
+  '--visual-tabbar-background': colorVar(props.backgroundColor),
+  '--visual-tabbar-height': `${props.height}px`,
+}))
 defineEmits<{ navigate: [item: VisualTabbarItem] }>()
 const visibleItems = computed(() =>
   Array.from(props.items)

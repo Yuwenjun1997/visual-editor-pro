@@ -1,14 +1,7 @@
 <template>
   <teleport to="body">
     <transition name="visual-popup">
-      <div
-        v-if="show"
-        ref="popupRef"
-        role="dialog"
-        aria-modal="true"
-        class="visual-popup"
-        @click.self="close"
-      >
+      <div v-if="show" ref="popupRef" role="dialog" aria-modal="true" class="visual-popup" @click.self="close">
         <div class="visual-popup__card">
           <img v-if="_props.props.bgImage" alt="弹窗背景" class="visual-popup__bg" :src="_props.props.bgImage" />
           <div v-else class="visual-popup__bg visual-popup__bg--gradient" />

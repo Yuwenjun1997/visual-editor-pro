@@ -97,6 +97,3 @@ const slideStyle = computed<CSSProperties>(() => ({
   }
 }
 </style>
-
-
-

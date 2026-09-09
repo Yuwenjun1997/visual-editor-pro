@@ -44,7 +44,7 @@
         <el-collapse-item name="media">
           <template #title>
             <div class="collapse-title">
-              <Icon icon="ion:play-circle-outline" class="collapse-title-icon" />
+              <Icon class="collapse-title-icon" icon="ion:play-circle-outline" />
               <span>媒体组件</span>
             </div>
           </template>
@@ -62,7 +62,7 @@
         <el-collapse-item name="service">
           <template #title>
             <div class="collapse-title">
-              <Icon icon="ion:chatbubbles-outline" class="collapse-title-icon" />
+              <Icon class="collapse-title-icon" icon="ion:chatbubbles-outline" />
               <span>互动服务</span>
             </div>
           </template>
@@ -71,7 +71,7 @@
         <el-collapse-item name="data">
           <template #title>
             <div class="collapse-title">
-              <Icon icon="ion:bar-chart-outline" class="collapse-title-icon" />
+              <Icon class="collapse-title-icon" icon="ion:bar-chart-outline" />
               <span>数据组件</span>
             </div>
           </template>

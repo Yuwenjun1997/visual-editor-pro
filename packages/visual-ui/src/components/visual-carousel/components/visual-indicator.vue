@@ -160,7 +160,3 @@ const bindClassList = computed(() => ['visual-indicator--' + props.type])
   }
 }
 </style>
-
-
-
-

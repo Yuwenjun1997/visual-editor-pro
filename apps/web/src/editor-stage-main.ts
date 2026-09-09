@@ -15,10 +15,7 @@ const StageRuntimeRoot = defineComponent({
       editor: true,
       auth: computed(() => ({
         status: previewIdentity.value === 'anonymous' ? 'anonymous' : 'authenticated',
-        profile:
-          previewIdentity.value === 'anonymous'
-            ? null
-            : { id: 'editor-preview', role: previewIdentity.value },
+        profile: previewIdentity.value === 'anonymous' ? null : { id: 'editor-preview', role: previewIdentity.value },
       })),
       $setEditorPreviewIdentity(identity) {
         previewIdentity.value = identity

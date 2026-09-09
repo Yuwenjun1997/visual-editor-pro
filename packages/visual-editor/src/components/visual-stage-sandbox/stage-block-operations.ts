@@ -68,7 +68,8 @@ const isDescendant = (block: VisualBlockData, vid: string): boolean => {
 }
 
 export const canAcceptBlock = (container: BlockContainer, block: VisualBlockData): string | undefined => {
-  if (container.slot?.size !== undefined && container.blocks.length >= container.slot.size) return '当前容器已达到容量上限'
+  if (container.slot?.size !== undefined && container.blocks.length >= container.slot.size)
+    return '当前容器已达到容量上限'
   if (container.parent?.key === 'VisualFlex' && VISUAL_OVERLAY_KEYS.includes(block.key)) return '当前容器不接受浮层组件'
   if (container.parent && ['VisualObject', 'VisualObjectArray'].includes(container.parent.key)) {
     if (block.souceDataType !== container.parent.key) return '当前数据容器不接受该组件'
@@ -82,7 +83,10 @@ const invalid = (blocks: VisualBlockData[], reason: string): BlockOperationResul
   reason,
 })
 
-export const applyBlockOperation = (blocks: VisualBlockData[], operation: StageBlockOperation): BlockOperationResult => {
+export const applyBlockOperation = (
+  blocks: VisualBlockData[],
+  operation: StageBlockOperation,
+): BlockOperationResult => {
   const next = cloneDeep(blocks)
   if (operation.kind === 'insert') {
     if (findBlock(next, operation.block._vid)) return invalid(blocks, '组件已存在')

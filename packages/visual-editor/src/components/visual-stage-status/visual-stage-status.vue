@@ -19,7 +19,7 @@
           <div class="visual-stage-status-title">舞台状态</div>
           <div class="visual-stage-status-caption">配置模拟身份并查看当前舞台状态</div>
         </div>
-        <Icon aria-hidden="true" icon="mdi:tune-variant" />
+        <Icon icon="mdi:tune-variant" />
       </div>
 
       <el-form label-position="top" class="visual-stage-status-form">

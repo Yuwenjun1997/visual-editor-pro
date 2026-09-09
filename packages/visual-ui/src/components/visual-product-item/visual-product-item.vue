@@ -211,6 +211,3 @@ const itemStyle = computed<CSSProperties>(() => ({
   }
 }
 </style>
-
-
-

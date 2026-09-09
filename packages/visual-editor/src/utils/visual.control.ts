@@ -1,4 +1,9 @@
-import { VisualEditorType, type VisualEditorProps, type VisualEntityType, type VisualSelectOption } from '../types/visual-editor'
+import {
+  VisualEditorType,
+  type VisualEditorProps,
+  type VisualEntityType,
+  type VisualSelectOption,
+} from '../types/visual-editor'
 import type { VisualUrl } from '@visual/ui'
 
 export interface VisualPropsEditorControl<O = any> {

@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { visualTemplates } from '../layout/components/visual-templates/templates'
 import visualComponents from '../packages'
-import { DEFAULT_VISUAL_THEME, VISUAL_THEME_PRESETS, resolvePageThemeName, resolveVisualThemeName } from './visual-theme'
+import {
+  DEFAULT_VISUAL_THEME,
+  VISUAL_THEME_PRESETS,
+  resolvePageThemeName,
+  resolveVisualThemeName,
+} from './visual-theme'
 import { getThemeCssVariableValue, initThemeConfig, resolveColorValue, resolveThemeName, useTheme } from '@visual/ui'
 
 const collectBlocks = (blocks: Array<Record<string, any>>): Array<Record<string, any>> =>
@@ -23,10 +28,12 @@ describe('visual themes', () => {
   })
 
   it('creates semantic variables and supports an application primary override', () => {
-    const config = initThemeConfig({ themeName: 'theme-blue', primary: '#123456' })
+    const config = initThemeConfig({ themeName: 'theme-blue', primary: '#123456', textColor: '#111827' })
     const theme = config.theme['theme-blue']
     expect(theme?.['primary-color']).toBe('#123456')
     expect(theme?.['text-color']).toBeTruthy()
+    expect(theme?.['text-1']).toBe('#111827')
+    expect(config.theme['theme-blue-dark']?.['primary-2']).not.toBe(theme?.['primary-2'])
     expect(resolveThemeName('theme-blue', config.theme)).toBe('theme-blue')
     expect(resolveColorValue('primary-color', theme || {})).toBe('#123456')
     expect(resolveColorValue('#fff', theme || {})).toBe('#fff')
@@ -43,6 +50,7 @@ describe('visual themes', () => {
 
   it('keeps transparent as a literal CSS color value', () => {
     expect(useTheme().colorVar('transparent')).toBe('transparent')
+    expect(useTheme().colorVar('text-color')).toBe('var(--v-text-1)')
   })
 })
 

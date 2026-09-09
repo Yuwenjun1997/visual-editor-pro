@@ -105,5 +105,3 @@ const handleClick = (event: MouseEvent) => {
   }
 }
 </style>
-
-

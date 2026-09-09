@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isValidPageSlug, normalizePageSlug } from './visual.validation'
+import { createPageSlug, isValidPageSlug, normalizePageSlug } from './visual.validation'
 
 describe('page slug validation', () => {
   it('normalizes user input before validation', () => {
@@ -12,5 +12,12 @@ describe('page slug validation', () => {
     expect(isValidPageSlug('my_page')).toBe(false)
     expect(isValidPageSlug('my page')).toBe(false)
     expect(isValidPageSlug('a'.repeat(81))).toBe(false)
+  })
+
+  it('creates a Supabase-compatible page slug', () => {
+    const slug = createPageSlug()
+
+    expect(isValidPageSlug(slug)).toBe(true)
+    expect(slug).toMatch(/^page-[0-9a-f]{8}$/)
   })
 })

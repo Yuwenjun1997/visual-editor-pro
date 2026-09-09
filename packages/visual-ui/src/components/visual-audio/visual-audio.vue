@@ -71,6 +71,3 @@ const innerStyle = computed<CSSProperties>(() => ({
   }
 }
 </style>
-
-
-

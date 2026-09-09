@@ -131,7 +131,8 @@ export const createStageMessage = <T extends StageMessageType>(
 export const isStageMessage = (value: unknown): value is StageMessage => {
   if (!value || typeof value !== 'object') return false
   const message = value as Partial<StageMessage>
-  return message.channel === STAGE_CHANNEL &&
+  return (
+    message.channel === STAGE_CHANNEL &&
     typeof message.type === 'string' &&
     typeof message.editorInstanceId === 'string' &&
     typeof message.protocolVersion === 'number' &&
@@ -139,6 +140,7 @@ export const isStageMessage = (value: unknown): value is StageMessage => {
     typeof message.sequence === 'number' &&
     typeof message.baseRevision === 'number' &&
     'payload' in message
+  )
 }
 
 /** Vue stores expose reactive Proxies, which cannot cross an iframe boundary. */
@@ -169,7 +171,9 @@ export const cloneStageMessage = <T extends StageMessageType>(message: StageMess
     }
     const result: Record<string, unknown> = {}
     seen.set(raw, result)
-    Object.keys(raw).forEach((key) => { result[key] = unwrap((raw as Record<string, unknown>)[key]) })
+    Object.keys(raw).forEach((key) => {
+      result[key] = unwrap((raw as Record<string, unknown>)[key])
+    })
     return result
   }
   const rawMessage = unwrap(message) as StageMessage<T>

@@ -22,7 +22,3 @@ const props = withDefaults(defineProps<Props>(), {
   color: var(--components-text-3);
 }
 </style>
-
-
-
-

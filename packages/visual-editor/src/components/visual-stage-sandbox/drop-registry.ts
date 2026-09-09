@@ -54,12 +54,14 @@ const findEntryForElement = (element: Element | null) => {
 
   const candidates = Array.from(entries.values()).filter((entry) => {
     const rect = entry.element.getBoundingClientRect()
-    return element instanceof HTMLElement &&
+    return (
+      element instanceof HTMLElement &&
       element.ownerDocument === entry.element.ownerDocument &&
       element.getBoundingClientRect().left >= rect.left &&
       element.getBoundingClientRect().right <= rect.right &&
       element.getBoundingClientRect().top >= rect.top &&
       element.getBoundingClientRect().bottom <= rect.bottom
+    )
   })
   return candidates.sort((left, right) => {
     const leftRect = left.element.getBoundingClientRect()

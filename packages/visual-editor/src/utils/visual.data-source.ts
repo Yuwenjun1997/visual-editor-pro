@@ -18,14 +18,15 @@ export const refreshColumnData = async (options: VisualSourceOptions, target?: a
   target?.setData?.(source.data)
 }
 
-export const refreshManagedData = async (options: VisualSourceOptions, target?: any, resolveRows?: ManagedDataResolver) => {
+export const refreshManagedData = async (
+  options: VisualSourceOptions,
+  target?: any,
+  resolveRows?: ManagedDataResolver,
+) => {
   if (options.dataSource !== 'managed' || !options.sourceId) return
   let rows: Record<string, any>[] | null | undefined
   try {
-    rows = await (
-      resolveRows?.(options.sourceId) ||
-      visualConfig.dataSourceProvider?.resolveRows?.(options.sourceId)
-    )
+    rows = await (resolveRows?.(options.sourceId) || visualConfig.dataSourceProvider?.resolveRows?.(options.sourceId))
   } catch {
     rows = null
   }

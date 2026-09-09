@@ -35,7 +35,7 @@ const editorInstanceId = new URLSearchParams(window.location.search).get('editor
 const visualStore = useViusalStore()
 const { blockList } = useBlocks()
 const { pageConfig } = usePageConfig()
-const { themeName, baseThemeName } = useTheme()
+const { themeName, baseThemeName, themeConfig, setThemeColor } = useTheme()
 const runtime = useH5Runtime()
 let revision = 0
 let sequence = 0
@@ -184,7 +184,14 @@ const onMessage = (event: MessageEvent<unknown>) => {
     revision = message.baseRevision
     blockList.value = message.payload.blocks
     pageConfig.value = message.payload.pageConfig as typeof pageConfig.value
-    themeName.value = message.payload.pageConfig.themeName || baseThemeName.value
+    const pageTheme = message.payload.pageConfig.themeName
+    if (pageTheme && themeConfig.value.theme[pageTheme]) {
+      themeName.value = pageTheme
+      setThemeColor()
+    } else {
+      themeName.value = baseThemeName.value
+      setThemeColor(pageTheme || undefined)
+    }
     visualStore.setDevice(message.payload.device)
     visualStore.activePanel = message.payload.activePanel
     runtime.$setEditorPreviewIdentity?.(message.payload.previewIdentity)

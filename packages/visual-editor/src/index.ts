@@ -29,6 +29,6 @@ export { getSchema, getSchemas } from './schemas'
 export { useSourceDataEditor } from './hooks/useSourceDataEditor'
 export { useViewJson } from './hooks/useViewJson'
 export { useVisualRef } from './hooks/useVisualRef'
-export { isValidPageSlug, normalizePageSlug } from './utils/visual.validation'
+export { createPageSlug, isValidPageSlug, normalizePageSlug } from './utils/visual.validation'
 
 export * from './types/visual-editor'

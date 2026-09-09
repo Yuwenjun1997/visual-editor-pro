@@ -15,7 +15,7 @@
         </h2>
         <p>{{ profile ? '欢迎回来' : '登录后享受完整服务' }}</p>
       </div>
-      <button v-if="!profile" class="visual-user-card__login" type="button" @click="runtime.$login?.()">
+      <button v-if="!profile" type="button" class="visual-user-card__login" @click="runtime.$login?.()">
         {{ props.buttonText || '去登录' }}
       </button>
     </template>

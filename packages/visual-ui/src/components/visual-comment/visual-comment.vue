@@ -128,4 +128,3 @@ const showRating = computed(() => _props.props.showRating)
   }
 }
 </style>
-

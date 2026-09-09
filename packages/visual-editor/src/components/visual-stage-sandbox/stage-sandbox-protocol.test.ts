@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { reactive } from 'vue'
-import { cloneStageMessage, createStageMessage, isStageMessage, STAGE_CHANNEL, STAGE_PROTOCOL_VERSION } from './stage-sandbox-protocol'
+import {
+  cloneStageMessage,
+  createStageMessage,
+  isStageMessage,
+  STAGE_CHANNEL,
+  STAGE_PROTOCOL_VERSION,
+} from './stage-sandbox-protocol'
 
 describe('stage sandbox protocol', () => {
   it('clones reactive payloads before they cross the iframe boundary', () => {

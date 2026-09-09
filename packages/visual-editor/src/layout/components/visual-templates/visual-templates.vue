@@ -113,12 +113,7 @@ async function applyTemplate(tpl: VisualTemplate) {
     border-radius: 10px;
     background:
       linear-gradient(rgb(15 23 42 / 0.48), rgb(15 23 42 / 0.48)),
-      linear-gradient(
-        135deg,
-        #86149f 0%,
-        var(--v-primary-1, #4f46e5) 48%,
-        #0f647d 100%
-      );
+      linear-gradient(135deg, #86149f 0%, var(--v-primary-1, #4f46e5) 48%, #0f647d 100%);
     cursor: pointer;
     transition:
       border-color 0.2s,

@@ -177,5 +177,3 @@ watch(() => [_props.props.qrContent, _props.props.qrSize, _props.props.qrFgColor
   }
 }
 </style>
-
-

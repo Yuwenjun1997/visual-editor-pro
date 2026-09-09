@@ -34,9 +34,9 @@ export const createVisualBlock = (visualComponent: VisualEditorComponent): Visua
     props: createProps(component.props),
     slots: component.slots,
     listData: listData?.data && createListData(listData?.data),
-    souceDataType: component.souceDataType || (component.key === 'VisualObject' || component.key === 'VisualObjectArray'
-      ? component.key
-      : undefined),
+    souceDataType:
+      component.souceDataType ||
+      (component.key === 'VisualObject' || component.key === 'VisualObjectArray' ? component.key : undefined),
   }
 }
 
@@ -130,9 +130,9 @@ export const formatVisualBlockData = (block: Partial<VisualBlockData>): VisualBl
     props: block.props,
     slots: block.slots,
     listData: block.listData,
-    souceDataType: block.souceDataType || (block.key === 'VisualObject' || block.key === 'VisualObjectArray'
-      ? block.key
-      : undefined),
+    souceDataType:
+      block.souceDataType ||
+      (block.key === 'VisualObject' || block.key === 'VisualObjectArray' ? block.key : undefined),
   }
 }
 

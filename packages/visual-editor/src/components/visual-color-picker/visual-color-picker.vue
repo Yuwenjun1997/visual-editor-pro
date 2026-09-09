@@ -14,16 +14,15 @@
       </div>
 
       <div class="color-list">
-        <el-tooltip v-if="props.allowInherit" placement="top" content="继承应用字体颜色">
-          <button
-            title="继承应用字体颜色"
-            :class="{ 'is-active': !modelValue }"
-            class="color-item color-item--inherit"
-            @click="handleInherit"
-          >
-            <Icon icon="bi:link" />
-          </button>
-        </el-tooltip>
+        <button
+          title="继承颜色"
+          type="button"
+          :class="{ 'is-active': !modelValue }"
+          class="color-item color-item--inherit"
+          @click="handleInherit"
+        >
+          <Icon icon="bi:link" />
+        </button>
         <button
           v-for="color in colorList"
           :key="color.value"
@@ -31,6 +30,7 @@
           class="color-item"
           :title="color.label"
           :aria-label="color.label"
+          :class="{ 'is-active': isActive(color.value) }"
           :style="{ backgroundColor: colorVal(color.value) }"
           @click="handleClick(colorVal(color.value))"
         />
@@ -48,8 +48,6 @@ import { colorList } from './configs/colorMap'
 
 interface Props {
   modelValue?: string
-  type?: 'bgColor' | 'borderColor' | 'textColor'
-  allowInherit?: boolean
 }
 
 defineOptions({
@@ -58,8 +56,6 @@ defineOptions({
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
-  type: 'bgColor',
-  allowInherit: false,
 })
 
 const emit = defineEmits<{
@@ -85,6 +81,8 @@ const visible = ref(false)
 const bindStyles = computed<CSSProperties>(() => ({
   backgroundColor: colorVal(modelValue.value),
 }))
+
+const isActive = (color: string) => colorVal(modelValue.value) === colorVal(color)
 
 const handleClick = (color: string) => {
   modelValue.value = color
@@ -145,6 +143,10 @@ const handleInherit = () => {
       &:hover {
         outline: 2px solid var(--el-color-primary);
       }
+
+      &.is-active {
+        outline: 2px solid var(--el-color-primary);
+      }
     }
   }
 
@@ -154,10 +156,6 @@ const handleInherit = () => {
     justify-content: center;
     color: var(--el-text-color-secondary);
     background: repeating-linear-gradient(135deg, #fff 0 6px, #e5e7eb 6px 12px);
-
-    &.is-active {
-      outline: 2px solid var(--el-color-primary);
-    }
   }
 }
 </style>

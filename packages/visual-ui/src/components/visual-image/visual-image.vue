@@ -55,6 +55,3 @@ const _bindImageStyles = computed<CSSProperties>(() => {
   }
 }
 </style>
-
-
-

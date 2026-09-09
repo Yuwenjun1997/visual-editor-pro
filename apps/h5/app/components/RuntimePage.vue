@@ -8,25 +8,31 @@
 import { useTheme } from '@visual/ui'
 import { mountThemeToRoot } from '@visual/ui/hooks/useMountThemeToRoot'
 import type { RuntimePage } from '../types/runtime'
+import { APP_TEXT_COLOR_KEY } from '../app-context'
 
 const props = defineProps<{ page: RuntimePage }>()
 const pageStyle = computed(() => props.page.schema.globalStyle || {})
-const pageTextColor = computed(() => pageStyle.value.color || 'inherit')
-const { themeConfig, themeName, baseThemeName } = useTheme()
+const appTextColor = inject(
+  APP_TEXT_COLOR_KEY,
+  computed(() => undefined),
+)
+const pageTextColor = computed(() => pageStyle.value.color || appTextColor.value)
+const { themeConfig, themeName, baseThemeName, setThemeColor } = useTheme()
 
 mountThemeToRoot({
   color: () => pageTextColor.value,
 })
 
-onBeforeUnmount(() => {
-  if (typeof document !== 'undefined') document.documentElement.style.setProperty('--v-text-color', 'inherit')
-})
-
-// 页面 schema 的 themeName 优先于应用默认主题。仅接受已注册的主题，
-// 避免历史或手工输入的无效名称导致主题 CSS 变量为空。
+// 页面主题支持已注册主题名，也支持实际颜色值或颜色 token。
 watchEffect(() => {
   const name = props.page.schema.themeName
-  themeName.value = name && themeConfig.value.theme[name] ? name : baseThemeName.value
+  if (name && themeConfig.value.theme[name]) {
+    themeName.value = name
+    setThemeColor()
+  } else {
+    themeName.value = baseThemeName.value
+    setThemeColor(name || undefined)
+  }
 })
 </script>
 

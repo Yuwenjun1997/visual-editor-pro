@@ -15,7 +15,7 @@
       >
         <template #default="{ data }">
           <div class="ve-flex ve-items-center ve-gap-1">
-            <img :src="data.icon" :alt="`${data.label}图标`" class="component-icon" />
+            <img :src="data.icon" class="component-icon" :alt="`${data.label}图标`" />
             <div>{{ data.label }}</div>
           </div>
         </template>

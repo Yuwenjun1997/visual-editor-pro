@@ -54,7 +54,7 @@
         <a target="_blank" :href="agreement" rel="noopener noreferrer">{{ config.agreementName }}</a>
       </p>
       <p v-if="error" role="alert" class="visual-login-panel__error">{{ error }}</p>
-      <button type="submit" class="visual-login-panel__submit" :disabled="busy || preview">
+      <button type="submit" :disabled="busy || preview" class="visual-login-panel__submit">
         {{ busy ? '正在登录…' : config.buttonText }}
       </button>
       <p class="visual-login-panel__footnote">与你喜爱的内容，近一点。</p>

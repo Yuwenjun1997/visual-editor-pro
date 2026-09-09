@@ -4,9 +4,9 @@ import { getThemeCssVariableValue } from '../utils/theme-utils'
 
 export interface MountThemeToRootOptions {
   /** 字体颜色 */
-  textColor?: string | (() => string)
+  textColor?: string | undefined | (() => string | undefined)
   /** 页面背景色：字面色值或主题 key（同 VisualAppProps.bgColor），传 getter 以保持响应式 */
-  bgColor?: string | (() => string)
+  bgColor?: string | undefined | (() => string | undefined)
   /** 底部安全区高度（px），传 getter 以保持响应式 */
   safeAreaBottom?: string | number | (() => string | number)
 }
@@ -17,26 +17,38 @@ export interface MountThemeToRootOptions {
  * 传入 `bgColor`/`safeAreaBottom` 时额外挂载 `--v-bg-color` 与 `--v-safe-area-bottom`。
  */
 export const mountThemeToRoot = (options: MountThemeToRootOptions = {}) => {
-  const { currentTheme, colorVar } = useTheme()
+  const { currentTheme, darkTheme, colorVar } = useTheme()
   watchEffect(() => {
     // 公开端会在 Nuxt SSR 中使用 visual-ui；服务端没有 document，主题变量会在 hydration 后挂载。
     if (typeof document === 'undefined') return
     const theme = currentTheme.value
     if (!theme) return
     const root = document.documentElement
-
-    Object.entries(theme).forEach(([key, value]) => {
-      root.style.setProperty(`--v-${key}`, getThemeCssVariableValue(key, String(value)))
-    })
+    const toCss = (values: Record<string, string>) =>
+      Object.entries(values)
+        .filter(([key]) => key !== 'text-color' && key !== 'page-background-color')
+        .map(([key, value]) => `--v-${key}:${getThemeCssVariableValue(key, String(value))};`)
+        .join('')
+    let style = document.head.querySelector<HTMLStyleElement>('style[data-visual-theme]')
+    if (!style) {
+      style = document.createElement('style')
+      style.dataset.visualTheme = ''
+      document.head.appendChild(style)
+    }
+    style.textContent = `:root{${toCss(theme)}}html.dark{${toCss(darkTheme.value)}}`
 
     const textColor = typeof options.textColor === 'function' ? options.textColor() : options.textColor
     if (textColor !== undefined) {
       root.style.setProperty('--v-text-color', colorVar(textColor) || 'inherit')
+    } else {
+      root.style.removeProperty('--v-text-color')
     }
 
     const bgColor = typeof options.bgColor === 'function' ? options.bgColor() : options.bgColor
     if (bgColor !== undefined) {
       root.style.setProperty('--v-page-background-color', colorVar(bgColor) || 'transparent')
+    } else {
+      root.style.removeProperty('--v-page-background-color')
     }
 
     const safeAreaBottom =

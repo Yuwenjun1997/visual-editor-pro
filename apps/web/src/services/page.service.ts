@@ -1,6 +1,7 @@
 import { upgradeTemplateBlocks } from '@visual/ui/utils'
 import { supabase } from '../lib/supabase'
 import type { PageRevision, PageRow } from '../types/api'
+import { createPageSlug } from '@visual/editor'
 import type { PageSchema } from '@visual/editor'
 
 export interface PageDataSourceBinding {
@@ -56,7 +57,7 @@ export const pageService = {
   },
 
   async saveWithBindings(payload: { pageId: string | null; title: string; schema: PageSchema }) {
-    const slug = payload.schema.slug || `page-${crypto.randomUUID().slice(0, 8)}`
+    const slug = payload.schema.slug || createPageSlug()
     const { data, error } = await supabase.rpc('page_write_draft', {
       p_page_id: payload.pageId,
       p_title: payload.title,

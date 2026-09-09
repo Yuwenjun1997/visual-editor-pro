@@ -108,5 +108,3 @@ const _bindClassList = computed(() => ({
   }
 }
 </style>
-
-

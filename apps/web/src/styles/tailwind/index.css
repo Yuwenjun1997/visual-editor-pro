@@ -13,3 +13,13 @@ body,
 .el-card .el-divider__text {
   background-color: var(--el-card-bg-color);
 }
+
+@layer components {
+  .page-meta-message-box .el-message-box__container {
+    @apply wa-block;
+  }
+
+  .page-meta-message-box .el-message-box__message {
+    @apply wa-block wa-w-full wa-ml-0;
+  }
+}

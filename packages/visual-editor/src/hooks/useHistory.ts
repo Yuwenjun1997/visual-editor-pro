@@ -68,14 +68,8 @@ export const useHistory = () => {
 
   const historyData = computed<HistoryData>(() => ({ ...pageConfig.value, blocks: blockList.value }))
   // HistoryStack 不是响应式对象；通过版本号让工具栏在提交、撤销和重做后重新计算可用状态。
-  const canRedo = computed(() => {
-    historyVersion.value
-    return history.canRedo
-  })
-  const canUndo = computed(() => {
-    historyVersion.value
-    return history.canUndo
-  })
+  const canRedo = computed(() => historyVersion.value >= 0 && history.canRedo)
+  const canUndo = computed(() => historyVersion.value >= 0 && history.canUndo)
 
   const undo = () => {
     const entry = history.undo()

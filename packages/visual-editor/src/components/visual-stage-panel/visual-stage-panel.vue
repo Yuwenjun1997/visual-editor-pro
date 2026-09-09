@@ -8,7 +8,7 @@
       </div>
       <div v-else-if="!controller.ready.value" role="status" aria-live="polite" class="visual-stage-loading">
         <div class="visual-stage-loader">
-          <svg tabindex="-1" focusable="false" aria-hidden="true" viewBox="0 0 64 64" class="visual-stage-loader-orbit">
+          <svg tabindex="-1" focusable="false" viewBox="0 0 64 64" class="visual-stage-loader-orbit">
             <circle r="24" cx="32" cy="32" class="visual-stage-loader-track" />
             <circle r="24" cx="32" cy="32" class="visual-stage-loader-arc" />
             <circle r="4" cy="8" cx="32" class="visual-stage-loader-dot" />
@@ -63,7 +63,9 @@ const appliedOperations = new Set<string>()
 let suppressStateWatch = false
 let themeObserver: MutationObserver | undefined
 
-const sandboxUrl = computed(() => `/visual-stage.html?editorInstanceId=${encodeURIComponent(controller.editorInstanceId)}`)
+const sandboxUrl = computed(
+  () => `/visual-stage.html?editorInstanceId=${encodeURIComponent(controller.editorInstanceId)}`,
+)
 
 const stageState = (): StageStatePayload => ({
   blocks: blockList.value,
@@ -275,7 +277,9 @@ onBeforeUnmount(() => {
   filter: drop-shadow(0 0 4px var(--el-color-primary-light-3));
 }
 @keyframes visual-stage-loader-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .visual-stage-error {
   pointer-events: auto;

@@ -89,7 +89,3 @@ const handleClick = (index: number, event: MouseEvent) => {
   }
 }
 </style>
-
-
-
-

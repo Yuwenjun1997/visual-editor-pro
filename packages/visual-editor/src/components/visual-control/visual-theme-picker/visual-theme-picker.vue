@@ -1,41 +1,11 @@
 <template>
-  <div class="visual-theme-picker">
-    <el-popover v-model:visible="visible" width="300px" trigger="click" popper-class="visual-theme-picker__popover">
-      <template #reference>
-        <el-button size="small">
-          <div class="theme-btn" :style="bindStyles">
-            <Icon v-if="!modelValue" icon="bi:x-lg" />
-          </div>
-        </el-button>
-      </template>
-      <div class="theme-list">
-        <el-tooltip placement="top" content="继承应用主题">
-          <span
-            title="继承应用主题"
-            :class="{ 'is-active': !modelValue }"
-            class="theme-item theme-item--inherit"
-            @click="handleClick(null)"
-          >
-            <Icon icon="bi:link" />
-          </span>
-        </el-tooltip>
-        <span
-          v-for="(color, theme) in themeMap"
-          :key="theme"
-          class="theme-item"
-          :style="{ backgroundColor: color }"
-          @click="handleClick(theme)"
-        />
-      </div>
-    </el-popover>
-  </div>
+  <visual-color-picker v-model="themeValue" />
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { themeMap } from './configs/index'
 import { useVModel } from '@vueuse/core'
-import type { CSSProperties } from 'vue'
+import VisualColorPicker from '../../visual-color-picker/visual-color-picker.vue'
+import { themeMap } from './configs/index'
 
 type ThemeType = keyof typeof themeMap
 
@@ -56,17 +26,10 @@ const emit = defineEmits<{
 }>()
 
 const modelValue = useVModel(props, 'modelValue', emit)
-
-const visible = ref(false)
-
-const bindStyles = computed<CSSProperties>(() => ({
-  backgroundColor: modelValue.value ? themeMap[modelValue.value] : 'transparent',
-}))
-
-const handleClick = (color: ThemeType | null) => {
-  modelValue.value = color
-  visible.value = false
-}
+const themeValue = computed({
+  get: () => modelValue.value || '',
+  set: (value: string) => (modelValue.value = (value || null) as ThemeType | null),
+})
 </script>
 
 <style lang="scss">

@@ -52,6 +52,3 @@ const _bindClassList = computed(() => [!isPictureUrl(_props.icon) ? _iconName.va
   }
 }
 </style>
-
-
-

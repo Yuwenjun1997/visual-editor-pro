@@ -7,10 +7,10 @@
       <visual-text-input v-model="pageConfig.slug" placeholder="小写字母、数字和连字符" />
     </visual-control-item>
     <visual-control-item title="主题颜色">
-      <visual-theme-picker v-model="pageConfig.themeName" />
+      <visual-color-input v-model="themeValue" />
     </visual-control-item>
     <visual-control-item title="字体颜色">
-      <visual-color-input v-model="pageConfig.globalStyle.color" allow-inherit placeholder="继承应用" />
+      <visual-color-input v-model="pageConfig.globalStyle.color" placeholder="继承应用" />
     </visual-control-item>
     <visual-background-editor v-model="pageConfig.globalStyle" />
     <visual-padding-editor v-model="pageConfig.globalStyle" />
@@ -23,12 +23,15 @@ import VisualTextInput from '../../../../../components/visual-control/visual-tex
 import VisualColorInput from '../../../../../components/visual-control/visual-color-input/visual-color-input.vue'
 import VisualBackgroundEditor from '../../../../../components/visual-styles-editor/visual-background-editor/visual-background-editor.vue'
 import VisualPaddingEditor from '../../../../../components/visual-styles-editor/visual-padding-editor/visual-padding-editor.vue'
-import VisualThemePicker from '../../../../../components/visual-control/visual-theme-picker/visual-theme-picker.vue'
 import { usePageConfig } from '../../../../../hooks/usePageConfig'
 import { useReload } from '../../../../../hooks/useReload'
 
 const { pageConfig } = usePageConfig()
 const { activeKey } = useReload()
+const themeValue = computed({
+  get: () => pageConfig.value.themeName || '',
+  set: (value: string) => (pageConfig.value.themeName = value || null),
+})
 </script>
 
 <style scoped lang="scss">

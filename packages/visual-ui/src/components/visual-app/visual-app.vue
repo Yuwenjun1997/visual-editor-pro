@@ -18,8 +18,6 @@ defineOptions({
 })
 
 const _props = withDefaults(defineProps<VisualAppProps>(), {
-  textColor: 'inherit',
-  bgColor: 'transparent',
   safeAreaBottom: true,
 })
 
@@ -49,10 +47,10 @@ const _bindClassList = computed(() => ({
   height: 100%;
   flex: 1;
   overflow: hidden;
-  color: var(--v-text-color);
+  color: var(--v-text-color, inherit);
   font-family: var(--visual-app-font-body);
   font-size: var(--visual-app-text-md);
-  background-color: var(--v-page-background-color);
+  background-color: var(--v-page-background-color, transparent);
 
   &::after {
     content: '';

@@ -52,5 +52,3 @@ const _props = withDefaults(defineProps<Props>(), {
   }
 }
 </style>
-
-

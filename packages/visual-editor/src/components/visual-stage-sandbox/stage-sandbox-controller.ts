@@ -71,13 +71,18 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
     iframe?.contentWindow?.postMessage(cloneStageMessage(message), window.location.origin)
   }
 
-  const sendForSession = <T extends StageMessage['type']>(type: T, payload: import('./stage-sandbox-protocol').StageMessageMap[T]) => {
+  const sendForSession = <T extends StageMessage['type']>(
+    type: T,
+    payload: import('./stage-sandbox-protocol').StageMessageMap[T],
+  ) => {
     const current = session.value
-    send(createStageMessage(type, editorInstanceId, payload, {
-      baseRevision: revision,
-      sequence: ++sequence,
-      sessionId: current?.id,
-    }))
+    send(
+      createStageMessage(type, editorInstanceId, payload, {
+        baseRevision: revision,
+        sequence: ++sequence,
+        sessionId: current?.id,
+      }),
+    )
   }
 
   const finish = () => {
@@ -88,7 +93,12 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
   }
 
   const onMessage = (event: MessageEvent<unknown>) => {
-    if (event.origin !== window.location.origin || event.source !== iframe?.contentWindow || !isStageMessage(event.data)) return
+    if (
+      event.origin !== window.location.origin ||
+      event.source !== iframe?.contentWindow ||
+      !isStageMessage(event.data)
+    )
+      return
     const message = event.data
     if (message.editorInstanceId !== editorInstanceId || message.protocolVersion !== 2) return
     if (message.type === 'stage-ready') {
@@ -130,10 +140,18 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
       if (!frameReady) error.value = '舞台加载超时，请重试'
     }, 10000)
     window.addEventListener('message', onMessage)
-    readyRequestListener = () => send(createStageMessage('stage-ready-request', editorInstanceId, {}, {
-      baseRevision: revision,
-      sequence: ++sequence,
-    }))
+    readyRequestListener = () =>
+      send(
+        createStageMessage(
+          'stage-ready-request',
+          editorInstanceId,
+          {},
+          {
+            baseRevision: revision,
+            sequence: ++sequence,
+          },
+        ),
+      )
     iframe.addEventListener('load', readyRequestListener)
     readyRequestListener()
   }
@@ -172,7 +190,10 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
     if (!current || event.pointerId !== current.pointerId) return
     dragPoint.value = { x: event.clientX, y: event.clientY }
     if (current.phase === 'pending') {
-      const distance = Math.hypot(event.clientX - (startPoint?.x || event.clientX), event.clientY - (startPoint?.y || event.clientY))
+      const distance = Math.hypot(
+        event.clientX - (startPoint?.x || event.clientX),
+        event.clientY - (startPoint?.y || event.clientY),
+      )
       if (distance < 5) return
       current.phase = 'dragging'
       sendForSession('stage-drag-start', { block: current.block })
@@ -210,21 +231,29 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
 
   const syncState = (state: StageStatePayload, nextRevision: number) => {
     revision = nextRevision
-    send(createStageMessage('stage-state-sync', editorInstanceId, state, {
-      baseRevision: revision,
-      sequence: ++sequence,
-    }))
+    send(
+      createStageMessage('stage-state-sync', editorInstanceId, state, {
+        baseRevision: revision,
+        sequence: ++sequence,
+      }),
+    )
   }
 
   const resolveDrop = (accepted: boolean, request: StageDropRequest, nextRevision: number, reason = '放置被拒绝') => {
     const operationId = request.operation.operationId
     const current = session.value
-    send(createStageMessage(accepted ? 'stage-drop-ack' : 'stage-drop-reject', editorInstanceId,
-      accepted ? { operationId, revision: nextRevision } : { operationId, revision: nextRevision, reason }, {
-        baseRevision: nextRevision,
-        sequence: ++sequence,
-        sessionId: current?.id,
-      }))
+    send(
+      createStageMessage(
+        accepted ? 'stage-drop-ack' : 'stage-drop-reject',
+        editorInstanceId,
+        accepted ? { operationId, revision: nextRevision } : { operationId, revision: nextRevision, reason },
+        {
+          baseRevision: nextRevision,
+          sequence: ++sequence,
+          sessionId: current?.id,
+        },
+      ),
+    )
     if (accepted) finish()
   }
 
@@ -243,9 +272,17 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
     reload,
     syncState,
     resolveDrop,
-    onReady: (callback) => { readyCallback = callback },
-    onDropRequest: (callback) => { dropRequestCallback = callback },
-    onBlockSelect: (callback) => { blockSelectCallback = callback },
-    onBlockDelete: (callback) => { blockDeleteCallback = callback },
+    onReady: (callback) => {
+      readyCallback = callback
+    },
+    onDropRequest: (callback) => {
+      dropRequestCallback = callback
+    },
+    onBlockSelect: (callback) => {
+      blockSelectCallback = callback
+    },
+    onBlockDelete: (callback) => {
+      blockDeleteCallback = callback
+    },
   }
 }

@@ -116,4 +116,3 @@ const deltaStyle = computed<CSSProperties>(() => {
   }
 }
 </style>
-

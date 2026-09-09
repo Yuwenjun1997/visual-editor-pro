@@ -28,13 +28,28 @@
         <el-form label-width="90px">
           <el-form-item label="预定主题">
             <el-select v-model="model.theme_config.themeName" class="wa-w-52">
-              <el-option v-for="item in themePresets" :key="item.name" :label="item.label" :value="item.name" />
+              <el-option v-for="item in themePresets" :key="item.name" :value="item.name" :label="item.label">
+                <div class="wa-flex wa-items-center wa-gap-2">
+                  <span class="theme-color-dot" :style="{ backgroundColor: item.color }" />
+                  <span>{{ item.label }}</span>
+                  <span class="wa-ml-auto wa-text-xs wa-text-[var(--el-text-color-secondary)]">{{ item.color }}</span>
+                </div>
+              </el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="主色覆盖">
             <div class="wa-flex wa-items-center wa-gap-3">
               <el-color-picker v-model="model.theme_config.primary" />
               <el-button v-if="model.theme_config.primary" link @click="model.theme_config.primary = undefined">
+                恢复主题默认色
+              </el-button>
+            </div>
+          </el-form-item>
+          <el-form-item label="字体颜色">
+            <div class="wa-flex wa-w-full wa-items-center wa-gap-3">
+              <el-color-picker v-model="model.theme_config.textColor" show-alpha />
+              <el-input v-model="model.theme_config.textColor" class="wa-max-w-52" placeholder="继承主题默认色" />
+              <el-button v-if="model.theme_config.textColor" link @click="model.theme_config.textColor = undefined">
                 恢复主题默认色
               </el-button>
             </div>
@@ -58,7 +73,16 @@
               <el-color-picker v-model="model.layout_config.backgroundColor" />
             </el-form-item>
             <el-form-item label="激活颜色">
-              <el-color-picker v-model="model.layout_config.activeColor" />
+              <div class="wa-flex wa-items-center wa-gap-2">
+                <el-select class="wa-w-32" :model-value="activeColorMode" @change="changeActiveColorMode">
+                  <el-option label="跟随主题" value="primary-color" />
+                  <el-option label="自定义颜色" value="custom-color" />
+                </el-select>
+                <el-color-picker
+                  v-if="model.layout_config.activeColor !== 'primary-color'"
+                  v-model="model.layout_config.activeColor"
+                />
+              </div>
             </el-form-item>
             <el-form-item label="未激活颜色">
               <el-color-picker v-model="model.layout_config.inactiveColor" />
@@ -85,7 +109,7 @@
                     >
                       <Icon icon="ep:arrow-down" />
                     </el-button>
-                    <el-button link type="danger" @click="removeNavItem(item.key)">移除</el-button>
+                    <el-button size="small" type="danger" @click="removeNavItem(item.key)">移除</el-button>
                   </div>
                 </div>
                 <div class="wa-grid wa-grid-cols-1 wa-gap-3 sm:wa-grid-cols-2 lg:wa-grid-cols-4">
@@ -141,9 +165,9 @@
                 :safe-area="false"
                 :items="previewItems"
                 :height="model.layout_config.tabbarHeight"
-                :active-color="model.layout_config.activeColor"
                 :inactive-color="model.layout_config.inactiveColor"
                 :background-color="model.layout_config.backgroundColor"
+                :active-color="resolveColor(model.layout_config.activeColor)"
               />
             </div>
           </div>
@@ -164,9 +188,34 @@ import { VISUAL_THEME_PRESETS } from '@visual/editor'
 const model = defineModel<AppRow>({ required: true })
 const props = defineProps<{ pages: PageRow[]; pageKey: (page: PageRow) => string }>()
 const themePresets = Object.entries(VISUAL_THEME_PRESETS).map(([name, value]) => ({ name, ...value }))
+const CUSTOM_ACTIVE_COLOR = 'custom-color'
 
 if (!model.value.theme_config || typeof model.value.theme_config !== 'object') model.value.theme_config = {}
 if (!model.value.theme_config.themeName) model.value.theme_config.themeName = 'theme-blue'
+
+const resolveColor = (value: string) => {
+  if (value === 'primary-color')
+    return (
+      model.value.theme_config.primary ||
+      themePresets.find((item) => item.name === model.value.theme_config.themeName)?.primary ||
+      value
+    )
+  return value
+}
+
+const activeColorMode = computed(() =>
+  model.value.layout_config.activeColor === 'primary-color' ? 'primary-color' : CUSTOM_ACTIVE_COLOR,
+)
+
+const changeActiveColorMode = (mode: string) => {
+  if (mode === 'primary-color') {
+    model.value.layout_config.activeColor = 'primary-color'
+    return
+  }
+  if (model.value.layout_config.activeColor === 'primary-color') {
+    model.value.layout_config.activeColor = resolveColor('primary-color')
+  }
+}
 
 const previewItems = computed(() =>
   model.value.layout_config.items.map((item) => ({
@@ -208,6 +257,14 @@ const moveNavItem = (index: number, direction: -1 | 1) => {
 </script>
 
 <style scoped>
+.theme-color-dot {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid rgb(0 0 0 / 12%);
+}
+
 .preview-tabbar :deep(.visual-tabbar__inner) {
   position: absolute;
 }

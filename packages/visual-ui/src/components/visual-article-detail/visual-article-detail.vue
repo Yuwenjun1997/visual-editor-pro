@@ -366,5 +366,3 @@ const showMeta = computed(
   }
 }
 </style>
-
-

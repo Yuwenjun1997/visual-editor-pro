@@ -227,6 +227,3 @@ const badgeStyle = computed<CSSProperties>(() => ({
   }
 }
 </style>
-
-
-

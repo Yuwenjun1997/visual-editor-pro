@@ -8,7 +8,7 @@
         <el-collapse-item name="pageInfo">
           <template #title>
             <div class="collapse-title">
-              <Icon icon="ion:document-text-outline" class="collapse-title-icon" />
+              <Icon class="collapse-title-icon" icon="ion:document-text-outline" />
               <span>页面属性</span>
             </div>
           </template>
@@ -40,7 +40,7 @@
           <el-collapse-item name="styles">
             <template #title>
               <div class="collapse-title">
-                <Icon icon="ion:color-palette-outline" class="collapse-title-icon" />
+                <Icon class="collapse-title-icon" icon="ion:color-palette-outline" />
                 <span>组件样式</span>
               </div>
             </template>

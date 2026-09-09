@@ -2,8 +2,9 @@ import type { ThemeColors } from '../types/theme'
 
 export const semanticThemeVariableAliases: Record<string, string> = {
   'primary-color': 'primary-1',
-  // 'text-color': 'text-1',
+  'text-color': 'text-1',
   'background-color': 'gray-1',
+  'bg-color': 'background-color',
   'surface-color': 'white',
   'border-color': 'gray-2',
   'success-color': 'success-1',
@@ -131,7 +132,7 @@ export const mixColors = (color1: string, color2: string, percentage: number) =>
  */
 export const generateTheme = (colors: ThemeColors, isDark: boolean = false): Record<string, any> => {
   const result: Record<string, any> = {}
-  Object.entries(colors).forEach(([key, value]) => {
+  Object.entries({ text: '#1F2937', ...colors }).forEach(([key, value]) => {
     for (let i = 0; i < 6; i++) {
       if (!['white', 'black', 'text'].includes(key)) {
         const colorKey = `${key}-${i + 1}`
@@ -158,5 +159,6 @@ export const generateTheme = (colors: ThemeColors, isDark: boolean = false): Rec
   result['warning-color'] = result['warning-1'] || colors.warning
   result['error-color'] = result['error-1'] || colors.error
   result['info-color'] = result['info-1'] || colors.info
+  result['text-color'] = result['text-1'] || colors.text || '#1F2937'
   return result
 }

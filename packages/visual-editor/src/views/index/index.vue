@@ -1,7 +1,7 @@
 <template>
   <el-config-provider :locale="zhCn">
     <div :class="bindClassList" class="visual-stage-container">
-      <visual-stage-bar :stage-ready="stageReady" :stage-error="stageError" />
+      <visual-stage-bar :stage-error="stageError" :stage-ready="stageReady" />
       <div class="ve-relative ve-flex-1 ve-flex ve-flex-col">
         <template v-if="activePanel === 'viewJson'">
           <visual-monaco-editor v-model="viewJson" :options="viewJsonOptions" />
@@ -29,13 +29,14 @@ import { useReload } from '../../hooks/useReload'
 import { usePageConfig } from '../../hooks/usePageConfig'
 import { useBlocks } from '../../hooks/useBlocks'
 import { visualConfig } from '../../utils/visual.registry'
+import { createPageSlug } from '../../utils/visual.validation'
 import { formatVisualBlockData, getPageSchemaFingerprint } from '../../utils/visual.utils'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { PageSchema } from '../../types/visual-editor'
 import { autoSaveStatus, useAutoSave } from '../../hooks/useAutoSave'
 import { initializeHistory, suspendHistory } from '../../hooks/useHistory'
 import { useTheme } from '@visual/ui/hooks/useTheme'
-import { resolvePageThemeName, resolveVisualThemeName, visualThemeConfig } from '../../configs/visual-theme'
+import { resolvePageThemeValue, resolveVisualThemeName, visualThemeConfig } from '../../configs/visual-theme'
 
 const { toggleRight } = useLayout()
 
@@ -55,7 +56,7 @@ const activePanel = computed(() => visualStore.activePanel)
 const { viewJson, viewJsonOptions, updateViewJson, restoreViewJson } = useViewJson()
 
 const { pageConfig } = usePageConfig()
-const { themeName, baseThemeName, initTheme } = useTheme()
+const { themeName, baseThemeName, themeConfig, initTheme, setThemeColor } = useTheme()
 
 const { blockList } = useBlocks()
 
@@ -94,14 +95,14 @@ const applyPageSchema = (schema: PageSchema, appId?: string) => {
     appId,
     title: schema.title,
     slug: schema.slug || '',
-    themeName: resolvePageThemeName(schema.themeName),
+    themeName: resolvePageThemeValue(schema.themeName),
     globalStyle: schema.globalStyle || {},
   }
 }
 
 const resetPage = () => {
   blockList.value = []
-  pageConfig.value = { pageId: '', title: '', slug: '', globalStyle: {}, themeName: null }
+  pageConfig.value = { pageId: '', title: '未命名', slug: createPageSlug(), globalStyle: {}, themeName: null }
 }
 
 const restoreLocalDraftIfNeeded = async (databaseSchema?: PageSchema) => {
@@ -196,9 +197,14 @@ const bindClassList = computed(() => [
 ])
 
 watchEffect(() => {
-  themeName.value = pageConfig.value.themeName
-    ? resolveVisualThemeName(pageConfig.value.themeName)
-    : baseThemeName.value
+  const pageTheme = pageConfig.value.themeName
+  if (pageTheme && themeConfig.value.theme[pageTheme]) {
+    themeName.value = pageTheme
+    setThemeColor()
+  } else {
+    themeName.value = baseThemeName.value
+    setThemeColor(pageTheme || undefined)
+  }
 })
 
 watchEffect(() => {

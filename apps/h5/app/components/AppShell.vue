@@ -1,5 +1,9 @@
 <template>
-  <VisualApp :bg-color="app.layoutConfig.backgroundColor" class="vh-min-h-screen vh-max-w-[750px] vh-mx-auto">
+  <VisualApp
+    :text-color="appTextColor"
+    :bg-color="app.layoutConfig.backgroundColor"
+    class="vh-min-h-screen vh-max-w-[750px] vh-mx-auto"
+  >
     <VisualAppLayout :layout="layout" @navigate="navigate">
       <slot />
     </VisualAppLayout>
@@ -12,6 +16,7 @@ import type { H5DetailContext } from '@visual/ui/types'
 import type { CustomThemeConfig } from '@visual/ui/types'
 import { useTheme } from '@visual/ui'
 import type { RuntimeApp } from '../types/runtime'
+import { APP_TEXT_COLOR_KEY } from '../app-context'
 
 const props = defineProps<{
   app: RuntimeApp
@@ -21,6 +26,8 @@ const props = defineProps<{
 }>()
 const route = useRoute()
 const { initTheme } = useTheme()
+const appTextColor = computed(() => props.app.themeConfig?.textColor)
+provide(APP_TEXT_COLOR_KEY, appTextColor)
 const nuxtApp = useNuxtApp()
 const requestFetch = useRequestFetch()
 

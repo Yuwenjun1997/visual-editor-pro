@@ -1,6 +1,6 @@
 <template>
   <visual-box class="visual-text" :class="_props.class" :styles="_props.styles">
-    <div class="visual-text__content" :class="bindClass" :style="bindStyle">
+    <div :class="bindClass" :style="bindStyle" class="visual-text__content">
       {{ _props.props.text }}
     </div>
   </visual-box>
@@ -105,4 +105,3 @@ const bindStyle = computed(() => ({
   text-decoration: line-through;
 }
 </style>
-

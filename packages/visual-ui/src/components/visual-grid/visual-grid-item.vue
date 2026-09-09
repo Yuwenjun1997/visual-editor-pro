@@ -60,6 +60,3 @@ const _bindStyles = computed<CSSProperties>(() => ({
   }
 }
 </style>
-
-
-
