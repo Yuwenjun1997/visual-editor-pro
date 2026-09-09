@@ -7,7 +7,7 @@ const constantColorMap = {
   white: '#ffffff',
   black: '#101010',
   gray: '#E5E7EB',
-  text: '#1F2937',
+  // text: '#1F2937',
 }
 
 const normalColorMap = {
@@ -34,7 +34,10 @@ export const initThemeConfig = (config: CustomThemeConfig = {}): ThemeConfig => 
   theme: {
     normal: createTheme(normalColorMap),
     'normal-dark': createTheme(normalColorMap, true),
-    ...createAllTheme({ ...config.theme, ...(config.primary ? { [config.themeName || 'normal']: { ...normalColorMap, primary: config.primary } } : {}) }),
+    ...createAllTheme({
+      ...config.theme,
+      ...(config.primary ? { [config.themeName || 'normal']: { ...normalColorMap, primary: config.primary } } : {}),
+    }),
   },
 })
 
@@ -60,8 +63,12 @@ export const useTheme = () => {
   }
 
   const colorVar = (code?: string) => {
-    if (typeof code === 'undefined') return
-    return isColorCode(code) || code === 'transparent' || code.includes('(') || code.includes('gradient')
+    if (typeof code === 'undefined' || code === '') return
+    return isColorCode(code) ||
+      code === 'transparent' ||
+      code === 'inherit' ||
+      code.includes('(') ||
+      code.includes('gradient')
       ? code
       : `var(--v-${code})`
   }

@@ -12,7 +12,18 @@
         <span class="color-picker__label">自定义颜色</span>
         <el-color-picker v-model="customColor" show-alpha />
       </div>
+
       <div class="color-list">
+        <el-tooltip v-if="props.allowInherit" placement="top" content="继承应用字体颜色">
+          <button
+            title="继承应用字体颜色"
+            :class="{ 'is-active': !modelValue }"
+            class="color-item color-item--inherit"
+            @click="handleInherit"
+          >
+            <Icon icon="bi:link" />
+          </button>
+        </el-tooltip>
         <button
           v-for="color in colorList"
           :key="color.value"
@@ -38,6 +49,7 @@ import { colorList } from './configs/colorMap'
 interface Props {
   modelValue?: string
   type?: 'bgColor' | 'borderColor' | 'textColor'
+  allowInherit?: boolean
 }
 
 defineOptions({
@@ -47,6 +59,7 @@ defineOptions({
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   type: 'bgColor',
+  allowInherit: false,
 })
 
 const emit = defineEmits<{
@@ -77,6 +90,11 @@ const handleClick = (color: string) => {
   modelValue.value = color
   visible.value = false
 }
+
+const handleInherit = () => {
+  modelValue.value = ''
+  visible.value = false
+}
 </script>
 
 <style lang="scss">
@@ -100,12 +118,14 @@ const handleClick = (color: string) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
     padding-bottom: 12px;
   }
 
   .color-picker__label {
     color: var(--el-text-color-primary);
     font-size: 13px;
+    margin-right: auto;
   }
 
   .color-list {
@@ -115,7 +135,6 @@ const handleClick = (color: string) => {
 
     .color-item {
       padding: 0;
-      display: block;
       height: 36px;
       border: 0;
       border-radius: 4px;
@@ -126,6 +145,18 @@ const handleClick = (color: string) => {
       &:hover {
         outline: 2px solid var(--el-color-primary);
       }
+    }
+  }
+
+  .color-item--inherit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--el-text-color-secondary);
+    background: repeating-linear-gradient(135deg, #fff 0 6px, #e5e7eb 6px 12px);
+
+    &.is-active {
+      outline: 2px solid var(--el-color-primary);
     }
   }
 }

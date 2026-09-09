@@ -3,7 +3,7 @@
     <el-input v-model="colorValue" :placeholder="props.placeholder" class="visual-image-input__input">
       <template #prefix>
         <div style="margin-left: 4px" @click.stop>
-          <visual-color-picker v-model="colorValue" />
+          <visual-color-picker v-model="colorValue" :allow-inherit="props.allowInherit" />
         </div>
       </template>
     </el-input>
@@ -17,6 +17,7 @@ import { useVModel } from '@vueuse/core'
 interface Props {
   modelValue?: string
   placeholder?: string
+  allowInherit?: boolean
 }
 
 defineOptions({
@@ -26,6 +27,7 @@ defineOptions({
 const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   placeholder: '选择颜色',
+  allowInherit: false,
 })
 
 const emit = defineEmits<{

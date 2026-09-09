@@ -2,7 +2,7 @@ import type { ThemeColors } from '../types/theme'
 
 export const semanticThemeVariableAliases: Record<string, string> = {
   'primary-color': 'primary-1',
-  'text-color': 'text-1',
+  // 'text-color': 'text-1',
   'background-color': 'gray-1',
   'surface-color': 'white',
   'border-color': 'gray-2',
@@ -10,7 +10,6 @@ export const semanticThemeVariableAliases: Record<string, string> = {
   'warning-color': 'warning-1',
   'error-color': 'error-1',
   'info-color': 'info-1',
-  'bg-color': 'background-color',
 }
 
 export const getThemeCssVariableValue = (key: string, value: string) => {
@@ -150,10 +149,8 @@ export const generateTheme = (colors: ThemeColors, isDark: boolean = false): Rec
     }
   })
   const primary = result['primary-1'] || colors.primary
-  const text = result['text-1'] || colors.text || '#1F2937'
   const border = result['gray-2'] || '#E5E7EB'
   result['primary-color'] = primary
-  result['text-color'] = text
   result['background-color'] = result['gray-1'] || '#F8FAFC'
   result['surface-color'] = result.white || '#ffffff'
   result['border-color'] = border

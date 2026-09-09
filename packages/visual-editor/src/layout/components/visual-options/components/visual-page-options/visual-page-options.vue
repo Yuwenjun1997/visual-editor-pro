@@ -9,6 +9,9 @@
     <visual-control-item title="主题颜色">
       <visual-theme-picker v-model="pageConfig.themeName" />
     </visual-control-item>
+    <visual-control-item title="字体颜色">
+      <visual-color-input v-model="pageConfig.globalStyle.color" allow-inherit placeholder="继承应用" />
+    </visual-control-item>
     <visual-background-editor v-model="pageConfig.globalStyle" />
     <visual-padding-editor v-model="pageConfig.globalStyle" />
   </div>
@@ -17,6 +20,7 @@
 <script setup lang="ts">
 import VisualControlItem from '../../../../../components/visual-control-item/visual-control-item.vue'
 import VisualTextInput from '../../../../../components/visual-control/visual-text-input/visual-text-input.vue'
+import VisualColorInput from '../../../../../components/visual-control/visual-color-input/visual-color-input.vue'
 import VisualBackgroundEditor from '../../../../../components/visual-styles-editor/visual-background-editor/visual-background-editor.vue'
 import VisualPaddingEditor from '../../../../../components/visual-styles-editor/visual-padding-editor/visual-padding-editor.vue'
 import VisualThemePicker from '../../../../../components/visual-control/visual-theme-picker/visual-theme-picker.vue'

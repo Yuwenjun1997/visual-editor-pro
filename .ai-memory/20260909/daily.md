@@ -58,6 +58,18 @@
 - **决策**: 所有样式控件统一使用 `@iconify/vue` 的 `mdi` 图标，移除 iconfont 和 Unicode 边框字符，保持线性 SVG 风格一致。
 - **验证**: `pnpm --filter @visual/editor type-check` 通过；针对性 Prettier 检查通过；`git diff --check` 通过。
 
+## [15:08] - 功能实现: 页面属性新增可继承应用的字体颜色
+
+- **文件**: `packages/visual-editor/src/layout/components/visual-options/components/visual-page-options/visual-page-options.vue`, `packages/visual-editor/src/components/visual-control/visual-color-input/visual-color-input.vue`, `packages/visual-editor/src/components/visual-color-picker/visual-color-picker.vue`
+- **决策**: 字体颜色保存到页面 `globalStyle.color`；空值表示继承应用级 `VisualApp` 字体颜色，并在颜色选择器中提供明确的“继承应用字体颜色”入口。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过；`git diff --check` 通过；编辑器测试 43/45 通过，2 项既有主题 token 断言失败，与本次改动无关。
+
+## [15:15] - 功能完善: 运行时页面字体颜色挂载到 html 主题变量
+
+- **文件**: `apps/h5/app/components/RuntimePage.vue`
+- **决策**: 页面字体颜色响应式写入 `document.documentElement` 的 `--v-text-color`；未配置和页面卸载时恢复 `inherit`，避免颜色残留。
+- **验证**: 编辑器类型检查通过；H5 类型检查因既有 Nuxt 文件 `EPERM` 无法启动；目标文件 `git diff --check` 通过。
+
 ## [11:50] - 交互调整: 为样式图标增加配置悬浮提示
 
 - **文件**: `packages/visual-editor/src/components/visual-styles-editor/visual-background-editor/visual-background-editor.vue`, `packages/visual-editor/src/components/visual-styles-editor/visual-border-editor/visual-border-editor.vue`, `packages/visual-editor/src/components/visual-styles-editor/visual-margin-editor/visual-margin-editor.vue`, `packages/visual-editor/src/components/visual-styles-editor/visual-padding-editor/visual-padding-editor.vue`, `packages/visual-editor/src/components/visual-styles-editor/visual-round-editor/visual-round-editor.vue`, `packages/visual-editor/src/components/visual-styles-editor/visual-shadow-editor/visual-shadow-editor.vue`
@@ -69,6 +81,12 @@
 - **文件**: `packages/visual-editor/src/components/visual-control-item/visual-control-item.vue`, `packages/visual-editor/src/layout/components/visual-options/components/visual-styles-options/visual-styles-options.vue`
 - **决策**: 为通用控制项增加可选标题插槽，透明度使用 `mdi:opacity` SVG 图标并与标题对齐，保留其他控制项的原有标题行为。
 - **验证**: `pnpm --filter @visual/editor type-check` 通过；针对性 Prettier 检查通过；`git diff --check` 通过。
+
+## [15:30] - Bug 修复: 修复页面字体颜色在 iframe 舞台中不生效
+
+- **文件**: `packages/visual-ui/src/components/visual-app/visual-app.vue`
+- **决策**: 将 `VisualApp` 的解析后字体颜色绑定到组件自身的局部 `--v-text-color`，避免舞台 iframe 中主题根变量同步覆盖页面配置。
+- **验证**: `pnpm --filter @visual/editor type-check` 通过；编辑器测试 43/45 通过，2 项既有主题 token 断言失败；`git diff --check` 无错误。
 
 ## [11:35] - 样式调整: 优化圆角和阴影图标辨识度
 

@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <visual-box :class="_props.class" :styles="_props.styles" class="visual-rich-text">
-    <!-- sanctioned: v-html 内容已由 sanitizeRichText（DOMPurify）清理 -->
+    <!-- sanctioned: v-内容已由 sanitizeRichText（DOMPurify）清理 -->
     <div class="visual-rich-text__content" v-html="safeHtml" />
   </visual-box>
 </template>

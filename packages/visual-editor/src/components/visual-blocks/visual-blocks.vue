@@ -210,16 +210,18 @@ const bindStyle = computed(() => ({
       text-overflow: ellipsis;
     }
 
-    &::after {
-      content: attr(data-component-name);
-      position: absolute;
-      min-width: 80px;
-      padding: 4px 0;
-      border-radius: 0 0 8px 0;
-      color: var(--el-text-color-secondary);
-      text-align: center;
-      background-color: var(--el-color-info-light-7);
-      font-size: 10px;
+    &[data-component-key] {
+      &::after {
+        content: attr(data-component-name);
+        position: absolute;
+        min-width: 80px;
+        padding: 4px 0;
+        border-radius: 0 0 8px 0;
+        color: var(--el-text-color-secondary);
+        text-align: center;
+        background-color: var(--el-color-info-light-7);
+        font-size: 10px;
+      }
     }
   }
 

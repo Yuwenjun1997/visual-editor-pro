@@ -1,11 +1,14 @@
 <template>
-  <visual-app :class="isPreview ? 'is-preview' : ''" :bg-color="pageConfig.globalStyle.backgroundColor">
+  <visual-app
+    :class="isPreview ? 'is-preview' : ''"
+    :text-color="pageConfig.globalStyle.color"
+    :bg-color="pageConfig.globalStyle.backgroundColor"
+  >
     <VisualBlocks
       v-model="blockList"
       v-model:is-drag="visualStore.isDrag"
       :disabled="disabled"
       class="visual-stage-wrap"
-      :style="pageConfig.globalStyle"
       :move-block="visualStore.moveBlock"
       :data-move-vid="visualStore.moveBlock?._vid"
       :data-source-type="visualStore.moveBlock?.souceDataType"

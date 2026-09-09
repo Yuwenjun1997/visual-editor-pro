@@ -106,14 +106,6 @@ const stageStatusTone = computed(() => {
   color: var(--el-color-primary);
 }
 
-:global(.visual-stage-status-popover) {
-  padding: 0;
-}
-
-:global(.visual-stage-status-popover .visual-stage-status-content) {
-  padding: 16px;
-}
-
 :global(.visual-stage-status-popover .visual-stage-status-heading) {
   display: flex;
   align-items: flex-start;

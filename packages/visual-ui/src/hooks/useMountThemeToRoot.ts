@@ -3,6 +3,8 @@ import { useTheme } from './useTheme'
 import { getThemeCssVariableValue } from '../utils/theme-utils'
 
 export interface MountThemeToRootOptions {
+  /** 字体颜色 */
+  textColor?: string | (() => string)
   /** 页面背景色：字面色值或主题 key（同 VisualAppProps.bgColor），传 getter 以保持响应式 */
   bgColor?: string | (() => string)
   /** 底部安全区高度（px），传 getter 以保持响应式 */
@@ -27,9 +29,14 @@ export const mountThemeToRoot = (options: MountThemeToRootOptions = {}) => {
       root.style.setProperty(`--v-${key}`, getThemeCssVariableValue(key, String(value)))
     })
 
+    const textColor = typeof options.textColor === 'function' ? options.textColor() : options.textColor
+    if (textColor !== undefined) {
+      root.style.setProperty('--v-text-color', colorVar(textColor) || 'inherit')
+    }
+
     const bgColor = typeof options.bgColor === 'function' ? options.bgColor() : options.bgColor
     if (bgColor !== undefined) {
-      root.style.setProperty('--v-bg-color', colorVar(bgColor) || 'transparent')
+      root.style.setProperty('--v-page-background-color', colorVar(bgColor) || 'transparent')
     }
 
     const safeAreaBottom =

@@ -18,8 +18,9 @@ defineOptions({
 })
 
 const _props = withDefaults(defineProps<VisualAppProps>(), {
-  safeAreaBottom: true,
+  textColor: 'inherit',
   bgColor: 'transparent',
+  safeAreaBottom: true,
 })
 
 const { themeName } = useTheme()
@@ -30,6 +31,7 @@ const _safeAreaBottom = computed(() => (_props.safeAreaBottom ? bottom.value : 0
 
 // 主题 CSS 变量只挂到当前文档的 <html>，iframe 内的组件不会把主题变量写回宿主页面。
 mountThemeToRoot({
+  textColor: () => _props.textColor,
   bgColor: () => _props.bgColor,
   safeAreaBottom: () => _safeAreaBottom.value,
 })
@@ -41,18 +43,16 @@ const _bindClassList = computed(() => ({
 
 <style lang="scss">
 .visual-app {
-  --visual-app-bg-color: var(--v-background-color);
-  --visual-app-text-color: var(--v-text-color);
   --visual-app-font-body: var(--v-font-body);
   --visual-app-text-md: var(--v-text-md);
   --visual-app-safe-area-bottom: var(--v-safe-area-bottom);
   height: 100%;
   flex: 1;
   overflow: hidden;
-  background-color: var(--visual-app-bg-color);
-  color: var(--visual-app-text-color);
+  color: var(--v-text-color);
   font-family: var(--visual-app-font-body);
   font-size: var(--visual-app-text-md);
+  background-color: var(--v-page-background-color);
 
   &::after {
     content: '';
