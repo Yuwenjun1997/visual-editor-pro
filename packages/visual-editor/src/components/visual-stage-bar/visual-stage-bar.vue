@@ -51,12 +51,7 @@
         </el-radio-button>
       </el-tooltip>
     </el-radio-group>
-    <el-select v-model="visualStore.previewIdentity" aria-label="模拟身份" size="small" style="width: 112px">
-      <el-option label="未登录" value="anonymous" />
-      <el-option label="普通用户" value="viewer" />
-      <el-option label="编辑者" value="editor" />
-      <el-option label="管理员" value="admin" />
-    </el-select>
+    <VisualStageStatus :stage-error="stageError" :stage-ready="stageReady" />
     <div class="ve-flex-1" />
     <span v-if="statusLabel" class="publish-status">{{ statusLabel }}</span>
     <el-button-group size="small">
@@ -99,11 +94,17 @@ import { visualConfig } from '../../utils/visual.registry'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Icon } from '@iconify/vue'
 import VisualRevisionPanel from '../visual-revision-panel/visual-revision-panel.vue'
+import VisualStageStatus from '../visual-stage-status/visual-stage-status.vue'
 import { autoSavePaused, autoSaveStatus, getAutoSaveController } from '../../hooks/useAutoSave'
 
 defineOptions({
   name: 'VisualStageBar',
 })
+
+defineProps<{
+  stageReady: boolean
+  stageError?: string | null
+}>()
 
 const visualStore = useViusalStore()
 const { redo, undo, canRedo, canUndo } = useHistory()

@@ -76,6 +76,7 @@ declare module 'vue' {
     VisualStageCanvas: typeof import('./components/visual-stage-sandbox/visual-stage-canvas.vue')['default']
     VisualStageCanvasContent: typeof import('./components/visual-stage-panel/visual-stage-canvas-content.vue')['default']
     VisualStagePanel: typeof import('./components/visual-stage-panel/visual-stage-panel.vue')['default']
+    VisualStageStatus: typeof import('./components/visual-stage-status/visual-stage-status.vue')['default']
     VisualTextInput: typeof import('./components/visual-control/visual-text-input/visual-text-input.vue')['default']
     VisualThemePicker: typeof import('./components/visual-control/visual-theme-picker/visual-theme-picker.vue')['default']
     VisualToolButton: typeof import('./components/visual-tool-button/visual-tool-button.vue')['default']

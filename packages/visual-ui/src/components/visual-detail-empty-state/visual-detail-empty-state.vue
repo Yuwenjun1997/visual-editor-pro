@@ -1,7 +1,7 @@
 <template>
   <div role="status" class="visual-detail-empty-state">
-    <span aria-hidden="true" class="visual-detail-empty-state__icon">
-      <svg focusable="false" tabindex="-1" fill="none" viewBox="0 0 24 24">
+    <span class="visual-detail-empty-state__icon">
+      <svg fill="none" focusable="false" aria-hidden="true" viewBox="0 0 24 24">
         <path d="M7 3.5h7l3 3V20.5H7z" />
         <path d="M14 3.5v4h3M10 12h4M10 15.5h4" />
       </svg>
@@ -25,7 +25,7 @@ withDefaults(defineProps<{ label?: string }>(), {
   --visual-detail-empty-state-primary-1: var(--v-primary-1);
   --visual-detail-empty-state-text-1: var(--v-text-1);
   display: flex;
-  min-height: 208px;
+  min-height: 120px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -65,4 +65,3 @@ withDefaults(defineProps<{ label?: string }>(), {
   }
 }
 </style>
-

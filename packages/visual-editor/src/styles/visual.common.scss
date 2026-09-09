@@ -1,11 +1,21 @@
-html.dark {
-  .visual-transparent-bg {
-    background: url('../assets/transparent-dark.svg');
-  }
+html.dark .visual-transparent-bg {
+  background: url('../assets/transparent-dark.svg');
 }
 
 .visual-transparent-bg {
   background: url('../assets/transparent.svg');
+}
+
+@mixin use-drop-styles($name) {
+  &.is-drag [data-block-key='#{$name}'] .is-empty[data-component-key='#{$name}']::before {
+    background-color: var(--el-color-primary-light-9);
+  }
+}
+
+@mixin use-drop-data-source-styles($name) {
+  &.is-drag[data-source-type='#{$name}'] [data-block-key='#{$name}'] .is-empty[data-component-key='#{$name}']::before {
+    background-color: var(--el-color-primary-light-9);
+  }
 }
 
 .visual-app {
@@ -25,43 +35,6 @@ html.dark {
       }
     }
 
-    &.is-drag {
-      [data-block-key='VisualFlex'] {
-        .is-empty[data-component-key='VisualFlex'] {
-          &::before {
-            background-color: var(--el-color-primary-light-9);
-          }
-        }
-      }
-
-      .is-empty[data-disabled='true'] {
-        &::before {
-          background-color: var(--el-disabled-bg-color) !important;
-          opacity: 0.4 !important;
-        }
-      }
-    }
-
-    &.is-drag[data-source-type='VisualObject'] {
-      [data-block-key='VisualObject'] {
-        .is-empty[data-component-key='VisualObject'] {
-          &::before {
-            background-color: var(--el-color-warning-light-9);
-          }
-        }
-      }
-    }
-
-    &.is-drag[data-source-type='VisualObjectArray'] {
-      [data-block-key='VisualObjectArray'] {
-        .is-empty[data-component-key='VisualObjectArray'] {
-          &::before {
-            background-color: var(--el-color-warning-light-9);
-          }
-        }
-      }
-    }
-
     &[data-component-key='VisualFlex'] {
       display: flex;
     }
@@ -71,64 +44,11 @@ html.dark {
       flex: 1;
     }
 
-    .visual-block {
-      &.is-drop-before,
-      &.is-drop-after {
-        --line-height: 12px;
-
-        transition: all 0.2s;
-      }
-
-      &.is-drop-before {
-        margin-top: var(--line-height);
-      }
-
-      &.is-drop-after {
-        margin-bottom: var(--line-height);
-      }
-
-      &.is-drop-before::before,
-      &.is-drop-after::after {
-        height: 0;
-        transition: all 0.2s;
-      }
-
-      &.is-drop-before::before,
-      &.is-drop-after::after {
-        transition: all 0.2s;
-        position: absolute;
-        right: 0;
-        left: 0;
-        z-index: 30;
-        height: var(--line-height);
-        content: '';
-        background: var(--el-color-primary);
-        pointer-events: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        color: #fff;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      &.is-drop-before::before {
-        top: calc(0px - var(--line-height));
-      }
-      &.is-drop-after::after {
-        bottom: calc(0px - var(--line-height));
-      }
-    }
-
-    &.is-drop-target::after {
-      position: absolute;
-      inset: 0;
-      z-index: 30;
-      border: 2px solid var(--el-color-primary);
-      content: '';
-      pointer-events: none;
-    }
+    @include use-drop-styles('VisualFlex');
+    @include use-drop-styles('VisualTabs');
+    @include use-drop-styles('VisualEventContainer');
+    @include use-drop-styles('VisualAuthGuard');
+    @include use-drop-data-source-styles('VisualObject');
+    @include use-drop-data-source-styles('VisualObjectArray');
   }
 }

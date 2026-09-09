@@ -1,7 +1,7 @@
 <template>
   <el-config-provider :locale="zhCn">
     <div :class="bindClassList" class="visual-stage-container">
-      <visual-stage-bar />
+      <visual-stage-bar :stage-ready="stageReady" :stage-error="stageError" />
       <div class="ve-relative ve-flex-1 ve-flex ve-flex-col">
         <template v-if="activePanel === 'viewJson'">
           <visual-monaco-editor v-model="viewJson" :options="viewJsonOptions" />
@@ -10,7 +10,7 @@
           <visual-monaco-editor :model-value="viewCode" :options="viewCodeOptions" />
         </template>
         <template v-else>
-          <visual-stage-panel />
+          <visual-stage-panel @status-change="handleStageStatusChange" />
         </template>
       </div>
     </div>
@@ -40,6 +40,13 @@ import { resolvePageThemeName, resolveVisualThemeName, visualThemeConfig } from 
 const { toggleRight } = useLayout()
 
 const visualStore = useViusalStore()
+
+const stageReady = ref(false)
+const stageError = ref<string | null>(null)
+const handleStageStatusChange = (status: { ready: boolean; error: string | null }) => {
+  stageReady.value = status.ready
+  stageError.value = status.error
+}
 
 const disabled = computed(() => visualStore.activePanel !== 'design')
 

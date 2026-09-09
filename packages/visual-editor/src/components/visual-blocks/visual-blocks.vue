@@ -13,6 +13,7 @@
     :data-component-key="parentKey"
     :data-disabled="props.disabled"
     :class="{ 'is-empty': isEmpty }"
+    :data-component-name="parentLabel"
     :data-slot="isEmpty ? '组件拖拽到这里' : ''"
     fallback-class="visual-stage-sortable-fallback"
     @start="onStart"
@@ -92,6 +93,7 @@ const getGroupOption = (slot: VisualBlockSlotData) => ({
 })
 
 const parentKey = computed(() => props.parentComponent?.key)
+const parentLabel = computed(() => props.parentComponent?.label)
 const parentProps = computed(() => props.parentComponent?.props)
 const parentStyles = computed(() => props.parentComponent?.styles)
 
@@ -207,6 +209,35 @@ const bindStyle = computed(() => ({
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
+    &::after {
+      content: attr(data-component-name);
+      position: absolute;
+      min-width: 80px;
+      padding: 4px 0;
+      border-radius: 0 0 8px 0;
+      color: var(--el-text-color-secondary);
+      text-align: center;
+      background-color: var(--el-color-info-light-7);
+      font-size: 10px;
+    }
+  }
+
+  &.is-drag .is-empty[data-disabled='true']::before {
+    background-color: var(--el-disabled-bg-color) !important;
+    opacity: 0.4 !important;
+  }
+
+  &.is-drop-target::after {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--el-color-primary);
+    content: '放入这里';
+    pointer-events: none;
   }
 
   .visual-block {
@@ -235,6 +266,55 @@ const bindStyle = computed(() => ({
       outline-style: solid !important;
       outline-width: 2px;
       outline-offset: -2px;
+    }
+
+    &.is-drop-before,
+    &.is-drop-after {
+      --line-height: 12px;
+
+      transition: all 0.2s;
+    }
+
+    &.is-drop-before {
+      margin-top: var(--line-height);
+    }
+
+    &.is-drop-after {
+      margin-bottom: var(--line-height);
+    }
+
+    &.is-drop-before::before,
+    &.is-drop-after::after {
+      height: 0;
+      transition: all 0.2s;
+    }
+
+    &.is-drop-before::before,
+    &.is-drop-after::after {
+      transition: all 0.2s;
+      position: absolute;
+      right: 0;
+      left: 0;
+      z-index: 30;
+      height: var(--line-height);
+      content: '';
+      background: var(--el-color-primary);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.is-drop-before::before {
+      top: calc(0px - var(--line-height));
+    }
+    &.is-drop-after::after {
+      bottom: calc(0px - var(--line-height));
     }
   }
 }

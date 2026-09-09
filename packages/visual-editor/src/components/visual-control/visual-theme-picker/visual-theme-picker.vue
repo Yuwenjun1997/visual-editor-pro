@@ -9,14 +9,16 @@
         </el-button>
       </template>
       <div class="theme-list">
-        <span
-          title="继承应用主题"
-          :class="{ 'is-active': !modelValue }"
-          class="theme-item theme-item--inherit"
-          @click="handleClick(null)"
-        >
-          <Icon icon="bi:link" />
-        </span>
+        <el-tooltip placement="top" content="继承应用主题">
+          <span
+            title="继承应用主题"
+            :class="{ 'is-active': !modelValue }"
+            class="theme-item theme-item--inherit"
+            @click="handleClick(null)"
+          >
+            <Icon icon="bi:link" />
+          </span>
+        </el-tooltip>
         <span
           v-for="(color, theme) in themeMap"
           :key="theme"
@@ -91,15 +93,18 @@ const handleClick = (color: ThemeType | null) => {
 .visual-theme-picker__popover {
   .theme-list {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
 
     .theme-item {
+      padding: 0;
       display: block;
-      width: 100%;
       height: 36px;
+      border: 0;
+      border-radius: 4px;
       outline-offset: -2px;
       cursor: pointer;
+      border: 1px solid var(--el-border-color);
 
       &--inherit {
         display: flex;

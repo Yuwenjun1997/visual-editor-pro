@@ -8,7 +8,7 @@
       </div>
       <div v-else-if="!controller.ready.value" role="status" aria-live="polite" class="visual-stage-loading">
         <div class="visual-stage-loader">
-          <svg aria-hidden="true" focusable="false" tabindex="-1" viewBox="0 0 64 64" class="visual-stage-loader-orbit">
+          <svg tabindex="-1" focusable="false" aria-hidden="true" viewBox="0 0 64 64" class="visual-stage-loader-orbit">
             <circle r="24" cx="32" cy="32" class="visual-stage-loader-track" />
             <circle r="24" cx="32" cy="32" class="visual-stage-loader-arc" />
             <circle r="4" cy="8" cx="32" class="visual-stage-loader-dot" />
@@ -47,6 +47,10 @@ import { usePageConfig } from '../../hooks/usePageConfig'
 import { useViusalStore } from '../../store/useVisual'
 
 defineOptions({ name: 'VisualStagePanel' })
+
+const emit = defineEmits<{
+  (event: 'status-change', payload: { ready: boolean; error: string | null }): void
+}>()
 
 const iframeRef = ref<HTMLIFrameElement>()
 const controller: StageSandboxController = createStageSandboxController(generateNanoid())
@@ -121,6 +125,12 @@ const isEditableTarget = (target: EventTarget | null) => {
   const element = target instanceof HTMLElement ? target : null
   return !!element?.closest('input, textarea, select, [contenteditable="true"], .monaco-editor')
 }
+
+const publishStageStatus = () => {
+  emit('status-change', { ready: controller.ready.value, error: controller.error.value })
+}
+
+watch([controller.ready, controller.error], publishStageStatus, { immediate: true })
 
 onMounted(() => {
   const syncThemeMode = () => {
