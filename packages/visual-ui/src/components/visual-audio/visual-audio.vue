@@ -44,7 +44,7 @@ const innerStyle = computed<CSSProperties>(() => ({
 <style scoped lang="scss">
 .visual-audio {
   --visual-audio-text-1: var(--v-text-1);
-  --visual-audio-primary-1: var(--v-primary-1);
+  --visual-audio-primary-1: var(--v-primary-color);
   .visual-audio__inner {
     width: var(--visual-audio-audio-width, 100%);
   }

@@ -94,7 +94,7 @@ const showMeta = computed(
   --visual-article-detail-text-2: var(--v-text-2);
   --visual-article-detail-text-3: var(--v-text-3);
   --visual-article-detail-gray-2: var(--v-gray-2);
-  --visual-article-detail-primary-1: var(--v-primary-1);
+  --visual-article-detail-primary-1: var(--v-primary-color);
   --visual-article-detail-surface-1: var(--v-white);
   --visual-article-detail-white: var(--v-white);
   --visual-article-detail-font-body: var(--v-font-body);

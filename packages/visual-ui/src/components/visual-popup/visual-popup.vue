@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
   --visual-popup-radius-moody: var(--v-radius-moody, 12px);
   --visual-popup-gradient-primary: var(--v-gradient-primary, linear-gradient(135deg, #4f6ef7 0%, #7c3aed 100%));
   --visual-popup-shadow-soft: var(--v-shadow-soft, 0 8px 24px -12px rgba(79, 110, 247, 0.5));
-  --visual-popup-primary-1: var(--v-primary-1, #4f6ef7);
+  --visual-popup-primary-1: var(--v-primary-color, #4f6ef7);
   --visual-popup-overlay: var(--v-black-opacity-4, rgba(15, 18, 40, 0.6));
   --visual-popup-white: var(--v-white, #ffffff);
   position: fixed;

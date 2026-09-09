@@ -22,8 +22,8 @@ const visualTabs: VisualEditorComponent<VisualTabsProps> = {
         { label: '胶囊', value: 'pill' },
       ],
     }),
-    activeColor: createColorInputControl({ label: '激活色', defaultValue: '#2563EB' }),
-    textColor: createColorInputControl({ label: '文字颜色', defaultValue: '#4B5563' }),
+    activeColor: createColorInputControl({ label: '激活颜色' }),
+    textColor: createColorInputControl({ label: '文字颜色' }),
   },
   listData: {
     label: '页签数据',

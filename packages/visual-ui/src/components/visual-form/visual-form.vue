@@ -109,7 +109,7 @@ const handleSubmit = () => {
   --visual-form-radius-moody-sm: var(--v-radius-moody-sm);
   --visual-form-motion-fast: var(--v-motion-fast);
   --visual-form-ease-soft: var(--v-ease-soft);
-  --visual-form-primary-1: var(--v-primary-1);
+  --visual-form-primary-1: var(--v-primary-color);
   --visual-form-text-3: var(--v-text-3);
   .visual-form__inner {
     display: flex;

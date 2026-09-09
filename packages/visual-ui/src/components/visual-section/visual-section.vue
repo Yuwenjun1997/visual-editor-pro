@@ -57,7 +57,7 @@ const _bindInnerStyles = computed(() => ({
 <style scoped lang="scss">
 .visual-section {
   --visual-section-spacing-sm: var(--v-spacing-sm);
-  --visual-section-primary-1: var(--v-primary-1);
+  --visual-section-primary-1: var(--v-primary-color);
   --visual-section-text-3: var(--v-text-3);
   --visual-section-text-sm: var(--v-text-sm);
   .visual-section__inner {

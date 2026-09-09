@@ -110,7 +110,7 @@ const actionStyle = computed<CSSProperties>(() => ({
 
 <style scoped lang="scss">
 .visual-float-action {
-  --visual-float-action-primary-1: var(--v-primary-1);
+  --visual-float-action-primary-1: var(--v-primary-color);
   --visual-float-action-shadow-soft: var(--v-shadow-soft);
   --visual-float-action-white: var(--v-white);
   position: fixed;

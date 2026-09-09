@@ -45,7 +45,7 @@ const bindClassList = computed(() => ['visual-indicator--' + props.type])
 <style scoped lang="scss">
 .visual-indicator {
   --visual-indicator-gray-2: var(--v-gray-2);
-  --visual-indicator-primary-1: var(--v-primary-1);
+  --visual-indicator-primary-1: var(--v-primary-color);
   --visual-indicator-ease-soft: var(--v-ease-soft);
   --visual-indicator-font-display: var(--v-font-display);
   --visual-indicator-white: var(--v-white);

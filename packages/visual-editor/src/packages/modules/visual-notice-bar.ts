@@ -17,7 +17,7 @@ const visualNoticeBar: VisualEditorComponent<VisualNoticeBarProps> = {
       defaultValue: '10',
     }),
     bgColor: createColorInputControl({ label: '背景颜色' }),
-    textColor: createColorInputControl({ label: '文字颜色', defaultValue: '#ffffff' }),
+    textColor: createColorInputControl({ label: '文字颜色' }),
     radius: createPxInputControl({ label: '圆角大小' }),
   },
 }

@@ -18,7 +18,7 @@ const visualStatCard: VisualEditorComponent<VisualStatCardProps> = {
       defaultValue: '8.5',
     }),
     icon: createIconInputControl({ label: '图标', defaultValue: 'bi:people-fill' }),
-    iconColor: createColorInputControl({ label: '图标颜色', defaultValue: '#ffffff' }),
+    iconColor: createColorInputControl({ label: '图标颜色' }),
     bgColor: createColorInputControl({ label: '背景颜色' }),
     textColor: createColorInputControl({ label: '文字颜色' }),
     deltaColor: createColorInputControl({ label: '环比颜色' }),

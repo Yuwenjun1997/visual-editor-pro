@@ -67,7 +67,7 @@ const handleSubmit = () => {
   --visual-search-primary-2: var(--v-primary-2);
   --visual-search-text-2: var(--v-text-2);
   --visual-search-text-3: var(--v-text-3);
-  --visual-search-primary-1: var(--v-primary-1);
+  --visual-search-primary-1: var(--v-primary-color);
   --visual-search-motion-fast: var(--v-motion-fast);
   --visual-search-ease-soft: var(--v-ease-soft);
   .visual-search__inner {

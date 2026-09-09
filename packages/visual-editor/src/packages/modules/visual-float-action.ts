@@ -29,8 +29,8 @@ const visualFloatAction: VisualEditorComponent<VisualFloatActionProps> = {
       defaultValue: 'customerService',
     }),
     icon: createIconInputControl({ label: '图标', tips: '留空按功能显示默认图标' }),
-    bgColor: createColorInputControl({ label: '背景颜色', defaultValue: '#2563EB' }),
-    textColor: createColorInputControl({ label: '图标颜色', defaultValue: '#ffffff' }),
+    bgColor: createColorInputControl({ label: '背景颜色' }),
+    textColor: createColorInputControl({ label: '图标颜色' }),
     position: createNormalSelectControl({
       label: '位置',
       options: [

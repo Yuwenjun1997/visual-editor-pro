@@ -22,7 +22,7 @@ withDefaults(defineProps<{ label?: string }>(), {
   --visual-detail-empty-state-text-2: var(--v-text-2);
   --visual-detail-empty-state-primary-opacity-6: var(--v-primary-opacity-6);
   --visual-detail-empty-state-shadow-soft: var(--v-shadow-soft);
-  --visual-detail-empty-state-primary-1: var(--v-primary-1);
+  --visual-detail-empty-state-primary-1: var(--v-primary-color);
   --visual-detail-empty-state-text-1: var(--v-text-1);
   display: flex;
   min-height: 120px;

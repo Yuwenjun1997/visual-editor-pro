@@ -72,7 +72,7 @@ const handleClick = (index: number, event: MouseEvent) => {
 
 <style scoped lang="scss">
 .visual-rating {
-  --visual-rating-primary-1: var(--v-primary-1);
+  --visual-rating-primary-1: var(--v-primary-color);
   .visual-rating__stars {
     display: inline-flex;
     gap: 4px;

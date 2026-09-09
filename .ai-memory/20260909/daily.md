@@ -142,3 +142,9 @@
 - **文件**: `apps/web/src/views/admin/apps/components/BasicSettings.vue`
 - **决策**: 将“跟随主题/自定义颜色”作为固定模式选项，避免自定义选项依赖当前颜色值而导致无法从主题色切换；切换到自定义时初始化为当前主题主色，切回主题时保存 `primary-color`。
 - **验证**: `pnpm --filter @visual/editor type-check` 通过；`git diff --check` 通过；Web 类型检查被仓库已有的 `nprogress`、React/Tiptap 缺失依赖阻断；Prettier 未安装无法执行。
+
+## [18:02] - Bug 修复: 修复 visual-tabs 主题色未解析
+
+- **文件**: `packages/visual-ui/src/components/visual-tabs/visual-tabs.vue`
+- **决策**: 使用 `useTheme().colorVar()` 解析页签的激活色与文本色，使 `primary-1`、`text-4` 等主题 token 和自定义颜色均能正确写入 CSS 变量。
+- **验证**: `git diff --check` 通过；变更文件级 Prettier 检查因仓库未安装 `prettier` 无法执行；visual-ui 类型检查被仓库已有 React/Tiptap 与内部 hook 依赖缺失阻断。

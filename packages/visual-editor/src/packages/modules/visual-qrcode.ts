@@ -28,8 +28,8 @@ const visualQRCode: VisualEditorComponent<VisualQRCodeProps> = {
         { label: '高（30%）', value: 'H' },
       ],
     }),
-    fgColor: createColorInputControl({ label: '前景色', defaultValue: '#000000' }),
-    bgColor: createColorInputControl({ label: '背景色', defaultValue: '#ffffff' }),
+    fgColor: createColorInputControl({ label: '前景色' }),
+    bgColor: createColorInputControl({ label: '背景色' }),
   },
 }
 

@@ -67,7 +67,7 @@ const badgeStyle = computed<CSSProperties>(() => ({
   --visual-coupon-gradient-primary: var(--v-gradient-primary);
   --visual-coupon-shadow-soft: var(--v-shadow-soft);
   --visual-coupon-error-1: var(--v-error-1);
-  --visual-coupon-primary-1: var(--v-primary-1);
+  --visual-coupon-primary-1: var(--v-primary-color);
   .visual-coupon__card {
     position: relative;
     display: flex;

@@ -33,7 +33,7 @@ const visualTimeline: VisualEditorComponent<VisualTimelineProps> = {
   souceDataType: 'VisualObjectArray',
   props: {
     showTime: createSwitchControl({ label: '显示时间', defaultValue: true }),
-    lineColor: createColorInputControl({ label: '连线颜色', defaultValue: '#e5e8f2' }),
+    lineColor: createColorInputControl({ label: '连线颜色' }),
   },
   listData: {
     label: '时间轴列表',

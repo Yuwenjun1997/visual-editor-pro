@@ -30,7 +30,7 @@ const visualCustomerService: VisualEditorComponent<VisualCustomerServiceProps> =
     link: createTextInputControl({ label: '跳转链接', tips: '接入方式为「自定义链接」时生效' }),
     iconVisible: createSwitchControl({ label: '显示图标', defaultValue: true }),
     bgColor: createColorInputControl({ label: '背景颜色' }),
-    textColor: createColorInputControl({ label: '文字颜色', defaultValue: '#ffffff' }),
+    textColor: createColorInputControl({ label: '文字颜色' }),
     radius: createPxInputControl({ label: '圆角大小' }),
   },
 }

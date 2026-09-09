@@ -24,6 +24,7 @@ import type { CSSProperties } from 'vue'
 import { TabsRoot, TabsList, TabsTrigger } from 'reka-ui'
 import VisualBox from '../visual-box/visual-box.vue'
 import type { VisualTabItem, VisualTabsProps } from './interface'
+import { useTheme } from '../../hooks/useTheme'
 
 interface Props {
   styles?: Partial<CSSProperties>
@@ -37,14 +38,15 @@ defineOptions({
 })
 
 const _props = defineProps<Props>()
+const { colorVar } = useTheme()
 
 const activeKey = ref('')
 
 const bindVariant = computed(() => _props.props.variant || 'line')
 
 const headerStyle = computed<CSSProperties>(() => ({
-  '--visual-tabs-tabs-active': _props.props.activeColor || 'var(--visual-tabs-primary-1)',
-  '--visual-tabs-tabs-text': _props.props.textColor || 'var(--visual-tabs-text-4)',
+  '--visual-tabs-tabs-active': colorVar(_props.props.activeColor) || 'var(--visual-tabs-primary-1)',
+  '--visual-tabs-tabs-text': colorVar(_props.props.textColor) || 'var(--visual-tabs-text-4)',
 }))
 
 const panes = computed(() => {
@@ -69,7 +71,7 @@ watch(
 
 <style scoped lang="scss">
 .visual-tabs {
-  --visual-tabs-primary-1: var(--v-primary-1);
+  --visual-tabs-primary-1: var(--v-primary-color);
   --visual-tabs-text-4: var(--v-text-4);
   --visual-tabs-gray-2: var(--v-gray-2);
   --visual-tabs-radius-moody-sm: var(--v-radius-moody-sm);
