@@ -5,9 +5,9 @@
         <el-form label-width="110px">
           <el-form-item label="布局方案">
             <el-select v-model="model.layout">
-              <el-option value="card" label="居中品牌卡片" />
-              <el-option value="brand" label="顶部品牌区＋底部表单" />
-              <el-option label="全屏背景＋浮层表单" value="background" />
+              <el-option value="card" label="标准平面布局" />
+              <el-option value="brand" label="品牌头图平面布局" />
+              <el-option label="全屏背景平面布局" value="background" />
             </el-select>
           </el-form-item>
           <el-form-item label="Logo"><ImageUploader v-model="model.logo" /></el-form-item>
