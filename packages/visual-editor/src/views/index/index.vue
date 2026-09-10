@@ -36,7 +36,7 @@ import type { PageSchema } from '../../types/visual-editor'
 import { autoSaveStatus, useAutoSave } from '../../hooks/useAutoSave'
 import { initializeHistory, suspendHistory } from '../../hooks/useHistory'
 import { useTheme } from '@visual/ui/hooks/useTheme'
-import { resolvePageThemeValue, resolveVisualThemeName, visualThemeConfig } from '../../configs/visual-theme'
+import { visualThemeConfig } from '../../configs/visual-theme'
 
 const { toggleRight } = useLayout()
 
@@ -56,7 +56,7 @@ const activePanel = computed(() => visualStore.activePanel)
 const { viewJson, viewJsonOptions, updateViewJson, restoreViewJson } = useViewJson()
 
 const { pageConfig } = usePageConfig()
-const { themeName, baseThemeName, themeConfig, initTheme, setThemeColor } = useTheme()
+const { initTheme } = useTheme()
 
 const { blockList } = useBlocks()
 
@@ -95,7 +95,7 @@ const applyPageSchema = (schema: PageSchema, appId?: string) => {
     appId,
     title: schema.title,
     slug: schema.slug || '',
-    themeName: resolvePageThemeValue(schema.themeName),
+    themeName: null,
     globalStyle: schema.globalStyle || {},
   }
 }
@@ -143,11 +143,7 @@ watch(
     hydrating.value = true
     if (appId && visualConfig.appThemeLoader) {
       const appTheme = await visualConfig.appThemeLoader(appId)
-      initTheme({
-        ...visualThemeConfig,
-        ...(appTheme || {}),
-        theme: { ...visualThemeConfig.theme, ...appTheme?.theme },
-      })
+      initTheme({ ...visualThemeConfig, ...(appTheme || {}) })
     }
     if (!pageId) {
       resetPage()
@@ -189,23 +185,7 @@ watch(
 
 onBeforeUnmount(stopAutoSave)
 
-const bindClassList = computed(() => [
-  pageConfig.value.themeName ? resolveVisualThemeName(pageConfig.value.themeName) : 'inherit',
-  {
-    'visual-disabled': disabled.value,
-  },
-])
-
-watchEffect(() => {
-  const pageTheme = pageConfig.value.themeName
-  if (pageTheme && themeConfig.value.theme[pageTheme]) {
-    themeName.value = pageTheme
-    setThemeColor()
-  } else {
-    themeName.value = baseThemeName.value
-    setThemeColor(pageTheme || undefined)
-  }
-})
+const bindClassList = computed(() => ({ 'visual-disabled': disabled.value }))
 
 watchEffect(() => {
   if (activePanel.value === 'viewJson') {

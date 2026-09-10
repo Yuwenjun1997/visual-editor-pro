@@ -8,16 +8,30 @@
       :before-upload="beforeUpload"
     >
       <div class="image-uploader__trigger">
-        <img v-if="modelValue" alt="封面" :src="modelValue" class="image-uploader__preview" />
+        <el-image
+          v-if="modelValue"
+          ref="imageRef"
+          alt="封面"
+          fit="cover"
+          :src="modelValue"
+          :preview-teleported="true"
+          class="image-uploader__preview"
+          :preview-src-list="[modelValue]"
+        />
+        <div v-if="modelValue" class="image-uploader__actions" @click.stop>
+          <el-button text circle title="预览图片" @click="imageRef?.showPreview()">
+            <Icon icon="ep:zoom-in" />
+          </el-button>
+          <el-button text circle title="删除图片" @click="emitUpdate('')">
+            <Icon icon="ep:delete" />
+          </el-button>
+        </div>
         <div v-else class="image-uploader__placeholder">
           <Icon icon="ep:plus" class="wa-text-2xl placeholder-icon" />
           <span class="wa-mt-1 wa-text-xs placeholder-text">点击上传封面</span>
         </div>
       </div>
     </el-upload>
-    <el-button v-if="modelValue" link size="small" type="danger" class="wa-mt-1" @click="emitUpdate('')">
-      移除图片
-    </el-button>
   </div>
 </template>
 
@@ -37,6 +51,7 @@ const emit = defineEmits<{
 }>()
 
 const modelValue = computed(() => props.modelValue)
+const imageRef = ref<{ showPreview: () => void }>()
 
 const authStore = useAuthStore()
 
@@ -71,6 +86,7 @@ const handleUpload = async (options: { file: File }) => {
 
 <style scoped>
 .image-uploader__trigger {
+  position: relative;
   width: 144px;
   height: 96px;
   border: 1px dashed var(--el-border-color);
@@ -97,7 +113,27 @@ const handleUpload = async (options: { file: File }) => {
 .image-uploader__preview {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+}
+
+.image-uploader__actions {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgb(0 0 0 / 45%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.image-uploader__trigger:hover .image-uploader__actions,
+.image-uploader__trigger:focus-within .image-uploader__actions {
+  opacity: 1;
+}
+
+.image-uploader__actions :deep(.el-button) {
+  margin-left: 0;
 }
 
 .placeholder-icon {

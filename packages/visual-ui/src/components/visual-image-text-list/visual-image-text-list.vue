@@ -6,6 +6,7 @@
         :key="index"
         :data="item"
         class="visual-image-text-item"
+        :background-color="_bindProps.backgroundColor"
         :show-time="_bindProps.showTime"
         :show-author="_bindProps.showAuthor"
         :corver-in-right="_bindProps.coverInRight"

@@ -6,6 +6,7 @@
       :layout="_props.props.layout"
       :show-buy="_props.props.showBuy"
       :show-tag="_props.props.showTag"
+      :background-color="_props.props.backgroundColor"
       :currency="_props.props.currency"
       :button-text="_props.props.buttonText"
     />

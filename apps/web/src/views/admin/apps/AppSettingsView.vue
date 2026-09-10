@@ -18,7 +18,7 @@
           <el-empty v-if="!loading && !editing" description="应用不存在" />
           <BasicSettings v-else-if="editing" v-model="editing" :pages="pages" :page-key="pageKey">
             <el-card>
-              <div class="wa-flex wa-justify-end wa-gap-3">
+              <div class="wa-flex wa-justify-end">
                 <el-button @click="router.push({ name: 'apps' })">取消</el-button>
                 <el-button type="primary" :loading="saving" @click="saveSettings">保存设置</el-button>
               </div>
@@ -29,7 +29,7 @@
       <el-tab-pane name="login" label="登录页面配置">
         <LoginSettings v-if="editing" v-model="editing.login_config">
           <el-card>
-            <div class="wa-flex wa-justify-end wa-gap-3">
+            <div class="wa-flex wa-justify-end">
               <el-button @click="router.push({ name: 'apps' })">取消</el-button>
               <el-button type="primary" :loading="saving" :disabled="!editing" @click="saveSettings">
                 保存设置

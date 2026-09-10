@@ -1,4 +1,6 @@
 export { default as VisualProductItem } from './visual-product-item.vue'
+import type { VisualUrlValue } from '../../types/url'
+
 export interface VisualProductItemData {
   id?: string
   cover?: string
@@ -6,7 +8,7 @@ export interface VisualProductItemData {
   price?: number | string
   originPrice?: number | string
   tag?: string
-  buyLink?: string
+  buyLink?: VisualUrlValue
 }
 export interface VisualProductItemProps {
   data?: VisualProductItemData
@@ -14,6 +16,7 @@ export interface VisualProductItemProps {
   showTag?: boolean
   showBuy?: boolean
   buttonText?: string
+  backgroundColor?: string
   round?: string
   currency?: string
 }

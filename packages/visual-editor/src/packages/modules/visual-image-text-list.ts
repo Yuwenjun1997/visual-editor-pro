@@ -4,6 +4,7 @@ import type {
   VisualImageTextListProps,
 } from '@visual/ui/components/visual-image-text-list/interface'
 import {
+  createColorInputControl,
   createImageInputControl,
   createNormalSelectControl,
   createSwitchControl,
@@ -57,6 +58,7 @@ const VisualImageTextList: VisualEditorComponent<VisualImageTextListProps> = {
       label: '显示时间',
       defaultValue: true,
     }),
+    backgroundColor: createColorInputControl({ label: '背景颜色', defaultValue: 'surface-color' }),
     gutter: createNormalSelectControl({
       label: '间距',
       options: [

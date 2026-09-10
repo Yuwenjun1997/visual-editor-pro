@@ -10,11 +10,7 @@ export const setupVisual = (
   options: CustomThemeConfig = visualThemeConfig,
   runtime: { mountTheme?: boolean } = {},
 ) => {
-  app.use(VisualComponents, {
-    ...visualThemeConfig,
-    ...options,
-    theme: { ...visualThemeConfig.theme, ...options.theme },
-  })
-  if (runtime.mountTheme) mountThemeToRoot()
+  app.use(VisualComponents, { ...visualThemeConfig, ...options })
+  if (runtime.mountTheme) app.onUnmount(mountThemeToRoot())
   setupMonaco()
 }

@@ -98,7 +98,7 @@ export const appService = {
         name: payload.name,
         slug,
         layout_config: DEFAULT_LAYOUT,
-        theme_config: { themeName: 'theme-blue' },
+        theme_config: { primary: '#4F46E5' },
       })
       .select()
       .single()

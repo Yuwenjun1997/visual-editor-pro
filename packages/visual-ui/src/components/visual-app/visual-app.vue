@@ -1,13 +1,12 @@
 <template>
-  <div class="visual-app" :class="[_bindClassList, _props.class]">
+  <div class="visual-app" :class="_props.class">
     <slot />
     <Sonner />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useTheme } from '../../hooks/useTheme'
+import { computed, onBeforeUnmount } from 'vue'
 import { useSafeArea } from '../../hooks/useSafeArea'
 import { mountThemeToRoot } from '../../hooks/useMountThemeToRoot'
 import Sonner from '../../deps/toast/sonner.vue'
@@ -21,22 +20,19 @@ const _props = withDefaults(defineProps<VisualAppProps>(), {
   safeAreaBottom: true,
 })
 
-const { themeName } = useTheme()
-
 const { bottom } = useSafeArea()
 
 const _safeAreaBottom = computed(() => (_props.safeAreaBottom ? bottom.value : 0))
 
 // 主题 CSS 变量只挂到当前文档的 <html>，iframe 内的组件不会把主题变量写回宿主页面。
-mountThemeToRoot({
+const stopThemeMount = mountThemeToRoot({
   textColor: () => _props.textColor,
   bgColor: () => _props.bgColor,
   safeAreaBottom: () => _safeAreaBottom.value,
 })
 
-const _bindClassList = computed(() => ({
-  [themeName.value]: true,
-}))
+onBeforeUnmount(stopThemeMount)
+
 </script>
 
 <style lang="scss">

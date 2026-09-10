@@ -1,60 +1,69 @@
 import { watchEffect } from 'vue'
 import { useTheme } from './useTheme'
-import { getThemeCssVariableValue } from '../utils/theme-utils'
+import { serializeThemeCssVariables, toThemeCssVariable } from '../utils/theme-utils'
+
+type ThemeRootValue<T> = T | (() => T)
 
 export interface MountThemeToRootOptions {
   /** 字体颜色 */
-  textColor?: string | undefined | (() => string | undefined)
+  textColor?: ThemeRootValue<string | undefined>
   /** 页面背景色：字面色值或主题 key（同 VisualAppProps.bgColor），传 getter 以保持响应式 */
-  bgColor?: string | undefined | (() => string | undefined)
-  /** 底部安全区高度（px），传 getter 以保持响应式 */
-  safeAreaBottom?: string | number | (() => string | number)
+  bgColor?: ThemeRootValue<string | undefined>
+  /** 底部安全区高度；数字会自动转换为 px，字符串保留为合法 CSS 长度。 */
+  safeAreaBottom?: ThemeRootValue<string | number | undefined>
+}
+
+const getOptionValue = <T>(value: ThemeRootValue<T> | undefined) =>
+  typeof value === 'function' ? (value as () => T)() : value
+
+const toCssLength = (value: string | number) => (typeof value === 'number' ? `${value}px` : value)
+
+const clearDynamicRootVariables = (root: HTMLElement) => {
+  root.style.removeProperty('--v-text-color')
+  root.style.removeProperty('--v-page-background-color')
+  root.style.removeProperty('--v-safe-area-bottom')
 }
 
 /**
- * 将视觉库的 `--v-*` 主题变量挂载到 documentElement。
- * 无参调用只挂 `--v-*` 主题变量（供 `.visual-app` 之外的编辑面板/teleport 弹层取用）；
- * 传入 `bgColor`/`safeAreaBottom` 时额外挂载 `--v-bg-color` 与 `--v-safe-area-bottom`。
+ * 将当前主题发布到 documentElement。返回的停止函数应在宿主卸载时调用，
+ * 以释放 watcher 和页面级动态变量；服务端渲染时保持无副作用。
  */
 export const mountThemeToRoot = (options: MountThemeToRootOptions = {}) => {
-  const { currentTheme, darkTheme, colorVar } = useTheme()
-  watchEffect(() => {
-    // 公开端会在 Nuxt SSR 中使用 visual-ui；服务端没有 document，主题变量会在 hydration 后挂载。
+  const { currentTheme, darkTheme } = useTheme()
+  const stop = watchEffect(() => {
     if (typeof document === 'undefined') return
     const theme = currentTheme.value
     if (!theme) return
+
     const root = document.documentElement
-    const toCss = (values: Record<string, string>) =>
-      Object.entries(values)
-        .filter(([key]) => key !== 'text-color' && key !== 'page-background-color')
-        .map(([key, value]) => `--v-${key}:${getThemeCssVariableValue(key, String(value))};`)
-        .join('')
     let style = document.head.querySelector<HTMLStyleElement>('style[data-visual-theme]')
     if (!style) {
       style = document.createElement('style')
       style.dataset.visualTheme = ''
       document.head.appendChild(style)
     }
-    style.textContent = `:root{${toCss(theme)}}html.dark{${toCss(darkTheme.value)}}`
 
-    const textColor = typeof options.textColor === 'function' ? options.textColor() : options.textColor
-    if (textColor !== undefined) {
-      root.style.setProperty('--v-text-color', colorVar(textColor) || 'inherit')
-    } else {
-      root.style.removeProperty('--v-text-color')
-    }
+    const themeContent = `:root{${serializeThemeCssVariables(theme)}}`
+    const darkThemeContent = `html.dark{${serializeThemeCssVariables(darkTheme.value || theme)}}`
 
-    const bgColor = typeof options.bgColor === 'function' ? options.bgColor() : options.bgColor
+    style.textContent = themeContent + darkThemeContent
+
+    const textColor = getOptionValue(options.textColor)
+    if (textColor !== undefined) root.style.setProperty('--v-text-color', toThemeCssVariable(textColor) || 'inherit')
+    else root.style.removeProperty('--v-text-color')
+
+    const bgColor = getOptionValue(options.bgColor)
     if (bgColor !== undefined) {
-      root.style.setProperty('--v-page-background-color', colorVar(bgColor) || 'transparent')
-    } else {
-      root.style.removeProperty('--v-page-background-color')
-    }
+      root.style.setProperty('--v-page-background-color', toThemeCssVariable(bgColor) || 'transparent')
+    } else root.style.removeProperty('--v-page-background-color')
 
-    const safeAreaBottom =
-      typeof options.safeAreaBottom === 'function' ? options.safeAreaBottom() : options.safeAreaBottom
-    if (safeAreaBottom !== undefined) {
-      root.style.setProperty('--v-safe-area-bottom', `${safeAreaBottom}px`)
-    }
+    const safeAreaBottom = getOptionValue(options.safeAreaBottom)
+    if (safeAreaBottom !== undefined) root.style.setProperty('--v-safe-area-bottom', toCssLength(safeAreaBottom))
+    else root.style.removeProperty('--v-safe-area-bottom')
   })
+
+  return () => {
+    stop()
+    if (typeof document !== 'undefined') clearDynamicRootVariables(document.documentElement)
+  }
 }

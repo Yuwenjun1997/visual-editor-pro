@@ -35,8 +35,10 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import { formatPrice } from '../../utils/format'
+import { useTheme } from '../../hooks/useTheme'
 import type { VisualProductItemProps } from './interface'
 import { useH5Runtime, useH5RuntimeContext } from '../../hooks/useH5Runtime'
+import { navigateVisualUrl, normalizeVisualUrl } from '../../utils/url'
 
 defineOptions({
   name: 'VisualProductItem',
@@ -48,6 +50,7 @@ const _props = withDefaults(defineProps<VisualProductItemProps>(), {
   showTag: true,
   showBuy: true,
   buttonText: '购买',
+  backgroundColor: 'surface-color',
   round: '',
   currency: '¥',
 })
@@ -64,16 +67,16 @@ const originPriceText = computed(() => {
 })
 
 const href = computed(() => {
-  const link = _props.data?.buyLink
-  if (!link) return undefined
-  return link
+  return normalizeVisualUrl(_props.data?.buyLink)?.url
 })
 const runtime = useH5Runtime()
 const runtimeContext = useH5RuntimeContext()
+const { colorVar } = useTheme()
 
 const handleClick = (event: MouseEvent) => {
   event.preventDefault()
-  if (href.value) runtime.$navigateTo(href.value)
+  const target = normalizeVisualUrl(_props.data?.buyLink)
+  if (target?.url) navigateVisualUrl(target, runtime)
   else
     runtime.$emit(
       'product:click',
@@ -83,6 +86,7 @@ const handleClick = (event: MouseEvent) => {
 }
 
 const itemStyle = computed<CSSProperties>(() => ({
+  '--visual-product-item-background': colorVar(_props.backgroundColor || 'surface-color'),
   '--visual-product-item-product-radius': _props.round || undefined,
 }))
 </script>
@@ -90,14 +94,15 @@ const itemStyle = computed<CSSProperties>(() => ({
 <style scoped lang="scss">
 .visual-product-item {
   --visual-product-item-error-1: var(--v-error-1);
-  --visual-product-item-text-1: var(--v-text-1);
-  --visual-product-item-text-3: var(--v-text-3);
+  --visual-product-item-text-1: var(--v-text-color);
+  --visual-product-item-text-3: var(--v-text-color);
+  --visual-product-item-white: var(--v-white);
   --visual-product-item-gradient-primary: var(--v-gradient-primary);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border-radius: var(--visual-product-item-product-radius);
-  background: #fff;
+  background: var(--visual-product-item-background, var(--v-surface-color));
 
   &--horizontal {
     flex-direction: row;
@@ -132,7 +137,8 @@ const itemStyle = computed<CSSProperties>(() => ({
       align-items: center;
       justify-content: center;
       font-size: 28px;
-      color: #c2c9d9;
+      color: var(--visual-product-item-text-1);
+      opacity: 0.4;
     }
   }
 
@@ -146,8 +152,8 @@ const itemStyle = computed<CSSProperties>(() => ({
     font-size: 11px;
     font-weight: 700;
     line-height: 1;
-    background: var(--visual-product-item-error-1, #ff5c7a);
-    color: #fff;
+    background: var(--visual-product-item-error-1);
+    color: var(--visual-product-item-white);
   }
 
   .visual-product-item__info {
@@ -164,7 +170,7 @@ const itemStyle = computed<CSSProperties>(() => ({
     overflow: hidden;
     font-size: 14px;
     line-height: 1.4;
-    color: var(--visual-product-item-text-1, #2b2f3a);
+    color: var(--visual-product-item-text-1);
     text-decoration: none;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -188,14 +194,15 @@ const itemStyle = computed<CSSProperties>(() => ({
   .visual-product-item__price {
     font-size: 18px;
     font-weight: 700;
-    color: var(--visual-product-item-error-1, #ff5c7a);
+    color: var(--visual-product-item-error-1);
     font-variant-numeric: tabular-nums;
   }
 
   .visual-product-item__origin {
     flex-shrink: 0;
     font-size: 12px;
-    color: var(--visual-product-item-text-3, #b3bac7);
+    color: var(--visual-product-item-text-3);
+    opacity: 0.6;
     text-decoration: line-through;
   }
 
@@ -207,7 +214,7 @@ const itemStyle = computed<CSSProperties>(() => ({
     font-weight: 600;
     line-height: 1;
     background: var(--visual-product-item-gradient-primary);
-    color: #fff;
+    color: var(--visual-product-item-white);
   }
 }
 </style>

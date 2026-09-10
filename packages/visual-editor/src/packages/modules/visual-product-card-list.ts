@@ -4,6 +4,7 @@ import type {
   VisualProductCardListProps,
 } from '@visual/ui/components/visual-product-card-list/interface'
 import {
+  createColorInputControl,
   createImageInputControl,
   createNormalSelectControl,
   createNumberInputControl,
@@ -66,6 +67,7 @@ const visualProductCardList: VisualEditorComponent<VisualProductCardListProps> =
     }),
     showTag: createSwitchControl({ label: '显示角标', defaultValue: true }),
     showBuy: createSwitchControl({ label: '显示购买按钮', defaultValue: true }),
+    backgroundColor: createColorInputControl({ label: '背景颜色', defaultValue: 'surface-color' }),
     buttonText: createTextInputControl({ label: '按钮文案', defaultValue: '立即购买' }),
     round: createPxInputControl({ label: '圆角大小' }),
     currency: createTextInputControl({ label: '货币符号', defaultValue: '¥' }),

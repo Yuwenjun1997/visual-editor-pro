@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
   --visual-author-spacing-xs: var(--v-spacing-xs);
   --visual-author-text-md: var(--v-text-md);
   --visual-author-text-sm: var(--v-text-sm);
-  --visual-author-text-3: var(--v-text-3);
+  --visual-author-text-3: var(--v-text-color);
   --components-spacing-xs: var(--visual-author-spacing-xs);
   --components-text-md: var(--visual-author-text-md);
   --components-text-sm: var(--visual-author-text-sm);
@@ -41,6 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
   &__name {
     font-size: var(--components-text-sm);
     color: var(--components-text-3);
+    opacity: 0.6;
   }
 }
 </style>

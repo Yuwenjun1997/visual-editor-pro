@@ -1,5 +1,5 @@
 <template>
-  <a :href="href" class="visual-image-text-two" @click="handleClick">
+  <a :href="href" :style="cardStyle" class="visual-image-text-two" @click="handleClick">
     <div class="visual-image-text__cover">
       <img :src="_props.data.cover" />
     </div>
@@ -20,24 +20,33 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
+import { useTheme } from '../../../hooks/useTheme'
 import type { VisualImageTextCardItem } from '../interface'
 import VisualAuthor from './visual-author.vue'
 import VisualTime from './visual-time.vue'
 import { useH5Runtime, useH5RuntimeContext } from '../../../hooks/useH5Runtime'
+import { navigateVisualUrl, normalizeVisualUrl } from '../../../utils/url'
 
 interface Props {
+  backgroundColor?: string
   showAuthor?: boolean
   showTime?: boolean
   data: VisualImageTextCardItem
 }
 
 const _props = defineProps<Props>()
+const { colorVar } = useTheme()
 const runtime = useH5Runtime()
 const runtimeContext = useH5RuntimeContext()
-const href = computed(() => _props.data.link)
+const href = computed(() => normalizeVisualUrl(_props.data.link)?.url)
+const cardStyle = computed<CSSProperties>(() => ({
+  '--visual-image-text-one-surface-1': colorVar(_props.backgroundColor || 'surface-color'),
+}))
 const handleClick = (event: MouseEvent) => {
   event.preventDefault()
-  if (href.value) runtime.$navigateTo(href.value)
+  const target = normalizeVisualUrl(_props.data.link)
+  if (target?.url) navigateVisualUrl(target, runtime)
   else
     runtime.$emit(
       'article:click',
@@ -51,7 +60,8 @@ const handleClick = (event: MouseEvent) => {
 @use '../../../assets/scss/utils/index.scss' as *;
 
 .visual-image-text-two {
-  --visual-image-text-one-surface-1: var(--v-white);
+  --visual-image-text-one-surface-1: var(--v-surface-color);
+  --visual-image-text-one-text-color: var(--v-text-color);
   --visual-image-text-one-text-md: var(--v-text-md);
   --visual-image-text-one-spacing-md: var(--v-spacing-md);
   --visual-image-text-one-spacing-sm: var(--v-spacing-sm);
@@ -64,6 +74,7 @@ const handleClick = (event: MouseEvent) => {
   display: flex;
   flex-direction: column;
   background-color: var(--components-surface-1);
+  color: var(--visual-image-text-one-text-color);
   font-size: var(--components-text-md);
 
   .visual-image-text__cover {

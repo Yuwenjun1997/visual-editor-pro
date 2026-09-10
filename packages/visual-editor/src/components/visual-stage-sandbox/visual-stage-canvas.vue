@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, watch } from 'vue'
+import { onBeforeUnmount, onMounted, toRaw, watch } from 'vue'
 import VisualStageCanvasContent from '../visual-stage-panel/visual-stage-canvas-content.vue'
 import {
   clearDropPreview,
@@ -26,7 +26,6 @@ import { generateNanoid } from '../../utils/visual.utils'
 import { useViusalStore } from '../../store/useVisual'
 import { useBlocks } from '../../hooks/useBlocks'
 import { usePageConfig } from '../../hooks/usePageConfig'
-import { useTheme } from '@visual/ui/hooks/useTheme'
 import { useH5Runtime } from '@visual/ui/hooks/useH5Runtime'
 import type { VisualBlockData } from '../../types/visual-editor'
 import { createStageSelectionSync } from './stage-selection-sync'
@@ -35,7 +34,6 @@ const editorInstanceId = new URLSearchParams(window.location.search).get('editor
 const visualStore = useViusalStore()
 const { blockList } = useBlocks()
 const { pageConfig } = usePageConfig()
-const { themeName, baseThemeName, themeConfig, setThemeColor } = useTheme()
 const runtime = useH5Runtime()
 let revision = 0
 let sequence = 0
@@ -182,16 +180,14 @@ const onMessage = (event: MessageEvent<unknown>) => {
   } else if (message.type === 'stage-state-sync') {
     if (!selectionSync.shouldApplyState(message.baseRevision)) return
     revision = message.baseRevision
-    blockList.value = message.payload.blocks
-    pageConfig.value = message.payload.pageConfig as typeof pageConfig.value
-    const pageTheme = message.payload.pageConfig.themeName
-    if (pageTheme && themeConfig.value.theme[pageTheme]) {
-      themeName.value = pageTheme
-      setThemeColor()
-    } else {
-      themeName.value = baseThemeName.value
-      setThemeColor(pageTheme || undefined)
+    // Selection changes also trigger a state sync from the parent editor. Keep
+    // the iframe's locally resolved data when the block schema itself did not
+    // change; replacing the block tree remounts data components and clears
+    // their resolved managed data.
+    if (JSON.stringify(toRaw(blockList.value)) !== JSON.stringify(message.payload.blocks)) {
+      blockList.value = message.payload.blocks
     }
+    pageConfig.value = message.payload.pageConfig as typeof pageConfig.value
     visualStore.setDevice(message.payload.device)
     visualStore.activePanel = message.payload.activePanel
     runtime.$setEditorPreviewIdentity?.(message.payload.previewIdentity)

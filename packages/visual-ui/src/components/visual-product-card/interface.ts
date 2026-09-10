@@ -10,6 +10,7 @@ export interface VisualProductCardProps {
   layout?: 'vertical' | 'horizontal'
   showTag?: boolean
   showBuy?: boolean
+  backgroundColor?: string
   round?: string
   currency?: string
 }

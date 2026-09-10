@@ -4,6 +4,7 @@ import type {
   VisualImageTextCardProps,
 } from '@visual/ui/components/visual-image-text-card/interface'
 import {
+  createColorInputControl,
   createImageInputControl,
   createNormalSelectControl,
   createPxInputControl,
@@ -76,6 +77,7 @@ const VisualImageTextCard: VisualEditorComponent<VisualImageTextCardProps> = {
       defaultValue: 'simple',
     }),
     coverHeight: createPxInputControl({ label: '封面高度' }),
+    backgroundColor: createColorInputControl({ label: '背景颜色', defaultValue: 'surface-color' }),
     gutter: createNormalSelectControl({
       label: '间距',
       options: [

@@ -9,6 +9,7 @@
             class="visual-image-text-item"
             :show-time="_bindProps.showTime"
             :show-author="_bindProps.showAuthor"
+            :background-color="_bindProps.backgroundColor"
           ></component>
         </div>
       </visual-scroll-x>
@@ -21,6 +22,7 @@
           class="visual-image-text-item"
           :show-time="_bindProps.showTime"
           :show-author="_bindProps.showAuthor"
+          :background-color="_bindProps.backgroundColor"
         ></component>
       </div>
     </div>

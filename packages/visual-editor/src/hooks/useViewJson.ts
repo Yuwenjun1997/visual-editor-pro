@@ -3,7 +3,6 @@ import { useBlocks } from './useBlocks'
 import { usePageConfig, type PageConfig } from './usePageConfig'
 import { formatVisualBlockData } from '../utils/visual.utils'
 import { ElNotification } from 'element-plus'
-import { resolvePageThemeValue } from '../configs/visual-theme'
 
 interface ViewJsonData extends PageConfig {
   blocks: VisualBlockData[]
@@ -12,7 +11,7 @@ interface ViewJsonData extends PageConfig {
 const createViewJsonData = (jsonData: Partial<ViewJsonData>): ViewJsonData => ({
   pageId: jsonData.pageId || '',
   title: jsonData.title || '',
-  themeName: resolvePageThemeValue(jsonData.themeName),
+  themeName: null,
   globalStyle: Object.assign({}, jsonData.globalStyle || {}),
   blocks: (jsonData.blocks || []).map((block) => formatVisualBlockData(block)),
 })

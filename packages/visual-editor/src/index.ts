@@ -6,14 +6,7 @@ export { default as DevScenario } from './views/dev/index.vue'
 export { default as VisualStageCanvas } from './components/visual-stage-sandbox/visual-stage-canvas.vue'
 
 export { setupVisual } from './plugins/visual-components'
-export {
-  DEFAULT_VISUAL_THEME,
-  VISUAL_THEME_PRESETS,
-  resolveVisualThemeName,
-  resolvePageThemeName,
-  visualThemeConfig,
-  type VisualThemeName,
-} from './configs/visual-theme'
+export { visualThemeConfig } from './configs/visual-theme'
 export { registryComponent, visualConfig } from './utils/visual.registry'
 export { default as visualComponents } from './packages'
 

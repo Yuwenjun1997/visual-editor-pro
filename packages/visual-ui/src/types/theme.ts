@@ -6,24 +6,20 @@ export interface ThemeColors {
   [key: string]: string
 }
 
+/** 已展开、可直接写入 CSS 变量的主题 token。 */
+export type ThemeTokens = Record<string, string>
+
 export interface ThemeSelection {
-  themeName?: string | null
   primary?: string
   textColor?: string
 }
 
 export interface ThemeConfig {
-  themeName: string
-  theme: {
-    [key: string]: Record<string, string>
-  }
+  light: ThemeTokens
+  dark: ThemeTokens
 }
 
 export interface CustomThemeConfig {
-  themeName?: string | null
   primary?: string
   textColor?: string
-  theme?: {
-    [key: string]: ThemeColors
-  }
 }

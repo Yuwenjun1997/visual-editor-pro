@@ -1,6 +1,8 @@
 <template>
   <div class="visual-url-input">
-    <el-button class="ve-w-full" @click="open">{{ summary }}</el-button>
+    <el-tooltip :content="detailLabel" placement="top" :disabled="!details">
+      <el-button class="ve-w-full" @click="open">{{ summary }}</el-button>
+    </el-tooltip>
     <el-dialog v-model="visible" width="520px" append-to-body title="选择跳转链接" @closed="reset">
       <el-radio-group v-model="draft.mode">
         <el-radio-button value="global-page">全局页面</el-radio-button>
@@ -38,14 +40,28 @@ const model = defineModel<VisualUrl | string | undefined>()
 const visible = ref(false)
 const loading = ref(false)
 const options = ref<VisualUrlPageOption[]>([])
+const displayOptions = ref<VisualUrlPageOption[]>([])
 const { pageConfig } = usePageConfig()
 const draft = reactive<VisualUrl>({ mode: 'external', url: '' })
 const appId = computed(() => pageConfig.value.appId)
 const summary = computed(() => {
   const target = normalizeVisualUrl(model.value)
   if (!target?.url) return '选择跳转链接'
-  const label = target.mode === 'global-page' ? '全局页面' : target.mode === 'app-page' ? '应用内页面' : '外部 URL'
-  return `${label}：${target.url}`
+  return target.mode === 'global-page' ? '全局页面' : target.mode === 'app-page' ? '应用内页面' : '外部 URL'
+})
+const details = computed(() => normalizeVisualUrl(model.value)?.url || '')
+const detailLabel = computed(() => {
+  const target = normalizeVisualUrl(model.value)
+  if (!target?.url) return ''
+  const option = [...options.value, ...displayOptions.value].find((item) => item.value === target.url)
+  if (option) return option.label
+  if (target.mode === 'app-page') {
+    if (target.url === 'product-detail') return '商品详情'
+    if (target.url === 'article-detail') return '文章详情'
+    if (target.url === 'profile') return '个人中心'
+    if (target.url === appId.value) return '首页'
+  }
+  return target.url
 })
 
 const loadOptions = async () => {
@@ -53,12 +69,14 @@ const loadOptions = async () => {
   if (!provider || draft.mode === 'external') return (options.value = [])
   loading.value = true
   try {
-    options.value =
+    const nextOptions =
       draft.mode === 'global-page'
         ? await provider.listGlobalPages()
         : appId.value
           ? await provider.listAppPages(appId.value)
           : []
+    options.value = nextOptions
+    displayOptions.value = nextOptions
   } finally {
     loading.value = false
   }
@@ -88,4 +106,11 @@ const confirm = () => {
 const reset = () => {
   options.value = []
 }
+
+onMounted(async () => {
+  const current = normalizeVisualUrl(model.value)
+  if (!current || current.mode === 'external') return
+  draft.mode = current.mode
+  await loadOptions()
+})
 </script>

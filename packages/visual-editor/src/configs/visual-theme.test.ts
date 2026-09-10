@@ -1,13 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { visualTemplates } from '../layout/components/visual-templates/templates'
 import visualComponents from '../packages'
-import {
-  DEFAULT_VISUAL_THEME,
-  VISUAL_THEME_PRESETS,
-  resolvePageThemeName,
-  resolveVisualThemeName,
-} from './visual-theme'
-import { getThemeCssVariableValue, initThemeConfig, resolveColorValue, resolveThemeName, useTheme } from '@visual/ui'
+import { visualThemeConfig } from './visual-theme'
+import { initThemeConfig, resolveColorValue, serializeThemeCssVariables, useTheme } from '@visual/ui'
 
 const collectBlocks = (blocks: Array<Record<string, any>>): Array<Record<string, any>> =>
   blocks.flatMap((block) => [
@@ -16,52 +11,48 @@ const collectBlocks = (blocks: Array<Record<string, any>>): Array<Record<string,
   ])
 
 describe('visual themes', () => {
-  it('exposes five presets and resolves legacy names', () => {
-    expect(Object.keys(VISUAL_THEME_PRESETS)).toHaveLength(5)
-    expect(resolveVisualThemeName()).toBe(DEFAULT_VISUAL_THEME)
-    expect(resolveVisualThemeName('theme-blue')).toBe('theme-blue')
-    expect(resolveVisualThemeName('theme-yellow')).toBe('theme-orange')
-    expect(resolveVisualThemeName('theme-cyan')).toBe('theme-green')
-    expect(resolveVisualThemeName('unknown-theme')).toBe(DEFAULT_VISUAL_THEME)
-    expect(resolvePageThemeName()).toBeNull()
-    expect(resolvePageThemeName('inherit')).toBeNull()
+  it('creates exactly one light and dark theme from the configured primary color', () => {
+    const config = initThemeConfig({ primary: '#123456' })
+
+    expect(Object.keys(config)).toEqual(['light', 'dark'])
+    expect(config.light['primary-1']).toBe('#123456')
+    expect(config.dark['primary-2']).not.toBe(config.light['primary-2'])
+    expect(resolveColorValue('primary-color', config.light)).toBe('#123456')
   })
 
-  it('creates semantic variables and supports an application primary override', () => {
-    const config = initThemeConfig({ themeName: 'theme-blue', primary: '#123456', textColor: '#111827' })
-    const theme = config.theme['theme-blue']
-    expect(theme?.['primary-color']).toBe('#123456')
-    expect(theme?.['text-color']).toBeTruthy()
-    expect(theme?.['text-1']).toBe('#111827')
-    expect(config.theme['theme-blue-dark']?.['primary-2']).not.toBe(theme?.['primary-2'])
-    expect(resolveThemeName('theme-blue', config.theme)).toBe('theme-blue')
-    expect(resolveColorValue('primary-color', theme || {})).toBe('#123456')
-    expect(resolveColorValue('#fff', theme || {})).toBe('#fff')
+  it('provides card fill and text defaults for both modes', () => {
+    const config = initThemeConfig()
+
+    expect(config.light['surface-color']).toBe('#FFFFFF')
+    expect(config.dark['surface-color']).toBe('#1F2937')
+    expect(config.light['border-color']).toBe('#E5E7EB')
+    expect(config.dark['border-color']).toBe('#374151')
+    expect(config.light['text-color']).toBe('#1F2937')
+    expect(config.dark['text-color']).toBe('#F9FAFB')
+    expect(Object.keys(config.light).some((key) => /^text-(?:[1-6]|opacity-)/.test(key))).toBe(false)
   })
 
-  it('maps semantic css variables to the existing theme tokens', () => {
-    expect(getThemeCssVariableValue('primary-color', '#123456')).toBe('var(--v-primary-1)')
-    expect(getThemeCssVariableValue('background-color', '#f8fafc')).toBe('var(--v-gray-1)')
-    expect(getThemeCssVariableValue('surface-color', '#ffffff')).toBe('var(--v-white)')
-    expect(getThemeCssVariableValue('border-color', '#e5e7eb')).toBe('var(--v-gray-2)')
-    expect(getThemeCssVariableValue('bg-color', '#f8fafc')).toBe('var(--v-background-color)')
-    expect(getThemeCssVariableValue('custom-color', '#123456')).toBe('#123456')
+  it('serializes each mode with its own card fill token', () => {
+    const config = initThemeConfig()
+    expect(serializeThemeCssVariables(config.light)).not.toContain('--v-fill-color:')
+    expect(serializeThemeCssVariables(config.dark)).toContain('--v-surface-color:#1F2937;')
   })
 
-  it('keeps transparent as a literal CSS color value', () => {
-    expect(useTheme().colorVar('transparent')).toBe('transparent')
-    expect(useTheme().colorVar('text-color')).toBe('var(--v-text-1)')
+  it('updates both token sets when the application theme changes', () => {
+    const { currentTheme, darkTheme, initTheme } = useTheme()
+    initTheme({ primary: '#123456' })
+    expect(currentTheme.value['primary-1']).toBe('#123456')
+    expect(darkTheme.value['primary-1']).toBe('#123456')
+    initTheme(visualThemeConfig)
   })
 })
 
 describe('built-in templates', () => {
-  it('has valid themes and registered nested blocks', () => {
+  it('has registered nested blocks without applying template theme names', () => {
     const registeredKeys = new Set(Object.values(visualComponents).map((component: any) => component.key))
 
     expect(visualTemplates).toHaveLength(6)
     visualTemplates.forEach((template) => {
-      expect(template.theme?.themeName).toBeTruthy()
-      expect(resolveVisualThemeName(template.theme?.themeName)).toBe(template.theme?.themeName)
       collectBlocks(template.blocks).forEach((block) => {
         expect(registeredKeys.has(block.key)).toBe(true)
         expect(block.componentName).toBeTruthy()

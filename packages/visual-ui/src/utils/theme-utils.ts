@@ -1,164 +1,167 @@
-import type { ThemeColors } from '../types/theme'
+import type { CustomThemeConfig, ThemeColors, ThemeConfig, ThemeTokens } from '../types/theme'
+import { isColorCode } from './validate'
 
-export const semanticThemeVariableAliases: Record<string, string> = {
+export const semanticThemeVariableAliases = {
   'primary-color': 'primary-1',
-  'text-color': 'text-1',
   'background-color': 'gray-1',
   'bg-color': 'background-color',
-  'surface-color': 'white',
-  'border-color': 'gray-2',
+  'card-background-color': 'surface-color',
   'success-color': 'success-1',
   'warning-color': 'warning-1',
   'error-color': 'error-1',
   'info-color': 'info-1',
+} as const
+
+export const DEFAULT_THEME_COLORS: ThemeColors = {
+  primary: '#2563EB',
+  warning: '#D97706',
+  success: '#0F9D6E',
+  error: '#E5484D',
+  info: '#0284C7',
 }
 
+export const DEFAULT_LIGHT_TEXT_COLOR = '#1F2937'
+export const DEFAULT_DARK_TEXT_COLOR = '#F9FAFB'
+export const DEFAULT_LIGHT_CARD_COLOR = '#FFFFFF'
+export const DEFAULT_DARK_CARD_COLOR = '#1F2937'
+export const DEFAULT_LIGHT_BORDER_COLOR = '#E5E7EB'
+export const DEFAULT_DARK_BORDER_COLOR = '#374151'
+
+const constantThemeColors: Record<string, string> = {
+  white: '#ffffff',
+  black: '#101010',
+  gray: '#E5E7EB',
+}
+
+const rootDynamicThemeKeys = new Set(['page-background-color', 'safe-area-bottom'])
+
 export const getThemeCssVariableValue = (key: string, value: string) => {
-  const alias = semanticThemeVariableAliases[key]
+  const alias = semanticThemeVariableAliases[key as keyof typeof semanticThemeVariableAliases]
   return alias ? `var(--v-${alias})` : String(value)
 }
 
-/**
- * 使颜色变暗的函数
- * @param {string} color - 要调整的颜色，以#RRGGBB格式
- * @param {number} percent - 调整的百分比
- * @returns {string} - 变暗后的颜色，以#RRGGBB格式
- */
+export const isLiteralThemeColor = (value: string) =>
+  isColorCode(value) ||
+  value === 'transparent' ||
+  value === 'inherit' ||
+  value.includes('(') ||
+  value.includes('gradient')
+
+export const resolveThemeColorValue = (value: string | undefined, theme: ThemeTokens) => {
+  if (!value) return undefined
+  if (isLiteralThemeColor(value)) return value
+  const token = semanticThemeVariableAliases[value as keyof typeof semanticThemeVariableAliases] || value
+  return theme[token] || value
+}
+
+export const toThemeCssVariable = (value: string | undefined) => {
+  if (!value) return undefined
+  if (isLiteralThemeColor(value)) return value
+  return semanticThemeVariableAliases[value as keyof typeof semanticThemeVariableAliases]
+    ? getThemeCssVariableValue(value, value)
+    : `var(--v-${value})`
+}
+
 export const darken = (color: string, percent: number): string => {
-  const num = parseInt(color.slice(1), 16),
-    amt = Math.round(2.55 * percent),
-    R = (num >> 16) - amt,
-    G = ((num >> 8) & 0x00ff) - amt,
-    B = (num & 0x0000ff) - amt
+  const number = parseInt(color.slice(1), 16)
+  const amount = Math.round(2.55 * percent)
+  const red = (number >> 16) - amount
+  const green = ((number >> 8) & 0x00ff) - amount
+  const blue = (number & 0x0000ff) - amount
 
   return `#${(
     0x1000000 +
-    (R < 255 ? (R < 0 ? 0 : R) : 255) * 0x10000 +
-    (G < 255 ? (G < 0 ? 0 : G) : 255) * 0x100 +
-    (B < 255 ? (B < 0 ? 0 : B) : 255)
+    (red < 255 ? (red < 0 ? 0 : red) : 255) * 0x10000 +
+    (green < 255 ? (green < 0 ? 0 : green) : 255) * 0x100 +
+    (blue < 255 ? (blue < 0 ? 0 : blue) : 255)
   )
     .toString(16)
     .slice(1)
     .toUpperCase()}`
 }
 
-/**
- * 使颜色变浅的函数
- * @param {string} color - 要调整的颜色，以#RRGGBB格式
- * @param {number} percent - 调整的百分比
- * @returns {string} - 变浅后的颜色，以#RRGGBB格式
- */
-export const lighten = (color: string, percent: number): string => {
-  const num = parseInt(color.slice(1), 16),
-    amt = Math.round(2.55 * percent),
-    R = (num >> 16) + amt,
-    G = ((num >> 8) & 0x00ff) + amt,
-    B = (num & 0x0000ff) + amt
+export const lighten = (color: string, percent: number): string => darken(color, -percent)
 
-  return `#${(
-    0x1000000 +
-    (R < 255 ? (R < 0 ? 0 : R) : 255) * 0x10000 +
-    (G < 255 ? (G < 0 ? 0 : G) : 255) * 0x100 +
-    (B < 255 ? (B < 0 ? 0 : B) : 255)
-  )
-    .toString(16)
-    .slice(1)
-    .toUpperCase()}`
-}
-
-/**
- * 处理颜色的方法，接受颜色和透明度，返回新的颜色
- * @param {string} color - 颜色，以#RRGGBB格式
- * @param {number} opacity - 透明度，范围从0到1
- * @returns {string} - 新的颜色，以rgba格式
- */
 export const processColor = (color: string, opacity: number): string => {
   if (!/^#([0-9A-F]{3}){1,2}$/i.test(color)) {
     throw new Error('Invalid color format. Use #RRGGBB.')
   }
-  let r = 0,
-    g = 0,
-    b = 0
-  if (color.length === 4) {
-    r = parseInt(color[1]! + color[1]!, 16)
-    g = parseInt(color[2]! + color[2]!, 16)
-    b = parseInt(color[3]! + color[3]!, 16)
-  } else if (color.length === 7) {
-    r = parseInt(color[1]! + color[2]!, 16)
-    g = parseInt(color[3]! + color[4]!, 16)
-    b = parseInt(color[5]! + color[6]!, 16)
-  }
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`
+
+  const hex =
+    color.length === 4
+      ? color
+          .slice(1)
+          .split('')
+          .map((value) => value + value)
+          .join('')
+      : color.slice(1)
+  const number = parseInt(hex, 16)
+  return `rgba(${(number >> 16) & 255}, ${(number >> 8) & 255}, ${number & 255}, ${opacity})`
 }
 
-/**
- * 将两个颜色混合生成新的颜色
- * @param color1
- * @param color2
- * @param percentage
- * @returns
- */
 export const mixColors = (color1: string, color2: string, percentage: number) => {
-  // 将十六进制颜色转换为RGB
-  function hexToRgb(hex: string): [number, number, number] {
-    const bigint = parseInt(hex.slice(1), 16)
-    const r = (bigint >> 16) & 255
-    const g = (bigint >> 8) & 255
-    const b = bigint & 255
-    return [r, g, b]
+  const hexToRgb = (hex: string): [number, number, number] => {
+    const number = parseInt(hex.slice(1), 16)
+    return [(number >> 16) & 255, (number >> 8) & 255, number & 255]
   }
+  const rgbToHex = (red: number, green: number, blue: number) =>
+    '#' + ((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1).toUpperCase()
+  const [red1, green1, blue1] = hexToRgb(color1)
+  const [red2, green2, blue2] = hexToRgb(color2)
+  const ratio = percentage / 100
 
-  // 将RGB颜色转换为十六进制
-  function rgbToHex(r: number, g: number, b: number) {
-    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()
-  }
-
-  // 混合颜色
-  const rgb1 = hexToRgb(color1)
-  const rgb2 = hexToRgb(color2)
-  const p = percentage / 100
-
-  const mixedR = Math.round(rgb1[0] * (1 - p) + rgb2[0] * p)
-  const mixedG = Math.round(rgb1[1] * (1 - p) + rgb2[1] * p)
-  const mixedB = Math.round(rgb1[2] * (1 - p) + rgb2[2] * p)
-
-  return rgbToHex(mixedR, mixedG, mixedB)
+  return rgbToHex(
+    Math.round(red1 * (1 - ratio) + red2 * ratio),
+    Math.round(green1 * (1 - ratio) + green2 * ratio),
+    Math.round(blue1 * (1 - ratio) + blue2 * ratio),
+  )
 }
 
-/**
- * 生成主题颜色
- * @param {object} colors 主题基本颜色键值对
- * @param {boolean} isDark 生成暗色主题
- */
-export const generateTheme = (colors: ThemeColors, isDark: boolean = false): Record<string, any> => {
-  const result: Record<string, any> = {}
-  Object.entries({ text: '#1F2937', ...colors }).forEach(([key, value]) => {
-    for (let i = 0; i < 6; i++) {
-      if (!['white', 'black', 'text'].includes(key)) {
-        const colorKey = `${key}-${i + 1}`
-        result[colorKey] = isDark ? mixColors(value, '#000000', i * 16) : mixColors(value, '#ffffff', i * 16)
-      } else if (key === 'text') {
-        const colorKey = `${key}-${i + 1}`
-        result[colorKey] = mixColors(value, '#ffffff', i * 19.4)
+export const generateTheme = (colors: Record<string, string>, isDark = false): ThemeTokens => {
+  const result: ThemeTokens = {}
+  Object.entries(colors).forEach(([key, value]) => {
+    for (let index = 0; index < 6; index++) {
+      if (!['white', 'black'].includes(key)) {
+        result[`${key}-${index + 1}`] = isDark
+          ? mixColors(value, '#000000', index * 16)
+          : mixColors(value, '#ffffff', index * 16)
       } else {
         result[key] = value
       }
     }
-    for (let i = 0; i < 6; i++) {
-      const colorKey = `${key}-opacity-${i + 1}`
-      result[colorKey] = processColor(value, 0.1 * (6 - i))
+    for (let index = 0; index < 6; index++) {
+      result[`${key}-opacity-${index + 1}`] = processColor(value, 0.1 * (6 - index))
     }
   })
-  const primary = result['primary-1'] || colors.primary
-  const border = result['gray-2'] || '#E5E7EB'
-  result['primary-color'] = primary
-  result['background-color'] = result['gray-1'] || '#F8FAFC'
-  result['surface-color'] = result.white || '#ffffff'
-  result['border-color'] = border
-  result['success-color'] = result['success-1'] || colors.success
-  result['warning-color'] = result['warning-1'] || colors.warning
-  result['error-color'] = result['error-1'] || colors.error
-  result['info-color'] = result['info-1'] || colors.info
-  result['text-color'] = result['text-1'] || colors.text || '#1F2937'
+
   return result
+}
+
+const createTheme = (colors: ThemeColors, isDark = false): ThemeTokens => {
+  const { text, ...palette } = colors
+  return {
+    ...generateTheme({ ...constantThemeColors, ...palette }, isDark),
+    'text-color': text || (isDark ? DEFAULT_DARK_TEXT_COLOR : DEFAULT_LIGHT_TEXT_COLOR),
+    'surface-color': isDark ? DEFAULT_DARK_CARD_COLOR : DEFAULT_LIGHT_CARD_COLOR,
+    'border-color': isDark ? DEFAULT_DARK_BORDER_COLOR : DEFAULT_LIGHT_BORDER_COLOR,
+  }
+}
+
+export const createThemeConfig = (config: CustomThemeConfig = {}): ThemeConfig => {
+  const colors = {
+    ...DEFAULT_THEME_COLORS,
+    ...(config.primary ? { primary: config.primary } : {}),
+    ...(config.textColor && isColorCode(config.textColor) ? { text: config.textColor } : {}),
+  }
+  return {
+    light: createTheme(colors),
+    dark: createTheme(colors, true),
+  }
+}
+
+export const serializeThemeCssVariables = (tokens: ThemeTokens) => {
+  return Object.entries(tokens)
+    .filter(([key]) => !rootDynamicThemeKeys.has(key))
+    .map(([key, value]) => `--v-${key}:${getThemeCssVariableValue(key, value)};`)
+    .join('')
 }

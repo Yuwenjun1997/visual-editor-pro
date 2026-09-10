@@ -21,27 +21,16 @@
           <div>
             <div class="wa-text-base wa-font-medium">应用主题</div>
             <div class="wa-mt-1 wa-text-[13px] wa-text-[var(--el-text-color-secondary)]">
-              页面未单独设置主题时，将继承这里的应用主题。
+              修改主色后，组件库会自动生成并切换 light/dark 两套主题 token。
             </div>
           </div>
         </template>
         <el-form label-width="90px">
-          <el-form-item label="预定主题">
-            <el-select v-model="model.theme_config.themeName" class="wa-w-52">
-              <el-option v-for="item in themePresets" :key="item.name" :value="item.name" :label="item.label">
-                <div class="wa-flex wa-items-center wa-gap-2">
-                  <span class="theme-color-dot" :style="{ backgroundColor: item.color }" />
-                  <span>{{ item.label }}</span>
-                  <span class="wa-ml-auto wa-text-xs wa-text-[var(--el-text-color-secondary)]">{{ item.color }}</span>
-                </div>
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="主色覆盖">
+          <el-form-item label="主题色">
             <div class="wa-flex wa-items-center wa-gap-3">
               <el-color-picker v-model="model.theme_config.primary" />
               <el-button v-if="model.theme_config.primary" link @click="model.theme_config.primary = undefined">
-                恢复主题默认色
+                恢复默认色
               </el-button>
             </div>
           </el-form-item>
@@ -183,23 +172,15 @@ import { Icon } from '@iconify/vue'
 import VisualTabbar from '@visual/ui/components/visual-tabbar/index'
 import type { AppRow, PageRow } from '../../../../types/api'
 import PreviewPhoneFrame from '../../../../components/PreviewPhoneFrame.vue'
-import { VISUAL_THEME_PRESETS } from '@visual/editor'
 
 const model = defineModel<AppRow>({ required: true })
 const props = defineProps<{ pages: PageRow[]; pageKey: (page: PageRow) => string }>()
-const themePresets = Object.entries(VISUAL_THEME_PRESETS).map(([name, value]) => ({ name, ...value }))
 const CUSTOM_ACTIVE_COLOR = 'custom-color'
 
 if (!model.value.theme_config || typeof model.value.theme_config !== 'object') model.value.theme_config = {}
-if (!model.value.theme_config.themeName) model.value.theme_config.themeName = 'theme-blue'
 
 const resolveColor = (value: string) => {
-  if (value === 'primary-color')
-    return (
-      model.value.theme_config.primary ||
-      themePresets.find((item) => item.name === model.value.theme_config.themeName)?.primary ||
-      value
-    )
+  if (value === 'primary-color') return model.value.theme_config.primary || '#4F46E5'
   return value
 }
 

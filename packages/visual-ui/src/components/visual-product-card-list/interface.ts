@@ -9,6 +9,7 @@ export interface VisualProductCardListProps {
   showTag?: boolean
   showBuy?: boolean
   buttonText?: string
+  backgroundColor?: string
   round?: string
   currency?: string
 }

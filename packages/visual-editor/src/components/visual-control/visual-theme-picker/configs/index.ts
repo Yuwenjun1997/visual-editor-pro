@@ -1,5 +1,4 @@
-import { VISUAL_THEME_PRESETS } from '../../../../configs/visual-theme'
-
-export const themeMap = Object.fromEntries(
-  Object.entries(VISUAL_THEME_PRESETS).map(([name, preset]) => [name, preset.color]),
-) as Record<keyof typeof VISUAL_THEME_PRESETS, string>
+/** 兼容旧控件值；主题名不再代表独立色板。 */
+export const themeMap = {
+  'primary-color': '#4F46E5',
+} as const

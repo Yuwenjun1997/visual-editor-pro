@@ -13,7 +13,6 @@
 <script setup lang="ts">
 import { provideH5Runtime, type H5Runtime, type H5RequestConfig, type H5UserProfile } from '@visual/ui'
 import type { H5DetailContext } from '@visual/ui/types'
-import type { CustomThemeConfig } from '@visual/ui/types'
 import { useTheme } from '@visual/ui'
 import type { RuntimeApp } from '../types/runtime'
 import { APP_TEXT_COLOR_KEY } from '../app-context'
@@ -30,18 +29,6 @@ const appTextColor = computed(() => props.app.themeConfig?.textColor)
 provide(APP_TEXT_COLOR_KEY, appTextColor)
 const nuxtApp = useNuxtApp()
 const requestFetch = useRequestFetch()
-
-// H5 不依赖编辑器包；在这里注册编辑器 schema 可选的内置页面主题，
-// 使 `schema.themeName` 在运行时能解析为实际的 CSS 变量。
-const pageThemeConfig: CustomThemeConfig = {
-  theme: {
-    'theme-blue': { primary: '#4F46E5', warning: '#D97706', success: '#0F9D6E', error: '#E5484D', info: '#0284C7' },
-    'theme-green': { primary: '#0F9D6E', warning: '#D97706', success: '#0F9D6E', error: '#E5484D', info: '#0284C7' },
-    'theme-orange': { primary: '#D97706', warning: '#D97706', success: '#0F9D6E', error: '#E5484D', info: '#0284C7' },
-    'theme-red': { primary: '#E5484D', warning: '#D97706', success: '#0F9D6E', error: '#E5484D', info: '#0284C7' },
-    'theme-purple': { primary: '#7C3AED', warning: '#D97706', success: '#0F9D6E', error: '#E5484D', info: '#0284C7' },
-  },
-}
 
 const { state, refresh, logout } = useH5Auth()
 if (state.value.status === 'loading') await refresh()
@@ -118,12 +105,7 @@ provideH5Runtime(runtime)
 
 watch(
   () => props.app.themeConfig,
-  (themeConfig) =>
-    initTheme({
-      ...pageThemeConfig,
-      ...(themeConfig || {}),
-      theme: { ...pageThemeConfig.theme, ...themeConfig?.theme },
-    }),
+  (themeConfig) => initTheme(themeConfig || {}),
   { immediate: true },
 )
 
