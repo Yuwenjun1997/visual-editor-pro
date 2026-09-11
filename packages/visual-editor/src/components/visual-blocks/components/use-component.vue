@@ -37,7 +37,7 @@ const blockAttrs = computed<Record<string, any>>(() =>
   isOverlayComponent.value
     ? { props: componentProps.value }
     : {
-        'list-data': listData.value,
+        ...(listData.value !== undefined ? { 'list-data': listData.value } : {}),
         props: componentProps.value,
         styles: componentStyles.value,
       },
@@ -54,7 +54,7 @@ const componentName = computed(() => props.block.componentName)
 
 const listData = computed(() => {
   if (slotObjectArray.value) return slotObjectArray.value
-  return props.block.listData || []
+  return props.block.listData
 })
 
 // 组件属性

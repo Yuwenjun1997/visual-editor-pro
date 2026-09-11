@@ -41,6 +41,8 @@ export interface StageStatePayload {
   activePanel: string
   selectedVid: string
   themeMode: 'light' | 'dark'
+  /** 页面级主题色覆盖；未设置时使用应用主题色。 */
+  themePrimary?: string
   previewIdentity: 'anonymous' | 'viewer' | 'editor' | 'admin'
 }
 
@@ -79,6 +81,7 @@ export interface StageMessageMap {
   'stage-ready': Record<string, never>
   'stage-ready-request': Record<string, never>
   'stage-state-sync': StageStatePayload
+  'stage-selection-sync': { vid: string }
   'stage-block-select': { vid: string }
   'stage-block-delete': { vid: string }
   'stage-drag-start': { block: VisualBlockData }

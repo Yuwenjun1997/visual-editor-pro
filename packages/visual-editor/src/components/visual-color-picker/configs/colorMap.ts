@@ -6,6 +6,7 @@ export const colorList = [
   { label: '信息色', value: 'info-color' },
   { label: '文本色', value: 'text-color' },
   { label: '背景色', value: 'background-color' },
+  { label: '前景色', value: 'foreground-color' },
   { label: '表面色', value: 'surface-color' },
   { label: '边框色', value: 'border-color' },
 ]

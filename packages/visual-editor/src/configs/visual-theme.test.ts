@@ -25,6 +25,8 @@ describe('visual themes', () => {
 
     expect(config.light['surface-color']).toBe('#FFFFFF')
     expect(config.dark['surface-color']).toBe('#1F2937')
+    expect(config.light['foreground-color']).toBe('#F3F4F6')
+    expect(config.dark['foreground-color']).toBe('#111827')
     expect(config.light['border-color']).toBe('#E5E7EB')
     expect(config.dark['border-color']).toBe('#374151')
     expect(config.light['text-color']).toBe('#1F2937')
@@ -36,6 +38,7 @@ describe('visual themes', () => {
     const config = initThemeConfig()
     expect(serializeThemeCssVariables(config.light)).not.toContain('--v-fill-color:')
     expect(serializeThemeCssVariables(config.dark)).toContain('--v-surface-color:#1F2937;')
+    expect(serializeThemeCssVariables(config.light)).toContain('--v-foreground-color:#F3F4F6;')
   })
 
   it('updates both token sets when the application theme changes', () => {

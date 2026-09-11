@@ -43,3 +43,10 @@ it('supports block delete requests from the iframe stage', () => {
   expect(isStageMessage(message)).toBe(true)
   expect(cloneStageMessage(message).payload).toEqual({ vid: 'block-1' })
 })
+
+it('supports selection-only sync without carrying the page tree', () => {
+  const message = createStageMessage('stage-selection-sync', 'editor', { vid: 'block-2' })
+
+  expect(isStageMessage(message)).toBe(true)
+  expect(cloneStageMessage(message).payload).toEqual({ vid: 'block-2' })
+})

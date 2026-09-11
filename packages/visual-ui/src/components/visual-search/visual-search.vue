@@ -62,7 +62,7 @@ const handleSubmit = () => {
 
 <style scoped lang="scss">
 .visual-search {
-  --visual-search-background-color: var(--v-surface-color);
+  --visual-search-background-color: var(--v-foreground-color);
   --visual-search-button-text-color: var(--v-white);
   --visual-search-primary-2: var(--v-primary-2);
   --visual-search-text-2: var(--v-text-2);

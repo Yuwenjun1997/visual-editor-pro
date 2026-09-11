@@ -27,14 +27,17 @@ import { useViusalStore } from '../../store/useVisual'
 import { useBlocks } from '../../hooks/useBlocks'
 import { usePageConfig } from '../../hooks/usePageConfig'
 import { useH5Runtime } from '@visual/ui/hooks/useH5Runtime'
+import { useTheme } from '@visual/ui/hooks/useTheme'
 import type { VisualBlockData } from '../../types/visual-editor'
 import { createStageSelectionSync } from './stage-selection-sync'
+import { mergeStageBlocks } from './stage-state-sync'
 
 const editorInstanceId = new URLSearchParams(window.location.search).get('editorInstanceId') || 'visual-editor'
 const visualStore = useViusalStore()
 const { blockList } = useBlocks()
 const { pageConfig } = usePageConfig()
 const runtime = useH5Runtime()
+const { initTheme } = useTheme()
 let revision = 0
 let sequence = 0
 let currentSessionId = ''
@@ -182,12 +185,13 @@ const onMessage = (event: MessageEvent<unknown>) => {
     revision = message.baseRevision
     // Selection changes also trigger a state sync from the parent editor. Keep
     // the iframe's locally resolved data when the block schema itself did not
-    // change; replacing the block tree remounts data components and clears
-    // their resolved managed data.
+    // change. When it did change, merge by _vid so data components keep their
+    // existing instances and resolved managed data.
     if (JSON.stringify(toRaw(blockList.value)) !== JSON.stringify(message.payload.blocks)) {
-      blockList.value = message.payload.blocks
+      mergeStageBlocks(blockList.value, message.payload.blocks)
     }
     pageConfig.value = message.payload.pageConfig as typeof pageConfig.value
+    if (message.payload.themePrimary) initTheme({ primary: message.payload.themePrimary })
     visualStore.setDevice(message.payload.device)
     visualStore.activePanel = message.payload.activePanel
     runtime.$setEditorPreviewIdentity?.(message.payload.previewIdentity)
@@ -198,6 +202,11 @@ const onMessage = (event: MessageEvent<unknown>) => {
     }
     document.documentElement.classList.toggle('dark', message.payload.themeMode === 'dark')
     document.documentElement.style.colorScheme = message.payload.themeMode === 'dark' ? 'dark' : 'light'
+  } else if (message.type === 'stage-selection-sync') {
+    if (!selectionSync.shouldApplySelection(message.payload.vid, visualStore.vid)) return
+    const selectedBlock = findBlockByVid(blockList.value, message.payload.vid)
+    if (selectedBlock) visualStore.setCurrentBlock(selectedBlock)
+    else visualStore.clearCurrent()
   } else if (message.type === 'stage-drag-move' && message.sessionId === currentSessionId) {
     sendPreview(message.payload.point)
   } else if (message.type === 'stage-drag-end' && message.sessionId === currentSessionId) {

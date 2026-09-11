@@ -45,6 +45,7 @@ import type { StageDropRequest, StageStatePayload } from '../visual-stage-sandbo
 import { useBlocks } from '../../hooks/useBlocks'
 import { usePageConfig } from '../../hooks/usePageConfig'
 import { useViusalStore } from '../../store/useVisual'
+import { useTheme } from '@visual/ui/hooks/useTheme'
 
 defineOptions({ name: 'VisualStagePanel' })
 
@@ -56,6 +57,7 @@ const iframeRef = ref<HTMLIFrameElement>()
 const controller: StageSandboxController = createStageSandboxController(generateNanoid())
 const { applyBlockOperation, blockList, refreshCurrentBlockPosition, removeByVid } = useBlocks()
 const { pageConfig } = usePageConfig()
+const { colorVal, currentTheme } = useTheme()
 const visualStore = useViusalStore()
 const themeMode = ref<'light' | 'dark'>('light')
 const revision = ref(0)
@@ -74,8 +76,15 @@ const stageState = (): StageStatePayload => ({
   activePanel: visualStore.activePanel,
   selectedVid: visualStore.vid,
   themeMode: themeMode.value,
+  themePrimary: resolveStageThemePrimary(),
   previewIdentity: visualStore.previewIdentity,
 })
+
+const resolveStageThemePrimary = () => {
+  const pageTheme = pageConfig.value.themeName
+  if (pageTheme?.startsWith('#') || pageTheme?.startsWith('rgb')) return pageTheme
+  return colorVal('primary-color') || currentTheme.value['primary-1']
+}
 
 const publishState = (increment = false) => {
   if (increment) revision.value += 1
@@ -174,7 +183,6 @@ watch(
     pageConfig,
     () => visualStore.device,
     () => visualStore.activePanel,
-    () => visualStore.vid,
     () => visualStore.previewIdentity,
   ],
   () => {
@@ -182,6 +190,11 @@ watch(
     publishState(true)
   },
   { deep: true },
+)
+
+watch(
+  () => visualStore.vid,
+  (vid) => controller.syncSelection(vid, revision.value),
 )
 
 onBeforeUnmount(() => {

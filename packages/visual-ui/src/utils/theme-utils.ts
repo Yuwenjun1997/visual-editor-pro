@@ -24,6 +24,8 @@ export const DEFAULT_LIGHT_TEXT_COLOR = '#1F2937'
 export const DEFAULT_DARK_TEXT_COLOR = '#F9FAFB'
 export const DEFAULT_LIGHT_CARD_COLOR = '#FFFFFF'
 export const DEFAULT_DARK_CARD_COLOR = '#1F2937'
+export const DEFAULT_LIGHT_FOREGROUND_COLOR = '#F3F4F6'
+export const DEFAULT_DARK_FOREGROUND_COLOR = '#111827'
 export const DEFAULT_LIGHT_BORDER_COLOR = '#E5E7EB'
 export const DEFAULT_DARK_BORDER_COLOR = '#374151'
 
@@ -143,6 +145,7 @@ const createTheme = (colors: ThemeColors, isDark = false): ThemeTokens => {
     ...generateTheme({ ...constantThemeColors, ...palette }, isDark),
     'text-color': text || (isDark ? DEFAULT_DARK_TEXT_COLOR : DEFAULT_LIGHT_TEXT_COLOR),
     'surface-color': isDark ? DEFAULT_DARK_CARD_COLOR : DEFAULT_LIGHT_CARD_COLOR,
+    'foreground-color': isDark ? DEFAULT_DARK_FOREGROUND_COLOR : DEFAULT_LIGHT_FOREGROUND_COLOR,
     'border-color': isDark ? DEFAULT_DARK_BORDER_COLOR : DEFAULT_LIGHT_BORDER_COLOR,
   }
 }

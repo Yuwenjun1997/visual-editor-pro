@@ -25,6 +25,7 @@ export interface StageSandboxController {
   cancel(reason?: string): void
   reload(): void
   syncState(state: StageStatePayload, revision: number): void
+  syncSelection(vid: string, revision: number): void
   resolveDrop(accepted: boolean, request: StageDropRequest, revision: number, reason?: string): void
   onReady(callback: () => void): void
   onDropRequest(callback: (request: StageDropRequest, baseRevision: number, sessionId?: string) => void): void
@@ -239,6 +240,15 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
     )
   }
 
+  const syncSelection = (vid: string, currentRevision: number) => {
+    send(
+      createStageMessage('stage-selection-sync', editorInstanceId, { vid }, {
+        baseRevision: currentRevision,
+        sequence: ++sequence,
+      }),
+    )
+  }
+
   const resolveDrop = (accepted: boolean, request: StageDropRequest, nextRevision: number, reason = '放置被拒绝') => {
     const operationId = request.operation.operationId
     const current = session.value
@@ -271,6 +281,7 @@ export const createStageSandboxController = (editorInstanceId = generateNanoid()
     cancel,
     reload,
     syncState,
+    syncSelection,
     resolveDrop,
     onReady: (callback) => {
       readyCallback = callback

@@ -95,7 +95,7 @@ const applyPageSchema = (schema: PageSchema, appId?: string) => {
     appId,
     title: schema.title,
     slug: schema.slug || '',
-    themeName: null,
+    themeName: schema.themeName || null,
     globalStyle: schema.globalStyle || {},
   }
 }
