@@ -10,6 +10,7 @@ import type {
   VisualEntityProvider,
   VisualUrlPageProvider,
   VisualAppThemeLoader,
+  VisualImagePicker,
 } from '../types/visual-editor'
 
 export function createVisualBlockConfig() {
@@ -37,6 +38,7 @@ export function createVisualBlockConfig() {
     dataSourceProvider: undefined as DataSourceProvider | undefined,
     entityProvider: undefined as VisualEntityProvider | undefined,
     urlPageProvider: undefined as VisualUrlPageProvider | undefined,
+    imagePicker: undefined as VisualImagePicker | undefined,
     clear(): void {
       componentModules.basicWidgets.length = 0
       componentModules.layoutWidgets.length = 0

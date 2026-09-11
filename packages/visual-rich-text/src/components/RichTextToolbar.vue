@@ -70,6 +70,7 @@
       />
       <MediaInsertPopover
         :upload-image="uploadImage"
+        :pick-image="pickImage"
         :upload-media="uploadMedia"
         @upload="emit('upload', $event)"
         @insert="emit('media', $event.type, $event.url)"
@@ -107,6 +108,7 @@ withDefaults(
     contentWidth: ContentWidth
     fullscreen?: boolean
     uploadImage?: (file: File) => Promise<string>
+    pickImage?: () => Promise<string | null>
     uploadMedia?: (file: File, type: MediaType) => Promise<string>
   }>(),
   { fullscreen: false },

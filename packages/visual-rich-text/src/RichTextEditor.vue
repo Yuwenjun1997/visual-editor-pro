@@ -11,6 +11,7 @@
       :fullscreen="fullscreen"
       :highlight="highlightColor"
       :upload-image="uploadImage"
+      :pick-image="pickImage"
       :upload-media="uploadMedia"
       :content-width="editorContentWidth"
       @list="setList"
@@ -65,12 +66,13 @@ import RichTextToolbar from './components/RichTextToolbar.vue'
 import type { ContentWidth } from './components/ContentWidthDropdown.vue'
 export interface RichTextEditorProps {
   uploadImage?: (file: File) => Promise<string>
+  pickImage?: () => Promise<string | null>
   uploadMedia?: (file: File, type: MediaType) => Promise<string>
   contentWidth?: ContentWidth
 }
 const props = defineProps<RichTextEditorProps>()
 const emit = defineEmits<{ 'update:contentWidth': [value: ContentWidth] }>()
-const { uploadImage, uploadMedia } = props
+const { uploadImage, uploadMedia, pickImage } = props
 const model = defineModel<string>({ default: '' })
 const editorContentWidth = ref<ContentWidth>(props.contentWidth || 'ipad')
 const previewVisible = ref(false)
@@ -94,7 +96,7 @@ const editor = useEditor({
     TextAlign.configure({ types: ['heading', 'paragraph'] }),
     TaskList,
     TaskItem.configure({ nested: true }),
-    Media.configure({ uploadImage, uploadMedia }),
+    Media.configure({ uploadImage, uploadMedia, pickImage }),
     MediaUpload.configure({ uploadImage, uploadMedia }),
     Placeholder.configure({ placeholder: '请输入正文内容…' }),
   ],
@@ -152,12 +154,14 @@ const insertMedia = (type: MediaType, src: string) => {
       .insertContent({ type: 'media', attrs: { mediaType: type, src } })
       .run()
 }
-const insertUploadNode = (mediaType: MediaType) =>
+const insertUploadNode = (mediaType: MediaType) => {
+  if (mediaType === 'image') return
   editor.value
     ?.chain()
     .focus()
     .insertContent({ type: 'mediaUpload', attrs: { mediaType, status: 'idle' } })
     .run()
+}
 const applyLink = (url: string) => {
   const href = url.trim()
   if (!href) return removeLink()

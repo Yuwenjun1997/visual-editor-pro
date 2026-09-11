@@ -17,9 +17,7 @@
         >
           {{ item.label }}
         </button>
-        <el-upload :auto-upload="false" :on-change="replace" :show-file-list="false">
-          <button type="button">替换</button>
-        </el-upload>
+        <button type="button" @click="replace">替换</button>
       </template>
       <button type="button" @click="deleteNode">删除</button>
     </div>
@@ -49,14 +47,12 @@ const deleteNode = () => {
       .deleteRange({ from: pos, to: pos + props.node.nodeSize })
       .run()
 }
-const replace = async (file: { raw?: File }) => {
-  if (!file.raw) return
-  const uploadImage = props.extension.options.uploadImage as ((file: File) => Promise<string>) | undefined
-  const uploadMedia = props.extension.options.uploadMedia as
-    ((file: File, type: MediaType) => Promise<string>) | undefined
-  if (!uploadMedia && !(type.value === 'image' && uploadImage)) return
-  const nextSrc =
-    type.value === 'image' && uploadImage ? await uploadImage(file.raw) : await uploadMedia!(file.raw, type.value)
-  props.updateAttributes({ src: nextSrc })
+const replace = async () => {
+  const pickImage = props.extension.options.pickImage as (() => Promise<string | null>) | undefined
+  if (type.value === 'image' && pickImage) {
+    const nextSrc = await pickImage()
+    if (nextSrc) props.updateAttributes({ src: nextSrc })
+    return
+  }
 }
 </script>

@@ -10,6 +10,7 @@ import { dataSourceService } from '../services/data-source.service'
 import { pageService } from '../services/page.service'
 import { productService } from '../services/product.service'
 import type { useAuthStore } from '../stores/auth'
+import { pickImageFromLibrary } from '../composables/image-library-picker'
 
 const isUuid = (value: string | number): boolean =>
   typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)
@@ -68,6 +69,7 @@ const requestPageMeta = async (initialTitle: string, initialSlug: string) => {
 }
 
 export const setupVisualHostConfig = (authStore: ReturnType<typeof useAuthStore>) => {
+  visualConfig.imagePicker = pickImageFromLibrary
   visualConfig.onSave = async (data) => {
     if (!authStore.user) {
       router.push({ name: 'login', query: { redirect: router.currentRoute.value.fullPath } })

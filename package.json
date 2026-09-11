@@ -22,7 +22,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write . && eslint . --fix",
     "format:check": "prettier --check . && eslint .",
-    "clean": "turbo run clean && rimraf node_modules pnpm-lock.yaml"
+    "clean": "turbo run clean && rimraf pnpm-lock.yaml"
   },
   "devDependencies": {
     "@vue/tsconfig": "^0.7.0",

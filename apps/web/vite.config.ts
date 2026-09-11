@@ -31,7 +31,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['@visual/editor', '@visual/ui'],
+    exclude: ['@visual/editor', '@visual/ui', '@visual/image-library'],
     include: ['element-plus'],
   },
   plugins: [

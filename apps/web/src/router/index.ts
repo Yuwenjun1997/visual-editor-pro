@@ -14,6 +14,7 @@ import DataSourcesView from '@/views/admin/data-sources/DataSourcesView.vue'
 import AppsView from '@/views/admin/apps/AppsView.vue'
 import AppDetailView from '@/views/admin/apps/AppDetailView.vue'
 import AppSettingsView from '@/views/admin/apps/AppSettingsView.vue'
+import ImageLibraryView from '@/views/admin/image-library/ImageLibraryView.vue'
 import { useAuthStore } from '@/stores/auth'
 import { hasPermission } from '@/lib/rbac'
 import type { PermissionCode } from '@/lib/rbac'
@@ -145,6 +146,7 @@ const router = createRouter({
           name: 'categories',
           component: CategoriesView,
         },
+        { path: 'image-library', name: 'image-library', component: ImageLibraryView },
         {
           path: 'data-sources',
           name: 'data-sources',

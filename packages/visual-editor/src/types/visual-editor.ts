@@ -250,6 +250,7 @@ export interface VisualRevisionProvider {
 
 export type VisualPageLoader = (pageId: string | number, appId?: string) => Promise<PageSchema | null>
 export type VisualAppThemeLoader = (appId: string) => Promise<CustomThemeConfig | null>
+export type VisualImagePicker = () => Promise<string | null>
 
 export interface VisualUrlPageOption {
   label: string

@@ -3,10 +3,11 @@
     <template #reference><ToolbarButton label="插入媒体" icon="tabler:photo-video" /></template>
     <el-tabs v-model="type">
       <el-tab-pane v-for="item in types" :key="item.value" :name="item.value" :label="item.label">
-        <el-input v-model="url" clearable :placeholder="`${item.label} URL`" />
+        <el-input v-if="item.value !== 'image'" v-model="url" clearable :placeholder="`${item.label} URL`" />
         <div class="vrt-mt-2 vrt-flex vrt-justify-end">
-          <el-button @click="insertUrl">插入 URL</el-button>
-          <el-button v-if="canUpload" @click="insertUpload">本地上传</el-button>
+          <el-button v-if="item.value !== 'image'" @click="insertUrl">插入 URL</el-button>
+          <el-button v-if="item.value === 'image' && pickImage" type="primary" @click="selectImage">从图片库选择</el-button>
+          <el-button v-if="item.value !== 'image' && canUpload" @click="insertUpload">本地上传</el-button>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -17,7 +18,8 @@ import { computed, ref } from 'vue'
 import ToolbarButton from './ToolbarButton.vue'
 type MediaType = 'image' | 'video' | 'audio'
 const props = defineProps<{
-  uploadImage?: (file: File) => Promise<string>
+    uploadImage?: (file: File) => Promise<string>
+    pickImage?: () => Promise<string | null>
   uploadMedia?: (file: File, type: MediaType) => Promise<string>
 }>()
 const emit = defineEmits<{ insert: [payload: { type: MediaType; url: string }]; upload: [type: MediaType] }>()
@@ -39,6 +41,12 @@ const insertUrl = () => {
 }
 const insertUpload = () => {
   emit('upload', type.value)
+  visible.value = false
+}
+const selectImage = async () => {
+  const url = await props.pickImage?.()
+  if (!url) return
+  emit('insert', { type: 'image', url })
   visible.value = false
 }
 </script>

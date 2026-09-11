@@ -2,8 +2,8 @@
   <div class="visual-image-input">
     <el-input v-model.trim="imageValue" clearable :placeholder="props.placeholder" class="visual-image-input__input">
       <template #prefix>
-        <div class="ve-w-8 visual-upload__btn" @click.stop>
-          <Icon class="ve-text-base" icon="line-md:cloud-up" />
+        <div class="ve-w-8 visual-upload__btn" @click.stop="pickImage">
+          <Icon class="ve-text-base" icon="ep:picture" />
         </div>
       </template>
     </el-input>
@@ -13,6 +13,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { useVModel } from '@vueuse/core'
+import { visualConfig } from '../../../utils/visual.registry'
 
 interface Props {
   modelValue?: string
@@ -33,6 +34,10 @@ const emit = defineEmits<{
 }>()
 
 const imageValue = useVModel(props, 'modelValue', emit)
+const pickImage = async () => {
+  const value = await visualConfig.imagePicker?.()
+  if (value) imageValue.value = value
+}
 </script>
 
 <style scoped lang="scss">

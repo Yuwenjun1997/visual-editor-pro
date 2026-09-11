@@ -9,14 +9,7 @@
             <el-avatar :size="72" :src="form.avatar_url || undefined">
               {{ initial }}
             </el-avatar>
-            <el-upload
-              accept="image/*"
-              :show-file-list="false"
-              :http-request="uploadAvatar"
-              :before-upload="beforeUpload"
-            >
-              <el-button size="small">上传头像</el-button>
-            </el-upload>
+            <ImageUploader v-model="form.avatar_url" />
           </div>
         </el-form-item>
         <el-form-item label="昵称">
@@ -41,6 +34,7 @@
 
 <script setup lang="ts">
 import { useProfilePage } from './composables/useProfilePage'
-const { auth, form, saving, initial, roleTagType, roleLabel, beforeUpload, uploadAvatar, save, changePassword } =
+import ImageUploader from '../../../components/ImageUploader.vue'
+const { auth, form, saving, initial, roleTagType, roleLabel, save, changePassword } =
   useProfilePage()
 </script>

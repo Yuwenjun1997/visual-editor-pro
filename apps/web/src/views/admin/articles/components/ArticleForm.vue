@@ -37,7 +37,7 @@
 
     <el-divider content-position="left">详情内容</el-divider>
     <el-form-item label="富文本详情">
-      <RichTextEditor v-model="form.html" :upload-image="uploadImage" />
+      <RichTextEditor v-model="form.html" :pick-image="pickImage" />
     </el-form-item>
   </el-form>
 </template>
@@ -45,7 +45,7 @@
 import ImageUploader from '../../../../components/ImageUploader.vue'
 import { RichTextEditor } from '@visual/rich-text'
 import type { CategoryRow } from '../../../../types/api'
-import { useRichTextImageUpload } from '../../../../composables/useRichTextImageUpload'
+import { pickImageFromLibrary } from '../../../../composables/image-library-picker'
 defineProps<{ categories: CategoryRow[] }>()
 const form = defineModel<{
   title: string
@@ -57,5 +57,5 @@ const form = defineModel<{
   publish_time: string | null
   summary: string
 }>({ required: true })
-const uploadImage = useRichTextImageUpload()
+const pickImage = pickImageFromLibrary
 </script>

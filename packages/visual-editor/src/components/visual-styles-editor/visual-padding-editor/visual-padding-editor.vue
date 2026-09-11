@@ -8,7 +8,7 @@
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <el-tooltip content="上内边距" placement="top">
-              <Icon icon="mdi:arrow-up" />
+              <Icon icon="mdi:arrow-collapse-up" />
             </el-tooltip>
           </div>
           <visual-px-input v-model="paddingTop" @change="onPaddingChange" />
@@ -16,7 +16,7 @@
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <el-tooltip content="右内边距" placement="top">
-              <Icon icon="mdi:arrow-right" />
+              <Icon icon="mdi:arrow-collapse-right" />
             </el-tooltip>
           </div>
           <visual-px-input v-model="paddingRight" @change="onPaddingChange" />
@@ -24,7 +24,7 @@
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <el-tooltip content="下内边距" placement="top">
-              <Icon icon="mdi:arrow-down" />
+              <Icon icon="mdi:arrow-collapse-down" />
             </el-tooltip>
           </div>
           <visual-px-input v-model="paddingBottom" @change="onPaddingChange" />
@@ -32,7 +32,7 @@
         <div class="ve-flex ve-items-center">
           <div class="ve-w-6 ve-flex-shrink-0">
             <el-tooltip content="左内边距" placement="top">
-              <Icon icon="mdi:arrow-left" />
+              <Icon icon="mdi:arrow-collapse-left" />
             </el-tooltip>
           </div>
           <visual-px-input v-model="paddingLeft" @change="onPaddingChange" />

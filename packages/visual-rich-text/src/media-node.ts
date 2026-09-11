@@ -10,6 +10,7 @@ export const Media = Node.create({
   selectable: true,
   addOptions: () => ({
     uploadImage: null as ((file: File) => Promise<string>) | null,
+    pickImage: null as (() => Promise<string | null>) | null,
     uploadMedia: null as ((file: File, type: MediaType) => Promise<string>) | null,
   }),
   addAttributes: () => ({

@@ -10,6 +10,8 @@
       "@visual/ui/*": ["../../packages/visual-ui/src/*"],
       "@visual/rich-text": ["../../packages/visual-rich-text/src/index.ts"],
       "@visual/rich-text/*": ["../../packages/visual-rich-text/src/*"]
+      ,"@visual/image-library": ["../../packages/visual-image-library/src/index.ts"],
+      "@visual/image-library/*": ["../../packages/visual-image-library/src/*"]
     },
     "types": ["vite/client", "element-plus/global"]
   },
@@ -22,5 +24,6 @@
     "../../packages/visual-editor/src",
     "../../packages/visual-ui/src",
     "../../packages/visual-rich-text/src"
+    ,"../../packages/visual-image-library/src"
   ]
 }
